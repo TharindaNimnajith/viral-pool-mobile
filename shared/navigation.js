@@ -1,23 +1,31 @@
 import React from 'react'
+import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
-import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {Ionicons} from '@expo/vector-icons'
+import DashboardScreen from '../screens/user/dashboard-screen'
+import ProfileScreen from '../screens/user/profile-screen'
+import IdeaListScreen from '../screens/ideas/idea-list-screen'
+import AddIdeaScreen from '../screens/ideas/add-idea-screen'
+import EditIdeaScreen from '../screens/ideas/edit-idea-screen'
+import NewProjectListScreen from '../screens/projects/new/new-project-list-screen'
+import NewProjectDetailsScreen from '../screens/projects/new/new-project-details-screen'
+import OngoingProjectListScreen from '../screens/projects/ongoing/ongoing-project-list-screen'
+import OngoingProjectDetailsScreen from '../screens/projects/ongoing/ongoing-project-details-screen'
+import RejectedProjectListScreen from '../screens/projects/rejected/rejected-project-list-screen'
+import RejectedProjectDetailsScreen from '../screens/projects/rejected/rejected-project-details-screen'
+import CompletedProjectListScreen from '../screens/projects/completed/completed-project-list-screen'
+import CompletedProjectDetailsScreen from '../screens/projects/completed/completed-project-details-screen'
+import LoginScreen from '../screens/user/login-screen'
+import Colors from './colors'
 
-const HomeNavigator = createStackNavigator(
+const DashboardNavigator = createStackNavigator(
   {
-    Categories: {
-      screen: HomeScreen
-    },
-    CategoriesProducts: {
-      screen: CategoriesProductsScreen
-    },
-    ProductDetails: {
-      screen: ProductsDetailScreen
-    }
+    Dashboard: DashboardScreen
   },
   {
     defaultNavigationOptions: {
+      headerTitleAlign: 'center',
       headerStyle: {
         backgroundColor: Colors.primaryColor
       },
@@ -41,10 +49,11 @@ const ProfileNavigator = createStackNavigator(
   }
 )
 
-const OrdersNavigator = createStackNavigator(
+const IdeasNavigator = createStackNavigator(
   {
-    Orders: OrdersScreen,
-    OrderDetails: OrderDetailsScreen
+    IdeaList: IdeaListScreen,
+    EditIdea: EditIdeaScreen,
+    AddIdea: AddIdeaScreen
   },
   {
     defaultNavigationOptions: {
@@ -57,9 +66,10 @@ const OrdersNavigator = createStackNavigator(
   }
 )
 
-const FeedbackNavigator = createStackNavigator(
+const NewProjectsNavigator = createStackNavigator(
   {
-    Feedback: FeedbackScreen
+    NewProjectList: NewProjectListScreen,
+    NewProjectDetails: NewProjectDetailsScreen
   },
   {
     defaultNavigationOptions: {
@@ -72,26 +82,14 @@ const FeedbackNavigator = createStackNavigator(
   }
 )
 
-const CartNavigator = createStackNavigator(
+const OngoingProjectsNavigator = createStackNavigator(
   {
-    Cart: {
-      screen: CartScreen
-    },
-    DeliveryDetails: {
-      screen: DeliveryDetailsScreen
-    },
-    PaymentDetails: {
-      screen: PaymentScreen
-    },
-    PaymentDetails2: {
-      screen: PaymentCardScreen
-    },
-
+    OngoingProjectList: OngoingProjectListScreen,
+    OngoingProjectDetails: OngoingProjectDetailsScreen
   },
-
   {
     defaultNavigationOptions: {
-
+      headerTitleAlign: 'center',
       headerStyle: {
         backgroundColor: Colors.primaryColor
       },
@@ -100,20 +98,14 @@ const CartNavigator = createStackNavigator(
   }
 )
 
-const WishListNavigator = createStackNavigator(
+const RejectedProjectsNavigator = createStackNavigator(
   {
-    WishList: {
-      screen: WishListScreen
-    },
-    ProductDetails: {
-      screen: ProductsDetailScreen
-    }
-
+    RejectedProjectList: RejectedProjectListScreen,
+    RejectedProjectDetails: RejectedProjectDetailsScreen
   },
-
   {
     defaultNavigationOptions: {
-
+      headerTitleAlign: 'center',
       headerStyle: {
         backgroundColor: Colors.primaryColor
       },
@@ -122,123 +114,92 @@ const WishListNavigator = createStackNavigator(
   }
 )
 
-// const PaymentNavigator = createStackNavigator(
-//   {
-//     Cart: PaymentScreen
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerTitleAlign: 'center',
-//       headerStyle: {
-//         backgroundColor: Colors.primaryColor
-//       },
-//       headerTintColor: Colors.secondaryColor
-//     }
-//   }
-// )
-//
-// const PaymentCardNavigator = createStackNavigator(
-//   {
-//     Cart: PaymentCardScreen
-//   },
-//   {
-//     defaultNavigationOptions: {
-//       headerTitleAlign: 'center',
-//       headerStyle: {
-//         backgroundColor: Colors.primaryColor
-//       },
-//       headerTintColor: Colors.secondaryColor
-//     }
-//   }
-// )
-
-const ShopNavigator = createDrawerNavigator(
+const CompletedProjectsNavigator = createStackNavigator(
   {
-    Home: {
-      screen: HomeNavigator,
+    CompletedProjectList: CompletedProjectListScreen,
+    CompletedProjectDetails: CompletedProjectDetailsScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerTitleAlign: 'center',
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.secondaryColor
+    }
+  }
+)
+
+const InternalNavigator = createDrawerNavigator(
+  {
+    Dashboard: {
+      screen: DashboardNavigator,
       navigationOptions: {
-        drawerLabel: 'Home',
-        drawerIcon: <Ionicons name='ios-home'
+        drawerLabel: 'Dashboard',
+        drawerIcon: <Ionicons name='md-person'
                               size={25}/>
       }
     },
     Profile: {
       screen: ProfileNavigator,
       navigationOptions: {
-        drawerLabel: 'My Profile',
+        drawerLabel: 'Profile',
         drawerIcon: <Ionicons name='md-person'
                               size={25}/>
       }
     },
-    Orders: {
-      screen: OrdersNavigator,
+    Ideas: {
+      screen: IdeasNavigator,
       navigationOptions: {
-        drawerLabel: 'My Orders',
-        drawerIcon: <Ionicons name='md-albums'
+        drawerLabel: 'Ideas',
+        drawerIcon: <Ionicons name='md-person'
                               size={25}/>
       }
     },
-    Feedback: {
-      screen: FeedbackNavigator,
+    NewProjects: {
+      screen: NewProjectsNavigator,
       navigationOptions: {
-        drawerLabel: 'Feedback',
-        drawerIcon: <Ionicons name='md-paper-plane'
+        drawerLabel: 'New Projects',
+        drawerIcon: <Ionicons name='md-person'
                               size={25}/>
       }
     },
-    Cart: {
-      screen: CartNavigator,
+    OngoingProjects: {
+      screen: OngoingProjectsNavigator,
       navigationOptions: {
-        drawerLabel: 'Cart',
-        drawerIcon: <Ionicons name='md-cart'
+        drawerLabel: 'Ongoing Projects',
+        drawerIcon: <Ionicons name='md-person'
                               size={25}/>
       }
     },
-    WishList: {
-      screen: WishListNavigator,
+    RejectedProjects: {
+      screen: RejectedProjectsNavigator,
       navigationOptions: {
-        drawerLabel: 'WishList',
-        drawerIcon: <Ionicons name='md-heart'
+        drawerLabel: 'Rejected Projects',
+        drawerIcon: <Ionicons name='md-person'
                               size={25}/>
       }
     },
-    // Payment: {
-    //   screen: PaymentNavigator,
-    //   navigationOptions: {
-    //     drawerLabel: 'Payment Details',
-    //     drawerIcon: <Ionicons name='md-albums'
-    //                           size={25}/>
-    //   }
-    // },
-    // PaymentCard: {
-    //   screen: PaymentCardNavigator,
-    //   navigationOptions: {
-    //     drawerLabel: 'Payment Details Card',
-    //     drawerIcon: <Ionicons name='md-albums'
-    //                           size={25}/>
-    //   }
-    // },
-    Logout: {
-      screen: FeedbackNavigator,
+    CompletedProjects: {
+      screen: CompletedProjectsNavigator,
       navigationOptions: {
-        drawerLabel: 'Logout',
-        drawerIcon: <Ionicons name='md-arrow-round-forward'
+        drawerLabel: 'Completed Projects',
+        drawerIcon: <Ionicons name='md-person'
                               size={25}/>
       }
     }
   },
   {
-    drawerBackgroundColor: Colors.secondaryColor,
+    drawerBackgroundColor: Colors.tertiaryColor,
     contentOptions: {
-      activeTintColor: Colors.primaryColor
+      activeTintColor: Colors.secondaryColor
     }
   }
 )
 
-const AuthNavigator = createStackNavigator(
+const LoginNavigator = createStackNavigator(
   {
-    Auth: AuthScreen,
-    ForgotPassword: ForgotPasswordScreen
+    Login: LoginScreen
   },
   {
     headerMode: 'none',
@@ -249,8 +210,8 @@ const AuthNavigator = createStackNavigator(
 )
 
 const MainNavigator = createSwitchNavigator({
-  Auth: AuthNavigator,
-  Shop: ShopNavigator
+  Login: LoginNavigator,
+  Navigator: InternalNavigator
 })
 
 export default createAppContainer(MainNavigator)
