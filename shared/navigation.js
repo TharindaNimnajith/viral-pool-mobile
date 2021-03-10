@@ -19,6 +19,18 @@ import CompletedProjectDetailsScreen from '../screens/projects/completed/complet
 import LoginScreen from '../screens/user/login-screen'
 import Colors from './colors'
 
+const LoginNavigator = createStackNavigator(
+  {
+    Login: LoginScreen
+  },
+  {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+)
+
 const DashboardNavigator = createStackNavigator(
   {
     Dashboard: DashboardScreen
@@ -215,18 +227,6 @@ const InternalNavigator = createDrawerNavigator(
     drawerBackgroundColor: Colors.tertiaryColor,
     contentOptions: {
       activeTintColor: Colors.secondaryColor
-    }
-  }
-)
-
-const LoginNavigator = createStackNavigator(
-  {
-    Login: LoginScreen
-  },
-  {
-    headerMode: 'none',
-    navigationOptions: {
-      headerVisible: false
     }
   }
 )
