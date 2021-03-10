@@ -151,7 +151,7 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'DASHBOARD',
         drawerIcon: <Icon name='md-person'
-                              size={25}/>
+                          size={25}/>
       }
     },
     Profile: {
@@ -159,7 +159,7 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'MY PROFILE',
         drawerIcon: <Icon name='md-person'
-                              size={25}/>
+                          size={25}/>
       }
     },
     AddIdea: {
@@ -167,7 +167,7 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'NEW IDEA',
         drawerIcon: <Icon name='md-person'
-                              size={25}/>
+                          size={25}/>
       }
     },
     Ideas: {
@@ -175,7 +175,7 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'MY IDEAS',
         drawerIcon: <Icon name='md-person'
-                              size={25}/>
+                          size={25}/>
       }
     },
     NewProjects: {
@@ -183,7 +183,7 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'NEW PROJECTS',
         drawerIcon: <Icon name='md-person'
-                              size={25}/>
+                          size={25}/>
       }
     },
     OngoingProjects: {
@@ -191,7 +191,7 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'ONGOING PROJECTS',
         drawerIcon: <Icon name='md-person'
-                              size={25}/>
+                          size={25}/>
       }
     },
     RejectedProjects: {
@@ -199,7 +199,7 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'REJECTED PROJECTS',
         drawerIcon: <Icon name='md-person'
-                              size={25}/>
+                          size={25}/>
       }
     },
     CompletedProjects: {
@@ -207,7 +207,7 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'COMPLETED PROJECTS',
         drawerIcon: <Icon name='md-person'
-                              size={25}/>
+                          size={25}/>
       }
     }
   },
