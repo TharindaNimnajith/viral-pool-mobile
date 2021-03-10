@@ -1,14 +1,20 @@
-import {Text, View} from "react-native";
-import React from "react";
+import React from 'react'
+import {Text, View} from 'react-native'
 
 const RejectedProjectDetailsScreen = () => {
   return (
     <View>
       <Text>
-        Dashboard
+        Rejected Project Details
       </Text>
     </View>
   )
+}
+
+RejectedProjectDetailsScreen.navigationOptions = () => {
+  return {
+    headerTitle: 'REJECTED PROJECT DETAILS'
+  }
 }
 
 export default RejectedProjectDetailsScreen

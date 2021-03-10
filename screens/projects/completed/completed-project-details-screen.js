@@ -1,14 +1,20 @@
-import {Text, View} from "react-native";
-import React from "react";
+import React from 'react'
+import {Text, View} from 'react-native'
 
 const CompletedProjectDetailsScreen = () => {
   return (
     <View>
       <Text>
-        Dashboard
+        Completed Project Details
       </Text>
     </View>
   )
+}
+
+CompletedProjectDetailsScreen.navigationOptions = () => {
+  return {
+    headerTitle: 'COMPLETED PROJECT DETAILS'
+  }
 }
 
 export default CompletedProjectDetailsScreen

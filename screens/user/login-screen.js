@@ -1,14 +1,11 @@
 import React, {useState} from 'react'
 import {Animated, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import Toast from 'react-native-simple-toast'
 import Colors from './../../shared/colors'
-import HeaderButton from './../../components/header-button'
 
 const LoginScreen = ({navigation}) => {
-  const [phoneNo, setPhoneNo] = useState('0712089046')
-  const [email, setEmail] = useState('tharindarajapakshe@y7mail.com')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
 
   return (
     <View style={styles.mainViewStyle}>
@@ -16,21 +13,21 @@ const LoginScreen = ({navigation}) => {
         <Animated.View style={styles.animatedViewStyle}>
           <View style={styles.container}>
             <Text style={styles.labelStyle}>
-              Phone No
-            </Text>
-            <TextInput style={styles.textInputStyle}
-                       onChangeText={(phoneNo) => setPhoneNo(phoneNo)}
-                       value={phoneNo}
-                       placeholder='Enter Phone No'
-                       placeholderTextColor={Colors.tertiaryColor}
-                       secureTextEntry={false}/>
-            <Text style={styles.labelStyle}>
               Email
             </Text>
             <TextInput style={styles.textInputStyle}
                        onChangeText={(email) => setEmail(email)}
                        value={email}
                        placeholder='Enter Email'
+                       placeholderTextColor={Colors.tertiaryColor}
+                       secureTextEntry={false}/>
+            <Text style={styles.labelStyle}>
+              Password
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={(password) => setPassword(password)}
+                       value={password}
+                       placeholder='Enter Phone No'
                        placeholderTextColor={Colors.tertiaryColor}
                        secureTextEntry={false}/>
             <View style={styles.viewStyle}>
@@ -41,7 +38,7 @@ const LoginScreen = ({navigation}) => {
                                   })
                                 }}>
                 <Text style={styles.buttonStyle}>
-                  Update
+                  Login
                 </Text>
               </TouchableOpacity>
             </View>
@@ -62,19 +59,6 @@ LoginScreen.navigationOptions = () => {
 }
 
 const styles = StyleSheet.create({
-  addressInputStyle: {
-    borderColor: Colors.primaryColor,
-    width: wp('80%'),
-    borderWidth: 1,
-    borderRadius: 10,
-    height: 80,
-    marginLeft: 20,
-    marginRight: 20,
-    padding: 10,
-    marginTop: 10,
-    alignContent: 'flex-start',
-    color: Colors.tertiaryColor
-  },
   animatedViewStyle: {
     justifyContent: 'center',
     alignItems: 'center'
@@ -89,42 +73,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignContent: 'center',
     margin: 10
-  },
-  dropDownActiveItemStyle: {
-    alignItems: 'flex-start'
-  },
-  dropDownActiveLabelStyle: {
-    color: Colors.tertiaryColor
-  },
-  dropDownArrowStyle: {
-    borderColor: Colors.tertiaryColor
-  },
-  dropDownContainerStyle: {
-    height: 50
-  },
-  dropDownItemStyle: {
-    alignItems: 'flex-start'
-  },
-  dropDownLabelStyle: {
-    color: Colors.tertiaryColor
-  },
-  dropDownPickerStyle: {
-    borderColor: Colors.primaryColor,
-    width: wp('80%'),
-    borderWidth: 1,
-    marginLeft: 20,
-    marginRight: 20,
-    padding: 10,
-    marginTop: 10
-  },
-  dropDownPlaceholderStyle: {
-    color: Colors.tertiaryColor
-  },
-  dropDownStyle: {
-    marginTop: 11,
-    marginLeft: 20,
-    marginRight: 20,
-    width: wp('80%')
   },
   labelStyle: {
     marginLeft: 20,

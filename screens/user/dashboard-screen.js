@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text, View} from 'react-native'
-import HeaderButton from './../../components/header-button'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
+import HeaderButton from './../../components/header-button'
 
 const DashboardScreen = () => {
   return (
@@ -17,7 +17,7 @@ export default DashboardScreen
 
 DashboardScreen.navigationOptions = ({navigation}) => {
   return {
-    headerTitle: 'PUSSALLA',
+    headerTitle: 'VIRAL POOL',
     headerTitleAlign: 'center',
     headerLeft: () =>
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
@@ -26,9 +26,6 @@ DashboardScreen.navigationOptions = ({navigation}) => {
               onPress={() => {
                 navigation.toggleDrawer()
               }}/>
-      </HeaderButtons>,
-    headerRight:
-      <View style={{flexDirection: "row"}}>
-      </View>
+      </HeaderButtons>
   }
 }
