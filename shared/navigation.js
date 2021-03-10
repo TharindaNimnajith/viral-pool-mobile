@@ -150,7 +150,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: DashboardNavigator,
       navigationOptions: {
         drawerLabel: 'DASHBOARD',
-        drawerIcon: <Ionicons name='md-home'
+        drawerIcon: <Ionicons name='speedometer'
                               size={25}/>
       }
     },
@@ -158,7 +158,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: ProfileNavigator,
       navigationOptions: {
         drawerLabel: 'MY PROFILE',
-        drawerIcon: <Ionicons name='sc-telegram'
+        drawerIcon: <Ionicons name='person'
                               size={25}/>
       }
     },
@@ -166,7 +166,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: AddIdeaNavigator,
       navigationOptions: {
         drawerLabel: 'NEW IDEA',
-        drawerIcon: <Ionicons name='sc-telegram'
+        drawerIcon: <Ionicons name='add'
                               size={25}/>
       }
     },
@@ -174,7 +174,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: IdeasNavigator,
       navigationOptions: {
         drawerLabel: 'MY IDEAS',
-        drawerIcon: <Ionicons name='sc-telegram'
+        drawerIcon: <Ionicons name='bulb'
                               size={25}/>
       }
     },
@@ -182,7 +182,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: NewProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'NEW PROJECTS',
-        drawerIcon: <Ionicons name='sc-telegram'
+        drawerIcon: <Ionicons name='layers'
                               size={25}/>
       }
     },
@@ -190,7 +190,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: OngoingProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'ONGOING PROJECTS',
-        drawerIcon: <Ionicons name='sc-telegram'
+        drawerIcon: <Ionicons name='flash'
                               size={25}/>
       }
     },
@@ -198,7 +198,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: RejectedProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'REJECTED PROJECTS',
-        drawerIcon: <Ionicons name='sc-telegram'
+        drawerIcon: <Ionicons name='warning'
                               size={25}/>
       }
     },
@@ -206,7 +206,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: CompletedProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'COMPLETED PROJECTS',
-        drawerIcon: <Ionicons name='sc-telegram'
+        drawerIcon: <Ionicons name='checkmark-done'
                               size={25}/>
       }
     }

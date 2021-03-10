@@ -19,7 +19,7 @@ IdeaListScreen.navigationOptions = (navData) => {
     headerLeft: () =>
       <HeaderButtons HeaderButtonComponent={HeaderButton}>
         <Item title='Menu'
-              iconName='ios-menu'
+              iconName='menu'
               onPress={() => {
                 navData.navigation.toggleDrawer()
               }}/>
