@@ -2,7 +2,7 @@ import React from 'react'
 import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
-import {Ionicons} from '@expo/vector-icons'
+import Icon from 'react-native-vector-icons/Ionicons'
 import DashboardScreen from '../screens/user/dashboard-screen'
 import ProfileScreen from '../screens/user/profile-screen'
 import IdeaListScreen from '../screens/ideas/idea-list-screen'
@@ -49,11 +49,25 @@ const ProfileNavigator = createStackNavigator(
   }
 )
 
+const AddIdeaNavigator = createStackNavigator(
+  {
+    AddIdea: AddIdeaScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerTitleAlign: 'center',
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.secondaryColor
+    }
+  }
+)
+
 const IdeasNavigator = createStackNavigator(
   {
     IdeaList: IdeaListScreen,
-    EditIdea: EditIdeaScreen,
-    AddIdea: AddIdeaScreen
+    EditIdea: EditIdeaScreen
   },
   {
     defaultNavigationOptions: {
@@ -135,56 +149,64 @@ const InternalNavigator = createDrawerNavigator(
     Dashboard: {
       screen: DashboardNavigator,
       navigationOptions: {
-        drawerLabel: 'Dashboard',
-        drawerIcon: <Ionicons name='md-person'
+        drawerLabel: 'DASHBOARD',
+        drawerIcon: <Icon name='md-person'
                               size={25}/>
       }
     },
     Profile: {
       screen: ProfileNavigator,
       navigationOptions: {
-        drawerLabel: 'Profile',
-        drawerIcon: <Ionicons name='md-person'
+        drawerLabel: 'MY PROFILE',
+        drawerIcon: <Icon name='md-person'
+                              size={25}/>
+      }
+    },
+    AddIdea: {
+      screen: AddIdeaNavigator,
+      navigationOptions: {
+        drawerLabel: 'NEW IDEA',
+        drawerIcon: <Icon name='md-person'
                               size={25}/>
       }
     },
     Ideas: {
       screen: IdeasNavigator,
       navigationOptions: {
-        drawerLabel: 'Ideas',
-        drawerIcon: <Ionicons name='md-person'
+        drawerLabel: 'MY IDEAS',
+        drawerIcon: <Icon name='md-person'
                               size={25}/>
       }
     },
     NewProjects: {
       screen: NewProjectsNavigator,
       navigationOptions: {
-        drawerLabel: 'New Projects',
-        drawerIcon: <Ionicons name='md-person'
+        drawerLabel: 'NEW PROJECTS',
+        drawerIcon: <Icon name='md-person'
                               size={25}/>
       }
     },
     OngoingProjects: {
       screen: OngoingProjectsNavigator,
       navigationOptions: {
-        drawerLabel: 'Ongoing Projects',
-        drawerIcon: <Ionicons name='md-person'
+        drawerLabel: 'ONGOING PROJECTS',
+        drawerIcon: <Icon name='md-person'
                               size={25}/>
       }
     },
     RejectedProjects: {
       screen: RejectedProjectsNavigator,
       navigationOptions: {
-        drawerLabel: 'Rejected Projects',
-        drawerIcon: <Ionicons name='md-person'
+        drawerLabel: 'REJECTED PROJECTS',
+        drawerIcon: <Icon name='md-person'
                               size={25}/>
       }
     },
     CompletedProjects: {
       screen: CompletedProjectsNavigator,
       navigationOptions: {
-        drawerLabel: 'Completed Projects',
-        drawerIcon: <Ionicons name='md-person'
+        drawerLabel: 'COMPLETED PROJECTS',
+        drawerIcon: <Icon name='md-person'
                               size={25}/>
       }
     }
