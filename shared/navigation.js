@@ -2,7 +2,7 @@ import React from 'react'
 import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
-import {Icon} from 'react-native-elements'
+import {Ionicons} from '@expo/vector-icons'
 import DashboardScreen from '../screens/user/dashboard-screen'
 import ProfileScreen from '../screens/user/profile-screen'
 import IdeaListScreen from '../screens/ideas/idea-list-screen'
@@ -150,64 +150,64 @@ const InternalNavigator = createDrawerNavigator(
       screen: DashboardNavigator,
       navigationOptions: {
         drawerLabel: 'DASHBOARD',
-        drawerIcon: <Icon name='sc-telegram'
-                          size={25}/>
+        drawerIcon: <Ionicons name='md-home'
+                              size={25}/>
       }
     },
     Profile: {
       screen: ProfileNavigator,
       navigationOptions: {
         drawerLabel: 'MY PROFILE',
-        drawerIcon: <Icon name='sc-telegram'
-                          size={25}/>
+        drawerIcon: <Ionicons name='sc-telegram'
+                              size={25}/>
       }
     },
     AddIdea: {
       screen: AddIdeaNavigator,
       navigationOptions: {
         drawerLabel: 'NEW IDEA',
-        drawerIcon: <Icon name='sc-telegram'
-                          size={25}/>
+        drawerIcon: <Ionicons name='sc-telegram'
+                              size={25}/>
       }
     },
     Ideas: {
       screen: IdeasNavigator,
       navigationOptions: {
         drawerLabel: 'MY IDEAS',
-        drawerIcon: <Icon name='sc-telegram'
-                          size={25}/>
+        drawerIcon: <Ionicons name='sc-telegram'
+                              size={25}/>
       }
     },
     NewProjects: {
       screen: NewProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'NEW PROJECTS',
-        drawerIcon: <Icon name='sc-telegram'
-                          size={25}/>
+        drawerIcon: <Ionicons name='sc-telegram'
+                              size={25}/>
       }
     },
     OngoingProjects: {
       screen: OngoingProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'ONGOING PROJECTS',
-        drawerIcon: <Icon name='sc-telegram'
-                          size={25}/>
+        drawerIcon: <Ionicons name='sc-telegram'
+                              size={25}/>
       }
     },
     RejectedProjects: {
       screen: RejectedProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'REJECTED PROJECTS',
-        drawerIcon: <Icon name='sc-telegram'
-                          size={25}/>
+        drawerIcon: <Ionicons name='sc-telegram'
+                              size={25}/>
       }
     },
     CompletedProjects: {
       screen: CompletedProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'COMPLETED PROJECTS',
-        drawerIcon: <Icon name='sc-telegram'
-                          size={25}/>
+        drawerIcon: <Ionicons name='sc-telegram'
+                              size={25}/>
       }
     }
   },

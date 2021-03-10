@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "viral-pool-mobile",
-    "slug": "viral-pool-mobile",
+    "name": "viral-pool-app",
+    "slug": "viral-pool-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
