@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {Animated, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from './../../shared/colors'
+import Colors from '../../shared/colors'
 
 const LoginScreen = ({navigation}) => {
   const [password, setPassword] = useState('')

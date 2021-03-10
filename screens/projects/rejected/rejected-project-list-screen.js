@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text, View} from 'react-native'
-import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import HeaderButton from './../../../components/header-button'
+import Menu from '../../../components/menu'
+import Logout from '../../../components/logout'
 
 const RejectedProjectListScreen = () => {
   return (
@@ -13,17 +13,11 @@ const RejectedProjectListScreen = () => {
   )
 }
 
-RejectedProjectListScreen.navigationOptions = (navData) => {
+RejectedProjectListScreen.navigationOptions = navData => {
   return {
     headerTitle: 'REJECTED PROJECTS',
-    headerLeft: () =>
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item title='Menu'
-              iconName='menu'
-              onPress={() => {
-                navData.navigation.toggleDrawer()
-              }}/>
-      </HeaderButtons>
+    headerLeft: () => <Menu navigation={navData.navigation}/>,
+    headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
 

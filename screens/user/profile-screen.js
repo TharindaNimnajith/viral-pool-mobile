@@ -1,7 +1,7 @@
 import React from 'react'
 import {Text, View} from 'react-native'
-import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import HeaderButton from './../../components/header-button'
+import Menu from '../../components/menu'
+import Logout from '../../components/logout'
 
 const ProfileScreen = () => {
   return (
@@ -13,17 +13,11 @@ const ProfileScreen = () => {
   )
 }
 
-ProfileScreen.navigationOptions = (navData) => {
+ProfileScreen.navigationOptions = navData => {
   return {
     headerTitle: 'MY PROFILE',
-    headerLeft: () =>
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        <Item title='Menu'
-              iconName='menu'
-              onPress={() => {
-                navData.navigation.toggleDrawer()
-              }}/>
-      </HeaderButtons>
+    headerLeft: () => <Menu navigation={navData.navigation}/>,
+    headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
 
