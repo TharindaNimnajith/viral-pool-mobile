@@ -2,7 +2,7 @@ import React from 'react'
 import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
-import Icon from 'react-native-vector-icons/Ionicons'
+import {Icon} from 'react-native-elements'
 import DashboardScreen from '../screens/user/dashboard-screen'
 import ProfileScreen from '../screens/user/profile-screen'
 import IdeaListScreen from '../screens/ideas/idea-list-screen'
@@ -150,7 +150,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: DashboardNavigator,
       navigationOptions: {
         drawerLabel: 'DASHBOARD',
-        drawerIcon: <Icon name='md-person'
+        drawerIcon: <Icon name='sc-telegram'
                           size={25}/>
       }
     },
@@ -158,7 +158,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: ProfileNavigator,
       navigationOptions: {
         drawerLabel: 'MY PROFILE',
-        drawerIcon: <Icon name='md-person'
+        drawerIcon: <Icon name='sc-telegram'
                           size={25}/>
       }
     },
@@ -166,7 +166,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: AddIdeaNavigator,
       navigationOptions: {
         drawerLabel: 'NEW IDEA',
-        drawerIcon: <Icon name='md-person'
+        drawerIcon: <Icon name='sc-telegram'
                           size={25}/>
       }
     },
@@ -174,7 +174,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: IdeasNavigator,
       navigationOptions: {
         drawerLabel: 'MY IDEAS',
-        drawerIcon: <Icon name='md-person'
+        drawerIcon: <Icon name='sc-telegram'
                           size={25}/>
       }
     },
@@ -182,7 +182,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: NewProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'NEW PROJECTS',
-        drawerIcon: <Icon name='md-person'
+        drawerIcon: <Icon name='sc-telegram'
                           size={25}/>
       }
     },
@@ -190,7 +190,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: OngoingProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'ONGOING PROJECTS',
-        drawerIcon: <Icon name='md-person'
+        drawerIcon: <Icon name='sc-telegram'
                           size={25}/>
       }
     },
@@ -198,7 +198,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: RejectedProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'REJECTED PROJECTS',
-        drawerIcon: <Icon name='md-person'
+        drawerIcon: <Icon name='sc-telegram'
                           size={25}/>
       }
     },
@@ -206,7 +206,7 @@ const InternalNavigator = createDrawerNavigator(
       screen: CompletedProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'COMPLETED PROJECTS',
-        drawerIcon: <Icon name='md-person'
+        drawerIcon: <Icon name='sc-telegram'
                           size={25}/>
       }
     }
