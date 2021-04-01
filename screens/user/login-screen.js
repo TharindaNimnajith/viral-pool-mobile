@@ -16,7 +16,7 @@ const LoginScreen = ({navigation}) => {
               Email
             </Text>
             <TextInput style={styles.textInputStyle}
-                       onChangeText={(email) => setEmail(email)}
+                       onChangeText={email => setEmail(email)}
                        value={email}
                        placeholder='Enter Email'
                        placeholderTextColor={Colors.tertiaryColor}
@@ -25,7 +25,7 @@ const LoginScreen = ({navigation}) => {
               Password
             </Text>
             <TextInput style={styles.textInputStyle}
-                       onChangeText={(password) => setPassword(password)}
+                       onChangeText={password => setPassword(password)}
                        value={password}
                        placeholder='Enter Password'
                        placeholderTextColor={Colors.tertiaryColor}
