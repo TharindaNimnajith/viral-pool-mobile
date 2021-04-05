@@ -12,10 +12,11 @@ import NewProjectListScreen from '../screens/projects/new/new-project-list-scree
 import NewProjectDetailsScreen from '../screens/projects/new/new-project-details-screen'
 import OngoingProjectListScreen from '../screens/projects/ongoing/ongoing-project-list-screen'
 import OngoingProjectDetailsScreen from '../screens/projects/ongoing/ongoing-project-details-screen'
-import RejectedProjectListScreen from '../screens/projects/rejected/rejected-project-list-screen'
-import RejectedProjectDetailsScreen from '../screens/projects/rejected/rejected-project-details-screen'
+// import RejectedProjectListScreen from '../screens/projects/rejected/rejected-project-list-screen'
+// import RejectedProjectDetailsScreen from '../screens/projects/rejected/rejected-project-details-screen'
 import CompletedProjectListScreen from '../screens/projects/completed/completed-project-list-screen'
 import CompletedProjectDetailsScreen from '../screens/projects/completed/completed-project-details-screen'
+import NotificationScreen from '../screens/user/notification-screen'
 import LoginScreen from '../screens/user/login-screen'
 import Colors from './colors'
 
@@ -49,6 +50,21 @@ const DashboardNavigator = createStackNavigator(
 const ProfileNavigator = createStackNavigator(
   {
     Profile: ProfileScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerTitleAlign: 'center',
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.secondaryColor
+    }
+  }
+)
+
+const NotificationNavigator = createStackNavigator(
+  {
+    Notification: NotificationScreen
   },
   {
     defaultNavigationOptions: {
@@ -124,21 +140,21 @@ const OngoingProjectsNavigator = createStackNavigator(
   }
 )
 
-const RejectedProjectsNavigator = createStackNavigator(
-  {
-    RejectedProjectList: RejectedProjectListScreen,
-    RejectedProjectDetails: RejectedProjectDetailsScreen
-  },
-  {
-    defaultNavigationOptions: {
-      headerTitleAlign: 'center',
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.secondaryColor
-    }
-  }
-)
+// const RejectedProjectsNavigator = createStackNavigator(
+//   {
+//     RejectedProjectList: RejectedProjectListScreen,
+//     RejectedProjectDetails: RejectedProjectDetailsScreen
+//   },
+//   {
+//     defaultNavigationOptions: {
+//       headerTitleAlign: 'center',
+//       headerStyle: {
+//         backgroundColor: Colors.primaryColor
+//       },
+//       headerTintColor: Colors.secondaryColor
+//     }
+//   }
+// )
 
 const CompletedProjectsNavigator = createStackNavigator(
   {
@@ -174,6 +190,14 @@ const InternalNavigator = createDrawerNavigator(
                               size={25}/>
       }
     },
+    Notification: {
+      screen: NotificationNavigator,
+      navigationOptions: {
+        drawerLabel: 'NOTIFICATIONS',
+        drawerIcon: <Ionicons name='notifications'
+                              size={25}/>
+      }
+    },
     AddIdea: {
       screen: AddIdeaNavigator,
       navigationOptions: {
@@ -206,14 +230,14 @@ const InternalNavigator = createDrawerNavigator(
                               size={25}/>
       }
     },
-    RejectedProjects: {
-      screen: RejectedProjectsNavigator,
-      navigationOptions: {
-        drawerLabel: 'REJECTED PROJECTS',
-        drawerIcon: <Ionicons name='warning'
-                              size={25}/>
-      }
-    },
+    // RejectedProjects: {
+    //   screen: RejectedProjectsNavigator,
+    //   navigationOptions: {
+    //     drawerLabel: 'REJECTED PROJECTS',
+    //     drawerIcon: <Ionicons name='warning'
+    //                           size={25}/>
+    //   }
+    // },
     CompletedProjects: {
       screen: CompletedProjectsNavigator,
       navigationOptions: {

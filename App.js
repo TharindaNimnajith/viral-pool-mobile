@@ -4,7 +4,7 @@ import Navigation from './shared/navigation'
 import Constants from './shared/constants'
 
 export default function App() {
-  LogBox.ignoreLogs([Constants.ignoredWarning])
+  LogBox.ignoreLogs([Constants.IGNORED_WARNING])
 
   return (
     <Navigation/>
