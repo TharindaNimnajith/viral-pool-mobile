@@ -1,16 +1,44 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
+import {View} from 'react-native'
+import Dialog from 'react-native-dialog'
 import HeaderButton from './header-button'
 
 const Logout = props => {
+  const [visible, setVisible] = useState(false)
+
+  const showDialog = async () => {
+    setVisible(true)
+  }
+
+  const hideDialog = async () => {
+    setVisible(false)
+  }
+
+  const handleLogout = async () => {
+    props.navigation.navigate('Login')
+  }
+
   return (
-    <HeaderButtons HeaderButtonComponent={HeaderButton}>
-      <Item title='Logout'
-            iconName='log-out-outline'
-            onPress={() => {
-              props.navigation.navigate('Login')
-            }}/>
-    </HeaderButtons>
+    <View>
+      <Dialog.Container visible={visible}>
+        <Dialog.Title>
+          LOGOUT
+        </Dialog.Title>
+        <Dialog.Description>
+          Are you sure?
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={handleLogout}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialog}/>
+      </Dialog.Container>
+      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item title='Logout'
+              iconName='log-out-outline'
+              onPress={showDialog}/>
+      </HeaderButtons>
+    </View>
   )
 }
 
