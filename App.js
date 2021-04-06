@@ -62,7 +62,7 @@ async function registerForPushNotificationsAsync() {
   return token
 }
 
-const App = ({navigation}) => {
+const App = () => {
   // const appContext = useContext(AppContext)
 
   LogBox.ignoreLogs([Constants.IGNORED_WARNING])
@@ -86,8 +86,8 @@ const App = ({navigation}) => {
     // backgrounded, or killed)
     // noinspection JSValidateTypes
     responseListener.current = addNotificationResponseReceivedListener(response => {
-      console.log(response.notification.request.content.data.data)
-      navigation.navigate(response.notification.request.content.data.data)
+      // console.log(response.notification.request.content.data.data)
+      // navigation.navigate(response.notification.request.content.data.data)
     })
 
     // appContext.setToken(expoPushToken).then(() => {

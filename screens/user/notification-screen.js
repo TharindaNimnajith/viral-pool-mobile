@@ -49,6 +49,27 @@ async function sendPushNotification(expoPushToken) {
     },
     body: JSON.stringify(message)
   })
+
+  // let data = {
+  //   "to": "ExponentPushToken[Wr2Q-yKUDUUi6qm0ZavPPM]",
+  //   "sound": "default",
+  //   "title": "Test Title",
+  //   "body": "Test viralpool notification body.",
+  //   "data": {
+  //     "someData": "OngoingProjectDetails"
+  //   }
+  // }
+  //
+  // let config = {
+  //   method: 'post',
+  //   url: 'https://exp.host/--/api/v2/push/send',
+  //   headers: {
+  //     'Accept': 'application/json',
+  //     'Accept-encoding': 'gzip, deflate',
+  //     'Content-Type': 'application/json'
+  //   },
+  //   data : data
+  // }
 }
 
 NotificationScreen.navigationOptions = navData => {
