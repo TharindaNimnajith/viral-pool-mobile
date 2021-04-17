@@ -19,6 +19,7 @@ import Navigation from './shared/navigation'
 import Constants from './shared/constants'
 import Colors from './shared/colors'
 
+// noinspection JSCheckFunctionSignatures
 setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -68,6 +69,7 @@ const App = () => {
   LogBox.ignoreLogs([Constants.IGNORED_WARNING])
 
   // const [expoPushToken, setExpoPushToken] = useState('')
+
   const notificationListener = useRef()
   const responseListener = useRef()
 
@@ -77,14 +79,14 @@ const App = () => {
     // registerForPushNotificationsAsync().then(token => appContext.setToken(token))
 
     // This listener is fired whenever a notification is received while the app is foregrounded
-    // noinspection JSValidateTypes
+    // noinspection JSValidateTypes, JSUnusedLocalSymbols
     notificationListener.current = addNotificationReceivedListener(notification => {
       // console.log(notification)
     })
 
     // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded,
     // backgrounded, or killed)
-    // noinspection JSValidateTypes
+    // noinspection JSValidateTypes, JSUnusedLocalSymbols
     responseListener.current = addNotificationResponseReceivedListener(response => {
       // console.log(response.notification.request.content.data.data)
       // navigation.navigate(response.notification.request.content.data.data)
