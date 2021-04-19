@@ -1,23 +1,49 @@
 import React, {useContext, useState} from 'react'
-import {Animated, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {Animated, Button, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
+import validator from 'validator'
 import Colors from '../../shared/colors'
+import Constants from '../../shared/constants'
 import {Util} from '../../util/util'
 import {AppContext} from '../../global/app-context'
 import {storeStringData} from '../../helpers/local-storage'
+import {isEmpty} from '../../helpers/common'
 
 const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
 
+  // TODO: Set initial state to empty string
   const [email, setEmail] = useState('akalanka@cube360global.com')
   const [password, setPassword] = useState('#Compaq123')
+
   const [state] = useState('string')
   const [redirectUri] = useState('string')
   const [clientId] = useState('string')
   const [clientName] = useState('string')
 
-  const login = () => {
+  const [emailValid, setEmailValid] = useState(false)
+  const [passwordValid, setPasswordValid] = useState(true)
+  const [unauthorized, setUnauthorized] = useState(false)
+
+  const onChangeEmail = async email => {
+    // noinspection JSUnresolvedFunction
+    setEmailValid(validator.isEmail(email.trim()))
+    setUnauthorized(false)
+    setEmail(email.trim())
+  }
+
+  const onChangePassword = async password => {
+    setPasswordValid(!await isEmpty(password))
+    setUnauthorized(false)
+    setPassword(password)
+  }
+
+  function isDisabled() {
+    return !emailValid || !passwordValid
+  }
+
+  const login = async () => {
     axios.post('oauth/mobile-login',
       {
         email: email,
@@ -36,19 +62,23 @@ const LoginScreen = ({navigation}) => {
         await appContext.SetAccessToken(response.data.access_token)
         // noinspection JSUnresolvedVariable
         await appContext.SetRefreshToken(response.data.refresh_token)
-        navigation.navigate({
-          routeName: 'Navigator'
-        })
-        // noinspection JSUnusedLocalSymbols
-        axios.get('User')
-          .then(response => {
-          })
-          .catch(error => {
-            console.error(error)
-          })
+        if (response.status === 200) {
+          // noinspection JSUnusedLocalSymbols
+          axios.get('User')
+            .then(response => {
+              // TODO: Get profile data
+              navigation.navigate({
+                routeName: 'Navigator'
+              })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
       })
       .catch(error => {
-        console.error(error)
+        setUnauthorized(true)
+        console.log(error)
       })
   }
 
@@ -61,28 +91,36 @@ const LoginScreen = ({navigation}) => {
               Email
             </Text>
             <TextInput style={styles.textInputStyle}
-                       onChangeText={email => setEmail(email)}
+                       onChangeText={email => onChangeEmail(email)}
                        value={email}
                        placeholder='Enter Email'
+                       textContentType={'emailAddress'}
                        placeholderTextColor={Colors.tertiaryColor}
                        secureTextEntry={false}/>
             <Text style={styles.labelStyle}>
               Password
             </Text>
             <TextInput style={styles.textInputStyle}
-                       onChangeText={password => setPassword(password)}
+                       onChangeText={password => onChangePassword(password)}
                        value={password}
                        placeholder='Enter Password'
                        placeholderTextColor={Colors.tertiaryColor}
                        secureTextEntry={true}/>
             <View style={styles.viewStyle}>
-              <TouchableOpacity style={styles.touchableOpacityStyle}
-                                onPress={login}>
-                <Text style={styles.buttonStyle}>
-                  Login
-                </Text>
-              </TouchableOpacity>
+              <Button title={'Login'}
+                      disabled={isDisabled()}
+                      onPress={login}>
+              </Button>
             </View>
+            {
+              unauthorized ? (
+                <View style={styles.viewStyle}>
+                  <Text style={styles.errorText}>
+                    {Constants.LOGIN_ERROR}
+                  </Text>
+                </View>
+              ) : null
+            }
           </View>
         </Animated.View>
       </ScrollView>
@@ -104,16 +142,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  buttonStyle: {
-    color: Colors.secondaryColor,
-    fontSize: 18,
-    textTransform: 'uppercase'
-  },
   container: {
     flex: 1,
     justifyContent: 'flex-start',
     alignContent: 'center',
     margin: 10
+  },
+  errorText: {
+    color: Colors.errorColor
   },
   labelStyle: {
     marginLeft: 20,
@@ -136,14 +172,6 @@ const styles = StyleSheet.create({
     padding: 10,
     marginTop: 10,
     color: Colors.tertiaryColor
-  },
-  touchableOpacityStyle: {
-    width: '100%',
-    height: 40,
-    backgroundColor: Colors.primaryColor,
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   viewStyle: {
     marginTop: 50,

@@ -19,23 +19,30 @@ const NotificationScreen = () => {
     })
   }, [])
 
+  const sendNotificationAppContext = async () => {
+    await sendPushNotification(appContext.expoPushToken)
+  }
+
+  const sendNotificationAsyncStorage = async () => {
+    await sendPushNotification(expoPushToken)
+  }
+
   return (
     <View style={styles.mainViewStyle}>
-      <Button title='Send Notification (App Context)'
-              onPress={
-                async () => {
-                  await sendPushNotification(appContext.expoPushToken)
-                }}/>
-      <Button title='Send Notification (Async Storage)'
-              onPress={
-                async () => {
-                  await sendPushNotification(expoPushToken)
-                }}/>
+      <Button style={styles.mainViewStyle}
+              title='Send Notification (App Context)'
+              onPress={sendNotificationAppContext}/>
+      <Button style={styles.mainViewStyle}
+              title='Send Notification (Async Storage)'
+              onPress={sendNotificationAsyncStorage}/>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  buttonStyle: {
+    marginTop: 15
+  },
   mainViewStyle: {
     width: wp('100%'),
     height: hp('100%'),

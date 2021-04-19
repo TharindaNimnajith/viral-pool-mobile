@@ -1,5 +1,6 @@
 export default {
   primaryColor: '#2699fb',
   secondaryColor: '#ffffff',
-  tertiaryColor: '#bce0fd'
+  tertiaryColor: '#bce0fd',
+  errorColor: '#ff0000'
 }

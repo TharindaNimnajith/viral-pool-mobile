@@ -14,14 +14,14 @@ axios.interceptors.request.use(async request => {
   request.headers['Authorization'] = `Bearer ${access_token}`
   return request
 }, error => {
-  console.error(error)
+  console.log(error)
   return Promise.reject(error)
 })
 
 // axios.interceptors.response.use(response => {
 //   return response
 // }, error => {
-//   console.error(error)
+//   console.log(error)
 //   return Promise.reject(error)
 // })
 

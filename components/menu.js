@@ -3,13 +3,15 @@ import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import HeaderButton from './header-button'
 
 const Menu = props => {
+  const toggleDrawer = async () => {
+    props.navigation.toggleDrawer()
+  }
+
   return (
     <HeaderButtons HeaderButtonComponent={HeaderButton}>
       <Item title='Menu'
             iconName='menu'
-            onPress={() => {
-              props.navigation.toggleDrawer()
-            }}/>
+            onPress={toggleDrawer}/>
     </HeaderButtons>
   )
 }
