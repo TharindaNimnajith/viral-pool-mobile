@@ -1,8 +1,8 @@
 import registerRootComponent from 'expo/build/launch/registerRootComponent'
 import axios from 'axios'
 import {Util} from './util/util'
-import App from './App'
 import {getStringData} from './helpers/local-storage'
+import App from './App'
 
 axios.defaults.baseURL = Util.BASE_URL
 axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN'

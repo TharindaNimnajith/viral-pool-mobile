@@ -19,19 +19,18 @@ const LoginScreen = ({navigation}) => {
         redirectUri: 'string',
         clientId: 'string',
         clientName: 'string'
-      }
-    ).then(response => {
-      console.log(response)
-      // noinspection JSUnresolvedVariable
-      storeStringData(Util.ACCESS_TOKEN, response.data.access_token).then(() => {
-      })
-      // noinspection JSUnresolvedVariable
-      storeStringData(Util.REFRESH_TOKEN, response.data.refresh_token).then(() => {
-      })
-      // navigation.navigate({
-      //   routeName: 'Navigator'
-      // })
-    }).catch(error => {
+      }).then(response => {
+        console.log(response)
+        // noinspection JSUnresolvedVariable
+        storeStringData(Util.ACCESS_TOKEN, response.data.access_token).then(() => {
+        })
+        // noinspection JSUnresolvedVariable
+        storeStringData(Util.REFRESH_TOKEN, response.data.refresh_token).then(() => {
+        })
+        // navigation.navigate({
+        //   routeName: 'Navigator'
+        // })
+      }).catch(error => {
       console.error(error)
       // localStorage.removeItem(Util.ACCESS_TOKEN)
       // localStorage.removeItem(Util.REFRESH_TOKEN)

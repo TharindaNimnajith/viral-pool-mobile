@@ -16,7 +16,7 @@ import OngoingProjectDetailsScreen from '../screens/projects/ongoing/ongoing-pro
 // import RejectedProjectDetailsScreen from '../screens/projects/rejected/rejected-project-details-screen'
 import CompletedProjectListScreen from '../screens/projects/completed/completed-project-list-screen'
 import CompletedProjectDetailsScreen from '../screens/projects/completed/completed-project-details-screen'
-import NotificationScreen from '../screens/user/notification-screen'
+// import NotificationScreen from '../screens/user/notification-screen'
 import LoginScreen from '../screens/user/login-screen'
 import Colors from './colors'
 
@@ -62,20 +62,20 @@ const ProfileNavigator = createStackNavigator(
   }
 )
 
-const NotificationNavigator = createStackNavigator(
-  {
-    Notification: NotificationScreen
-  },
-  {
-    defaultNavigationOptions: {
-      headerTitleAlign: 'center',
-      headerStyle: {
-        backgroundColor: Colors.primaryColor
-      },
-      headerTintColor: Colors.secondaryColor
-    }
-  }
-)
+// const NotificationNavigator = createStackNavigator(
+//   {
+//     Notification: NotificationScreen
+//   },
+//   {
+//     defaultNavigationOptions: {
+//       headerTitleAlign: 'center',
+//       headerStyle: {
+//         backgroundColor: Colors.primaryColor
+//       },
+//       headerTintColor: Colors.secondaryColor
+//     }
+//   }
+// )
 
 const AddIdeaNavigator = createStackNavigator(
   {
@@ -190,14 +190,14 @@ const InternalNavigator = createDrawerNavigator(
                               size={25}/>
       }
     },
-    Notification: {
-      screen: NotificationNavigator,
-      navigationOptions: {
-        drawerLabel: 'NOTIFICATIONS',
-        drawerIcon: <Ionicons name='notifications'
-                              size={25}/>
-      }
-    },
+    // Notification: {
+    //   screen: NotificationNavigator,
+    //   navigationOptions: {
+    //     drawerLabel: 'NOTIFICATIONS',
+    //     drawerIcon: <Ionicons name='notifications'
+    //                           size={25}/>
+    //   }
+    // },
     AddIdea: {
       screen: AddIdeaNavigator,
       navigationOptions: {
