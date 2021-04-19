@@ -1,17 +1,27 @@
 import React from 'react'
-import {Text, View} from 'react-native'
+import {StyleSheet, Text, View} from 'react-native'
 import Menu from '../../components/menu'
 import Logout from '../../components/logout'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
+import Colors from "../../shared/colors";
 
 const AddIdeaScreen = () => {
   return (
-    <View>
+    <View style={styles.mainViewStyle}>
       <Text>
         New Idea
       </Text>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  mainViewStyle: {
+    width: wp('100%'),
+    height: hp('100%'),
+    backgroundColor: Colors.secondaryColor
+  }
+})
 
 AddIdeaScreen.navigationOptions = navData => {
   return {
