@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react'
+import React, {useContext, useState} from 'react'
 import {Button, View} from 'react-native'
 import {AppContext} from '../../global/app-context'
 import {getStringData} from '../../helpers/local-storage'

@@ -9,7 +9,7 @@ axios.defaults.baseURL = Util.BASE_URL
 // axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN'
 // axios.defaults.headers.post['Content-Type'] = 'application/json'
 
-axios.interceptors.request.use(async request =>  {
+axios.interceptors.request.use(async request => {
   const access_token = await getStringData(Util.ACCESS_TOKEN)
   request.headers['Authorization'] = `Bearer ${access_token}`
   return request
