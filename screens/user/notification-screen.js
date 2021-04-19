@@ -21,14 +21,16 @@ const NotificationScreen = () => {
 
   return (
     <View style={styles.mainViewStyle}>
-      <Button title='Send Notification (AppContext)'
-              onPress={async () => {
-                await sendPushNotification(appContext.expoPushToken)
-              }}/>
-      <Button title='Send Notification (AsyncStorage)'
-              onPress={async () => {
-                await sendPushNotification(expoPushToken)
-              }}/>
+      <Button title='Send Notification (App Context)'
+              onPress={
+                async () => {
+                  await sendPushNotification(appContext.expoPushToken)
+                }}/>
+      <Button title='Send Notification (Async Storage)'
+              onPress={
+                async () => {
+                  await sendPushNotification(expoPushToken)
+                }}/>
     </View>
   )
 }

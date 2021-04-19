@@ -10,32 +10,32 @@ import {storeStringData} from '../../helpers/local-storage'
 const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
 
-  const [password, setPassword] = useState('')
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState('akalanka@cube360global.com')
+  const [password, setPassword] = useState('#Compaq123')
+  const [state] = useState('string')
+  const [redirectUri] = useState('string')
+  const [clientId] = useState('string')
+  const [clientName] = useState('string')
 
   const login = () => {
     axios.post('oauth/mobile-login',
       {
-        email: 'akalanka@cube360global.com',
-        password: '#Compaq123',
-        state: 'string',
-        redirectUri: 'string',
-        clientId: 'string',
-        clientName: 'string'
+        email: email,
+        password: password,
+        state: state,
+        redirectUri: redirectUri,
+        clientId: clientId,
+        clientName: clientName
       })
-      .then(response => {
+      .then(async response => {
         // noinspection JSUnresolvedVariable
-        storeStringData(Util.ACCESS_TOKEN, response.data.access_token).then(() => {
-        })
+        await storeStringData(Util.ACCESS_TOKEN, response.data.access_token)
         // noinspection JSUnresolvedVariable
-        storeStringData(Util.REFRESH_TOKEN, response.data.refresh_token).then(() => {
-        })
+        await storeStringData(Util.REFRESH_TOKEN, response.data.refresh_token)
         // noinspection JSUnresolvedVariable
-        appContext.SetAccessToken(response.data.access_token).then(() => {
-        })
+        await appContext.SetAccessToken(response.data.access_token)
         // noinspection JSUnresolvedVariable
-        appContext.SetRefreshToken(response.data.refresh_token).then(() => {
-        })
+        await appContext.SetRefreshToken(response.data.refresh_token)
         navigation.navigate({
           routeName: 'Navigator'
         })
@@ -77,9 +77,7 @@ const LoginScreen = ({navigation}) => {
                        secureTextEntry={true}/>
             <View style={styles.viewStyle}>
               <TouchableOpacity style={styles.touchableOpacityStyle}
-                                onPress={() => {
-                                  login()
-                                }}>
+                                onPress={login}>
                 <Text style={styles.buttonStyle}>
                   Login
                 </Text>

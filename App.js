@@ -75,7 +75,8 @@ const App = () => {
   useEffect(() => {
     registerForPushNotificationsAsync().then(async token => {
       await storeStringData(Util.EXPO_PUSH_TOKEN, token)
-      await appContext.SetExpoPushToken(token)
+      // The following appContext.SetExpoPushToken(token) is not working
+      // await appContext.SetExpoPushToken(token)
     })
 
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
@@ -87,6 +88,7 @@ const App = () => {
     responseListener.current = addNotificationResponseReceivedListener(response => {
       // This listener is fired whenever a user taps on or interacts with a notification (works when app is
       // foregrounded, backgrounded, or killed)
+      // console.log(response.notification.request.content.data.data)
     })
 
     return () => {
