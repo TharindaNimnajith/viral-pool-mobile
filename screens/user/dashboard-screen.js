@@ -58,7 +58,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor
   },
   textStyle: {
-    margin: 16
+    marginTop: 15,
+    marginRight: 15,
+    marginLeft: 15
   }
 })
 

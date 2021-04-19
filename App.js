@@ -73,8 +73,10 @@ const App = () => {
   const responseListener = useRef()
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then(token => storeStringData(Util.EXPO_PUSH_TOKEN, token))
-    registerForPushNotificationsAsync().then(token => appContext.SetExpoPushToken(token))
+    registerForPushNotificationsAsync().then(async token => {
+      await storeStringData(Util.EXPO_PUSH_TOKEN, token)
+      await appContext.SetExpoPushToken(token)
+    })
 
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
     notificationListener.current = addNotificationReceivedListener(notification => {

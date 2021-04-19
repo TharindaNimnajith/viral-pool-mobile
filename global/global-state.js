@@ -2,13 +2,9 @@ import React, {useState} from 'react'
 import {AppContext} from './app-context'
 
 export const GlobalState = props => {
-  const [expoPushToken, setExpoPushToken] = useState(null)
   const [accessToken, setAccessToken] = useState(null)
   const [refreshToken, setRefreshToken] = useState(null)
-
-  const SetExpoPushToken = async data => {
-    setExpoPushToken(data)
-  }
+  const [expoPushToken, setExpoPushToken] = useState(null)
 
   const SetAccessToken = async data => {
     setAccessToken(data)
@@ -18,14 +14,18 @@ export const GlobalState = props => {
     setRefreshToken(data)
   }
 
+  const SetExpoPushToken = data => {
+    setExpoPushToken(data)
+  }
+
   return (
     <AppContext.Provider value={{
-      expoPushToken: expoPushToken,
       accessToken: accessToken,
       refreshToken: refreshToken,
-      SetExpoPushToken: SetExpoPushToken,
+      expoPushToken: expoPushToken,
       SetAccessToken: SetAccessToken,
-      SetRefreshToken: SetRefreshToken
+      SetRefreshToken: SetRefreshToken,
+      SetExpoPushToken: SetExpoPushToken
     }}>
       {props.children}
     </AppContext.Provider>
