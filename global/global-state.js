@@ -5,6 +5,7 @@ export const GlobalState = props => {
   const [accessToken, setAccessToken] = useState(null)
   const [refreshToken, setRefreshToken] = useState(null)
   const [expoPushToken, setExpoPushToken] = useState(null)
+  const [userData, setUserData] = useState(null)
 
   const SetAccessToken = async data => {
     setAccessToken(data)
@@ -18,14 +19,20 @@ export const GlobalState = props => {
     setExpoPushToken(data)
   }
 
+  const SetUserData = data => {
+    setUserData(data)
+  }
+
   return (
     <AppContext.Provider value={{
       accessToken: accessToken,
       refreshToken: refreshToken,
       expoPushToken: expoPushToken,
+      userData: userData,
       SetAccessToken: SetAccessToken,
       SetRefreshToken: SetRefreshToken,
-      SetExpoPushToken: SetExpoPushToken
+      SetExpoPushToken: SetExpoPushToken,
+      SetUserData: SetUserData
     }}>
       {props.children}
     </AppContext.Provider>

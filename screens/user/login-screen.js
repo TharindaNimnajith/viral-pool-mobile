@@ -7,7 +7,7 @@ import Colors from '../../shared/colors'
 import Constants from '../../shared/constants'
 import {Util} from '../../util/util'
 import {AppContext} from '../../global/app-context'
-import {storeStringData} from '../../helpers/local-storage'
+import {storeObjectData, storeStringData} from '../../helpers/local-storage'
 import {isEmpty} from '../../helpers/common'
 
 const LoginScreen = ({navigation}) => {
@@ -65,15 +65,23 @@ const LoginScreen = ({navigation}) => {
         if (response.status === 200) {
           // noinspection JSUnusedLocalSymbols
           axios.get('User')
-            .then(response => {
-              // TODO: Get profile data
-              navigation.navigate({
-                routeName: 'Navigator'
-              })
+            .then(async response => {
+              if (response.status === 200) {
+                await storeObjectData(Util.USER_DATA, response.data.data)
+                await appContext.SetUserData(response.data.data)
+                navigation.navigate({
+                  routeName: 'Navigator'
+                })
+              } else {
+                setUnauthorized(true)
+              }
             })
             .catch(error => {
+              setUnauthorized(true)
               console.log(error)
             })
+        } else {
+          setUnauthorized(true)
         }
       })
       .catch(error => {

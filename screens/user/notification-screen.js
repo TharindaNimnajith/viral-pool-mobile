@@ -1,12 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {Button, StyleSheet, View} from 'react-native'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
 import {getStringData} from '../../helpers/local-storage'
 import Menu from '../../components/menu'
 import Logout from '../../components/logout'
 import {Util} from '../../util/util'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
-import Colors from "../../shared/colors";
+
 
 const NotificationScreen = () => {
   const appContext = useContext(AppContext)
