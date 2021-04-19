@@ -2,22 +2,20 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const storeStringData = async (key, value) => {
   try {
-    // console.log(key)
-    // console.log(value)
     await AsyncStorage.setItem(key, JSON.stringify(value))
   } catch (e) {
-    // saving error
+    console.error(e)
   }
 }
 
-const storeObjectData = async (value) => {
-  try {
-    const jsonValue = JSON.stringify(value)
-    await AsyncStorage.setItem('@storage_Key', jsonValue)
-  } catch (e) {
-    // saving error
-  }
-}
+// const storeObjectData = async (key, value) => {
+//   try {
+//     const jsonValue = JSON.stringify(value)
+//     await AsyncStorage.setItem(key, jsonValue)
+//   } catch (e) {
+//     console.error(e)
+//   }
+// }
 
 export const getStringData = async (key) => {
   try {
@@ -26,15 +24,18 @@ export const getStringData = async (key) => {
       return value
     }
   } catch (e) {
-    // error reading value
+    console.error(e)
   }
 }
 
-const getObjectData = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem('@storage_Key')
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-  } catch (e) {
-    // error reading value
-  }
-}
+// const getObjectData = async (key) => {
+//   try {
+//     const jsonValue = await AsyncStorage.getItem(key)
+//     return jsonValue != null ? JSON.parse(jsonValue) : null
+//   } catch (e) {
+//     console.error(e)
+//   }
+// }
+
+// removeStringData
+// removeObjectData
