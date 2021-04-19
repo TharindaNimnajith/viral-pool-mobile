@@ -8,7 +8,6 @@ import Menu from '../../components/menu'
 import Logout from '../../components/logout'
 import {Util} from '../../util/util'
 
-
 const NotificationScreen = () => {
   const appContext = useContext(AppContext)
 
@@ -30,20 +29,15 @@ const NotificationScreen = () => {
 
   return (
     <View style={styles.mainViewStyle}>
-      <Button style={styles.mainViewStyle}
-              title='Send Notification (App Context)'
+      <Button title='Send Notification (App Context)'
               onPress={sendNotificationAppContext}/>
-      <Button style={styles.mainViewStyle}
-              title='Send Notification (Async Storage)'
+      <Button title='Send Notification (Async Storage)'
               onPress={sendNotificationAsyncStorage}/>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  buttonStyle: {
-    marginTop: 15
-  },
   mainViewStyle: {
     width: wp('100%'),
     height: hp('100%'),

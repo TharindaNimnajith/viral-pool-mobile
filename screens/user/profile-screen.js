@@ -19,14 +19,63 @@ const ProfileScreen = () => {
     })
   }, [])
 
+  // noinspection JSUnresolvedVariable
   return (
     <View style={styles.mainViewStyle}>
-      <Text style={styles.textStyle}>
-        User Data (AppContext): {appContext.userData}
-      </Text>
-      <Text style={styles.textStyle}>
-        User Data (AsyncStorage): {userData}
-      </Text>
+      {
+        userData ? (
+          <View>
+            <Text style={styles.textStyle}>
+              User Data (AppContext):
+              {'\n'}{'\n'}
+              {appContext.userData.id}
+              {'\n'}
+              {appContext.userData.firstName}
+              {'\n'}
+              {appContext.userData.lastName}
+              {'\n'}
+              {appContext.userData.email}
+              {'\n'}
+              {appContext.userData.userRole}
+              {'\n'}
+              {appContext.userData.gender}
+              {'\n'}
+              {appContext.userData.birthDate}
+              {'\n'}
+              {appContext.userData.address}
+              {'\n'}
+              {appContext.userData.phoneNumber}
+              {'\n'}
+              {appContext.userData.profileImagePath}
+              {'\n'}
+            </Text>
+            <Text style={styles.textStyle}>
+              User Data (AsyncStorage):
+              {'\n'}{'\n'}
+              {userData.id}
+              {'\n'}
+              {userData.firstName}
+              {'\n'}
+              {userData.lastName}
+              {'\n'}
+              {userData.email}
+              {'\n'}
+              {userData.userRole}
+              {'\n'}
+              {userData.gender}
+              {'\n'}
+              {userData.birthDate}
+              {'\n'}
+              {userData.address}
+              {'\n'}
+              {userData.phoneNumber}
+              {'\n'}
+              {userData.profileImagePath}
+              {'\n'}
+            </Text>
+          </View>
+        ) : null
+      }
     </View>
   )
 }

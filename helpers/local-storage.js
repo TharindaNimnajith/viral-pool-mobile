@@ -27,17 +27,17 @@ export const getStringData = async key => {
 
 export const getObjectData = async key => {
   try {
-    const jsonValue = await AsyncStorage.getItem(key)
-    return jsonValue != null ? JSON.parse(jsonValue) : null
+    const value = await AsyncStorage.getItem(key)
+    return value != null ? JSON.parse(value) : null
   } catch (error) {
     console.log(error)
   }
 }
 
-export const removeData = async key => {
-  try {
-    await AsyncStorage.removeItem(key);
-  } catch (error) {
-    console.log(error)
-  }
-}
+// export const removeData = async key => {
+//   try {
+//     await AsyncStorage.removeItem(key);
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
