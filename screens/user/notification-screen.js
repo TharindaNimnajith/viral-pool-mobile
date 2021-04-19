@@ -1,35 +1,33 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Button, View} from 'react-native'
-// import {AppContext} from '../../global/app-context'
+import {AppContext} from '../../global/app-context'
 import {getStringData} from '../../helpers/local-storage'
-import Constants from '../../shared/constants'
 import Menu from '../../components/menu'
 import Logout from '../../components/logout'
+import {Util} from '../../util/util'
 
 const NotificationScreen = () => {
-  // const appContext = useContext(AppContext)
+  const appContext = useContext(AppContext)
 
-  const [expoToken, setExpoToken] = useState(null)
+  // noinspection JSUnusedLocalSymbols
+  const [expoPushToken, setExpoPushToken] = useState(null)
 
-  getStringData('@expoPushToken').then(value => {
-    setExpoToken(JSON.parse(value))
+  getStringData(Util.EXPO_PUSH_TOKEN).then(value => {
+    setExpoPushToken(value)
   })
 
   return (
     <View>
       <Button title='Press to Send Notification'
               onPress={async () => {
-                // console.log(expoToken)
-                // await sendPushNotification(appContext.expoToken)
-                await sendPushNotification(expoToken)
+                await sendPushNotification(appContext.expoPushToken)
+                // await sendPushNotification(expoPushToken)
               }}/>
     </View>
   )
 }
 
 async function sendPushNotification(expoPushToken) {
-  // console.log(expoPushToken)
-
   const message = {
     to: expoPushToken,
     sound: 'default',
@@ -40,7 +38,7 @@ async function sendPushNotification(expoPushToken) {
     }
   }
 
-  await fetch(Constants.EXPO_PUSH_NOTIFICATION_URL, {
+  await fetch(Util.EXPO_PUSH_NOTIFICATION_URL, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -80,4 +78,5 @@ NotificationScreen.navigationOptions = navData => {
   }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default NotificationScreen

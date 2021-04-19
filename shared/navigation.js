@@ -2,6 +2,7 @@ import React from 'react'
 import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
+// noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
 import DashboardScreen from '../screens/user/dashboard-screen'
 import ProfileScreen from '../screens/user/profile-screen'

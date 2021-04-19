@@ -1,12 +1,13 @@
 import {createContext} from 'react'
 
 export const AppContext = createContext({
-  expoToken: null,
-  // loginData: null,
-  // login: async () => {
-  // },
-  // logout: async () => {
-  // },
-  setToken: async () => {
+  expoPushToken: null,
+  accessToken: null,
+  refreshToken: null,
+  SetRefreshToken: async () => {
+  },
+  SetAccessToken: async () => {
+  },
+  SetExpoPushToken: async () => {
   }
 })

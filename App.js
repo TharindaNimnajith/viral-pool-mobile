@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useContext, useEffect, useRef} from 'react'
 import {LogBox, Platform} from 'react-native'
 import ExpoConstants from 'expo-constants'
 import {
@@ -12,12 +12,13 @@ import {
   setNotificationChannelAsync,
   setNotificationHandler
 } from 'expo-notifications'
-// import {AppContext} from './global/app-context'
-// import {GlobalState} from './global/global-state'
+import {AppContext} from './global/app-context'
+import {GlobalState} from './global/global-state'
 import {storeStringData} from './helpers/local-storage'
 import Navigation from './shared/navigation'
 import Constants from './shared/constants'
 import Colors from './shared/colors'
+import {Util} from './util/util'
 
 // noinspection JSCheckFunctionSignatures
 setNotificationHandler({
@@ -64,39 +65,27 @@ async function registerForPushNotificationsAsync() {
 }
 
 const App = () => {
-  // const appContext = useContext(AppContext)
-
   LogBox.ignoreLogs([Constants.IGNORED_WARNING])
 
-  // const [expoPushToken, setExpoPushToken] = useState('')
+  const appContext = useContext(AppContext)
 
   const notificationListener = useRef()
   const responseListener = useRef()
 
   useEffect(() => {
-    registerForPushNotificationsAsync().then(token => storeStringData('@expoPushToken', token))
-    // registerForPushNotificationsAsync().then(token => setExpoPushToken(token))
-    // registerForPushNotificationsAsync().then(token => appContext.setToken(token))
+    registerForPushNotificationsAsync().then(token => storeStringData(Util.EXPO_PUSH_TOKEN, token))
+    registerForPushNotificationsAsync().then(token => appContext.SetExpoPushToken(token))
 
-    // This listener is fired whenever a notification is received while the app is foregrounded
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
     notificationListener.current = addNotificationReceivedListener(notification => {
-      // console.log(notification)
+      // This listener is fired whenever a notification is received while the app is foregrounded
     })
 
-    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded,
-    // backgrounded, or killed)
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
     responseListener.current = addNotificationResponseReceivedListener(response => {
-      // console.log(response.notification.request.content.data.data)
-      // navigation.navigate(response.notification.request.content.data.data)
+      // This listener is fired whenever a user taps on or interacts with a notification (works when app is
+      // foregrounded, backgrounded, or killed)
     })
-
-    // appContext.setToken(expoPushToken).then(() => {
-    // })
-
-    // storeStringData('@expoPushToken', expoPushToken).then(() => {
-    // })
 
     return () => {
       removeNotificationSubscription(notificationListener)
@@ -105,9 +94,9 @@ const App = () => {
   }, [])
 
   return (
-    // <GlobalState>
-    <Navigation/>
-    // </GlobalState>
+    <GlobalState>
+      <Navigation/>
+    </GlobalState>
   )
 }
 

@@ -21,4 +21,5 @@ RejectedProjectListScreen.navigationOptions = navData => {
   }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default RejectedProjectListScreen

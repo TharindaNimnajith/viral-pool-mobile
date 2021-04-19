@@ -5,11 +5,12 @@ import {getStringData} from './helpers/local-storage'
 import App from './App'
 
 axios.defaults.baseURL = Util.BASE_URL
-axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN'
-axios.defaults.headers.post['Content-Type'] = 'application/json'
 
-axios.interceptors.request.use(request => {
-  const access_token = getStringData(Util.ACCESS_TOKEN)
+// axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN'
+// axios.defaults.headers.post['Content-Type'] = 'application/json'
+
+axios.interceptors.request.use(async request =>  {
+  const access_token = await getStringData(Util.ACCESS_TOKEN)
   request.headers['Authorization'] = `Bearer ${access_token}`
   return request
 }, error => {
@@ -18,7 +19,6 @@ axios.interceptors.request.use(request => {
 })
 
 // axios.interceptors.response.use(response => {
-//   console.log(response)
 //   return response
 // }, error => {
 //   console.error(error)

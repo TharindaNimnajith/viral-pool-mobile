@@ -1,6 +1,7 @@
 import React from 'react'
 import {HeaderButton} from 'react-navigation-header-buttons'
 import {StyleSheet} from 'react-native'
+// noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
 import Colors from '../shared/colors'
 

@@ -17,4 +17,5 @@ RejectedProjectDetailsScreen.navigationOptions = () => {
   }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default RejectedProjectDetailsScreen

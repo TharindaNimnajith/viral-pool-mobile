@@ -1,17 +1,20 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {Animated, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import Colors from '../../shared/colors'
 import {Util} from '../../util/util'
+import {AppContext} from '../../global/app-context'
 import {storeStringData} from '../../helpers/local-storage'
 
 const LoginScreen = ({navigation}) => {
+  const appContext = useContext(AppContext)
+
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
 
   const login = () => {
-    axios.post('oauth/token',
+    axios.post('oauth/mobile-login',
       {
         email: 'akalanka@cube360global.com',
         password: '#Compaq123',
@@ -19,22 +22,34 @@ const LoginScreen = ({navigation}) => {
         redirectUri: 'string',
         clientId: 'string',
         clientName: 'string'
-      }).then(response => {
-        console.log(response)
+      })
+      .then(response => {
         // noinspection JSUnresolvedVariable
         storeStringData(Util.ACCESS_TOKEN, response.data.access_token).then(() => {
         })
         // noinspection JSUnresolvedVariable
         storeStringData(Util.REFRESH_TOKEN, response.data.refresh_token).then(() => {
         })
-        // navigation.navigate({
-        //   routeName: 'Navigator'
-        // })
-      }).catch(error => {
-      console.error(error)
-      // localStorage.removeItem(Util.ACCESS_TOKEN)
-      // localStorage.removeItem(Util.REFRESH_TOKEN)
-    })
+        // noinspection JSUnresolvedVariable
+        appContext.SetAccessToken(response.data.access_token).then(() => {
+        })
+        // noinspection JSUnresolvedVariable
+        appContext.SetRefreshToken(response.data.refresh_token).then(() => {
+        })
+        navigation.navigate({
+          routeName: 'Navigator'
+        })
+        // noinspection JSUnusedLocalSymbols
+        axios.get('User')
+          .then(response => {
+          })
+          .catch(error => {
+            console.error(error)
+          })
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   return (
