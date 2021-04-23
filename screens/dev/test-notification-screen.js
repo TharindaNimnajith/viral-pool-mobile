@@ -31,18 +31,20 @@ const TestNotificationScreen = () => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.mainViewStyle}>
-          <TouchableOpacity style={styles.buttonStyle}
-                            onPress={sendNotificationAppContext}>
-            <Text style={styles.buttonTextStyle}>
-              Send Notification (App Context)
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonStyle}
-                            onPress={sendNotificationAsyncStorage}>
-            <Text style={styles.buttonTextStyle}>
-              Send Notification (Async Storage)
-            </Text>
-          </TouchableOpacity>
+          <View style={styles.viewStyle}>
+            <TouchableOpacity style={styles.buttonStyle}
+                              onPress={sendNotificationAppContext}>
+              <Text style={styles.buttonTextStyle}>
+                Send Notification (App Context)
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonStyle}
+                              onPress={sendNotificationAsyncStorage}>
+              <Text style={styles.buttonTextStyle}>
+                Send Notification (Async Storage)
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -65,7 +67,9 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     width: wp('100%'),
     height: hp('100%'),
-    backgroundColor: Colors.secondaryColor,
+    backgroundColor: Colors.secondaryColor
+  },
+  viewStyle: {
     alignItems: 'center'
   }
 })
