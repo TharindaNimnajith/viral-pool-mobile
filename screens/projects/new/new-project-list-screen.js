@@ -5,7 +5,7 @@ import Colors from '../../../shared/colors'
 import Menu from '../../../components/menu-component'
 import Logout from '../../../components/logout-component'
 
-const NewProjectListScreen = () => {
+const NewProjectListScreen = props => {
   const onEditButtonPress = async () => {
     props.navigation.navigate('NewProjectDetails')
   }

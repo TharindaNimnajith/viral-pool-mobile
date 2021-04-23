@@ -5,7 +5,7 @@ import Colors from '../../../shared/colors'
 import Menu from '../../../components/menu-component'
 import Logout from '../../../components/logout-component'
 
-const RejectedProjectListScreen = () => {
+const RejectedProjectListScreen = props => {
   const onEditButtonPress = async () => {
     props.navigation.navigate('RejectedProjectDetails')
   }
