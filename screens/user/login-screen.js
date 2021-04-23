@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import {Animated, Button, ScrollView, StyleSheet, Text, TextInput, View} from 'react-native'
+import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import validator from 'validator'
@@ -13,9 +13,13 @@ import {isEmpty} from '../../helpers/common'
 const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
 
-  // TODO: Set initial state to empty string
+  // For development
   const [email, setEmail] = useState('akalanka@cube360global.com')
   const [password, setPassword] = useState('#Compaq123')
+
+  // For production
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')
@@ -92,46 +96,43 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.mainViewStyle}>
-      <ScrollView>
-        <Animated.View style={styles.animatedViewStyle}>
-          <View style={styles.container}>
-            <Text style={styles.labelStyle}>
-              Email
-            </Text>
-            <TextInput style={styles.textInputStyle}
-                       onChangeText={email => onChangeEmail(email)}
-                       value={email}
-                       placeholder='Enter Email'
-                       textContentType={'emailAddress'}
-                       placeholderTextColor={Colors.tertiaryColor}
-                       secureTextEntry={false}/>
-            <Text style={styles.labelStyle}>
-              Password
-            </Text>
-            <TextInput style={styles.textInputStyle}
-                       onChangeText={password => onChangePassword(password)}
-                       value={password}
-                       placeholder='Enter Password'
-                       placeholderTextColor={Colors.tertiaryColor}
-                       secureTextEntry={true}/>
+      <View style={styles.containerStyle}>
+        <Text style={styles.labelStyle}>
+          Email
+        </Text>
+        <TextInput style={styles.textInputStyle}
+                   onChangeText={email => onChangeEmail(email)}
+                   value={email}
+                   placeholder='Enter Email'
+                   textContentType={'emailAddress'}
+                   placeholderTextColor={Colors.tertiaryColor}
+                   secureTextEntry={false}/>
+        <Text style={styles.labelStyle}>
+          Password
+        </Text>
+        <TextInput style={styles.textInputStyle}
+                   onChangeText={password => onChangePassword(password)}
+                   value={password}
+                   placeholder='Enter Password'
+                   placeholderTextColor={Colors.tertiaryColor}
+                   secureTextEntry={true}/>
+        <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                          disabled={isDisabled()}
+                          onPress={login}>
+          <Text style={styles.buttonTextStyle}>
+            Login
+          </Text>
+        </TouchableOpacity>
+        {
+          unauthorized ? (
             <View style={styles.viewStyle}>
-              <Button title={'Login'}
-                      disabled={isDisabled()}
-                      onPress={login}>
-              </Button>
+              <Text style={styles.errorTextStyle}>
+                {Constants.LOGIN_ERROR}
+              </Text>
             </View>
-            {
-              unauthorized ? (
-                <View style={styles.viewStyle}>
-                  <Text style={styles.errorText}>
-                    {Constants.LOGIN_ERROR}
-                  </Text>
-                </View>
-              ) : null
-            }
-          </View>
-        </Animated.View>
-      </ScrollView>
+          ) : null
+        }
+      </View>
     </View>
   )
 }
@@ -146,23 +147,39 @@ LoginScreen.navigationOptions = () => {
 }
 
 const styles = StyleSheet.create({
-  animatedViewStyle: {
-    justifyContent: 'center',
-    alignItems: 'center'
+  buttonStyle: {
+    marginTop: 30,
+    backgroundColor: Colors.primaryColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5,
   },
-  container: {
+  buttonDisabledStyle: {
+    marginTop: 30,
+    backgroundColor: Colors.disabledColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5,
+  },
+  buttonTextStyle: {
+    color: Colors.secondaryColor,
+    textTransform: 'uppercase'
+  },
+  containerStyle: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignContent: 'center',
-    margin: 10
+    alignItems: 'center',
+    justifyContent: 'center'
   },
-  errorText: {
+  errorTextStyle: {
     color: Colors.errorColor
   },
   labelStyle: {
-    marginLeft: 20,
-    marginTop: 24,
-    color: Colors.primaryColor
+    marginLeft: 40,
+    marginTop: 20,
+    color: Colors.primaryColor,
+    alignSelf: 'baseline'
   },
   mainViewStyle: {
     width: wp('100%'),
@@ -173,19 +190,14 @@ const styles = StyleSheet.create({
     borderColor: Colors.primaryColor,
     width: wp('80%'),
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 5,
     height: 40,
-    marginLeft: 20,
-    marginRight: 20,
-    padding: 10,
     marginTop: 10,
+    padding: 10,
     color: Colors.tertiaryColor
   },
   viewStyle: {
-    marginTop: 50,
-    marginLeft: 20,
-    marginRight: 20,
-    borderRadius: 10
+    marginTop: 40
   }
 })
 
