@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
@@ -28,26 +28,30 @@ const TestDevScreen = () => {
   }, [])
 
   return (
-    <View style={styles.mainViewStyle}>
-      <Text style={styles.textStyle}>
-        Access Token (AppContext): {appContext.accessToken}
-      </Text>
-      <Text style={styles.textStyle}>
-        Refresh Token (AppContext): {appContext.refreshToken}
-      </Text>
-      <Text style={styles.textStyle}>
-        Expo Push Token (AppContext): {appContext.expoPushToken}
-      </Text>
-      <Text style={styles.textStyle}>
-        Access Token (AsyncStorage): {accessToken}
-      </Text>
-      <Text style={styles.textStyle}>
-        Refresh Token (AsyncStorage): {refreshToken}
-      </Text>
-      <Text style={styles.textStyle}>
-        Expo Push Token (AsyncStorage): {expoPushToken}
-      </Text>
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.mainViewStyle}>
+          <Text style={styles.textStyle}>
+            Access Token (AppContext): {appContext.accessToken}
+          </Text>
+          <Text style={styles.textStyle}>
+            Refresh Token (AppContext): {appContext.refreshToken}
+          </Text>
+          <Text style={styles.textStyle}>
+            Expo Push Token (AppContext): {appContext.expoPushToken}
+          </Text>
+          <Text style={styles.textStyle}>
+            Access Token (AsyncStorage): {accessToken}
+          </Text>
+          <Text style={styles.textStyle}>
+            Refresh Token (AsyncStorage): {refreshToken}
+          </Text>
+          <Text style={styles.textStyle}>
+            Expo Push Token (AsyncStorage): {expoPushToken}
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 

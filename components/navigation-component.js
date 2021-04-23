@@ -4,7 +4,9 @@ import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
 // noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
+import LoginScreen from '../screens/user/login/login-screen'
 import DashboardScreen from '../screens/user/dashboard/dashboard-screen'
+import NotificationsScreen from '../screens/user/notifications/notifications-screen'
 import ProfileScreen from '../screens/user/profile/profile-screen'
 import EditProfileScreen from '../screens/user/profile/edit-profile-screen'
 import IdeaListScreen from '../screens/user/ideas/idea-list-screen'
@@ -18,7 +20,6 @@ import RejectedProjectListScreen from '../screens/projects/rejected/rejected-pro
 import RejectedProjectDetailsScreen from '../screens/projects/rejected/rejected-project-details-screen'
 import CompletedProjectListScreen from '../screens/projects/completed/completed-project-list-screen'
 import CompletedProjectDetailsScreen from '../screens/projects/completed/completed-project-details-screen'
-import LoginScreen from '../screens/user/auth/login-screen'
 import TestNotificationScreen from '../screens/dev/test-notification-screen'
 import TestDevScreen from '../screens/dev/test-dev-screen'
 import Colors from '../shared/colors'
@@ -38,6 +39,21 @@ const LoginNavigator = createStackNavigator(
 const DashboardNavigator = createStackNavigator(
   {
     Dashboard: DashboardScreen
+  },
+  {
+    defaultNavigationOptions: {
+      headerTitleAlign: 'center',
+      headerStyle: {
+        backgroundColor: Colors.primaryColor
+      },
+      headerTintColor: Colors.secondaryColor
+    }
+  }
+)
+
+const NotificationsNavigator = createStackNavigator(
+  {
+    Notifications: NotificationsScreen
   },
   {
     defaultNavigationOptions: {
@@ -198,6 +214,14 @@ const InternalNavigator = createDrawerNavigator(
       navigationOptions: {
         drawerLabel: 'DASHBOARD',
         drawerIcon: <Ionicons name='speedometer'
+                              size={25}/>
+      }
+    },
+    Notifications: {
+      screen: NotificationsNavigator,
+      navigationOptions: {
+        drawerLabel: 'NOTIFICATIONS',
+        drawerIcon: <Ionicons name='notifications'
                               size={25}/>
       }
     },

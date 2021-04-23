@@ -1,15 +1,17 @@
 import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
+import Menu from '../../../components/menu-component'
+import Logout from '../../../components/logout-component'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
 
-const OngoingProjectDetailsScreen = () => {
+const NotificationsScreen = () => {
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.mainViewStyle}>
           <Text>
-            Ongoing Project Details
+            Notifications
           </Text>
         </View>
       </ScrollView>
@@ -25,10 +27,12 @@ const styles = StyleSheet.create({
   }
 })
 
-OngoingProjectDetailsScreen.navigationOptions = () => {
+NotificationsScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'ONGOING PROJECT DETAILS'
+    headerTitle: 'NOTIFICATIONS',
+    headerLeft: () => <Menu navigation={navData.navigation}/>,
+    headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
 
-export default OngoingProjectDetailsScreen
+export default NotificationsScreen

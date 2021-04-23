@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
@@ -28,20 +28,24 @@ const TestNotificationScreen = () => {
   }
 
   return (
-    <View style={styles.mainViewStyle}>
-      <TouchableOpacity style={styles.buttonStyle}
-                        onPress={sendNotificationAppContext}>
-        <Text style={styles.buttonTextStyle}>
-          Send Notification (App Context)
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonStyle}
-                        onPress={sendNotificationAsyncStorage}>
-        <Text style={styles.buttonTextStyle}>
-          Send Notification (Async Storage)
-        </Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.mainViewStyle}>
+          <TouchableOpacity style={styles.buttonStyle}
+                            onPress={sendNotificationAppContext}>
+            <Text style={styles.buttonTextStyle}>
+              Send Notification (App Context)
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonStyle}
+                            onPress={sendNotificationAsyncStorage}>
+            <Text style={styles.buttonTextStyle}>
+              Send Notification (Async Storage)
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -52,7 +56,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),
-    borderRadius: 5,
+    borderRadius: 5
   },
   buttonTextStyle: {
     color: Colors.secondaryColor,

@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
 import Menu from '../../../components/menu-component'
@@ -7,11 +7,15 @@ import Logout from '../../../components/logout-component'
 
 const DashboardScreen = () => {
   return (
-    <View style={styles.mainViewStyle}>
-      <Text>
-        Dashboard
-      </Text>
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.mainViewStyle}>
+          <Text>
+            Dashboard
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 

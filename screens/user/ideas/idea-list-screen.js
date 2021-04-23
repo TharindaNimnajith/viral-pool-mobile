@@ -1,5 +1,5 @@
 import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import Menu from '../../../components/menu-component'
 import Logout from '../../../components/logout-component'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
@@ -7,11 +7,15 @@ import Colors from '../../../shared/colors'
 
 const IdeaListScreen = () => {
   return (
-    <View style={styles.mainViewStyle}>
-      <Text>
-        Idea List
-      </Text>
-    </View>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.mainViewStyle}>
+          <Text>
+            Idea List
+          </Text>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
