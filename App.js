@@ -15,7 +15,7 @@ import {
 import {AppContext} from './global/app-context'
 import {GlobalState} from './global/global-state'
 import {storeStringData} from './helpers/local-storage-helpers'
-import Navigation from './components/navigation-component'
+import NavigationBar from './components/navigation-bar'
 import Constants from './shared/constants'
 import Colors from './shared/colors'
 import {Util} from './util/util'
@@ -100,7 +100,7 @@ const App = () => {
 
   return (
     <GlobalState>
-      <Navigation/>
+      <NavigationBar/>
     </GlobalState>
   )
 }

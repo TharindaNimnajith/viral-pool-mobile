@@ -2,7 +2,7 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
-import Logout from '../../../components/logout-component'
+import Logout from '../../../components/logout-button'
 
 const NewProjectDetailsScreen = () => {
   return (
@@ -10,9 +10,9 @@ const NewProjectDetailsScreen = () => {
       <ScrollView>
         <View style={styles.mainViewStyle}>
           <View style={styles.viewStyle}>
-          <Text>
-            New Project Details
-          </Text>
+            <Text>
+              New Project Details
+            </Text>
           </View>
         </View>
       </ScrollView>

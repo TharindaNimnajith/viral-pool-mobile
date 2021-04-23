@@ -2,8 +2,8 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
-import Menu from '../../../components/menu-component'
-import Logout from '../../../components/logout-component'
+import Menu from '../../../components/menu-button'
+import CombinedButtons from '../../../components/combined-buttons'
 
 const DashboardScreen = () => {
   return (
@@ -37,7 +37,7 @@ DashboardScreen.navigationOptions = navData => {
   return {
     headerTitle: 'VIRAL POOL',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

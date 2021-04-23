@@ -4,8 +4,8 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 // noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
 import {AppContext} from '../../../global/app-context'
-import Menu from '../../../components/menu-component'
-import Logout from '../../../components/logout-component'
+import Menu from '../../../components/menu-button'
+import Logout from '../../../components/logout-button'
 import Colors from '../../../shared/colors'
 
 const ProfileScreen = props => {

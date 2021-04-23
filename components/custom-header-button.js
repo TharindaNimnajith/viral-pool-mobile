@@ -18,7 +18,8 @@ const CustomHeaderButton = props => {
 const styles = StyleSheet.create({
   buttonStyle: {
     marginTop: 10,
-    marginLeft: 20
+    marginLeft: 20,
+    marginRight: 20
   }
 })
 

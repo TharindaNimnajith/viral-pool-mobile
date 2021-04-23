@@ -2,8 +2,8 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
-import Menu from '../../../components/menu-component'
-import Logout from '../../../components/logout-component'
+import Menu from '../../../components/menu-button'
+import Logout from '../../../components/logout-button'
 
 const CompletedProjectListScreen = props => {
   const onEditButtonPress = async () => {

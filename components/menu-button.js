@@ -1,6 +1,6 @@
 import React from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import HeaderButton from './header-button-component'
+import CustomHeaderButton from './custom-header-button'
 
 const Menu = props => {
   const toggleDrawer = async () => {
@@ -8,7 +8,7 @@ const Menu = props => {
   }
 
   return (
-    <HeaderButtons HeaderButtonComponent={HeaderButton}>
+    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
       <Item title='Menu'
             iconName='menu'
             onPress={toggleDrawer}/>

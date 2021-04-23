@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import {View} from 'react-native'
 import Dialog from 'react-native-dialog'
-import HeaderButton from './header-button-component'
+import CustomHeaderButton from './custom-header-button'
 
 const Logout = props => {
   const [visible, setVisible] = useState(false)
@@ -33,7 +33,7 @@ const Logout = props => {
         <Dialog.Button label='No'
                        onPress={hideDialog}/>
       </Dialog.Container>
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item title='Logout'
               iconName='log-out-outline'
               onPress={showDialog}/>
