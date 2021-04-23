@@ -3,9 +3,9 @@ import {Button, StyleSheet, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
-import {getStringData} from '../../helpers/local-storage'
-import Menu from '../../components/menu'
-import Logout from '../../components/logout'
+import {getStringData} from '../../helpers/local-storage-helpers'
+import Menu from '../../components/menu-component'
+import Logout from '../../components/logout-component'
 import {Util} from '../../util/util'
 
 const NotificationScreen = () => {

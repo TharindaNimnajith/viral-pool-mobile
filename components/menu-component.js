@@ -1,6 +1,6 @@
 import React from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import HeaderButton from './header-button'
+import HeaderButton from './header-button-component'
 
 const Menu = props => {
   const toggleDrawer = async () => {

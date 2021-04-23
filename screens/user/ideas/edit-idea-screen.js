@@ -1,15 +1,13 @@
 import React from 'react'
 import {StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../shared/colors'
-import Menu from '../../components/menu'
-import Logout from '../../components/logout'
+import Colors from '../../../shared/colors'
 
-const AddIdeaScreen = () => {
+const EditIdeaScreen = () => {
   return (
     <View style={styles.mainViewStyle}>
       <Text>
-        New Idea
+        Edit Idea
       </Text>
     </View>
   )
@@ -23,12 +21,10 @@ const styles = StyleSheet.create({
   }
 })
 
-AddIdeaScreen.navigationOptions = navData => {
+EditIdeaScreen.navigationOptions = () => {
   return {
-    headerTitle: 'NEW IDEA',
-    headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerTitle: 'EDIT IDEA'
   }
 }
 
-export default AddIdeaScreen
+export default EditIdeaScreen

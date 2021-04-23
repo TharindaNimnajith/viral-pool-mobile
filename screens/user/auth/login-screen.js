@@ -3,12 +3,12 @@ import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity,
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import validator from 'validator'
-import Colors from '../../shared/colors'
-import Constants from '../../shared/constants'
-import {Util} from '../../util/util'
-import {AppContext} from '../../global/app-context'
-import {storeObjectData, storeStringData} from '../../helpers/local-storage'
-import {isEmpty} from '../../helpers/common'
+import Colors from '../../../shared/colors'
+import Constants from '../../../shared/constants'
+import {Util} from '../../../util/util'
+import {AppContext} from '../../../global/app-context'
+import {storeObjectData, storeStringData} from '../../../helpers/local-storage-helpers'
+import {isEmpty} from '../../../helpers/common-helpers'
 
 const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)

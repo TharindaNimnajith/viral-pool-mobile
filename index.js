@@ -1,7 +1,7 @@
 import registerRootComponent from 'expo/build/launch/registerRootComponent'
 import axios from 'axios'
 import {Util} from './util/util'
-import {getStringData} from './helpers/local-storage'
+import {getStringData} from './helpers/local-storage-helpers'
 import App from './App'
 
 axios.defaults.baseURL = Util.BASE_URL

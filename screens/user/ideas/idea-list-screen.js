@@ -1,15 +1,15 @@
 import React from 'react'
 import {StyleSheet, Text, View} from 'react-native'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../../shared/colors'
 import Menu from '../../../components/menu-component'
 import Logout from '../../../components/logout-component'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Colors from '../../../shared/colors'
 
-const NewProjectListScreen = () => {
+const IdeaListScreen = () => {
   return (
     <View style={styles.mainViewStyle}>
       <Text>
-        New Project List
+        Idea List
       </Text>
     </View>
   )
@@ -23,12 +23,12 @@ const styles = StyleSheet.create({
   }
 })
 
-NewProjectListScreen.navigationOptions = navData => {
+IdeaListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'NEW PROJECTS',
+    headerTitle: 'MY IDEAS',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
 
-export default NewProjectListScreen
+export default IdeaListScreen

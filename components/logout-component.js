@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import {View} from 'react-native'
 import Dialog from 'react-native-dialog'
-import HeaderButton from './header-button'
+import HeaderButton from './header-button-component'
 
 const Logout = props => {
   const [visible, setVisible] = useState(false)

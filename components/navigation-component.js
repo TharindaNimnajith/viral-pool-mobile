@@ -4,11 +4,12 @@ import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
 // noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
-import DashboardScreen from '../screens/user/dashboard-screen'
-import ProfileScreen from '../screens/user/profile-screen'
-import IdeaListScreen from '../screens/ideas/idea-list-screen'
-import AddIdeaScreen from '../screens/ideas/add-idea-screen'
-import EditIdeaScreen from '../screens/ideas/edit-idea-screen'
+import DashboardScreen from '../screens/user/dashboard/dashboard-screen'
+import ProfileScreen from '../screens/user/profile/profile-screen'
+import EditProfileScreen from '../screens/user/profile/edit-profile-screen'
+import IdeaListScreen from '../screens/user/ideas/idea-list-screen'
+import AddIdeaScreen from '../screens/user/ideas/add-idea-screen'
+import EditIdeaScreen from '../screens/user/ideas/edit-idea-screen'
 import NewProjectListScreen from '../screens/projects/new/new-project-list-screen'
 import NewProjectDetailsScreen from '../screens/projects/new/new-project-details-screen'
 import OngoingProjectListScreen from '../screens/projects/ongoing/ongoing-project-list-screen'
@@ -17,9 +18,9 @@ import RejectedProjectListScreen from '../screens/projects/rejected/rejected-pro
 import RejectedProjectDetailsScreen from '../screens/projects/rejected/rejected-project-details-screen'
 import CompletedProjectListScreen from '../screens/projects/completed/completed-project-list-screen'
 import CompletedProjectDetailsScreen from '../screens/projects/completed/completed-project-details-screen'
-import NotificationScreen from '../screens/user/notification-screen'
-import LoginScreen from '../screens/user/login-screen'
-import Colors from './colors'
+import NotificationScreen from '../screens/dev/notification-screen'
+import LoginScreen from '../screens/user/auth/login-screen'
+import Colors from '../shared/colors'
 
 const LoginNavigator = createStackNavigator(
   {
@@ -50,7 +51,8 @@ const DashboardNavigator = createStackNavigator(
 
 const ProfileNavigator = createStackNavigator(
   {
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    EditProfile: EditProfileScreen
   },
   {
     defaultNavigationOptions: {

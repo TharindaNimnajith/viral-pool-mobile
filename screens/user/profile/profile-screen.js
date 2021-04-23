@@ -3,10 +3,10 @@ import {Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, Vie
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 // noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
-import {AppContext} from '../../global/app-context'
-import Menu from '../../components/menu'
-import Logout from '../../components/logout'
-import Colors from '../../shared/colors'
+import {AppContext} from '../../../global/app-context'
+import Menu from '../../../components/menu-component'
+import Logout from '../../../components/logout-component'
+import Colors from '../../../shared/colors'
 
 const ProfileScreen = () => {
   const appContext = useContext(AppContext)
