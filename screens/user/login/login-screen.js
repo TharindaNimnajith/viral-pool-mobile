@@ -141,15 +141,6 @@ const LoginScreen = ({navigation}) => {
   )
 }
 
-LoginScreen.navigationOptions = () => {
-  return {
-    headerMode: 'none',
-    navigationOptions: {
-      headerVisible: false
-    }
-  }
-}
-
 const styles = StyleSheet.create({
   buttonStyle: {
     marginTop: 30,
@@ -204,5 +195,14 @@ const styles = StyleSheet.create({
     marginTop: 40
   }
 })
+
+LoginScreen.navigationOptions = () => {
+  return {
+    headerMode: 'none',
+    navigationOptions: {
+      headerVisible: false
+    }
+  }
+}
 
 export default LoginScreen

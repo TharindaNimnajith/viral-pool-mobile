@@ -25,6 +25,7 @@ export const getStringData = async key => {
   }
 }
 
+// noinspection JSUnusedGlobalSymbols
 export const getObjectData = async key => {
   try {
     const value = await AsyncStorage.getItem(key)
@@ -34,10 +35,11 @@ export const getObjectData = async key => {
   }
 }
 
-// export const removeData = async key => {
-//   try {
-//     await AsyncStorage.removeItem(key);
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
+// noinspection JSUnusedGlobalSymbols
+export const removeData = async key => {
+  try {
+    await AsyncStorage.removeItem(key);
+  } catch (error) {
+    console.log(error)
+  }
+}

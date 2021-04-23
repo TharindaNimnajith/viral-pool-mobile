@@ -27,13 +27,12 @@ const styles = StyleSheet.create({
   }
 })
 
-export default DashboardScreen
-
-DashboardScreen.navigationOptions = ({navigation}) => {
+DashboardScreen.navigationOptions = navData => {
   return {
     headerTitle: 'VIRAL POOL',
-    headerTitleAlign: 'center',
-    headerLeft: () => <Menu navigation={navigation}/>,
-    headerRight: () => <Logout navigation={navigation}/>
+    headerLeft: () => <Menu navigation={navData.navigation}/>,
+    headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
+
+export default DashboardScreen

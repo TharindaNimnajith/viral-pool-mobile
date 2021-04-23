@@ -8,7 +8,7 @@ import Menu from '../../../components/menu-component'
 import Logout from '../../../components/logout-component'
 import Colors from '../../../shared/colors'
 
-const ProfileScreen = () => {
+const ProfileScreen = props => {
   const appContext = useContext(AppContext)
 
   // const [userData, setUserData] = useState(null)
@@ -18,6 +18,10 @@ const ProfileScreen = () => {
   //     setUserData(value)
   //   })
   // }, [])
+
+  const onEditButtonPress = async () => {
+    props.navigation.navigate('EditProfile')
+  }
 
   // noinspection JSUnresolvedVariable
   return (
@@ -84,7 +88,8 @@ const ProfileScreen = () => {
                   </Text>
                 </View>
               </View>
-              <TouchableOpacity style={styles.buttonStyle}>
+              <TouchableOpacity style={styles.buttonStyle}
+                                onPress={onEditButtonPress}>
                 <Text style={styles.buttonTextStyle}>
                   Edit Profile
                 </Text>

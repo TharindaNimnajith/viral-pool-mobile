@@ -2,6 +2,7 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
+import Logout from '../../../components/logout-component'
 
 const RejectedProjectDetailsScreen = () => {
   return (
@@ -25,9 +26,10 @@ const styles = StyleSheet.create({
   }
 })
 
-RejectedProjectDetailsScreen.navigationOptions = () => {
+RejectedProjectDetailsScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'REJECTED PROJECT DETAILS'
+    headerTitle: 'REJECTED PROJECT DETAILS',
+    headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
 

@@ -2,6 +2,7 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
+import Logout from '../../../components/logout-component'
 
 const CompletedProjectDetailsScreen = () => {
   return (
@@ -25,9 +26,10 @@ const styles = StyleSheet.create({
   }
 })
 
-CompletedProjectDetailsScreen.navigationOptions = () => {
+CompletedProjectDetailsScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'COMPLETED PROJECT DETAILS'
+    headerTitle: 'COMPLETED PROJECT DETAILS',
+    headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
 

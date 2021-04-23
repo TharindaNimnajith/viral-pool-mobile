@@ -68,13 +68,13 @@ const styles = StyleSheet.create({
   }
 })
 
-export default TestDevScreen
-
-TestDevScreen.navigationOptions = ({navigation}) => {
+TestDevScreen.navigationOptions = navData => {
   return {
     headerTitle: 'TEST DEV',
-    headerTitleAlign: 'center',
-    headerLeft: () => <Menu navigation={navigation}/>,
-    headerRight: () => <Logout navigation={navigation}/>
+    headerLeft: () => <Menu navigation={navData.navigation}/>,
+    headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
+
+// noinspection JSUnusedGlobalSymbols
+export default TestDevScreen

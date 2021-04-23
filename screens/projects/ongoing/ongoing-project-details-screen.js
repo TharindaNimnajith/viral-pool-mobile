@@ -2,6 +2,7 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
+import Logout from '../../../components/logout-component'
 
 const OngoingProjectDetailsScreen = () => {
   return (
@@ -25,9 +26,10 @@ const styles = StyleSheet.create({
   }
 })
 
-OngoingProjectDetailsScreen.navigationOptions = () => {
+OngoingProjectDetailsScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'ONGOING PROJECT DETAILS'
+    headerTitle: 'ONGOING PROJECT DETAILS',
+    headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
 
