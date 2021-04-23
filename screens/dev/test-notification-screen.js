@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {Button, StyleSheet, View} from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
@@ -8,7 +8,7 @@ import Menu from '../../components/menu-component'
 import Logout from '../../components/logout-component'
 import {Util} from '../../util/util'
 
-const NotificationScreen = () => {
+const TestNotificationScreen = () => {
   const appContext = useContext(AppContext)
 
   const [expoPushToken, setExpoPushToken] = useState(null)
@@ -29,19 +29,40 @@ const NotificationScreen = () => {
 
   return (
     <View style={styles.mainViewStyle}>
-      <Button title='Send Notification (App Context)'
-              onPress={sendNotificationAppContext}/>
-      <Button title='Send Notification (Async Storage)'
-              onPress={sendNotificationAsyncStorage}/>
+      <TouchableOpacity style={styles.buttonStyle}
+                        onPress={sendNotificationAppContext}>
+        <Text style={styles.buttonTextStyle}>
+          Send Notification (App Context)
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.buttonStyle}
+                        onPress={sendNotificationAsyncStorage}>
+        <Text style={styles.buttonTextStyle}>
+          Send Notification (Async Storage)
+        </Text>
+      </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+  buttonStyle: {
+    marginTop: 30,
+    backgroundColor: Colors.primaryColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5,
+  },
+  buttonTextStyle: {
+    color: Colors.secondaryColor,
+    textTransform: 'uppercase'
+  },
   mainViewStyle: {
     width: wp('100%'),
     height: hp('100%'),
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.secondaryColor,
+    alignItems: 'center'
   }
 })
 
@@ -88,13 +109,13 @@ async function sendPushNotification(expoPushToken) {
   // }
 }
 
-NotificationScreen.navigationOptions = navData => {
+TestNotificationScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'NOTIFICATIONS',
+    headerTitle: 'TEST NOTIFICATIONS',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }
 
 // noinspection JSUnusedGlobalSymbols
-export default NotificationScreen
+export default TestNotificationScreen
