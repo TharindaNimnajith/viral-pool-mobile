@@ -9,9 +9,11 @@ const CompletedProjectDetailsScreen = () => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.mainViewStyle}>
-          <Text>
-            Completed Project Details
-          </Text>
+          <View style={styles.viewStyle}>
+            <Text>
+              Completed Project Details
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -23,6 +25,10 @@ const styles = StyleSheet.create({
     width: wp('100%'),
     height: hp('100%'),
     backgroundColor: Colors.secondaryColor
+  },
+  viewStyle: {
+    alignItems: 'center',
+    marginTop: 10
   }
 })
 

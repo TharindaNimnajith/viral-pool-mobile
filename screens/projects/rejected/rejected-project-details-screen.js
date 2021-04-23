@@ -9,9 +9,11 @@ const RejectedProjectDetailsScreen = () => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.mainViewStyle}>
-          <Text>
-            Rejected Project Details
-          </Text>
+          <View style={styles.viewStyle}>
+            <Text>
+              Rejected Project Details
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -23,6 +25,10 @@ const styles = StyleSheet.create({
     width: wp('100%'),
     height: hp('100%'),
     backgroundColor: Colors.secondaryColor
+  },
+  viewStyle: {
+    alignItems: 'center',
+    marginTop: 10
   }
 })
 

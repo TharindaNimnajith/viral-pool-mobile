@@ -145,10 +145,10 @@ const OngoingProjectsNavigator = createStackNavigator(
   }
 )
 
-const RejectedProjectsNavigator = createStackNavigator(
+const CompletedProjectsNavigator = createStackNavigator(
   {
-    RejectedProjectList: RejectedProjectListScreen,
-    RejectedProjectDetails: RejectedProjectDetailsScreen
+    CompletedProjectList: CompletedProjectListScreen,
+    CompletedProjectDetails: CompletedProjectDetailsScreen
   },
   {
     defaultNavigationOptions: {
@@ -161,10 +161,10 @@ const RejectedProjectsNavigator = createStackNavigator(
   }
 )
 
-const CompletedProjectsNavigator = createStackNavigator(
+const RejectedProjectsNavigator = createStackNavigator(
   {
-    CompletedProjectList: CompletedProjectListScreen,
-    CompletedProjectDetails: CompletedProjectDetailsScreen
+    RejectedProjectList: RejectedProjectListScreen,
+    RejectedProjectDetails: RejectedProjectDetailsScreen
   },
   {
     defaultNavigationOptions: {
@@ -265,19 +265,19 @@ const InternalNavigator = createDrawerNavigator(
                               size={25}/>
       }
     },
-    RejectedProjects: {
-      screen: RejectedProjectsNavigator,
-      navigationOptions: {
-        drawerLabel: 'REJECTED PROJECTS',
-        drawerIcon: <Ionicons name='warning'
-                              size={25}/>
-      }
-    },
     CompletedProjects: {
       screen: CompletedProjectsNavigator,
       navigationOptions: {
         drawerLabel: 'COMPLETED PROJECTS',
         drawerIcon: <Ionicons name='checkmark-done'
+                              size={25}/>
+      }
+    },
+    RejectedProjects: {
+      screen: RejectedProjectsNavigator,
+      navigationOptions: {
+        drawerLabel: 'REJECTED PROJECTS',
+        drawerIcon: <Ionicons name='warning'
                               size={25}/>
       }
     },

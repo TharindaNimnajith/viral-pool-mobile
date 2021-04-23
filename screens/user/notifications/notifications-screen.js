@@ -10,9 +10,11 @@ const NotificationsScreen = () => {
     <SafeAreaView>
       <ScrollView>
         <View style={styles.mainViewStyle}>
-          <Text>
-            Notifications
-          </Text>
+          <View style={styles.viewStyle}>
+            <Text>
+              Notifications
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -24,6 +26,10 @@ const styles = StyleSheet.create({
     width: wp('100%'),
     height: hp('100%'),
     backgroundColor: Colors.secondaryColor
+  },
+  viewStyle: {
+    alignItems: 'center',
+    marginTop: 10
   }
 })
 
