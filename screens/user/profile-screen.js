@@ -1,6 +1,8 @@
 import React, {useContext} from 'react'
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+// noinspection NpmUsedModulesInstalled
+import {Ionicons} from '@expo/vector-icons'
 import {AppContext} from '../../global/app-context'
 import Menu from '../../components/menu'
 import Logout from '../../components/logout'
@@ -19,63 +21,99 @@ const ProfileScreen = () => {
 
   // noinspection JSUnresolvedVariable
   return (
-    <View style={styles.mainViewStyle}>
-      <View style={styles.containerStyle}>
-        <View style={styles.headerStyle}/>
-        <Image style={styles.avatarStyle}
-               source={{
-                 uri: appContext.userData.profileImagePath
-               }}/>
-        <View style={styles.bodyStyle}>
-          <View style={styles.bodyContentStyle}>
-            <Text style={styles.titleStyle}>
-              {appContext.userData.firstName} {appContext.userData.lastName}
-            </Text>
-            <Text style={styles.subtitleStyle}>
-              {appContext.userData.userRole}
-            </Text>
-            <Text style={styles.textStyle}>
-              {appContext.userData.email}
-              {'\n'}
-              {appContext.userData.gender}
-              {'\n'}
-              {appContext.userData.birthDate}
-              {'\n'}
-              {appContext.userData.address}
-              {'\n'}
-              {appContext.userData.phoneNumber}
-            </Text>
-            <TouchableOpacity style={styles.buttonStyle}>
-              <Text style={styles.buttonTextStyle}>
-                Edit Profile
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.headerStyle}/>
+          <Image style={styles.avatarStyle}
+                 source={{
+                   uri: appContext.userData.profileImagePath
+                 }}/>
+          <View style={styles.bodyStyle}>
+            <View style={styles.bodyContentStyle}>
+              <Text style={styles.titleStyle}>
+                {appContext.userData.firstName} {appContext.userData.lastName}
               </Text>
-            </TouchableOpacity>
+              <Text style={styles.subtitleStyle}>
+                {appContext.userData.userRole}
+              </Text>
+              <View>
+                <View style={styles.viewStyle}>
+                  <Ionicons name='mail'
+                            size={20}/>
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.email}
+                  </Text>
+                </View>
+                <View style={styles.viewStyle}>
+                  {
+                    appContext.userData.gender === 'male' ? (
+                      <Ionicons name='man'
+                                size={20}/>
+                    ) : appContext.userData.gender === 'female' ? (
+                      <Ionicons name='woman'
+                                size={20}/>
+                    ) : (
+                      <Ionicons name='person'
+                                size={20}/>
+                    )
+                  }
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.gender}
+                  </Text>
+                </View>
+                <View style={styles.viewStyle}>
+                  <Ionicons name='calendar'
+                            size={20}/>
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.birthDate.slice(0, 10)}
+                  </Text>
+                </View>
+                <View style={styles.viewStyle}>
+                  <Ionicons name='location'
+                            size={20}/>
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.address}
+                  </Text>
+                </View>
+                <View style={styles.viewStyle}>
+                  <Ionicons name='call'
+                            size={20}/>
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.phoneNumber}
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity style={styles.buttonStyle}>
+                <Text style={styles.buttonTextStyle}>
+                  Edit Profile
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    width: 130,
-    height: 130,
-    borderRadius: 63,
-    borderWidth: 4,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    borderWidth: 3,
     borderColor: Colors.secondaryColor,
-    marginBottom: 10,
     alignSelf: 'center',
     position: 'absolute',
-    marginTop: 130
+    marginTop: 100
   },
   bodyContentStyle: {
-    flex: 1,
-    alignItems: 'center',
-    padding: 30
+    alignItems: 'center'
   },
   bodyStyle: {
-    marginTop: 40
+    marginTop: 90,
+    flex: 1
   },
   buttonStyle: {
     marginTop: 30,
@@ -83,7 +121,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),
-    borderRadius: 5,
+    borderRadius: 5
   },
   buttonTextStyle: {
     color: Colors.secondaryColor,
@@ -101,18 +139,27 @@ const styles = StyleSheet.create({
   subtitleStyle: {
     fontSize: 16,
     color: Colors.primaryColor,
-    marginTop: 10
+    marginTop: 10,
+    marginBottom: 30
   },
   textStyle: {
     fontSize: 16,
     color: Colors.disabledColor,
-    marginTop: 10,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginLeft: 10
   },
   titleStyle: {
     fontSize: 22,
     color: Colors.primaryColor,
-    fontWeight: '600'
+    fontWeight: '600',
+    marginTop: 30,
+    marginBottom: 10
+  },
+  viewStyle: {
+    paddingVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start'
   }
 })
 

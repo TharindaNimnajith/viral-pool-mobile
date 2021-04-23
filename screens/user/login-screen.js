@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react'
-import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import validator from 'validator'
@@ -95,45 +95,49 @@ const LoginScreen = ({navigation}) => {
   }
 
   return (
-    <View style={styles.mainViewStyle}>
-      <View style={styles.containerStyle}>
-        <Text style={styles.labelStyle}>
-          Email
-        </Text>
-        <TextInput style={styles.textInputStyle}
-                   onChangeText={email => onChangeEmail(email)}
-                   value={email}
-                   placeholder='Enter Email'
-                   textContentType={'emailAddress'}
-                   placeholderTextColor={Colors.tertiaryColor}
-                   secureTextEntry={false}/>
-        <Text style={styles.labelStyle}>
-          Password
-        </Text>
-        <TextInput style={styles.textInputStyle}
-                   onChangeText={password => onChangePassword(password)}
-                   value={password}
-                   placeholder='Enter Password'
-                   placeholderTextColor={Colors.tertiaryColor}
-                   secureTextEntry={true}/>
-        <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                          disabled={isDisabled()}
-                          onPress={login}>
-          <Text style={styles.buttonTextStyle}>
-            Login
-          </Text>
-        </TouchableOpacity>
-        {
-          unauthorized ? (
-            <View style={styles.viewStyle}>
-              <Text style={styles.errorTextStyle}>
-                {Constants.LOGIN_ERROR}
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.containerStyle}>
+            <Text style={styles.labelStyle}>
+              Email
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={email => onChangeEmail(email)}
+                       value={email}
+                       placeholder='Enter Email'
+                       textContentType={'emailAddress'}
+                       placeholderTextColor={Colors.tertiaryColor}
+                       secureTextEntry={false}/>
+            <Text style={styles.labelStyle}>
+              Password
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={password => onChangePassword(password)}
+                       value={password}
+                       placeholder='Enter Password'
+                       placeholderTextColor={Colors.tertiaryColor}
+                       secureTextEntry={true}/>
+            <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                              disabled={isDisabled()}
+                              onPress={login}>
+              <Text style={styles.buttonTextStyle}>
+                Login
               </Text>
-            </View>
-          ) : null
-        }
-      </View>
-    </View>
+            </TouchableOpacity>
+            {
+              unauthorized ? (
+                <View style={styles.viewStyle}>
+                  <Text style={styles.errorTextStyle}>
+                    {Constants.LOGIN_ERROR}
+                  </Text>
+                </View>
+              ) : null
+            }
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
