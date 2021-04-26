@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import {FlatList, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-// import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
 // import {CompletedProjects} from '../../../data/project-data/completed-project-data'
-
 
 const CompletedProjectListScreen = props => {
   const onEditButtonPress = async () => {
