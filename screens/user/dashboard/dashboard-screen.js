@@ -2,8 +2,8 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
-import Menu from '../../../components/menu-button'
-import CombinedButtons from '../../../components/combined-buttons'
+import Menu from '../../../components/buttons/menu-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const DashboardScreen = () => {
   return (

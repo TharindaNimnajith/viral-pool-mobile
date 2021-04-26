@@ -4,8 +4,8 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
 import {getStringData} from '../../helpers/local-storage-helpers'
-import Menu from '../../components/menu-button'
-import Logout from '../../components/logout-button'
+import Menu from '../../components/buttons/menu-button'
+import Logout from '../../components/buttons/logout-button'
 import {Util} from '../../util/util'
 
 const TestNotificationScreen = () => {

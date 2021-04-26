@@ -3,7 +3,7 @@ import {HeaderButton} from 'react-navigation-header-buttons'
 import {StyleSheet} from 'react-native'
 // noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
-import Colors from '../shared/colors'
+import Colors from '../../shared/colors'
 
 const CustomHeaderButton = props => {
   return (

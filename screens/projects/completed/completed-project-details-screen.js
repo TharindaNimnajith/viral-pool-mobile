@@ -2,7 +2,7 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
-import Logout from '../../../components/logout-button'
+import Logout from '../../../components/buttons/logout-button'
 
 const CompletedProjectDetailsScreen = () => {
   return (
