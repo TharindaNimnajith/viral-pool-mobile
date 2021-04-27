@@ -19,13 +19,11 @@ const DashboardScreen = () => {
         {
           contentCreatorId: appContext.userData.id,
           token: value
-        })
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+        }).then(response => {
+        console.log(response)
+      }).catch(error => {
+        console.log(error)
+      })
     })
   }, [])
 

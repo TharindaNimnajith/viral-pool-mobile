@@ -1,5 +1,14 @@
 import React, {useContext, useState} from 'react'
-import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import validator from 'validator'
@@ -28,7 +37,10 @@ const LoginScreen = ({navigation}) => {
 
   const [emailValid, setEmailValid] = useState(false)
   const [passwordValid, setPasswordValid] = useState(true)
+
   const [unauthorized, setUnauthorized] = useState(false)
+
+  const [loading, setLoading] = useState(false)
 
   const onChangeEmail = async email => {
     // noinspection JSUnresolvedFunction
@@ -48,6 +60,8 @@ const LoginScreen = ({navigation}) => {
   }
 
   const login = async () => {
+    setLoading(true)
+    setUnauthorized(false)
     axios.post('oauth/mobile-login',
       {
         email: email,
@@ -68,30 +82,31 @@ const LoginScreen = ({navigation}) => {
         await appContext.SetRefreshToken(response.data.refresh_token)
         if (response.status === 200) {
           // noinspection JSUnusedLocalSymbols
-          axios.get('User')
-            .then(async response => {
-              if (response.status === 200) {
-                await storeObjectData(Util.USER_DATA, response.data.data)
-                await appContext.SetUserData(response.data.data)
-                navigation.navigate({
-                  routeName: 'Navigator'
-                })
-              } else {
-                setUnauthorized(true)
-              }
-            })
-            .catch(error => {
+          axios.get('User').then(async response => {
+            if (response.status === 200) {
+              await storeObjectData(Util.USER_DATA, response.data.data)
+              await appContext.SetUserData(response.data.data)
+              navigation.navigate({
+                routeName: 'Navigator'
+              })
+            } else {
+              setLoading(false)
               setUnauthorized(true)
-              console.log(error)
-            })
+            }
+          }).catch(error => {
+            setLoading(false)
+            setUnauthorized(true)
+            console.log(error)
+          })
         } else {
+          setLoading(false)
           setUnauthorized(true)
         }
-      })
-      .catch(error => {
-        setUnauthorized(true)
-        console.log(error)
-      })
+      }).catch(error => {
+      setLoading(false)
+      setUnauthorized(true)
+      console.log(error)
+    })
   }
 
   return (
@@ -126,6 +141,14 @@ const LoginScreen = ({navigation}) => {
               </Text>
             </TouchableOpacity>
             {
+              loading && (
+                <View style={styles.loadingStyle}>
+                  <ActivityIndicator size='large'
+                                     color={Colors.primaryColor}/>
+                </View>
+              )
+            }
+            {
               unauthorized ? (
                 <View style={styles.viewStyle}>
                   <Text style={styles.errorTextStyle}>
@@ -148,7 +171,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),
-    borderRadius: 5,
+    borderRadius: 5
   },
   buttonDisabledStyle: {
     marginTop: 30,
@@ -156,7 +179,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),
-    borderRadius: 5,
+    borderRadius: 5
   },
   buttonTextStyle: {
     color: Colors.secondaryColor,
@@ -175,6 +198,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: Colors.primaryColor,
     alignSelf: 'baseline'
+  },
+  loadingStyle: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
     width: wp('100%'),
