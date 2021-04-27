@@ -51,10 +51,10 @@ const ProfileScreen = props => {
                 </View>
                 <View style={styles.viewStyle}>
                   {
-                    appContext.userData.gender === 'male' ? (
+                    appContext.userData.gender.toUpperCase() === 'MALE' ? (
                       <Ionicons name='man'
                                 size={20}/>
-                    ) : appContext.userData.gender === 'female' ? (
+                    ) : appContext.userData.gender.toUpperCase() === 'FEMALE' ? (
                       <Ionicons name='woman'
                                 size={20}/>
                     ) : (
@@ -63,7 +63,7 @@ const ProfileScreen = props => {
                     )
                   }
                   <Text style={styles.textStyle}>
-                    {appContext.userData.gender}
+                    {appContext.userData.gender.charAt(0).toUpperCase() + appContext.userData.gender.slice(1)}
                   </Text>
                 </View>
                 <View style={styles.viewStyle}>
