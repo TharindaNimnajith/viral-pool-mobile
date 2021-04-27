@@ -5,7 +5,7 @@ import Colors from '../../../shared/colors'
 import {NewProjects} from '../../../data/project-data/new-project-data'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
-import ProjectItem from '../../../components/list-items/project-item'
+import ProjectItem from '../../../components/list-items/project-item/project-item'
 
 const NewProjectListScreen = ({navigation}) => {
   let projects = NewProjects

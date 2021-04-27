@@ -5,7 +5,7 @@ import Colors from '../../../shared/colors'
 import {OngoingProjects} from '../../../data/project-data/ongoing-project-data'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
-import ProjectItem from '../../../components/list-items/project-item'
+import ProjectItem from '../../../components/list-items/project-item/project-item'
 
 const OngoingProjectListScreen = ({navigation}) => {
   let projects = OngoingProjects

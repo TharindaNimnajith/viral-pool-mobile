@@ -1,14 +1,23 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../shared/colors'
+import Colors from '../../../shared/colors'
 
-const NotificationItem = () => {
+const ProjectItem = props => {
+  let project = {
+    project: props.itemData.item,
+    navigation: props.navigation,
+    refresh: props.refreshFunction
+  }
+
   return (
-    <TouchableOpacity style={styles.itemStyle}>
+    <TouchableOpacity style={styles.itemStyle}
+                      onPress={() => {
+                        props.navigation.navigate('CompletedProjectDetails', {project})
+                      }}>
       <View>
         <Text>
-          Notification Item
+          {props.itemData.item.id}
         </Text>
       </View>
     </TouchableOpacity>
@@ -30,4 +39,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default NotificationItem
+export default ProjectItem

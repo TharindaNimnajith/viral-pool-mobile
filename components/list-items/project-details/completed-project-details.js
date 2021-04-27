@@ -1,12 +1,12 @@
 import React from 'react'
 import {StyleSheet, Text, View} from 'react-native'
-import Colors from '../../shared/colors'
+import Colors from '../../../shared/colors'
 
-const ProjectDetails = () => {
+const CompletedProjectDetails = () => {
   return (
     <View style={styles.viewStyle}>
       <Text>
-        Project Details
+        Completed Project Details
       </Text>
     </View>
   )
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ProjectDetails
+export default CompletedProjectDetails
