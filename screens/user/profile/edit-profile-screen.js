@@ -178,88 +178,88 @@ const EditProfileScreen = props => {
 
   return (
     <SafeAreaView>
-      {/*<ScrollView>*/}
-      <Dialog.Container visible={visible}>
-        <Dialog.Title>
-          EDIT PROFILE
-        </Dialog.Title>
-        <Dialog.Description>
-          Do you want to update the profile details?
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       onPress={editProfile}/>
-        <Dialog.Button label='No'
-                       onPress={hideDialog}/>
-      </Dialog.Container>
-      <View style={styles.mainViewStyle}>
-        <View style={styles.containerStyle}>
-          <Text style={styles.labelStyle}>
-            First Name
-          </Text>
-          <TextInput style={styles.textInputStyle}
-                     onChangeText={firstName => onChangeFirstName(firstName)}
-                     value={firstName}
-                     placeholder='Enter First Name'
-                     placeholderTextColor={Colors.tertiaryColor}/>
-          <Text style={styles.labelStyle}>
-            Last Name
-          </Text>
-          <TextInput style={styles.textInputStyle}
-                     onChangeText={lastName => onChangeLastName(lastName)}
-                     value={lastName}
-                     placeholder='Enter Last Name'
-                     placeholderTextColor={Colors.tertiaryColor}/>
-          <Text style={styles.labelStyle}>
-            Gender
-          </Text>
-          <Text style={styles.labelStyle}>
-            Birthday
-          </Text>
-          <Text style={styles.labelStyle}>
-            Address
-          </Text>
-          <TextInput style={styles.multilineTextInputStyle}
-                     onChangeText={address => onChangeAddress(address)}
-                     value={address}
-                     placeholder='Enter Address'
-                     placeholderTextColor={Colors.tertiaryColor}
-                     multiline={true}
-                     numberOfLines={5}/>
-          <Text style={styles.labelStyle}>
-            Phone Number
-          </Text>
-          <TextInput style={styles.textInputStyle}
-                     onChangeText={phoneNumber => onChangePhoneNumber(phoneNumber)}
-                     value={phoneNumber}
-                     placeholder='Enter Phone Number'
-                     placeholderTextColor={Colors.tertiaryColor}/>
-          <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                            disabled={isDisabled()}
-                            onPress={showDialog}>
-            <Text style={styles.buttonTextStyle}>
-              Update
+      <ScrollView>
+        <Dialog.Container visible={visible}>
+          <Dialog.Title>
+            EDIT PROFILE
+          </Dialog.Title>
+          <Dialog.Description>
+            Do you want to update the profile details?
+          </Dialog.Description>
+          <Dialog.Button label='Yes'
+                         onPress={editProfile}/>
+          <Dialog.Button label='No'
+                         onPress={hideDialog}/>
+        </Dialog.Container>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.containerStyle}>
+            <Text style={styles.labelStyle}>
+              First Name
             </Text>
-          </TouchableOpacity>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={firstName => onChangeFirstName(firstName)}
+                       value={firstName}
+                       placeholder='Enter First Name'
+                       placeholderTextColor={Colors.tertiaryColor}/>
+            <Text style={styles.labelStyle}>
+              Last Name
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={lastName => onChangeLastName(lastName)}
+                       value={lastName}
+                       placeholder='Enter Last Name'
+                       placeholderTextColor={Colors.tertiaryColor}/>
+            <Text style={styles.labelStyle}>
+              Gender
+            </Text>
+            <Text style={styles.labelStyle}>
+              Birthday
+            </Text>
+            <Text style={styles.labelStyle}>
+              Address
+            </Text>
+            <TextInput style={styles.multilineTextInputStyle}
+                       onChangeText={address => onChangeAddress(address)}
+                       value={address}
+                       placeholder='Enter Address'
+                       placeholderTextColor={Colors.tertiaryColor}
+                       multiline={true}
+                       numberOfLines={5}/>
+            <Text style={styles.labelStyle}>
+              Phone Number
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={phoneNumber => onChangePhoneNumber(phoneNumber)}
+                       value={phoneNumber}
+                       placeholder='Enter Phone Number'
+                       placeholderTextColor={Colors.tertiaryColor}/>
+            <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                              disabled={isDisabled()}
+                              onPress={showDialog}>
+              <Text style={styles.buttonTextStyle}>
+                Update
+              </Text>
+            </TouchableOpacity>
+            {
+              error ? (
+                <View style={styles.viewStyle}>
+                  <Text style={styles.errorTextStyle}>
+                    {Constants.ERROR}
+                  </Text>
+                </View>
+              ) : null
+            }
+          </View>
           {
-            error ? (
-              <View style={styles.viewStyle}>
-                <Text style={styles.errorTextStyle}>
-                  {Constants.ERROR}
-                </Text>
+            loading && (
+              <View style={styles.loadingStyle}>
+                <ActivityIndicator size='large'
+                                   color={Colors.primaryColor}/>
               </View>
-            ) : null
+            )
           }
         </View>
-        {
-          loading && (
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.primaryColor}/>
-            </View>
-          )
-        }
-      </View>
-      {/*</ScrollView>*/}
+      </ScrollView>
     </SafeAreaView>
   )
 }
