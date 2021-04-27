@@ -67,15 +67,14 @@ const LoginScreen = ({navigation}) => {
   const login = async () => {
     setLoading(true)
     setUnauthorized(false)
-    axios.post('oauth/mobile-login',
-      {
-        email: email,
-        password: password,
-        state: state,
-        redirectUri: redirectUri,
-        clientId: clientId,
-        clientName: clientName
-      }).then(async response => {
+    axios.post('oauth/mobile-login', {
+      email: email,
+      password: password,
+      state: state,
+      redirectUri: redirectUri,
+      clientId: clientId,
+      clientName: clientName
+    }).then(async response => {
       // noinspection JSUnresolvedVariable
       await storeStringData(Util.ACCESS_TOKEN, response.data.access_token)
       // noinspection JSUnresolvedVariable
@@ -144,14 +143,6 @@ const LoginScreen = ({navigation}) => {
               </Text>
             </TouchableOpacity>
             {
-              loading && (
-                <View style={styles.loadingStyle}>
-                  <ActivityIndicator size='large'
-                                     color={Colors.primaryColor}/>
-                </View>
-              )
-            }
-            {
               unauthorized ? (
                 <View style={styles.viewStyle}>
                   <Text style={styles.errorTextStyle}>
@@ -161,6 +152,14 @@ const LoginScreen = ({navigation}) => {
               ) : null
             }
           </View>
+          {
+            loading && (
+              <View style={styles.loadingStyle}>
+                <ActivityIndicator size='large'
+                                   color={Colors.primaryColor}/>
+              </View>
+            )
+          }
         </View>
       </ScrollView>
     </SafeAreaView>

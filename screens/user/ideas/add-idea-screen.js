@@ -1,4 +1,5 @@
 import React, {useContext, useState} from 'react'
+// noinspection ES6UnusedImports
 import {
   ActivityIndicator,
   SafeAreaView,
@@ -34,11 +35,13 @@ const AddIdeaScreen = ({navigation}) => {
 
   const onChangeTitle = async title => {
     setTitleValid(!await isEmpty(title.trim()))
+    setError(false)
     setTitle(title)
   }
 
   const onChangeDescription = async description => {
     setDescriptionValid(!await isEmpty(description.trim()))
+    setError(false)
     setDescription(description)
   }
 
@@ -47,23 +50,26 @@ const AddIdeaScreen = ({navigation}) => {
   }
 
   const addIdea = async () => {
-    // TODO: Connect valid API
-    axios.post('',
-      {
-        title: title,
-        description: description,
-        userId: appContext.userData.id
-      }).then(async response => {
+    setLoading(true)
+    setError(false)
+    axios.post('', {
+      title: title,
+      description: description,
+      userId: appContext.userData.id
+    }).then(async response => {
       if (response.status === 200) {
         // navigation.navigate({
         //   routeName: 'IdeaList'
         // })
         setTitle('')
         setDescription('')
+        setLoading(false)
       } else {
-
+        setLoading(false)
+        setError(true)
       }
     }).catch(error => {
+      setLoading(false)
       setError(true)
       console.log(error)
     })
@@ -71,54 +77,54 @@ const AddIdeaScreen = ({navigation}) => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View style={styles.mainViewStyle}>
-          <View style={styles.containerStyle}>
-            <Text style={styles.labelStyle}>
-              Title
+      {/*<ScrollView>*/}
+      <View style={styles.mainViewStyle}>
+        <View style={styles.containerStyle}>
+          <Text style={styles.labelStyle}>
+            Title
+          </Text>
+          <TextInput style={styles.textInputStyle}
+                     onChangeText={title => onChangeTitle(title)}
+                     value={title}
+                     placeholder='Enter Title'
+                     placeholderTextColor={Colors.tertiaryColor}/>
+          <Text style={styles.labelStyle}>
+            Description
+          </Text>
+          <TextInput style={styles.multilineTextInputStyle}
+                     onChangeText={description => onChangeDescription(description)}
+                     value={description}
+                     placeholder='Enter Description'
+                     placeholderTextColor={Colors.tertiaryColor}
+                     multiline={true}
+                     numberOfLines={15}/>
+          <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                            disabled={isDisabled()}
+                            onPress={addIdea}>
+            <Text style={styles.buttonTextStyle}>
+              Submit
             </Text>
-            <TextInput style={styles.textInputStyle}
-                       onChangeText={title => onChangeTitle(title)}
-                       value={title}
-                       placeholder='Enter Title'
-                       placeholderTextColor={Colors.tertiaryColor}/>
-            <Text style={styles.labelStyle}>
-              Description
-            </Text>
-            <TextInput style={styles.multilineTextInputStyle}
-                       onChangeText={description => onChangeDescription(description)}
-                       value={description}
-                       placeholder='Enter Description'
-                       placeholderTextColor={Colors.tertiaryColor}
-                       multiline={true}
-                       numberOfLines={15}/>
-            <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                              disabled={isDisabled()}
-                              onPress={addIdea}>
-              <Text style={styles.buttonTextStyle}>
-                Submit
-              </Text>
-            </TouchableOpacity>
-            {
-              loading && (
-                <View style={styles.loadingStyle}>
-                  <ActivityIndicator size='large'
-                                     color={Colors.primaryColor}/>
-                </View>
-              )
-            }
-            {
-              error ? (
-                <View style={styles.viewStyle}>
-                  <Text style={styles.errorTextStyle}>
-                    {Constants.ERROR}
-                  </Text>
-                </View>
-              ) : null
-            }
-          </View>
+          </TouchableOpacity>
+          {
+            error ? (
+              <View style={styles.viewStyle}>
+                <Text style={styles.errorTextStyle}>
+                  {Constants.ERROR}
+                </Text>
+              </View>
+            ) : null
+          }
         </View>
-      </ScrollView>
+        {
+          loading && (
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.primaryColor}/>
+            </View>
+          )
+        }
+      </View>
+      {/*</ScrollView>*/}
     </SafeAreaView>
   )
 }
@@ -146,7 +152,9 @@ const styles = StyleSheet.create({
   },
   containerStyle: {
     marginTop: wp('5%'),
-    alignItems: 'center'
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flex: 1
   },
   errorTextStyle: {
     color: Colors.errorColor

@@ -15,11 +15,10 @@ const DashboardScreen = () => {
   useEffect(() => {
     getStringData(Util.EXPO_PUSH_TOKEN).then(value => {
       // noinspection JSUnusedLocalSymbols
-      axios.post('content-creator-notification/expo-token',
-        {
-          contentCreatorId: appContext.userData.id,
-          token: value
-        }).then(response => {
+      axios.post('content-creator-notification/expo-token', {
+        contentCreatorId: appContext.userData.id,
+        token: value
+      }).then(response => {
         console.log(response)
       }).catch(error => {
         console.log(error)
