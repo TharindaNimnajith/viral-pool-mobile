@@ -1,14 +1,25 @@
 import React, {useContext, useState} from 'react'
-import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
 import Colors from '../../../shared/colors'
+import Constants from '../../../shared/constants'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
 
-const AddIdeaScreen = () => {
+// noinspection JSUnusedLocalSymbols
+const AddIdeaScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
 
   const [title, setTitle] = useState('')
@@ -16,6 +27,10 @@ const AddIdeaScreen = () => {
 
   const [titleValid, setTitleValid] = useState(false)
   const [descriptionValid, setDescriptionValid] = useState(false)
+
+  const [error, setError] = useState(false)
+
+  const [loading, setLoading] = useState(false)
 
   const onChangeTitle = async title => {
     setTitleValid(!await isEmpty(title.trim()))
@@ -32,22 +47,24 @@ const AddIdeaScreen = () => {
   }
 
   const addIdea = async () => {
+    // TODO: Connect valid API
     axios.post('',
       {
         title: title,
         description: description,
         userId: appContext.userData.id
       }).then(async response => {
-        if (response.status === 200) {
-          // navigation.navigate({
-          //   routeName: 'IdeaList'
-          // })
-          setTitle('')
-          setDescription('')
-        } else {
+      if (response.status === 200) {
+        // navigation.navigate({
+        //   routeName: 'IdeaList'
+        // })
+        setTitle('')
+        setDescription('')
+      } else {
 
-        }
-      }).catch(error => {
+      }
+    }).catch(error => {
+      setError(true)
       console.log(error)
     })
   }
@@ -82,6 +99,23 @@ const AddIdeaScreen = () => {
                 Submit
               </Text>
             </TouchableOpacity>
+            {
+              loading && (
+                <View style={styles.loadingStyle}>
+                  <ActivityIndicator size='large'
+                                     color={Colors.primaryColor}/>
+                </View>
+              )
+            }
+            {
+              error ? (
+                <View style={styles.viewStyle}>
+                  <Text style={styles.errorTextStyle}>
+                    {Constants.ERROR}
+                  </Text>
+                </View>
+              ) : null
+            }
           </View>
         </View>
       </ScrollView>
@@ -114,11 +148,24 @@ const styles = StyleSheet.create({
     marginTop: wp('5%'),
     alignItems: 'center'
   },
+  errorTextStyle: {
+    color: Colors.errorColor
+  },
   labelStyle: {
     marginLeft: 40,
     marginTop: 20,
     color: Colors.primaryColor,
     alignSelf: 'baseline'
+  },
+  loadingStyle: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
     width: wp('100%'),
@@ -145,6 +192,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     color: Colors.tertiaryColor
+  },
+  viewStyle: {
+    marginTop: 40
   }
 })
 
