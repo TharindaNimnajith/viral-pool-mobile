@@ -4,14 +4,16 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Colors from '../../../shared/colors'
 import Logout from '../../../components/buttons/logout-button'
 
-const RejectedProjectDetailsScreen = () => {
+const RejectedProjectDetailsScreen = props => {
+  let project = props.navigation.getParam('project')
+
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.mainViewStyle}>
           <View style={styles.viewStyle}>
             <Text>
-              Rejected Project Details
+              {project.project.id}
             </Text>
           </View>
         </View>
