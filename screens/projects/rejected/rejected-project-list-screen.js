@@ -38,7 +38,6 @@ const RejectedProjectListScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   list: {
-    marginTop: 5,
     width: wp('100%'),
     backgroundColor: Colors.secondaryColor
   }

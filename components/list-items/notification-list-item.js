@@ -34,10 +34,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor,
     marginHorizontal: wp('4%'),
     marginVertical: hp('0.5%'),
+    height: 140,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    marginTop: 10,
+    marginBottom: 10
   }
 })
 

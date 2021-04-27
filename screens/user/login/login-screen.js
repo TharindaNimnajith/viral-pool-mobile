@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     width: wp('100%'),
-    height: hp('100%'),
+    height: hp('103.3%'),
     backgroundColor: Colors.secondaryColor
   },
   textInputStyle: {
