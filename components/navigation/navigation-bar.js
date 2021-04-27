@@ -262,7 +262,6 @@ const InternalNavigator = createDrawerNavigator({
   }
 }, {
   drawerBackgroundColor: Colors.tertiaryColor,
-  drawerType: 'back',
   contentOptions: {
     activeTintColor: Colors.secondaryColor
   }
