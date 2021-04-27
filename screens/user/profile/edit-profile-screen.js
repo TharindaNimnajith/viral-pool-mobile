@@ -212,9 +212,19 @@ const EditProfileScreen = props => {
             <Text style={styles.labelStyle}>
               Gender
             </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={gender => onChangeGender(gender)}
+                       value={gender}
+                       placeholder='Enter Gender'
+                       placeholderTextColor={Colors.tertiaryColor}/>
             <Text style={styles.labelStyle}>
               Birthday
             </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={birthDate => onChangeBirthDate(birthDate)}
+                       value={birthDate}
+                       placeholder='Enter Birthday'
+                       placeholderTextColor={Colors.tertiaryColor}/>
             <Text style={styles.labelStyle}>
               Address
             </Text>
