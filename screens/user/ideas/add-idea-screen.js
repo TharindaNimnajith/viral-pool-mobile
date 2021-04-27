@@ -1,17 +1,21 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import axios from 'axios'
+import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
 import Colors from '../../../shared/colors'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
 
 const AddIdeaScreen = () => {
+  const appContext = useContext(AppContext)
+
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
 
   const [titleValid, setTitleValid] = useState(false)
-  const [descriptionValid, setDescriptionValid] = useState(true)
+  const [descriptionValid, setDescriptionValid] = useState(false)
 
   const onChangeTitle = async title => {
     setTitleValid(!await isEmpty(title.trim()))
@@ -28,7 +32,24 @@ const AddIdeaScreen = () => {
   }
 
   const addIdea = async () => {
-    //
+    axios.post('',
+      {
+        title: title,
+        description: description,
+        userId: appContext.userData.id
+      }).then(async response => {
+        if (response.status === 200) {
+          // navigation.navigate({
+          //   routeName: 'IdeaList'
+          // })
+          setTitle('')
+          setDescription('')
+        } else {
+
+        }
+      }).catch(error => {
+      console.log(error)
+    })
   }
 
   return (
@@ -90,7 +111,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   containerStyle: {
-    marginTop: wp('20%'),
+    marginTop: wp('5%'),
     alignItems: 'center'
   },
   labelStyle: {

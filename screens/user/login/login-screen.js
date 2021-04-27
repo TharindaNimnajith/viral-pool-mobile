@@ -23,20 +23,25 @@ const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
 
   // For development
-  // const [email, setEmail] = useState('akalanka@cube360global.com')
-  // const [password, setPassword] = useState('#Compaq123')
+  const [email, setEmail] = useState('akalanka@cube360global.com')
+  const [password, setPassword] = useState('#Compaq123')
 
   // For production
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')
   const [clientId] = useState('string')
   const [clientName] = useState('string')
 
-  const [emailValid, setEmailValid] = useState(false)
+  // For development
+  const [emailValid, setEmailValid] = useState(true)
   const [passwordValid, setPasswordValid] = useState(true)
+
+  // For production
+  // const [emailValid, setEmailValid] = useState(false)
+  // const [passwordValid, setPasswordValid] = useState(false)
 
   const [unauthorized, setUnauthorized] = useState(false)
 
@@ -70,39 +75,38 @@ const LoginScreen = ({navigation}) => {
         redirectUri: redirectUri,
         clientId: clientId,
         clientName: clientName
-      })
-      .then(async response => {
-        // noinspection JSUnresolvedVariable
-        await storeStringData(Util.ACCESS_TOKEN, response.data.access_token)
-        // noinspection JSUnresolvedVariable
-        await storeStringData(Util.REFRESH_TOKEN, response.data.refresh_token)
-        // noinspection JSUnresolvedVariable
-        await appContext.SetAccessToken(response.data.access_token)
-        // noinspection JSUnresolvedVariable
-        await appContext.SetRefreshToken(response.data.refresh_token)
-        if (response.status === 200) {
-          // noinspection JSUnusedLocalSymbols
-          axios.get('User').then(async response => {
-            if (response.status === 200) {
-              await storeObjectData(Util.USER_DATA, response.data.data)
-              await appContext.SetUserData(response.data.data)
-              navigation.navigate({
-                routeName: 'Navigator'
-              })
-            } else {
-              setLoading(false)
-              setUnauthorized(true)
-            }
-          }).catch(error => {
+      }).then(async response => {
+      // noinspection JSUnresolvedVariable
+      await storeStringData(Util.ACCESS_TOKEN, response.data.access_token)
+      // noinspection JSUnresolvedVariable
+      await storeStringData(Util.REFRESH_TOKEN, response.data.refresh_token)
+      // noinspection JSUnresolvedVariable
+      await appContext.SetAccessToken(response.data.access_token)
+      // noinspection JSUnresolvedVariable
+      await appContext.SetRefreshToken(response.data.refresh_token)
+      if (response.status === 200) {
+        // noinspection JSUnusedLocalSymbols
+        axios.get('User').then(async response => {
+          if (response.status === 200) {
+            await storeObjectData(Util.USER_DATA, response.data.data)
+            await appContext.SetUserData(response.data.data)
+            navigation.navigate({
+              routeName: 'Navigator'
+            })
+          } else {
             setLoading(false)
             setUnauthorized(true)
-            console.log(error)
-          })
-        } else {
+          }
+        }).catch(error => {
           setLoading(false)
           setUnauthorized(true)
-        }
-      }).catch(error => {
+          console.log(error)
+        })
+      } else {
+        setLoading(false)
+        setUnauthorized(true)
+      }
+    }).catch(error => {
       setLoading(false)
       setUnauthorized(true)
       console.log(error)
