@@ -23,12 +23,12 @@ const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
 
   // For development
-  const [email, setEmail] = useState('akalanka@cube360global.com')
-  const [password, setPassword] = useState('#Compaq123')
+  // const [email, setEmail] = useState('akalanka@cube360global.com')
+  // const [password, setPassword] = useState('#Compaq123')
 
   // For production
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')
@@ -122,8 +122,7 @@ const LoginScreen = ({navigation}) => {
                        value={email}
                        placeholder='Enter Email'
                        textContentType={'emailAddress'}
-                       placeholderTextColor={Colors.tertiaryColor}
-                       secureTextEntry={false}/>
+                       placeholderTextColor={Colors.tertiaryColor}/>
             <Text style={styles.labelStyle}>
               Password
             </Text>
