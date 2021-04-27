@@ -1,6 +1,6 @@
 import NotificationModel from '../../models/notification-model'
 
-export const NewProjects = [
+export const Notifications = [
   new NotificationModel(
     '1',
     'N1',

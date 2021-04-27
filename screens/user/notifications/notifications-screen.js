@@ -1,35 +1,48 @@
-import React from 'react'
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import React, {useEffect, useState} from 'react'
+import {FlatList, StyleSheet, View} from 'react-native'
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Colors from '../../../shared/colors'
+import {Notifications} from '../../../data/notification-data/notification-data'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
-import Colors from '../../../shared/colors'
+import ProjectListItem from '../../../components/list-items/project-list-item'
 
-const NotificationsScreen = () => {
+const NotificationsScreen = ({navigation}) => {
+  let notifications = Notifications
+
+  const [refresh, setRefresh] = useState(false)
+
+  useEffect(() => {
+    setRefresh(false)
+  }, [refresh])
+
+  const renderItemsFunction = itemData => {
+    return (
+      <ProjectListItem navigation={navigation}
+                       itemData={itemData}
+                       refreshFunction={refreshFunction}/>
+    )
+  }
+
+  const refreshFunction = () => {
+    setRefresh(true)
+  }
+
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.mainViewStyle}>
-          <View style={styles.viewStyle}>
-            <Text>
-              Notifications
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View style={styles.list}>
+      <FlatList keyExtractor={(item, index) => index.toString()}
+                data={notifications}
+                numColumns={1}
+                renderItem={renderItemsFunction}/>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  mainViewStyle: {
+  list: {
+    marginTop: 5,
     width: wp('100%'),
-    height: hp('100%'),
     backgroundColor: Colors.secondaryColor
-  },
-  viewStyle: {
-    alignItems: 'center',
-    marginTop: 10
   }
 })
 
