@@ -17,3 +17,6 @@ web-build/
 
 # webstorm settings
 /.idea
+
+# other
+notes.txt
