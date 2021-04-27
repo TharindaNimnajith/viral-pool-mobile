@@ -6,23 +6,27 @@ import {AppContext} from '../../../global/app-context'
 import Colors from '../../../shared/colors'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
+import {getStringData} from '../../../helpers/local-storage-helpers'
+import {Util} from '../../../util/util'
 
 const DashboardScreen = () => {
   const appContext = useContext(AppContext)
 
   useEffect(() => {
-    // noinspection JSUnusedLocalSymbols
-    axios.post('content-creator-notification/expo-token',
-      {
-        contentCreatorId: appContext.userData.id,
-        token: appContext.expoPushToken
-      })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    getStringData(Util.EXPO_PUSH_TOKEN).then(value => {
+      // noinspection JSUnusedLocalSymbols
+      axios.post('content-creator-notification/expo-token',
+        {
+          contentCreatorId: appContext.userData.id,
+          token: value
+        })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    })
   }, [])
 
   return (
