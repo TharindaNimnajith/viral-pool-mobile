@@ -15,7 +15,7 @@ const DashboardScreen = () => {
     axios.post('content-creator-notification/expo-token',
       {
         contentCreatorId: appContext.userData.id,
-        token: 'appContext.expoPushToken'
+        token: appContext.expoPushToken
       })
       .then(response => {
         console.log(response)
@@ -23,7 +23,7 @@ const DashboardScreen = () => {
       .catch(error => {
         console.log(error)
       })
-  })
+  }, [])
 
   return (
     <SafeAreaView>
