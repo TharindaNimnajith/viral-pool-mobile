@@ -1,5 +1,4 @@
 import React, {useContext, useState} from 'react'
-// noinspection ES6UnusedImports
 import {
   ActivityIndicator,
   Alert,
@@ -17,6 +16,8 @@ import axios from 'axios'
 import validator from 'validator'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
+import {storeObjectData} from '../../../helpers/local-storage-helpers'
+import {Util} from '../../../util/util'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import Logout from '../../../components/buttons/logout-button'
@@ -44,10 +45,10 @@ const EditProfileScreen = props => {
 
   const [firstNameValid, setFirstNameValid] = useState(true)
   const [lastNameValid, setLastNameValid] = useState(true)
-  // const [genderValid, setGenderValid] = useState(true)
   const [birthDateValid, setBirthDateValid] = useState(true)
   const [addressValid, setAddressValid] = useState(true)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
+  // const [genderValid, setGenderValid] = useState(true)
 
   const [error, setError] = useState(false)
 
@@ -100,7 +101,7 @@ const EditProfileScreen = props => {
   }
 
   const onChangeBirthDate = async birthDate => {
-    setBirthDateValid(checkBirthDateValidity(birthDate))
+    setBirthDateValid(await checkBirthDateValidity(birthDate))
     setError(false)
     setBirthDate(birthDate)
   }
@@ -112,30 +113,30 @@ const EditProfileScreen = props => {
   }
 
   const onChangePhoneNumber = async phoneNumber => {
-    setPhoneNumberValid(checkPhoneNumberValidity(phoneNumber))
+    setPhoneNumberValid(await checkPhoneNumberValidity(phoneNumber))
     setError(false)
     setPhoneNumber(phoneNumber)
   }
 
   const checkPhoneNumberValidity = async phoneNumber => {
-    if (!await isEmpty(phoneNumber.trim()))
-      // noinspection JSUnresolvedFunction
-      if (validator.isNumeric(phoneNumber))
-        // noinspection JSUnresolvedFunction
-        if (validator.isLength(phoneNumber, {
-          min: 10,
-          max: 10
-        }))
-          return true
+    // if (!await isEmpty(phoneNumber.trim()))
+    //   // noinspection JSUnresolvedFunction
+    //   if (validator.isNumeric(phoneNumber))
+    //     // noinspection JSUnresolvedFunction
+    //     if (validator.isLength(phoneNumber, {
+    //       min: 10,
+    //       max: 10
+    //     }))
+    //       return true
     return false
   }
 
   const checkBirthDateValidity = async birthDate => {
-    // noinspection JSUnresolvedFunction
-    if (validator.isDate(birthDate))
-      // noinspection JSUnresolvedFunction
-      if (validator.isBefore(birthDate, Date.now()))
-        return true
+    // // noinspection JSUnresolvedFunction
+    // if (validator.isDate(birthDate))
+    //   // noinspection JSUnresolvedFunction
+    //   if (validator.isBefore(birthDate, Date.now()))
+    //     return true
     return false
   }
 
@@ -147,7 +148,7 @@ const EditProfileScreen = props => {
     setVisible(false)
     setLoading(true)
     setError(false)
-    axios.put('', {
+    let data = {
       id: appContext.userData.id,
       email: appContext.userData.email,
       userRole: appContext.userData.userRole,
@@ -158,11 +159,14 @@ const EditProfileScreen = props => {
       birthDate: birthDate,
       address: address,
       phoneNumber: phoneNumber
-    }).then(async response => {
+    }
+    axios.put('', {data}).then(async response => {
       if (response.status === 200) {
         // navigation.navigate({
         //   routeName: 'Profile'
         // })
+        await appContext.SetUserData(data)
+        await storeObjectData(Util.USER_DATA, data)
         setLoading(false)
         await showAlert()
       } else {
