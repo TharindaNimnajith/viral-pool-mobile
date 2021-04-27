@@ -4,14 +4,16 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Colors from '../../../shared/colors'
 import Logout from '../../../components/buttons/logout-button'
 
-const EditIdeaScreen = () => {
+const EditIdeaScreen = props => {
+  let idea = props.navigation.getParam('idea')
+
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.mainViewStyle}>
           <View style={styles.viewStyle}>
             <Text>
-              Edit Idea
+              {idea.idea.id}
             </Text>
           </View>
         </View>

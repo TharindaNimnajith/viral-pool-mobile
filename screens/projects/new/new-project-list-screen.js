@@ -8,8 +8,6 @@ import Logout from '../../../components/buttons/logout-button'
 import ProjectListItem from '../../../components/list-items/project-list-item'
 
 const NewProjectListScreen = ({navigation}) => {
-  let projects = NewProjects
-
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
@@ -31,7 +29,7 @@ const NewProjectListScreen = ({navigation}) => {
   return (
     <View style={styles.list}>
       <FlatList keyExtractor={(item, index) => index.toString()}
-                data={projects}
+                data={NewProjects}
                 numColumns={1}
                 renderItem={renderItemsFunction}/>
     </View>

@@ -8,8 +8,6 @@ import Logout from '../../../components/buttons/logout-button'
 import NotificationListItem from '../../../components/list-items/notification-list-item'
 
 const NotificationsScreen = ({navigation}) => {
-  let notifications = Notifications
-
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
@@ -31,7 +29,7 @@ const NotificationsScreen = ({navigation}) => {
   return (
     <View style={styles.list}>
       <FlatList keyExtractor={(item, index) => index.toString()}
-                data={notifications}
+                data={Notifications}
                 numColumns={1}
                 renderItem={renderItemsFunction}/>
     </View>
