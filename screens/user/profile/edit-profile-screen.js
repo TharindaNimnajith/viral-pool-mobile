@@ -21,7 +21,8 @@ import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import Logout from '../../../components/buttons/logout-button'
 
-const EditProfileScreen = () => {
+// noinspection JSUnusedLocalSymbols
+const EditProfileScreen = props => {
   const appContext = useContext(AppContext)
 
   // noinspection JSUnresolvedVariable
@@ -142,21 +143,26 @@ const EditProfileScreen = () => {
     return !firstNameValid || !lastNameValid || !birthDateValid || !addressValid || !phoneNumberValid
   }
 
-  const editIdea = async () => {
+  const editProfile = async () => {
     setVisible(false)
     setLoading(true)
     setError(false)
     axios.put('', {
-      title: title,
-      description: description,
-      userId: idea.idea.userId
+      id: appContext.userData.id,
+      email: appContext.userData.email,
+      userRole: appContext.userData.userRole,
+      profileImagePath: appContext.userData.profileImagePath,
+      firstName: firstName,
+      lastName: lastName,
+      gender: gender,
+      birthDate: birthDate,
+      address: address,
+      phoneNumber: phoneNumber
     }).then(async response => {
       if (response.status === 200) {
         // navigation.navigate({
-        //   routeName: 'IdeaList'
+        //   routeName: 'Profile'
         // })
-        setTitle('')
-        setDescription('')
         setLoading(false)
         await showAlert()
       } else {
@@ -175,36 +181,58 @@ const EditProfileScreen = () => {
       {/*<ScrollView>*/}
       <Dialog.Container visible={visible}>
         <Dialog.Title>
-          EDIT IDEA
+          EDIT PROFILE
         </Dialog.Title>
         <Dialog.Description>
-          Do you want to update the idea?
+          Do you want to update the profile details?
         </Dialog.Description>
         <Dialog.Button label='Yes'
-                       onPress={editIdea}/>
+                       onPress={editProfile}/>
         <Dialog.Button label='No'
                        onPress={hideDialog}/>
       </Dialog.Container>
       <View style={styles.mainViewStyle}>
         <View style={styles.containerStyle}>
           <Text style={styles.labelStyle}>
-            Title
+            First Name
           </Text>
           <TextInput style={styles.textInputStyle}
-                     onChangeText={title => onChangeTitle(title)}
-                     value={title}
-                     placeholder='Enter Title'
+                     onChangeText={firstName => onChangeFirstName(firstName)}
+                     value={firstName}
+                     placeholder='Enter First Name'
                      placeholderTextColor={Colors.tertiaryColor}/>
           <Text style={styles.labelStyle}>
-            Description
+            Last Name
+          </Text>
+          <TextInput style={styles.textInputStyle}
+                     onChangeText={lastName => onChangeLastName(lastName)}
+                     value={lastName}
+                     placeholder='Enter Last Name'
+                     placeholderTextColor={Colors.tertiaryColor}/>
+          <Text style={styles.labelStyle}>
+            Gender
+          </Text>
+          <Text style={styles.labelStyle}>
+            Birthday
+          </Text>
+          <Text style={styles.labelStyle}>
+            Address
           </Text>
           <TextInput style={styles.multilineTextInputStyle}
-                     onChangeText={description => onChangeDescription(description)}
-                     value={description}
-                     placeholder='Enter Description'
+                     onChangeText={address => onChangeAddress(address)}
+                     value={address}
+                     placeholder='Enter Address'
                      placeholderTextColor={Colors.tertiaryColor}
                      multiline={true}
-                     numberOfLines={15}/>
+                     numberOfLines={5}/>
+          <Text style={styles.labelStyle}>
+            Phone Number
+          </Text>
+          <TextInput style={styles.textInputStyle}
+                     onChangeText={phoneNumber => onChangePhoneNumber(phoneNumber)}
+                     value={phoneNumber}
+                     placeholder='Enter Phone Number'
+                     placeholderTextColor={Colors.tertiaryColor}/>
           <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                             disabled={isDisabled()}
                             onPress={showDialog}>
@@ -291,7 +319,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     borderColor: Colors.primaryColor,
     width: wp('80%'),
-    height: wp('60%'),
+    height: wp('30%'),
     borderWidth: 1,
     borderRadius: 5,
     marginTop: 10,
