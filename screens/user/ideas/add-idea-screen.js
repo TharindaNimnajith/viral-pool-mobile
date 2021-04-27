@@ -2,6 +2,7 @@ import React, {useContext, useState} from 'react'
 // noinspection ES6UnusedImports
 import {
   ActivityIndicator,
+  Alert,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -11,6 +12,7 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
@@ -18,7 +20,6 @@ import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
-import Dialog from "react-native-dialog";
 
 // noinspection JSUnusedLocalSymbols
 const AddIdeaScreen = ({navigation}) => {
@@ -42,6 +43,16 @@ const AddIdeaScreen = ({navigation}) => {
 
   const hideDialog = async () => {
     setVisible(false)
+  }
+
+  const showAlert = () => {
+    Alert.alert(
+      'SUCCESS',
+      'New idea submitted successfully!',
+      [{
+        text: 'OK'
+      }]
+    )
   }
 
   const onChangeTitle = async title => {
@@ -76,6 +87,7 @@ const AddIdeaScreen = ({navigation}) => {
         setTitle('')
         setDescription('')
         setLoading(false)
+        await showAlert()
       } else {
         setLoading(false)
         setError(true)
