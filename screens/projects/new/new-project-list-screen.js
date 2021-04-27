@@ -5,7 +5,7 @@ import Colors from '../../../shared/colors'
 import {NewProjects} from '../../../data/project-data/new-project-data'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
-import ProjectItem from '../../../components/list-items/project-item/project-item'
+import ProjectListItem from '../../../components/list-items/project-list-item'
 
 const NewProjectListScreen = ({navigation}) => {
   let projects = NewProjects
@@ -18,9 +18,9 @@ const NewProjectListScreen = ({navigation}) => {
 
   const renderItemsFunction = itemData => {
     return (
-      <ProjectItem navigation={navigation}
-                   itemData={itemData}
-                   refreshFunction={refreshFunction}/>
+      <ProjectListItem navigation={navigation}
+                       itemData={itemData}
+                       refreshFunction={refreshFunction}/>
     )
   }
 

@@ -5,7 +5,7 @@ import Colors from '../../../shared/colors'
 import {RejectedProjects} from '../../../data/project-data/rejected-project-data'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
-import ProjectItem from '../../../components/list-items/project-item/project-item'
+import ProjectListItem from '../../../components/list-items/project-list-item'
 
 const RejectedProjectListScreen = ({navigation}) => {
   let projects = RejectedProjects
@@ -18,9 +18,9 @@ const RejectedProjectListScreen = ({navigation}) => {
 
   const renderItemsFunction = itemData => {
     return (
-      <ProjectItem navigation={navigation}
-                   itemData={itemData}
-                   refreshFunction={refreshFunction}/>
+      <ProjectListItem navigation={navigation}
+                       itemData={itemData}
+                       refreshFunction={refreshFunction}/>
     )
   }
 

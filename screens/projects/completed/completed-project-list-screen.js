@@ -5,7 +5,7 @@ import Colors from '../../../shared/colors'
 import {CompletedProjects} from '../../../data/project-data/completed-project-data'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
-import ProjectItem from '../../../components/list-items/project-item/project-item'
+import ProjectListItem from '../../../components/list-items/project-list-item'
 
 const CompletedProjectListScreen = ({navigation}) => {
   let projects = CompletedProjects
@@ -18,9 +18,9 @@ const CompletedProjectListScreen = ({navigation}) => {
 
   const renderItemsFunction = itemData => {
     return (
-      <ProjectItem navigation={navigation}
-                   itemData={itemData}
-                   refreshFunction={refreshFunction}/>
+      <ProjectListItem navigation={navigation}
+                       itemData={itemData}
+                       refreshFunction={refreshFunction}/>
     )
   }
 
