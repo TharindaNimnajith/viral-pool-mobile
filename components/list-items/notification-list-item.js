@@ -3,12 +3,23 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
 
-const NotificationListItem = () => {
+const NotificationListItem = props => {
+  let notification = {
+    notification: props.itemData.item,
+    navigation: props.navigation,
+    refresh: props.refreshFunction
+  }
+
+  const pressNotification = () => {
+    console.log(notification)
+  }
+
   return (
-    <TouchableOpacity style={styles.itemStyle}>
+    <TouchableOpacity style={styles.itemStyle}
+                      onPress={pressNotification}>
       <View>
         <Text>
-          Notification Item
+          {props.itemData.item.id}
         </Text>
       </View>
     </TouchableOpacity>

@@ -5,7 +5,7 @@ import Colors from '../../../shared/colors'
 import {Notifications} from '../../../data/notification-data/notification-data'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
-import ProjectListItem from '../../../components/list-items/project-list-item'
+import NotificationListItem from '../../../components/list-items/notification-list-item'
 
 const NotificationsScreen = ({navigation}) => {
   let notifications = Notifications
@@ -18,9 +18,9 @@ const NotificationsScreen = ({navigation}) => {
 
   const renderItemsFunction = itemData => {
     return (
-      <ProjectListItem navigation={navigation}
-                       itemData={itemData}
-                       refreshFunction={refreshFunction}/>
+      <NotificationListItem navigation={navigation}
+                            itemData={itemData}
+                            refreshFunction={refreshFunction}/>
     )
   }
 
