@@ -18,6 +18,7 @@ import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
+import Dialog from "react-native-dialog";
 
 // noinspection JSUnusedLocalSymbols
 const AddIdeaScreen = ({navigation}) => {
@@ -32,6 +33,16 @@ const AddIdeaScreen = ({navigation}) => {
   const [error, setError] = useState(false)
 
   const [loading, setLoading] = useState(false)
+
+  const [visible, setVisible] = useState(false)
+
+  const showDialog = async () => {
+    setVisible(true)
+  }
+
+  const hideDialog = async () => {
+    setVisible(false)
+  }
 
   const onChangeTitle = async title => {
     setTitleValid(!await isEmpty(title.trim()))
@@ -50,6 +61,7 @@ const AddIdeaScreen = ({navigation}) => {
   }
 
   const addIdea = async () => {
+    setVisible(false)
     setLoading(true)
     setError(false)
     axios.post('', {
@@ -78,6 +90,18 @@ const AddIdeaScreen = ({navigation}) => {
   return (
     <SafeAreaView>
       {/*<ScrollView>*/}
+      <Dialog.Container visible={visible}>
+        <Dialog.Title>
+          NEW IDEA
+        </Dialog.Title>
+        <Dialog.Description>
+          Do you want to submit the new idea?
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={addIdea}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialog}/>
+      </Dialog.Container>
       <View style={styles.mainViewStyle}>
         <View style={styles.containerStyle}>
           <Text style={styles.labelStyle}>
@@ -100,7 +124,7 @@ const AddIdeaScreen = ({navigation}) => {
                      numberOfLines={15}/>
           <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                             disabled={isDisabled()}
-                            onPress={addIdea}>
+                            onPress={showDialog}>
             <Text style={styles.buttonTextStyle}>
               Submit
             </Text>
