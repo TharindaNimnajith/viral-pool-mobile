@@ -13,7 +13,7 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
-import validator from 'validator'
+// import validator from 'validator'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
 import {storeObjectData} from '../../../helpers/local-storage-helpers'
