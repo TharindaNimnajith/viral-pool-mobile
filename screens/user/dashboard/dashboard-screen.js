@@ -1,5 +1,6 @@
 import React, {useContext, useEffect} from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
 import Colors from '../../../shared/colors'
