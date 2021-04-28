@@ -13,6 +13,7 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import RNPickerSelect from 'react-native-picker-select'
+import DatePicker from 'react-native-date-picker'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
@@ -232,11 +233,8 @@ const EditProfileScreen = props => {
             <Text style={styles.labelStyle}>
               Birthday
             </Text>
-            <TextInput style={styles.textInputStyle}
-                       onChangeText={birthDate => onChangeBirthDate(birthDate)}
-                       value={birthDate}
-                       placeholder='Enter Birthday'
-                       placeholderTextColor={Colors.tertiaryColor}/>
+            <DatePicker date={birthDate}
+                        onDateChange={onChangeBirthDate()}/>
             <Text style={styles.labelStyle}>
               Address
             </Text>
