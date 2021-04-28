@@ -1,9 +1,11 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 // noinspection ES6UnusedImports
-import {Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 // noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
+import * as ImagePicker from 'expo-image-picker'
+import Dialog from 'react-native-dialog'
 import {AppContext} from '../../../global/app-context'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
@@ -11,6 +13,10 @@ import Colors from '../../../shared/colors'
 
 const ProfileScreen = props => {
   const appContext = useContext(AppContext)
+
+  const [image, setImage] = useState(appContext.userData.profileImagePath)
+
+  const [visible, setVisible] = useState(false)
 
   // const [userData, setUserData] = useState(null)
   //
@@ -20,6 +26,36 @@ const ProfileScreen = props => {
   //   })
   // }, [])
 
+  useEffect(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync()
+        if (status !== 'granted')
+          alert('Sorry, we need camera roll permissions to make this work!')
+      }
+    })()
+  }, [])
+
+  const showDialog = async () => {
+    setVisible(true)
+  }
+
+  const hideDialog = async () => {
+    setVisible(false)
+  }
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1
+    })
+    if (!result.cancelled)
+      // noinspection JSUnresolvedVariable
+      setImage(result.uri)
+  }
+
   const onEditButtonPress = async () => {
     props.navigation.navigate('EditProfile')
   }
@@ -28,12 +64,29 @@ const ProfileScreen = props => {
   return (
     <SafeAreaView>
       {/*<ScrollView>*/}
+      <Dialog.Container visible={visible}>
+        <Dialog.Title>
+          EDIT PROFILE PICTURE
+        </Dialog.Title>
+        <Dialog.Description>
+          Do you want to update the profile picture?
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={pickImage}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialog}/>
+      </Dialog.Container>
       <View style={styles.mainViewStyle}>
         <View style={styles.headerStyle}/>
-        <Image style={styles.avatarStyle}
-               source={{
-                 uri: appContext.userData.profileImagePath
-               }}/>
+        {
+          image && (
+            <Image style={styles.avatarStyle}
+                   onPress={showDialog}
+                   source={{
+                     uri: image
+                   }}/>
+          )
+        }
         <View style={styles.bodyStyle}>
           <View style={styles.bodyContentStyle}>
             <Text style={styles.titleStyle}>

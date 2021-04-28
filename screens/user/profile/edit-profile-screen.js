@@ -138,7 +138,6 @@ const EditProfileScreen = props => {
   //         max: 10
   //       }))
   //         return true
-  //
   //   return false
   // }
   //
@@ -148,7 +147,6 @@ const EditProfileScreen = props => {
   //     // noinspection JSUnresolvedFunction
   //     if (validator.isBefore(birthDate, Date.now()))
   //       return true
-  //
   //   return false
   // }
 
