@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
+import RNPickerSelect from 'react-native-picker-select'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
@@ -20,6 +21,14 @@ import {Util} from '../../../util/util'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import Logout from '../../../components/buttons/logout-button'
+
+let genderOptions = [{
+  label: 'Male',
+  value: 'male'
+}, {
+  label: 'Female',
+  value: 'female'
+}]
 
 // noinspection JSUnusedLocalSymbols
 const EditProfileScreen = props => {
@@ -218,11 +227,8 @@ const EditProfileScreen = props => {
             <Text style={styles.labelStyle}>
               Gender
             </Text>
-            <TextInput style={styles.textInputStyle}
-                       onChangeText={gender => onChangeGender(gender)}
-                       value={gender}
-                       placeholder='Enter Gender'
-                       placeholderTextColor={Colors.tertiaryColor}/>
+            <RNPickerSelect onValueChange={gender => onChangeGender(gender)}
+                            items={genderOptions}/>
             <Text style={styles.labelStyle}>
               Birthday
             </Text>
