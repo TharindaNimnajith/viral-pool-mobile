@@ -13,7 +13,6 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
-// import validator from 'validator'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
 import {storeObjectData} from '../../../helpers/local-storage-helpers'
@@ -101,7 +100,7 @@ const EditProfileScreen = props => {
   }
 
   const onChangeBirthDate = async birthDate => {
-    setBirthDateValid(await checkBirthDateValidity(birthDate))
+    // setBirthDateValid(await checkBirthDateValidity(birthDate))
     setError(false)
     setBirthDate(birthDate)
   }
@@ -113,32 +112,35 @@ const EditProfileScreen = props => {
   }
 
   const onChangePhoneNumber = async phoneNumber => {
-    setPhoneNumberValid(await checkPhoneNumberValidity(phoneNumber))
+    setPhoneNumberValid(phoneNumber.length === 10 && !isNaN(phoneNumber)
+      && !await isEmpty(phoneNumber.trim()))
     setError(false)
     setPhoneNumber(phoneNumber)
   }
 
-  const checkPhoneNumberValidity = async phoneNumber => {
-    // if (!await isEmpty(phoneNumber.trim()))
-    //   // noinspection JSUnresolvedFunction
-    //   if (validator.isNumeric(phoneNumber))
-    //     // noinspection JSUnresolvedFunction
-    //     if (validator.isLength(phoneNumber, {
-    //       min: 10,
-    //       max: 10
-    //     }))
-    //       return true
-    return false
-  }
-
-  const checkBirthDateValidity = async birthDate => {
-    // // noinspection JSUnresolvedFunction
-    // if (validator.isDate(birthDate))
-    //   // noinspection JSUnresolvedFunction
-    //   if (validator.isBefore(birthDate, Date.now()))
-    //     return true
-    return false
-  }
+  // const checkPhoneNumberValidity = async phoneNumber => {
+  //   if (!await isEmpty(phoneNumber.trim()))
+  //     // noinspection JSUnresolvedFunction
+  //     if (validator.isNumeric(phoneNumber))
+  //       // noinspection JSUnresolvedFunction
+  //       if (validator.isLength(phoneNumber, {
+  //         min: 10,
+  //         max: 10
+  //       }))
+  //         return true
+  //
+  //   return false
+  // }
+  //
+  // const checkBirthDateValidity = async birthDate => {
+  //   // noinspection JSUnresolvedFunction
+  //   if (validator.isDate(birthDate))
+  //     // noinspection JSUnresolvedFunction
+  //     if (validator.isBefore(birthDate, Date.now()))
+  //       return true
+  //
+  //   return false
+  // }
 
   function isDisabled() {
     return !firstNameValid || !lastNameValid || !birthDateValid || !addressValid || !phoneNumberValid

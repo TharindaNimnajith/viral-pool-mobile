@@ -27,7 +27,6 @@ const DashboardScreen = () => {
     })
   }, [])
 
-
   useEffect(() => {
     (async () => {
       if (Platform.OS !== 'web') {
@@ -45,9 +44,7 @@ const DashboardScreen = () => {
       aspect: [4, 3],
       quality: 1
     })
-
-    console.log(result)
-
+    // console.log(result)
     if (!result.cancelled)
       // noinspection JSUnresolvedVariable
       setImage(result.uri)
