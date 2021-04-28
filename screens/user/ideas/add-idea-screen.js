@@ -75,11 +75,12 @@ const AddIdeaScreen = ({navigation}) => {
     setVisible(false)
     setLoading(true)
     setError(false)
-    axios.post('', {
+    let data = {
       title: title,
       description: description,
       userId: appContext.userData.id
-    }).then(async response => {
+    }
+    axios.post('', {data}).then(async response => {
       if (response.status === 200) {
         // navigation.navigate({
         //   routeName: 'IdeaList'

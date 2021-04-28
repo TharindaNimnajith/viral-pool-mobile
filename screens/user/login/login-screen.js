@@ -67,14 +67,15 @@ const LoginScreen = ({navigation}) => {
   const login = async () => {
     setLoading(true)
     setUnauthorized(false)
-    axios.post('oauth/mobile-login', {
+    let data = {
       email: email,
       password: password,
       state: state,
       redirectUri: redirectUri,
       clientId: clientId,
       clientName: clientName
-    }).then(async response => {
+    }
+    axios.post('oauth/mobile-login', {data}).then(async response => {
       // noinspection JSUnresolvedVariable
       await storeStringData(Util.ACCESS_TOKEN, response.data.access_token)
       // noinspection JSUnresolvedVariable

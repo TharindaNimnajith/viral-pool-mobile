@@ -72,11 +72,12 @@ const EditIdeaScreen = props => {
     setVisible(false)
     setLoading(true)
     setError(false)
-    axios.put('', {
+    let data = {
       title: title,
       description: description,
       userId: idea.idea.userId
-    }).then(async response => {
+    }
+    axios.put('', {data}).then(async response => {
       if (response.status === 200) {
         // navigation.navigate({
         //   routeName: 'IdeaList'
