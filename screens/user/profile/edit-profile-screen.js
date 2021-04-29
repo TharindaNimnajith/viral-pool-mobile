@@ -62,9 +62,9 @@ const EditProfileScreen = props => {
 
   const [firstNameValid, setFirstNameValid] = useState(true)
   const [lastNameValid, setLastNameValid] = useState(true)
-  const [birthDateValid, setBirthDateValid] = useState(true)
   const [addressValid, setAddressValid] = useState(true)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
+  // const [birthDateValid, setBirthDateValid] = useState(true)
   // const [genderValid, setGenderValid] = useState(true)
 
   const [error, setError] = useState(false)
@@ -159,7 +159,7 @@ const EditProfileScreen = props => {
   // }
 
   function isDisabled() {
-    return !firstNameValid || !lastNameValid || !birthDateValid || !addressValid || !phoneNumberValid
+    return !firstNameValid || !lastNameValid || !addressValid || !phoneNumberValid
   }
 
   const editProfile = async () => {
@@ -178,7 +178,7 @@ const EditProfileScreen = props => {
       address: address,
       phoneNumber: phoneNumber
     }
-    axios.put('', {data}).then(async response => {
+    axios.put('', data).then(async response => {
       if (response.status === 200) {
         // navigation.navigate({
         //   routeName: 'Profile'
