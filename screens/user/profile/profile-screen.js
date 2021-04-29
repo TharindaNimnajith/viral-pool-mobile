@@ -1,6 +1,16 @@
 import React, {useContext, useEffect, useState} from 'react'
 // noinspection ES6UnusedImports
-import {Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {
+  Image,
+  Platform,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 // noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
@@ -47,6 +57,7 @@ const ProfileScreen = props => {
   }
 
   const pickImage = async () => {
+    setVisible(false)
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -79,18 +90,27 @@ const ProfileScreen = props => {
                        onPress={hideDialog}/>
       </Dialog.Container>
       <View style={styles.mainViewStyle}>
-        <View style={styles.headerStyle}
-              onPress={showDialog}/>
-        {
-          image && (
-            <Image style={styles.avatarStyle}
-                   source={{
-                     uri: image
-                   }}/>
-          )
-        }
+        <View style={styles.headerStyle}>
+          {
+            image && (
+              <Image style={styles.avatarStyle}
+                     source={{
+                       uri: image
+                     }}/>
+            )
+          }
+        </View>
         <View style={styles.bodyStyle}>
           <View style={styles.bodyContentStyle}>
+            <TouchableOpacity style={styles.editPhotoStyle}
+                              onPress={showDialog}>
+              {/*<Ionicons name='pencil-sharp'*/}
+              {/*          size={20}*/}
+              {/*          color={Colors.secondaryColor}/>*/}
+              <Text style={styles.buttonTextStyle}>
+                Edit Profile Picture
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.titleStyle}>
               {appContext.userData.firstName} {appContext.userData.lastName}
             </Text>
@@ -187,6 +207,13 @@ const styles = StyleSheet.create({
   buttonTextStyle: {
     color: Colors.secondaryColor,
     textTransform: 'uppercase'
+  },
+  editPhotoStyle: {
+    marginTop: 10,
+    flexDirection: 'row',
+    backgroundColor: Colors.primaryColor,
+    padding: 10,
+    borderRadius: 5
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
