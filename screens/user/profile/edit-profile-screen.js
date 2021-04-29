@@ -13,8 +13,12 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import RadioForm from 'react-native-simple-radio-button'
+// "react-native-dropdown-picker": "^4.0.9"
 // import DropDownPicker from 'react-native-dropdown-picker'
+// "react-native-picker-select": "^8.0.4"
+// "@react-native-picker/picker": "^1.15.0"
 // import RNPickerSelect from 'react-native-picker-select'
+// "react-native-date-picker": "^3.2.10"
 // import DatePicker from 'react-native-date-picker'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
