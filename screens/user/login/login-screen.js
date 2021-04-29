@@ -14,6 +14,7 @@ import axios from 'axios'
 import validator from 'validator'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
+import {LoginDetails} from '../../../data/login-data/login-data'
 import {Util} from '../../../util/util'
 import {AppContext} from '../../../global/app-context'
 import {storeObjectData, storeStringData} from '../../../helpers/local-storage-helpers'
@@ -23,25 +24,28 @@ const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
 
   // For development
-  // const [email, setEmail] = useState('akalanka@cube360global.com')
-  // const [password, setPassword] = useState('#Compaq123')
+
+  // const [email, setEmail] = useState(LoginDetails[0].email)
+  // const [password, setPassword] = useState(LoginDetails[0].password)
+
+  const [email, setEmail] = useState(LoginDetails[1].email)
+  const [password, setPassword] = useState(LoginDetails[1].password)
+
+  const [emailValid, setEmailValid] = useState(true)
+  const [passwordValid, setPasswordValid] = useState(true)
 
   // For production
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+
+  // const [emailValid, setEmailValid] = useState(false)
+  // const [passwordValid, setPasswordValid] = useState(false)
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')
   const [clientId] = useState('string')
   const [clientName] = useState('string')
-
-  // For development
-  // const [emailValid, setEmailValid] = useState(true)
-  // const [passwordValid, setPasswordValid] = useState(true)
-
-  // For production
-  const [emailValid, setEmailValid] = useState(false)
-  const [passwordValid, setPasswordValid] = useState(false)
 
   const [unauthorized, setUnauthorized] = useState(false)
 
