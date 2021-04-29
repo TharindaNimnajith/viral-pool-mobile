@@ -1,6 +1,8 @@
 import React, {useContext, useState} from 'react'
 import {
   ActivityIndicator,
+  Animated,
+  Dimensions,
   Image,
   SafeAreaView,
   ScrollView,
@@ -15,11 +17,13 @@ import axios from 'axios'
 import validator from 'validator'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
-// import {LoginDetails} from '../../../data/login-data/login-data'
+import {LoginDetails} from '../../../data/login-data/login-data'
 import {Util} from '../../../util/util'
 import {AppContext} from '../../../global/app-context'
 import {storeObjectData, storeStringData} from '../../../helpers/local-storage-helpers'
 import {isEmpty} from '../../../helpers/common-helpers'
+
+const {width} = Dimensions.get('window')
 
 const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
@@ -29,19 +33,19 @@ const LoginScreen = ({navigation}) => {
   // const [email, setEmail] = useState(LoginDetails[0].email)
   // const [password, setPassword] = useState(LoginDetails[0].password)
 
-  // const [email, setEmail] = useState(LoginDetails[1].email)
-  // const [password, setPassword] = useState(LoginDetails[1].password)
+  const [email, setEmail] = useState(LoginDetails[1].email)
+  const [password, setPassword] = useState(LoginDetails[1].password)
 
-  // const [emailValid, setEmailValid] = useState(true)
-  // const [passwordValid, setPasswordValid] = useState(true)
+  const [emailValid, setEmailValid] = useState(true)
+  const [passwordValid, setPasswordValid] = useState(true)
 
   // For production
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const [emailValid, setEmailValid] = useState(false)
-  const [passwordValid, setPasswordValid] = useState(false)
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+  //
+  // const [emailValid, setEmailValid] = useState(false)
+  // const [passwordValid, setPasswordValid] = useState(false)
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')
@@ -51,6 +55,44 @@ const LoginScreen = ({navigation}) => {
   const [unauthorized, setUnauthorized] = useState(false)
 
   const [loading, setLoading] = useState(false)
+
+  const [active, setActive] = useState(1)
+  const [xTabOne, setXTabOne] = useState(0)
+  const [xTabTwo, setXTabTwo] = useState(0)
+  const [translateX, setTranslateX] = useState(new Animated.Value(0))
+  const [translateXTabOne, setTranslateXTabOne] = useState(new Animated.Value(0))
+  const [translateXTabTwo, setTranslateXTabTwo] = useState(new Animated.Value(width))
+  const [translateY, setTranslateY] = useState(-1000)
+
+  const handleSlide = type => {
+    Animated.spring(translateX, {
+      toValue: type,
+      duration: 100
+    }).start()
+    if (active === 0) {
+      // noinspection JSCheckFunctionSignatures, CommaExpressionJS
+      Animated.parallel([(
+        Animated.spring(translateXTabOne, {
+          toValue: 0,
+          duration: 100
+        }).start(),
+          Animated.spring(translateXTabTwo, {
+            toValue: width,
+            duration: 100
+          }).start())])
+    } else {
+      // noinspection JSCheckFunctionSignatures, CommaExpressionJS
+      Animated.parallel([(
+        Animated.spring(translateXTabOne, {
+          toValue: -width,
+          duration: 100
+        }).start(),
+          Animated.spring(translateXTabTwo, {
+            toValue: 0,
+            duration: 100
+          }).start())])
+    }
+  }
 
   const onChangeEmail = async email => {
     // noinspection JSUnresolvedFunction
@@ -135,6 +177,67 @@ const LoginScreen = ({navigation}) => {
               <Text style={styles.textStyle}>
                 Manage Your Team, Clients, Content Creators | Create Strategies, Discuss, Execute | Statistics
               </Text>
+            </View>
+            <View style={{
+              flexDirection: 'row',
+              marginTop: 40,
+              marginBottom: 20,
+              height: 36,
+              position: 'relative',
+            }}>
+              <Animated.View style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                top: 0,
+                left: 0,
+                borderRadius: 4,
+                transform: [{
+                  translateX,
+                },]
+              }}/>
+              <TouchableOpacity style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderBottomWidth: active === 0 ? 3 : 0,
+                borderColor: active === 0 ? '#f07800' : null,
+              }}
+                                onLayout={event => setXTabOne(event.nativeEvent.layout.x)}
+                                onPress={() => {
+                                  setActive(0)
+                                  handleSlide(xTabOne)
+                                }}>
+                <Text style={{
+                  color: active === 0 ? '#f07800' : 'black',
+                  fontWeight: active === 0 ? 'bold' : 'normal',
+                  fontSize: 23,
+                  paddingBottom: 10,
+                }}>
+                  Signup
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderBottomWidth: active === 1 ? 3 : 0,
+                borderColor: active === 1 ? '#f07800' : null,
+              }}
+                                onLayout={event => setXTabTwo(event.nativeEvent.layout.x)}
+                                onPress={() => {
+                                  setActive(1)
+                                  handleSlide(xTabTwo)
+                                }}>
+                <Text style={{
+                  color: active === 1 ? '#f07800' : 'black',
+                  fontWeight: active === 1 ? 'bold' : 'normal',
+                  fontSize: 23,
+                  paddingBottom: 10,
+                }}>
+                  Login
+                </Text>
+              </TouchableOpacity>
             </View>
             <Text style={styles.labelStyle}>
               Email
