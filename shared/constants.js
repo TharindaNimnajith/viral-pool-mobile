@@ -6,9 +6,9 @@ export default {
   WARNING_2: 'componentWillReceiveProps has been renamed, and is not recommended for use. See' +
     ' https://fb.me/react-unsafe-component-lifecycles for details.\n',
 
-  WARNING_3: ' DatePickerAndroid has been merged with DatePickerIOS and will be removed in a future release. It can' +
-    ' now be installed and imported from \'@react-native-community/datetimepicker\' instead of \'react-native\'.' +
-    ' See https://github.com/react-native-community/datetimepicker\n',
+  WARNING_3: 'DatePickerAndroid has been merged with DatePickerIOS and will be removed in a future release.' +
+    ' It can now be installed and imported from \'@react-native-community/datetimepicker\' instead' +
+    ' of \'react-native\'. See https://github.com/react-native-community/datetimepicker',
 
   LOGIN_ERROR: 'Invalid email or password. Please try again!',
 

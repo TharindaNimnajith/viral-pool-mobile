@@ -65,13 +65,11 @@ async function registerForPushNotificationsAsync() {
 }
 
 const App = () => {
-  const warnings = [
+  LogBox.ignoreLogs([
     Constants.WARNING_1,
     Constants.WARNING_2,
     Constants.WARNING_3
-  ]
-
-  LogBox.ignoreLogs(warnings)
+  ])
 
   const appContext = useContext(AppContext)
 
