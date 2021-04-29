@@ -18,6 +18,7 @@ import RadioForm from 'react-native-simple-radio-button'
 // "react-native-picker-select": "^8.0.4"
 // "@react-native-picker/picker": "^1.15.0"
 // import RNPickerSelect from 'react-native-picker-select'
+import DatePicker from 'react-native-datepicker'
 // "react-native-date-picker": "^3.2.10"
 // import DatePicker from 'react-native-date-picker'
 import axios from 'axios'
@@ -256,6 +257,26 @@ const EditProfileScreen = props => {
             <Text style={styles.labelStyle}>
               Birthday
             </Text>
+            <DatePicker style={styles.datePickerStyle}
+                        date={birthDate}
+                        mode='date'
+                        placeholder='Enter Birthday'
+                        format='YYYY-MM-DD'
+                        maxDate={new Date()}
+                        confirmBtnText='Confirm'
+                        cancelBtnText='Cancel'
+                        customStyles={{
+                          dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 4,
+                            marginLeft: 0
+                          },
+                          dateInput: {
+                            marginLeft: 36
+                          }
+                        }}
+                        onDateChange={birthDate => onChangeBirthDate(birthDate)}/>
             {/*<DatePicker style={styles.datePickerStyle}*/}
             {/*            date={}*/}
             {/*            onDateChange={onChangeBirthDate()}/>*/}
@@ -335,16 +356,11 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 1
   },
-  // datePickerStyle: {
-  //   borderColor: Colors.primaryColor,
-  //   width: wp('80%'),
-  //   borderWidth: 1,
-  //   borderRadius: 5,
-  //   height: 40,
-  //   marginTop: 10,
-  //   padding: 10,
-  //   color: Colors.tertiaryColor
-  // },
+  datePickerStyle: {
+    borderColor: Colors.secondaryColor,
+    width: wp('80%'),
+    marginTop: 10
+  },
   // dropdownContainerStyle: {
   //   width: wp('80%'),
   //   height: 40,
