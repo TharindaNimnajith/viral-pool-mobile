@@ -30,6 +30,7 @@ import Constants from "../../../shared/constants";
 const ProfileScreen = props => {
   const appContext = useContext(AppContext)
 
+  // noinspection JSUnresolvedVariable
   const [image, setImage] = useState(appContext.userData.profileImagePath)
 
   const [error, setError] = useState(false)
@@ -41,8 +42,8 @@ const ProfileScreen = props => {
   // const [userData, setUserData] = useState(null)
   //
   // useEffect(() => {
-  //   getObjectData(Util.USER_DATA).then(value => {
-  //     setUserData(value)
+  //   getObjectData(Util.USER_DATA).then(userData => {
+  //     setUserData(userData)
   //   })
   // }, [])
 
@@ -77,6 +78,8 @@ const ProfileScreen = props => {
   }
 
   const pickImage = async () => {
+    // noinspection JSUnresolvedVariable
+    console.log(appContext.userData.profileImagePath)
     setVisible(false)
     setError(false)
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -90,22 +93,40 @@ const ProfileScreen = props => {
       // setLoading(true)
       // noinspection JSUnresolvedVariable
       setImage(result.uri)
-      let data = {
-        id: appContext.userData.id,
-        email: appContext.userData.email,
-        userRole: appContext.userData.userRole,
-        profileImagePath: image,
-        firstName: appContext.userData.firstName,
-        lastName: appContext.userData.lastName,
-        gender: appContext.userData.gender,
-        birthDate: appContext.userData.birthDate,
-        address: appContext.userData.address,
-        phoneNumber: appContext.userData.phoneNumber
-      }
-      axios.put('', data).then(async response => {
+      const formData = new FormData()
+      formData.append('id', appContext.userData.id)
+      formData.append('email', appContext.userData.email)
+      // noinspection JSUnresolvedVariable
+      formData.append('userRole', appContext.userData.userRole)
+      formData.append('profileImagePath', image)
+      // noinspection JSUnresolvedVariable
+      formData.append('firstName', appContext.userData.firstName)
+      // noinspection JSUnresolvedVariable
+      formData.append('lastName', appContext.userData.lastName)
+      // noinspection JSUnresolvedVariable
+      formData.append('gender', appContext.userData.gender)
+      // noinspection JSUnresolvedVariable
+      formData.append('birthDate', appContext.userData.birthDate)
+      formData.append('address', appContext.userData.address)
+      // noinspection JSUnresolvedVariable
+      formData.append('phoneNumber', appContext.userData.phoneNumber)
+      // let data = {
+      //   id: appContext.userData.id,
+      //   email: appContext.userData.email,
+      //   userRole: appContext.userData.userRole,
+      //   profileImagePath: image,
+      //   firstName: appContext.userData.firstName,
+      //   lastName: appContext.userData.lastName,
+      //   gender: appContext.userData.gender,
+      //   birthDate: appContext.userData.birthDate,
+      //   address: appContext.userData.address,
+      //   phoneNumber: appContext.userData.phoneNumber
+      // }
+      axios.put('User', formData).then(async response => {
         if (response.status === 200) {
-          await appContext.SetUserData(data)
-          await storeObjectData(Util.USER_DATA, data)
+          console.log(response.data.data)
+          await appContext.SetUserData(response.data.data)
+          await storeObjectData(Util.USER_DATA, response.data.data)
           // setLoading(false)
           await showSuccessAlert()
         } else {

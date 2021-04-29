@@ -46,19 +46,14 @@ const EditProfileScreen = props => {
 
   // noinspection JSUnresolvedVariable
   const [firstName, setFirstName] = useState(appContext.userData.firstName)
-
   // noinspection JSUnresolvedVariable
   const [lastName, setLastName] = useState(appContext.userData.lastName)
-
   // noinspection JSUnresolvedVariable
   const [gender, setGender] = useState(appContext.userData.gender.toUpperCase() === 'MALE' ? 1
     : appContext.userData.gender.toUpperCase() === 'FEMALE' ? 0 : null)
-
   // noinspection JSUnresolvedVariable
   const [birthDate, setBirthDate] = useState(appContext.userData.birthDate)
-
   const [address, setAddress] = useState(appContext.userData.address)
-
   // noinspection JSUnresolvedVariable
   const [phoneNumber, setPhoneNumber] = useState(appContext.userData.phoneNumber)
 
@@ -78,8 +73,8 @@ const EditProfileScreen = props => {
   // const [userData, setUserData] = useState(null)
   //
   // useEffect(() => {
-  //   getObjectData(Util.USER_DATA).then(value => {
-  //     setUserData(value)
+  //   getObjectData(Util.USER_DATA).then(userData => {
+  //     setUserData(userData)
   //   })
   // }, [])
 
@@ -185,25 +180,39 @@ const EditProfileScreen = props => {
     setLoading(false)
     setLoading(true)
     setError(false)
-    let data = {
-      id: appContext.userData.id,
-      email: appContext.userData.email,
-      userRole: appContext.userData.userRole,
-      profileImagePath: appContext.userData.profileImagePath,
-      firstName: firstName,
-      lastName: lastName,
-      gender: gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender,
-      birthDate: birthDate,
-      address: address,
-      phoneNumber: phoneNumber
-    }
-    axios.put('', data).then(async response => {
+    const formData = new FormData()
+    formData.append('id', appContext.userData.id)
+    formData.append('email', appContext.userData.email)
+    // noinspection JSUnresolvedVariable
+    formData.append('userRole', appContext.userData.userRole)
+    // noinspection JSUnresolvedVariable
+    formData.append('profileImagePath', appContext.userData.profileImagePath)
+    formData.append('firstName', firstName)
+    formData.append('lastName', lastName)
+    // noinspection JSUnresolvedVariable
+    formData.append('gender', gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender)
+    formData.append('birthDate', birthDate)
+    formData.append('address', address)
+    formData.append('phoneNumber', phoneNumber)
+    // let data = {
+    //   id: appContext.userData.id,
+    //   email: appContext.userData.email,
+    //   userRole: appContext.userData.userRole,
+    //   profileImagePath: appContext.userData.profileImagePath,
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   gender: gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender,
+    //   birthDate: birthDate,
+    //   address: address,
+    //   phoneNumber: phoneNumber
+    // }
+    axios.put('User', formData).then(async response => {
       if (response.status === 200) {
         // navigation.navigate({
         //   routeName: 'Profile'
         // })
-        await appContext.SetUserData(data)
-        await storeObjectData(Util.USER_DATA, data)
+        await appContext.SetUserData(response.data.data)
+        await storeObjectData(Util.USER_DATA, response.data.data)
         setLoading(false)
         await showSuccessAlert()
       } else {

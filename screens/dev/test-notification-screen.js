@@ -14,8 +14,8 @@ const TestNotificationScreen = () => {
   const [expoPushToken, setExpoPushToken] = useState(null)
 
   useEffect(() => {
-    getStringData(Util.EXPO_PUSH_TOKEN).then(value => {
-      setExpoPushToken(value)
+    getStringData(Util.EXPO_PUSH_TOKEN).then(expoPushToken => {
+      setExpoPushToken(expoPushToken)
     })
   }, [])
 

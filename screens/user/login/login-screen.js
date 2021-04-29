@@ -65,7 +65,7 @@ const LoginScreen = ({navigation}) => {
   }
 
   function isDisabled() {
-    return !emailValid || !passwordValid
+    return !emailValid || !passwordValid || false
   }
 
   const login = async () => {
@@ -80,7 +80,12 @@ const LoginScreen = ({navigation}) => {
       clientId: clientId,
       clientName: clientName
     }
-    axios.post('oauth/mobile-login', data).then(async response => {
+    // const headers = {
+    //   'client_id': 'UFwv4s5sAHYyRS2q'
+    // }
+    axios.post('oauth/mobile-login', data, {
+      // headers: headers
+    }).then(async response => {
       // noinspection JSUnresolvedVariable
       await storeStringData(Util.ACCESS_TOKEN, response.data.access_token)
       // noinspection JSUnresolvedVariable

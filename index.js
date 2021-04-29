@@ -12,6 +12,8 @@ axios.defaults.baseURL = Util.BASE_URL
 axios.interceptors.request.use(async request => {
   const access_token = await getStringData(Util.ACCESS_TOKEN)
   request.headers['Authorization'] = `Bearer ${access_token}`
+  request.headers['client_id'] = 'UFwv4s5sAHYyRS2q'
+  // console.log(request)
   return request
 }, error => {
   console.log(error)

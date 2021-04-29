@@ -16,14 +16,14 @@ const TestDevScreen = () => {
   const [expoPushToken, setExpoPushToken] = useState(null)
 
   useEffect(() => {
-    getStringData(Util.ACCESS_TOKEN).then(value => {
-      setAccessToken(value)
+    getStringData(Util.ACCESS_TOKEN).then(accessToken => {
+      setAccessToken(accessToken)
     })
-    getStringData(Util.REFRESH_TOKEN).then(value => {
-      setRefreshToken(value)
+    getStringData(Util.REFRESH_TOKEN).then(refreshToken => {
+      setRefreshToken(refreshToken)
     })
-    getStringData(Util.EXPO_PUSH_TOKEN).then(value => {
-      setExpoPushToken(value)
+    getStringData(Util.EXPO_PUSH_TOKEN).then(expoPushToken => {
+      setExpoPushToken(expoPushToken)
     })
   }, [])
 
