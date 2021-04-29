@@ -19,7 +19,7 @@ const DashboardScreen = () => {
         token: value
       }
       // noinspection JSUnusedLocalSymbols
-      axios.post('content-creator-notification/expo-token', {data}).then(response => {
+      axios.post('content-creator-notification/expo-token', data).then(response => {
         console.log(response)
       }).catch(error => {
         console.log(error)

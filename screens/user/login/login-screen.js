@@ -23,12 +23,12 @@ const LoginScreen = ({navigation}) => {
   const appContext = useContext(AppContext)
 
   // For development
-  // const [email, setEmail] = useState('akalanka@cube360global.com')
-  // const [password, setPassword] = useState('#Compaq123')
+  const [email, setEmail] = useState('akalanka@cube360global.com')
+  const [password, setPassword] = useState('#Compaq123')
 
   // For production
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')
@@ -36,12 +36,12 @@ const LoginScreen = ({navigation}) => {
   const [clientName] = useState('string')
 
   // For development
-  // const [emailValid, setEmailValid] = useState(true)
-  // const [passwordValid, setPasswordValid] = useState(true)
+  const [emailValid, setEmailValid] = useState(true)
+  const [passwordValid, setPasswordValid] = useState(true)
 
   // For production
-  const [emailValid, setEmailValid] = useState(false)
-  const [passwordValid, setPasswordValid] = useState(false)
+  // const [emailValid, setEmailValid] = useState(false)
+  // const [passwordValid, setPasswordValid] = useState(false)
 
   const [unauthorized, setUnauthorized] = useState(false)
 
@@ -75,7 +75,7 @@ const LoginScreen = ({navigation}) => {
       clientId: clientId,
       clientName: clientName
     }
-    axios.post('oauth/mobile-login', {data}).then(async response => {
+    axios.post('oauth/mobile-login', data).then(async response => {
       // noinspection JSUnresolvedVariable
       await storeStringData(Util.ACCESS_TOKEN, response.data.access_token)
       // noinspection JSUnresolvedVariable

@@ -12,8 +12,10 @@ import {
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
-import RNPickerSelect from 'react-native-picker-select'
-import DatePicker from 'react-native-date-picker'
+import RadioForm from 'react-native-simple-radio-button'
+// import DropDownPicker from 'react-native-dropdown-picker'
+// import RNPickerSelect from 'react-native-picker-select'
+// import DatePicker from 'react-native-date-picker'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
@@ -23,12 +25,12 @@ import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import Logout from '../../../components/buttons/logout-button'
 
-let genderOptions = [{
-  label: 'Male',
-  value: 'male'
-}, {
+const genderOptions = [{
   label: 'Female',
-  value: 'female'
+  value: 0
+}, {
+  label: 'Male',
+  value: 1
 }]
 
 // noinspection JSUnusedLocalSymbols
@@ -42,7 +44,8 @@ const EditProfileScreen = props => {
   const [lastName, setLastName] = useState(appContext.userData.lastName)
 
   // noinspection JSUnresolvedVariable
-  const [gender, setGender] = useState(appContext.userData.gender)
+  const [gender, setGender] = useState(appContext.userData.gender.toUpperCase() === 'MALE' ? 1
+    : appContext.userData.gender.toUpperCase() === 'FEMALE' ? 0 : null)
 
   // noinspection JSUnresolvedVariable
   const [birthDate, setBirthDate] = useState(appContext.userData.birthDate)
@@ -165,7 +168,7 @@ const EditProfileScreen = props => {
       profileImagePath: appContext.userData.profileImagePath,
       firstName: firstName,
       lastName: lastName,
-      gender: gender,
+      gender: gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender,
       birthDate: birthDate,
       address: address,
       phoneNumber: phoneNumber
@@ -226,13 +229,32 @@ const EditProfileScreen = props => {
             <Text style={styles.labelStyle}>
               Gender
             </Text>
-            <RNPickerSelect onValueChange={gender => onChangeGender(gender)}
-                            items={genderOptions}/>
+            <RadioForm radio_props={genderOptions}
+                       initial={gender}
+                       formHorizontal={true}
+                       buttonColor={Colors.primaryColor}
+                       buttonSize={10}
+                       buttonOuterSize={20}
+                       borderWidth={0.5}
+                       labelStyle={styles.radioLabelStyle}
+                       style={styles.radioStyle}
+                       onPress={gender => onChangeGender(gender)}/>
+            {/*<DropDownPicker items={genderOptions}*/}
+            {/*                defaultValue={gender}*/}
+            {/*                containerStyle={styles.dropdownContainerStyle}*/}
+            {/*                style={styles.dropdownPickerStyle}*/}
+            {/*                itemStyle={styles.dropdownItemStyle}*/}
+            {/*                dropDownStyle={styles.dropdownStyle}*/}
+            {/*                labelStyle={styles.dropdownLabelStyle}*/}
+            {/*                onChangeItem={gender => onChangeGender(gender)}/>*/}
+            {/*<RNPickerSelect onValueChange={gender => onChangeGender(gender)}*/}
+            {/*                items={genderOptions}/>*/}
             <Text style={styles.labelStyle}>
               Birthday
             </Text>
-            <DatePicker date={birthDate}
-                        onDateChange={onChangeBirthDate()}/>
+            {/*<DatePicker style={styles.datePickerStyle}*/}
+            {/*            date={}*/}
+            {/*            onDateChange={onChangeBirthDate()}/>*/}
             <Text style={styles.labelStyle}>
               Address
             </Text>
@@ -309,6 +331,36 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 1
   },
+  // datePickerStyle: {
+  //   borderColor: Colors.primaryColor,
+  //   width: wp('80%'),
+  //   borderWidth: 1,
+  //   borderRadius: 5,
+  //   height: 40,
+  //   marginTop: 10,
+  //   padding: 10,
+  //   color: Colors.tertiaryColor
+  // },
+  // dropdownContainerStyle: {
+  //   width: wp('80%'),
+  //   height: 40,
+  //   marginTop: 10,
+  //   borderColor: Colors.secondaryColor,
+  //   borderWidth: 1,
+  //   borderRadius: 5
+  // },
+  // dropdownItemStyle: {
+  //   justifyContent: 'flex-start'
+  // },
+  // dropdownLabelStyle: {
+  //   color: Colors.tertiaryColor
+  // },
+  // dropdownPickerStyle: {
+  //   borderColor: Colors.primaryColor
+  // },
+  // dropdownStyle: {
+  //   borderColor: Colors.primaryColor
+  // },
   errorTextStyle: {
     color: Colors.errorColor
   },
@@ -343,6 +395,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     color: Colors.tertiaryColor
+  },
+  radioLabelStyle: {
+    color: Colors.primaryColor,
+    marginRight: wp('20%')
+  },
+  radioStyle: {
+    marginTop: 10,
+    width: wp('80%')
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
