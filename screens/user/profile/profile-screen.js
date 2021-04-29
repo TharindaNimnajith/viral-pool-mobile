@@ -114,7 +114,6 @@ const ProfileScreen = props => {
         }
       }).catch(async error => {
         // setLoading(false)
-        await showSuccessAlert()
         setError(true)
         console.log(error)
       })
