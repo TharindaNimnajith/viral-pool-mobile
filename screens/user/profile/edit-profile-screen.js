@@ -18,7 +18,9 @@ import RadioForm from 'react-native-simple-radio-button'
 // "react-native-picker-select": "^8.0.4"
 // "@react-native-picker/picker": "^1.15.0"
 // import RNPickerSelect from 'react-native-picker-select'
-import DatePicker from 'react-native-datepicker'
+// "react-native-datepicker": "^1.7.2",
+// import DatePicker from 'react-native-datepicker'
+import DateTimePicker from '@react-native-community/datetimepicker'
 // "react-native-date-picker": "^3.2.10"
 // import DatePicker from 'react-native-date-picker'
 import axios from 'axios'
@@ -257,26 +259,26 @@ const EditProfileScreen = props => {
             <Text style={styles.labelStyle}>
               Birthday
             </Text>
-            <DatePicker style={styles.datePickerStyle}
-                        date={birthDate}
-                        mode='date'
-                        placeholder='Enter Birthday'
-                        format='YYYY-MM-DD'
-                        maxDate={new Date()}
-                        confirmBtnText='Confirm'
-                        cancelBtnText='Cancel'
-                        customStyles={{
-                          dateIcon: {
-                            position: 'absolute',
-                            left: 0,
-                            top: 4,
-                            marginLeft: 0
-                          },
-                          dateInput: {
-                            marginLeft: 36
-                          }
-                        }}
-                        onDateChange={birthDate => onChangeBirthDate(birthDate)}/>
+            <DateTimePicker style={styles.datePickerStyle}
+                            date={birthDate}
+                            mode='date'
+                            placeholder='Enter Birthday'
+                            format='YYYY-MM-DD'
+                            maxDate={new Date()}
+                            confirmBtnText='Confirm'
+                            cancelBtnText='Cancel'
+                            customStyles={{
+                              dateIcon: {
+                                position: 'absolute',
+                                left: 0,
+                                top: 4,
+                                marginLeft: 0
+                              },
+                              dateInput: {
+                                marginLeft: 36
+                              }
+                            }}
+                            onDateChange={birthDate => onChangeBirthDate(birthDate)}/>
             {/*<DatePicker style={styles.datePickerStyle}*/}
             {/*            date={}*/}
             {/*            onDateChange={onChangeBirthDate()}/>*/}
