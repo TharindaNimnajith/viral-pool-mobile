@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import {
   ActivityIndicator,
+  Image,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -128,6 +129,13 @@ const LoginScreen = ({navigation}) => {
       <ScrollView>
         <View style={styles.mainViewStyle}>
           <View style={styles.containerStyle}>
+            <View style={styles.headerStyle}>
+              <Image style={styles.imageStyle}
+                     source={require('../../../assets/logo.png')}/>
+              <Text style={styles.textStyle}>
+                Manage Your Team, Clients, Content Creators | Create Strategies, Discuss, Execute | Statistics
+              </Text>
+            </View>
             <Text style={styles.labelStyle}>
               Email
             </Text>
@@ -188,7 +196,7 @@ const styles = StyleSheet.create({
   },
   buttonDisabledStyle: {
     marginTop: 30,
-    backgroundColor: Colors.disabledColor,
+    backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),
@@ -205,6 +213,13 @@ const styles = StyleSheet.create({
   },
   errorTextStyle: {
     color: Colors.errorColor
+  },
+  imageStyle: {
+    marginBottom: wp('6%')
+  },
+  headerStyle: {
+    marginBottom: wp('6%'),
+    alignItems: 'center'
   },
   labelStyle: {
     marginLeft: 40,
@@ -236,6 +251,12 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     color: Colors.tertiaryColor
+  },
+  textStyle: {
+    width: wp('70%'),
+    color: Colors.tertiaryColor,
+    textAlign: 'center',
+    lineHeight: 20
   },
   viewStyle: {
     marginTop: 40

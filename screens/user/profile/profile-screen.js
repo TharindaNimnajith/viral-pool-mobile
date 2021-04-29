@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 16,
-    color: Colors.disabledColor,
+    color: Colors.tertiaryColor,
     textAlign: 'center',
     marginLeft: 10
   },

@@ -1,8 +1,7 @@
 export default {
-  primaryColor: '#2699fb',
+  primaryColor: '#204ECF',
   secondaryColor: '#ffffff',
-  tertiaryColor: '#bce0fd',
+  tertiaryColor: '#A1A1A1',
   errorColor: '#ff0000',
-  disabledColor: '#787878',
   blurEffectColor: 'rgba(0, 0, 0, 0.8)'
 }

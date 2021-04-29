@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   },
   buttonDisabledStyle: {
     marginTop: 30,
-    backgroundColor: Colors.disabledColor,
+    backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),
