@@ -68,7 +68,8 @@ const App = () => {
   LogBox.ignoreLogs([
     Constants.WARNING_1,
     Constants.WARNING_2,
-    Constants.WARNING_3
+    Constants.WARNING_3,
+    'Animated: `useNativeDriver`'
   ])
 
   const appContext = useContext(AppContext)

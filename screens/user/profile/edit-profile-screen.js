@@ -275,7 +275,15 @@ const EditProfileScreen = props => {
                             marginLeft: 0
                           },
                           dateInput: {
-                            marginLeft: 36
+                            marginLeft: 36,
+                            borderColor: Colors.primaryColor,
+                            borderRadius: 5
+                          },
+                          dateText: {
+                            color: Colors.tertiaryColor
+                          },
+                          placeholderText: {
+                            color: Colors.tertiaryColor
                           }
                         }}
                         onDateChange={birthDate => onChangeBirthDate(birthDate)}/>
@@ -367,7 +375,8 @@ const styles = StyleSheet.create({
   datePickerStyle: {
     borderColor: Colors.secondaryColor,
     width: wp('80%'),
-    marginTop: 10
+    marginTop: 10,
+    color: Colors.tertiaryColor
   },
   // dropdownContainerStyle: {
   //   width: wp('80%'),
