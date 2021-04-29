@@ -79,11 +79,11 @@ const ProfileScreen = props => {
                        onPress={hideDialog}/>
       </Dialog.Container>
       <View style={styles.mainViewStyle}>
-        <View style={styles.headerStyle}/>
+        <View style={styles.headerStyle}
+              onPress={showDialog}/>
         {
           image && (
             <Image style={styles.avatarStyle}
-                   onPress={showDialog}
                    source={{
                      uri: image
                    }}/>

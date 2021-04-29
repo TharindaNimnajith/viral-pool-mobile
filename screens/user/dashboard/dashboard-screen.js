@@ -21,7 +21,7 @@ const DashboardScreen = () => {
       // noinspection JSUnusedLocalSymbols
       axios.post('content-creator-notification/expo-token', data).then(response => {
         console.log(response)
-      }).catch(error => {
+      }).catch(async error => {
         console.log(error)
       })
     })

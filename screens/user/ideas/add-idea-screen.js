@@ -45,7 +45,7 @@ const AddIdeaScreen = ({navigation}) => {
     setVisible(false)
   }
 
-  const showAlert = () => {
+  const showSuccessAlert = () => {
     Alert.alert(
       'SUCCESS',
       'New idea submitted successfully!',
@@ -73,6 +73,7 @@ const AddIdeaScreen = ({navigation}) => {
 
   const addIdea = async () => {
     setVisible(false)
+    setLoading(false)
     setLoading(true)
     setError(false)
     let data = {
@@ -88,12 +89,12 @@ const AddIdeaScreen = ({navigation}) => {
         setTitle('')
         setDescription('')
         setLoading(false)
-        await showAlert()
+        await showSuccessAlert()
       } else {
         setLoading(false)
         setError(true)
       }
-    }).catch(error => {
+    }).catch(async error => {
       setLoading(false)
       setError(true)
       console.log(error)

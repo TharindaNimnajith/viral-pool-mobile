@@ -65,6 +65,7 @@ const LoginScreen = ({navigation}) => {
   }
 
   const login = async () => {
+    setLoading(false)
     setLoading(true)
     setUnauthorized(false)
     let data = {
@@ -97,7 +98,7 @@ const LoginScreen = ({navigation}) => {
             setLoading(false)
             setUnauthorized(true)
           }
-        }).catch(error => {
+        }).catch(async error => {
           setLoading(false)
           setUnauthorized(true)
           console.log(error)
@@ -106,7 +107,7 @@ const LoginScreen = ({navigation}) => {
         setLoading(false)
         setUnauthorized(true)
       }
-    }).catch(error => {
+    }).catch(async error => {
       setLoading(false)
       setUnauthorized(true)
       console.log(error)

@@ -42,7 +42,7 @@ const EditIdeaScreen = props => {
     setVisible(false)
   }
 
-  const showAlert = () => {
+  const showSuccessAlert = () => {
     Alert.alert(
       'SUCCESS',
       'Idea updated successfully!',
@@ -70,6 +70,7 @@ const EditIdeaScreen = props => {
 
   const editIdea = async () => {
     setVisible(false)
+    setLoading(false)
     setLoading(true)
     setError(false)
     let data = {
@@ -85,12 +86,12 @@ const EditIdeaScreen = props => {
         setTitle('')
         setDescription('')
         setLoading(false)
-        await showAlert()
+        await showSuccessAlert()
       } else {
         setLoading(false)
         setError(true)
       }
-    }).catch(error => {
+    }).catch(async error => {
       setLoading(false)
       setError(true)
       console.log(error)

@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Dialog from 'react-native-dialog'
+// import Dialog from 'react-native-dialog'
 import RadioForm from 'react-native-simple-radio-button'
 // "react-native-dropdown-picker": "^4.0.9"
 // import DropDownPicker from 'react-native-dropdown-picker'
@@ -73,7 +73,7 @@ const EditProfileScreen = props => {
 
   const [loading, setLoading] = useState(false)
 
-  const [visible, setVisible] = useState(false)
+  // const [visible, setVisible] = useState(true)
 
   // const [userData, setUserData] = useState(null)
   //
@@ -83,15 +83,31 @@ const EditProfileScreen = props => {
   //   })
   // }, [])
 
-  const showDialog = async () => {
-    setVisible(true)
+  // const showDialog = async () => {
+  //   setVisible(true)
+  // }
+  //
+  // const hideDialog = async () => {
+  //   setVisible(false)
+  // }
+
+  const showConfirmAlert = () => {
+    Alert.alert(
+      'EDIT PROFILE',
+      'Do you want to update the profile details?',
+      [{
+        text: 'Yes',
+        onPress: editProfile,
+      }, {
+        text: 'No'
+      }],
+      {
+        cancelable: false
+      }
+    )
   }
 
-  const hideDialog = async () => {
-    setVisible(false)
-  }
-
-  const showAlert = () => {
+  const showSuccessAlert = () => {
     Alert.alert(
       'SUCCESS',
       'Profile updated successfully!',
@@ -165,7 +181,8 @@ const EditProfileScreen = props => {
   }
 
   const editProfile = async () => {
-    setVisible(false)
+    // setVisible(false)
+    setLoading(false)
     setLoading(true)
     setError(false)
     let data = {
@@ -188,12 +205,12 @@ const EditProfileScreen = props => {
         await appContext.SetUserData(data)
         await storeObjectData(Util.USER_DATA, data)
         setLoading(false)
-        await showAlert()
+        await showSuccessAlert()
       } else {
         setLoading(false)
         setError(true)
       }
-    }).catch(error => {
+    }).catch(async error => {
       setLoading(false)
       setError(true)
       console.log(error)
@@ -203,18 +220,18 @@ const EditProfileScreen = props => {
   return (
     <SafeAreaView>
       <ScrollView>
-        <Dialog.Container visible={visible}>
-          <Dialog.Title>
-            EDIT PROFILE
-          </Dialog.Title>
-          <Dialog.Description>
-            Do you want to update the profile details?
-          </Dialog.Description>
-          <Dialog.Button label='Yes'
-                         onPress={editProfile}/>
-          <Dialog.Button label='No'
-                         onPress={hideDialog}/>
-        </Dialog.Container>
+        {/*<Dialog.Container visible={visible}>*/}
+        {/*  <Dialog.Title>*/}
+        {/*    EDIT PROFILE*/}
+        {/*  </Dialog.Title>*/}
+        {/*  <Dialog.Description>*/}
+        {/*    Do you want to update the profile details?*/}
+        {/*  </Dialog.Description>*/}
+        {/*  <Dialog.Button label='Yes'*/}
+        {/*                 onPress={editProfile}/>*/}
+        {/*  <Dialog.Button label='No'*/}
+        {/*                 onPress={hideDialog}/>*/}
+        {/*</Dialog.Container>*/}
         <View style={styles.mainViewStyle}>
           <View style={styles.containerStyle}>
             <Text style={styles.labelStyle}>
@@ -316,7 +333,7 @@ const EditProfileScreen = props => {
                        placeholderTextColor={Colors.tertiaryColor}/>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
-                              onPress={showDialog}>
+                              onPress={showConfirmAlert}>
               <Text style={styles.buttonTextStyle}>
                 Update
               </Text>
