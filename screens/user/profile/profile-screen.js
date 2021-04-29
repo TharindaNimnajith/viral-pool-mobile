@@ -1,6 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react'
 // noinspection ES6UnusedImports
 import {
+  ActivityIndicator,
+  Alert,
   Image,
   Platform,
   SafeAreaView,
@@ -20,11 +22,19 @@ import {AppContext} from '../../../global/app-context'
 import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
 import Colors from '../../../shared/colors'
+import axios from "axios";
+import {storeObjectData} from "../../../helpers/local-storage-helpers";
+import {Util} from "../../../util/util";
+import Constants from "../../../shared/constants";
 
 const ProfileScreen = props => {
   const appContext = useContext(AppContext)
 
   const [image, setImage] = useState(appContext.userData.profileImagePath)
+
+  const [error, setError] = useState(false)
+
+  // const [loading, setLoading] = useState(false)
 
   const [visible, setVisible] = useState(false)
 
@@ -56,17 +66,59 @@ const ProfileScreen = props => {
     setVisible(false)
   }
 
+  const showSuccessAlert = () => {
+    Alert.alert(
+      'SUCCESS',
+      'Profile picture updated successfully!',
+      [{
+        text: 'OK'
+      }]
+    )
+  }
+
   const pickImage = async () => {
     setVisible(false)
+    setError(false)
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1
     })
-    if (!result.cancelled)
+    if (!result.cancelled) {
+      // setLoading(false)
+      // setLoading(true)
       // noinspection JSUnresolvedVariable
       setImage(result.uri)
+      let data = {
+        id: appContext.userData.id,
+        email: appContext.userData.email,
+        userRole: appContext.userData.userRole,
+        profileImagePath: image,
+        firstName: appContext.userData.firstName,
+        lastName: appContext.userData.lastName,
+        gender: appContext.userData.gender,
+        birthDate: appContext.userData.birthDate,
+        address: appContext.userData.address,
+        phoneNumber: appContext.userData.phoneNumber
+      }
+      axios.put('', data).then(async response => {
+        if (response.status === 200) {
+          await appContext.SetUserData(data)
+          await storeObjectData(Util.USER_DATA, data)
+          // setLoading(false)
+          await showSuccessAlert()
+        } else {
+          // setLoading(false)
+          setError(true)
+        }
+      }).catch(async error => {
+        // setLoading(false)
+        await showSuccessAlert()
+        setError(true)
+        console.log(error)
+      })
+    }
   }
 
   const onEditButtonPress = async () => {
@@ -111,6 +163,15 @@ const ProfileScreen = props => {
                 Edit Profile Picture
               </Text>
             </TouchableOpacity>
+            {
+              error ? (
+                <View style={styles.viewStyle}>
+                  <Text style={styles.errorTextStyle}>
+                    {Constants.ERROR}
+                  </Text>
+                </View>
+              ) : null
+            }
             <Text style={styles.titleStyle}>
               {appContext.userData.firstName} {appContext.userData.lastName}
             </Text>
@@ -172,6 +233,14 @@ const ProfileScreen = props => {
             </TouchableOpacity>
           </View>
         </View>
+        {/*{*/}
+        {/*  loading && (*/}
+        {/*    <View style={styles.loadingStyle}>*/}
+        {/*      <ActivityIndicator size='large'*/}
+        {/*                         color={Colors.primaryColor}/>*/}
+        {/*    </View>*/}
+        {/*  )*/}
+        {/*}*/}
       </View>
       {/*</ScrollView>*/}
     </SafeAreaView>
@@ -210,10 +279,13 @@ const styles = StyleSheet.create({
   },
   editPhotoStyle: {
     marginTop: 10,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     backgroundColor: Colors.primaryColor,
     padding: 10,
     borderRadius: 5
+  },
+  errorTextStyle: {
+    color: Colors.errorColor
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
@@ -240,7 +312,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: Colors.primaryColor,
     fontWeight: '600',
-    marginTop: 30,
+    marginTop: 20,
     marginBottom: 10
   },
   viewStyle: {
