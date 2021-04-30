@@ -283,8 +283,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   bodyStyle: {
-    marginTop: wp('25%'),
-    flex: 1
+    marginTop: wp('25%')
   },
   buttonStyle: {
     marginTop: 30,

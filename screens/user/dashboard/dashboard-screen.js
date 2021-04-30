@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react'
 // noinspection ES6UnusedImports
-import {Image, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
+import {Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
@@ -43,6 +43,46 @@ const DashboardScreen = () => {
           </View>
         </View>
         <View style={styles.bodyStyle}>
+          <View style={styles.smallCardsViewStyle}>
+            <TouchableOpacity style={styles.cardStyle}>
+              <Text>
+                3
+              </Text>
+              <Text>
+                Test
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.cardStyle}>
+              <Text>
+                3
+              </Text>
+              <Text>
+                Test
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.cardStyle}>
+              <Text>
+                3
+              </Text>
+              <Text>
+                Test
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.largeCardViewStyle}>
+            <TouchableOpacity>
+              <Text>
+                3
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.socialAccountViewStyle}>
+            <TouchableOpacity>
+              <Text>
+                3
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       {/*</ScrollView>*/}
@@ -62,9 +102,14 @@ const styles = StyleSheet.create({
     marginLeft: wp('10%')
   },
   bodyStyle: {
-    marginTop: wp('5%'),
-    flex: 1,
-    backgroundColor: Colors.tertiaryColor
+    marginTop: wp('5%')
+  },
+  cardStyle: {
+    width: wp('28%'),
+    height: wp('28%'),
+    borderRadius: wp('10%'),
+    margin:  wp('1%'),
+    backgroundColor: Colors.fadedEffectColor
   },
   mainViewStyle: {
     width: wp('100%'),
@@ -76,6 +121,17 @@ const styles = StyleSheet.create({
     height: wp('43%'),
     borderBottomRightRadius: wp('20%'),
     borderBottomLeftRadius: wp('10%')
+  },
+  largeCardViewStyle: {
+
+  },
+  smallCardsViewStyle: {
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'center'
+  },
+  socialAccountViewStyle: {
+
   },
   titleStyle: {
     fontSize: 22,
