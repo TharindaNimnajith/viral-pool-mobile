@@ -332,7 +332,7 @@ const EditProfileScreen = props => {
                        placeholder='Enter Address'
                        placeholderTextColor={Colors.tertiaryColor}
                        multiline={true}
-                       numberOfLines={5}/>
+                       numberOfLines={9}/>
             <Text style={styles.labelStyle}>
               Phone Number
             </Text>
@@ -394,7 +394,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   containerStyle: {
-    marginTop: hp('5%'),
+    marginTop: hp('2%'),
     alignItems: 'center',
     justifyContent: 'flex-start',
     flex: 1
@@ -453,7 +453,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     borderColor: Colors.primaryColor,
     width: wp('80%'),
-    height: hp('30%'),
+    height: hp('20%'),
     borderWidth: 1,
     borderRadius: 5,
     marginTop: 10,
