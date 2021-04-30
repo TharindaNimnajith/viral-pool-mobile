@@ -185,20 +185,20 @@ const DashboardScreen = props => {
 const styles = StyleSheet.create({
   avatarStyle: {
     width: wp('30%'),
-    height: hp('30%'),
+    height: wp('30%'),
     borderRadius: wp('15%'),
     borderWidth: 3,
     borderColor: Colors.secondaryColor,
     position: 'absolute',
-    marginTop: hp('4%'),
-    marginLeft: wp('10%')
+    marginTop: wp('5%'),
+    marginLeft: wp('8%')
   },
   bodyStyle: {
-    marginTop: hp('5%')
+    marginTop: hp('4%')
   },
   cardStyle: {
     width: wp('28%'),
-    height: hp('28%'),
+    height: wp('28%'),
     borderRadius: wp('10%'),
     margin: wp('1%'),
     backgroundColor: Colors.fadedEffectColor
@@ -221,8 +221,8 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: hp('40%'),
-    borderBottomRightRadius: wp('20%'),
+    height: wp('42%'),
+    borderBottomRightRadius: wp('25%'),
     borderBottomLeftRadius: wp('10%')
   },
   keyStyle: {
@@ -231,10 +231,10 @@ const styles = StyleSheet.create({
   },
   largeCardViewStyle: {
     width: wp('90%'),
-    height: hp('30%'),
+    height: hp('15%'),
     borderRadius: wp('10%'),
     backgroundColor: Colors.fadedEffectColor,
-    marginTop: hp('35%'),
+    marginTop: hp('18%'),
     alignSelf: 'center',
     justifyContent: 'center'
   },
@@ -255,16 +255,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center'
   },
-  socialAccountViewStyle: {
-    width: wp('90%'),
-    height: hp('30%'),
-    borderRadius: wp('10%'),
-    backgroundColor: Colors.fadedEffectColor,
-    marginTop: hp('5%'),
-    alignSelf: 'center'
-  },
   socialAccountsViewStyle: {
-    marginTop: hp('5%')
+    marginTop: hp('4%')
   },
   socialIconButtonStyle: {
     marginTop: 5,
@@ -301,8 +293,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: Colors.secondaryColor,
     // fontWeight: 'bold',
-    marginTop: hp('15%'),
-    marginLeft: wp('45%'),
+    marginTop: wp('15%'),
+    marginLeft: wp('44%'),
     marginRight: wp('5%')
   },
   valueStyle: {
