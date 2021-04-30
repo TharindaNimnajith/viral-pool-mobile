@@ -1,6 +1,15 @@
 import React, {useContext, useEffect} from 'react'
 // noinspection ES6UnusedImports
-import {Image, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {
+  Image,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
@@ -10,7 +19,7 @@ import CombinedButtons from '../../../components/buttons/combined-buttons'
 import {getStringData} from '../../../helpers/local-storage-helpers'
 import {Util} from '../../../util/util'
 
-const DashboardScreen = () => {
+const DashboardScreen = props => {
   // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
@@ -26,6 +35,10 @@ const DashboardScreen = () => {
     })
   }, [])
 
+  const onProfilePress = async () => {
+    props.navigation.navigate('Profile')
+  }
+
   // noinspection JSUnresolvedVariable
   return (
     <SafeAreaView>
@@ -33,11 +46,14 @@ const DashboardScreen = () => {
       <View style={styles.mainViewStyle}>
         <View style={styles.headerStyle}>
           <View style={styles.viewStyle}>
-            <Image style={styles.avatarStyle}
-                   source={{
-                     uri: appContext.userData.profileImagePath
-                   }}/>
-            <Text style={styles.titleStyle}>
+            <TouchableWithoutFeedback onPress={onProfilePress}>
+              <Image style={styles.avatarStyle}
+                     source={{
+                       uri: appContext.userData.profileImagePath
+                     }}/>
+            </TouchableWithoutFeedback>
+            <Text style={styles.titleStyle}
+                  onPress={onProfilePress}>
               {appContext.userData.firstName} {appContext.userData.lastName}
             </Text>
           </View>
