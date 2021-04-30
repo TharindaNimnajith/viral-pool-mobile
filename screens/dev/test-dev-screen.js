@@ -3,10 +3,10 @@ import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
-import Menu from '../../components/buttons/menu-button'
-import Logout from '../../components/buttons/logout-button'
 import {getStringData} from '../../helpers/local-storage-helpers'
 import {Util} from '../../util/util'
+import Menu from '../../components/buttons/menu-button'
+import CombinedButtons from '../../components/buttons/combined-buttons'
 
 const TestDevScreen = () => {
   // noinspection JSCheckFunctionSignatures
@@ -73,7 +73,7 @@ TestDevScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Test Dev',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

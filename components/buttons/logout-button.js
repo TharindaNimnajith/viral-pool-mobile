@@ -26,7 +26,7 @@ const Logout = props => {
           LOGOUT
         </Dialog.Title>
         <Dialog.Description>
-          Are you sure?
+          Are you sure you want to logout?
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        onPress={handleLogout}/>

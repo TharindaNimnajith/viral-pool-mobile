@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
 import {OngoingProjects} from '../../../data/project-data/ongoing-project-data'
 import Menu from '../../../components/buttons/menu-button'
-import Logout from '../../../components/buttons/logout-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 import ProjectListItem from '../../../components/list-items/project-list-item'
 
 const OngoingProjectListScreen = ({navigation}) => {
@@ -47,7 +47,7 @@ OngoingProjectListScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Ongoing Projects',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

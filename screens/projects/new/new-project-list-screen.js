@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
 import {NewProjects} from '../../../data/project-data/new-project-data'
 import Menu from '../../../components/buttons/menu-button'
-import Logout from '../../../components/buttons/logout-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 import ProjectListItem from '../../../components/list-items/project-list-item'
 
 const NewProjectListScreen = ({navigation}) => {
@@ -47,7 +47,7 @@ NewProjectListScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Job Pool',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

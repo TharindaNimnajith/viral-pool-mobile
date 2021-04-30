@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
 import {Ideas} from '../../../data/idea-data/idea-data'
 import Menu from '../../../components/buttons/menu-button'
-import Logout from '../../../components/buttons/logout-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 import IdeaListItem from '../../../components/list-items/idea-list-item'
 
 const IdeaListScreen = ({navigation}) => {
@@ -71,7 +71,7 @@ IdeaListScreen.navigationOptions = navData => {
   return {
     headerTitle: 'My Ideas',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

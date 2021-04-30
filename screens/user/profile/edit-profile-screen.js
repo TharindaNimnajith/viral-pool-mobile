@@ -30,7 +30,7 @@ import {storeObjectData} from '../../../helpers/local-storage-helpers'
 import {Util} from '../../../util/util'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
-import Logout from '../../../components/buttons/logout-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const genderOptions = [{
   label: 'Female',
@@ -486,7 +486,7 @@ const styles = StyleSheet.create({
 EditProfileScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Edit Profile',
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

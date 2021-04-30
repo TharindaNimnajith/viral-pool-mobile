@@ -18,7 +18,7 @@ import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
-import Logout from '../../../components/buttons/logout-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 // noinspection JSUnusedLocalSymbols
 const AddIdeaScreen = ({navigation}) => {
@@ -248,7 +248,7 @@ AddIdeaScreen.navigationOptions = navData => {
   return {
     headerTitle: 'New Idea',
     // headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

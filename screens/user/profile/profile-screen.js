@@ -18,14 +18,14 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import {Ionicons} from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
 import Dialog from 'react-native-dialog'
+import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
-import Menu from '../../../components/buttons/menu-button'
-import Logout from '../../../components/buttons/logout-button'
+import {storeObjectData} from '../../../helpers/local-storage-helpers'
+import {Util} from '../../../util/util'
 import Colors from '../../../shared/colors'
-import axios from "axios";
-import {storeObjectData} from "../../../helpers/local-storage-helpers";
-import {Util} from "../../../util/util";
-import Constants from "../../../shared/constants";
+import Constants from '../../../shared/constants'
+import Menu from '../../../components/buttons/menu-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const ProfileScreen = props => {
   // noinspection JSCheckFunctionSignatures
@@ -348,7 +348,7 @@ ProfileScreen.navigationOptions = navData => {
   return {
     headerTitle: 'My Profile',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

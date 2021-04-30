@@ -2,7 +2,7 @@ import React from 'react'
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
-import Logout from '../../../components/buttons/logout-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const NewProjectDetailsScreen = props => {
   let project = props.navigation.getParam('project')
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 NewProjectDetailsScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Project Details',
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

@@ -17,7 +17,7 @@ import axios from 'axios'
 import {isEmpty} from '../../../helpers/common-helpers'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
-import Logout from '../../../components/buttons/logout-button'
+import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const EditIdeaScreen = props => {
   let idea = props.navigation.getParam('idea')
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
 EditIdeaScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Edit Idea',
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 

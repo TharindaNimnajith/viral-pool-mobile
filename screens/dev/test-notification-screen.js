@@ -4,9 +4,9 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
 import {getStringData} from '../../helpers/local-storage-helpers'
-import Menu from '../../components/buttons/menu-button'
-import Logout from '../../components/buttons/logout-button'
 import {Util} from '../../util/util'
+import Menu from '../../components/buttons/menu-button'
+import CombinedButtons from '../../components/buttons/combined-buttons'
 
 const TestNotificationScreen = () => {
   // noinspection JSCheckFunctionSignatures
@@ -122,7 +122,7 @@ TestNotificationScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Test Notifications',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <Logout navigation={navData.navigation}/>
+    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 
