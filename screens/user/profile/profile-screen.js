@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
 
 ProfileScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'MY PROFILE',
+    headerTitle: 'My Profile',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }

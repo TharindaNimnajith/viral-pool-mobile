@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
 CompletedProjectDetailsScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'COMPLETED PROJECT DETAILS',
+    headerTitle: 'Project Details',
     headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }

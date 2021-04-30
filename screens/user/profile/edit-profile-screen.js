@@ -485,7 +485,7 @@ const styles = StyleSheet.create({
 
 EditProfileScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'EDIT PROFILE',
+    headerTitle: 'Edit Profile',
     headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }

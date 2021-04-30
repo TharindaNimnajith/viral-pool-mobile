@@ -120,7 +120,7 @@ async function sendPushNotification(expoPushToken) {
 
 TestNotificationScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'TEST NOTIFICATIONS',
+    headerTitle: 'Test Notifications',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
 NewProjectListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'NEW PROJECTS',
+    headerTitle: 'Job Pool',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }

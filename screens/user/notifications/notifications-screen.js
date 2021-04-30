@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
 NotificationsScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'NOTIFICATIONS',
+    headerTitle: 'Notifications',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }

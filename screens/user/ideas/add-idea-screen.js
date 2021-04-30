@@ -246,7 +246,7 @@ const styles = StyleSheet.create({
 
 AddIdeaScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'NEW IDEA',
+    headerTitle: 'New Idea',
     // headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }

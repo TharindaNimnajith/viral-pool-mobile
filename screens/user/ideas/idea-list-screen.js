@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
 
 IdeaListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'MY IDEAS',
+    headerTitle: 'My Ideas',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }

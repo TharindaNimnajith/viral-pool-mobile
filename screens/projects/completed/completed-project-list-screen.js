@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
 CompletedProjectListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'COMPLETED PROJECTS',
+    headerTitle: 'Completed Projects',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }

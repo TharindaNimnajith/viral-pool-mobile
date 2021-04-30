@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
 
 EditIdeaScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'EDIT IDEA',
+    headerTitle: 'Edit Idea',
     headerRight: () => <Logout navigation={navData.navigation}/>
   }
 }

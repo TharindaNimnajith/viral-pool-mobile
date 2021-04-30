@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
 
 TestDevScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'TEST DEV',
+    headerTitle: 'Test Dev',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <Logout navigation={navData.navigation}/>
   }
