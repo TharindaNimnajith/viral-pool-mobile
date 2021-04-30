@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   containerStyle: {
-    marginTop: wp('5%'),
+    marginTop: hp('5%'),
     alignItems: 'center',
     justifyContent: 'flex-start',
     flex: 1
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     borderColor: Colors.primaryColor,
     width: wp('80%'),
-    height: wp('60%'),
+    height: hp('60%'),
     borderWidth: 1,
     borderRadius: 5,
     marginTop: 10,

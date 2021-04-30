@@ -212,11 +212,11 @@ const styles = StyleSheet.create({
     color: Colors.errorColor
   },
   imageStyle: {
-    marginBottom: wp('6%')
+    marginBottom: hp('6%')
   },
   headerStyle: {
     alignItems: 'center',
-    marginBottom: wp('4%')
+    marginBottom: hp('4%')
   },
   labelStyle: {
     marginLeft: 40,
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     color: Colors.primaryColor,
     // fontWeight: 'bold',
-    marginTop: wp('10%'),
+    marginTop: hp('10%'),
     fontSize: 30
   },
   viewStyle: {

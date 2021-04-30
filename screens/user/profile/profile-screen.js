@@ -36,7 +36,7 @@ const ProfileScreen = props => {
 
   const [error, setError] = useState(false)
 
-  // const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const [visible, setVisible] = useState(false)
 
@@ -79,8 +79,6 @@ const ProfileScreen = props => {
   }
 
   const pickImage = async () => {
-    // noinspection JSUnresolvedVariable
-    // console.log(appContext.userData.profileImagePath)
     setVisible(false)
     setError(false)
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -90,16 +88,26 @@ const ProfileScreen = props => {
       quality: 1
     })
     if (!result.cancelled) {
-      // setLoading(false)
-      // setLoading(true)
+      setLoading(false)
+      setLoading(true)
       // noinspection JSUnresolvedVariable
-      setImage(result.uri)
+      let localUri = result.uri
+      setImage(localUri)
+      let filename = localUri.split('/').pop()
+      let match = /\.(\w+)$/.exec(filename)
+      let type = match ? `image/${match[1]}` : `image`
       const formData = new FormData()
       formData.append('id', appContext.userData.id)
       formData.append('email', appContext.userData.email)
       // noinspection JSUnresolvedVariable
       formData.append('userRole', appContext.userData.userRole)
-      formData.append('profileImagePath', image)
+      // noinspection JSUnresolvedVariable
+      // formData.append('profileImagePath', appContext.userData.profileImagePath)
+      // noinspection JSUnresolvedVariable
+      formData.append('formFile', {
+        uri: localUri,
+        name: filename, type
+      })
       // noinspection JSUnresolvedVariable
       formData.append('firstName', appContext.userData.firstName)
       // noinspection JSUnresolvedVariable
@@ -125,17 +133,18 @@ const ProfileScreen = props => {
       // }
       axios.put('User', formData).then(async response => {
         if (response.status === 200) {
-          // console.log(response.data.data)
+          console.log(formData)
+          console.log(response.data.data)
           await appContext.SetUserData(response.data.data)
           await storeObjectData(Util.USER_DATA, response.data.data)
-          // setLoading(false)
+          setLoading(false)
           await showSuccessAlert()
         } else {
-          // setLoading(false)
+          setLoading(false)
           setError(true)
         }
       }).catch(async error => {
-        // setLoading(false)
+        setLoading(false)
         setError(true)
         console.log(error)
       })
@@ -164,14 +173,10 @@ const ProfileScreen = props => {
       </Dialog.Container>
       <View style={styles.mainViewStyle}>
         <View style={styles.headerStyle}>
-          {
-            image && (
-              <Image style={styles.avatarStyle}
-                     source={{
-                       uri: image
-                     }}/>
-            )
-          }
+          <Image style={styles.avatarStyle}
+                 source={{
+                   uri: image
+                 }}/>
         </View>
         <View style={styles.bodyStyle}>
           <View style={styles.bodyContentStyle}>
@@ -254,14 +259,14 @@ const ProfileScreen = props => {
             </TouchableOpacity>
           </View>
         </View>
-        {/*{*/}
-        {/*  loading && (*/}
-        {/*    <View style={styles.loadingStyle}>*/}
-        {/*      <ActivityIndicator size='large'*/}
-        {/*                         color={Colors.primaryColor}/>*/}
-        {/*    </View>*/}
-        {/*  )*/}
-        {/*}*/}
+        {
+          loading && (
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.primaryColor}/>
+            </View>
+          )
+        }
       </View>
       {/*</ScrollView>*/}
     </SafeAreaView>
@@ -271,19 +276,19 @@ const ProfileScreen = props => {
 const styles = StyleSheet.create({
   avatarStyle: {
     width: wp('50%'),
-    height: wp('50%'),
+    height: hp('50%'),
     borderRadius: wp('25%'),
     borderWidth: 3,
     borderColor: Colors.secondaryColor,
     alignSelf: 'center',
     position: 'absolute',
-    marginTop: wp('25%'),
+    marginTop: hp('25%'),
   },
   bodyContentStyle: {
     alignItems: 'center'
   },
   bodyStyle: {
-    marginTop: wp('25%')
+    marginTop: hp('25%')
   },
   buttonStyle: {
     marginTop: 30,
@@ -309,7 +314,7 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: wp('50%')
+    height: hp('50%')
   },
   mainViewStyle: {
     width: wp('100%'),

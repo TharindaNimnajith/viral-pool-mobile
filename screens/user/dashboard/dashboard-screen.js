@@ -129,7 +129,7 @@ const DashboardScreen = props => {
             </View>
           </TouchableOpacity>
           <View style={styles.socialAccountsViewStyle}>
-            <TouchableOpacity>
+            <TouchableOpacity activeOpacity={1}>
               <SocialIcon title='Sign in with Facebook'
                           button
                           raised={false}
@@ -139,7 +139,7 @@ const DashboardScreen = props => {
                           style={styles.socialIconButtonStyle}
                           onPress={onSelectFacebook}/>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity activeOpacity={1}>
               <SocialIcon title='Sign in with Youtube'
                           button
                           raised={false}
@@ -149,7 +149,7 @@ const DashboardScreen = props => {
                           style={styles.socialIconButtonStyle}
                           onPress={onSelectYoutube}/>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity activeOpacity={1}>
               <SocialIcon title='Sign in with Instagram'
                           button
                           raised={false}
@@ -159,10 +159,11 @@ const DashboardScreen = props => {
                           style={styles.socialIconButtonStyle}
                           onPress={onSelectInstagram}/>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.tiktokViewStyle}>
+            <TouchableOpacity style={styles.tiktokViewStyle}
+                              activeOpacity={1}>
               <Image style={styles.tiktokIconStyle}
                      source={require('../../../assets/tiktok.png')}/>
-              <View style={styles.tiktok}>
+              <View style={styles.tiktokButtonStyle}>
                 <SocialIcon title='Sign in with Tiktok'
                             button
                             raised={false}
@@ -184,20 +185,20 @@ const DashboardScreen = props => {
 const styles = StyleSheet.create({
   avatarStyle: {
     width: wp('30%'),
-    height: wp('30%'),
+    height: hp('30%'),
     borderRadius: wp('15%'),
     borderWidth: 3,
     borderColor: Colors.secondaryColor,
     position: 'absolute',
-    marginTop: wp('4%'),
+    marginTop: hp('4%'),
     marginLeft: wp('10%')
   },
   bodyStyle: {
-    marginTop: wp('5%')
+    marginTop: hp('5%')
   },
   cardStyle: {
     width: wp('28%'),
-    height: wp('28%'),
+    height: hp('28%'),
     borderRadius: wp('10%'),
     margin: wp('1%'),
     backgroundColor: Colors.fadedEffectColor
@@ -220,7 +221,7 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: wp('40%'),
+    height: hp('40%'),
     borderBottomRightRadius: wp('20%'),
     borderBottomLeftRadius: wp('10%')
   },
@@ -230,10 +231,10 @@ const styles = StyleSheet.create({
   },
   largeCardViewStyle: {
     width: wp('90%'),
-    height: wp('30%'),
+    height: hp('30%'),
     borderRadius: wp('10%'),
     backgroundColor: Colors.fadedEffectColor,
-    marginTop: wp('35%'),
+    marginTop: hp('35%'),
     alignSelf: 'center',
     justifyContent: 'center'
   },
@@ -256,20 +257,21 @@ const styles = StyleSheet.create({
   },
   socialAccountViewStyle: {
     width: wp('90%'),
-    height: wp('30%'),
+    height: hp('30%'),
     borderRadius: wp('10%'),
     backgroundColor: Colors.fadedEffectColor,
-    marginTop: wp('5%'),
+    marginTop: hp('5%'),
     alignSelf: 'center'
   },
   socialAccountsViewStyle: {
-    marginTop: wp('5%')
+    marginTop: hp('5%')
   },
   socialIconButtonStyle: {
     marginTop: 5,
     marginBottom: 5,
     alignSelf: 'center',
     width: wp('85%'),
+    height: hp('6%'),
     borderRadius: 25
   },
   socialIconFontStyle: {
@@ -280,8 +282,16 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 17
   },
+  tiktokButtonStyle: {
+    justifyContent: 'center',
+    flex: 1
+  },
   tiktokIconStyle: {
-    position: 'absolute'
+    position: 'absolute',
+    zIndex: 1,
+    marginLeft: wp('25%'),
+    width: 32,
+    height: 32
   },
   tiktokViewStyle: {
     flexDirection: 'row',
@@ -291,7 +301,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: Colors.secondaryColor,
     // fontWeight: 'bold',
-    marginTop: wp('15%'),
+    marginTop: hp('15%'),
     marginLeft: wp('45%'),
     marginRight: wp('5%')
   },
