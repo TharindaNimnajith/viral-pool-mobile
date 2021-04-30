@@ -19,6 +19,7 @@ import {Ionicons} from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
+// import RNFetchBlob from 'react-native-fetch-blob'
 import {AppContext} from '../../../global/app-context'
 import {storeObjectData} from '../../../helpers/local-storage-helpers'
 import {Util} from '../../../util/util'
@@ -104,7 +105,7 @@ const ProfileScreen = props => {
       // noinspection JSUnresolvedVariable
       // formData.append('profileImagePath', appContext.userData.profileImagePath)
       // noinspection JSUnresolvedVariable
-      formData.append('FormFile', {
+      formData.append('formFile', {
         uri: localUri,
         name: filename, type
       })
@@ -133,8 +134,8 @@ const ProfileScreen = props => {
       // }
       axios.put('User', formData).then(async response => {
         if (response.status === 200) {
-          // console.log(formData)
-          // console.log(response.data.data)
+          console.log(formData)
+          console.log(response.data.data)
           await appContext.SetUserData(response.data.data)
           await storeObjectData(Util.USER_DATA, response.data.data)
           setLoading(false)
@@ -148,6 +149,58 @@ const ProfileScreen = props => {
         setError(true)
         console.log(error)
       })
+      // noinspection JSUnresolvedVariable
+      // RNFetchBlob.fetch('PUT', `${Util.BASE_URL}User`, {
+      //   Authorization: `Bearer ${appContext.accessToken}`,
+      //   client_id: 'UFwv4s5sAHYyRS2q',
+      //   'Content-Type': 'multipart/form-data',
+      // }, [{
+      //   name: 'formFile',
+      //   filename: filename,
+      //   type: type,
+      //   data: binaryDataInBase64
+      // }, {
+      //   name: 'id',
+      //   data: appContext.userData.id
+      // }, {
+      //   name: 'email',
+      //   data: appContext.userData.email
+      // }, {
+      //   name: 'userRole',
+      //   data: appContext.userData.userRole
+      // }, {
+      //   name: 'firstName',
+      //   data: appContext.userData.firstName
+      // }, {
+      //   name: 'lastName',
+      //   data: appContext.userData.lastName
+      // }, {
+      //   name: 'gender',
+      //   data: appContext.userData.gender
+      // },{
+      //   name: 'birthDate',
+      //   data: appContext.userData.birthDate
+      // }, {
+      //   name: 'address',
+      //   data: appContext.userData.address
+      // }, {
+      //   name: 'phoneNumber',
+      //   data: appContext.userData.phoneNumber
+      // }]).then(async response => {
+      //   if (response.status === 200) {
+      //     await appContext.SetUserData(response.data.data)
+      //     await storeObjectData(Util.USER_DATA, response.data.data)
+      //     setLoading(false)
+      //     await showSuccessAlert()
+      //   } else {
+      //     setLoading(false)
+      //     setError(true)
+      //   }
+      // }).catch(async error => {
+      //   setLoading(false)
+      //   setError(true)
+      //   console.log(error)
+      // })
     }
   }
 

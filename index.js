@@ -4,14 +4,15 @@ import {Util} from './util/util'
 import {getStringData} from './helpers/local-storage-helpers'
 import App from './App'
 
+const accessToken = getStringData(Util.ACCESS_TOKEN)
+
 axios.defaults.baseURL = Util.BASE_URL
 
 // axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN'
 // axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 axios.interceptors.request.use(async request => {
-  const access_token = await getStringData(Util.ACCESS_TOKEN)
-  request.headers['Authorization'] = `Bearer ${access_token}`
+  request.headers['Authorization'] = `Bearer ${accessToken}`
   request.headers['client_id'] = 'UFwv4s5sAHYyRS2q'
   // console.log(request)
   return request
