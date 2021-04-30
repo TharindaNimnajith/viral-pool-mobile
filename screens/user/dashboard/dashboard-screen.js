@@ -10,6 +10,7 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
+import {SocialIcon} from 'react-native-elements'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
@@ -37,6 +38,22 @@ const DashboardScreen = props => {
 
   const onProfilePress = async () => {
     props.navigation.navigate('Profile')
+  }
+
+  const onSelectFacebook = async () => {
+    //
+  }
+
+  const onSelectInstagram = async () => {
+    //
+  }
+
+  const onSelectYoutube = async () => {
+    //
+  }
+
+  const onSelectTiktok = async () => {
+    //
   }
 
   // noinspection JSUnresolvedVariable
@@ -111,8 +128,52 @@ const DashboardScreen = props => {
               </Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.socialAccountViewStyle}>
-          </TouchableOpacity>
+          <View style={styles.socialAccountsViewStyle}>
+            <TouchableOpacity>
+              <SocialIcon title='Sign in with Facebook'
+                          button
+                          raised={false}
+                          type='facebook'
+                          iconSize={25}
+                          fontStyle={styles.socialIconFontStyle}
+                          style={styles.socialIconButtonStyle}
+                          onPress={onSelectFacebook}/>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <SocialIcon title='Sign in with Youtube'
+                          button
+                          raised={false}
+                          type='youtube'
+                          iconSize={25}
+                          fontStyle={styles.socialIconFontStyle}
+                          style={styles.socialIconButtonStyle}
+                          onPress={onSelectYoutube}/>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <SocialIcon title='Sign in with Instagram'
+                          button
+                          raised={false}
+                          type='instagram'
+                          iconSize={25}
+                          fontStyle={styles.socialIconFontStyle}
+                          style={styles.socialIconButtonStyle}
+                          onPress={onSelectInstagram}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.tiktokViewStyle}>
+              <Image style={styles.tiktokIconStyle}
+                     source={require('../../../assets/tiktok.png')}/>
+              <View style={styles.tiktok}>
+                <SocialIcon title='Sign in with Tiktok'
+                            button
+                            raised={false}
+                            type='github'
+                            iconSize={0}
+                            fontStyle={styles.socialIconFontStyle}
+                            style={styles.socialIconButtonStyle}
+                            onPress={onSelectTiktok}/>
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
       {/*</ScrollView>*/}
@@ -201,10 +262,30 @@ const styles = StyleSheet.create({
     marginTop: wp('5%'),
     alignSelf: 'center'
   },
+  socialAccountsViewStyle: {
+    marginTop: wp('5%')
+  },
+  socialIconButtonStyle: {
+    marginTop: 5,
+    marginBottom: 5,
+    alignSelf: 'center',
+    width: wp('85%'),
+    borderRadius: 25
+  },
+  socialIconFontStyle: {
+    fontSize: 18
+  },
   statTitleStyle: {
     alignSelf: 'center',
     fontSize: 15,
     lineHeight: 17
+  },
+  tiktokIconStyle: {
+    position: 'absolute'
+  },
+  tiktokViewStyle: {
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   titleStyle: {
     fontSize: 22,
