@@ -69,10 +69,34 @@ const DashboardScreen = () => {
               </Text>
             </TouchableOpacity>
           </View>
-            <TouchableOpacity style={styles.largeCardViewStyle}>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.socialAccountViewStyle}>
-            </TouchableOpacity>
+          <TouchableOpacity style={styles.largeCardViewStyle}>
+            <View style={styles.cardViewStyle}>
+              <Text style={styles.keyStyle}>
+                Total Earnings
+              </Text>
+              <Text style={styles.valueStyle}>
+                145,000 LKR
+              </Text>
+            </View>
+            <View style={styles.cardViewStyle}>
+              <Text style={styles.keyStyle}>
+                Total Top-ups
+              </Text>
+              <Text style={styles.valueStyle}>
+                10,000 LKR
+              </Text>
+            </View>
+            <View style={styles.cardViewStyle}>
+              <Text style={styles.keyStyle}>
+                Total Viralpool Points
+              </Text>
+              <Text style={styles.valueStyle}>
+                50
+              </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.socialAccountViewStyle}>
+          </TouchableOpacity>
         </View>
       </View>
       {/*</ScrollView>*/}
@@ -88,7 +112,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: Colors.secondaryColor,
     position: 'absolute',
-    marginTop: wp('5%'),
+    marginTop: wp('4%'),
     marginLeft: wp('10%')
   },
   bodyStyle: {
@@ -100,6 +124,11 @@ const styles = StyleSheet.create({
     borderRadius: wp('10%'),
     margin: wp('1%'),
     backgroundColor: Colors.fadedEffectColor
+  },
+  cardViewStyle: {
+    flexDirection: 'row',
+    marginTop: 5,
+    marginBottom: 5
   },
   completedProjectStatStyle: {
     fontSize: 60,
@@ -114,17 +143,22 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: wp('43%'),
+    height: wp('40%'),
     borderBottomRightRadius: wp('20%'),
     borderBottomLeftRadius: wp('10%')
   },
+  keyStyle: {
+    left: wp('8%'),
+    fontSize: 17
+  },
   largeCardViewStyle: {
     width: wp('90%'),
-    height: wp('10%'),
+    height: wp('30%'),
     borderRadius: wp('10%'),
     backgroundColor: Colors.fadedEffectColor,
     marginTop: wp('35%'),
-    alignSelf: 'center'
+    alignSelf: 'center',
+    justifyContent: 'center'
   },
   ongoingProjectStatStyle: {
     fontSize: 60,
@@ -145,7 +179,7 @@ const styles = StyleSheet.create({
   },
   socialAccountViewStyle: {
     width: wp('90%'),
-    height: wp('10%'),
+    height: wp('30%'),
     borderRadius: wp('10%'),
     backgroundColor: Colors.fadedEffectColor,
     marginTop: wp('5%'),
@@ -160,9 +194,15 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: Colors.secondaryColor,
     // fontWeight: 'bold',
-    marginTop: wp('17%'),
+    marginTop: wp('15%'),
     marginLeft: wp('45%'),
     marginRight: wp('5%')
+  },
+  valueStyle: {
+    fontWeight: 'bold',
+    right: wp('8%'),
+    position: 'absolute',
+    fontSize: 17
   },
   viewStyle: {
     flexDirection: 'row'
