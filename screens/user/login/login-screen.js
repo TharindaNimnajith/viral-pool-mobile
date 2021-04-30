@@ -25,17 +25,17 @@ const LoginScreen = ({navigation}) => {
   // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
-  // const [email, setEmail] = useState(LoginDetails[1].email)
-  // const [password, setPassword] = useState(LoginDetails[1].password)
+  const [email, setEmail] = useState(LoginDetails[1].email)
+  const [password, setPassword] = useState(LoginDetails[1].password)
+
+  const [emailValid, setEmailValid] = useState(true)
+  const [passwordValid, setPasswordValid] = useState(true)
+
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
   //
-  // const [emailValid, setEmailValid] = useState(true)
-  // const [passwordValid, setPasswordValid] = useState(true)
-
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-
-  const [emailValid, setEmailValid] = useState(false)
-  const [passwordValid, setPasswordValid] = useState(false)
+  // const [emailValid, setEmailValid] = useState(false)
+  // const [passwordValid, setPasswordValid] = useState(false)
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')
@@ -258,7 +258,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     textTransform: 'uppercase',
     color: Colors.primaryColor,
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
     marginTop: wp('10%'),
     fontSize: 30
   },
