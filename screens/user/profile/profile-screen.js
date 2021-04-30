@@ -80,7 +80,7 @@ const ProfileScreen = props => {
 
   const pickImage = async () => {
     // noinspection JSUnresolvedVariable
-    console.log(appContext.userData.profileImagePath)
+    // console.log(appContext.userData.profileImagePath)
     setVisible(false)
     setError(false)
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -125,7 +125,7 @@ const ProfileScreen = props => {
       // }
       axios.put('User', formData).then(async response => {
         if (response.status === 200) {
-          console.log(response.data.data)
+          // console.log(response.data.data)
           await appContext.SetUserData(response.data.data)
           await storeObjectData(Util.USER_DATA, response.data.data)
           // setLoading(false)

@@ -4,14 +4,14 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Colors from '../../shared/colors'
 
 const NotificationListItem = props => {
-  let notification = {
-    notification: props.itemData.item,
-    navigation: props.navigation,
-    refresh: props.refreshFunction
-  }
+  // let notification = {
+  //   notification: props.itemData.item,
+  //   navigation: props.navigation,
+  //   refresh: props.refreshFunction
+  // }
 
   const pressNotification = () => {
-    console.log(notification)
+    // console.log(notification)
   }
 
   return (
