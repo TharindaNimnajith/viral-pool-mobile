@@ -45,44 +45,34 @@ const DashboardScreen = () => {
         <View style={styles.bodyStyle}>
           <View style={styles.smallCardsViewStyle}>
             <TouchableOpacity style={styles.cardStyle}>
-              <Text>
+              <Text style={styles.ongoingProjectStatStyle}>
                 3
               </Text>
-              <Text>
-                Test
+              <Text style={styles.statTitleStyle}>
+                Ongoing{'\n'}Projects
               </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cardStyle}>
-              <Text>
-                3
+              <Text style={styles.completedProjectStatStyle}>
+                10
               </Text>
-              <Text>
-                Test
+              <Text style={styles.statTitleStyle}>
+                Completed{'\n'}Projects
               </Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.cardStyle}>
-              <Text>
-                3
+              <Text style={styles.rejectedProjectStatStyle}>
+                7
               </Text>
-              <Text>
-                Test
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.largeCardViewStyle}>
-            <TouchableOpacity>
-              <Text>
-                3
+              <Text style={styles.statTitleStyle}>
+                Rejected{'\n'}Projects
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.socialAccountViewStyle}>
-            <TouchableOpacity>
-              <Text>
-                3
-              </Text>
+            <TouchableOpacity style={styles.largeCardViewStyle}>
             </TouchableOpacity>
-          </View>
+            <TouchableOpacity style={styles.socialAccountViewStyle}>
+            </TouchableOpacity>
         </View>
       </View>
       {/*</ScrollView>*/}
@@ -108,8 +98,14 @@ const styles = StyleSheet.create({
     width: wp('28%'),
     height: wp('28%'),
     borderRadius: wp('10%'),
-    margin:  wp('1%'),
+    margin: wp('1%'),
     backgroundColor: Colors.fadedEffectColor
+  },
+  completedProjectStatStyle: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    color: Colors.successColor,
+    alignSelf: 'center'
   },
   mainViewStyle: {
     width: wp('100%'),
@@ -123,15 +119,42 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: wp('10%')
   },
   largeCardViewStyle: {
-
+    width: wp('90%'),
+    height: wp('10%'),
+    borderRadius: wp('10%'),
+    backgroundColor: Colors.fadedEffectColor,
+    marginTop: wp('35%'),
+    alignSelf: 'center'
+  },
+  ongoingProjectStatStyle: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    color: Colors.styleColor,
+    alignSelf: 'center'
+  },
+  rejectedProjectStatStyle: {
+    fontSize: 60,
+    fontWeight: 'bold',
+    color: Colors.errorColor,
+    alignSelf: 'center'
   },
   smallCardsViewStyle: {
-    flexDirection: 'row',
     flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center'
   },
   socialAccountViewStyle: {
-
+    width: wp('90%'),
+    height: wp('10%'),
+    borderRadius: wp('10%'),
+    backgroundColor: Colors.fadedEffectColor,
+    marginTop: wp('5%'),
+    alignSelf: 'center'
+  },
+  statTitleStyle: {
+    alignSelf: 'center',
+    fontSize: 15,
+    lineHeight: 17
   },
   titleStyle: {
     fontSize: 22,
