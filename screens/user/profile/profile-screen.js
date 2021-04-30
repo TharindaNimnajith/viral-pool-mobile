@@ -123,13 +123,13 @@ const ProfileScreen = props => {
       //   })
       // })
       // noinspection JSUnresolvedVariable
-      formData.append('formFile', {
-        // uri: localUri,
-        // name: filename, type
-        filename: filename,
-        type: type,
-        data: result.base64
-      })
+      // formData.append('formFile', {
+      //   // uri: localUri,
+      //   // name: filename, type
+      //   filename: filename,
+      //   type: type,
+      //   data: result.base64
+      // })
       // noinspection JSUnresolvedVariable
       formData.append('firstName', appContext.userData.firstName)
       // noinspection JSUnresolvedVariable
@@ -153,22 +153,28 @@ const ProfileScreen = props => {
       //   address: appContext.userData.address,
       //   phoneNumber: appContext.userData.phoneNumber
       // }
+      // const headers = {
+      //   Accept: 'application/json',
+      //   'Content-Type': 'multipart/form-data'
+      // }
+      // const headers = {
+      //   Accept: 'application/json',
+      //   'Content-Type': 'multipart/form-data',
+      //   'Authorization': `Bearer ${appContext.accessToken}`,
+      //   'client_id': 'UFwv4s5sAHYyRS2q'
+      // }
       axios.put('User', formData).then(async response => {
-        console.log('1111')
         if (response.status === 200) {
-          // console.log(formData)
           console.log(response.data.data)
           await appContext.SetUserData(response.data.data)
           await storeObjectData(Util.USER_DATA, response.data.data)
           setLoading(false)
           await showSuccessAlert()
         } else {
-          console.log('2222')
           setLoading(false)
           setError(true)
         }
       }).catch(async error => {
-        console.log('3333')
         setLoading(false)
         setError(true)
         console.log(error)
