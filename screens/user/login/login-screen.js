@@ -135,6 +135,9 @@ const LoginScreen = ({navigation}) => {
               <Text style={styles.textStyle}>
                 Manage Your Team, Clients, Content Creators | Create Strategies, Discuss, Execute | Statistics
               </Text>
+              <Text style={styles.titleStyle}>
+                Login
+              </Text>
             </View>
             <Text style={styles.labelStyle}>
               Email
@@ -218,8 +221,8 @@ const styles = StyleSheet.create({
     marginBottom: wp('6%')
   },
   headerStyle: {
-    marginBottom: wp('6%'),
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: wp('4%')
   },
   labelStyle: {
     marginLeft: 40,
@@ -257,6 +260,13 @@ const styles = StyleSheet.create({
     color: Colors.tertiaryColor,
     textAlign: 'center',
     lineHeight: 20
+  },
+  titleStyle: {
+    textTransform: 'uppercase',
+    color: Colors.primaryColor,
+    fontWeight: 'bold',
+    marginTop: wp('10%'),
+    fontSize: 30
   },
   viewStyle: {
     marginTop: 40
