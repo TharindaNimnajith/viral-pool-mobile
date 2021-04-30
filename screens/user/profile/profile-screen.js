@@ -81,6 +81,10 @@ const ProfileScreen = props => {
     )
   }
 
+  const onEditButtonPress = async () => {
+    props.navigation.navigate('EditProfile')
+  }
+
   const pickImage = async () => {
     setVisible(false)
     setError(false)
@@ -88,7 +92,9 @@ const ProfileScreen = props => {
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1
+      quality: 1,
+      base64: true,
+      allowsMultipleSelection: false
     })
     if (!result.cancelled) {
       setLoading(false)
@@ -99,7 +105,6 @@ const ProfileScreen = props => {
       let filename = localUri.split('/').pop()
       let match = /\.(\w+)$/.exec(filename)
       let type = match ? `image/${match[1]}` : `image`
-      let binaryDataInBase64 = null
       const formData = new FormData()
       formData.append('id', appContext.userData.id)
       formData.append('email', appContext.userData.email)
@@ -117,12 +122,13 @@ const ProfileScreen = props => {
       //     data: data
       //   })
       // })
+      // noinspection JSUnresolvedVariable
       formData.append('formFile', {
         // uri: localUri,
         // name: filename, type
         filename: filename,
         type: type,
-        data: binaryDataInBase64
+        data: result.base64
       })
       // noinspection JSUnresolvedVariable
       formData.append('firstName', appContext.userData.firstName)
@@ -148,18 +154,21 @@ const ProfileScreen = props => {
       //   phoneNumber: appContext.userData.phoneNumber
       // }
       axios.put('User', formData).then(async response => {
+        console.log('1111')
         if (response.status === 200) {
-          console.log(formData)
+          // console.log(formData)
           console.log(response.data.data)
           await appContext.SetUserData(response.data.data)
           await storeObjectData(Util.USER_DATA, response.data.data)
           setLoading(false)
           await showSuccessAlert()
         } else {
+          console.log('2222')
           setLoading(false)
           setError(true)
         }
       }).catch(async error => {
+        console.log('3333')
         setLoading(false)
         setError(true)
         console.log(error)
@@ -217,10 +226,6 @@ const ProfileScreen = props => {
       //   console.log(error)
       // })
     }
-  }
-
-  const onEditButtonPress = async () => {
-    props.navigation.navigate('EditProfile')
   }
 
   // noinspection JSUnresolvedVariable
