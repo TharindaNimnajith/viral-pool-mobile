@@ -10,6 +10,7 @@ import {getStringData} from '../../../helpers/local-storage-helpers'
 import {Util} from '../../../util/util'
 
 const DashboardScreen = () => {
+  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
   useEffect(() => {

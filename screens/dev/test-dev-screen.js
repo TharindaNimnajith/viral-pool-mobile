@@ -9,6 +9,7 @@ import {getStringData} from '../../helpers/local-storage-helpers'
 import {Util} from '../../util/util'
 
 const TestDevScreen = () => {
+  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
   const [accessToken, setAccessToken] = useState(null)

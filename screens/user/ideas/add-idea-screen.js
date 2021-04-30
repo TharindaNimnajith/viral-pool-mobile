@@ -18,11 +18,11 @@ import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
-import Menu from '../../../components/buttons/menu-button'
 import Logout from '../../../components/buttons/logout-button'
 
 // noinspection JSUnusedLocalSymbols
 const AddIdeaScreen = ({navigation}) => {
+  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
   const [title, setTitle] = useState('')

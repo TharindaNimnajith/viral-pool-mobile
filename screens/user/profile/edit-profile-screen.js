@@ -42,6 +42,7 @@ const genderOptions = [{
 
 // noinspection JSUnusedLocalSymbols
 const EditProfileScreen = props => {
+  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
   // noinspection JSUnresolvedVariable

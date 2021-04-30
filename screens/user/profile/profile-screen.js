@@ -28,6 +28,7 @@ import {Util} from "../../../util/util";
 import Constants from "../../../shared/constants";
 
 const ProfileScreen = props => {
+  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
   // noinspection JSUnresolvedVariable

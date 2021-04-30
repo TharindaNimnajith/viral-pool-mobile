@@ -65,13 +65,16 @@ async function registerForPushNotificationsAsync() {
 }
 
 const App = () => {
-  LogBox.ignoreLogs([
+  const patterns = [
     Constants.WARNING_1,
     Constants.WARNING_2,
     Constants.WARNING_3,
     'Animated: `useNativeDriver`'
-  ])
+  ]
 
+  LogBox.ignoreLogs(patterns)
+
+  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
   const notificationListener = useRef()
@@ -98,7 +101,9 @@ const App = () => {
     })
 
     return () => {
+      // noinspection JSCheckFunctionSignatures
       removeNotificationSubscription(notificationListener)
+      // noinspection JSCheckFunctionSignatures
       removeNotificationSubscription(responseListener)
     }
   }, [])

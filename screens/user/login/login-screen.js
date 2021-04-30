@@ -22,20 +22,14 @@ import {storeObjectData, storeStringData} from '../../../helpers/local-storage-h
 import {isEmpty} from '../../../helpers/common-helpers'
 
 const LoginScreen = ({navigation}) => {
+  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
-
-  // For development
-
-  // const [email, setEmail] = useState(LoginDetails[0].email)
-  // const [password, setPassword] = useState(LoginDetails[0].password)
 
   const [email, setEmail] = useState(LoginDetails[1].email)
   const [password, setPassword] = useState(LoginDetails[1].password)
 
   const [emailValid, setEmailValid] = useState(true)
   const [passwordValid, setPasswordValid] = useState(true)
-
-  // For production
 
   // const [email, setEmail] = useState('')
   // const [password, setPassword] = useState('')

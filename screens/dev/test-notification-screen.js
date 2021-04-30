@@ -9,6 +9,7 @@ import Logout from '../../components/buttons/logout-button'
 import {Util} from '../../util/util'
 
 const TestNotificationScreen = () => {
+  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
   const [expoPushToken, setExpoPushToken] = useState(null)
