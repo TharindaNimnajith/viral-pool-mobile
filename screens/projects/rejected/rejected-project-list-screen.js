@@ -27,7 +27,7 @@ const RejectedProjectListScreen = ({navigation}) => {
   }
 
   return (
-    <View style={styles.list}>
+    <View style={styles.listStyle}>
       <FlatList keyExtractor={(item, index) => index.toString()}
                 data={RejectedProjects}
                 numColumns={1}
@@ -37,7 +37,7 @@ const RejectedProjectListScreen = ({navigation}) => {
 }
 
 const styles = StyleSheet.create({
-  list: {
+  listStyle: {
     width: wp('100%'),
     backgroundColor: Colors.secondaryColor
   }
