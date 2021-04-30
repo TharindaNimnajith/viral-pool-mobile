@@ -111,6 +111,7 @@ const CompletedProjectsNavigator = createStackNavigator({
 
 const IdeasNavigator = createStackNavigator({
   IdeaList: IdeaListScreen,
+  AddIdea: AddIdeaScreen,
   EditIdea: EditIdeaScreen
 }, {
   defaultNavigationOptions: {
@@ -122,17 +123,17 @@ const IdeasNavigator = createStackNavigator({
   }
 })
 
-const AddIdeaNavigator = createStackNavigator({
-  AddIdea: AddIdeaScreen
-}, {
-  defaultNavigationOptions: {
-    headerTitleAlign: 'center',
-    headerStyle: {
-      backgroundColor: Colors.primaryColor
-    },
-    headerTintColor: Colors.secondaryColor
-  }
-})
+// const AddIdeaNavigator = createStackNavigator({
+//   AddIdea: AddIdeaScreen
+// }, {
+//   defaultNavigationOptions: {
+//     headerTitleAlign: 'center',
+//     headerStyle: {
+//       backgroundColor: Colors.primaryColor
+//     },
+//     headerTintColor: Colors.secondaryColor
+//   }
+// })
 
 const ProfileNavigator = createStackNavigator({
   Profile: ProfileScreen,
@@ -175,7 +176,7 @@ const InternalNavigator = createDrawerNavigator({
   Dashboard: {
     screen: DashboardNavigator,
     navigationOptions: {
-      drawerLabel: 'DASHBOARD',
+      drawerLabel: 'Dashboard',
       drawerIcon: <Ionicons name='speedometer'
                             size={25}
                             color={Colors.primaryColor}/>
@@ -184,7 +185,7 @@ const InternalNavigator = createDrawerNavigator({
   Notifications: {
     screen: NotificationsNavigator,
     navigationOptions: {
-      drawerLabel: 'NOTIFICATIONS',
+      drawerLabel: 'Notifications',
       drawerIcon: <Ionicons name='notifications'
                             size={25}
                             color={Colors.primaryColor}/>
@@ -193,7 +194,7 @@ const InternalNavigator = createDrawerNavigator({
   NewProjects: {
     screen: NewProjectsNavigator,
     navigationOptions: {
-      drawerLabel: 'NEW PROJECTS',
+      drawerLabel: 'Job Pool',
       drawerIcon: <Ionicons name='layers'
                             size={25}
                             color={Colors.primaryColor}/>
@@ -202,7 +203,7 @@ const InternalNavigator = createDrawerNavigator({
   OngoingProjects: {
     screen: OngoingProjectsNavigator,
     navigationOptions: {
-      drawerLabel: 'ONGOING PROJECTS',
+      drawerLabel: 'Ongoing Projects',
       drawerIcon: <Ionicons name='flash'
                             size={25}
                             color={Colors.primaryColor}/>
@@ -211,7 +212,7 @@ const InternalNavigator = createDrawerNavigator({
   CompletedProjects: {
     screen: CompletedProjectsNavigator,
     navigationOptions: {
-      drawerLabel: 'COMPLETED PROJECTS',
+      drawerLabel: 'Completed Projects',
       drawerIcon: <Ionicons name='checkmark-done'
                             size={25}
                             color={Colors.primaryColor}/>
@@ -229,25 +230,25 @@ const InternalNavigator = createDrawerNavigator({
   Ideas: {
     screen: IdeasNavigator,
     navigationOptions: {
-      drawerLabel: 'MY IDEAS',
+      drawerLabel: 'My Ideas',
       drawerIcon: <Ionicons name='bulb'
                             size={25}
                             color={Colors.primaryColor}/>
     }
   },
-  AddIdea: {
-    screen: AddIdeaNavigator,
-    navigationOptions: {
-      drawerLabel: 'NEW IDEA',
-      drawerIcon: <Ionicons name='add'
-                            size={25}
-                            color={Colors.primaryColor}/>
-    }
-  },
+  // AddIdea: {
+  //   screen: AddIdeaNavigator,
+  //   navigationOptions: {
+  //     drawerLabel: 'New Idea',
+  //     drawerIcon: <Ionicons name='add'
+  //                           size={25}
+  //                           color={Colors.primaryColor}/>
+  //   }
+  // },
   Profile: {
     screen: ProfileNavigator,
     navigationOptions: {
-      drawerLabel: 'MY PROFILE',
+      drawerLabel: 'My Profile',
       drawerIcon: <Ionicons name='person'
                             size={25}
                             color={Colors.primaryColor}/>
@@ -256,7 +257,7 @@ const InternalNavigator = createDrawerNavigator({
   // TestNotification: {
   //   screen: TestNotificationNavigator,
   //   navigationOptions: {
-  //     drawerLabel: 'TEST NOTIFICATIONS',
+  //     drawerLabel: 'Test Notification',
   //     drawerIcon: <Ionicons name='bug'
   //                           size={25}
   //                           color={Colors.primaryColor}/>
@@ -265,7 +266,7 @@ const InternalNavigator = createDrawerNavigator({
   // TestDev: {
   //   screen: TestDevNavigator,
   //   navigationOptions: {
-  //     drawerLabel: 'TEST DEV',
+  //     drawerLabel: 'Test Dev',
   //     drawerIcon: <Ionicons name='bug'
   //                           size={25}
   //                           color={Colors.primaryColor}/>
