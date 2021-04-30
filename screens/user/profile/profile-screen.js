@@ -104,7 +104,7 @@ const ProfileScreen = props => {
       // noinspection JSUnresolvedVariable
       // formData.append('profileImagePath', appContext.userData.profileImagePath)
       // noinspection JSUnresolvedVariable
-      formData.append('formFile', {
+      formData.append('FormFile', {
         uri: localUri,
         name: filename, type
       })
@@ -133,8 +133,8 @@ const ProfileScreen = props => {
       // }
       axios.put('User', formData).then(async response => {
         if (response.status === 200) {
-          console.log(formData)
-          console.log(response.data.data)
+          // console.log(formData)
+          // console.log(response.data.data)
           await appContext.SetUserData(response.data.data)
           await storeObjectData(Util.USER_DATA, response.data.data)
           setLoading(false)
@@ -263,7 +263,7 @@ const ProfileScreen = props => {
           loading && (
             <View style={styles.loadingStyle}>
               <ActivityIndicator size='large'
-                                 color={Colors.primaryColor}/>
+                                 color={Colors.secondaryColor}/>
             </View>
           )
         }
@@ -317,6 +317,16 @@ const styles = StyleSheet.create({
     height: wp('55%'),
     borderBottomRightRadius: wp('10%'),
     borderBottomLeftRadius: wp('10%')
+  },
+  loadingStyle: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
     width: wp('100%'),

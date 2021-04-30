@@ -362,7 +362,7 @@ const EditProfileScreen = props => {
             loading && (
               <View style={styles.loadingStyle}>
                 <ActivityIndicator size='large'
-                                   color={Colors.primaryColor}/>
+                                   color={Colors.secondaryColor}/>
               </View>
             )
           }
