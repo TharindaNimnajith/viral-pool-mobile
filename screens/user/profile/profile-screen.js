@@ -29,6 +29,8 @@ import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const ProfileScreen = props => {
+  // const RNFS = require('react-native-fs')
+
   // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
@@ -97,6 +99,7 @@ const ProfileScreen = props => {
       let filename = localUri.split('/').pop()
       let match = /\.(\w+)$/.exec(filename)
       let type = match ? `image/${match[1]}` : `image`
+      let binaryDataInBase64 = null
       const formData = new FormData()
       formData.append('id', appContext.userData.id)
       formData.append('email', appContext.userData.email)
@@ -105,9 +108,21 @@ const ProfileScreen = props => {
       // noinspection JSUnresolvedVariable
       // formData.append('profileImagePath', appContext.userData.profileImagePath)
       // noinspection JSUnresolvedVariable
+      // RNFS.readFile(localUri, 'base64').then(data => {
+      //   formData.append('formFile', {
+      //     // uri: localUri,
+      //     // name: filename, type
+      //     filename: filename,
+      //     type: type,
+      //     data: data
+      //   })
+      // })
       formData.append('formFile', {
-        uri: localUri,
-        name: filename, type
+        // uri: localUri,
+        // name: filename, type
+        filename: filename,
+        type: type,
+        data: binaryDataInBase64
       })
       // noinspection JSUnresolvedVariable
       formData.append('firstName', appContext.userData.firstName)
