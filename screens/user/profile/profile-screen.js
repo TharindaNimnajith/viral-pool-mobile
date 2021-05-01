@@ -17,6 +17,8 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 // noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
+import * as FileSystem from 'expo-file-system'
+import {FileSystemSessionType, FileSystemUploadType} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
 // import RNFetchBlob from 'react-native-fetch-blob'
@@ -93,10 +95,12 @@ const ProfileScreen = props => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-      base64: true,
+      base64: false,
       allowsMultipleSelection: false
     })
+    // noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
     if (!result.cancelled) {
+      // console.log(result)
       setLoading(false)
       setLoading(true)
       // noinspection JSUnresolvedVariable
@@ -104,7 +108,60 @@ const ProfileScreen = props => {
       setImage(localUri)
       let filename = localUri.split('/').pop()
       let match = /\.(\w+)$/.exec(filename)
+      // noinspection JSUnusedLocalSymbols
       let type = match ? `image/${match[1]}` : `image`
+      // const headers = {
+      //   Accept: 'application/json',
+      //   'Content-Type': 'multipart/form-data'
+      // }
+      const headers = {
+        Accept: 'application/json',
+        'Content-Type': 'multipart/form-data',
+        'Authorization': `Bearer ${appContext.accessToken}`,
+        'client_id': 'UFwv4s5sAHYyRS2q'
+      }
+      FileSystem.uploadAsync(
+        `${Util.BASE_URL}User`,
+        `${localUri}`,
+        {
+          headers: headers,
+          httpMethod: 'PUT',
+          sessionType: FileSystemSessionType.BACKGROUND,
+          uploadType: FileSystemUploadType.MULTIPART,
+          fieldName: 'FormFile',
+          mimeType: type,
+          parameters: {
+            'id': appContext.userData.id,
+            'email': appContext.userData.email,
+            'userRole': appContext.userData.userRole,
+            'firstName': appContext.userData.firstName,
+            'lastName': appContext.userData.lastName,
+            'gender': appContext.userData.gender,
+            'birthDate': appContext.userData.birthDate,
+            'address': appContext.userData.address,
+            'phoneNumber': appContext.userData.phoneNumber
+          }
+        }).then(async response => {
+        console.log(response)
+        if (response.status === 200) {
+          // noinspection JSUnresolvedVariable
+          // console.log(response.data.data)
+          // noinspection JSUnresolvedVariable
+          await appContext.SetUserData(response.data.data)
+          // noinspection JSUnresolvedVariable
+          await storeObjectData(Util.USER_DATA, response.data.data)
+          setLoading(false)
+          await showSuccessAlert()
+        } else {
+          setLoading(false)
+          setError(true)
+        }
+      }).catch(async error => {
+        setLoading(false)
+        setError(true)
+        console.log(error)
+      })
+      return
       const formData = new FormData()
       formData.append('id', appContext.userData.id)
       formData.append('email', appContext.userData.email)
@@ -131,6 +188,8 @@ const ProfileScreen = props => {
       //   data: result.base64
       // })
       // noinspection JSUnresolvedVariable
+      formData.append('formFile', result.base64)
+      // noinspection JSUnresolvedVariable
       formData.append('firstName', appContext.userData.firstName)
       // noinspection JSUnresolvedVariable
       formData.append('lastName', appContext.userData.lastName)
@@ -153,19 +212,10 @@ const ProfileScreen = props => {
       //   address: appContext.userData.address,
       //   phoneNumber: appContext.userData.phoneNumber
       // }
-      // const headers = {
-      //   Accept: 'application/json',
-      //   'Content-Type': 'multipart/form-data'
-      // }
-      // const headers = {
-      //   Accept: 'application/json',
-      //   'Content-Type': 'multipart/form-data',
-      //   'Authorization': `Bearer ${appContext.accessToken}`,
-      //   'client_id': 'UFwv4s5sAHYyRS2q'
-      // }
+      // console.log(formData)
       axios.put('User', formData).then(async response => {
         if (response.status === 200) {
-          console.log(response.data.data)
+          // console.log(response.data.data)
           await appContext.SetUserData(response.data.data)
           await storeObjectData(Util.USER_DATA, response.data.data)
           setLoading(false)
