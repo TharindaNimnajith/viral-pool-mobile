@@ -20,7 +20,6 @@ import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
 import {FileSystemSessionType, FileSystemUploadType} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
-import axios from 'axios'
 // import RNFetchBlob from 'react-native-fetch-blob'
 import {AppContext} from '../../../global/app-context'
 import {storeObjectData} from '../../../helpers/local-storage-helpers'
@@ -104,7 +103,7 @@ const ProfileScreen = props => {
       ia[i] = byteString.charCodeAt(i);
     }
 
-    return new Blob([ia], {type:mimeString});
+    return new Blob([ia], {type: mimeString});
   }
 
   // function dataURLtoFile(dataurl, filename) {
@@ -164,14 +163,14 @@ const ProfileScreen = props => {
       // // Form Data
       //
       let formData1 = new FormData();
-      formData1.append('FormFile',{
-          uri: result.uri,
-          name: `photo.png`,
-          type: `image/png`,
-        })
-      formData1.append('Id',appContext.userData.id)
-      formData1.append('Email',appContext.userData.email)
-      formData1.append('UserRole','Influencer')
+      formData1.append('FormFile', {
+        uri: result.uri,
+        name: `photo.png`,
+        type: `image/png`,
+      })
+      formData1.append('Id', appContext.userData.id)
+      formData1.append('Email', appContext.userData.email)
+      formData1.append('UserRole', 'Influencer')
       //
       //
       //
@@ -322,7 +321,6 @@ const ProfileScreen = props => {
       //   setError(true)
       //   console.log(error)
       // })
-
 
 
       // noinspection JSUnresolvedVariable
