@@ -399,11 +399,14 @@ const ProfileScreen = props => {
       <View style={styles.mainViewStyle}>
         <View style={styles.headerStyle}>
           {
-            image && (
+            image ? (
               <Image style={styles.avatarStyle}
                      source={{
                        uri: image
                      }}/>
+            ) : (
+              <Image style={styles.avatarStyle}
+                     source={require('../../../assets/user.jpg')}/>
             )
           }
         </View>
@@ -454,9 +457,13 @@ const ProfileScreen = props => {
                               size={20}/>
                   )
                 }
-                <Text style={styles.textStyle}>
-                  {appContext.userData.gender?.charAt(0).toUpperCase() + appContext.userData.gender?.slice(1)}
-                </Text>
+                {
+                  appContext.userData.gender ? (
+                    <Text style={styles.textStyle}>
+                      {appContext.userData.gender.charAt(0).toUpperCase() + appContext.userData.gender.slice(1)}
+                    </Text>
+                  ) : null
+                }
               </View>
               <View style={styles.viewStyle}>
                 <Ionicons name='calendar'
@@ -489,12 +496,12 @@ const ProfileScreen = props => {
           </View>
         </View>
         {
-          loading && (
+          loading ? (
             <View style={styles.loadingStyle}>
               <ActivityIndicator size='large'
                                  color={Colors.secondaryColor}/>
             </View>
-          )
+          ) : null
         }
       </View>
       {/*</ScrollView>*/}

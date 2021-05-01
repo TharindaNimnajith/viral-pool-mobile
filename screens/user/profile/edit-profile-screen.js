@@ -50,8 +50,8 @@ const EditProfileScreen = props => {
   // noinspection JSUnresolvedVariable
   const [lastName, setLastName] = useState(appContext.userData.lastName)
   // noinspection JSUnresolvedVariable
-  const [gender, setGender] = useState(appContext.userData.gender.toUpperCase() === 'MALE' ? 1
-    : appContext.userData.gender.toUpperCase() === 'FEMALE' ? 0 : null)
+  const [gender, setGender] = useState(appContext.userData.gender?.toUpperCase() === 'MALE' ? 1
+    : appContext.userData.gender?.toUpperCase() === 'FEMALE' ? 0 : null)
   // noinspection JSUnresolvedVariable
   const [birthDate, setBirthDate] = useState(appContext.userData.birthDate)
   const [address, setAddress] = useState(appContext.userData.address)
@@ -359,12 +359,12 @@ const EditProfileScreen = props => {
             }
           </View>
           {
-            loading && (
+            loading ? (
               <View style={styles.loadingStyle}>
                 <ActivityIndicator size='large'
                                    color={Colors.secondaryColor}/>
               </View>
-            )
+            ) : null
           }
         </View>
       </ScrollView>

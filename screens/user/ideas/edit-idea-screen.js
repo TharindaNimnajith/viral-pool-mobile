@@ -151,12 +151,12 @@ const EditIdeaScreen = props => {
           }
         </View>
         {
-          loading && (
+          loading ? (
             <View style={styles.loadingStyle}>
               <ActivityIndicator size='large'
                                  color={Colors.secondaryColor}/>
             </View>
-          )
+          ) : null
         }
       </View>
       {/*</ScrollView>*/}
