@@ -198,7 +198,6 @@ const ProfileScreen = props => {
         }).then(async response => {
         if (response.status === 200) {
           const data = JSON.parse(response.body).data
-          console.log(data)
           // noinspection JSUnresolvedVariable
           await appContext.SetUserData(data)
           // noinspection JSUnresolvedVariable
