@@ -86,46 +86,38 @@ const ProfileScreen = props => {
     props.navigation.navigate('EditProfile')
   }
 
-  function dataURItoBlob(dataURI) {
-    // convert base64/URLEncoded data component to raw binary data held in a string
-    var byteString;
-    if (dataURI.split(',')[0].indexOf('base64') >= 0)
-      byteString = atob(dataURI.split(',')[1]);
-    else
-      byteString = unescape(dataURI.split(',')[1]);
-
-    // separate out the mime component
-    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-    // write the bytes of the string to a typed array
-    var ia = new Uint8Array(byteString.length);
-    for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-
-    return new Blob([ia], {type: mimeString});
-  }
-
-  // function dataURLtoFile(dataurl, filename) {
-  //
-  //   var arr = dataurl.split(','),
-  //     mime = arr[0].match(/:(.*?);/)[1],
-  //     bstr = atob(arr[1]),
-  //     n = bstr.length,
-  //     u8arr = new Uint8Array(n);
-  //
-  //   while(n--){
-  //     u8arr[n] = bstr.charCodeAt(n);
-  //   }
-  //
-  //   return new File([u8arr], filename, {type:mime});
+  // function dataURItoBlob(dataUri) {
+  //   let byteString
+  //   if (dataUri.split(',')[0].indexOf('base64') >= 0)
+  //     byteString = atob(dataUri.split(',')[1])
+  //   else
+  //     byteString = unescape(dataUri.split(',')[1])
+  //   let mimeString = dataUri.split(',')[0].split(':')[1].split(';')[0]
+  //   let ia = new Uint8Array(byteString.length)
+  //   for (let i = 0; i < byteString.length; i++)
+  //     ia[i] = byteString.charCodeAt(i)
+  //   return new Blob([ia], {type: mimeString});
   // }
   //
-  // function urltoFile(url, filename, mimeType){
-  //   return (fetch(url)
-  //       .then(function(res){return res.arrayBuffer();})
-  //       .then(function(buf){return new File([buf], filename,{type:mimeType});})
-  //   );
+  // function dataURLtoFile(dataUri, fileName) {
+  //   let arr = dataUri.split(','), mime = arr[0].match(/:(.*?);/)[1], bstr = atob(arr[1]), n = bstr.length,
+  //     u8arr = new Uint8Array(n)
+  //   while (n--)
+  //     u8arr[n] = bstr.charCodeAt(n)
+  //   return new File([u8arr], fileName, {
+  //     type: mime
+  //   })
+  // }
+  //
+  // function urlToFile(url, fileName, mimeType) {
+  //   return (fetch(url).then(function (res) {
+  //       return res.arrayBuffer()
+  //     }).then(function (buf) {
+  //       return new File([buf], fileName, {
+  //         type: mimeType
+  //       })
+  //     })
+  //   )
   // }
 
   const pickImage = async () => {
@@ -134,60 +126,54 @@ const ProfileScreen = props => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [3, 3],
       quality: 1,
       base64: true,
       allowsMultipleSelection: false
     })
-
-    // noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
     if (!result.cancelled) {
-      // console.log(result)
-      // setLoading(false)
-      // setLoading(true)
+      setLoading(false)
+      setLoading(true)
       // noinspection JSUnresolvedVariable
-
       let localUri = result.uri
       setImage(localUri)
+      // noinspection JSUnresolvedVariable
       let filename = localUri.split('/').pop()
       let match = /\.(\w+)$/.exec(filename)
       // noinspection JSUnusedLocalSymbols
       let type = match ? `image/${match[1]}` : `image`
-
-      //console.log(result)
-      // console.log(dataURItoBlob())
-
-      // let uriParts = result.uri.split('.');
-      // let fileType = result.uri[result.uri.length - 1];
-
-      // // Form Data
-      //
-      let formData1 = new FormData();
-      formData1.append('FormFile', {
-        uri: result.uri,
-        name: `photo.png`,
-        type: `image/png`,
-      })
-      formData1.append('Id', appContext.userData.id)
-      formData1.append('Email', appContext.userData.email)
-      formData1.append('UserRole', 'Influencer')
-      //
-      //
-      //
+      // noinspection JSUnresolvedVariable
+      // let uriParts = localUri.split('.')
+      // noinspection JSUnresolvedVariable
+      // let fileType = localUri[localUri.length - 1]
+      // let formData = new FormData()
+      // noinspection JSUnresolvedVariable
+      // formData.append('FormFile', {
+      //   uri: localUri,
+      //   name: `photo.${uriParts[1]}`,
+      //   type: `image/${fileType}`,
+      // })
+      // formData.append('Id', appContext.userData.id)
+      // formData.append('Email', appContext.userData.email)
+      // formData.append('UserRole', 'Influencer')
+      // formData.append('FirstName', appContext.userData.firstName)
+      // formData.append('LastName', appContext.userData.lastName)
+      // formData.append('Gender', appContext.userData.gender)
+      // formData.append('BirthDate', appContext.userData.birthDate)
+      // formData.append('Address', appContext.userData.address)
+      // formData.append('PhoneNumber', appContext.userData.phoneNumber)
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${appContext.accessToken}`,
         'client_id': 'UFwv4s5sAHYyRS2q'
       }
-      //
       // let options = {
       //   method: 'PUT',
-      //   body: formData1,
-      //   headers: headers,
-      // };
-
-
+      //   body: formData
+      //   headers: headers
+      // }
+      // noinspection JSUnresolvedVariable
       FileSystem.uploadAsync(
         `${Util.BASE_URL}User`,
         `${localUri}`,
@@ -214,8 +200,6 @@ const ProfileScreen = props => {
           const data = JSON.parse(response.body).data
           console.log(data)
           // noinspection JSUnresolvedVariable
-          // console.log(response.data.data)
-          // noinspection JSUnresolvedVariable
           await appContext.SetUserData(data)
           // noinspection JSUnresolvedVariable
           await storeObjectData(Util.USER_DATA, data)
@@ -230,20 +214,22 @@ const ProfileScreen = props => {
         setError(true)
         console.log(error)
       })
-
-
       // const formData = new FormData()
       // formData.append('id', appContext.userData.id)
       // formData.append('email', appContext.userData.email)
-      // // noinspection JSUnresolvedVariable
+      // noinspection JSUnresolvedVariable
       // formData.append('userRole', appContext.userData.userRole)
       // noinspection JSUnresolvedVariable
       // formData.append('profileImagePath', appContext.userData.profileImagePath)
       // noinspection JSUnresolvedVariable
       // RNFS.readFile(localUri, 'base64').then(data => {
       //   formData.append('formFile', {
-      //     // uri: localUri,
-      //     // name: filename, type
+      //     uri: localUri,
+      //     name: filename, type
+      //   })
+      // })
+      // RNFS.readFile(localUri, 'base64').then(data => {
+      //   formData.append('formFile', {
       //     filename: filename,
       //     type: type,
       //     data: data
@@ -251,24 +237,24 @@ const ProfileScreen = props => {
       // })
       // noinspection JSUnresolvedVariable
       // formData.append('formFile', {
-      //   // uri: localUri,
-      //   // name: filename, type
+      //   uri: localUri,
+      //   name: filename, type
       //   filename: filename,
       //   type: type,
       //   data: result.base64
       // })
       // noinspection JSUnresolvedVariable
       // formData.append('formFile', result.base64)
-      // // noinspection JSUnresolvedVariable
+      // noinspection JSUnresolvedVariable
       // formData.append('firstName', appContext.userData.firstName)
-      // // noinspection JSUnresolvedVariable
+      // noinspection JSUnresolvedVariable
       // formData.append('lastName', appContext.userData.lastName)
-      // // noinspection JSUnresolvedVariable
+      // noinspection JSUnresolvedVariable
       // formData.append('gender', appContext.userData.gender)
-      // // noinspection JSUnresolvedVariable
+      // noinspection JSUnresolvedVariable
       // formData.append('birthDate', appContext.userData.birthDate)
       // formData.append('address', appContext.userData.address)
-      // // noinspection JSUnresolvedVariable
+      // noinspection JSUnresolvedVariable
       // formData.append('phoneNumber', appContext.userData.phoneNumber)
       // let data = {
       //   id: appContext.userData.id,
@@ -282,32 +268,8 @@ const ProfileScreen = props => {
       //   address: appContext.userData.address,
       //   phoneNumber: appContext.userData.phoneNumber
       // }
-      // console.log(formData)
-
-
-      // axios.put('User', formData1).then(async response => {
-      //   console.log(response)
+      // axios.put('User', formData).then(async response => {
       //   if (response.status === 200) {
-      //      // console.log(response.data)
-      //     //await appContext.SetUserData(response.data.data)
-      //     //await storeObjectData(Util.USER_DATA, response.data.data)
-      //     //setLoading(false)
-      //     //await showSuccessAlert()
-      //   } else {
-      //     setLoading(false)
-      //     setError(true)
-      //   }
-      // }).catch(async error => {
-      //   setLoading(false)
-      //   setError(true)
-      //   console.log(error)
-      // })
-
-
-      // instance.post('weatherforecast', formData1).then(async response => {
-      //   console.log(response)
-      //   if (response.status === 200) {
-      //     // console.log(response.data.data)
       //     await appContext.SetUserData(response.data.data)
       //     await storeObjectData(Util.USER_DATA, response.data.data)
       //     setLoading(false)
@@ -321,8 +283,6 @@ const ProfileScreen = props => {
       //   setError(true)
       //   console.log(error)
       // })
-
-
       // noinspection JSUnresolvedVariable
       // RNFetchBlob.fetch('PUT', `${Util.BASE_URL}User`, {
       //   Authorization: `Bearer ${appContext.accessToken}`,
