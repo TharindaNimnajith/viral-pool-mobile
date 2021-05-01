@@ -74,8 +74,8 @@ const EditIdeaScreen = props => {
     setLoading(true)
     setError(false)
     let data = {
-      title: title,
-      description: description,
+      title: title.trim(),
+      description: description.trim(),
       userId: idea.idea.userId
     }
     axios.put('', data).then(async response => {

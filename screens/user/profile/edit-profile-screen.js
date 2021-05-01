@@ -185,16 +185,16 @@ const EditProfileScreen = props => {
     formData.append('id', appContext.userData.id)
     formData.append('email', appContext.userData.email)
     // noinspection JSUnresolvedVariable
-    formData.append('userRole', appContext.userData.userRole)
+    formData.append('userRole', 'Influencer')
     // noinspection JSUnresolvedVariable
     // formData.append('profileImagePath', appContext.userData.profileImagePath)
-    formData.append('firstName', firstName)
-    formData.append('lastName', lastName)
+    formData.append('firstName', firstName.trim())
+    formData.append('lastName', lastName.trim())
     // noinspection JSUnresolvedVariable
     formData.append('gender', gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender)
     formData.append('birthDate', birthDate)
-    formData.append('address', address)
-    formData.append('phoneNumber', phoneNumber)
+    formData.append('address', address.trim())
+    formData.append('phoneNumber', phoneNumber.trim())
     // let data = {
     //   id: appContext.userData.id,
     //   email: appContext.userData.email,

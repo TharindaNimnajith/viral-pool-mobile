@@ -77,8 +77,8 @@ const AddIdeaScreen = ({navigation}) => {
     setLoading(true)
     setError(false)
     let data = {
-      title: title,
-      description: description,
+      title: title.trim(),
+      description: description.trim(),
       userId: appContext.userData.id
     }
     axios.post('', data).then(async response => {
