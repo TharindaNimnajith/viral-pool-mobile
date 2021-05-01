@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
 OngoingProjectListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Ongoing Projects',
+    headerTitle: 'Ongoing Jobs',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }

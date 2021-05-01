@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
 RejectedProjectListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Rejected Projects',
+    headerTitle: 'Rejected Jobs',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }

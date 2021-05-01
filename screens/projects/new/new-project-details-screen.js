@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
 NewProjectDetailsScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Project Details',
+    headerTitle: 'Job Details',
     headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }

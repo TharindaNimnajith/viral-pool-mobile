@@ -203,7 +203,7 @@ const InternalNavigator = createDrawerNavigator({
   OngoingProjects: {
     screen: OngoingProjectsNavigator,
     navigationOptions: {
-      drawerLabel: 'Ongoing Projects',
+      drawerLabel: 'Ongoing Jobs',
       drawerIcon: <Ionicons name='flash'
                             size={25}
                             color={Colors.primaryColor}/>
@@ -212,7 +212,7 @@ const InternalNavigator = createDrawerNavigator({
   CompletedProjects: {
     screen: CompletedProjectsNavigator,
     navigationOptions: {
-      drawerLabel: 'Completed Projects',
+      drawerLabel: 'Completed Jobs',
       drawerIcon: <Ionicons name='checkmark-done'
                             size={25}
                             color={Colors.primaryColor}/>
@@ -221,7 +221,7 @@ const InternalNavigator = createDrawerNavigator({
   // RejectedProjects: {
   //   screen: RejectedProjectsNavigator,
   //   navigationOptions: {
-  //     drawerLabel: 'REJECTED PROJECTS',
+  //     drawerLabel: 'Rejected Jobs',
   //     drawerIcon: <Ionicons name='warning'
   //                           size={25}
   //                           color={Colors.primaryColor}/>
