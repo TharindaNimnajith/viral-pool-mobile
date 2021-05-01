@@ -64,14 +64,23 @@ const DashboardScreen = props => {
         <View style={styles.headerStyle}>
           <View style={styles.viewStyle}>
             <TouchableWithoutFeedback onPress={onProfilePress}>
-              <Image style={styles.avatarStyle}
-                     source={{
-                       uri: appContext.userData.profileImagePath
-                     }}/>
+              {
+                appContext?.userData?.profileImagePath ? (
+                  <Image style={styles.avatarStyle}
+                         source={{
+                           uri: appContext?.userData?.profileImagePath
+                         }}/>
+                ) : (
+                  <Image style={styles.avatarStyle}
+                         source={{
+                           uri: appContext?.userData?.profileImagePath
+                         }}/>
+                )
+              }
             </TouchableWithoutFeedback>
             <Text style={styles.titleStyle}
                   onPress={onProfilePress}>
-              {appContext.userData.firstName} {appContext.userData.lastName}
+              {appContext?.userData?.firstName} {appContext?.userData?.lastName}
             </Text>
           </View>
         </View>

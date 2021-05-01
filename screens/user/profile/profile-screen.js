@@ -87,6 +87,48 @@ const ProfileScreen = props => {
     props.navigation.navigate('EditProfile')
   }
 
+  function dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    var byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0)
+      byteString = atob(dataURI.split(',')[1]);
+    else
+      byteString = unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    var ia = new Uint8Array(byteString.length);
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
+  }
+
+  // function dataURLtoFile(dataurl, filename) {
+  //
+  //   var arr = dataurl.split(','),
+  //     mime = arr[0].match(/:(.*?);/)[1],
+  //     bstr = atob(arr[1]),
+  //     n = bstr.length,
+  //     u8arr = new Uint8Array(n);
+  //
+  //   while(n--){
+  //     u8arr[n] = bstr.charCodeAt(n);
+  //   }
+  //
+  //   return new File([u8arr], filename, {type:mime});
+  // }
+  //
+  // function urltoFile(url, filename, mimeType){
+  //   return (fetch(url)
+  //       .then(function(res){return res.arrayBuffer();})
+  //       .then(function(buf){return new File([buf], filename,{type:mimeType});})
+  //   );
+  // }
+
   const pickImage = async () => {
     setVisible(false)
     setError(false)
@@ -95,31 +137,58 @@ const ProfileScreen = props => {
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-      base64: false,
+      base64: true,
       allowsMultipleSelection: false
     })
+
     // noinspection JSUnresolvedVariable,JSUnusedLocalSymbols
     if (!result.cancelled) {
       // console.log(result)
-      setLoading(false)
-      setLoading(true)
+      // setLoading(false)
+      // setLoading(true)
       // noinspection JSUnresolvedVariable
+
       let localUri = result.uri
       setImage(localUri)
       let filename = localUri.split('/').pop()
       let match = /\.(\w+)$/.exec(filename)
       // noinspection JSUnusedLocalSymbols
       let type = match ? `image/${match[1]}` : `image`
-      // const headers = {
-      //   Accept: 'application/json',
-      //   'Content-Type': 'multipart/form-data'
-      // }
+
+      //console.log(result)
+      // console.log(dataURItoBlob())
+
+      // let uriParts = result.uri.split('.');
+      // let fileType = result.uri[result.uri.length - 1];
+
+      // // Form Data
+      //
+      let formData1 = new FormData();
+      formData1.append('FormFile',{
+          uri: result.uri,
+          name: `photo.png`,
+          type: `image/png`,
+        })
+      formData1.append('Id',appContext.userData.id)
+      formData1.append('Email',appContext.userData.email)
+      formData1.append('UserRole','Influencer')
+      //
+      //
+      //
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${appContext.accessToken}`,
         'client_id': 'UFwv4s5sAHYyRS2q'
       }
+      //
+      // let options = {
+      //   method: 'PUT',
+      //   body: formData1,
+      //   headers: headers,
+      // };
+
+
       FileSystem.uploadAsync(
         `${Util.BASE_URL}User`,
         `${localUri}`,
@@ -133,7 +202,7 @@ const ProfileScreen = props => {
           parameters: {
             'id': appContext.userData.id,
             'email': appContext.userData.email,
-            'userRole': appContext.userData.userRole,
+            'userRole': 'Influencer',
             'firstName': appContext.userData.firstName,
             'lastName': appContext.userData.lastName,
             'gender': appContext.userData.gender,
@@ -142,14 +211,15 @@ const ProfileScreen = props => {
             'phoneNumber': appContext.userData.phoneNumber
           }
         }).then(async response => {
-        console.log(response)
         if (response.status === 200) {
+          const data = JSON.parse(response.body).data
+          console.log(data)
           // noinspection JSUnresolvedVariable
           // console.log(response.data.data)
           // noinspection JSUnresolvedVariable
-          await appContext.SetUserData(response.data.data)
+          await appContext.SetUserData(data)
           // noinspection JSUnresolvedVariable
-          await storeObjectData(Util.USER_DATA, response.data.data)
+          await storeObjectData(Util.USER_DATA, data)
           setLoading(false)
           await showSuccessAlert()
         } else {
@@ -161,12 +231,13 @@ const ProfileScreen = props => {
         setError(true)
         console.log(error)
       })
-      return
-      const formData = new FormData()
-      formData.append('id', appContext.userData.id)
-      formData.append('email', appContext.userData.email)
-      // noinspection JSUnresolvedVariable
-      formData.append('userRole', appContext.userData.userRole)
+
+
+      // const formData = new FormData()
+      // formData.append('id', appContext.userData.id)
+      // formData.append('email', appContext.userData.email)
+      // // noinspection JSUnresolvedVariable
+      // formData.append('userRole', appContext.userData.userRole)
       // noinspection JSUnresolvedVariable
       // formData.append('profileImagePath', appContext.userData.profileImagePath)
       // noinspection JSUnresolvedVariable
@@ -188,18 +259,18 @@ const ProfileScreen = props => {
       //   data: result.base64
       // })
       // noinspection JSUnresolvedVariable
-      formData.append('formFile', result.base64)
-      // noinspection JSUnresolvedVariable
-      formData.append('firstName', appContext.userData.firstName)
-      // noinspection JSUnresolvedVariable
-      formData.append('lastName', appContext.userData.lastName)
-      // noinspection JSUnresolvedVariable
-      formData.append('gender', appContext.userData.gender)
-      // noinspection JSUnresolvedVariable
-      formData.append('birthDate', appContext.userData.birthDate)
-      formData.append('address', appContext.userData.address)
-      // noinspection JSUnresolvedVariable
-      formData.append('phoneNumber', appContext.userData.phoneNumber)
+      // formData.append('formFile', result.base64)
+      // // noinspection JSUnresolvedVariable
+      // formData.append('firstName', appContext.userData.firstName)
+      // // noinspection JSUnresolvedVariable
+      // formData.append('lastName', appContext.userData.lastName)
+      // // noinspection JSUnresolvedVariable
+      // formData.append('gender', appContext.userData.gender)
+      // // noinspection JSUnresolvedVariable
+      // formData.append('birthDate', appContext.userData.birthDate)
+      // formData.append('address', appContext.userData.address)
+      // // noinspection JSUnresolvedVariable
+      // formData.append('phoneNumber', appContext.userData.phoneNumber)
       // let data = {
       //   id: appContext.userData.id,
       //   email: appContext.userData.email,
@@ -213,22 +284,47 @@ const ProfileScreen = props => {
       //   phoneNumber: appContext.userData.phoneNumber
       // }
       // console.log(formData)
-      axios.put('User', formData).then(async response => {
-        if (response.status === 200) {
-          // console.log(response.data.data)
-          await appContext.SetUserData(response.data.data)
-          await storeObjectData(Util.USER_DATA, response.data.data)
-          setLoading(false)
-          await showSuccessAlert()
-        } else {
-          setLoading(false)
-          setError(true)
-        }
-      }).catch(async error => {
-        setLoading(false)
-        setError(true)
-        console.log(error)
-      })
+
+
+      // axios.put('User', formData1).then(async response => {
+      //   console.log(response)
+      //   if (response.status === 200) {
+      //      // console.log(response.data)
+      //     //await appContext.SetUserData(response.data.data)
+      //     //await storeObjectData(Util.USER_DATA, response.data.data)
+      //     //setLoading(false)
+      //     //await showSuccessAlert()
+      //   } else {
+      //     setLoading(false)
+      //     setError(true)
+      //   }
+      // }).catch(async error => {
+      //   setLoading(false)
+      //   setError(true)
+      //   console.log(error)
+      // })
+
+
+      // instance.post('weatherforecast', formData1).then(async response => {
+      //   console.log(response)
+      //   if (response.status === 200) {
+      //     // console.log(response.data.data)
+      //     await appContext.SetUserData(response.data.data)
+      //     await storeObjectData(Util.USER_DATA, response.data.data)
+      //     setLoading(false)
+      //     await showSuccessAlert()
+      //   } else {
+      //     setLoading(false)
+      //     setError(true)
+      //   }
+      // }).catch(async error => {
+      //   setLoading(false)
+      //   setError(true)
+      //   console.log(error)
+      // })
+
+
+
       // noinspection JSUnresolvedVariable
       // RNFetchBlob.fetch('PUT', `${Util.BASE_URL}User`, {
       //   Authorization: `Bearer ${appContext.accessToken}`,
@@ -302,10 +398,14 @@ const ProfileScreen = props => {
       </Dialog.Container>
       <View style={styles.mainViewStyle}>
         <View style={styles.headerStyle}>
-          <Image style={styles.avatarStyle}
-                 source={{
-                   uri: image
-                 }}/>
+          {
+            image && (
+              <Image style={styles.avatarStyle}
+                     source={{
+                       uri: image
+                     }}/>
+            )
+          }
         </View>
         <View style={styles.bodyStyle}>
           <View style={styles.bodyContentStyle}>
@@ -343,10 +443,10 @@ const ProfileScreen = props => {
               </View>
               <View style={styles.viewStyle}>
                 {
-                  appContext.userData.gender.toUpperCase() === 'MALE' ? (
+                  appContext.userData.gender?.toUpperCase() === 'MALE' ? (
                     <Ionicons name='man'
                               size={20}/>
-                  ) : appContext.userData.gender.toUpperCase() === 'FEMALE' ? (
+                  ) : appContext.userData.gender?.toUpperCase() === 'FEMALE' ? (
                     <Ionicons name='woman'
                               size={20}/>
                   ) : (
@@ -355,14 +455,14 @@ const ProfileScreen = props => {
                   )
                 }
                 <Text style={styles.textStyle}>
-                  {appContext.userData.gender.charAt(0).toUpperCase() + appContext.userData.gender.slice(1)}
+                  {appContext.userData.gender?.charAt(0).toUpperCase() + appContext.userData.gender?.slice(1)}
                 </Text>
               </View>
               <View style={styles.viewStyle}>
                 <Ionicons name='calendar'
                           size={20}/>
                 <Text style={styles.textStyle}>
-                  {appContext.userData.birthDate.slice(0, 10)}
+                  {appContext.userData.birthDate?.slice(0, 10)}
                 </Text>
               </View>
               <View style={styles.viewStyle}>
