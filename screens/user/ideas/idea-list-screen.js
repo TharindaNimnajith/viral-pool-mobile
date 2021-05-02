@@ -52,14 +52,11 @@ const IdeaListScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 15,
     backgroundColor: Colors.primaryColor,
     padding: 10,
-    width: wp('40%'),
+    width: wp('85%'),
     borderRadius: 5,
-    position: 'absolute',
-    alignSelf: 'flex-end',
     alignItems: 'center'
   },
   buttonTextStyle: {
@@ -67,14 +64,16 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   listStyle: {
-    marginTop: 70,
-    width: wp('100%')
+    width: wp('95%'),
+    marginTop: 65,
+    marginBottom: 10
   },
   mainViewStyle: {
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.secondaryColor,
+    alignItems: 'center'
   },
   viewStyle: {
-    marginRight: 15
+    position: 'absolute'
   }
 })
 

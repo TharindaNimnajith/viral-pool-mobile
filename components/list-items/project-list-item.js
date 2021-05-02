@@ -1,6 +1,6 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
 
 const ProjectListItem = props => {
@@ -53,14 +53,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: Colors.secondaryColor,
     marginHorizontal: wp('4%'),
-    marginVertical: hp('0.5%'),
-    height: 140,
+    height: 80,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-start',
-    marginTop: 10,
-    marginBottom: 10
+    marginTop: 6,
+    marginBottom: 6
   }
 })
 

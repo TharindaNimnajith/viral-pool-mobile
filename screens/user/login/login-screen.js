@@ -28,11 +28,11 @@ const LoginScreen = ({navigation}) => {
   // const [email, setEmail] = useState(LoginDetails[0].email)
   // const [password, setPassword] = useState(LoginDetails[0].password)
 
-  // const [email, setEmail] = useState(LoginDetails[1].email)
-  // const [password, setPassword] = useState(LoginDetails[1].password)
+  const [email, setEmail] = useState(LoginDetails[1].email)
+  const [password, setPassword] = useState(LoginDetails[1].password)
 
-  const [email, setEmail] = useState(LoginDetails[2].email)
-  const [password, setPassword] = useState(LoginDetails[2].password)
+  // const [email, setEmail] = useState(LoginDetails[2].email)
+  // const [password, setPassword] = useState(LoginDetails[2].password)
 
   const [emailValid, setEmailValid] = useState(true)
   const [passwordValid, setPasswordValid] = useState(true)

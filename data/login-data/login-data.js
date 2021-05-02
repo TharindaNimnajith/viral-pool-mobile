@@ -7,12 +7,10 @@ export const LoginDetails = [
   ),
   new LoginModel(
     'tharindarajapakshe@y7mail.com',
-    // 'wzrr9992QH'
     'tharinda'
   ),
   new LoginModel(
     'tharindarajapakshe@gmail.com',
-    // 'wzrr9992QH'
     'tharinda'
   )
 ]
