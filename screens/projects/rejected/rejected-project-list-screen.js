@@ -27,19 +27,26 @@ const RejectedProjectListScreen = ({navigation}) => {
   }
 
   return (
-    <View style={styles.listStyle}>
-      <FlatList keyExtractor={(item, index) => index.toString()}
-                data={RejectedProjects}
-                numColumns={1}
-                renderItem={renderItemsFunction}/>
+    <View style={styles.mainViewStyle}>
+      <View style={styles.listStyle}>
+        <FlatList keyExtractor={(item, index) => index.toString()}
+                  data={RejectedProjects}
+                  numColumns={1}
+                  renderItem={renderItemsFunction}/>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   listStyle: {
-    width: wp('100%'),
-    backgroundColor: Colors.secondaryColor
+    width: wp('95%'),
+    marginTop: 10,
+    marginBottom: 10
+  },
+  mainViewStyle: {
+    backgroundColor: Colors.secondaryColor,
+    alignItems: 'center'
   }
 })
 

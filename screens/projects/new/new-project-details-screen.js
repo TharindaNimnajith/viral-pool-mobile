@@ -13,7 +13,13 @@ const NewProjectDetailsScreen = props => {
         <View style={styles.mainViewStyle}>
           <View style={styles.viewStyle}>
             <Text>
-              {project.project.id}
+              {project.project.title}
+            </Text>
+            <Text>
+              {project.project.description}
+            </Text>
+            <Text>
+              {project.project.status}
             </Text>
           </View>
         </View>
