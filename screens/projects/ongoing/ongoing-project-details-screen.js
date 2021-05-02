@@ -35,8 +35,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor
   },
   viewStyle: {
-    alignItems: 'center',
-    marginTop: 10
+    margin: 20
   }
 })
 
