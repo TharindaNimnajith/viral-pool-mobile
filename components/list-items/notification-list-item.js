@@ -19,7 +19,13 @@ const NotificationListItem = props => {
                       onPress={pressNotification}>
       <View>
         <Text>
-          {props.itemData.item.id}
+          {props.itemData.item.title}
+        </Text>
+        <Text>
+          {props.itemData.item.description}
+        </Text>
+        <Text>
+          {props.itemData.item.date}
         </Text>
       </View>
     </TouchableOpacity>

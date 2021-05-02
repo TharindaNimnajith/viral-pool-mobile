@@ -1,9 +1,7 @@
 class IdeaModel {
-  constructor(id, title, description, userId) {
-    this.id = id
+  constructor(title, description) {
     this.title = title
     this.description = description
-    this.userId = userId
   }
 }
 

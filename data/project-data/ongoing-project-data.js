@@ -2,33 +2,58 @@ import ProjectModel from '../../models/project-model'
 
 export const OngoingProjects = [
   new ProjectModel(
-    '1',
-    'P1',
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
     'Ongoing'
   ),
   new ProjectModel(
-    '2',
-    'P2',
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
     'Ongoing'
   ),
   new ProjectModel(
-    '3',
-    'P3',
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
     'Ongoing'
   ),
   new ProjectModel(
-    '4',
-    'P4',
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
     'Ongoing'
   ),
   new ProjectModel(
-    '5',
-    'P5',
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
     'Ongoing'
   ),
   new ProjectModel(
-    '6',
-    'P6',
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
+    'Ongoing'
+  ),
+  new ProjectModel(
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
+    'Ongoing'
+  ),
+  new ProjectModel(
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
+    'Ongoing'
+  ),
+  new ProjectModel(
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
+    'Ongoing'
+  ),
+  new ProjectModel(
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
+    'Ongoing'
+  ),
+  new ProjectModel(
+    'Youtube video promoting Dialog',
+    'A comedy video is required for promoting 4G internet services provided by Dialog.',
     'Ongoing'
   )
 ]

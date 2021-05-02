@@ -1,7 +1,7 @@
 class ProjectModel {
-  constructor(id, name, status) {
-    this.id = id
-    this.name = name
+  constructor(title, description, status) {
+    this.title = title
+    this.description = description
     this.status = status
   }
 }

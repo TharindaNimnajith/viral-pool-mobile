@@ -15,7 +15,7 @@ import axios from 'axios'
 import validator from 'validator'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
-// import {LoginDetails} from '../../../data/login-data/login-data'
+import {LoginDetails} from '../../../data/login-data/login-data'
 import {Util} from '../../../util/util'
 import {AppContext} from '../../../global/app-context'
 import {storeObjectData, storeStringData} from '../../../helpers/local-storage-helpers'
@@ -31,17 +31,17 @@ const LoginScreen = ({navigation}) => {
   // const [email, setEmail] = useState(LoginDetails[1].email)
   // const [password, setPassword] = useState(LoginDetails[1].password)
 
-  // const [email, setEmail] = useState(LoginDetails[2].email)
-  // const [password, setPassword] = useState(LoginDetails[2].password)
+  const [email, setEmail] = useState(LoginDetails[2].email)
+  const [password, setPassword] = useState(LoginDetails[2].password)
 
-  // const [emailValid, setEmailValid] = useState(true)
-  // const [passwordValid, setPasswordValid] = useState(true)
+  const [emailValid, setEmailValid] = useState(true)
+  const [passwordValid, setPasswordValid] = useState(true)
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
 
-  const [emailValid, setEmailValid] = useState(false)
-  const [passwordValid, setPasswordValid] = useState(false)
+  // const [emailValid, setEmailValid] = useState(false)
+  // const [passwordValid, setPasswordValid] = useState(false)
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')

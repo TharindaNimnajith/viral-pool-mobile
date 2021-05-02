@@ -19,7 +19,10 @@ const IdeaListItem = props => {
                       onPress={redirectToDetailsScreen}>
       <View>
         <Text>
-          {props.itemData.item.id}
+          {props.itemData.item.title}
+        </Text>
+        <Text>
+          {props.itemData.item.description}
         </Text>
       </View>
     </TouchableOpacity>
