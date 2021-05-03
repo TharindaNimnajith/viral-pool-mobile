@@ -6,6 +6,10 @@ export const LoginDetails = [
     '#Compaq123'
   ),
   new LoginModel(
+    'angajasinghe@gmail.com',
+    '#Compaq123'
+  ),
+  new LoginModel(
     'tharindarajapakshe@y7mail.com',
     'tharinda'
   ),
