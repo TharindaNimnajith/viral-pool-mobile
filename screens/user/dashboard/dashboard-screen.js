@@ -137,7 +137,7 @@ const DashboardScreen = props => {
           </TouchableOpacity>
           <View style={styles.socialAccountsViewStyle}>
             <TouchableOpacity activeOpacity={1}>
-              <SocialIcon title='Sign in with Facebook'
+              <SocialIcon title='Connect with Facebook'
                           button
                           raised={false}
                           type='facebook'
@@ -147,7 +147,7 @@ const DashboardScreen = props => {
                           onPress={onSelectFacebook}/>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={1}>
-              <SocialIcon title='Sign in with Youtube'
+              <SocialIcon title='Connect with Youtube'
                           button
                           raised={false}
                           type='youtube'
@@ -157,7 +157,7 @@ const DashboardScreen = props => {
                           onPress={onSelectYoutube}/>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={1}>
-              <SocialIcon title='Sign in with Instagram'
+              <SocialIcon title='Connect with Instagram'
                           button
                           raised={false}
                           type='instagram'
@@ -171,7 +171,7 @@ const DashboardScreen = props => {
               <Image style={styles.tiktokIconStyle}
                      source={require('../../../assets/tiktok.png')}/>
               <View style={styles.tiktokButtonStyle}>
-                <SocialIcon title='Sign in with Tiktok'
+                <SocialIcon title='Connect with Tiktok'
                             button
                             raised={false}
                             type='github'
