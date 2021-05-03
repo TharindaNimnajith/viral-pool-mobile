@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
   headerStyle: {
     backgroundColor: Colors.primaryColor,
     height: wp('42%'),
-    borderBottomRightRadius: wp('25%'),
+    borderBottomRightRadius: wp('10%'),
     borderBottomLeftRadius: wp('10%')
   },
   keyStyle: {
