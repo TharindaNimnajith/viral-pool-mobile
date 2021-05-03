@@ -44,12 +44,12 @@ async function registerForPushNotificationsAsync() {
       finalStatus = status
     }
     if (finalStatus !== 'granted') {
-      alert('Failed to get push token for expo push notification.')
+      console.log('Failed to get push token for expo push notification.')
       return
     }
     token = (await getExpoPushTokenAsync()).data
   } else {
-    alert('Must use physical device for expo push notifications.')
+    console.log('Must use physical device for expo push notifications.')
   }
 
   if (Platform.OS === 'android') {
@@ -64,16 +64,7 @@ async function registerForPushNotificationsAsync() {
   return token
 }
 
-const App = () => {
-  const patterns = [
-    Constants.WARNING_1,
-    Constants.WARNING_2,
-    Constants.WARNING_3,
-    'Animated: `useNativeDriver`'
-  ]
-
-  LogBox.ignoreLogs(patterns)
-
+const ExpoToken = () => {
   // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
@@ -82,10 +73,9 @@ const App = () => {
 
   useEffect(() => {
     registerForPushNotificationsAsync().then(async token => {
-      await storeStringData(Util.EXPO_PUSH_TOKEN, token)
-      // The following function call is not working
-      // Therefore, Expo Push Notification Token is not stored in AppContext
       await appContext.SetExpoPushToken(token)
+      // Following function call is not working after expo build
+      await storeStringData(Util.EXPO_PUSH_TOKEN, token)
     })
 
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
@@ -108,11 +98,26 @@ const App = () => {
     }
   }, [])
 
+  return (<></>);
+}
+
+const App = () => {
+  const patterns = [
+    Constants.WARNING_1,
+    Constants.WARNING_2,
+    Constants.WARNING_3,
+    'Animated: `useNativeDriver`'
+  ]
+
+  LogBox.ignoreLogs(patterns)
+
   return (
     <GlobalState>
+      <ExpoToken/>
       <NavigationBar/>
     </GlobalState>
   )
 }
 
 export default App
+
