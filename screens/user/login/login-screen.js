@@ -28,20 +28,20 @@ const LoginScreen = ({navigation}) => {
   // const [email, setEmail] = useState(LoginDetails[0].email)
   // const [password, setPassword] = useState(LoginDetails[0].password)
 
-  const [email, setEmail] = useState(LoginDetails[1].email)
-  const [password, setPassword] = useState(LoginDetails[1].password)
+  // const [email, setEmail] = useState(LoginDetails[1].email)
+  // const [password, setPassword] = useState(LoginDetails[1].password)
 
   // const [email, setEmail] = useState(LoginDetails[2].email)
   // const [password, setPassword] = useState(LoginDetails[2].password)
 
-  const [emailValid, setEmailValid] = useState(true)
-  const [passwordValid, setPasswordValid] = useState(true)
+  // const [emailValid, setEmailValid] = useState(true)
+  // const [passwordValid, setPasswordValid] = useState(true)
 
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  // const [emailValid, setEmailValid] = useState(false)
-  // const [passwordValid, setPasswordValid] = useState(false)
+  const [emailValid, setEmailValid] = useState(false)
+  const [passwordValid, setPasswordValid] = useState(false)
 
   const [state] = useState('string')
   const [redirectUri] = useState('string')
