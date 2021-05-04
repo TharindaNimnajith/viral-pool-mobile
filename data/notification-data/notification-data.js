@@ -1,4 +1,7 @@
 import NotificationModel from '../../models/notification-model'
+import {NewProjects} from '../project-data/new-project-data'
+import {OngoingProjects} from '../project-data/ongoing-project-data'
+import {CompletedProjects} from '../project-data/completed-project-data'
 
 export const Notifications = [
   new NotificationModel(
@@ -6,120 +9,76 @@ export const Notifications = [
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[0]
+  ),
+  new NotificationModel(
+    'Ongoing Job',
+    'Your submission has been rejected.',
+    new Date().toLocaleDateString().toString(),
+    'OngoingProjectDetails',
+    OngoingProjects[0]
+  ),
+  new NotificationModel(
+    'Completed Job',
+    'You have received a payment.',
+    new Date().toLocaleDateString().toString(),
+    'CompletedProjectDetails',
+    CompletedProjects[0]
   ),
   new NotificationModel(
     'New Job',
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[1]
   ),
   new NotificationModel(
     'New Job',
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[2]
   ),
   new NotificationModel(
     'New Job',
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[3]
   ),
   new NotificationModel(
     'New Job',
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[4]
   ),
   new NotificationModel(
     'New Job',
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[5]
   ),
   new NotificationModel(
     'New Job',
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[6]
   ),
   new NotificationModel(
     'New Job',
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[7]
   ),
   new NotificationModel(
     'New Job',
     'You have been assigned a new job.',
     new Date().toLocaleDateString().toString(),
     'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
-  ),
-  new NotificationModel(
-    'New Job',
-    'You have been assigned a new job.',
-    new Date().toLocaleDateString().toString(),
-    'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
-  ),
-  new NotificationModel(
-    'New Job',
-    'You have been assigned a new job.',
-    new Date().toLocaleDateString().toString(),
-    'NewProjectDetails',
-    {
-      title: 'A video promoting Dialog',
-      description: 'A comedy video is required for promoting 4G internet services provided by Dialog.',
-      status: 'New'
-    }
+    NewProjects[8]
   )
 ]
