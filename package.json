@@ -1,5 +1,37 @@
 {
   "main": "index.js",
+  "name": "viralpool",
+  "description": "Viralpool mobile application for content creators.",
+  "keywords": [
+    "expo",
+    "react-native",
+    "viralpool",
+    "android",
+    "ios",
+    "mobile-application"
+  ],
+  "version": "1.0.0",
+  "license": "MIT License",
+  "private": true,
+  "author": "Tharinda Nimnajith Rajapaksha",
+  "repository": {
+    "url": "https://github.com/TharindaNimnajith/viral-pool-mobile.git",
+    "type": "git"
+  },
+  "contributors": [
+    {
+      "email": "tharindarajapakshe@y7mail.com",
+      "name": "Tharinda Nimnajith Rajapaksha",
+      "url": "https://github.com/TharindaNimnajith"
+    }
+  ],
+  "maintainers": [
+    {
+      "email": "tharindarajapakshe@y7mail.com",
+      "name": "Tharinda Nimnajith Rajapaksha",
+      "url": "https://github.com/TharindaNimnajith"
+    }
+  ],
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -40,6 +72,5 @@
   "devDependencies": {
     "@babel/core": "~7.9.0",
     "babel-preset-expo": "^8.3.0"
-  },
-  "private": true
+  }
 }

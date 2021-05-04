@@ -1,18 +1,42 @@
 {
   "expo": {
     "name": "Viralpool",
-    "slug": "viralpool-content-creator-mobile-app",
     "description": "Viralpool mobile application for content creators.",
-    "privacy": "public",
+    "slug": "viralpool-content-creator-mobile-app",
+    "owner": "tharindarajapakshe",
+    "privacy": "unlisted",
     "version": "1.0.0",
+    "platforms": ["ios", "android"],
+    "githubUrl": "https://github.com/TharindaNimnajith/viral-pool-mobile.git",
     "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "backgroundColor": "#ffffff",
+    "primaryColor": "#204ecf",
     "icon": "./assets/logo_square.png",
+    "notification": {
+      "icon": "",
+      "color": "#ffffff",
+      "iosDisplayInForeground": true,
+      "androidMode": "collapse",
+      "androidCollapsedTitle": "Viralpool new interactions"
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#204ecf",
+      "hidden": false,
+      "translucent": true
+    },
+    "developmentClient": {
+      "silentLaunch": true
+    },
     "splash": {
       "image": "./assets/logo_square.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
