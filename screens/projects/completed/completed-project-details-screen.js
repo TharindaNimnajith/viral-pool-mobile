@@ -4,28 +4,13 @@ import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
+import ProjectDetails from "../../../components/project-details/project-details";
 
 const CompletedProjectDetailsScreen = props => {
   let project = props.navigation.getParam('project')
 
   return (
-    <SafeAreaView>
-      {/*<ScrollView>*/}
-      <View style={styles.mainViewStyle}>
-        <View style={styles.viewStyle}>
-          <Text>
-            {project.project.title}
-          </Text>
-          <Text>
-            {project.project.description}
-          </Text>
-          <Text>
-            {project.project.status}
-          </Text>
-        </View>
-      </View>
-      {/*</ScrollView>*/}
-    </SafeAreaView>
+    <ProjectDetails project={project}/>
   )
 }
 
