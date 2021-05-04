@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useRef} from 'react'
 // noinspection ES6UnusedImports
 import {Platform} from 'react-native'
 // noinspection ES6CheckImport
-import {useNavigation} from '@react-navigation/native'
+// import {useNavigation} from '@react-navigation/native'
 import ExpoConstants from 'expo-constants'
 // noinspection ES6UnusedImports
 import {
@@ -31,7 +31,7 @@ const ExpoPushNotifications = () => {
   // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
-  const navigation = useNavigation()
+  // const navigation = useNavigation()
 
   const notificationListener = useRef()
   const responseListener = useRef()
@@ -56,7 +56,7 @@ const ExpoPushNotifications = () => {
       // navigate(notificationBody.screen, {
       //   data: notificationBody.data
       // })
-      navigation.navigate('Profile')
+      // navigation.navigate(notificationBody.screen)
     })
 
     return () => {
