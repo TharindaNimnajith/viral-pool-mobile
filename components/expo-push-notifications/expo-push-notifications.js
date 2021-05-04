@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useRef} from 'react'
-import {Platform} from 'react-native'
+// import {Platform} from 'react-native'
 import ExpoConstants from 'expo-constants'
+// noinspection ES6UnusedImports
 import {
   addNotificationReceivedListener,
   addNotificationResponseReceivedListener,
@@ -10,13 +11,14 @@ import {
   getPermissionsAsync,
   removeNotificationSubscription,
   requestPermissionsAsync,
+  setNotificationCategoryAsync,
   setNotificationChannelAsync,
   setNotificationHandler
 } from 'expo-notifications'
 import {AppContext} from '../../global/app-context'
 import {storeStringData} from '../../helpers/local-storage-helpers'
 import Constants from '../../shared/constants'
-import Colors from '../../shared/colors'
+// import Colors from '../../shared/colors'
 import {Util} from '../../util/util'
 
 const ExpoPushNotifications = () => {
@@ -87,23 +89,46 @@ async function registerForPushNotificationsAsync() {
     console.log(Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
   }
 
-  if (Platform.OS === 'android') {
-    await setNotificationChannelAsync(
-      'default',
-      {
-        name: 'default',
-        importance: AndroidImportance.MAX,
-        bypassDnd: false,
-        description: 'Viralpool',
-        lightColor: Colors.primaryColor,
-        lockscreenVisibility: AndroidNotificationVisibility.PUBLIC,
-        showBadge: true,
-        sound: 'default',
-        vibrationPattern: [0, 250, 250, 250],
-        enableLights: true,
-        enableVibrate: true
-      })
-  }
+  // if (Platform.OS === 'android')
+  //   await setNotificationChannelAsync(
+  //     'default',
+  //     {
+  //       name: 'default',
+  //       importance: AndroidImportance.MAX,
+  //       bypassDnd: false,
+  //       description: 'Viralpool',
+  //       lightColor: Colors.primaryColor,
+  //       lockscreenVisibility: AndroidNotificationVisibility.PUBLIC,
+  //       showBadge: true,
+  //       sound: 'default',
+  //       vibrationPattern: [0, 250, 250, 250],
+  //       enableLights: true,
+  //       enableVibrate: true
+  //     })
+  //
+  // await setNotificationCategoryAsync(
+  //   'default',
+  //   [{
+  //     identifier: 'default',
+  //     buttonTitle: 'Viralpool',
+  //     textInput: {
+  //       submitButtonTitle: 'OK',
+  //       placeholder: ''
+  //     },
+  //     options: {
+  //       isDestructive: false,
+  //       isAuthenticationRequired: false,
+  //       opensAppToForeground: true
+  //     }
+  //   }],
+  //   {
+  //     customDismissAction: true,
+  //     allowInCarPlay: false,
+  //     showTitle: false,
+  //     showSubtitle: false,
+  //     allowAnnouncement: false,
+  //   }
+  // )
 
   return token
 }
