@@ -18,5 +18,7 @@ export default {
 
   EXPO_PUSH_NOTIFICATION_TOKEN_ERROR: 'Failed to get push token for expo push notification.',
 
-  EXPO_PUSH_NOTIFICATION_DEVICE_ERROR: 'Must use physical device for expo push notifications.'
+  EXPO_PUSH_NOTIFICATION_DEVICE_ERROR: 'Must use physical device for expo push notifications.',
+
+  NAVIGATOR_ERROR: 'The navigation object has not been initialized or finished mounting yet.'
 }

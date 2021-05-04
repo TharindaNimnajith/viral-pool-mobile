@@ -27,7 +27,7 @@ import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
 import {isEmpty} from '../../../helpers/common-helpers'
 import {storeObjectData} from '../../../helpers/local-storage-helpers'
-import {Util} from '../../../util/util'
+import {Const} from '../../../util/const'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
@@ -74,7 +74,7 @@ const EditProfileScreen = props => {
   // const [userData, setUserData] = useState(null)
   //
   // useEffect(() => {
-  //   getObjectData(Util.USER_DATA).then(userData => {
+  //   getObjectData(Const.USER_DATA).then(userData => {
   //     setUserData(userData)
   //   })
   // }, [])
@@ -213,7 +213,7 @@ const EditProfileScreen = props => {
         //   routeName: 'Profile'
         // })
         await appContext.SetUserData(response.data.data)
-        await storeObjectData(Util.USER_DATA, response.data.data)
+        await storeObjectData(Const.USER_DATA, response.data.data)
         setLoading(false)
         await showSuccessAlert()
       } else {

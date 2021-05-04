@@ -16,7 +16,7 @@ import validator from 'validator'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import {LoginDetails} from '../../../data/login-data/login-data'
-import {Util} from '../../../util/util'
+import {Const} from '../../../util/const'
 import {AppContext} from '../../../global/app-context'
 import {storeObjectData, storeStringData} from '../../../helpers/local-storage-helpers'
 import {isEmpty} from '../../../helpers/common-helpers'
@@ -82,9 +82,9 @@ const LoginScreen = ({navigation}) => {
       // headers: headers
     }).then(async response => {
       // noinspection JSUnresolvedVariable
-      await storeStringData(Util.ACCESS_TOKEN, response.data.access_token)
+      await storeStringData(Const.ACCESS_TOKEN, response.data.access_token)
       // noinspection JSUnresolvedVariable
-      await storeStringData(Util.REFRESH_TOKEN, response.data.refresh_token)
+      await storeStringData(Const.REFRESH_TOKEN, response.data.refresh_token)
       // noinspection JSUnresolvedVariable
       await appContext.SetAccessToken(response.data.access_token)
       // noinspection JSUnresolvedVariable
@@ -93,7 +93,7 @@ const LoginScreen = ({navigation}) => {
         // noinspection JSUnusedLocalSymbols
         axios.get('User').then(async response => {
           if (response.status === 200) {
-            await storeObjectData(Util.USER_DATA, response.data.data)
+            await storeObjectData(Const.USER_DATA, response.data.data)
             await appContext.SetUserData(response.data.data)
             navigation.navigate({
               routeName: 'Navigator'

@@ -1,6 +1,8 @@
 import React, {useContext, useEffect, useRef} from 'react'
 // noinspection ES6UnusedImports
 import {Platform} from 'react-native'
+// noinspection ES6CheckImport
+import {useNavigation} from '@react-navigation/native'
 import ExpoConstants from 'expo-constants'
 // noinspection ES6UnusedImports
 import {
@@ -21,11 +23,15 @@ import {storeStringData} from '../../helpers/local-storage-helpers'
 import Constants from '../../shared/constants'
 // noinspection ES6UnusedImports
 import Colors from '../../shared/colors'
-import {Util} from '../../util/util'
+import {Const} from '../../util/const'
+// noinspection ES6UnusedImports
+import {navigate} from '../../util/root-navigation'
 
 const ExpoPushNotifications = () => {
   // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
+
+  const navigation = useNavigation()
 
   const notificationListener = useRef()
   const responseListener = useRef()
@@ -33,20 +39,24 @@ const ExpoPushNotifications = () => {
   useEffect(() => {
     registerForPushNotificationsAsync().then(async token => {
       await appContext.SetExpoPushToken(token)
-      await storeStringData(Util.EXPO_PUSH_TOKEN, token)
+      await storeStringData(Const.EXPO_PUSH_TOKEN, token)
     })
 
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
     notificationListener.current = addNotificationReceivedListener(notification => {
       // This listener is fired whenever a notification is received while the app is foregrounded
-      console.log(notification.request.content.data)
+      // const notificationBody = notification.request.content.data
     })
 
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
     responseListener.current = addNotificationResponseReceivedListener(response => {
       // This listener is fired whenever a user taps on or interacts with a notification (works when app is
       // foregrounded, backgrounded, or killed)
-      console.log(response.notification.request.content.data)
+      // const notificationBody = response.notification.request.content.data
+      // navigate(notificationBody.screen, {
+      //   data: notificationBody.data
+      // })
+      navigation.navigate('Profile')
     })
 
     return () => {

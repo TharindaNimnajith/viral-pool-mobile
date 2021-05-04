@@ -20,6 +20,7 @@ import RejectedProjectListScreen from '../../screens/projects/rejected/rejected-
 import RejectedProjectDetailsScreen from '../../screens/projects/rejected/rejected-project-details-screen'
 import CompletedProjectListScreen from '../../screens/projects/completed/completed-project-list-screen'
 import CompletedProjectDetailsScreen from '../../screens/projects/completed/completed-project-details-screen'
+// import ExpoPushNotifications from '../expo-push-notifications/expo-push-notifications'
 import TestNotificationScreen from '../../screens/dev/test-notification-screen'
 import TestDevScreen from '../../screens/dev/test-dev-screen'
 import Colors from '../../shared/colors'
@@ -147,6 +148,10 @@ const ProfileNavigator = createStackNavigator({
     headerTintColor: Colors.secondaryColor
   }
 })
+
+// const ExpoPushNotificationNavigator = createStackNavigator({
+//   ExpoPushNotifications: ExpoPushNotifications
+// })
 
 const TestNotificationNavigator = createStackNavigator({
   TestNotification: TestNotificationScreen

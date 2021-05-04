@@ -23,7 +23,8 @@ import Dialog from 'react-native-dialog'
 // import RNFetchBlob from 'react-native-fetch-blob'
 import {AppContext} from '../../../global/app-context'
 import {storeObjectData} from '../../../helpers/local-storage-helpers'
-import {Util} from '../../../util/util'
+import {ApiUrl} from '../../../util/api-url'
+import {Const} from '../../../util/const'
 import Colors from '../../../shared/colors'
 import Constants from '../../../shared/constants'
 import Menu from '../../../components/buttons/menu-button'
@@ -47,7 +48,7 @@ const ProfileScreen = props => {
   // const [userData, setUserData] = useState(null)
   //
   // useEffect(() => {
-  //   getObjectData(Util.USER_DATA).then(userData => {
+  //   getObjectData(Const.USER_DATA).then(userData => {
   //     setUserData(userData)
   //   })
   // }, [])
@@ -175,7 +176,7 @@ const ProfileScreen = props => {
       // }
       // noinspection JSUnresolvedVariable
       FileSystem.uploadAsync(
-        `${Util.BASE_URL}User`,
+        `${ApiUrl.BASE_URL}User`,
         `${localUri}`,
         {
           headers: headers,
@@ -201,7 +202,7 @@ const ProfileScreen = props => {
           // noinspection JSUnresolvedVariable
           await appContext.SetUserData(data)
           // noinspection JSUnresolvedVariable
-          await storeObjectData(Util.USER_DATA, data)
+          await storeObjectData(Const.USER_DATA, data)
           setLoading(false)
           await showSuccessAlert()
         } else {
@@ -270,7 +271,7 @@ const ProfileScreen = props => {
       // axios.put('User', formData).then(async response => {
       //   if (response.status === 200) {
       //     await appContext.SetUserData(response.data.data)
-      //     await storeObjectData(Util.USER_DATA, response.data.data)
+      //     await storeObjectData(Const.USER_DATA, response.data.data)
       //     setLoading(false)
       //     await showSuccessAlert()
       //   } else {
@@ -283,7 +284,7 @@ const ProfileScreen = props => {
       //   console.log(error)
       // })
       // noinspection JSUnresolvedVariable
-      // RNFetchBlob.fetch('PUT', `${Util.BASE_URL}User`, {
+      // RNFetchBlob.fetch('PUT', `${ApiUrl.BASE_URL}User`, {
       //   Authorization: `Bearer ${appContext.accessToken}`,
       //   client_id: 'UFwv4s5sAHYyRS2q',
       //   'Content-Type': 'multipart/form-data',
@@ -322,7 +323,7 @@ const ProfileScreen = props => {
       // }]).then(async response => {
       //   if (response.status === 200) {
       //     await appContext.SetUserData(response.data.data)
-      //     await storeObjectData(Util.USER_DATA, response.data.data)
+      //     await storeObjectData(Const.USER_DATA, response.data.data)
       //     setLoading(false)
       //     await showSuccessAlert()
       //   } else {

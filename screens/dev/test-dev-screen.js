@@ -5,7 +5,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
 import {getStringData} from '../../helpers/local-storage-helpers'
-import {Util} from '../../util/util'
+import {Const} from '../../util/const'
 import Menu from '../../components/buttons/menu-button'
 import CombinedButtons from '../../components/buttons/combined-buttons'
 
@@ -18,13 +18,13 @@ const TestDevScreen = () => {
   const [expoPushToken, setExpoPushToken] = useState(null)
 
   useEffect(() => {
-    getStringData(Util.ACCESS_TOKEN).then(accessToken => {
+    getStringData(Const.ACCESS_TOKEN).then(accessToken => {
       setAccessToken(accessToken)
     })
-    getStringData(Util.REFRESH_TOKEN).then(refreshToken => {
+    getStringData(Const.REFRESH_TOKEN).then(refreshToken => {
       setRefreshToken(refreshToken)
     })
-    getStringData(Util.EXPO_PUSH_TOKEN).then(expoPushToken => {
+    getStringData(Const.EXPO_PUSH_TOKEN).then(expoPushToken => {
       setExpoPushToken(expoPushToken)
     })
   }, [])

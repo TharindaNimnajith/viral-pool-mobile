@@ -5,7 +5,8 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
 import {getStringData} from '../../helpers/local-storage-helpers'
-import {Util} from '../../util/util'
+import {Const} from '../../util/const'
+import {ApiUrl} from '../../util/api-url'
 import {Notifications} from '../../data/notification-data/notification-data';
 import Menu from '../../components/buttons/menu-button'
 import CombinedButtons from '../../components/buttons/combined-buttons'
@@ -17,7 +18,7 @@ const TestNotificationScreen = () => {
   const [expoPushToken, setExpoPushToken] = useState(null)
 
   useEffect(() => {
-    getStringData(Util.EXPO_PUSH_TOKEN).then(expoPushToken => {
+    getStringData(Const.EXPO_PUSH_TOKEN).then(expoPushToken => {
       setExpoPushToken(expoPushToken)
     })
   }, [])
@@ -84,7 +85,8 @@ async function sendPushNotification(expoPushToken) {
     title: Notifications[0].title,
     body: Notifications[0].description,
     data: {
-      data: 'NewProjectDetails'
+      screen: Notifications[0].screen,
+      data: Notifications[0].data
     }
   }
 
@@ -94,7 +96,7 @@ async function sendPushNotification(expoPushToken) {
     'Content-Type': 'application/json'
   }
 
-  await fetch(Util.EXPO_PUSH_NOTIFICATION_URL, {
+  await fetch(ApiUrl.EXPO_PUSH_NOTIFICATION_URL, {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(message)
@@ -106,7 +108,8 @@ async function sendPushNotification(expoPushToken) {
   //   "title": "New Job",
   //   "body": "You have been assigned a new job.",
   //   "data": {
-  //     "someData": "NewProjectDetails"
+  //     "screen": "NewProjectDetails"
+  //     "data": "data"
   //   }
   // }
   //
