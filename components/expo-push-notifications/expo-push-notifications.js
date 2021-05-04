@@ -14,6 +14,7 @@ import {
 } from 'expo-notifications'
 import {AppContext} from '../../global/app-context'
 import {storeStringData} from '../../helpers/local-storage-helpers'
+import Constants from '../../shared/constants'
 import Colors from '../../shared/colors'
 import {Util} from '../../util/util'
 
@@ -41,12 +42,12 @@ async function registerForPushNotificationsAsync() {
       finalStatus = status
     }
     if (finalStatus !== 'granted') {
-      console.log('Failed to get push token for expo push notification.')
+      console.log(Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
       return
     }
     token = (await getExpoPushTokenAsync()).data
   } else {
-    console.log('Must use physical device for expo push notifications.')
+    console.log(Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
   }
 
   if (Platform.OS === 'android') {

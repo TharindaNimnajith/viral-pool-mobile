@@ -12,5 +12,9 @@ export default {
 
   LOGIN_ERROR: 'Invalid email or password. Please try again!',
 
-  ERROR: 'An unexpected error occurred. Please try again later!'
+  ERROR: 'An unexpected error occurred. Please try again later!',
+
+  EXPO_PUSH_NOTIFICATION_TOKEN_ERROR: 'Failed to get push token for expo push notification.',
+
+  EXPO_PUSH_NOTIFICATION_DEVICE_ERROR: 'Must use physical device for expo push notifications.'
 }
