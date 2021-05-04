@@ -5,6 +5,7 @@ import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
 import {getStringData} from '../../helpers/local-storage-helpers'
 import {Util} from '../../util/util'
+import {Notifications} from '../../data/notification-data/notification-data';
 import Menu from '../../components/buttons/menu-button'
 import CombinedButtons from '../../components/buttons/combined-buttons'
 
@@ -79,42 +80,44 @@ async function sendPushNotification(expoPushToken) {
   const message = {
     to: expoPushToken,
     sound: 'default',
-    title: 'Test Title',
-    body: 'Test viralpool notification body.',
+    title: Notifications[0].title,
+    body: Notifications[0].description,
     data: {
-      data: 'OngoingProjectDetails'
+      data: 'NewProjectDetails'
     }
+  }
+
+  const headers = {
+    'Accept': 'application/json',
+    'Accept-encoding': 'gzip, deflate',
+    'Content-Type': 'application/json'
   }
 
   await fetch(Util.EXPO_PUSH_NOTIFICATION_URL, {
     method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Accept-encoding': 'gzip, deflate',
-      'Content-Type': 'application/json'
-    },
+    headers: headers,
     body: JSON.stringify(message)
   })
 
   // let data = {
   //   "to": "ExponentPushToken[Wr2Q-yKUDUUi6qm0ZavPPM]",
   //   "sound": "default",
-  //   "title": "Test Title",
-  //   "body": "Test viralpool notification body.",
+  //   "title": "New Job",
+  //   "body": "You have been assigned a new job.",
   //   "data": {
-  //     "someData": "OngoingProjectDetails"
+  //     "someData": "NewProjectDetails"
   //   }
   // }
   //
   // let config = {
-  //   method: 'post',
+  //   method: 'POST',
   //   url: 'https://exp.host/--/api/v2/push/send',
   //   headers: {
   //     'Accept': 'application/json',
   //     'Accept-encoding': 'gzip, deflate',
   //     'Content-Type': 'application/json'
   //   },
-  //   data : data
+  //   data: data
   // }
 }
 
