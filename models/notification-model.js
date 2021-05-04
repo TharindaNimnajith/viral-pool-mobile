@@ -1,10 +1,10 @@
 class NotificationModel {
-  constructor(title, description, date, screen, data) {
+  constructor(title, description, date, screen, project) {
     this.title = title
     this.description = description
     this.date = date
     this.screen = screen
-    this.data = data
+    this.project = project
   }
 }
 

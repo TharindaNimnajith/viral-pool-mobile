@@ -11,9 +11,7 @@ const ProjectListItem = props => {
   }
 
   const redirectToDetailsScreen = () => {
-    let status = props.itemData.item.status
-
-    switch (status) {
+    switch (project.project.status) {
       case 'New':
         props.navigation.navigate('NewProjectDetails', {project})
         break
@@ -36,10 +34,10 @@ const ProjectListItem = props => {
                       onPress={redirectToDetailsScreen}>
       <View style={styles.viewStyle}>
         <Text style={styles.titleStyle}>
-          {props.itemData.item.title}
+          {project.project.title}
         </Text>
         <Text style={styles.textStyle}>
-          {props.itemData.item.description}
+          {project.project.description}
         </Text>
       </View>
     </TouchableOpacity>

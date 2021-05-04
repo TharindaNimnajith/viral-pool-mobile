@@ -20,5 +20,7 @@ export default {
 
   EXPO_PUSH_NOTIFICATION_DEVICE_ERROR: 'Must use physical device for expo push notifications.',
 
-  NAVIGATOR_ERROR: 'The navigation object has not been initialized or finished mounting yet.'
+  NAVIGATOR_ERROR: 'The navigation object has not been initialized or finished mounting yet.',
+
+  CAMERA_PERMISSION: 'Sorry, we need camera roll permissions to make this work!'
 }

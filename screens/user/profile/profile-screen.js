@@ -60,7 +60,7 @@ const ProfileScreen = props => {
           status
         } = await ImagePicker.requestMediaLibraryPermissionsAsync()
         if (status !== 'granted')
-          alert('Sorry, we need camera roll permissions to make this work!')
+          alert(Constants.CAMERA_PERMISSION)
       }
     })()
   }, [])

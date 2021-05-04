@@ -86,7 +86,7 @@ async function sendPushNotification(expoPushToken) {
     body: Notifications[0].description,
     data: {
       screen: Notifications[0].screen,
-      data: Notifications[0].data
+      project: Notifications[0].project
     }
   }
 
@@ -109,7 +109,11 @@ async function sendPushNotification(expoPushToken) {
   //   "body": "You have been assigned a new job.",
   //   "data": {
   //     "screen": "NewProjectDetails"
-  //     "data": "data"
+  //     "project": {
+  //       "title": "A video promoting Dialog",
+  //       "description": "A comedy video is required for promoting 4G internet services provided by Dialog.",
+  //       "status": "New"
+  //     }
   //   }
   // }
   //

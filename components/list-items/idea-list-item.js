@@ -11,7 +11,7 @@ const IdeaListItem = props => {
   }
 
   const redirectToDetailsScreen = () => {
-    props.navigation.navigate('EditIdea', {idea})
+    idea.navigation.navigate('EditIdea', {idea})
   }
 
   return (
@@ -19,10 +19,10 @@ const IdeaListItem = props => {
                       onPress={redirectToDetailsScreen}>
       <View style={styles.viewStyle}>
         <Text style={styles.titleStyle}>
-          {props.itemData.item.title}
+          {idea.idea.title}
         </Text>
         <Text style={styles.textStyle}>
-          {props.itemData.item.description}
+          {idea.idea.description}
         </Text>
       </View>
     </TouchableOpacity>

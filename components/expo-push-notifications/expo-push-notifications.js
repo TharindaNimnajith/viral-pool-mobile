@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useRef} from 'react'
 // noinspection ES6UnusedImports
 import {Platform} from 'react-native'
-// noinspection ES6CheckImport
 // import {useNavigation} from '@react-navigation/native'
+// noinspection ES6CheckImport
 import ExpoConstants from 'expo-constants'
 // noinspection ES6UnusedImports
 import {
@@ -46,6 +46,7 @@ const ExpoPushNotifications = () => {
     notificationListener.current = addNotificationReceivedListener(notification => {
       // This listener is fired whenever a notification is received while the app is foregrounded
       // const notificationBody = notification.request.content.data
+      // console.log(notificationBody)
     })
 
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
@@ -94,12 +95,12 @@ async function registerForPushNotificationsAsync() {
       finalStatus = status
     }
     if (finalStatus !== 'granted') {
-      console.log(Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
+      alert(Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
       return
     }
     token = (await getExpoPushTokenAsync()).data
   } else {
-    console.log(Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
+    alert(Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
   }
 
   // if (Platform.OS === 'android')

@@ -4,14 +4,15 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
 
 const NotificationListItem = props => {
-  // let notification = {
-  //   notification: props.itemData.item,
-  //   navigation: props.navigation,
-  //   refresh: props.refreshFunction
-  // }
+  let notification = {
+    notification: props.itemData.item,
+    navigation: props.navigation,
+    refresh: props.refreshFunction
+  }
 
   const pressNotification = () => {
-    // console.log(notification)
+    const project = notification.notification
+    notification.navigation.navigate(notification.notification.screen, {project})
   }
 
   return (
@@ -19,13 +20,13 @@ const NotificationListItem = props => {
                       onPress={pressNotification}>
       <View style={styles.viewStyle}>
         <Text style={styles.titleStyle}>
-          {props.itemData.item.title}
+          {notification.notification.title}
         </Text>
         <Text style={styles.textStyle}>
-          {props.itemData.item.description}
+          {notification.notification.description}
         </Text>
         <Text style={styles.dateStyle}>
-          {props.itemData.item.date}
+          {notification.notification.date}
         </Text>
       </View>
     </TouchableOpacity>
