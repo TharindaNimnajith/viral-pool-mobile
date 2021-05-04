@@ -1,105 +1,9 @@
-import React, {useContext, useEffect, useRef} from 'react'
-import {LogBox, Platform} from 'react-native'
-import ExpoConstants from 'expo-constants'
-import {
-  addNotificationReceivedListener,
-  addNotificationResponseReceivedListener,
-  AndroidImportance,
-  getExpoPushTokenAsync,
-  getPermissionsAsync,
-  removeNotificationSubscription,
-  requestPermissionsAsync,
-  setNotificationChannelAsync,
-  setNotificationHandler
-} from 'expo-notifications'
-import {AppContext} from './global/app-context'
+import React from 'react'
+import {LogBox} from 'react-native'
 import {GlobalState} from './global/global-state'
-import {storeStringData} from './helpers/local-storage-helpers'
-import NavigationBar from './components/navigation/navigation-bar'
 import Constants from './shared/constants'
-import Colors from './shared/colors'
-import {Util} from './util/util'
-
-// noinspection JSCheckFunctionSignatures
-setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false
-  })
-})
-
-async function registerForPushNotificationsAsync() {
-  let token
-
-  if (ExpoConstants.isDevice) {
-    const {
-      status: existingStatus
-    } = await getPermissionsAsync()
-    let finalStatus = existingStatus
-    if (existingStatus !== 'granted') {
-      const {
-        status
-      } = await requestPermissionsAsync()
-      finalStatus = status
-    }
-    if (finalStatus !== 'granted') {
-      console.log('Failed to get push token for expo push notification.')
-      return
-    }
-    token = (await getExpoPushTokenAsync()).data
-  } else {
-    console.log('Must use physical device for expo push notifications.')
-  }
-
-  if (Platform.OS === 'android') {
-    await setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: Colors.primaryColor
-    })
-  }
-
-  return token
-}
-
-const ExpoToken = () => {
-  // noinspection JSCheckFunctionSignatures
-  const appContext = useContext(AppContext)
-
-  const notificationListener = useRef()
-  const responseListener = useRef()
-
-  useEffect(() => {
-    registerForPushNotificationsAsync().then(async token => {
-      await appContext.SetExpoPushToken(token)
-      // Following function call is not working after expo build
-      await storeStringData(Util.EXPO_PUSH_TOKEN, token)
-    })
-
-    // noinspection JSValidateTypes, JSUnusedLocalSymbols
-    notificationListener.current = addNotificationReceivedListener(notification => {
-      // This listener is fired whenever a notification is received while the app is foregrounded
-    })
-
-    // noinspection JSValidateTypes, JSUnusedLocalSymbols
-    responseListener.current = addNotificationResponseReceivedListener(response => {
-      // This listener is fired whenever a user taps on or interacts with a notification (works when app is
-      // foregrounded, backgrounded, or killed)
-      // response.notification.request.content.data.data
-    })
-
-    return () => {
-      // noinspection JSCheckFunctionSignatures
-      removeNotificationSubscription(notificationListener)
-      // noinspection JSCheckFunctionSignatures
-      removeNotificationSubscription(responseListener)
-    }
-  }, [])
-
-  return (<></>);
-}
+import NavigationBar from './components/navigation/navigation-bar'
+import ExpoPushNotifications from './components/expo-push-notifications/expo-push-notifications'
 
 const App = () => {
   const patterns = [
@@ -113,11 +17,10 @@ const App = () => {
 
   return (
     <GlobalState>
-      <ExpoToken/>
+      <ExpoPushNotifications/>
       <NavigationBar/>
     </GlobalState>
   )
 }
 
 export default App
-
