@@ -1,7 +1,8 @@
+// noinspection ES6UnusedImports
 import React, {useEffect} from 'react'
 import {LogBox} from 'react-native'
-import {NavigationContainer} from '@react-navigation/native'
-import {isReadyRef, navigationRef} from './util/root-navigation'
+// import {NavigationContainer} from '@react-navigation/native'
+// import {isReadyRef, navigationRef} from './util/root-navigation'
 import {GlobalState} from './global/global-state'
 import Constants from './shared/constants'
 import NavigationBar from './components/navigation/navigation-bar'
@@ -17,25 +18,24 @@ const App = () => {
 
   LogBox.ignoreLogs(patterns)
 
-  useEffect(() => {
-    return handleNotReady
-  }, [])
-
-  const handleNotReady = async () => {
-    isReadyRef.current = false
-  }
-
-  const handleReady = async () => {
-    isReadyRef.current = true
-  }
+  // useEffect(() => {
+  //   return () => {
+  //     isReadyRef.current = false
+  //   }
+  // }, [])
+  //
+  // const handleReady = async () => {
+  //   isReadyRef.current = true
+  // }
 
   return (
+    // <NavigationContainer ref={navigationRef}
+    //                      onReady={handleReady}>
     <GlobalState>
-      <NavigationContainer ref={navigationRef}
-                           onReady={handleReady}/>
       <ExpoPushNotifications/>
       <NavigationBar/>
     </GlobalState>
+    // </NavigationContainer>
   )
 }
 

@@ -25,7 +25,7 @@ import Constants from '../../shared/constants'
 import Colors from '../../shared/colors'
 import {Const} from '../../util/const'
 // noinspection ES6UnusedImports
-import {navigate} from '../../util/root-navigation'
+// import {isReadyRef, navigate, navigationRef} from '../../util/root-navigation'
 
 const ExpoPushNotifications = () => {
   // noinspection JSCheckFunctionSignatures
