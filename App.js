@@ -10,7 +10,7 @@ const App = () => {
     Constants.WARNING_1,
     Constants.WARNING_2,
     Constants.WARNING_3,
-    'Animated: `useNativeDriver`'
+    Constants.WARNING_4
   ]
 
   LogBox.ignoreLogs(patterns)

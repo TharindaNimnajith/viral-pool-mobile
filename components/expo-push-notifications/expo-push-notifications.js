@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useRef} from 'react'
-// import {Platform} from 'react-native'
+// noinspection ES6UnusedImports
+import {Platform} from 'react-native'
 import ExpoConstants from 'expo-constants'
 // noinspection ES6UnusedImports
 import {
@@ -18,7 +19,8 @@ import {
 import {AppContext} from '../../global/app-context'
 import {storeStringData} from '../../helpers/local-storage-helpers'
 import Constants from '../../shared/constants'
-// import Colors from '../../shared/colors'
+// noinspection ES6UnusedImports
+import Colors from '../../shared/colors'
 import {Util} from '../../util/util'
 
 const ExpoPushNotifications = () => {
@@ -37,13 +39,14 @@ const ExpoPushNotifications = () => {
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
     notificationListener.current = addNotificationReceivedListener(notification => {
       // This listener is fired whenever a notification is received while the app is foregrounded
+      console.log(notification.request.content.data)
     })
 
     // noinspection JSValidateTypes, JSUnusedLocalSymbols
     responseListener.current = addNotificationResponseReceivedListener(response => {
       // This listener is fired whenever a user taps on or interacts with a notification (works when app is
       // foregrounded, backgrounded, or killed)
-      // response.notification.request.content.data.data
+      console.log(response.notification.request.content.data)
     })
 
     return () => {
@@ -104,7 +107,8 @@ async function registerForPushNotificationsAsync() {
   //       vibrationPattern: [0, 250, 250, 250],
   //       enableLights: true,
   //       enableVibrate: true
-  //     })
+  //     }
+  //   )
   //
   // await setNotificationCategoryAsync(
   //   'default',
@@ -126,7 +130,7 @@ async function registerForPushNotificationsAsync() {
   //     allowInCarPlay: false,
   //     showTitle: false,
   //     showSubtitle: false,
-  //     allowAnnouncement: false,
+  //     allowAnnouncement: false
   //   }
   // )
 

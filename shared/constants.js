@@ -10,6 +10,8 @@ export default {
     ' It can now be installed and imported from \'@react-native-community/datetimepicker\' instead' +
     ' of \'react-native\'. See https://github.com/react-native-community/datetimepicker',
 
+  WARNING_4: 'Animated: `useNativeDriver`',
+
   LOGIN_ERROR: 'Invalid email or password. Please try again!',
 
   ERROR: 'An unexpected error occurred. Please try again later!',
