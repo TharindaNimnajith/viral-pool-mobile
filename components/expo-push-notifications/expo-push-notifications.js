@@ -5,6 +5,7 @@ import {
   addNotificationReceivedListener,
   addNotificationResponseReceivedListener,
   AndroidImportance,
+  AndroidNotificationVisibility,
   getExpoPushTokenAsync,
   getPermissionsAsync,
   removeNotificationSubscription,
@@ -17,50 +18,6 @@ import {storeStringData} from '../../helpers/local-storage-helpers'
 import Constants from '../../shared/constants'
 import Colors from '../../shared/colors'
 import {Util} from '../../util/util'
-
-// noinspection JSCheckFunctionSignatures
-setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false
-  })
-})
-
-async function registerForPushNotificationsAsync() {
-  let token
-
-  if (ExpoConstants.isDevice) {
-    const {
-      status: existingStatus
-    } = await getPermissionsAsync()
-    let finalStatus = existingStatus
-    if (existingStatus !== 'granted') {
-      const {
-        status
-      } = await requestPermissionsAsync()
-      finalStatus = status
-    }
-    if (finalStatus !== 'granted') {
-      console.log(Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
-      return
-    }
-    token = (await getExpoPushTokenAsync()).data
-  } else {
-    console.log(Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
-  }
-
-  if (Platform.OS === 'android') {
-    await setNotificationChannelAsync('default', {
-      name: 'default',
-      importance: AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: Colors.primaryColor
-    })
-  }
-
-  return token
-}
 
 const ExpoPushNotifications = () => {
   // noinspection JSCheckFunctionSignatures
@@ -96,6 +53,59 @@ const ExpoPushNotifications = () => {
   }, [])
 
   return (<></>)
+}
+
+// noinspection JSCheckFunctionSignatures
+setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false
+  })
+})
+
+async function registerForPushNotificationsAsync() {
+  let token
+
+  if (ExpoConstants.isDevice) {
+    const {
+      status: existingStatus
+    } = await getPermissionsAsync()
+    let finalStatus = existingStatus
+    if (existingStatus !== 'granted') {
+      const {
+        status
+      } = await requestPermissionsAsync()
+      finalStatus = status
+    }
+    if (finalStatus !== 'granted') {
+      console.log(Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
+      return
+    }
+    token = (await getExpoPushTokenAsync()).data
+  } else {
+    console.log(Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
+  }
+
+  if (Platform.OS === 'android') {
+    await setNotificationChannelAsync(
+      'default',
+      {
+        name: 'default',
+        importance: AndroidImportance.MAX,
+        bypassDnd: false,
+        description: 'Viralpool',
+        lightColor: Colors.primaryColor,
+        lockscreenVisibility: AndroidNotificationVisibility.PUBLIC,
+        showBadge: true,
+        sound: 'default',
+        vibrationPattern: [0, 250, 250, 250],
+        enableLights: true,
+        enableVibrate: true
+      })
+  }
+
+  return token
 }
 
 export default ExpoPushNotifications
