@@ -1,4 +1,5 @@
 import React from 'react'
+// noinspection ES6UnusedImports
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../shared/colors'
@@ -9,21 +10,21 @@ const CompletedProjectDetailsScreen = props => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View style={styles.mainViewStyle}>
-          <View style={styles.viewStyle}>
-            <Text>
-              {project.project.title}
-            </Text>
-            <Text>
-              {project.project.description}
-            </Text>
-            <Text>
-              {project.project.status}
-            </Text>
-          </View>
+      {/*<ScrollView>*/}
+      <View style={styles.mainViewStyle}>
+        <View style={styles.viewStyle}>
+          <Text>
+            {project.project.title}
+          </Text>
+          <Text>
+            {project.project.description}
+          </Text>
+          <Text>
+            {project.project.status}
+          </Text>
         </View>
-      </ScrollView>
+      </View>
+      {/*</ScrollView>*/}
     </SafeAreaView>
   )
 }

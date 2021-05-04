@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
+// noinspection ES6UnusedImports
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
@@ -30,28 +31,28 @@ const TestDevScreen = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View style={styles.mainViewStyle}>
-          <Text style={styles.textStyle}>
-            Access Token (AppContext): {appContext.accessToken}
-          </Text>
-          <Text style={styles.textStyle}>
-            Refresh Token (AppContext): {appContext.refreshToken}
-          </Text>
-          <Text style={styles.textStyle}>
-            Expo Push Token (AppContext): {appContext.expoPushToken}
-          </Text>
-          <Text style={styles.textStyle}>
-            Access Token (AsyncStorage): {accessToken}
-          </Text>
-          <Text style={styles.textStyle}>
-            Refresh Token (AsyncStorage): {refreshToken}
-          </Text>
-          <Text style={styles.textStyle}>
-            Expo Push Token (AsyncStorage): {expoPushToken}
-          </Text>
-        </View>
-      </ScrollView>
+      {/*<ScrollView>*/}
+      <View style={styles.mainViewStyle}>
+        <Text style={styles.textStyle}>
+          Access Token (AppContext): {appContext.accessToken}
+        </Text>
+        <Text style={styles.textStyle}>
+          Refresh Token (AppContext): {appContext.refreshToken}
+        </Text>
+        <Text style={styles.textStyle}>
+          Expo Push Token (AppContext): {appContext.expoPushToken}
+        </Text>
+        <Text style={styles.textStyle}>
+          Access Token (AsyncStorage): {accessToken}
+        </Text>
+        <Text style={styles.textStyle}>
+          Refresh Token (AsyncStorage): {refreshToken}
+        </Text>
+        <Text style={styles.textStyle}>
+          Expo Push Token (AsyncStorage): {expoPushToken}
+        </Text>
+      </View>
+      {/*</ScrollView>*/}
     </SafeAreaView>
   )
 }

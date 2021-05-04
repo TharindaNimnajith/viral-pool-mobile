@@ -1,4 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
+// noinspection ES6UnusedImports
 import {SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../shared/colors'
@@ -31,24 +32,24 @@ const TestNotificationScreen = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View style={styles.mainViewStyle}>
-          <View style={styles.viewStyle}>
-            <TouchableOpacity style={styles.buttonStyle}
-                              onPress={sendNotificationAppContext}>
-              <Text style={styles.buttonTextStyle}>
-                Send Notification (App Context)
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonStyle}
-                              onPress={sendNotificationAsyncStorage}>
-              <Text style={styles.buttonTextStyle}>
-                Send Notification (Async Storage)
-              </Text>
-            </TouchableOpacity>
-          </View>
+      {/*<ScrollView>*/}
+      <View style={styles.mainViewStyle}>
+        <View style={styles.viewStyle}>
+          <TouchableOpacity style={styles.buttonStyle}
+                            onPress={sendNotificationAppContext}>
+            <Text style={styles.buttonTextStyle}>
+              Send Notification (App Context)
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.buttonStyle}
+                            onPress={sendNotificationAsyncStorage}>
+            <Text style={styles.buttonTextStyle}>
+              Send Notification (Async Storage)
+            </Text>
+          </TouchableOpacity>
         </View>
-      </ScrollView>
+      </View>
+      {/*</ScrollView>*/}
     </SafeAreaView>
   )
 }
