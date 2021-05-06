@@ -5,17 +5,17 @@ const ProjectDetails = props => {
   let project = props.navigation.getParam('project')
 
   return (
-      <View style={styles.viewStyle}>
-        <Text>
-          {project.project.title}
-        </Text>
-        <Text>
-          {project.project.description}
-        </Text>
-        <Text>
-          {project.project.status}
-        </Text>
-      </View>
+    <View style={styles.viewStyle}>
+      <Text>
+        {project.project.title}
+      </Text>
+      <Text>
+        {project.project.description}
+      </Text>
+      <Text>
+        {project.project.status}
+      </Text>
+    </View>
   )
 }
 
