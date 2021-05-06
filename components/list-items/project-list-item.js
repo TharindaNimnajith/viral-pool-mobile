@@ -11,23 +11,22 @@ const ProjectListItem = props => {
   }
 
   const redirectToDetailsScreen = () => {
-    // switch (project.project.status) {
-    //   case 'New':
-    //     props.navigation.navigate('NewProjectDetails', {project})
-    //     break
-    //   case 'Ongoing':
-    //     props.navigation.navigate('OngoingProjectDetails', {project})
-    //     break
-    //   case 'Rejected':
-    //     props.navigation.navigate('RejectedProjectDetails', {project})
-    //     break
-    //   case 'Completed':
-    //     props.navigation.navigate('CompletedProjectDetails', {project})
-    //     break
-    //   default:
-    //     props.navigation.navigate('Dashboard')
-    // }
-    props.navigation.navigate('CompletedProjectDetails', {project})
+    switch (project.project.status) {
+      case 'New':
+        props.navigation.navigate('NewProjectDetails', {project})
+        break
+      case 'Ongoing':
+        props.navigation.navigate('OngoingProjectDetails', {project})
+        break
+      case 'Rejected':
+        props.navigation.navigate('RejectedProjectDetails', {project})
+        break
+      case 'Completed':
+        props.navigation.navigate('CompletedProjectDetails', {project})
+        break
+      default:
+        props.navigation.navigate('Dashboard')
+    }
   }
 
   return (
@@ -35,11 +34,11 @@ const ProjectListItem = props => {
                       onPress={redirectToDetailsScreen}>
       <View style={styles.viewStyle}>
         <Text style={styles.titleStyle}>
-          {project.project.name}
+          {project.project.title}
         </Text>
-        {/*<Text style={styles.textStyle}>*/}
-        {/*  {project.project.description}*/}
-        {/*</Text>*/}
+        <Text style={styles.textStyle}>
+          {project.project.description}
+        </Text>
       </View>
     </TouchableOpacity>
   )
