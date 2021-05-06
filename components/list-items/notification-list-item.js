@@ -4,8 +4,9 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../util/colors'
 
 const NotificationListItem = props => {
+  const project = props.itemData.item.project
+
   const pressNotification = () => {
-    const project = props.itemData.item.project
     props.navigation.navigate(props.itemData.item.screen, {project})
   }
 

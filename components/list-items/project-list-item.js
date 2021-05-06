@@ -5,9 +5,10 @@ import Constants from '../../util/constants'
 import Colors from '../../util/colors'
 
 const ProjectListItem = props => {
+  const project = props.itemData.item
+
   const redirectToDetailsScreen = () => {
-    const project = props.itemData.item
-    switch (props.itemData.item.status) {
+    switch (project.status) {
       case 'New':
         props.navigation.navigate('NewProjectDetails', {project})
         break
@@ -27,10 +28,10 @@ const ProjectListItem = props => {
                       onPress={redirectToDetailsScreen}>
       <View style={styles.viewStyle}>
         <Text style={styles.titleStyle}>
-          {props.itemData.item.title}
+          {project.title}
         </Text>
         <Text style={styles.textStyle}>
-          {props.itemData.item.description}
+          {project.description}
         </Text>
       </View>
     </TouchableOpacity>
