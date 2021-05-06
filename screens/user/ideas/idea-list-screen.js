@@ -1,33 +1,22 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../../shared/colors'
+import Colors from '../../../util/colors'
 import {Ideas} from '../../../data/idea-data/idea-data'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 import IdeaListItem from '../../../components/list-items/idea-list-item'
 
-const IdeaListScreen = ({navigation}) => {
-  const [refresh, setRefresh] = useState(false)
-
-  useEffect(() => {
-    setRefresh(false)
-  }, [refresh])
-
+const IdeaListScreen = props => {
   const renderItemsFunction = itemData => {
     return (
-      <IdeaListItem navigation={navigation}
-                    itemData={itemData}
-                    refreshFunction={refreshFunction}/>
+      <IdeaListItem navigation={props.navigation}
+                    itemData={itemData}/>
     )
   }
 
-  const refreshFunction = () => {
-    setRefresh(true)
-  }
-
   const redirectToAddIdeaScreen = () => {
-    navigation.navigate('AddIdea')
+    props.navigation.navigate('AddIdea')
   }
 
   return (

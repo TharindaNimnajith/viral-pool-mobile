@@ -1,29 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {FlatList, StyleSheet, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../../shared/colors'
+import Colors from '../../../util/colors'
 import {Notifications} from '../../../data/notification-data/notification-data'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 import NotificationListItem from '../../../components/list-items/notification-list-item'
 
-const NotificationsScreen = ({navigation}) => {
-  const [refresh, setRefresh] = useState(false)
-
-  useEffect(() => {
-    setRefresh(false)
-  }, [refresh])
-
+const NotificationsScreen = props => {
   const renderItemsFunction = itemData => {
     return (
-      <NotificationListItem navigation={navigation}
-                            itemData={itemData}
-                            refreshFunction={refreshFunction}/>
+      <NotificationListItem navigation={props.navigation}
+                            itemData={itemData}/>
     )
-  }
-
-  const refreshFunction = () => {
-    setRefresh(true)
   }
 
   return (

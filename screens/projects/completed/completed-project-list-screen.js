@@ -1,55 +1,18 @@
-// noinspection ES6UnusedImports
-import React, {useContext, useEffect, useState} from 'react'
+import React from 'react'
 import {FlatList, StyleSheet, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-// import axios from 'axios'
-// import {AppContext} from '../../../global/app-context'
-import Colors from '../../../shared/colors'
+import Colors from '../../../util/colors'
 import {CompletedProjects} from '../../../data/project-data/completed-project-data'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 import ProjectListItem from '../../../components/list-items/project-list-item'
-// import {storeObjectData} from '../../../helpers/local-storage-helpers'
-// import {Const} from '../../../util/const'
 
-const CompletedProjectListScreen = ({navigation}) => {
-  // const appContext = useContext(AppContext)
-
-  const [refresh, setRefresh] = useState(false)
-  // const [projects, setProjects] = useState(null)
-
-  useEffect(() => {
-    // axios.get('project-cc-strategy').then(async response => {
-    //   if (response.status === 200) {
-    //     console.log(response)
-    //     // await storeObjectData(Const.USER_DATA, response.data.data)
-    //     // await appContext.SetUserData(response.data.data)
-    //     // navigation.navigate({
-    //     //   routeName: 'Navigator'
-    //     // })
-    //     setProjects(response.data.data)
-    //   } else {
-    //     // setLoading(false)
-    //     // setUnauthorized(true)
-    //   }
-    // }).catch(async error => {
-    //   // setLoading(false)
-    //   // setUnauthorized(true)
-    //   console.log(error)
-    // })
-    setRefresh(false)
-  }, [refresh])
-
+const CompletedProjectListScreen = props => {
   const renderItemsFunction = itemData => {
     return (
-      <ProjectListItem navigation={navigation}
-                       itemData={itemData}
-                       refreshFunction={refreshFunction}/>
+      <ProjectListItem navigation={props.navigation}
+                       itemData={itemData}/>
     )
-  }
-
-  const refreshFunction = () => {
-    setRefresh(true)
   }
 
   return (

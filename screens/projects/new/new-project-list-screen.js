@@ -1,29 +1,18 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import {FlatList, StyleSheet, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../../shared/colors'
+import Colors from '../../../util/colors'
 import {NewProjects} from '../../../data/project-data/new-project-data'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 import ProjectListItem from '../../../components/list-items/project-list-item'
 
-const NewProjectListScreen = ({navigation}) => {
-  const [refresh, setRefresh] = useState(false)
-
-  useEffect(() => {
-    setRefresh(false)
-  }, [refresh])
-
+const NewProjectListScreen = props => {
   const renderItemsFunction = itemData => {
     return (
-      <ProjectListItem navigation={navigation}
-                       itemData={itemData}
-                       refreshFunction={refreshFunction}/>
+      <ProjectListItem navigation={props.navigation}
+                       itemData={itemData}/>
     )
-  }
-
-  const refreshFunction = () => {
-    setRefresh(true)
   }
 
   return (

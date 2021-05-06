@@ -1,18 +1,15 @@
 import React from 'react'
-// noinspection ES6UnusedImports
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
-import Colors from '../../../shared/colors'
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native'
+import Colors from '../../../util/colors'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
-import ProjectDetails from "../../../components/project-details/project-details";
+import ProjectDetails from '../../../components/project-details/project-details'
 
 const CompletedProjectDetailsScreen = props => {
-  let project = props.navigation.getParam('project')
-
   return (
     <SafeAreaView>
       <ScrollView>
         <View style={styles.mainViewStyle}>
-          <ProjectDetails project={project}/>
+          <ProjectDetails project={props}/>
         </View>
       </ScrollView>
     </SafeAreaView>

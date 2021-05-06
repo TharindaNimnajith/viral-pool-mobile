@@ -13,41 +13,27 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import validator from 'validator'
-import Colors from '../../../shared/colors'
-import Constants from '../../../shared/constants'
-import {LoginDetails} from '../../../data/login-data/login-data'
-import {Const} from '../../../util/const'
 import {AppContext} from '../../../global/app-context'
-import {storeObjectData, storeStringData} from '../../../helpers/local-storage-helpers'
-import {isEmpty} from '../../../helpers/common-helpers'
+import Colors from '../../../util/colors'
+import Constants from '../../../util/constants'
+import {isEmpty} from '../../../util/common-helpers'
+import {storeStringData} from '../../../util/local-storage'
 
-const LoginScreen = ({navigation}) => {
-  // noinspection JSCheckFunctionSignatures
+const LoginScreen = props => {
   const appContext = useContext(AppContext)
 
-  const [email, setEmail] = useState(LoginDetails[2].email)
-  const [password, setPassword] = useState(LoginDetails[2].password)
-
+  const [email, setEmail] = useState('tharindarajapakshe@y7mail.com')
+  const [password, setPassword] = useState('tharinda')
   const [emailValid, setEmailValid] = useState(true)
   const [passwordValid, setPasswordValid] = useState(true)
-
-  // const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
-  //
-  // const [emailValid, setEmailValid] = useState(false)
-  // const [passwordValid, setPasswordValid] = useState(false)
-
   const [state] = useState('string')
   const [redirectUri] = useState('string')
   const [clientId] = useState('string')
   const [clientName] = useState('string')
-
   const [unauthorized, setUnauthorized] = useState(false)
-
   const [loading, setLoading] = useState(false)
 
   const onChangeEmail = async email => {
-    // noinspection JSUnresolvedFunction
     setEmailValid(validator.isEmail(email.trim()))
     setUnauthorized(false)
     setEmail(email.trim())
@@ -75,27 +61,15 @@ const LoginScreen = ({navigation}) => {
       clientId: clientId,
       clientName: clientName
     }
-    // const headers = {
-    //   'client_id': 'UFwv4s5sAHYyRS2q'
-    // }
-    axios.post('oauth/mobile-login', data, {
-      // headers: headers
-    }).then(async response => {
-      // noinspection JSUnresolvedVariable
-      await storeStringData(Const.ACCESS_TOKEN, response.data.access_token)
-      // noinspection JSUnresolvedVariable
-      await storeStringData(Const.REFRESH_TOKEN, response.data.refresh_token)
-      // noinspection JSUnresolvedVariable
+    axios.post('oauth/mobile-login', data).then(async response => {
+      await storeStringData(Constants.ACCESS_TOKEN, response.data.access_token)
       await appContext.SetAccessToken(response.data.access_token)
-      // noinspection JSUnresolvedVariable
       await appContext.SetRefreshToken(response.data.refresh_token)
       if (response.status === 200) {
-        // noinspection JSUnusedLocalSymbols
         axios.get('User').then(async response => {
           if (response.status === 200) {
-            await storeObjectData(Const.USER_DATA, response.data.data)
             await appContext.SetUserData(response.data.data)
-            navigation.navigate({
+            props.navigation.navigate({
               routeName: 'Navigator'
             })
           } else {
@@ -258,7 +232,6 @@ const styles = StyleSheet.create({
   titleStyle: {
     textTransform: 'uppercase',
     color: Colors.primaryColor,
-    // fontWeight: 'bold',
     marginTop: hp('5%'),
     fontSize: 30
   },

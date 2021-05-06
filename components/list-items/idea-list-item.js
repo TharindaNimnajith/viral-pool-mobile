@@ -1,17 +1,16 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../shared/colors'
+import Colors from '../../util/colors'
 
 const IdeaListItem = props => {
   let idea = {
     idea: props.itemData.item,
-    navigation: props.navigation,
-    refresh: props.refreshFunction
+    navigation: props.navigation
   }
 
   const redirectToDetailsScreen = () => {
-    idea.navigation.navigate('EditIdea', {idea})
+    props.navigation.navigate('EditIdea', {idea})
   }
 
   return (
@@ -19,10 +18,10 @@ const IdeaListItem = props => {
                       onPress={redirectToDetailsScreen}>
       <View style={styles.viewStyle}>
         <Text style={styles.titleStyle}>
-          {idea.idea.title}
+          {props.itemData.item.title}
         </Text>
         <Text style={styles.textStyle}>
-          {idea.idea.description}
+          {props.itemData.item.description}
         </Text>
       </View>
     </TouchableOpacity>

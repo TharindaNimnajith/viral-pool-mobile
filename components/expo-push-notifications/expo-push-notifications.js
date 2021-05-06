@@ -1,37 +1,19 @@
 import React, {useContext, useEffect, useRef} from 'react'
-// noinspection ES6UnusedImports
-import {Platform} from 'react-native'
-// import {useNavigation} from '@react-navigation/native'
-// noinspection ES6CheckImport
 import ExpoConstants from 'expo-constants'
-// noinspection ES6UnusedImports
 import {
   addNotificationReceivedListener,
   addNotificationResponseReceivedListener,
-  AndroidImportance,
-  AndroidNotificationVisibility,
   getExpoPushTokenAsync,
   getPermissionsAsync,
   removeNotificationSubscription,
   requestPermissionsAsync,
-  setNotificationCategoryAsync,
-  setNotificationChannelAsync,
   setNotificationHandler
 } from 'expo-notifications'
 import {AppContext} from '../../global/app-context'
-import {storeStringData} from '../../helpers/local-storage-helpers'
-import Constants from '../../shared/constants'
-// noinspection ES6UnusedImports
-import Colors from '../../shared/colors'
-import {Const} from '../../util/const'
-// noinspection ES6UnusedImports
-// import {isReadyRef, navigate, navigationRef} from '../../util/root-navigation'
+import Constants from '../../util/constants'
 
 const ExpoPushNotifications = () => {
-  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
-
-  // const navigation = useNavigation()
 
   const notificationListener = useRef()
   const responseListener = useRef()
@@ -39,31 +21,16 @@ const ExpoPushNotifications = () => {
   useEffect(() => {
     registerForPushNotificationsAsync().then(async token => {
       await appContext.SetExpoPushToken(token)
-      await storeStringData(Const.EXPO_PUSH_TOKEN, token)
     })
 
-    // noinspection JSValidateTypes, JSUnusedLocalSymbols
     notificationListener.current = addNotificationReceivedListener(notification => {
-      // This listener is fired whenever a notification is received while the app is foregrounded
-      // const notificationBody = notification.request.content.data
-      // console.log(notificationBody)
     })
 
-    // noinspection JSValidateTypes, JSUnusedLocalSymbols
     responseListener.current = addNotificationResponseReceivedListener(response => {
-      // This listener is fired whenever a user taps on or interacts with a notification (works when app is
-      // foregrounded, backgrounded, or killed)
-      // const notificationBody = response.notification.request.content.data
-      // navigate(notificationBody.screen, {
-      //   data: notificationBody.data
-      // })
-      // navigation.navigate(notificationBody.screen)
     })
 
     return () => {
-      // noinspection JSCheckFunctionSignatures
       removeNotificationSubscription(notificationListener)
-      // noinspection JSCheckFunctionSignatures
       removeNotificationSubscription(responseListener)
     }
   }, [])
@@ -71,7 +38,6 @@ const ExpoPushNotifications = () => {
   return (<></>)
 }
 
-// noinspection JSCheckFunctionSignatures
 setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -102,48 +68,6 @@ async function registerForPushNotificationsAsync() {
   } else {
     alert(Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
   }
-
-  // if (Platform.OS === 'android')
-  //   await setNotificationChannelAsync(
-  //     'default',
-  //     {
-  //       name: 'default',
-  //       importance: AndroidImportance.MAX,
-  //       bypassDnd: false,
-  //       description: 'Viralpool',
-  //       lightColor: Colors.primaryColor,
-  //       lockscreenVisibility: AndroidNotificationVisibility.PUBLIC,
-  //       showBadge: true,
-  //       sound: 'default',
-  //       vibrationPattern: [0, 250, 250, 250],
-  //       enableLights: true,
-  //       enableVibrate: true
-  //     }
-  //   )
-  //
-  // await setNotificationCategoryAsync(
-  //   'default',
-  //   [{
-  //     identifier: 'default',
-  //     buttonTitle: 'Viralpool',
-  //     textInput: {
-  //       submitButtonTitle: 'OK',
-  //       placeholder: ''
-  //     },
-  //     options: {
-  //       isDestructive: false,
-  //       isAuthenticationRequired: false,
-  //       opensAppToForeground: true
-  //     }
-  //   }],
-  //   {
-  //     customDismissAction: true,
-  //     allowInCarPlay: false,
-  //     showTitle: false,
-  //     showSubtitle: false,
-  //     allowAnnouncement: false
-  //   }
-  // )
 
   return token
 }

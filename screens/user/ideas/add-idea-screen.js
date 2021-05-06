@@ -1,40 +1,23 @@
 import React, {useContext, useState} from 'react'
-// noinspection ES6UnusedImports
-import {
-  ActivityIndicator,
-  Alert,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native'
+import {ActivityIndicator, Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
-import {isEmpty} from '../../../helpers/common-helpers'
-import Colors from '../../../shared/colors'
-import Constants from '../../../shared/constants'
+import {isEmpty} from '../../../util/common-helpers'
+import Colors from '../../../util/colors'
+import Constants from '../../../util/constants'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 
-// noinspection JSUnusedLocalSymbols
-const AddIdeaScreen = ({navigation}) => {
-  // noinspection JSCheckFunctionSignatures
+const AddIdeaScreen = () => {
   const appContext = useContext(AppContext)
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-
   const [titleValid, setTitleValid] = useState(false)
   const [descriptionValid, setDescriptionValid] = useState(false)
-
   const [error, setError] = useState(false)
-
   const [loading, setLoading] = useState(false)
-
   const [visible, setVisible] = useState(false)
 
   const showDialog = async () => {
@@ -83,9 +66,6 @@ const AddIdeaScreen = ({navigation}) => {
     }
     axios.post('', data).then(async response => {
       if (response.status === 200) {
-        // navigation.navigate({
-        //   routeName: 'IdeaList'
-        // })
         setTitle('')
         setDescription('')
         setLoading(false)
@@ -103,7 +83,6 @@ const AddIdeaScreen = ({navigation}) => {
 
   return (
     <SafeAreaView>
-      {/*<ScrollView>*/}
       <Dialog.Container visible={visible}>
         <Dialog.Title>
           NEW IDEA
@@ -162,7 +141,6 @@ const AddIdeaScreen = ({navigation}) => {
           ) : null
         }
       </View>
-      {/*</ScrollView>*/}
     </SafeAreaView>
   )
 }
@@ -247,7 +225,6 @@ const styles = StyleSheet.create({
 AddIdeaScreen.navigationOptions = navData => {
   return {
     headerTitle: 'New Idea',
-    // headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }

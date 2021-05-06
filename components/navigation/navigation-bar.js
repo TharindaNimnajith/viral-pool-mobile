@@ -2,8 +2,8 @@ import React from 'react'
 import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
-// noinspection NpmUsedModulesInstalled
 import {Ionicons} from '@expo/vector-icons'
+import Colors from '../../util/colors'
 import LoginScreen from '../../screens/user/login/login-screen'
 import DashboardScreen from '../../screens/user/dashboard/dashboard-screen'
 import NotificationsScreen from '../../screens/user/notifications/notifications-screen'
@@ -16,14 +16,9 @@ import NewProjectListScreen from '../../screens/projects/new/new-project-list-sc
 import NewProjectDetailsScreen from '../../screens/projects/new/new-project-details-screen'
 import OngoingProjectListScreen from '../../screens/projects/ongoing/ongoing-project-list-screen'
 import OngoingProjectDetailsScreen from '../../screens/projects/ongoing/ongoing-project-details-screen'
-import RejectedProjectListScreen from '../../screens/projects/rejected/rejected-project-list-screen'
-import RejectedProjectDetailsScreen from '../../screens/projects/rejected/rejected-project-details-screen'
 import CompletedProjectListScreen from '../../screens/projects/completed/completed-project-list-screen'
 import CompletedProjectDetailsScreen from '../../screens/projects/completed/completed-project-details-screen'
-// import ExpoPushNotifications from '../expo-push-notifications/expo-push-notifications'
 import TestNotificationScreen from '../../screens/dev/test-notification-screen'
-import TestDevScreen from '../../screens/dev/test-dev-screen'
-import Colors from '../../shared/colors'
 
 const LoginNavigator = createStackNavigator({
   Login: LoginScreen
@@ -97,19 +92,6 @@ const CompletedProjectsNavigator = createStackNavigator({
   }
 })
 
-const RejectedProjectsNavigator = createStackNavigator({
-  RejectedProjectList: RejectedProjectListScreen,
-  RejectedProjectDetails: RejectedProjectDetailsScreen
-}, {
-  defaultNavigationOptions: {
-    headerTitleAlign: 'center',
-    headerStyle: {
-      backgroundColor: Colors.primaryColor
-    },
-    headerTintColor: Colors.secondaryColor
-  }
-})
-
 const IdeasNavigator = createStackNavigator({
   IdeaList: IdeaListScreen,
   AddIdea: AddIdeaScreen,
@@ -124,18 +106,6 @@ const IdeasNavigator = createStackNavigator({
   }
 })
 
-// const AddIdeaNavigator = createStackNavigator({
-//   AddIdea: AddIdeaScreen
-// }, {
-//   defaultNavigationOptions: {
-//     headerTitleAlign: 'center',
-//     headerStyle: {
-//       backgroundColor: Colors.primaryColor
-//     },
-//     headerTintColor: Colors.secondaryColor
-//   }
-// })
-
 const ProfileNavigator = createStackNavigator({
   Profile: ProfileScreen,
   EditProfile: EditProfileScreen
@@ -149,24 +119,8 @@ const ProfileNavigator = createStackNavigator({
   }
 })
 
-// const ExpoPushNotificationNavigator = createStackNavigator({
-//   ExpoPushNotifications: ExpoPushNotifications
-// })
-
 const TestNotificationNavigator = createStackNavigator({
   TestNotification: TestNotificationScreen
-}, {
-  defaultNavigationOptions: {
-    headerTitleAlign: 'center',
-    headerStyle: {
-      backgroundColor: Colors.primaryColor
-    },
-    headerTintColor: Colors.secondaryColor
-  }
-})
-
-const TestDevNavigator = createStackNavigator({
-  TestDev: TestDevScreen
 }, {
   defaultNavigationOptions: {
     headerTitleAlign: 'center',
@@ -223,15 +177,6 @@ const InternalNavigator = createDrawerNavigator({
                             color={Colors.primaryColor}/>
     }
   },
-  RejectedProjects: {
-    screen: RejectedProjectsNavigator,
-    navigationOptions: {
-      drawerLabel: 'Rejected Jobs',
-      drawerIcon: <Ionicons name='warning'
-                            size={25}
-                            color={Colors.primaryColor}/>
-    }
-  },
   Ideas: {
     screen: IdeasNavigator,
     navigationOptions: {
@@ -241,15 +186,6 @@ const InternalNavigator = createDrawerNavigator({
                             color={Colors.primaryColor}/>
     }
   },
-  // AddIdea: {
-  //   screen: AddIdeaNavigator,
-  //   navigationOptions: {
-  //     drawerLabel: 'New Idea',
-  //     drawerIcon: <Ionicons name='add'
-  //                           size={25}
-  //                           color={Colors.primaryColor}/>
-  //   }
-  // },
   Profile: {
     screen: ProfileNavigator,
     navigationOptions: {
@@ -263,15 +199,6 @@ const InternalNavigator = createDrawerNavigator({
     screen: TestNotificationNavigator,
     navigationOptions: {
       drawerLabel: 'Test Notification',
-      drawerIcon: <Ionicons name='bug'
-                            size={25}
-                            color={Colors.primaryColor}/>
-    }
-  },
-  TestDev: {
-    screen: TestDevNavigator,
-    navigationOptions: {
-      drawerLabel: 'Test Dev',
       drawerIcon: <Ionicons name='bug'
                             size={25}
                             color={Colors.primaryColor}/>

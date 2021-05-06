@@ -5,7 +5,6 @@ export const AppContext = createContext({
   refreshToken: null,
   expoPushToken: null,
   userData: null,
-
   SetAccessToken: async () => {
   },
   SetRefreshToken: async () => {

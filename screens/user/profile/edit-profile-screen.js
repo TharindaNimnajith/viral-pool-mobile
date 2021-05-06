@@ -11,25 +11,13 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-// import Dialog from 'react-native-dialog'
 import RadioForm from 'react-native-simple-radio-button'
-// "react-native-dropdown-picker": "^4.0.9"
-// import DropDownPicker from 'react-native-dropdown-picker'
-// "react-native-picker-select": "^8.0.4"
-// "@react-native-picker/picker": "^1.15.0"
-// import RNPickerSelect from 'react-native-picker-select'
 import DatePicker from 'react-native-datepicker'
-// "@react-native-community/datetimepicker": "^3.0.4",
-// import DateTimePicker from '@react-native-community/datetimepicker'
-// "react-native-date-picker": "^3.2.10"
-// import DatePicker from 'react-native-date-picker'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
-import {isEmpty} from '../../../helpers/common-helpers'
-import {storeObjectData} from '../../../helpers/local-storage-helpers'
-import {Const} from '../../../util/const'
-import Colors from '../../../shared/colors'
-import Constants from '../../../shared/constants'
+import {isEmpty} from '../../../util/common-helpers'
+import Colors from '../../../util/colors'
+import Constants from '../../../util/constants'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const genderOptions = [{
@@ -40,52 +28,22 @@ const genderOptions = [{
   value: 1
 }]
 
-// noinspection JSUnusedLocalSymbols
-const EditProfileScreen = props => {
-  // noinspection JSCheckFunctionSignatures
+const EditProfileScreen = () => {
   const appContext = useContext(AppContext)
 
-  // noinspection JSUnresolvedVariable
   const [firstName, setFirstName] = useState(appContext.userData.firstName)
-  // noinspection JSUnresolvedVariable
   const [lastName, setLastName] = useState(appContext.userData.lastName)
-  // noinspection JSUnresolvedVariable
-  const [gender, setGender] = useState(appContext.userData.gender?.toUpperCase() === 'MALE' ? 1
-    : appContext.userData.gender?.toUpperCase() === 'FEMALE' ? 0 : null)
-  // noinspection JSUnresolvedVariable
+  const [gender, setGender] = useState(appContext.userData.gender?.toUpperCase() === 'MALE' ? 1 :
+    appContext.userData.gender?.toUpperCase() === 'FEMALE' ? 0 : null)
   const [birthDate, setBirthDate] = useState(appContext.userData.birthDate)
   const [address, setAddress] = useState(appContext.userData.address)
-  // noinspection JSUnresolvedVariable
   const [phoneNumber, setPhoneNumber] = useState(appContext.userData.phoneNumber)
-
   const [firstNameValid, setFirstNameValid] = useState(true)
   const [lastNameValid, setLastNameValid] = useState(true)
   const [addressValid, setAddressValid] = useState(true)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
-  // const [birthDateValid, setBirthDateValid] = useState(true)
-  // const [genderValid, setGenderValid] = useState(true)
-
   const [error, setError] = useState(false)
-
   const [loading, setLoading] = useState(false)
-
-  // const [visible, setVisible] = useState(true)
-
-  // const [userData, setUserData] = useState(null)
-  //
-  // useEffect(() => {
-  //   getObjectData(Const.USER_DATA).then(userData => {
-  //     setUserData(userData)
-  //   })
-  // }, [])
-
-  // const showDialog = async () => {
-  //   setVisible(true)
-  // }
-  //
-  // const hideDialog = async () => {
-  //   setVisible(false)
-  // }
 
   const showConfirmAlert = () => {
     Alert.alert(
@@ -126,13 +84,11 @@ const EditProfileScreen = props => {
   }
 
   const onChangeGender = async gender => {
-    // setGenderValid(!await isEmpty(gender.trim()))
     setError(false)
     setGender(gender)
   }
 
   const onChangeBirthDate = async birthDate => {
-    // setBirthDateValid(await checkBirthDateValidity(birthDate))
     setError(false)
     setBirthDate(birthDate)
   }
@@ -150,70 +106,27 @@ const EditProfileScreen = props => {
     setPhoneNumber(phoneNumber)
   }
 
-  // const checkPhoneNumberValidity = async phoneNumber => {
-  //   if (!await isEmpty(phoneNumber.trim()))
-  //     // noinspection JSUnresolvedFunction
-  //     if (validator.isNumeric(phoneNumber))
-  //       // noinspection JSUnresolvedFunction
-  //       if (validator.isLength(phoneNumber, {
-  //         min: 10,
-  //         max: 10
-  //       }))
-  //         return true
-  //   return false
-  // }
-  //
-  // const checkBirthDateValidity = async birthDate => {
-  //   // noinspection JSUnresolvedFunction
-  //   if (validator.isDate(birthDate))
-  //     // noinspection JSUnresolvedFunction
-  //     if (validator.isBefore(birthDate, Date.now()))
-  //       return true
-  //   return false
-  // }
-
   function isDisabled() {
     return !firstNameValid || !lastNameValid || !addressValid || !phoneNumberValid
   }
 
   const editProfile = async () => {
-    // setVisible(false)
     setLoading(false)
     setLoading(true)
     setError(false)
     const formData = new FormData()
     formData.append('id', appContext.userData.id)
     formData.append('email', appContext.userData.email)
-    // noinspection JSUnresolvedVariable
     formData.append('userRole', 'Influencer')
-    // noinspection JSUnresolvedVariable
-    // formData.append('profileImagePath', appContext.userData.profileImagePath)
     formData.append('firstName', firstName.trim())
     formData.append('lastName', lastName.trim())
-    // noinspection JSUnresolvedVariable
     formData.append('gender', gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender)
     formData.append('birthDate', birthDate)
     formData.append('address', address.trim())
     formData.append('phoneNumber', phoneNumber.trim())
-    // let data = {
-    //   id: appContext.userData.id,
-    //   email: appContext.userData.email,
-    //   userRole: appContext.userData.userRole,
-    //   profileImagePath: appContext.userData.profileImagePath,
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   gender: gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender,
-    //   birthDate: birthDate,
-    //   address: address,
-    //   phoneNumber: phoneNumber
-    // }
     axios.put('User', formData).then(async response => {
       if (response.status === 200) {
-        // navigation.navigate({
-        //   routeName: 'Profile'
-        // })
         await appContext.SetUserData(response.data.data)
-        await storeObjectData(Const.USER_DATA, response.data.data)
         setLoading(false)
         await showSuccessAlert()
       } else {
@@ -230,18 +143,6 @@ const EditProfileScreen = props => {
   return (
     <SafeAreaView>
       <ScrollView>
-        {/*<Dialog.Container visible={visible}>*/}
-        {/*  <Dialog.Title>*/}
-        {/*    EDIT PROFILE*/}
-        {/*  </Dialog.Title>*/}
-        {/*  <Dialog.Description>*/}
-        {/*    Do you want to update the profile details?*/}
-        {/*  </Dialog.Description>*/}
-        {/*  <Dialog.Button label='Yes'*/}
-        {/*                 onPress={editProfile}/>*/}
-        {/*  <Dialog.Button label='No'*/}
-        {/*                 onPress={hideDialog}/>*/}
-        {/*</Dialog.Container>*/}
         <View style={styles.mainViewStyle}>
           <View style={styles.containerStyle}>
             <Text style={styles.labelStyle}>
@@ -273,16 +174,6 @@ const EditProfileScreen = props => {
                        labelStyle={styles.radioLabelStyle}
                        style={styles.radioStyle}
                        onPress={gender => onChangeGender(gender)}/>
-            {/*<DropDownPicker items={genderOptions}*/}
-            {/*                defaultValue={gender}*/}
-            {/*                containerStyle={styles.dropdownContainerStyle}*/}
-            {/*                style={styles.dropdownPickerStyle}*/}
-            {/*                itemStyle={styles.dropdownItemStyle}*/}
-            {/*                dropDownStyle={styles.dropdownStyle}*/}
-            {/*                labelStyle={styles.dropdownLabelStyle}*/}
-            {/*                onChangeItem={gender => onChangeGender(gender)}/>*/}
-            {/*<RNPickerSelect onValueChange={gender => onChangeGender(gender)}*/}
-            {/*                items={genderOptions}/>*/}
             <Text style={styles.labelStyle}>
               Birthday
             </Text>
@@ -314,15 +205,6 @@ const EditProfileScreen = props => {
                           }
                         }}
                         onDateChange={birthDate => onChangeBirthDate(birthDate)}/>
-            {/*<DateTimePicker testID='dateTimePicker'*/}
-            {/*                value={birthDate}*/}
-            {/*                mode={'date'}*/}
-            {/*                is24Hour={true}*/}
-            {/*                display='default'*/}
-            {/*                onChange={birthDate => onChangeBirthDate(birthDate)}/>*/}
-            {/*<DatePicker style={styles.datePickerStyle}*/}
-            {/*            date={birthDate}*/}
-            {/*            onDateChange={birthDate => onChangeBirthDate(birthDate)}/>*/}
             <Text style={styles.labelStyle}>
               Address
             </Text>
@@ -405,26 +287,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: Colors.tertiaryColor
   },
-  // dropdownContainerStyle: {
-  //   width: wp('80%'),
-  //   height: 40,
-  //   marginTop: 10,
-  //   borderColor: Colors.secondaryColor,
-  //   borderWidth: 1,
-  //   borderRadius: 5
-  // },
-  // dropdownItemStyle: {
-  //   justifyContent: 'flex-start'
-  // },
-  // dropdownLabelStyle: {
-  //   color: Colors.tertiaryColor
-  // },
-  // dropdownPickerStyle: {
-  //   borderColor: Colors.primaryColor
-  // },
-  // dropdownStyle: {
-  //   borderColor: Colors.primaryColor
-  // },
   errorTextStyle: {
     color: Colors.errorColor
   },

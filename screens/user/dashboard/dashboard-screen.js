@@ -1,25 +1,14 @@
 import React, {useContext, useEffect} from 'react'
-// noinspection ES6UnusedImports
-import {
-  Image,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-  View
-} from 'react-native'
+import {Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native'
 import {SocialIcon} from 'react-native-elements'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
-import Colors from '../../../shared/colors'
+import Colors from '../../../util/colors'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const DashboardScreen = props => {
-  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
   useEffect(() => {
@@ -36,26 +25,8 @@ const DashboardScreen = props => {
     props.navigation.navigate('Profile')
   }
 
-  const onSelectFacebook = async () => {
-    //
-  }
-
-  const onSelectInstagram = async () => {
-    //
-  }
-
-  const onSelectYoutube = async () => {
-    //
-  }
-
-  const onSelectTiktok = async () => {
-    //
-  }
-
-  // noinspection JSUnresolvedVariable
   return (
     <SafeAreaView>
-      {/*<ScrollView>*/}
       <View style={styles.mainViewStyle}>
         <View style={styles.headerStyle}>
           <View style={styles.viewStyle}>
@@ -139,8 +110,7 @@ const DashboardScreen = props => {
                           type='facebook'
                           iconSize={25}
                           fontStyle={styles.socialIconFontStyle}
-                          style={styles.socialIconButtonStyle}
-                          onPress={onSelectFacebook}/>
+                          style={styles.socialIconButtonStyle}/>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={1}>
               <SocialIcon title='Connect with Youtube'
@@ -149,8 +119,7 @@ const DashboardScreen = props => {
                           type='youtube'
                           iconSize={25}
                           fontStyle={styles.socialIconFontStyle}
-                          style={styles.socialIconButtonStyle}
-                          onPress={onSelectYoutube}/>
+                          style={styles.socialIconButtonStyle}/>
             </TouchableOpacity>
             <TouchableOpacity activeOpacity={1}>
               <SocialIcon title='Connect with Instagram'
@@ -159,8 +128,7 @@ const DashboardScreen = props => {
                           type='instagram'
                           iconSize={25}
                           fontStyle={styles.socialIconFontStyle}
-                          style={styles.socialIconButtonStyle}
-                          onPress={onSelectInstagram}/>
+                          style={styles.socialIconButtonStyle}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.tiktokViewStyle}
                               activeOpacity={1}>
@@ -173,14 +141,12 @@ const DashboardScreen = props => {
                             type='github'
                             iconSize={0}
                             fontStyle={styles.socialIconFontStyle}
-                            style={styles.socialIconButtonStyle}
-                            onPress={onSelectTiktok}/>
+                            style={styles.socialIconButtonStyle}/>
               </View>
             </TouchableOpacity>
           </View>
         </View>
       </View>
-      {/*</ScrollView>*/}
     </SafeAreaView>
   )
 }
@@ -295,7 +261,6 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 22,
     color: Colors.secondaryColor,
-    // fontWeight: 'bold',
     marginTop: wp('15%'),
     marginLeft: wp('44%'),
     marginRight: wp('5%')

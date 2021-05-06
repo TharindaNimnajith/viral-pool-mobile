@@ -1,31 +1,25 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../shared/colors'
+import Constants from '../../util/constants'
+import Colors from '../../util/colors'
 
 const ProjectListItem = props => {
-  let project = {
-    project: props.itemData.item,
-    navigation: props.navigation,
-    refresh: props.refreshFunction
-  }
-
   const redirectToDetailsScreen = () => {
-    switch (project.project.status) {
+    let project = {props}
+    project = project.project.navigation.state.params.itemData.item
+    switch (props.itemData.item.status) {
       case 'New':
-        props.navigation.navigate('NewProjectDetails', {project})
+        props.navigation.navigate('NewProjectDetails', project)
         break
       case 'Ongoing':
-        props.navigation.navigate('OngoingProjectDetails', {project})
-        break
-      case 'Rejected':
-        props.navigation.navigate('RejectedProjectDetails', {project})
+        props.navigation.navigate('OngoingProjectDetails', project)
         break
       case 'Completed':
-        props.navigation.navigate('CompletedProjectDetails', {project})
+        props.navigation.navigate('CompletedProjectDetails', project)
         break
       default:
-        props.navigation.navigate('Dashboard')
+        alert(Constants.ERROR)
     }
   }
 
@@ -34,10 +28,10 @@ const ProjectListItem = props => {
                       onPress={redirectToDetailsScreen}>
       <View style={styles.viewStyle}>
         <Text style={styles.titleStyle}>
-          {project.project.title}
+          {props.itemData.item.title}
         </Text>
         <Text style={styles.textStyle}>
-          {project.project.description}
+          {props.itemData.item.description}
         </Text>
       </View>
     </TouchableOpacity>

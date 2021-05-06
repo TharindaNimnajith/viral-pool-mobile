@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import {View} from 'react-native'
+import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import Dialog from 'react-native-dialog'
 import CustomHeaderButton from './custom-header-button'
 

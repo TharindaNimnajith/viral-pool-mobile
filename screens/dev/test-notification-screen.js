@@ -1,56 +1,32 @@
-import React, {useContext, useEffect, useState} from 'react'
-// noinspection ES6UnusedImports
-import {SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import React, {useContext} from 'react'
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../shared/colors'
 import {AppContext} from '../../global/app-context'
-import {getStringData} from '../../helpers/local-storage-helpers'
-import {Const} from '../../util/const'
+import Colors from '../../util/colors'
 import {ApiUrl} from '../../util/api-url'
-import {Notifications} from '../../data/notification-data/notification-data';
+import {Notifications} from '../../data/notification-data/notification-data'
 import Menu from '../../components/buttons/menu-button'
 import CombinedButtons from '../../components/buttons/combined-buttons'
 
 const TestNotificationScreen = () => {
-  // noinspection JSCheckFunctionSignatures
   const appContext = useContext(AppContext)
 
-  const [expoPushToken, setExpoPushToken] = useState(null)
-
-  useEffect(() => {
-    getStringData(Const.EXPO_PUSH_TOKEN).then(expoPushToken => {
-      setExpoPushToken(expoPushToken)
-    })
-  }, [])
-
-  const sendNotificationAppContext = async () => {
+  const sendNotification = async () => {
     await sendPushNotification(appContext.expoPushToken)
-  }
-
-  const sendNotificationAsyncStorage = async () => {
-    await sendPushNotification(expoPushToken)
   }
 
   return (
     <SafeAreaView>
-      {/*<ScrollView>*/}
       <View style={styles.mainViewStyle}>
         <View style={styles.viewStyle}>
           <TouchableOpacity style={styles.buttonStyle}
-                            onPress={sendNotificationAppContext}>
+                            onPress={sendNotification}>
             <Text style={styles.buttonTextStyle}>
-              Send Notification (App Context)
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonStyle}
-                            onPress={sendNotificationAsyncStorage}>
-            <Text style={styles.buttonTextStyle}>
-              Send Notification (Async Storage)
+              Send Notification
             </Text>
           </TouchableOpacity>
         </View>
       </View>
-      {/*</ScrollView>*/}
     </SafeAreaView>
   )
 }
@@ -101,32 +77,6 @@ async function sendPushNotification(expoPushToken) {
     headers: headers,
     body: JSON.stringify(message)
   })
-
-  // let data = {
-  //   "to": "ExponentPushToken[Wr2Q-yKUDUUi6qm0ZavPPM]",
-  //   "sound": "default",
-  //   "title": "New Job",
-  //   "body": "You have been assigned a new job.",
-  //   "data": {
-  //     "screen": "NewProjectDetails"
-  //     "project": {
-  //       "title": "A video promoting Dialog",
-  //       "description": "A comedy video is required for promoting 4G internet services provided by Dialog.",
-  //       "status": "New"
-  //     }
-  //   }
-  // }
-  //
-  // let config = {
-  //   method: 'POST',
-  //   url: 'https://exp.host/--/api/v2/push/send',
-  //   headers: {
-  //     'Accept': 'application/json',
-  //     'Accept-encoding': 'gzip, deflate',
-  //     'Content-Type': 'application/json'
-  //   },
-  //   data: data
-  // }
 }
 
 TestNotificationScreen.navigationOptions = navData => {
@@ -137,5 +87,4 @@ TestNotificationScreen.navigationOptions = navData => {
   }
 }
 
-// noinspection JSUnusedGlobalSymbols
 export default TestNotificationScreen

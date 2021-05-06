@@ -1,22 +1,11 @@
 import React, {useState} from 'react'
-// noinspection ES6UnusedImports
-import {
-  ActivityIndicator,
-  Alert,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View
-} from 'react-native'
+import {ActivityIndicator, Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
-import {isEmpty} from '../../../helpers/common-helpers'
-import Colors from '../../../shared/colors'
-import Constants from '../../../shared/constants'
+import {isEmpty} from '../../../util/common-helpers'
+import Colors from '../../../util/colors'
+import Constants from '../../../util/constants'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 
 const EditIdeaScreen = props => {
@@ -24,14 +13,10 @@ const EditIdeaScreen = props => {
 
   const [title, setTitle] = useState(idea.idea.title)
   const [description, setDescription] = useState(idea.idea.description)
-
   const [titleValid, setTitleValid] = useState(true)
   const [descriptionValid, setDescriptionValid] = useState(true)
-
   const [error, setError] = useState(false)
-
   const [loading, setLoading] = useState(false)
-
   const [visible, setVisible] = useState(false)
 
   const showDialog = async () => {
@@ -80,9 +65,6 @@ const EditIdeaScreen = props => {
     }
     axios.put('', data).then(async response => {
       if (response.status === 200) {
-        // navigation.navigate({
-        //   routeName: 'IdeaList'
-        // })
         setTitle('')
         setDescription('')
         setLoading(false)
@@ -100,7 +82,6 @@ const EditIdeaScreen = props => {
 
   return (
     <SafeAreaView>
-      {/*<ScrollView>*/}
       <Dialog.Container visible={visible}>
         <Dialog.Title>
           EDIT IDEA
@@ -159,7 +140,6 @@ const EditIdeaScreen = props => {
           ) : null
         }
       </View>
-      {/*</ScrollView>*/}
     </SafeAreaView>
   )
 }
