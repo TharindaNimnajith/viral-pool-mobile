@@ -6,17 +6,16 @@ import Colors from '../../util/colors'
 
 const ProjectListItem = props => {
   const redirectToDetailsScreen = () => {
-    let project = {props}
-    project = project.project.navigation.state.params.itemData.item
+    const project = props.itemData.item
     switch (props.itemData.item.status) {
       case 'New':
-        props.navigation.navigate('NewProjectDetails', project)
+        props.navigation.navigate('NewProjectDetails', {project})
         break
       case 'Ongoing':
-        props.navigation.navigate('OngoingProjectDetails', project)
+        props.navigation.navigate('OngoingProjectDetails', {project})
         break
       case 'Completed':
-        props.navigation.navigate('CompletedProjectDetails', project)
+        props.navigation.navigate('CompletedProjectDetails', {project})
         break
       default:
         alert(Constants.ERROR)

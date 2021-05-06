@@ -5,7 +5,8 @@ import Colors from '../../util/colors'
 
 const NotificationListItem = props => {
   const pressNotification = () => {
-    props.navigation.navigate(props.itemData.item.screen, props)
+    const project = props.itemData.item.project
+    props.navigation.navigate(props.itemData.item.screen, {project})
   }
 
   return (

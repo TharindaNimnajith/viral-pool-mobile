@@ -1,20 +1,20 @@
 import React from 'react'
-import {StyleSheet, View} from 'react-native'
+import {StyleSheet, Text, View} from 'react-native'
 
 const ProjectDetails = props => {
-  console.log(props)
+  const project = props.project.navigation.getParam('project')
 
   return (
     <View style={styles.viewStyle}>
-      {/*<Text>*/}
-      {/*  {project.title}*/}
-      {/*</Text>*/}
-      {/*<Text>*/}
-      {/*  {project.description}*/}
-      {/*</Text>*/}
-      {/*<Text>*/}
-      {/*  {project.status}*/}
-      {/*</Text>*/}
+      <Text>
+        {project.title}
+      </Text>
+      <Text>
+        {project.description}
+      </Text>
+      <Text>
+        {project.status}
+      </Text>
     </View>
   )
 }
