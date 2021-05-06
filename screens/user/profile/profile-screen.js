@@ -1,15 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {
-  ActivityIndicator,
-  Alert,
-  Image,
-  Platform,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native'
+import {ActivityIndicator, Image, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
@@ -20,6 +10,7 @@ import {AppContext} from '../../../global/app-context'
 import {ApiUrl} from '../../../util/api-url'
 import Colors from '../../../util/colors'
 import Constants from '../../../util/constants'
+import {showAlert} from '../../../util/common-helpers'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 
@@ -38,7 +29,7 @@ const ProfileScreen = props => {
           status
         } = await ImagePicker.requestMediaLibraryPermissionsAsync()
         if (status !== 'granted')
-          alert(Constants.CAMERA_PERMISSION)
+          showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
     })()
   }, [])
@@ -49,16 +40,6 @@ const ProfileScreen = props => {
 
   const hideDialog = async () => {
     setVisible(false)
-  }
-
-  const showSuccessAlert = () => {
-    Alert.alert(
-      'SUCCESS',
-      'Profile picture updated successfully!',
-      [{
-        text: 'OK'
-      }]
-    )
   }
 
   const onEditButtonPress = async () => {
@@ -88,7 +69,7 @@ const ProfileScreen = props => {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${appContext.accessToken}`,
-        'client_id': 'UFwv4s5sAHYyRS2q'
+        'client_id': `${Constants.CLIENT_ID_VALUE}`
       }
       FileSystem.uploadAsync(
         `${ApiUrl.BASE_URL}User`,
@@ -103,7 +84,7 @@ const ProfileScreen = props => {
           parameters: {
             'id': appContext.userData.id,
             'email': appContext.userData.email,
-            'userRole': 'Influencer',
+            'userRole': Constants.USER_ROLE,
             'firstName': appContext.userData.firstName,
             'lastName': appContext.userData.lastName,
             'gender': appContext.userData.gender,
@@ -116,7 +97,7 @@ const ProfileScreen = props => {
           const data = JSON.parse(response.body).data
           await appContext.SetUserData(data)
           setLoading(false)
-          await showSuccessAlert()
+          await showAlert(Constants.SUCCESS, Constants.UPDATED)
         } else {
           setLoading(false)
           setError(true)
@@ -169,7 +150,7 @@ const ProfileScreen = props => {
               error ? (
                 <View style={styles.viewStyle}>
                   <Text style={styles.errorTextStyle}>
-                    {Constants.ERROR}
+                    {Constants.UNEXPECTED_ERROR}
                   </Text>
                 </View>
               ) : null

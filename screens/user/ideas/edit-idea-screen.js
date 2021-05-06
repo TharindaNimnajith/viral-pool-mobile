@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
-import {ActivityIndicator, Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {ActivityIndicator, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
-import {isEmpty} from '../../../util/common-helpers'
+import {isEmpty, showAlert} from '../../../util/common-helpers'
 import Colors from '../../../util/colors'
 import Constants from '../../../util/constants'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
@@ -25,16 +25,6 @@ const EditIdeaScreen = props => {
 
   const hideDialog = async () => {
     setVisible(false)
-  }
-
-  const showSuccessAlert = () => {
-    Alert.alert(
-      'SUCCESS',
-      'Idea updated successfully!',
-      [{
-        text: 'OK'
-      }]
-    )
   }
 
   const onChangeTitle = async title => {
@@ -68,7 +58,7 @@ const EditIdeaScreen = props => {
         setTitle('')
         setDescription('')
         setLoading(false)
-        await showSuccessAlert()
+        await showAlert(Constants.SUCCESS, Constants.UPDATED)
       } else {
         setLoading(false)
         setError(true)
@@ -125,7 +115,7 @@ const EditIdeaScreen = props => {
             error ? (
               <View style={styles.viewStyle}>
                 <Text style={styles.errorTextStyle}>
-                  {Constants.ERROR}
+                  {Constants.UNEXPECTED_ERROR}
                 </Text>
               </View>
             ) : null

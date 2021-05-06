@@ -22,14 +22,10 @@ import {storeStringData} from '../../../util/local-storage'
 const LoginScreen = props => {
   const appContext = useContext(AppContext)
 
-  const [email, setEmail] = useState('tharindarajapakshe@y7mail.com')
-  const [password, setPassword] = useState('tharinda')
-  const [emailValid, setEmailValid] = useState(true)
-  const [passwordValid, setPasswordValid] = useState(true)
-  const [state] = useState('string')
-  const [redirectUri] = useState('string')
-  const [clientId] = useState('string')
-  const [clientName] = useState('string')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [emailValid, setEmailValid] = useState(false)
+  const [passwordValid, setPasswordValid] = useState(false)
   const [unauthorized, setUnauthorized] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -56,10 +52,10 @@ const LoginScreen = props => {
     let data = {
       email: email,
       password: password,
-      state: state,
-      redirectUri: redirectUri,
-      clientId: clientId,
-      clientName: clientName
+      state: Constants.DUMMY_STRING,
+      redirectUri: Constants.DUMMY_STRING,
+      clientId: Constants.DUMMY_STRING,
+      clientName: Constants.DUMMY_STRING
     }
     axios.post('oauth/mobile-login', data).then(async response => {
       await storeStringData(Constants.ACCESS_TOKEN, response.data.access_token)
@@ -101,7 +97,7 @@ const LoginScreen = props => {
               <Image style={styles.imageStyle}
                      source={require('../../../assets/logo.png')}/>
               <Text style={styles.textStyle}>
-                Manage Your Team, Clients, Content Creators | Create Strategies, Discuss, Execute | Statistics
+                {Constants.DESCRIPTION}
               </Text>
               <Text style={styles.titleStyle}>
                 Login

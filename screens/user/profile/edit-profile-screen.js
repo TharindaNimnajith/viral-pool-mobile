@@ -15,18 +15,11 @@ import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
-import {isEmpty} from '../../../util/common-helpers'
+import {isEmpty, showAlert} from '../../../util/common-helpers'
 import Colors from '../../../util/colors'
 import Constants from '../../../util/constants'
+import {genderOptions} from '../../../util/enum'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
-
-const genderOptions = [{
-  label: 'Female',
-  value: 0
-}, {
-  label: 'Male',
-  value: 1
-}]
 
 const EditProfileScreen = () => {
   const appContext = useContext(AppContext)
@@ -48,7 +41,7 @@ const EditProfileScreen = () => {
   const showConfirmAlert = () => {
     Alert.alert(
       'EDIT PROFILE',
-      'Do you want to update the profile details?',
+      Constants.CONFIRMATION,
       [{
         text: 'Yes',
         onPress: editProfile,
@@ -58,16 +51,6 @@ const EditProfileScreen = () => {
       {
         cancelable: false
       }
-    )
-  }
-
-  const showSuccessAlert = () => {
-    Alert.alert(
-      'SUCCESS',
-      'Profile updated successfully!',
-      [{
-        text: 'OK'
-      }]
     )
   }
 
@@ -117,7 +100,7 @@ const EditProfileScreen = () => {
     const formData = new FormData()
     formData.append('id', appContext.userData.id)
     formData.append('email', appContext.userData.email)
-    formData.append('userRole', 'Influencer')
+    formData.append('userRole', Constants.USER_ROLE)
     formData.append('firstName', firstName.trim())
     formData.append('lastName', lastName.trim())
     formData.append('gender', gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender)
@@ -128,7 +111,7 @@ const EditProfileScreen = () => {
       if (response.status === 200) {
         await appContext.SetUserData(response.data.data)
         setLoading(false)
-        await showSuccessAlert()
+        await showAlert(Constants.SUCCESS, Constants.UPDATED)
       } else {
         setLoading(false)
         setError(true)
@@ -234,7 +217,7 @@ const EditProfileScreen = () => {
               error ? (
                 <View style={styles.viewStyle}>
                   <Text style={styles.errorTextStyle}>
-                    {Constants.ERROR}
+                    {Constants.UNEXPECTED_ERROR}
                   </Text>
                 </View>
               ) : null

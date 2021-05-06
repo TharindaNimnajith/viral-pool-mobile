@@ -8,11 +8,22 @@ export default {
     ' It can now be installed and imported from \'@react-native-community/datetimepicker\' instead' +
     ' of \'react-native\'. See https://github.com/react-native-community/datetimepicker',
   WARNING_4: 'Animated: `useNativeDriver`',
-  LOGIN_ERROR: 'Invalid email or password. Please try again!',
-  ERROR: 'An unexpected error occurred. Please try again later!',
+  USER_ROLE: 'Influencer',
+  ACCESS_TOKEN: 'access_token',
+  CLIENT_ID: 'client_id',
+  CLIENT_ID_VALUE: 'UFwv4s5sAHYyRS2q',
+  DUMMY_STRING: 'string',
+  SUCCESS: 'SUCCESS',
+  WARNING: 'WARNING',
+  ERROR: 'ERROR',
+  UPDATED: 'Updated successfully!',
+  SUBMITTED: 'Submitted successfully!',
+  DELETED: 'Deleted successfully!',
+  CONFIRMATION: 'Are you sure?',
+  UNEXPECTED_ERROR: 'An unexpected error occurred. Please try again later.',
+  LOGIN_ERROR: 'Invalid email or password. Please try again.',
   EXPO_PUSH_NOTIFICATION_TOKEN_ERROR: 'Failed to get push token for expo push notification.',
   EXPO_PUSH_NOTIFICATION_DEVICE_ERROR: 'Must use physical device for expo push notifications.',
-  NAVIGATOR_ERROR: 'The navigation object has not been initialized or finished mounting yet.',
-  CAMERA_PERMISSION: 'Sorry, we need camera roll permissions to make this work!',
-  ACCESS_TOKEN: 'access_token'
+  CAMERA_PERMISSION: 'Sorry, we need camera roll permissions to make this work.',
+  DESCRIPTION: 'Manage Your Team, Clients, Content Creators | Create Strategies, Discuss, Execute | Statistics'
 }

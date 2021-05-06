@@ -11,6 +11,7 @@ import {
 } from 'expo-notifications'
 import {AppContext} from '../../global/app-context'
 import Constants from '../../util/constants'
+import {showAlert} from '../../util/common-helpers'
 
 const ExpoPushNotifications = () => {
   const appContext = useContext(AppContext)
@@ -23,10 +24,14 @@ const ExpoPushNotifications = () => {
       await appContext.SetExpoPushToken(token)
     })
 
+    // noinspection JSUnusedLocalSymbols
     notificationListener.current = addNotificationReceivedListener(notification => {
+      //
     })
 
+    // noinspection JSUnusedLocalSymbols
     responseListener.current = addNotificationResponseReceivedListener(response => {
+      //
     })
 
     return () => {
@@ -48,7 +53,6 @@ setNotificationHandler({
 
 async function registerForPushNotificationsAsync() {
   let token
-
   if (ExpoConstants.isDevice) {
     const {
       status: existingStatus
@@ -61,14 +65,13 @@ async function registerForPushNotificationsAsync() {
       finalStatus = status
     }
     if (finalStatus !== 'granted') {
-      alert(Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
+      showAlert(Constants.ERROR, Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
       return
     }
     token = (await getExpoPushTokenAsync()).data
   } else {
-    alert(Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
+    showAlert(Constants.ERROR, Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
   }
-
   return token
 }
 

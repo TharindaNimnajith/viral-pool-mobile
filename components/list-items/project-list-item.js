@@ -3,6 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Constants from '../../util/constants'
 import Colors from '../../util/colors'
+import {showAlert} from '../../util/common-helpers'
 
 const ProjectListItem = props => {
   const project = props.itemData.item
@@ -19,7 +20,7 @@ const ProjectListItem = props => {
         props.navigation.navigate('CompletedProjectDetails', {project})
         break
       default:
-        alert(Constants.ERROR)
+        showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
     }
   }
 
