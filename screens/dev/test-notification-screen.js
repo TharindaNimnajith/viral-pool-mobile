@@ -19,6 +19,9 @@ const TestNotificationScreen = () => {
     <SafeAreaView>
       <View style={styles.mainViewStyle}>
         <View style={styles.viewStyle}>
+          <Text style={styles.textStyle}>
+            {appContext.expoPushToken}
+          </Text>
           <TouchableOpacity style={styles.buttonStyle}
                             onPress={sendNotification}>
             <Text style={styles.buttonTextStyle}>
@@ -48,6 +51,9 @@ const styles = StyleSheet.create({
     width: wp('100%'),
     height: hp('100%'),
     backgroundColor: Colors.secondaryColor
+  },
+  textStyle: {
+    marginTop: 20
   },
   viewStyle: {
     alignItems: 'center'

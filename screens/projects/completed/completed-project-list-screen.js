@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native'
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import Colors from '../../../util/colors'
 import Menu from '../../../components/buttons/menu-button'
@@ -14,11 +14,9 @@ const CompletedProjectListScreen = props => {
   useEffect(() => {
     setLoading(false)
     setLoading(true)
-    axios.get('project-cc-strategy?status=0').then(async response => {
-      if (response.status === 200) {
-        console.log(response)
+    axios.get('project-cc-strategy?status=2').then(async response => {
+      if (response.status === 200)
         setCompletedProjects(response.data.data)
-      }
       setLoading(false)
     }).catch(async error => {
       setLoading(false)
@@ -29,7 +27,8 @@ const CompletedProjectListScreen = props => {
   const renderItemsFunction = itemData => {
     return (
       <ProjectListItem navigation={props.navigation}
-                       itemData={itemData}/>
+                       itemData={itemData}
+                       screen='CompletedProjectDetails'/>
     )
   }
 
@@ -57,7 +56,7 @@ const styles = StyleSheet.create({
   listStyle: {
     width: wp('95%'),
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 15
   },
   loadingStyle: {
     position: 'absolute',
@@ -71,7 +70,8 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: hp('95%')
   }
 })
 

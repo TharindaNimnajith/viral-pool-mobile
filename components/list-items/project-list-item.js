@@ -1,27 +1,13 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Constants from '../../util/constants'
 import Colors from '../../util/colors'
-import {showAlert} from '../../util/common-helpers'
 
 const ProjectListItem = props => {
-  const project = props.itemData.item
+  const project = props.itemData.item.id
 
   const redirectToDetailsScreen = () => {
-    switch (project.status) {
-      case 'New':
-        props.navigation.navigate('NewProjectDetails', {project})
-        break
-      case 'Ongoing':
-        props.navigation.navigate('OngoingProjectDetails', {project})
-        break
-      case 'Completed':
-        props.navigation.navigate('CompletedProjectDetails', {project})
-        break
-      default:
-        showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
-    }
+    props.navigation.navigate(props.screen, {project})
   }
 
   return (
@@ -29,10 +15,19 @@ const ProjectListItem = props => {
                       onPress={redirectToDetailsScreen}>
       <View style={styles.viewStyle}>
         <Text style={styles.titleStyle}>
-          {project.title}
+          {props.itemData.item.name}
         </Text>
         <Text style={styles.textStyle}>
-          {project.description}
+          {props.itemData.item.socialMediaPlatformName}
+        </Text>
+        <Text style={styles.textStyle}>
+          {props.itemData.item.isContentGivenByStrategyMember.toString()}
+        </Text>
+        <Text style={styles.textStyle}>
+          {props.itemData.item.createdDate}
+        </Text>
+        <Text style={styles.textStyle}>
+          {props.itemData.item.id}
         </Text>
       </View>
     </TouchableOpacity>
@@ -46,7 +41,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: Colors.secondaryColor,
     marginHorizontal: wp('4%'),
-    height: 90,
+    height: 125,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
