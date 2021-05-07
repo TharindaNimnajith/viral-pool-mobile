@@ -1,5 +1,5 @@
-import React, {useContext} from 'react'
-import {SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import React, {useCallback, useContext, useState} from 'react'
+import {RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {AppContext} from '../../global/app-context'
 import Colors from '../../util/colors'
@@ -11,25 +11,37 @@ import CombinedButtons from '../../components/buttons/combined-buttons'
 const TestNotificationScreen = () => {
   const appContext = useContext(AppContext)
 
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
+
   const sendNotification = async () => {
     await sendPushNotification(appContext.expoPushToken)
   }
 
   return (
     <SafeAreaView>
-      <View style={styles.mainViewStyle}>
-        <View style={styles.viewStyle}>
-          <Text style={styles.textStyle}>
-            {appContext.expoPushToken}
-          </Text>
-          <TouchableOpacity style={styles.buttonStyle}
-                            onPress={sendNotification}>
-            <Text style={styles.buttonTextStyle}>
-              Send Notification
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.viewStyle}>
+            <Text style={styles.textStyle}>
+              {appContext.expoPushToken}
             </Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonStyle}
+                              onPress={sendNotification}>
+              <Text style={styles.buttonTextStyle}>
+                Send Notification
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -82,6 +94,12 @@ async function sendPushNotification(expoPushToken) {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(message)
+  })
+}
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
   })
 }
 

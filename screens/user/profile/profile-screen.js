@@ -1,5 +1,16 @@
-import React, {useContext, useEffect, useState} from 'react'
-import {ActivityIndicator, Image, Platform, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
+import {
+  ActivityIndicator,
+  Image,
+  Platform,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import * as ImagePicker from 'expo-image-picker'
@@ -21,6 +32,7 @@ const ProfileScreen = props => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     (async () => {
@@ -32,6 +44,11 @@ const ProfileScreen = props => {
           showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
     })()
+  }, [])
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
   }, [])
 
   const showDialog = async () => {
@@ -124,111 +141,116 @@ const ProfileScreen = props => {
         <Dialog.Button label='No'
                        onPress={hideDialog}/>
       </Dialog.Container>
-      <View style={styles.mainViewStyle}>
-        <View style={styles.headerStyle}>
-          {
-            image ? (
-              <Image style={styles.avatarStyle}
-                     source={{
-                       uri: image
-                     }}/>
-            ) : (
-              <Image style={styles.avatarStyle}
-                     source={require('../../../assets/user.jpg')}/>
-            )
-          }
-        </View>
-        <View style={styles.bodyStyle}>
-          <View style={styles.bodyContentStyle}>
-            <TouchableOpacity style={styles.editPhotoStyle}
-                              onPress={showDialog}>
-              <Text style={styles.buttonTextStyle}>
-                Edit Profile Picture
-              </Text>
-            </TouchableOpacity>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.headerStyle}>
             {
-              error ? (
+              image ? (
+                <Image style={styles.avatarStyle}
+                       source={{
+                         uri: image
+                       }}/>
+              ) : (
+                <Image style={styles.avatarStyle}
+                       source={require('../../../assets/user.jpg')}/>
+              )
+            }
+          </View>
+          <View style={styles.bodyStyle}>
+            <View style={styles.bodyContentStyle}>
+              <TouchableOpacity style={styles.editPhotoStyle}
+                                onPress={showDialog}>
+                <Text style={styles.buttonTextStyle}>
+                  Edit Profile Picture
+                </Text>
+              </TouchableOpacity>
+              {
+                error ? (
+                  <View style={styles.viewStyle}>
+                    <Text style={styles.errorTextStyle}>
+                      {Constants.UNEXPECTED_ERROR}
+                    </Text>
+                  </View>
+                ) : null
+              }
+              <Text style={styles.titleStyle}>
+                {appContext.userData.firstName} {appContext.userData.lastName}
+              </Text>
+              <Text style={styles.subtitleStyle}>
+                {appContext.userData.userRole}
+              </Text>
+              <View>
                 <View style={styles.viewStyle}>
-                  <Text style={styles.errorTextStyle}>
-                    {Constants.UNEXPECTED_ERROR}
+                  <Ionicons name='mail'
+                            size={20}/>
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.email}
                   </Text>
                 </View>
-              ) : null
-            }
-            <Text style={styles.titleStyle}>
-              {appContext.userData.firstName} {appContext.userData.lastName}
-            </Text>
-            <Text style={styles.subtitleStyle}>
-              {appContext.userData.userRole}
-            </Text>
-            <View>
-              <View style={styles.viewStyle}>
-                <Ionicons name='mail'
-                          size={20}/>
-                <Text style={styles.textStyle}>
-                  {appContext.userData.email}
+                <View style={styles.viewStyle}>
+                  {
+                    appContext.userData.gender?.toUpperCase() === 'MALE' ? (
+                      <Ionicons name='man'
+                                size={20}/>
+                    ) : appContext.userData.gender?.toUpperCase() === 'FEMALE' ? (
+                      <Ionicons name='woman'
+                                size={20}/>
+                    ) : (
+                      <Ionicons name='person'
+                                size={20}/>
+                    )
+                  }
+                  {
+                    appContext.userData.gender ? (
+                      <Text style={styles.textStyle}>
+                        {appContext.userData.gender.charAt(0).toUpperCase() + appContext.userData.gender.slice(1)}
+                      </Text>
+                    ) : null
+                  }
+                </View>
+                <View style={styles.viewStyle}>
+                  <Ionicons name='calendar'
+                            size={20}/>
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.birthDate?.slice(0, 10)}
+                  </Text>
+                </View>
+                <View style={styles.viewStyle}>
+                  <Ionicons name='location'
+                            size={20}/>
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.address}
+                  </Text>
+                </View>
+                <View style={styles.viewStyle}>
+                  <Ionicons name='call'
+                            size={20}/>
+                  <Text style={styles.textStyle}>
+                    {appContext.userData.phoneNumber}
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity style={styles.buttonStyle}
+                                onPress={onEditButtonPress}>
+                <Text style={styles.buttonTextStyle}>
+                  Edit Profile
                 </Text>
-              </View>
-              <View style={styles.viewStyle}>
-                {
-                  appContext.userData.gender?.toUpperCase() === 'MALE' ? (
-                    <Ionicons name='man'
-                              size={20}/>
-                  ) : appContext.userData.gender?.toUpperCase() === 'FEMALE' ? (
-                    <Ionicons name='woman'
-                              size={20}/>
-                  ) : (
-                    <Ionicons name='person'
-                              size={20}/>
-                  )
-                }
-                {
-                  appContext.userData.gender ? (
-                    <Text style={styles.textStyle}>
-                      {appContext.userData.gender.charAt(0).toUpperCase() + appContext.userData.gender.slice(1)}
-                    </Text>
-                  ) : null
-                }
-              </View>
-              <View style={styles.viewStyle}>
-                <Ionicons name='calendar'
-                          size={20}/>
-                <Text style={styles.textStyle}>
-                  {appContext.userData.birthDate?.slice(0, 10)}
-                </Text>
-              </View>
-              <View style={styles.viewStyle}>
-                <Ionicons name='location'
-                          size={20}/>
-                <Text style={styles.textStyle}>
-                  {appContext.userData.address}
-                </Text>
-              </View>
-              <View style={styles.viewStyle}>
-                <Ionicons name='call'
-                          size={20}/>
-                <Text style={styles.textStyle}>
-                  {appContext.userData.phoneNumber}
-                </Text>
-              </View>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity style={styles.buttonStyle}
-                              onPress={onEditButtonPress}>
-              <Text style={styles.buttonTextStyle}>
-                Edit Profile
-              </Text>
-            </TouchableOpacity>
           </View>
+          {
+            loading ? (
+              <View style={styles.loadingStyle}>
+                <ActivityIndicator size='large'
+                                   color={Colors.secondaryColor}/>
+              </View>
+            ) : null
+          }
         </View>
-        {
-          loading ? (
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
-            </View>
-          ) : null
-        }
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -317,6 +339,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 ProfileScreen.navigationOptions = navData => {
   return {

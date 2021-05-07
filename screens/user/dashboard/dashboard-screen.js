@@ -1,8 +1,10 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
   Image,
+  RefreshControl,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -21,6 +23,7 @@ const DashboardScreen = props => {
   const appContext = useContext(AppContext)
 
   const [loading, setLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     setLoading(false)
@@ -37,140 +40,150 @@ const DashboardScreen = props => {
     })
   }, [])
 
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
+
   const onProfilePress = async () => {
     props.navigation.navigate('Profile')
   }
 
   return (
     <SafeAreaView>
-      <View style={styles.mainViewStyle}>
-        <View style={styles.headerStyle}>
-          <View style={styles.viewStyle}>
-            <TouchableWithoutFeedback onPress={onProfilePress}>
-              {
-                appContext.userData.profileImagePath ? (
-                  <Image style={styles.avatarStyle}
-                         source={{
-                           uri: appContext.userData.profileImagePath
-                         }}/>
-                ) : (
-                  <Image style={styles.avatarStyle}
-                         source={require('../../../assets/user.jpg')}/>
-                )
-              }
-            </TouchableWithoutFeedback>
-            <Text style={styles.titleStyle}
-                  onPress={onProfilePress}>
-              {appContext.userData.firstName} {appContext.userData.lastName}
-            </Text>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.headerStyle}>
+            <View style={styles.viewStyle}>
+              <TouchableWithoutFeedback onPress={onProfilePress}>
+                {
+                  appContext.userData.profileImagePath ? (
+                    <Image style={styles.avatarStyle}
+                           source={{
+                             uri: appContext.userData.profileImagePath
+                           }}/>
+                  ) : (
+                    <Image style={styles.avatarStyle}
+                           source={require('../../../assets/user.jpg')}/>
+                  )
+                }
+              </TouchableWithoutFeedback>
+              <Text style={styles.titleStyle}
+                    onPress={onProfilePress}>
+                {appContext.userData.firstName} {appContext.userData.lastName}
+              </Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.bodyStyle}>
-          <View style={styles.smallCardsViewStyle}>
-            <TouchableOpacity style={styles.cardStyle}>
-              <Text style={styles.ongoingProjectStatStyle}>
-                3
-              </Text>
-              <Text style={styles.statTitleStyle}>
-                Ongoing{'\n'}Projects
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
-              <Text style={styles.completedProjectStatStyle}>
-                10
-              </Text>
-              <Text style={styles.statTitleStyle}>
-                Completed{'\n'}Projects
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cardStyle}>
-              <Text style={styles.rejectedProjectStatStyle}>
-                7
-              </Text>
-              <Text style={styles.statTitleStyle}>
-                Rejected{'\n'}Projects
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity style={styles.largeCardViewStyle}>
-            <View style={styles.cardViewStyle}>
-              <Text style={styles.keyStyle}>
-                Total Earnings
-              </Text>
-              <Text style={styles.valueStyle}>
-                145,000 LKR
-              </Text>
+          <View style={styles.bodyStyle}>
+            <View style={styles.smallCardsViewStyle}>
+              <TouchableOpacity style={styles.cardStyle}>
+                <Text style={styles.ongoingProjectStatStyle}>
+                  3
+                </Text>
+                <Text style={styles.statTitleStyle}>
+                  Ongoing{'\n'}Projects
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.cardStyle}>
+                <Text style={styles.completedProjectStatStyle}>
+                  10
+                </Text>
+                <Text style={styles.statTitleStyle}>
+                  Completed{'\n'}Projects
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.cardStyle}>
+                <Text style={styles.rejectedProjectStatStyle}>
+                  7
+                </Text>
+                <Text style={styles.statTitleStyle}>
+                  Rejected{'\n'}Projects
+                </Text>
+              </TouchableOpacity>
             </View>
-            <View style={styles.cardViewStyle}>
-              <Text style={styles.keyStyle}>
-                Total Top-ups
-              </Text>
-              <Text style={styles.valueStyle}>
-                10,000 LKR
-              </Text>
-            </View>
-            <View style={styles.cardViewStyle}>
-              <Text style={styles.keyStyle}>
-                Total Viralpool Points
-              </Text>
-              <Text style={styles.valueStyle}>
-                50
-              </Text>
-            </View>
-          </TouchableOpacity>
-          <View style={styles.socialAccountsViewStyle}>
-            <TouchableOpacity activeOpacity={1}>
-              <SocialIcon title='Connect with Facebook'
-                          button
-                          raised={false}
-                          type='facebook'
-                          iconSize={25}
-                          fontStyle={styles.socialIconFontStyle}
-                          style={styles.socialIconButtonStyle}/>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={1}>
-              <SocialIcon title='Connect with Youtube'
-                          button
-                          raised={false}
-                          type='youtube'
-                          iconSize={25}
-                          fontStyle={styles.socialIconFontStyle}
-                          style={styles.socialIconButtonStyle}/>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={1}>
-              <SocialIcon title='Connect with Instagram'
-                          button
-                          raised={false}
-                          type='instagram'
-                          iconSize={25}
-                          fontStyle={styles.socialIconFontStyle}
-                          style={styles.socialIconButtonStyle}/>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.tiktokViewStyle}
-                              activeOpacity={1}>
-              <Image style={styles.tiktokIconStyle}
-                     source={require('../../../assets/tiktok.png')}/>
-              <View style={styles.tiktokButtonStyle}>
-                <SocialIcon title='Connect with Tiktok'
-                            button
-                            raised={false}
-                            type='github'
-                            iconSize={0}
-                            fontStyle={styles.socialIconFontStyle}
-                            style={styles.socialIconButtonStyle}/>
+            <TouchableOpacity style={styles.largeCardViewStyle}>
+              <View style={styles.cardViewStyle}>
+                <Text style={styles.keyStyle}>
+                  Total Earnings
+                </Text>
+                <Text style={styles.valueStyle}>
+                  145,000 LKR
+                </Text>
+              </View>
+              <View style={styles.cardViewStyle}>
+                <Text style={styles.keyStyle}>
+                  Total Top-ups
+                </Text>
+                <Text style={styles.valueStyle}>
+                  10,000 LKR
+                </Text>
+              </View>
+              <View style={styles.cardViewStyle}>
+                <Text style={styles.keyStyle}>
+                  Total Viralpool Points
+                </Text>
+                <Text style={styles.valueStyle}>
+                  50
+                </Text>
               </View>
             </TouchableOpacity>
-          </View>
-        </View>
-        {
-          loading ? (
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
+            <View style={styles.socialAccountsViewStyle}>
+              <TouchableOpacity activeOpacity={1}>
+                <SocialIcon title='Connect with Facebook'
+                            button
+                            raised={false}
+                            type='facebook'
+                            iconSize={25}
+                            fontStyle={styles.socialIconFontStyle}
+                            style={styles.socialIconButtonStyle}/>
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={1}>
+                <SocialIcon title='Connect with Youtube'
+                            button
+                            raised={false}
+                            type='youtube'
+                            iconSize={25}
+                            fontStyle={styles.socialIconFontStyle}
+                            style={styles.socialIconButtonStyle}/>
+              </TouchableOpacity>
+              <TouchableOpacity activeOpacity={1}>
+                <SocialIcon title='Connect with Instagram'
+                            button
+                            raised={false}
+                            type='instagram'
+                            iconSize={25}
+                            fontStyle={styles.socialIconFontStyle}
+                            style={styles.socialIconButtonStyle}/>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.tiktokViewStyle}
+                                activeOpacity={1}>
+                <Image style={styles.tiktokIconStyle}
+                       source={require('../../../assets/tiktok.png')}/>
+                <View style={styles.tiktokButtonStyle}>
+                  <SocialIcon title='Connect with Tiktok'
+                              button
+                              raised={false}
+                              type='github'
+                              iconSize={0}
+                              fontStyle={styles.socialIconFontStyle}
+                              style={styles.socialIconButtonStyle}/>
+                </View>
+              </TouchableOpacity>
             </View>
-          ) : null
-        }
-      </View>
+          </View>
+          {
+            loading ? (
+              <View style={styles.loadingStyle}>
+                <ActivityIndicator size='large'
+                                   color={Colors.secondaryColor}/>
+              </View>
+            ) : null
+          }
+        </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -309,6 +322,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 DashboardScreen.navigationOptions = navData => {
   return {

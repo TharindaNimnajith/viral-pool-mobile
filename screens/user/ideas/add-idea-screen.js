@@ -1,5 +1,15 @@
-import React, {useContext, useState} from 'react'
-import {ActivityIndicator, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import React, {useCallback, useContext, useState} from 'react'
+import {
+  ActivityIndicator,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
@@ -19,6 +29,12 @@ const AddIdeaScreen = () => {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
 
   const showDialog = async () => {
     setVisible(true)
@@ -85,52 +101,57 @@ const AddIdeaScreen = () => {
         <Dialog.Button label='No'
                        onPress={hideDialog}/>
       </Dialog.Container>
-      <View style={styles.mainViewStyle}>
-        <View style={styles.containerStyle}>
-          <Text style={styles.labelStyle}>
-            Title
-          </Text>
-          <TextInput style={styles.textInputStyle}
-                     onChangeText={title => onChangeTitle(title)}
-                     value={title}
-                     placeholder='Enter Title'
-                     placeholderTextColor={Colors.tertiaryColor}/>
-          <Text style={styles.labelStyle}>
-            Description
-          </Text>
-          <TextInput style={styles.multilineTextInputStyle}
-                     onChangeText={description => onChangeDescription(description)}
-                     value={description}
-                     placeholder='Enter Description'
-                     placeholderTextColor={Colors.tertiaryColor}
-                     multiline={true}
-                     numberOfLines={17}/>
-          <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                            disabled={isDisabled()}
-                            onPress={showDialog}>
-            <Text style={styles.buttonTextStyle}>
-              Submit
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.containerStyle}>
+            <Text style={styles.labelStyle}>
+              Title
             </Text>
-          </TouchableOpacity>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={title => onChangeTitle(title)}
+                       value={title}
+                       placeholder='Enter Title'
+                       placeholderTextColor={Colors.tertiaryColor}/>
+            <Text style={styles.labelStyle}>
+              Description
+            </Text>
+            <TextInput style={styles.multilineTextInputStyle}
+                       onChangeText={description => onChangeDescription(description)}
+                       value={description}
+                       placeholder='Enter Description'
+                       placeholderTextColor={Colors.tertiaryColor}
+                       multiline={true}
+                       numberOfLines={17}/>
+            <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                              disabled={isDisabled()}
+                              onPress={showDialog}>
+              <Text style={styles.buttonTextStyle}>
+                Submit
+              </Text>
+            </TouchableOpacity>
+            {
+              error ? (
+                <View style={styles.viewStyle}>
+                  <Text style={styles.errorTextStyle}>
+                    {Constants.UNEXPECTED_ERROR}
+                  </Text>
+                </View>
+              ) : null
+            }
+          </View>
           {
-            error ? (
-              <View style={styles.viewStyle}>
-                <Text style={styles.errorTextStyle}>
-                  {Constants.UNEXPECTED_ERROR}
-                </Text>
+            loading ? (
+              <View style={styles.loadingStyle}>
+                <ActivityIndicator size='large'
+                                   color={Colors.secondaryColor}/>
               </View>
             ) : null
           }
         </View>
-        {
-          loading ? (
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
-            </View>
-          ) : null
-        }
-      </View>
+      </ScrollView>
     </SafeAreaView>
   )
 }
@@ -211,6 +232,12 @@ const styles = StyleSheet.create({
     marginTop: 40
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 AddIdeaScreen.navigationOptions = navData => {
   return {

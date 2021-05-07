@@ -1,7 +1,8 @@
-import React, {useContext, useState} from 'react'
+import React, {useCallback, useContext, useState} from 'react'
 import {
   ActivityIndicator,
   Image,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -28,6 +29,12 @@ const LoginScreen = props => {
   const [passwordValid, setPasswordValid] = useState(true)
   const [unauthorized, setUnauthorized] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
 
   const onChangeEmail = async email => {
     setEmailValid(validator.isEmail(email.trim()))
@@ -90,7 +97,11 @@ const LoginScreen = props => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView style={styles.refreshStyle}
+                  refreshControl={
+                    <RefreshControl refreshing={refreshing}
+                                    onRefresh={onRefresh}/>
+                  }>
         <View style={styles.mainViewStyle}>
           <View style={styles.containerStyle}>
             <View style={styles.headerStyle}>
@@ -206,8 +217,11 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     width: wp('100%'),
-    height: hp('103.3%'),
+    height: hp('102%'),
     backgroundColor: Colors.secondaryColor
+  },
+  refreshStyle: {
+    marginTop: 10
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
@@ -235,6 +249,12 @@ const styles = StyleSheet.create({
     marginTop: 40
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 LoginScreen.navigationOptions = () => {
   return {

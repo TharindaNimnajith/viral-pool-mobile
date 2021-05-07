@@ -1,7 +1,8 @@
-import React, {useContext, useState} from 'react'
+import React, {useCallback, useContext, useState} from 'react'
 import {
   ActivityIndicator,
   Alert,
+  RefreshControl,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -37,6 +38,12 @@ const EditProfileScreen = () => {
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
 
   const showConfirmAlert = () => {
     Alert.alert(
@@ -125,7 +132,10 @@ const EditProfileScreen = () => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
         <View style={styles.mainViewStyle}>
           <View style={styles.containerStyle}>
             <Text style={styles.labelStyle}>
@@ -327,6 +337,12 @@ const styles = StyleSheet.create({
     marginTop: 40
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 EditProfileScreen.navigationOptions = navData => {
   return {
