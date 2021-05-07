@@ -1,5 +1,14 @@
-import React, {useContext, useEffect} from 'react'
-import {Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, TouchableWithoutFeedback, View} from 'react-native'
+import React, {useContext, useEffect, useState} from 'react'
+import {
+  ActivityIndicator,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native'
 import {SocialIcon} from 'react-native-elements'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
@@ -11,12 +20,19 @@ import CombinedButtons from '../../../components/buttons/combined-buttons'
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)
 
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
+    setLoading(false)
+    setLoading(true)
     let data = {
       contentCreatorId: appContext.userData.id,
       token: appContext.expoPushToken
     }
-    axios.post('content-creator-notification/expo-token', data).catch(async error => {
+    axios.post('content-creator-notification/expo-token', data).then(() => {
+      setLoading(false)
+    }).catch(async error => {
+      setLoading(false)
       console.log(error)
     })
   }, [])
@@ -146,6 +162,14 @@ const DashboardScreen = props => {
             </TouchableOpacity>
           </View>
         </View>
+        {
+          loading ? (
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
+          ) : null
+        }
       </View>
     </SafeAreaView>
   )
@@ -182,6 +206,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: Colors.successColor,
     alignSelf: 'center'
+  },
+  loadingStyle: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
     width: wp('100%'),

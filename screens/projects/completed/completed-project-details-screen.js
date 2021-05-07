@@ -1,26 +1,12 @@
 import React from 'react'
-import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native'
-import Colors from '../../../util/colors'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 import ProjectDetails from '../../../components/project-details/project-details'
 
 const CompletedProjectDetailsScreen = props => {
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.mainViewStyle}>
-          <ProjectDetails project={props}/>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ProjectDetails project={props}/>
   )
 }
-
-const styles = StyleSheet.create({
-  mainViewStyle: {
-    backgroundColor: Colors.secondaryColor
-  }
-})
 
 CompletedProjectDetailsScreen.navigationOptions = navData => {
   return {
