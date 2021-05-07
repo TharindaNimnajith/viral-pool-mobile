@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native'
+import React, {useCallback, useEffect, useState} from 'react'
+import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import Colors from '../../../util/colors'
@@ -10,6 +10,12 @@ import ProjectListItem from '../../../components/list-items/project-list-item'
 const NewProjectListScreen = props => {
   const [newProjects, setNewProjects] = useState([])
   const [loading, setLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
 
   useEffect(() => {
     setLoading(false)
@@ -38,7 +44,11 @@ const NewProjectListScreen = props => {
         <FlatList keyExtractor={(item, index) => index.toString()}
                   data={newProjects}
                   numColumns={1}
-                  renderItem={renderItemsFunction}/>
+                  renderItem={renderItemsFunction}
+                  refreshControl={
+                    <RefreshControl refreshing={refreshing}
+                                    onRefresh={onRefresh}/>
+                  }/>
       </View>
       {
         loading ? (
@@ -74,6 +84,12 @@ const styles = StyleSheet.create({
     minHeight: hp('95%')
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 NewProjectListScreen.navigationOptions = navData => {
   return {

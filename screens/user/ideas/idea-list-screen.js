@@ -1,5 +1,5 @@
-import React from 'react'
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import React, {useCallback, useState} from 'react'
+import {FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../util/colors'
 import {Ideas} from '../../../data/idea-data/idea-data'
@@ -8,6 +8,13 @@ import CombinedButtons from '../../../components/buttons/combined-buttons'
 import IdeaListItem from '../../../components/list-items/idea-list-item'
 
 const IdeaListScreen = props => {
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
+
   const renderItemsFunction = itemData => {
     return (
       <IdeaListItem navigation={props.navigation}
@@ -33,7 +40,11 @@ const IdeaListScreen = props => {
         <FlatList keyExtractor={(item, index) => index.toString()}
                   data={Ideas}
                   numColumns={1}
-                  renderItem={renderItemsFunction}/>
+                  renderItem={renderItemsFunction}
+                  refreshControl={
+                    <RefreshControl refreshing={refreshing}
+                                    onRefresh={onRefresh}/>
+                  }/>
       </View>
     </View>
   )
@@ -65,6 +76,12 @@ const styles = StyleSheet.create({
     position: 'absolute'
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 IdeaListScreen.navigationOptions = navData => {
   return {

@@ -1,5 +1,5 @@
-import React from 'react'
-import {FlatList, StyleSheet, View} from 'react-native'
+import React, {useCallback, useState} from 'react'
+import {FlatList, RefreshControl, StyleSheet, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../../../util/colors'
 import {Notifications} from '../../../data/notification-data/notification-data'
@@ -8,6 +8,13 @@ import CombinedButtons from '../../../components/buttons/combined-buttons'
 import NotificationListItem from '../../../components/list-items/notification-list-item'
 
 const NotificationsScreen = props => {
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
+
   const renderItemsFunction = itemData => {
     return (
       <NotificationListItem navigation={props.navigation}
@@ -21,7 +28,11 @@ const NotificationsScreen = props => {
         <FlatList keyExtractor={(item, index) => index.toString()}
                   data={Notifications}
                   numColumns={1}
-                  renderItem={renderItemsFunction}/>
+                  renderItem={renderItemsFunction}
+                  refreshControl={
+                    <RefreshControl refreshing={refreshing}
+                                    onRefresh={onRefresh}/>
+                  }/>
       </View>
     </View>
   )
@@ -38,6 +49,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 NotificationsScreen.navigationOptions = navData => {
   return {
