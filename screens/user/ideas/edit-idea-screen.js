@@ -27,7 +27,8 @@ const EditIdeaScreen = props => {
   const [descriptionValid, setDescriptionValid] = useState(true)
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [visible, setVisible] = useState(false)
+  const [visibleEdit, setVisibleEdit] = useState(false)
+  const [visibleDelete, setVisibleDelete] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   const onRefresh = useCallback(() => {
@@ -35,12 +36,20 @@ const EditIdeaScreen = props => {
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
-  const showDialog = async () => {
-    setVisible(true)
+  const showDialogEdit = async () => {
+    setVisibleEdit(true)
   }
 
-  const hideDialog = async () => {
-    setVisible(false)
+  const hideDialogEdit = async () => {
+    setVisibleEdit(false)
+  }
+
+  const showDialogDelete = async () => {
+    setVisibleDelete(true)
+  }
+
+  const hideDialogDelete = async () => {
+    setVisibleDelete(false)
   }
 
   const onChangeTitle = async title => {
@@ -60,7 +69,7 @@ const EditIdeaScreen = props => {
   }
 
   const editIdea = async () => {
-    setVisible(false)
+    setVisibleEdit(false)
     setLoading(false)
     setLoading(true)
     setError(false)
@@ -71,8 +80,6 @@ const EditIdeaScreen = props => {
     }
     axios.put('', data).then(async response => {
       if (response.status === 200) {
-        setTitle('')
-        setDescription('')
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.UPDATED)
       } else {
@@ -86,9 +93,30 @@ const EditIdeaScreen = props => {
     })
   }
 
+  const deleteIdea = async () => {
+    setVisibleDelete(false)
+    setLoading(false)
+    setLoading(true)
+    setError(false)
+    axios.delete('').then(async response => {
+      if (response.status === 200) {
+        setLoading(false)
+        await showAlert(Constants.SUCCESS, Constants.DELETED)
+        props.navigation.navigate('IdeaList')
+      } else {
+        setLoading(false)
+        setError(true)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      setError(true)
+      console.log(error)
+    })
+  }
+
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visible}>
+      <Dialog.Container visible={visibleEdit}>
         <Dialog.Title>
           EDIT IDEA
         </Dialog.Title>
@@ -98,7 +126,19 @@ const EditIdeaScreen = props => {
         <Dialog.Button label='Yes'
                        onPress={editIdea}/>
         <Dialog.Button label='No'
-                       onPress={hideDialog}/>
+                       onPress={hideDialogEdit}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleDelete}>
+        <Dialog.Title>
+          DELETE IDEA
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={deleteIdea}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialogDelete}/>
       </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
@@ -126,9 +166,15 @@ const EditIdeaScreen = props => {
                        numberOfLines={17}/>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
-                              onPress={showDialog}>
+                              onPress={showDialogEdit}>
               <Text style={styles.buttonTextStyle}>
                 Update
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.deleteButtonStyle}
+                              onPress={showDialogDelete}>
+              <Text style={styles.buttonTextStyle}>
+                Delete
               </Text>
             </TouchableOpacity>
             {
@@ -181,6 +227,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flex: 1
+  },
+  deleteButtonStyle: {
+    marginTop: 15,
+    backgroundColor: Colors.errorColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5
   },
   errorTextStyle: {
     color: Colors.errorColor

@@ -31,13 +31,13 @@ const ProjectDetails = props => {
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
+  const project = props.project.navigation.getParam('project')
+
   useEffect(() => {
     setLoading(false)
     setLoading(true)
-    const project = props.project.navigation.getParam('project')
     axios.get(`project-cc-strategy/${project}`).then(async response => {
       if (response.status === 200) {
-        // console.log(response.data.data)
         setId(response.data.data.id)
         setName(response.data.data.name)
         setDescription(response.data.data.description)
