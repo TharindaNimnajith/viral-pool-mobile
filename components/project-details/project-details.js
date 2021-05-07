@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, Text, useWindowDimensions, View} from 'react-native'
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
 import Colors from '../../util/colors'
-import {heightPercentageToDP as hp} from "react-native-responsive-screen";
 
 const ProjectDetails = props => {
-  const contentWidth = useWindowDimensions().width
-
   const project = props.project.navigation.getParam('project')
 
   const [id, setId] = useState('')
@@ -46,6 +44,8 @@ const ProjectDetails = props => {
       console.log(error)
     })
   }, [])
+
+  const contentWidth = useWindowDimensions().width
 
   return (
     <SafeAreaView>
