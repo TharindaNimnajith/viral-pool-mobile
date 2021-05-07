@@ -11,12 +11,12 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
 import Colors from '../../util/colors'
-import Constants from "../../util/constants";
-import Dialog from "react-native-dialog";
-import {showAlert} from "../../util/common-helpers";
+import Constants from '../../util/constants'
+import {showAlert} from '../../util/common-helpers'
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
