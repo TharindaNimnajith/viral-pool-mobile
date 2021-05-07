@@ -1,5 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, Text, useWindowDimensions, View} from 'react-native'
+import {
+  ActivityIndicator,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
@@ -20,6 +29,12 @@ const ProjectDetails = props => {
   const [contentSubmissionStatus, setContentSubmissionStatus] = useState(0)
   const [resultSubmissionStatus, setResultSubmissionStatus] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
 
   useEffect(() => {
     setLoading(false)
@@ -49,7 +64,10 @@ const ProjectDetails = props => {
 
   return (
     <SafeAreaView>
-      <ScrollView>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
         <View style={styles.mainViewStyle}>
           <Text>
             {id}
@@ -121,5 +139,11 @@ const styles = StyleSheet.create({
     margin: 25
   }
 })
+
+const wait = timeout => {
+  return new Promise(resolve => {
+    setTimeout(resolve, timeout)
+  })
+}
 
 export default ProjectDetails
