@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     width: wp('100%'),
-    height: hp('100%'),
+    height: hp('93.6%'),
     backgroundColor: Colors.secondaryColor
   },
   subtitleStyle: {

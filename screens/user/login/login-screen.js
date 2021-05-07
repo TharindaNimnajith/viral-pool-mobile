@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     width: wp('100%'),
-    height: hp('102%'),
+    height: hp('102.2%'),
     backgroundColor: Colors.secondaryColor
   },
   refreshStyle: {

@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   RefreshControl,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
@@ -202,7 +203,7 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     width: wp('100%'),
-    height: hp('100%'),
+    height: hp('93.6%'),
     backgroundColor: Colors.secondaryColor
   },
   multilineTextInputStyle: {
