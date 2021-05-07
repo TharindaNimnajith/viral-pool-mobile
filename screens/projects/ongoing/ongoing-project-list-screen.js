@@ -12,11 +12,6 @@ const OngoingProjectListScreen = props => {
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
-  const onRefresh = useCallback(() => {
-    setRefreshing(true)
-    wait(2000).then(() => setRefreshing(false))
-  }, [])
-
   useEffect(() => {
     setLoading(false)
     setLoading(true)
@@ -28,6 +23,11 @@ const OngoingProjectListScreen = props => {
       setLoading(false)
       console.log(error)
     })
+  }, [])
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
   }, [])
 
   const renderItemsFunction = itemData => {

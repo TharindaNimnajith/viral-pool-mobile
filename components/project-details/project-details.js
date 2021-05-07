@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
   RefreshControl,
@@ -15,6 +15,8 @@ import axios from 'axios'
 import Colors from '../../util/colors'
 
 const ProjectDetails = props => {
+  const contentWidth = useWindowDimensions().width
+
   const project = props.project.navigation.getParam('project')
 
   const [id, setId] = useState('')
@@ -30,11 +32,6 @@ const ProjectDetails = props => {
   const [resultSubmissionStatus, setResultSubmissionStatus] = useState(0)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
-
-  const onRefresh = useCallback(() => {
-    setRefreshing(true)
-    wait(2000).then(() => setRefreshing(false))
-  }, [])
 
   useEffect(() => {
     setLoading(false)
@@ -60,7 +57,10 @@ const ProjectDetails = props => {
     })
   }, [])
 
-  const contentWidth = useWindowDimensions().width
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => setRefreshing(false))
+  }, [])
 
   return (
     <SafeAreaView>
