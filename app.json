@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Viralpool",
-    "description": "Viralpool mobile application for content creators.",
-    "slug": "viralpool-content-creator-mobile-app",
+    "name": "Viral Pool",
+    "description": "Viral Pool mobile application for content creators and influencers.",
+    "slug": "viral-pool",
     "owner": "tharindarajapakshe",
     "privacy": "unlisted",
     "version": "1.0.0",

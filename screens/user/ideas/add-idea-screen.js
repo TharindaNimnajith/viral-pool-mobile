@@ -78,7 +78,7 @@ const AddIdeaScreen = () => {
           NEW IDEA
         </Dialog.Title>
         <Dialog.Description>
-          Do you want to submit the new idea?
+          {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        onPress={addIdea}/>

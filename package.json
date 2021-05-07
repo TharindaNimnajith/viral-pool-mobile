@@ -1,14 +1,13 @@
 {
   "main": "index.js",
-  "name": "viralpool",
-  "description": "Viralpool mobile application for content creators.",
+  "name": "viral-pool",
+  "description": "Viral Pool mobile application for content creators and influencers.",
   "keywords": [
+    "viral-pool",
     "expo",
     "react-native",
-    "viralpool",
     "android",
-    "ios",
-    "mobile-application"
+    "ios"
   ],
   "version": "1.0.0",
   "license": "MIT License",

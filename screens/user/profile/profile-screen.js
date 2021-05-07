@@ -117,7 +117,7 @@ const ProfileScreen = props => {
           EDIT PROFILE PICTURE
         </Dialog.Title>
         <Dialog.Description>
-          Do you want to update the profile picture?
+          {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        onPress={pickImage}/>
