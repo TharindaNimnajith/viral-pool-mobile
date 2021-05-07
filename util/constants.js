@@ -19,6 +19,8 @@ export default {
   UPDATED: 'Updated successfully!',
   SUBMITTED: 'Submitted successfully!',
   DELETED: 'Deleted successfully!',
+  ACCEPTED: 'Accepted successfully!',
+  REJECTED: 'Rejected successfully!',
   CONFIRMATION: 'Are you sure?',
   UNEXPECTED_ERROR: 'An unexpected error occurred. Please try again later.',
   LOGIN_ERROR: 'Invalid email or password. Please try again.',

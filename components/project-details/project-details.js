@@ -6,13 +6,17 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   useWindowDimensions,
   View
 } from 'react-native'
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
 import Colors from '../../util/colors'
+import Constants from "../../util/constants";
+import Dialog from "react-native-dialog";
+import {showAlert} from "../../util/common-helpers";
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
@@ -29,6 +33,8 @@ const ProjectDetails = props => {
   const [contentSubmissionStatus, setContentSubmissionStatus] = useState(0)
   const [resultSubmissionStatus, setResultSubmissionStatus] = useState(0)
   const [loading, setLoading] = useState(false)
+  const [visibleAccept, setVisibleAccept] = useState(false)
+  const [visibleReject, setVisibleReject] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   const project = props.project.navigation.getParam('project')
@@ -62,8 +68,89 @@ const ProjectDetails = props => {
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
+  const showDialogAccept = async () => {
+    setVisibleAccept(true)
+  }
+
+  const hideDialogAccept = async () => {
+    setVisibleAccept(false)
+  }
+
+  const showDialogReject = async () => {
+    setVisibleReject(true)
+  }
+
+  const hideDialogReject = async () => {
+    setVisibleReject(false)
+  }
+
+  const acceptJob = async () => {
+    setVisibleAccept(false)
+    setLoading(false)
+    setLoading(true)
+    setError(false)
+    axios.put('').then(async response => {
+      if (response.status === 200) {
+        setLoading(false)
+        await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
+      } else {
+        setLoading(false)
+        setError(true)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      setError(true)
+      console.log(error)
+    })
+  }
+
+  const rejectJob = async () => {
+    setVisibleReject(false)
+    setLoading(false)
+    setLoading(true)
+    setError(false)
+    axios.put('').then(async response => {
+      if (response.status === 200) {
+        setLoading(false)
+        await showAlert(Constants.SUCCESS, Constants.REJECTED)
+        props.navigation.navigate('NewProjectList')
+      } else {
+        setLoading(false)
+        setError(true)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      setError(true)
+      console.log(error)
+    })
+  }
+
   return (
     <SafeAreaView>
+      <Dialog.Container visible={visibleAccept}>
+        <Dialog.Title>
+          ACCEPT JOB
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={acceptJob}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialogAccept}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleReject}>
+        <Dialog.Title>
+          REJECT JOB
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={rejectJob}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialogReject}/>
+      </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
@@ -109,6 +196,20 @@ const ProjectDetails = props => {
               ) : null
             }
           </View>
+          <View>
+            <TouchableOpacity style={styles.buttonStyle}
+                              onPress={showDialogAccept}>
+              <Text style={styles.buttonTextStyle}>
+                Accept
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.deleteButtonStyle}
+                              onPress={showDialogReject}>
+              <Text style={styles.buttonTextStyle}>
+                Reject
+              </Text>
+            </TouchableOpacity>
+          </View>
           {
             loading ? (
               <View style={styles.loadingStyle}>
@@ -124,6 +225,26 @@ const ProjectDetails = props => {
 }
 
 const styles = StyleSheet.create({
+  buttonStyle: {
+    marginTop: 30,
+    backgroundColor: Colors.primaryColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5
+  },
+  buttonTextStyle: {
+    color: Colors.secondaryColor,
+    textTransform: 'uppercase'
+  },
+  deleteButtonStyle: {
+    marginTop: 15,
+    backgroundColor: Colors.errorColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5
+  },
   loadingStyle: {
     position: 'absolute',
     left: 0,
