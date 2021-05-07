@@ -17,8 +17,6 @@ import Colors from '../../util/colors'
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
 
-  const project = props.project.navigation.getParam('project')
-
   const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [description, setDescription] = useState(`<p></p>`)
@@ -36,8 +34,10 @@ const ProjectDetails = props => {
   useEffect(() => {
     setLoading(false)
     setLoading(true)
+    const project = props.project.navigation.getParam('project')
     axios.get(`project-cc-strategy/${project}`).then(async response => {
       if (response.status === 200) {
+        // console.log(response.data.data)
         setId(response.data.data.id)
         setName(response.data.data.name)
         setDescription(response.data.data.description)
@@ -100,10 +100,14 @@ const ProjectDetails = props => {
             {resultSubmissionStatus}
           </Text>
           <View style={styles.viewStyle}>
-            <HTML contentWidth={contentWidth}
-                  source={{
-                    html: description
-                  }}/>
+            {
+              description ? (
+                <HTML contentWidth={contentWidth}
+                      source={{
+                        html: description
+                      }}/>
+              ) : null
+            }
           </View>
           {
             loading ? (
