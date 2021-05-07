@@ -1,14 +1,18 @@
 import React, {useEffect, useState} from 'react'
-import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
+import {ActivityIndicator, SafeAreaView, ScrollView, StyleSheet, Text, useWindowDimensions, View} from 'react-native'
+import HTML from 'react-native-render-html'
 import axios from 'axios'
 import Colors from '../../util/colors'
+import {heightPercentageToDP as hp} from "react-native-responsive-screen";
 
 const ProjectDetails = props => {
+  const contentWidth = useWindowDimensions().width
+
   const project = props.project.navigation.getParam('project')
 
   const [id, setId] = useState('')
   const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
+  const [description, setDescription] = useState(`<p></p>`)
   const [createdDate, setCreatedDate] = useState('')
   const [socialMediaPlatformName, setSocialMediaPlatformName] = useState('')
   const [contentSubmissionLink, setContentSubmissionLink] = useState('')
@@ -77,6 +81,12 @@ const ProjectDetails = props => {
           <Text>
             {resultSubmissionStatus}
           </Text>
+          <View style={styles.viewStyle}>
+            <HTML contentWidth={contentWidth}
+                  source={{
+                    html: description
+                  }}/>
+          </View>
           {
             loading ? (
               <View style={styles.loadingStyle}>
@@ -104,7 +114,11 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: hp('95%')
+  },
+  viewStyle: {
+    margin: 25
   }
 })
 
