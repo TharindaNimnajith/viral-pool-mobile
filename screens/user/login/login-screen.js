@@ -17,7 +17,7 @@ import validator from 'validator'
 import {AppContext} from '../../../global/app-context'
 import Colors from '../../../util/colors'
 import Constants from '../../../util/constants'
-import {isEmpty} from '../../../util/common-helpers'
+import {isEmpty, showAlert} from '../../../util/common-helpers'
 import {storeStringData} from '../../../util/local-storage'
 
 const LoginScreen = props => {
@@ -27,7 +27,6 @@ const LoginScreen = props => {
   const [password, setPassword] = useState('tharinda')
   const [emailValid, setEmailValid] = useState(true)
   const [passwordValid, setPasswordValid] = useState(true)
-  const [unauthorized, setUnauthorized] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -38,13 +37,11 @@ const LoginScreen = props => {
 
   const onChangeEmail = async email => {
     setEmailValid(validator.isEmail(email.trim()))
-    setUnauthorized(false)
     setEmail(email.trim())
   }
 
   const onChangePassword = async password => {
     setPasswordValid(!await isEmpty(password))
-    setUnauthorized(false)
     setPassword(password)
   }
 
@@ -53,9 +50,7 @@ const LoginScreen = props => {
   }
 
   const login = async () => {
-    setLoading(false)
     setLoading(true)
-    setUnauthorized(false)
     let data = {
       email: email,
       password: password,
@@ -77,20 +72,20 @@ const LoginScreen = props => {
             })
           } else {
             setLoading(false)
-            setUnauthorized(true)
+            await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
           }
         }).catch(async error => {
           setLoading(false)
-          setUnauthorized(true)
+          await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
           console.log(error)
         })
       } else {
         setLoading(false)
-        setUnauthorized(true)
+        await showAlert(Constants.ERROR, Constants.LOGIN_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      setUnauthorized(true)
+      await showAlert(Constants.ERROR, Constants.LOGIN_ERROR)
       console.log(error)
     })
   }
@@ -139,23 +134,13 @@ const LoginScreen = props => {
                 Login
               </Text>
             </TouchableOpacity>
-            {
-              unauthorized ? (
-                <View style={styles.viewStyle}>
-                  <Text style={styles.errorTextStyle}>
-                    {Constants.LOGIN_ERROR}
-                  </Text>
-                </View>
-              ) : null
-            }
           </View>
           {
-            loading ? (
-              <View style={styles.loadingStyle}>
-                <ActivityIndicator size='large'
-                                   color={Colors.secondaryColor}/>
-              </View>
-            ) : null
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
           }
         </View>
       </ScrollView>
@@ -188,9 +173,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
-  },
-  errorTextStyle: {
-    color: Colors.errorColor
   },
   imageStyle: {
     marginBottom: 25
@@ -244,9 +226,6 @@ const styles = StyleSheet.create({
     color: Colors.primaryColor,
     marginTop: hp('5%'),
     fontSize: 30
-  },
-  viewStyle: {
-    marginTop: 40
   }
 })
 

@@ -94,6 +94,10 @@ async function sendPushNotification(expoPushToken) {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(message)
+  }).then(async response => {
+    console.log(response)
+  }).catch(async error => {
+    console.log(error)
   })
 }
 

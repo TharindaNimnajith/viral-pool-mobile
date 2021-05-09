@@ -29,7 +29,6 @@ const ProfileScreen = props => {
   const appContext = useContext(AppContext)
 
   const [image, setImage] = useState(appContext.userData.profileImagePath)
-  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
@@ -65,7 +64,6 @@ const ProfileScreen = props => {
 
   const pickImage = async () => {
     setVisible(false)
-    setError(false)
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
@@ -75,7 +73,6 @@ const ProfileScreen = props => {
       allowsMultipleSelection: false
     })
     if (!result.cancelled) {
-      setLoading(false)
       setLoading(true)
       let localUri = result.uri
       setImage(localUri)
@@ -117,11 +114,11 @@ const ProfileScreen = props => {
           await showAlert(Constants.SUCCESS, Constants.UPDATED)
         } else {
           setLoading(false)
-          setError(true)
+          await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
         }
       }).catch(async error => {
         setLoading(false)
-        setError(true)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
         console.log(error)
       })
     }
@@ -167,15 +164,6 @@ const ProfileScreen = props => {
                   Edit Profile Picture
                 </Text>
               </TouchableOpacity>
-              {
-                error ? (
-                  <View style={styles.viewStyle}>
-                    <Text style={styles.errorTextStyle}>
-                      {Constants.UNEXPECTED_ERROR}
-                    </Text>
-                  </View>
-                ) : null
-              }
               <Text style={styles.titleStyle}>
                 {appContext.userData.firstName} {appContext.userData.lastName}
               </Text>
@@ -204,11 +192,10 @@ const ProfileScreen = props => {
                     )
                   }
                   {
-                    appContext.userData.gender ? (
-                      <Text style={styles.textStyle}>
-                        {appContext.userData.gender.charAt(0).toUpperCase() + appContext.userData.gender.slice(1)}
-                      </Text>
-                    ) : null
+                    appContext.userData.gender &&
+                    <Text style={styles.textStyle}>
+                      {appContext.userData.gender.charAt(0).toUpperCase() + appContext.userData.gender.slice(1)}
+                    </Text>
                   }
                 </View>
                 <View style={styles.viewStyle}>
@@ -242,12 +229,11 @@ const ProfileScreen = props => {
             </View>
           </View>
           {
-            loading ? (
-              <View style={styles.loadingStyle}>
-                <ActivityIndicator size='large'
-                                   color={Colors.secondaryColor}/>
-              </View>
-            ) : null
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
           }
         </View>
       </ScrollView>
@@ -289,9 +275,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryColor,
     padding: 10,
     borderRadius: 5
-  },
-  errorTextStyle: {
-    color: Colors.errorColor
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,

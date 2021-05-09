@@ -26,7 +26,6 @@ const AddIdeaScreen = () => {
   const [description, setDescription] = useState('')
   const [titleValid, setTitleValid] = useState(false)
   const [descriptionValid, setDescriptionValid] = useState(false)
-  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
@@ -46,13 +45,11 @@ const AddIdeaScreen = () => {
 
   const onChangeTitle = async title => {
     setTitleValid(!await isEmpty(title.trim()))
-    setError(false)
     setTitle(title)
   }
 
   const onChangeDescription = async description => {
     setDescriptionValid(!await isEmpty(description.trim()))
-    setError(false)
     setDescription(description)
   }
 
@@ -62,9 +59,7 @@ const AddIdeaScreen = () => {
 
   const addIdea = async () => {
     setVisible(false)
-    setLoading(false)
     setLoading(true)
-    setError(false)
     let data = {
       title: title.trim(),
       description: description.trim(),
@@ -78,11 +73,11 @@ const AddIdeaScreen = () => {
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       } else {
         setLoading(false)
-        setError(true)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      setError(true)
+      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       console.log(error)
     })
   }
@@ -132,23 +127,13 @@ const AddIdeaScreen = () => {
                 Submit
               </Text>
             </TouchableOpacity>
-            {
-              error ? (
-                <View style={styles.viewStyle}>
-                  <Text style={styles.errorTextStyle}>
-                    {Constants.UNEXPECTED_ERROR}
-                  </Text>
-                </View>
-              ) : null
-            }
           </View>
           {
-            loading ? (
-              <View style={styles.loadingStyle}>
-                <ActivityIndicator size='large'
-                                   color={Colors.secondaryColor}/>
-              </View>
-            ) : null
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
           }
         </View>
       </ScrollView>
@@ -182,9 +167,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flex: 1
-  },
-  errorTextStyle: {
-    color: Colors.errorColor
   },
   labelStyle: {
     marginLeft: 40,
@@ -227,9 +209,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     color: Colors.tertiaryColor
-  },
-  viewStyle: {
-    marginTop: 40
   }
 })
 

@@ -40,7 +40,6 @@ const ProjectDetails = props => {
   const project = props.project.navigation.getParam('project')
 
   useEffect(() => {
-    setLoading(false)
     setLoading(true)
     axios.get(`project-cc-strategy/${project}`).then(async response => {
       if (response.status === 200) {
@@ -86,29 +85,23 @@ const ProjectDetails = props => {
 
   const acceptJob = async () => {
     setVisibleAccept(false)
-    setLoading(false)
     setLoading(true)
-    setError(false)
     axios.put('').then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
       } else {
         setLoading(false)
-        setError(true)
       }
     }).catch(async error => {
       setLoading(false)
-      setError(true)
       console.log(error)
     })
   }
 
   const rejectJob = async () => {
     setVisibleReject(false)
-    setLoading(false)
     setLoading(true)
-    setError(false)
     axios.put('').then(async response => {
       if (response.status === 200) {
         setLoading(false)
@@ -116,11 +109,9 @@ const ProjectDetails = props => {
         props.navigation.navigate('NewProjectList')
       } else {
         setLoading(false)
-        setError(true)
       }
     }).catch(async error => {
       setLoading(false)
-      setError(true)
       console.log(error)
     })
   }
@@ -188,12 +179,11 @@ const ProjectDetails = props => {
           </Text>
           <View style={styles.viewStyle}>
             {
-              description ? (
-                <HTML contentWidth={contentWidth}
-                      source={{
-                        html: description
-                      }}/>
-              ) : null
+              description &&
+              <HTML contentWidth={contentWidth}
+                    source={{
+                      html: description
+                    }}/>
             }
           </View>
           <View>
@@ -211,12 +201,11 @@ const ProjectDetails = props => {
             </TouchableOpacity>
           </View>
           {
-            loading ? (
-              <View style={styles.loadingStyle}>
-                <ActivityIndicator size='large'
-                                   color={Colors.secondaryColor}/>
-              </View>
-            ) : null
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
           }
         </View>
       </ScrollView>

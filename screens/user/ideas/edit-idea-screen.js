@@ -25,7 +25,6 @@ const EditIdeaScreen = props => {
   const [description, setDescription] = useState(idea.idea.description)
   const [titleValid, setTitleValid] = useState(true)
   const [descriptionValid, setDescriptionValid] = useState(true)
-  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [visibleEdit, setVisibleEdit] = useState(false)
   const [visibleDelete, setVisibleDelete] = useState(false)
@@ -54,13 +53,11 @@ const EditIdeaScreen = props => {
 
   const onChangeTitle = async title => {
     setTitleValid(!await isEmpty(title.trim()))
-    setError(false)
     setTitle(title)
   }
 
   const onChangeDescription = async description => {
     setDescriptionValid(!await isEmpty(description.trim()))
-    setError(false)
     setDescription(description)
   }
 
@@ -70,9 +67,7 @@ const EditIdeaScreen = props => {
 
   const editIdea = async () => {
     setVisibleEdit(false)
-    setLoading(false)
     setLoading(true)
-    setError(false)
     let data = {
       title: title.trim(),
       description: description.trim(),
@@ -84,20 +79,18 @@ const EditIdeaScreen = props => {
         await showAlert(Constants.SUCCESS, Constants.UPDATED)
       } else {
         setLoading(false)
-        setError(true)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      setError(true)
+      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       console.log(error)
     })
   }
 
   const deleteIdea = async () => {
     setVisibleDelete(false)
-    setLoading(false)
     setLoading(true)
-    setError(false)
     axios.delete('').then(async response => {
       if (response.status === 200) {
         setLoading(false)
@@ -105,11 +98,11 @@ const EditIdeaScreen = props => {
         props.navigation.navigate('IdeaList')
       } else {
         setLoading(false)
-        setError(true)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      setError(true)
+      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       console.log(error)
     })
   }
@@ -177,23 +170,13 @@ const EditIdeaScreen = props => {
                 Delete
               </Text>
             </TouchableOpacity>
-            {
-              error ? (
-                <View style={styles.viewStyle}>
-                  <Text style={styles.errorTextStyle}>
-                    {Constants.UNEXPECTED_ERROR}
-                  </Text>
-                </View>
-              ) : null
-            }
           </View>
           {
-            loading ? (
-              <View style={styles.loadingStyle}>
-                <ActivityIndicator size='large'
-                                   color={Colors.secondaryColor}/>
-              </View>
-            ) : null
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
           }
         </View>
       </ScrollView>
@@ -236,9 +219,6 @@ const styles = StyleSheet.create({
     width: wp('80%'),
     borderRadius: 5
   },
-  errorTextStyle: {
-    color: Colors.errorColor
-  },
   labelStyle: {
     marginLeft: 40,
     marginTop: 20,
@@ -280,9 +260,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     color: Colors.tertiaryColor
-  },
-  viewStyle: {
-    marginTop: 40
   }
 })
 

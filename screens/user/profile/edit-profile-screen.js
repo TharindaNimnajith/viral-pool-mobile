@@ -36,7 +36,6 @@ const EditProfileScreen = () => {
   const [lastNameValid, setLastNameValid] = useState(true)
   const [addressValid, setAddressValid] = useState(true)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
-  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -63,36 +62,30 @@ const EditProfileScreen = () => {
 
   const onChangeFirstName = async firstName => {
     setFirstNameValid(!await isEmpty(firstName.trim()))
-    setError(false)
     setFirstName(firstName)
   }
 
   const onChangeLastName = async lastName => {
     setLastNameValid(!await isEmpty(lastName.trim()))
-    setError(false)
     setLastName(lastName)
   }
 
   const onChangeGender = async gender => {
-    setError(false)
     setGender(gender)
   }
 
   const onChangeBirthDate = async birthDate => {
-    setError(false)
     setBirthDate(birthDate)
   }
 
   const onChangeAddress = async address => {
     setAddressValid(!await isEmpty(address.trim()))
-    setError(false)
     setAddress(address)
   }
 
   const onChangePhoneNumber = async phoneNumber => {
     setPhoneNumberValid(phoneNumber.length === 10 && !isNaN(phoneNumber)
       && !await isEmpty(phoneNumber.trim()))
-    setError(false)
     setPhoneNumber(phoneNumber)
   }
 
@@ -101,9 +94,7 @@ const EditProfileScreen = () => {
   }
 
   const editProfile = async () => {
-    setLoading(false)
     setLoading(true)
-    setError(false)
     const formData = new FormData()
     formData.append('id', appContext.userData.id)
     formData.append('email', appContext.userData.email)
@@ -121,11 +112,11 @@ const EditProfileScreen = () => {
         await showAlert(Constants.SUCCESS, Constants.UPDATED)
       } else {
         setLoading(false)
-        setError(true)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      setError(true)
+      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       console.log(error)
     })
   }
@@ -223,23 +214,13 @@ const EditProfileScreen = () => {
                 Update
               </Text>
             </TouchableOpacity>
-            {
-              error ? (
-                <View style={styles.viewStyle}>
-                  <Text style={styles.errorTextStyle}>
-                    {Constants.UNEXPECTED_ERROR}
-                  </Text>
-                </View>
-              ) : null
-            }
           </View>
           {
-            loading ? (
-              <View style={styles.loadingStyle}>
-                <ActivityIndicator size='large'
-                                   color={Colors.secondaryColor}/>
-              </View>
-            ) : null
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
           }
         </View>
       </ScrollView>
@@ -279,9 +260,6 @@ const styles = StyleSheet.create({
     width: wp('80%'),
     marginTop: 10,
     color: Colors.tertiaryColor
-  },
-  errorTextStyle: {
-    color: Colors.errorColor
   },
   labelStyle: {
     marginLeft: 40,
@@ -332,9 +310,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     color: Colors.tertiaryColor
-  },
-  viewStyle: {
-    marginTop: 40
   }
 })
 

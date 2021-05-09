@@ -26,7 +26,6 @@ const DashboardScreen = props => {
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
-    setLoading(false)
     setLoading(true)
     let data = {
       contentCreatorId: appContext.userData.id,
@@ -175,12 +174,11 @@ const DashboardScreen = props => {
             </View>
           </View>
           {
-            loading ? (
-              <View style={styles.loadingStyle}>
-                <ActivityIndicator size='large'
-                                   color={Colors.secondaryColor}/>
-              </View>
-            ) : null
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
           }
         </View>
       </ScrollView>

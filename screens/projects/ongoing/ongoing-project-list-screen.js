@@ -13,7 +13,6 @@ const OngoingProjectListScreen = props => {
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
-    setLoading(false)
     setLoading(true)
     axios.get('project-cc-strategy?status=1').then(async response => {
       if (response.status === 200)
@@ -51,12 +50,11 @@ const OngoingProjectListScreen = props => {
                   }/>
       </View>
       {
-        loading ? (
-          <View style={styles.loadingStyle}>
-            <ActivityIndicator size='large'
-                               color={Colors.secondaryColor}/>
-          </View>
-        ) : null
+        loading &&
+        <View style={styles.loadingStyle}>
+          <ActivityIndicator size='large'
+                             color={Colors.secondaryColor}/>
+        </View>
       }
     </View>
   )
