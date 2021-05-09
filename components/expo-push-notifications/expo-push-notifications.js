@@ -23,17 +23,10 @@ const ExpoPushNotifications = () => {
     registerForPushNotificationsAsync().then(async token => {
       await appContext.SetExpoPushToken(token)
     })
-
-    // noinspection JSUnusedLocalSymbols
     notificationListener.current = addNotificationReceivedListener(notification => {
-      //
     })
-
-    // noinspection JSUnusedLocalSymbols
     responseListener.current = addNotificationResponseReceivedListener(response => {
-      //
     })
-
     return () => {
       removeNotificationSubscription(notificationListener)
       removeNotificationSubscription(responseListener)

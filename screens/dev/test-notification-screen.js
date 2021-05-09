@@ -4,6 +4,8 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import {AppContext} from '../../global/app-context'
 import Colors from '../../util/colors'
 import {ApiUrl} from '../../util/api-url'
+import {showAlert} from '../../util/common-helpers'
+import Constants from '../../util/constants'
 import {Notifications} from '../../data/notification-data/notification-data'
 import Menu from '../../components/buttons/menu-button'
 import CombinedButtons from '../../components/buttons/combined-buttons'
@@ -94,9 +96,8 @@ async function sendPushNotification(expoPushToken) {
     method: 'POST',
     headers: headers,
     body: JSON.stringify(message)
-  }).then(async response => {
-    console.log(response)
   }).catch(async error => {
+    await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
     console.log(error)
   })
 }

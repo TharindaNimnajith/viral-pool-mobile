@@ -54,10 +54,14 @@ const ProjectDetails = props => {
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
         setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
+        setLoading(false)
+      } else {
+        setLoading(false)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       }
-      setLoading(false)
     }).catch(async error => {
       setLoading(false)
+      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       console.log(error)
     })
   }, [])
@@ -92,9 +96,11 @@ const ProjectDetails = props => {
         await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
       } else {
         setLoading(false)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
+      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       console.log(error)
     })
   }
@@ -109,9 +115,11 @@ const ProjectDetails = props => {
         props.navigation.navigate('NewProjectList')
       } else {
         setLoading(false)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
+      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       console.log(error)
     })
   }
