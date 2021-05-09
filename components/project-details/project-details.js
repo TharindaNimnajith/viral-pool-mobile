@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   useWindowDimensions,
   View
@@ -194,20 +195,73 @@ const ProjectDetails = props => {
                     }}/>
             }
           </View>
-          <View>
-            <TouchableOpacity style={styles.buttonStyle}
-                              onPress={showDialogAccept}>
-              <Text style={styles.buttonTextStyle}>
-                Accept
+          {
+            jobAcceptationStatus === 0 &&
+            <View>
+              <TouchableOpacity style={styles.buttonStyle}
+                                onPress={showDialogAccept}>
+                <Text style={styles.buttonTextStyle}>
+                  Accept
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.deleteButtonStyle}
+                                onPress={showDialogReject}>
+                <Text style={styles.buttonTextStyle}>
+                  Reject
+                </Text>
+              </TouchableOpacity>
+            </View>
+          }
+          {
+            jobAcceptationStatus === 1 &&
+            <View>
+              <Text style={styles.labelStyle}>
+                Content Submission Link
               </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.deleteButtonStyle}
-                              onPress={showDialogReject}>
-              <Text style={styles.buttonTextStyle}>
-                Reject
+              <TextInput style={styles.textInputStyle}
+                         onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
+                         value={contentSubmissionLink}
+                         placeholder='Enter URL'
+                         placeholderTextColor={Colors.tertiaryColor}/>
+              <TouchableOpacity style={styles.buttonStyle}
+                                onPress={}>
+                <Text style={styles.buttonTextStyle}>
+                  Submit
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonStyle}
+                                onPress={}>
+                <Text style={styles.deleteButtonStyle}>
+                  Delete
+                </Text>
+              </TouchableOpacity>
+            </View>
+          }
+          {
+            jobAcceptationStatus === 1 && contentSubmissionStatus === 1 &&
+            <View>
+              <Text style={styles.labelStyle}>
+                Result Submission Link
               </Text>
-            </TouchableOpacity>
-          </View>
+              <TextInput style={styles.textInputStyle}
+                         onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
+                         value={resultSubmissionLink}
+                         placeholder='Enter URL'
+                         placeholderTextColor={Colors.tertiaryColor}/>
+              <TouchableOpacity style={styles.buttonStyle}
+                                onPress={}>
+                <Text style={styles.buttonTextStyle}>
+                  Submit
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.deleteButtonStyle}
+                                onPress={}>
+                <Text style={styles.buttonTextStyle}>
+                  Delete
+                </Text>
+              </TouchableOpacity>
+            </View>
+          }
           {
             loading &&
             <View style={styles.loadingStyle}>
