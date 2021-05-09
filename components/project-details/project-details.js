@@ -36,6 +36,10 @@ const ProjectDetails = props => {
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
+  const [visibleAccept, setVisibleAccept] = useState(false)
+  const [visibleReject, setVisibleReject] = useState(false)
+  const [visibleAccept, setVisibleAccept] = useState(false)
+  const [visibleReject, setVisibleReject] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   const project = props.project.navigation.getParam('project')
@@ -88,6 +92,38 @@ const ProjectDetails = props => {
     setVisibleReject(false)
   }
 
+  const showDialogReject = async () => {
+    setVisibleReject(true)
+  }
+
+  const hideDialogReject = async () => {
+    setVisibleReject(false)
+  }
+
+  const showDialogReject = async () => {
+    setVisibleReject(true)
+  }
+
+  const hideDialogReject = async () => {
+    setVisibleReject(false)
+  }
+
+  const showDialogReject = async () => {
+    setVisibleReject(true)
+  }
+
+  const hideDialogReject = async () => {
+    setVisibleReject(false)
+  }
+
+  const showDialogReject = async () => {
+    setVisibleReject(true)
+  }
+
+  const hideDialogReject = async () => {
+    setVisibleReject(false)
+  }
+
   const acceptJob = async () => {
     setVisibleAccept(false)
     setLoading(true)
@@ -95,6 +131,82 @@ const ProjectDetails = props => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
+      } else {
+        setLoading(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }
+
+  const rejectJob = async () => {
+    setVisibleReject(false)
+    setLoading(true)
+    axios.put('').then(async response => {
+      if (response.status === 200) {
+        setLoading(false)
+        await showAlert(Constants.SUCCESS, Constants.REJECTED)
+        props.navigation.navigate('NewProjectList')
+      } else {
+        setLoading(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }
+
+  const rejectJob = async () => {
+    setVisibleReject(false)
+    setLoading(true)
+    axios.put('').then(async response => {
+      if (response.status === 200) {
+        setLoading(false)
+        await showAlert(Constants.SUCCESS, Constants.REJECTED)
+        props.navigation.navigate('NewProjectList')
+      } else {
+        setLoading(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }
+
+  const rejectJob = async () => {
+    setVisibleReject(false)
+    setLoading(true)
+    axios.put('').then(async response => {
+      if (response.status === 200) {
+        setLoading(false)
+        await showAlert(Constants.SUCCESS, Constants.REJECTED)
+        props.navigation.navigate('NewProjectList')
+      } else {
+        setLoading(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }
+
+  const rejectJob = async () => {
+    setVisibleReject(false)
+    setLoading(true)
+    axios.put('').then(async response => {
+      if (response.status === 200) {
+        setLoading(false)
+        await showAlert(Constants.SUCCESS, Constants.REJECTED)
+        props.navigation.navigate('NewProjectList')
       } else {
         setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -223,14 +335,15 @@ const ProjectDetails = props => {
                          value={contentSubmissionLink}
                          placeholder='Enter URL'
                          placeholderTextColor={Colors.tertiaryColor}/>
-              <TouchableOpacity style={styles.buttonStyle}
-                                onPress={}>
+              <TouchableOpacity style={isDisabledContentSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                onPress={showDialogContentSubmit}>
                 <Text style={styles.buttonTextStyle}>
                   Submit
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.buttonStyle}
-                                onPress={}>
+              <TouchableOpacity
+                style={isDisabledContentDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
+                onPress={showDialogContentDelete}>
                 <Text style={styles.deleteButtonStyle}>
                   Delete
                 </Text>
@@ -248,14 +361,14 @@ const ProjectDetails = props => {
                          value={resultSubmissionLink}
                          placeholder='Enter URL'
                          placeholderTextColor={Colors.tertiaryColor}/>
-              <TouchableOpacity style={styles.buttonStyle}
-                                onPress={}>
+              <TouchableOpacity style={isDisabledResultSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                onPress={showDialogResultSubmit}>
                 <Text style={styles.buttonTextStyle}>
                   Submit
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.deleteButtonStyle}
-                                onPress={}>
+              <TouchableOpacity style={isDisabledResultDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
+                                onPress={showDialogResultDelete}>
                 <Text style={styles.buttonTextStyle}>
                   Delete
                 </Text>
@@ -284,6 +397,14 @@ const styles = StyleSheet.create({
     width: wp('80%'),
     borderRadius: 5
   },
+  buttonDisabledStyle: {
+    marginTop: 30,
+    backgroundColor: Colors.tertiaryColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5
+  },
   buttonTextStyle: {
     color: Colors.secondaryColor,
     textTransform: 'uppercase'
@@ -295,6 +416,12 @@ const styles = StyleSheet.create({
     padding: 10,
     width: wp('80%'),
     borderRadius: 5
+  },
+  labelStyle: {
+    marginLeft: 40,
+    marginTop: 20,
+    color: Colors.primaryColor,
+    alignSelf: 'baseline'
   },
   loadingStyle: {
     position: 'absolute',
@@ -310,6 +437,16 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor,
     alignItems: 'center',
     minHeight: hp('95%')
+  },
+  textInputStyle: {
+    borderColor: Colors.primaryColor,
+    width: wp('80%'),
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+    marginTop: 10,
+    padding: 10,
+    color: Colors.tertiaryColor
   },
   viewStyle: {
     margin: 25
