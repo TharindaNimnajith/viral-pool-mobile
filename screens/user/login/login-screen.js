@@ -23,10 +23,10 @@ import {storeStringData} from '../../../util/local-storage'
 const LoginScreen = props => {
   const appContext = useContext(AppContext)
 
-  const [email, setEmail] = useState('tharindarajapakshe@y7mail.com')
-  const [password, setPassword] = useState('tharinda')
-  const [emailValid, setEmailValid] = useState(true)
-  const [passwordValid, setPasswordValid] = useState(true)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [emailValid, setEmailValid] = useState(false)
+  const [passwordValid, setPasswordValid] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -72,11 +72,11 @@ const LoginScreen = props => {
             })
           } else {
             setLoading(false)
-            await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
           }
         }).catch(async error => {
           setLoading(false)
-          await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
           console.log(error)
         })
       } else {

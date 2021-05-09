@@ -22,11 +22,11 @@ const CompletedProjectListScreen = props => {
         setLoading(false)
       } else {
         setLoading(false)
-        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
   }, [])

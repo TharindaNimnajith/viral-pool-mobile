@@ -57,11 +57,11 @@ const ProjectDetails = props => {
         setLoading(false)
       } else {
         setLoading(false)
-        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
   }, [])
@@ -96,11 +96,11 @@ const ProjectDetails = props => {
         await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
       } else {
         setLoading(false)
-        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
   }
@@ -115,11 +115,11 @@ const ProjectDetails = props => {
         props.navigation.navigate('NewProjectList')
       } else {
         setLoading(false)
-        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
   }

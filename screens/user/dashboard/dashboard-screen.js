@@ -16,6 +16,8 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import axios from 'axios'
 import {AppContext} from '../../../global/app-context'
 import Colors from '../../../util/colors'
+import {showAlert} from '../../../util/common-helpers'
+import Constants from '../../../util/constants'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 
@@ -35,6 +37,7 @@ const DashboardScreen = props => {
       setLoading(false)
     }).catch(async error => {
       setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
   }, [])

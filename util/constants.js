@@ -19,7 +19,7 @@ export default {
   CAMERA_PERMISSION: 'Sorry, we need camera roll permissions to make this work.',
   EXPO_PUSH_NOTIFICATION_TOKEN_ERROR: 'Failed to get push token for expo push notification.',
   EXPO_PUSH_NOTIFICATION_DEVICE_ERROR: 'Must use physical device for expo push notifications.',
-  UNEXPECTED_ERROR: 'An unexpected error occurred. Please try again later.',
+  COMMON_ERROR: 'Oops! Something went wrong! Our technical staff will be looking into this with the utmost urgency.',
   LOGIN_ERROR: 'Invalid email or password. Please try again.',
   SUBMITTED: 'Submitted successfully!',
   UPDATED: 'Updated successfully!',
