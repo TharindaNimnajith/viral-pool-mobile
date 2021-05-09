@@ -3,6 +3,8 @@ import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, View} from 'rea
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import Colors from '../../../util/colors'
+import {showAlert} from '../../../util/common-helpers'
+import Constants from '../../../util/constants'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 import ProjectListItem from '../../../components/list-items/project-list-item'
@@ -15,11 +17,16 @@ const OngoingProjectListScreen = props => {
   useEffect(() => {
     setLoading(true)
     axios.get('project-cc-strategy?status=1').then(async response => {
-      if (response.status === 200)
+      if (response.status === 200) {
         setOngoingProjects(response.data.data)
-      setLoading(false)
+        setLoading(false)
+      } else {
+        setLoading(false)
+        await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
+      }
     }).catch(async error => {
       setLoading(false)
+      await showAlert(Constants.ERROR, Constants.UNEXPECTED_ERROR)
       console.log(error)
     })
   }, [])
