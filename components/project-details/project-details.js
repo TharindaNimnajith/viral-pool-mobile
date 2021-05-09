@@ -36,10 +36,10 @@ const ProjectDetails = props => {
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
-  const [visibleAccept, setVisibleAccept] = useState(false)
-  const [visibleReject, setVisibleReject] = useState(false)
-  const [visibleAccept, setVisibleAccept] = useState(false)
-  const [visibleReject, setVisibleReject] = useState(false)
+  const [visibleContentSubmit, setVisibleContentSubmit] = useState(false)
+  const [visibleContentDelete, setVisibleContentDelete] = useState(false)
+  const [visibleResultSubmit, setVisibleResultSubmit] = useState(false)
+  const [visibleResultDelete, setVisibleResultDelete] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   const project = props.project.navigation.getParam('project')
@@ -92,36 +92,36 @@ const ProjectDetails = props => {
     setVisibleReject(false)
   }
 
-  const showDialogReject = async () => {
-    setVisibleReject(true)
+  const showDialogContentSubmit = async () => {
+    setVisibleContentSubmit(true)
   }
 
-  const hideDialogReject = async () => {
-    setVisibleReject(false)
+  const hideDialogContentSubmit = async () => {
+    setVisibleContentSubmit(false)
   }
 
-  const showDialogReject = async () => {
-    setVisibleReject(true)
+  const showDialogContentDelete = async () => {
+    setVisibleContentDelete(true)
   }
 
-  const hideDialogReject = async () => {
-    setVisibleReject(false)
+  const hideDialogContentDelete = async () => {
+    setVisibleContentDelete(false)
   }
 
-  const showDialogReject = async () => {
-    setVisibleReject(true)
+  const showDialogResultSubmit = async () => {
+    setVisibleResultSubmit(true)
   }
 
-  const hideDialogReject = async () => {
-    setVisibleReject(false)
+  const hideDialogResultSubmit = async () => {
+    setVisibleResultSubmit(false)
   }
 
-  const showDialogReject = async () => {
-    setVisibleReject(true)
+  const showDialogResultDelete = async () => {
+    setVisibleResultDelete(true)
   }
 
-  const hideDialogReject = async () => {
-    setVisibleReject(false)
+  const hideDialogResultDelete = async () => {
+    setVisibleResultDelete(false)
   }
 
   const acceptJob = async () => {
@@ -161,7 +161,7 @@ const ProjectDetails = props => {
     })
   }
 
-  const rejectJob = async () => {
+  const contentSubmit = async () => {
     setVisibleReject(false)
     setLoading(true)
     axios.put('').then(async response => {
@@ -180,7 +180,7 @@ const ProjectDetails = props => {
     })
   }
 
-  const rejectJob = async () => {
+  const contentDelete = async () => {
     setVisibleReject(false)
     setLoading(true)
     axios.put('').then(async response => {
@@ -199,7 +199,7 @@ const ProjectDetails = props => {
     })
   }
 
-  const rejectJob = async () => {
+  const resultSubmit = async () => {
     setVisibleReject(false)
     setLoading(true)
     axios.put('').then(async response => {
@@ -218,7 +218,7 @@ const ProjectDetails = props => {
     })
   }
 
-  const rejectJob = async () => {
+  const resultDelete = async () => {
     setVisibleReject(false)
     setLoading(true)
     axios.put('').then(async response => {
@@ -262,6 +262,54 @@ const ProjectDetails = props => {
                        onPress={rejectJob}/>
         <Dialog.Button label='No'
                        onPress={hideDialogReject}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleContentSubmit}>
+        <Dialog.Title>
+          SUBMIT CONTENT
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={contentSubmit}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialogContentSubmit}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleContentDelete}>
+        <Dialog.Title>
+          DELETE CONTENT
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={contentDelete}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialogContentDelete}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleResultSubmit}>
+        <Dialog.Title>
+          SUBMIT RESULT
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={resultSubmit}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialogResultSubmit}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleResultDelete}>
+        <Dialog.Title>
+          DELETE RESULT
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={resultDelete}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialogResultDelete}/>
       </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
