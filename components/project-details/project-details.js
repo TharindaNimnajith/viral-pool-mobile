@@ -162,13 +162,12 @@ const ProjectDetails = props => {
   }
 
   const contentSubmit = async () => {
-    setVisibleReject(false)
+    setVisibleContentSubmit(false)
     setLoading(true)
     axios.put('').then(async response => {
       if (response.status === 200) {
         setLoading(false)
-        await showAlert(Constants.SUCCESS, Constants.REJECTED)
-        props.navigation.navigate('NewProjectList')
+        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       } else {
         setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -181,13 +180,12 @@ const ProjectDetails = props => {
   }
 
   const contentDelete = async () => {
-    setVisibleReject(false)
+    setVisibleContentDelete(false)
     setLoading(true)
     axios.put('').then(async response => {
       if (response.status === 200) {
         setLoading(false)
-        await showAlert(Constants.SUCCESS, Constants.REJECTED)
-        props.navigation.navigate('NewProjectList')
+        await showAlert(Constants.SUCCESS, Constants.DELETED)
       } else {
         setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -200,13 +198,12 @@ const ProjectDetails = props => {
   }
 
   const resultSubmit = async () => {
-    setVisibleReject(false)
+    setVisibleResultSubmit(false)
     setLoading(true)
     axios.put('').then(async response => {
       if (response.status === 200) {
         setLoading(false)
-        await showAlert(Constants.SUCCESS, Constants.REJECTED)
-        props.navigation.navigate('NewProjectList')
+        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       } else {
         setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -219,13 +216,12 @@ const ProjectDetails = props => {
   }
 
   const resultDelete = async () => {
-    setVisibleReject(false)
+    setVisibleResultDelete(false)
     setLoading(true)
     axios.put('').then(async response => {
       if (response.status === 200) {
         setLoading(false)
-        await showAlert(Constants.SUCCESS, Constants.REJECTED)
-        props.navigation.navigate('NewProjectList')
+        await showAlert(Constants.SUCCESS, Constants.DELETED)
       } else {
         setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
