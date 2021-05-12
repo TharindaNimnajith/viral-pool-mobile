@@ -41,8 +41,8 @@ const IdeaListScreen = props => {
       </View>
       <TouchableOpacity style={styles.buttonStyle}
                         onPress={redirectToAddIdeaScreen}>
-        <Ionicons name=''
-                  size={30}
+        <Ionicons name='add'
+                  size={35}
                   color={Colors.secondaryColor}/>
       </TouchableOpacity>
     </View>
