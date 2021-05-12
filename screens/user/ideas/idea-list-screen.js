@@ -1,6 +1,7 @@
 import React, {useCallback, useState} from 'react'
-import {FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {FlatList, RefreshControl, StyleSheet, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {Ionicons} from '@expo/vector-icons'
 import Colors from '../../../util/colors'
 import {Ideas} from '../../../data/idea-data/idea-data'
 import Menu from '../../../components/buttons/menu-button'
@@ -28,14 +29,6 @@ const IdeaListScreen = props => {
 
   return (
     <View style={styles.mainViewStyle}>
-      <View style={styles.viewStyle}>
-        <TouchableOpacity style={styles.buttonStyle}
-                          onPress={redirectToAddIdeaScreen}>
-          <Text style={styles.buttonTextStyle}>
-            New Idea
-          </Text>
-        </TouchableOpacity>
-      </View>
       <View style={styles.listStyle}>
         <FlatList keyExtractor={(item, index) => index.toString()}
                   data={Ideas}
@@ -46,34 +39,38 @@ const IdeaListScreen = props => {
                                     onRefresh={onRefresh}/>
                   }/>
       </View>
+      <TouchableOpacity style={styles.buttonStyle}
+                        onPress={redirectToAddIdeaScreen}>
+        <Ionicons name=''
+                  size={30}
+                  color={Colors.secondaryColor}/>
+      </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: 15,
+    borderWidth: 1,
+    borderColor: Colors.primaryColor,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 70,
+    position: 'absolute',
+    bottom: wp('10%'),
+    right: wp('10%'),
+    height: 70,
     backgroundColor: Colors.primaryColor,
-    padding: 10,
-    width: wp('85%'),
-    borderRadius: 5,
-    alignItems: 'center'
-  },
-  buttonTextStyle: {
-    color: Colors.secondaryColor,
-    textTransform: 'uppercase'
+    borderRadius: 35
   },
   listStyle: {
     width: wp('95%'),
-    marginTop: 65,
+    marginTop: 10,
     marginBottom: 10
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
     alignItems: 'center'
-  },
-  viewStyle: {
-    position: 'absolute'
   }
 })
 
