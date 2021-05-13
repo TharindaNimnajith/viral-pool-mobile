@@ -18,7 +18,6 @@ import OngoingProjectListScreen from '../../screens/projects/ongoing/ongoing-pro
 import OngoingProjectDetailsScreen from '../../screens/projects/ongoing/ongoing-project-details-screen'
 import CompletedProjectListScreen from '../../screens/projects/completed/completed-project-list-screen'
 import CompletedProjectDetailsScreen from '../../screens/projects/completed/completed-project-details-screen'
-import TestNotificationScreen from '../../screens/dev/test-notification-screen'
 
 const LoginNavigator = createStackNavigator({
   Login: LoginScreen
@@ -119,18 +118,6 @@ const ProfileNavigator = createStackNavigator({
   }
 })
 
-const TestNotificationNavigator = createStackNavigator({
-  TestNotification: TestNotificationScreen
-}, {
-  defaultNavigationOptions: {
-    headerTitleAlign: 'center',
-    headerStyle: {
-      backgroundColor: Colors.primaryColor
-    },
-    headerTintColor: Colors.secondaryColor
-  }
-})
-
 const InternalNavigator = createDrawerNavigator({
   Dashboard: {
     screen: DashboardNavigator,
@@ -191,15 +178,6 @@ const InternalNavigator = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: 'My Profile',
       drawerIcon: <Ionicons name='person'
-                            size={25}
-                            color={Colors.primaryColor}/>
-    }
-  },
-  TestNotification: {
-    screen: TestNotificationNavigator,
-    navigationOptions: {
-      drawerLabel: 'Test Notification',
-      drawerIcon: <Ionicons name='bug'
                             size={25}
                             color={Colors.primaryColor}/>
     }
