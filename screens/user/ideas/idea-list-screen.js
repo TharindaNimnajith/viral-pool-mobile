@@ -1,15 +1,31 @@
-import React, {useCallback, useState} from 'react'
-import {FlatList, RefreshControl, StyleSheet, TouchableOpacity, View} from 'react-native'
+import React, {useCallback, useEffect, useState} from 'react'
+import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import Colors from '../../../util/colors'
-import {Ideas} from '../../../data/idea-data/idea-data'
+import axios from 'axios'
+import {showAlert} from '../../../util/common-helpers'
+import Constants from '../../../util/constants'
 import Menu from '../../../components/buttons/menu-button'
 import CombinedButtons from '../../../components/buttons/combined-buttons'
 import IdeaListItem from '../../../components/list-items/idea-list-item'
 
 const IdeaListScreen = props => {
+  const [ideas, setIdeas] = useState(null)
+  const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
+
+  useEffect(() => {
+    setLoading(true)
+    axios.get('ideas').then(async response => {
+      setIdeas(response.data.data)
+      setLoading(false)
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }, [])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
@@ -31,7 +47,7 @@ const IdeaListScreen = props => {
     <View style={styles.mainViewStyle}>
       <View style={styles.listStyle}>
         <FlatList keyExtractor={(item, index) => index.toString()}
-                  data={Ideas}
+                  data={ideas}
                   numColumns={1}
                   renderItem={renderItemsFunction}
                   refreshControl={
@@ -45,6 +61,13 @@ const IdeaListScreen = props => {
                   size={35}
                   color={Colors.secondaryColor}/>
       </TouchableOpacity>
+      {
+        loading &&
+        <View style={styles.loadingStyle}>
+          <ActivityIndicator size='large'
+                             color={Colors.secondaryColor}/>
+        </View>
+      }
     </View>
   )
 }
