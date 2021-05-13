@@ -1,9 +1,9 @@
 import React from 'react'
 import {LogBox} from 'react-native'
-import {GlobalState} from './global/global-state'
+import {GlobalState} from './util/global-state'
 import Constants from './util/constants'
-import NavigationBar from './components/navigation/navigation-bar'
-import ExpoPushNotifications from './components/expo-push-notifications/expo-push-notifications'
+import NavigationBar from './components/navigation-bar'
+import ExpoPushNotifications from './components/expo-push-notifications'
 
 const App = () => {
   const patterns = [

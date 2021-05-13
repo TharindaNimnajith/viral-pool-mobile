@@ -15,12 +15,12 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
-import {AppContext} from '../../global/app-context'
-import {isEmpty, showAlert} from '../../util/common-helpers'
-import Colors from '../../util/colors'
-import Constants from '../../util/constants'
-import {genderOptions} from '../../util/enum'
-import CombinedButtons from '../../components/buttons/combined-buttons'
+import {AppContext} from '../util/app-context'
+import {isEmpty, showAlert} from '../util/common-helpers'
+import Colors from '../util/colors'
+import Constants from '../util/constants'
+import {genderOptions} from '../util/enum'
+import CombinedButtons from '../components/combined-buttons'
 
 const EditProfileScreen = () => {
   const appContext = useContext(AppContext)

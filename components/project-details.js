@@ -15,9 +15,9 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
-import Colors from '../../util/colors'
-import Constants from '../../util/constants'
-import {isEmpty, showAlert} from '../../util/common-helpers'
+import Colors from '../util/colors'
+import Constants from '../util/constants'
+import {isEmpty, showAlert} from '../util/common-helpers'
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width

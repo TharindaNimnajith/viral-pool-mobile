@@ -13,10 +13,10 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
-import {isEmpty, showAlert} from '../../util/common-helpers'
-import Colors from '../../util/colors'
-import Constants from '../../util/constants'
-import CombinedButtons from '../../components/buttons/combined-buttons'
+import {isEmpty, showAlert} from '../util/common-helpers'
+import Colors from '../util/colors'
+import Constants from '../util/constants'
+import CombinedButtons from '../components/combined-buttons'
 
 const EditIdeaScreen = props => {
   let idea = props.navigation.getParam('idea')

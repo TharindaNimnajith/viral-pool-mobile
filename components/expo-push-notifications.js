@@ -9,9 +9,9 @@ import {
   requestPermissionsAsync,
   setNotificationHandler
 } from 'expo-notifications'
-import {AppContext} from '../../global/app-context'
-import Constants from '../../util/constants'
-import {showAlert} from '../../util/common-helpers'
+import {AppContext} from '../util/app-context'
+import Constants from '../util/constants'
+import {showAlert} from '../util/common-helpers'
 
 const ExpoPushNotifications = () => {
   const appContext = useContext(AppContext)

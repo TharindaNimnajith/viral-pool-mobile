@@ -13,11 +13,11 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
-import {AppContext} from '../../global/app-context'
-import {isEmpty, showAlert} from '../../util/common-helpers'
-import Colors from '../../util/colors'
-import Constants from '../../util/constants'
-import CombinedButtons from '../../components/buttons/combined-buttons'
+import {AppContext} from '../util/app-context'
+import {isEmpty, showAlert} from '../util/common-helpers'
+import Colors from '../util/colors'
+import Constants from '../util/constants'
+import CombinedButtons from '../components/combined-buttons'
 
 const AddIdeaScreen = () => {
   const appContext = useContext(AppContext)

@@ -2,23 +2,23 @@ import React, {useCallback, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
-import Colors from '../../util/colors'
-import {showAlert} from '../../util/common-helpers'
-import Constants from '../../util/constants'
-import Menu from '../../components/buttons/menu-button'
-import CombinedButtons from '../../components/buttons/combined-buttons'
-import ProjectListItem from '../../components/list-items/project-list-item'
+import Colors from '../util/colors'
+import {showAlert} from '../util/common-helpers'
+import Constants from '../util/constants'
+import Menu from '../components/menu-button'
+import CombinedButtons from '../components/combined-buttons'
+import ProjectListItem from '../components/project-list-item'
 
-const CompletedProjectListScreen = props => {
-  const [completedProjects, setCompletedProjects] = useState([])
+const OngoingProjectListScreen = props => {
+  const [ongoingProjects, setOngoingProjects] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     setLoading(true)
-    axios.get('project-cc-strategy?status=2').then(async response => {
+    axios.get('project-cc-strategy?status=1').then(async response => {
       if (response.status === 200) {
-        setCompletedProjects(response.data.data)
+        setOngoingProjects(response.data.data)
         setLoading(false)
       } else {
         setLoading(false)
@@ -40,7 +40,7 @@ const CompletedProjectListScreen = props => {
     return (
       <ProjectListItem navigation={props.navigation}
                        itemData={itemData}
-                       screen='CompletedProjectDetails'/>
+                       screen='OngoingProjectDetails'/>
     )
   }
 
@@ -48,7 +48,7 @@ const CompletedProjectListScreen = props => {
     <View style={styles.mainViewStyle}>
       <View style={styles.listStyle}>
         <FlatList keyExtractor={(item, index) => index.toString()}
-                  data={completedProjects}
+                  data={ongoingProjects}
                   numColumns={1}
                   renderItem={renderItemsFunction}
                   refreshControl={
@@ -96,12 +96,12 @@ const wait = timeout => {
   })
 }
 
-CompletedProjectListScreen.navigationOptions = navData => {
+OngoingProjectListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Completed Jobs',
+    headerTitle: 'Ongoing Jobs',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 
-export default CompletedProjectListScreen
+export default OngoingProjectListScreen

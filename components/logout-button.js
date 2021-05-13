@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {View} from 'react-native'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import Dialog from 'react-native-dialog'
-import Constants from '../../util/constants'
+import Constants from '../util/constants'
 import CustomHeaderButton from './custom-header-button'
 
 const Logout = props => {

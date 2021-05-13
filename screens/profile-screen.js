@@ -17,13 +17,13 @@ import * as ImagePicker from 'expo-image-picker'
 import * as FileSystem from 'expo-file-system'
 import {FileSystemSessionType, FileSystemUploadType} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
-import {AppContext} from '../../global/app-context'
-import {ApiUrl} from '../../util/api-url'
-import Colors from '../../util/colors'
-import Constants from '../../util/constants'
-import {showAlert} from '../../util/common-helpers'
-import Menu from '../../components/buttons/menu-button'
-import CombinedButtons from '../../components/buttons/combined-buttons'
+import {AppContext} from '../util/app-context'
+import {ApiUrl} from '../util/api-url'
+import Colors from '../util/colors'
+import Constants from '../util/constants'
+import {showAlert} from '../util/common-helpers'
+import Menu from '../components/menu-button'
+import CombinedButtons from '../components/combined-buttons'
 
 const ProfileScreen = props => {
   const appContext = useContext(AppContext)
@@ -152,7 +152,7 @@ const ProfileScreen = props => {
                        }}/>
               ) : (
                 <Image style={styles.avatarStyle}
-                       source={require('../../assets/user.jpg')}/>
+                       source={require('../assets/user.jpg')}/>
               )
             }
           </View>

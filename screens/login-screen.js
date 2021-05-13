@@ -14,11 +14,11 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import validator from 'validator'
-import {AppContext} from '../../global/app-context'
-import Colors from '../../util/colors'
-import Constants from '../../util/constants'
-import {isEmpty, showAlert} from '../../util/common-helpers'
-import {storeStringData} from '../../util/local-storage'
+import {AppContext} from '../util/app-context'
+import Colors from '../util/colors'
+import Constants from '../util/constants'
+import {isEmpty, showAlert} from '../util/common-helpers'
+import {storeStringData} from '../util/local-storage'
 
 const LoginScreen = props => {
   const appContext = useContext(AppContext)
@@ -101,7 +101,7 @@ const LoginScreen = props => {
           <View style={styles.containerStyle}>
             <View style={styles.headerStyle}>
               <Image style={styles.imageStyle}
-                     source={require('../../assets/logo.png')}/>
+                     source={require('../assets/logo.png')}/>
               <Text style={styles.textStyle}>
                 {Constants.DESCRIPTION}
               </Text>
