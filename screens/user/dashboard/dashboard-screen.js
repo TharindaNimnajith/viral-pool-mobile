@@ -31,9 +31,9 @@ const DashboardScreen = props => {
     setLoading(true)
     let data = {
       contentCreatorId: appContext.userData.id,
-      token: appContext.expoPushToken
+      expoToken: appContext.expoPushToken
     }
-    axios.post('content-creator-notification/expo-token', data).then(() => {
+    axios.post('content-creator-notification/token', data).then(() => {
       setLoading(false)
     }).catch(async error => {
       setLoading(false)

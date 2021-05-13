@@ -17,7 +17,7 @@ import HTML from 'react-native-render-html'
 import axios from 'axios'
 import Colors from '../../util/colors'
 import Constants from '../../util/constants'
-import {showAlert} from '../../util/common-helpers'
+import {isEmpty, showAlert} from '../../util/common-helpers'
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
@@ -33,6 +33,8 @@ const ProjectDetails = props => {
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(0)
   const [contentSubmissionStatus, setContentSubmissionStatus] = useState(0)
   const [resultSubmissionStatus, setResultSubmissionStatus] = useState(0)
+  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(contentSubmissionStatus !== 0)
+  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(resultSubmissionStatus !== 0)
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
@@ -127,7 +129,10 @@ const ProjectDetails = props => {
   const acceptJob = async () => {
     setVisibleAccept(false)
     setLoading(true)
-    axios.put('').then(async response => {
+    let data = {
+      id: project
+    }
+    axios.put('project-cc-strategy/accept', data).then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
@@ -145,7 +150,10 @@ const ProjectDetails = props => {
   const rejectJob = async () => {
     setVisibleReject(false)
     setLoading(true)
-    axios.put('').then(async response => {
+    let data = {
+      id: project
+    }
+    axios.put('project-cc-strategy/reject', data).then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.REJECTED)
@@ -164,7 +172,11 @@ const ProjectDetails = props => {
   const contentSubmit = async () => {
     setVisibleContentSubmit(false)
     setLoading(true)
-    axios.put('').then(async response => {
+    let data = {
+      id: project,
+      contentLink: contentSubmissionLink
+    }
+    axios.put('project-cc-strategy/content-link', data).then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
@@ -182,7 +194,11 @@ const ProjectDetails = props => {
   const contentDelete = async () => {
     setVisibleContentDelete(false)
     setLoading(true)
-    axios.put('').then(async response => {
+    let data = {
+      id: project,
+      contentLink: null
+    }
+    axios.put('project-cc-strategy/content-link', data).then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
@@ -200,7 +216,11 @@ const ProjectDetails = props => {
   const resultSubmit = async () => {
     setVisibleResultSubmit(false)
     setLoading(true)
-    axios.put('').then(async response => {
+    let data = {
+      id: project,
+      resultLink: resultSubmissionLink
+    }
+    axios.put('project-cc-strategy/result-link', data).then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
@@ -218,7 +238,11 @@ const ProjectDetails = props => {
   const resultDelete = async () => {
     setVisibleResultDelete(false)
     setLoading(true)
-    axios.put('').then(async response => {
+    let data = {
+      id: project,
+      resultLink: null
+    }
+    axios.put('project-cc-strategy/result-link', data).then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
@@ -231,6 +255,32 @@ const ProjectDetails = props => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
+  }
+
+  const onChangeContentSubmissionLink = async contentSubmissionLink => {
+    setContentSubmissionLinkValid(!await isEmpty(contentSubmissionLink.trim()))
+    setContentSubmissionLink(contentSubmissionLink)
+  }
+
+  const onChangeResultSubmissionLink = async resultSubmissionLink => {
+    setResultSubmissionLinkValid(!await isEmpty(resultSubmissionLink.trim()))
+    setResultSubmissionLink(resultSubmissionLink)
+  }
+
+  function isDisabledContentSubmit() {
+    return !contentSubmissionLinkValid
+  }
+
+  function isDisabledContentDelete() {
+    return false
+  }
+
+  function isDisabledResultSubmit() {
+    return !resultSubmissionLinkValid
+  }
+
+  function isDisabledResultDelete() {
+    return false
   }
 
   return (
