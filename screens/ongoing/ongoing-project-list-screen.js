@@ -1,24 +1,29 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, View} from 'react-native'
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../../util/colors'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
-import {showAlert} from '../../../util/common-helpers'
-import Constants from '../../../util/constants'
-import Menu from '../../../components/buttons/menu-button'
-import CombinedButtons from '../../../components/buttons/combined-buttons'
-import NotificationListItem from '../../../components/list-items/notification-list-item'
+import Colors from '../../util/colors'
+import {showAlert} from '../../util/common-helpers'
+import Constants from '../../util/constants'
+import Menu from '../../components/buttons/menu-button'
+import CombinedButtons from '../../components/buttons/combined-buttons'
+import ProjectListItem from '../../components/list-items/project-list-item'
 
-const NotificationsScreen = props => {
-  const [notifications, setNotifications] = useState(null)
+const OngoingProjectListScreen = props => {
+  const [ongoingProjects, setOngoingProjects] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
     setLoading(true)
-    axios.get('content-creator-notification').then(async response => {
-      setNotifications(response.data.data)
-      setLoading(false)
+    axios.get('project-cc-strategy?status=1').then(async response => {
+      if (response.status === 200) {
+        setOngoingProjects(response.data.data)
+        setLoading(false)
+      } else {
+        setLoading(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -33,8 +38,9 @@ const NotificationsScreen = props => {
 
   const renderItemsFunction = itemData => {
     return (
-      <NotificationListItem navigation={props.navigation}
-                            itemData={itemData}/>
+      <ProjectListItem navigation={props.navigation}
+                       itemData={itemData}
+                       screen='OngoingProjectDetails'/>
     )
   }
 
@@ -42,7 +48,7 @@ const NotificationsScreen = props => {
     <View style={styles.mainViewStyle}>
       <View style={styles.listStyle}>
         <FlatList keyExtractor={(item, index) => index.toString()}
-                  data={notifications}
+                  data={ongoingProjects}
                   numColumns={1}
                   renderItem={renderItemsFunction}
                   refreshControl={
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
   listStyle: {
     width: wp('95%'),
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 15
   },
   loadingStyle: {
     position: 'absolute',
@@ -79,7 +85,8 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: hp('95%')
   }
 })
 
@@ -89,12 +96,12 @@ const wait = timeout => {
   })
 }
 
-NotificationsScreen.navigationOptions = navData => {
+OngoingProjectListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Notifications',
+    headerTitle: 'Ongoing Jobs',
     headerLeft: () => <Menu navigation={navData.navigation}/>,
     headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 
-export default NotificationsScreen
+export default OngoingProjectListScreen

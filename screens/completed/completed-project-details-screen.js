@@ -1,6 +1,6 @@
 import React from 'react'
-import CombinedButtons from '../../../components/buttons/combined-buttons'
-import ProjectDetails from '../../../components/project-details/project-details'
+import CombinedButtons from '../../components/buttons/combined-buttons'
+import ProjectDetails from '../../components/project-details/project-details'
 
 const CompletedProjectDetailsScreen = props => {
   return (

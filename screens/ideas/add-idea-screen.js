@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useContext, useState} from 'react'
 import {
   ActivityIndicator,
   RefreshControl,
@@ -13,21 +13,21 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
-import {isEmpty, showAlert} from '../../../util/common-helpers'
-import Colors from '../../../util/colors'
-import Constants from '../../../util/constants'
-import CombinedButtons from '../../../components/buttons/combined-buttons'
+import {AppContext} from '../../global/app-context'
+import {isEmpty, showAlert} from '../../util/common-helpers'
+import Colors from '../../util/colors'
+import Constants from '../../util/constants'
+import CombinedButtons from '../../components/buttons/combined-buttons'
 
-const EditIdeaScreen = props => {
-  let idea = props.navigation.getParam('idea')
+const AddIdeaScreen = () => {
+  const appContext = useContext(AppContext)
 
-  const [title, setTitle] = useState(idea.idea.title)
-  const [description, setDescription] = useState(idea.idea.description)
-  const [titleValid, setTitleValid] = useState(true)
-  const [descriptionValid, setDescriptionValid] = useState(true)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [titleValid, setTitleValid] = useState(false)
+  const [descriptionValid, setDescriptionValid] = useState(false)
   const [loading, setLoading] = useState(false)
-  const [visibleEdit, setVisibleEdit] = useState(false)
-  const [visibleDelete, setVisibleDelete] = useState(false)
+  const [visible, setVisible] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   const onRefresh = useCallback(() => {
@@ -35,20 +35,12 @@ const EditIdeaScreen = props => {
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
-  const showDialogEdit = async () => {
-    setVisibleEdit(true)
+  const showDialog = async () => {
+    setVisible(true)
   }
 
-  const hideDialogEdit = async () => {
-    setVisibleEdit(false)
-  }
-
-  const showDialogDelete = async () => {
-    setVisibleDelete(true)
-  }
-
-  const hideDialogDelete = async () => {
-    setVisibleDelete(false)
+  const hideDialog = async () => {
+    setVisible(false)
   }
 
   const onChangeTitle = async title => {
@@ -65,37 +57,20 @@ const EditIdeaScreen = props => {
     return !titleValid || !descriptionValid
   }
 
-  const editIdea = async () => {
-    setVisibleEdit(false)
+  const addIdea = async () => {
+    setVisible(false)
     setLoading(true)
     let data = {
       title: title.trim(),
       description: description.trim(),
-      userId: idea.idea.userId
+      userId: appContext.userData.id
     }
-    axios.put('', data).then(async response => {
+    axios.post('', data).then(async response => {
       if (response.status === 200) {
+        setTitle('')
+        setDescription('')
         setLoading(false)
-        await showAlert(Constants.SUCCESS, Constants.UPDATED)
-      } else {
-        setLoading(false)
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
-    }).catch(async error => {
-      setLoading(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
-    })
-  }
-
-  const deleteIdea = async () => {
-    setVisibleDelete(false)
-    setLoading(true)
-    axios.delete('').then(async response => {
-      if (response.status === 200) {
-        setLoading(false)
-        await showAlert(Constants.SUCCESS, Constants.DELETED)
-        props.navigation.navigate('IdeaList')
+        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       } else {
         setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -109,29 +84,17 @@ const EditIdeaScreen = props => {
 
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visibleEdit}>
+      <Dialog.Container visible={visible}>
         <Dialog.Title>
-          EDIT IDEA
+          NEW IDEA
         </Dialog.Title>
         <Dialog.Description>
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
-                       onPress={editIdea}/>
+                       onPress={addIdea}/>
         <Dialog.Button label='No'
-                       onPress={hideDialogEdit}/>
-      </Dialog.Container>
-      <Dialog.Container visible={visibleDelete}>
-        <Dialog.Title>
-          DELETE IDEA
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       onPress={deleteIdea}/>
-        <Dialog.Button label='No'
-                       onPress={hideDialogDelete}/>
+                       onPress={hideDialog}/>
       </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
@@ -159,15 +122,9 @@ const EditIdeaScreen = props => {
                        numberOfLines={17}/>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
-                              onPress={showDialogEdit}>
+                              onPress={showDialog}>
               <Text style={styles.buttonTextStyle}>
-                Update
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.deleteButtonStyle}
-                              onPress={showDialogDelete}>
-              <Text style={styles.buttonTextStyle}>
-                Delete
+                Submit
               </Text>
             </TouchableOpacity>
           </View>
@@ -210,14 +167,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flex: 1
-  },
-  deleteButtonStyle: {
-    marginTop: 15,
-    backgroundColor: Colors.errorColor,
-    alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
-    borderRadius: 5
   },
   labelStyle: {
     marginLeft: 40,
@@ -269,11 +218,11 @@ const wait = timeout => {
   })
 }
 
-EditIdeaScreen.navigationOptions = navData => {
+AddIdeaScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Edit Idea',
+    headerTitle: 'New Idea',
     headerRight: () => <CombinedButtons navigation={navData.navigation}/>
   }
 }
 
-export default EditIdeaScreen
+export default AddIdeaScreen

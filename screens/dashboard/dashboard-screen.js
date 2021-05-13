@@ -14,12 +14,12 @@ import {
 import {SocialIcon} from 'react-native-elements'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
-import {AppContext} from '../../../global/app-context'
-import Colors from '../../../util/colors'
-import {showAlert} from '../../../util/common-helpers'
-import Constants from '../../../util/constants'
-import Menu from '../../../components/buttons/menu-button'
-import CombinedButtons from '../../../components/buttons/combined-buttons'
+import {AppContext} from '../../global/app-context'
+import Colors from '../../util/colors'
+import {showAlert} from '../../util/common-helpers'
+import Constants from '../../util/constants'
+import Menu from '../../components/buttons/menu-button'
+import CombinedButtons from '../../components/buttons/combined-buttons'
 
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)
@@ -70,7 +70,7 @@ const DashboardScreen = props => {
                            }}/>
                   ) : (
                     <Image style={styles.avatarStyle}
-                           source={require('../../../assets/user.jpg')}/>
+                           source={require('../../assets/user.jpg')}/>
                   )
                 }
               </TouchableWithoutFeedback>
@@ -164,7 +164,7 @@ const DashboardScreen = props => {
               <TouchableOpacity style={styles.tiktokViewStyle}
                                 activeOpacity={1}>
                 <Image style={styles.tiktokIconStyle}
-                       source={require('../../../assets/tiktok.png')}/>
+                       source={require('../../assets/tiktok.png')}/>
                 <View style={styles.tiktokButtonStyle}>
                   <SocialIcon title='Connect with Tiktok'
                               button

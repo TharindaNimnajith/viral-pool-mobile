@@ -2,12 +2,12 @@ import React, {useCallback, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
-import Colors from '../../../util/colors'
-import {showAlert} from '../../../util/common-helpers'
-import Constants from '../../../util/constants'
-import Menu from '../../../components/buttons/menu-button'
-import CombinedButtons from '../../../components/buttons/combined-buttons'
-import ProjectListItem from '../../../components/list-items/project-list-item'
+import Colors from '../../util/colors'
+import {showAlert} from '../../util/common-helpers'
+import Constants from '../../util/constants'
+import Menu from '../../components/buttons/menu-button'
+import CombinedButtons from '../../components/buttons/combined-buttons'
+import ProjectListItem from '../../components/list-items/project-list-item'
 
 const CompletedProjectListScreen = props => {
   const [completedProjects, setCompletedProjects] = useState([])
