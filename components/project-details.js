@@ -22,6 +22,8 @@ import {isEmpty, showAlert} from '../util/common-helpers'
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
 
+  const project = props.project.navigation.getParam('project')
+
   const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [description, setDescription] = useState(`<p></p>`)
@@ -43,8 +45,6 @@ const ProjectDetails = props => {
   const [visibleResultSubmit, setVisibleResultSubmit] = useState(false)
   const [visibleResultDelete, setVisibleResultDelete] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
-
-  const project = props.project.navigation.getParam('project')
 
   useEffect(() => {
     setLoading(true)
@@ -438,7 +438,7 @@ const ProjectDetails = props => {
               <TouchableOpacity
                 style={isDisabledContentDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
                 onPress={showDialogContentDelete}>
-                <Text style={styles.deleteButtonStyle}>
+                <Text style={styles.buttonTextStyle}>
                   Delete
                 </Text>
               </TouchableOpacity>
