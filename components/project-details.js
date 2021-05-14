@@ -430,14 +430,16 @@ const ProjectDetails = props => {
                          placeholder='Enter URL'
                          placeholderTextColor={Colors.tertiaryColor}/>
               <TouchableOpacity style={isDisabledContentSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                disabled={isDisabledContentSubmit()}
                                 onPress={showDialogContentSubmit}>
                 <Text style={styles.buttonTextStyle}>
                   Submit
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity
-                style={isDisabledContentDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
-                onPress={showDialogContentDelete}>
+              <TouchableOpacity disabled={isDisabledContentDelete()}
+                                onPress={showDialogContentDelete}
+                                style={isDisabledContentDelete() ? styles.buttonDisabledStyle
+                                  : styles.deleteButtonStyle}>
                 <Text style={styles.buttonTextStyle}>
                   Delete
                 </Text>
@@ -456,12 +458,14 @@ const ProjectDetails = props => {
                          placeholder='Enter URL'
                          placeholderTextColor={Colors.tertiaryColor}/>
               <TouchableOpacity style={isDisabledResultSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                disabled={isDisabledResultSubmit()}
                                 onPress={showDialogResultSubmit}>
                 <Text style={styles.buttonTextStyle}>
                   Submit
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={isDisabledResultDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
+                                disabled={isDisabledResultDelete()}
                                 onPress={showDialogResultDelete}>
                 <Text style={styles.buttonTextStyle}>
                   Delete

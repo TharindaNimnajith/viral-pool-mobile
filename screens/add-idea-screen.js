@@ -60,7 +60,7 @@ const AddIdeaScreen = () => {
   const addIdea = async () => {
     setVisible(false)
     setLoading(true)
-    let data = {
+    const data = {
       title: title.trim(),
       description: description.trim(),
       userId: appContext.userData.id

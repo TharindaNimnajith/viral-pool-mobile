@@ -19,7 +19,7 @@ import Constants from '../util/constants'
 import CombinedButtons from '../components/combined-buttons'
 
 const EditIdeaScreen = props => {
-  let idea = props.navigation.getParam('idea')
+  const idea = props.navigation.getParam('idea')
 
   const [title, setTitle] = useState(idea.idea.title)
   const [description, setDescription] = useState(idea.idea.description)
@@ -68,7 +68,7 @@ const EditIdeaScreen = props => {
   const editIdea = async () => {
     setVisibleEdit(false)
     setLoading(true)
-    let data = {
+    const data = {
       title: title.trim(),
       description: description.trim(),
       userId: idea.idea.userId

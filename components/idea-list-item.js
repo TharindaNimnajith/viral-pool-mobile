@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../util/colors'
 
 const IdeaListItem = props => {
-  let idea = {
+  const idea = {
     idea: props.itemData.item,
     navigation: props.navigation
   }

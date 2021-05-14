@@ -13,9 +13,8 @@ import {
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
-import * as ImagePicker from 'expo-image-picker'
-import * as FileSystem from 'expo-file-system'
-import {FileSystemSessionType, FileSystemUploadType} from 'expo-file-system'
+import {launchImageLibraryAsync, MediaTypeOptions, requestMediaLibraryPermissionsAsync} from 'expo-image-picker'
+import {FileSystemSessionType, FileSystemUploadType, uploadAsync} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
 import {AppContext} from '../util/app-context'
 import {ApiUrl} from '../util/api-url'
@@ -38,7 +37,7 @@ const ProfileScreen = props => {
       if (Platform.OS !== 'web') {
         const {
           status
-        } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+        } = await requestMediaLibraryPermissionsAsync()
         if (status !== 'granted')
           showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
@@ -64,8 +63,8 @@ const ProfileScreen = props => {
 
   const pickImage = async () => {
     setVisible(false)
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+    const result = await launchImageLibraryAsync({
+      mediaTypes: MediaTypeOptions.All,
       allowsEditing: true,
       aspect: [3, 3],
       quality: 1,
@@ -74,18 +73,18 @@ const ProfileScreen = props => {
     })
     if (!result.cancelled) {
       setLoading(true)
-      let localUri = result.uri
+      const localUri = result.uri
       setImage(localUri)
-      let filename = localUri.split('/').pop()
-      let match = /\.(\w+)$/.exec(filename)
-      let type = match ? `image/${match[1]}` : `image`
+      const filename = localUri.split('/').pop()
+      const match = /\.(\w+)$/.exec(filename)
+      const type = match ? `image/${match[1]}` : `image`
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
         'Authorization': `Bearer ${appContext.accessToken}`,
         'client_id': `${Constants.CLIENT_ID_VALUE}`
       }
-      FileSystem.uploadAsync(
+      uploadAsync(
         `${ApiUrl.BASE_URL}User`,
         `${localUri}`,
         {

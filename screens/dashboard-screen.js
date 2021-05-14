@@ -29,7 +29,7 @@ const DashboardScreen = props => {
 
   useEffect(() => {
     setLoading(true)
-    let data = {
+    const data = {
       contentCreatorId: appContext.userData.id,
       expoToken: appContext.expoPushToken,
       fireBaseToken: Constants.DUMMY_STRING
