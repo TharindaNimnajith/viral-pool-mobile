@@ -69,11 +69,12 @@ const EditIdeaScreen = props => {
     setVisibleEdit(false)
     setLoading(true)
     const data = {
+      id: idea.idea.id,
       title: title.trim(),
       description: description.trim(),
-      userId: idea.idea.userId
+      contentCreatorDetailId: idea.idea.contentCreatorDetailId
     }
-    axios.put('', data).then(async response => {
+    axios.put('cc-ideas', data).then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.UPDATED)

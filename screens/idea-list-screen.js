@@ -1,9 +1,9 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, TouchableOpacity, View} from 'react-native'
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
-import Colors from '../util/colors'
 import axios from 'axios'
+import Colors from '../util/colors'
 import {showAlert} from '../util/common-helpers'
 import Constants from '../util/constants'
 import Menu from '../components/menu-button'
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 70,
     position: 'absolute',
-    bottom: wp('10%'),
+    bottom: wp('20%'),
     right: wp('10%'),
     height: 70,
     backgroundColor: Colors.primaryColor,
@@ -93,7 +93,9 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center'
+    alignItems: 'center',
+    minWidth: wp('100%'),
+    minHeight: hp('100%')
   }
 })
 

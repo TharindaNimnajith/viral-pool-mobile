@@ -63,9 +63,9 @@ const AddIdeaScreen = () => {
     const data = {
       title: title.trim(),
       description: description.trim(),
-      userId: appContext.userData.id
+      contentCreatorDetailId: appContext.userData.id
     }
-    axios.post('', data).then(async response => {
+    axios.post('cc-ideas', data).then(async response => {
       if (response.status === 200) {
         setTitle('')
         setDescription('')
