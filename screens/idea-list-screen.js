@@ -29,6 +29,12 @@ const IdeaListScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
+    axios.get('cc-ideas').then(async response => {
+      setIdeas(response.data.data)
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
