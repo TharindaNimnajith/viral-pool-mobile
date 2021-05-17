@@ -7,21 +7,19 @@ const NotificationListItem = props => {
   const project = props.itemData.item.project
 
   const pressNotification = () => {
-    props.navigation.navigate(props.itemData.item.screen, {project})
+    console.log(project)
+    // props.navigation.navigate(props.itemData.item.screen, {project})
   }
 
   return (
     <TouchableOpacity style={styles.itemStyle}
                       onPress={pressNotification}>
       <View style={styles.viewStyle}>
-        <Text style={styles.titleStyle}>
-          {props.itemData.item.title}
-        </Text>
         <Text style={styles.textStyle}>
-          {props.itemData.item.description}
+          {props.itemData.item.notification}
         </Text>
         <Text style={styles.dateStyle}>
-          {props.itemData.item.date}
+          {props.itemData.item.createdDate.slice(0, 10)}
         </Text>
       </View>
     </TouchableOpacity>
@@ -50,12 +48,6 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   textStyle: {
-    color: Colors.tertiaryColor,
-    fontSize: 15,
-    marginTop: 3,
-    marginBottom: 3
-  },
-  titleStyle: {
     fontWeight: 'bold',
     fontSize: 16,
     color: Colors.primaryColor

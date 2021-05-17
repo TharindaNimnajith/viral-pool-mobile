@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, View} from 'react-native'
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../util/colors'
 import axios from 'axios'
 import {showAlert} from '../util/common-helpers'
@@ -79,7 +79,9 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center'
+    alignItems: 'center',
+    minWidth: wp('100%'),
+    minHeight: hp('100%')
   }
 })
 
