@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 70,
     position: 'absolute',
-    bottom: wp('20%'),
+    bottom: hp('10%'),
     right: wp('10%'),
     height: 70,
     backgroundColor: Colors.primaryColor,
