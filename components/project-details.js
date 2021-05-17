@@ -368,29 +368,34 @@ const ProjectDetails = props => {
                         onRefresh={onRefresh}/>
       }>
         <View style={styles.mainViewStyle}>
-          <Text>
-            {name}
-          </Text>
-          <Text>
-            {createdDate.slice(0, 10)}
-          </Text>
-          <Text>
-            {socialMediaPlatformName}
-          </Text>
           <View style={styles.viewStyle}>
-            {
-              description &&
+            <Text style={styles.titleStyle}>
+              {name}
+            </Text>
+            <Text style={styles.titleStyle}>
+              {createdDate.slice(0, 10)}
+            </Text>
+            <Text style={styles.titleStyle}>
+              {socialMediaPlatformName}
+            </Text>
+          </View>
+          <View style={styles.lineStyle}/>
+          {
+            description &&
+            <View style={styles.viewStyle}>
               <HTML contentWidth={contentWidth}
                     source={{
                       html: description
                     }}/>
-            }
-          </View>
+            </View>
+          }
           {
-            projectFileResponses.length > 0 ? (
-              <View>
-              </View>
-            ) : null
+            projectFileResponses.length > 0 &&
+            <View style={styles.viewStyle}>
+              <Text style={styles.titleStyle}>
+                Samples
+              </Text>
+            </View>
           }
           {
             jobAcceptationStatus === 0 &&
@@ -519,6 +524,12 @@ const styles = StyleSheet.create({
     color: Colors.primaryColor,
     alignSelf: 'baseline'
   },
+  lineStyle: {
+    borderBottomColor: Colors.tertiaryColor,
+    borderBottomWidth: 1,
+    marginLeft: 25,
+    marginRight: 25
+  },
   loadingStyle: {
     position: 'absolute',
     left: 0,
@@ -531,7 +542,6 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center',
     minHeight: hp('95%')
   },
   textInputStyle: {
@@ -543,6 +553,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 10,
     color: Colors.tertiaryColor
+  },
+  titleStyle: {
+    color: Colors.primaryColor,
+    fontSize: 18
   },
   viewStyle: {
     margin: 25
