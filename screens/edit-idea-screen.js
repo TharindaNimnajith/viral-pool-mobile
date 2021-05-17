@@ -92,7 +92,8 @@ const EditIdeaScreen = props => {
   const deleteIdea = async () => {
     setVisibleDelete(false)
     setLoading(true)
-    axios.delete('').then(async response => {
+    const id = idea.idea.id
+    axios.delete(`cc-ideas/${id}`).then(async response => {
       if (response.status === 200) {
         setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
