@@ -33,6 +33,15 @@ const OngoingProjectListScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
+    axios.get('project-cc-strategy?status=1').then(async response => {
+      if (response.status === 200)
+        setOngoingProjects(response.data.data)
+      else
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
     wait(2000).then(() => setRefreshing(false))
   }, [])
 

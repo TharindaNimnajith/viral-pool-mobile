@@ -28,6 +28,12 @@ const NotificationsScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
+    axios.get('content-creator-notification').then(async response => {
+      setNotifications(response.data.data)
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
     wait(2000).then(() => setRefreshing(false))
   }, [])
 

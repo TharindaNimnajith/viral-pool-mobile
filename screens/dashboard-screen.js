@@ -44,6 +44,14 @@ const DashboardScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
+    const data = {
+      contentCreatorId: appContext.userData.id,
+      expoToken: appContext.expoPushToken
+    }
+    axios.post('content-creator-notification/token', data).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
