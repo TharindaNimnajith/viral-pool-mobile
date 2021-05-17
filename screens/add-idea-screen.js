@@ -53,6 +53,11 @@ const AddIdeaScreen = () => {
     setDescription(description)
   }
 
+  const reset = async () => {
+    setTitle('')
+    setDescription('')
+  }
+
   function isDisabled() {
     return !titleValid || !descriptionValid
   }
@@ -66,13 +71,11 @@ const AddIdeaScreen = () => {
       contentCreatorDetailId: appContext.userData.id
     }
     axios.post('cc-ideas', data).then(async response => {
+      setLoading(false)
       if (response.status === 200) {
-        setTitle('')
-        setDescription('')
-        setLoading(false)
+        await reset()
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       } else {
-        setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {

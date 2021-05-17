@@ -106,12 +106,11 @@ const EditProfileScreen = () => {
     formData.append('address', address.trim())
     formData.append('phoneNumber', phoneNumber.trim())
     axios.put('User', formData).then(async response => {
+      setLoading(false)
       if (response.status === 200) {
         await appContext.SetUserData(response.data.data)
-        setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.UPDATED)
       } else {
-        setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {

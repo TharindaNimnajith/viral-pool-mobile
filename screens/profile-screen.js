@@ -45,6 +45,15 @@ const ProfileScreen = props => {
   }, [])
 
   const onRefresh = useCallback(() => {
+    (async () => {
+      if (Platform.OS !== 'web') {
+        const {
+          status
+        } = await requestMediaLibraryPermissionsAsync()
+        if (status !== 'granted')
+          showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
+      }
+    })()
     setRefreshing(true)
     wait(2000).then(() => setRefreshing(false))
   }, [])
@@ -106,13 +115,12 @@ const ProfileScreen = props => {
             'phoneNumber': appContext.userData.phoneNumber
           }
         }).then(async response => {
+        setLoading(false)
         if (response.status === 200) {
           const data = JSON.parse(response.body).data
           await appContext.SetUserData(data)
-          setLoading(false)
           await showAlert(Constants.SUCCESS, Constants.UPDATED)
         } else {
-          setLoading(false)
           await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
         }
       }).catch(async error => {

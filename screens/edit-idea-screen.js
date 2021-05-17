@@ -75,13 +75,11 @@ const EditIdeaScreen = props => {
       contentCreatorDetailId: idea.idea.contentCreatorDetailId
     }
     axios.put('cc-ideas', data).then(async response => {
-      if (response.status === 200) {
-        setLoading(false)
+      setLoading(false)
+      if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.UPDATED)
-      } else {
-        setLoading(false)
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -94,12 +92,11 @@ const EditIdeaScreen = props => {
     setLoading(true)
     const id = idea.idea.id
     axios.delete(`cc-ideas/${id}`).then(async response => {
+      setLoading(false)
       if (response.status === 200) {
-        setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
         props.navigation.navigate('IdeaList')
       } else {
-        setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {

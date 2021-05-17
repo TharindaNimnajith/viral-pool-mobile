@@ -24,14 +24,12 @@ const ProjectDetails = props => {
 
   const project = props.project.navigation.getParam('project')
 
-  const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [description, setDescription] = useState(`<></>`)
   const [createdDate, setCreatedDate] = useState('')
   const [socialMediaPlatformName, setSocialMediaPlatformName] = useState('')
   const [contentSubmissionLink, setContentSubmissionLink] = useState('')
   const [resultSubmissionLink, setResultSubmissionLink] = useState('')
-  const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(0)
   const [contentSubmissionStatus, setContentSubmissionStatus] = useState(0)
   const [resultSubmissionStatus, setResultSubmissionStatus] = useState(0)
@@ -49,21 +47,18 @@ const ProjectDetails = props => {
   useEffect(() => {
     setLoading(true)
     axios.get(`project-cc-strategy/${project}`).then(async response => {
+      setLoading(false)
       if (response.status === 200) {
-        setId(response.data.data.id)
         setName(response.data.data.name)
         setDescription(response.data.data.description)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
         setContentSubmissionLink(response.data.data.contentSubmissionLink)
         setResultSubmissionLink(response.data.data.resultSubmissionLink)
-        setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
         setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
-        setLoading(false)
       } else {
-        setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
@@ -77,14 +72,12 @@ const ProjectDetails = props => {
     setRefreshing(true)
     axios.get(`project-cc-strategy/${project}`).then(async response => {
       if (response.status === 200) {
-        setId(response.data.data.id)
         setName(response.data.data.name)
         setDescription(response.data.data.description)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
         setContentSubmissionLink(response.data.data.contentSubmissionLink)
         setResultSubmissionLink(response.data.data.resultSubmissionLink)
-        setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
         setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
@@ -153,13 +146,11 @@ const ProjectDetails = props => {
       id: project
     }
     axios.put('project-cc-strategy/accept', data).then(async response => {
-      if (response.status === 200) {
-        setLoading(false)
+      setLoading(false)
+      if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
-      } else {
-        setLoading(false)
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -174,12 +165,11 @@ const ProjectDetails = props => {
       id: project
     }
     axios.put('project-cc-strategy/reject', data).then(async response => {
+      setLoading(false)
       if (response.status === 200) {
-        setLoading(false)
         await showAlert(Constants.SUCCESS, Constants.REJECTED)
         props.navigation.navigate('NewProjectList')
       } else {
-        setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
@@ -197,13 +187,11 @@ const ProjectDetails = props => {
       contentLink: contentSubmissionLink
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
-      if (response.status === 200) {
-        setLoading(false)
+      setLoading(false)
+      if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
-      } else {
-        setLoading(false)
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -219,13 +207,11 @@ const ProjectDetails = props => {
       contentLink: null
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
-      if (response.status === 200) {
-        setLoading(false)
+      setLoading(false)
+      if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
-      } else {
-        setLoading(false)
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -241,13 +227,11 @@ const ProjectDetails = props => {
       resultLink: resultSubmissionLink
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
-      if (response.status === 200) {
-        setLoading(false)
+      setLoading(false)
+      if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
-      } else {
-        setLoading(false)
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -263,13 +247,11 @@ const ProjectDetails = props => {
       resultLink: null
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
-      if (response.status === 200) {
-        setLoading(false)
+      setLoading(false)
+      if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
-      } else {
-        setLoading(false)
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -403,7 +385,7 @@ const ProjectDetails = props => {
           {
             jobAcceptationStatus === 0 &&
             <View>
-              <TouchableOpacity style={styles.buttonStyle}
+              <TouchableOpacity style={styles.acceptButtonStyle}
                                 onPress={showDialogAccept}>
                 <Text style={styles.buttonTextStyle}>
                   Accept
@@ -486,6 +468,14 @@ const ProjectDetails = props => {
 }
 
 const styles = StyleSheet.create({
+  acceptButtonStyle: {
+    marginTop: 30,
+    backgroundColor: Colors.successColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5
+  },
   buttonStyle: {
     marginTop: 30,
     backgroundColor: Colors.primaryColor,
