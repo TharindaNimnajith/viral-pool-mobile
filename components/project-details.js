@@ -26,7 +26,7 @@ const ProjectDetails = props => {
 
   const [id, setId] = useState('')
   const [name, setName] = useState('')
-  const [description, setDescription] = useState(`<p></p>`)
+  const [description, setDescription] = useState('')
   const [createdDate, setCreatedDate] = useState('')
   const [socialMediaPlatformName, setSocialMediaPlatformName] = useState('')
   const [contentSubmissionLink, setContentSubmissionLink] = useState('')
