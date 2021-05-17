@@ -25,7 +25,8 @@ const ProjectDetails = props => {
   const project = props.project.navigation.getParam('project')
 
   const [name, setName] = useState('')
-  const [description, setDescription] = useState(`<></>`)
+  const [description, setDescription] = useState(null)
+  const [projectFileResponses, setProjectFileResponses] = useState([])
   const [createdDate, setCreatedDate] = useState('')
   const [socialMediaPlatformName, setSocialMediaPlatformName] = useState('')
   const [contentSubmissionLink, setContentSubmissionLink] = useState('')
@@ -48,9 +49,11 @@ const ProjectDetails = props => {
     setLoading(true)
     axios.get(`project-cc-strategy/${project}`).then(async response => {
       setLoading(false)
+      console.log(response.data.data.projectFileResponses)
       if (response.status === 200) {
         setName(response.data.data.name)
         setDescription(response.data.data.description)
+        setProjectFileResponses(response.data.data.projectFileResponses)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
         setContentSubmissionLink(response.data.data.contentSubmissionLink)
@@ -74,6 +77,7 @@ const ProjectDetails = props => {
       if (response.status === 200) {
         setName(response.data.data.name)
         setDescription(response.data.data.description)
+        setProjectFileResponses(response.data.data.projectFileResponses)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
         setContentSubmissionLink(response.data.data.contentSubmissionLink)
@@ -274,7 +278,7 @@ const ProjectDetails = props => {
   }
 
   function isDisabledContentDelete() {
-    return false
+    return !contentSubmissionLinkValid
   }
 
   function isDisabledResultSubmit() {
@@ -282,7 +286,7 @@ const ProjectDetails = props => {
   }
 
   function isDisabledResultDelete() {
-    return false
+    return !resultSubmissionLinkValid
   }
 
   return (
@@ -383,6 +387,12 @@ const ProjectDetails = props => {
             }
           </View>
           {
+            projectFileResponses.length > 0 ? (
+              <View>
+              </View>
+            ) : null
+          }
+          {
             jobAcceptationStatus === 0 &&
             <View>
               <TouchableOpacity style={styles.acceptButtonStyle}
@@ -477,7 +487,7 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   buttonStyle: {
-    marginTop: 30,
+    marginTop: 15,
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
     padding: 10,
@@ -485,7 +495,7 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   buttonDisabledStyle: {
-    marginTop: 30,
+    marginTop: 15,
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 10,
@@ -505,7 +515,6 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   labelStyle: {
-    marginLeft: 40,
     marginTop: 20,
     color: Colors.primaryColor,
     alignSelf: 'baseline'
