@@ -75,6 +75,26 @@ const ProjectDetails = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
+    axios.get(`project-cc-strategy/${project}`).then(async response => {
+      if (response.status === 200) {
+        setId(response.data.data.id)
+        setName(response.data.data.name)
+        setDescription(response.data.data.description)
+        setCreatedDate(response.data.data.createdDate)
+        setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
+        setContentSubmissionLink(response.data.data.contentSubmissionLink)
+        setResultSubmissionLink(response.data.data.resultSubmissionLink)
+        setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
+        setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
+        setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
+        setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
     wait(2000).then(() => setRefreshing(false))
   }, [])
 

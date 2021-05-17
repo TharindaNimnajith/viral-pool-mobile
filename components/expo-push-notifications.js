@@ -24,8 +24,10 @@ const ExpoPushNotifications = () => {
       await appContext.SetExpoPushToken(token)
     })
     notificationListener.current = addNotificationReceivedListener(notification => {
+      console.log(notification.request.content.data)
     })
     responseListener.current = addNotificationResponseReceivedListener(response => {
+      console.log(response.notification.request.content.data)
     })
     return () => {
       removeNotificationSubscription(notificationListener)

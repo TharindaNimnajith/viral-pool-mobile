@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     width: 70,
     position: 'absolute',
     bottom: hp('10%'),
-    right: wp('10%'),
+    right: wp('9%'),
     height: 70,
     backgroundColor: Colors.primaryColor,
     borderRadius: 35
