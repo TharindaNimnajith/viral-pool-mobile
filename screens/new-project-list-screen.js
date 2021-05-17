@@ -1,7 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
+import {AppContext} from '../util/app-context'
 import Colors from '../util/colors'
 import {showAlert} from '../util/common-helpers'
 import Constants from '../util/constants'
@@ -10,7 +11,8 @@ import CombinedButtons from '../components/combined-buttons'
 import ProjectListItem from '../components/project-list-item'
 
 const NewProjectListScreen = props => {
-  const [newProjects, setNewProjects] = useState([])
+  const appContext = useContext(AppContext)
+
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -18,7 +20,7 @@ const NewProjectListScreen = props => {
     setLoading(true)
     axios.get('project-cc-strategy?status=0').then(async response => {
       if (response.status === 200) {
-        setNewProjects(response.data.data)
+        await appContext.SetNewProjectList(response.data.data)
         setLoading(false)
       } else {
         setLoading(false)
@@ -48,7 +50,7 @@ const NewProjectListScreen = props => {
     <View style={styles.mainViewStyle}>
       <View style={styles.listStyle}>
         <FlatList keyExtractor={(item, index) => index.toString()}
-                  data={newProjects}
+                  data={appContext.newProjectList}
                   numColumns={1}
                   renderItem={renderItemsFunction}
                   refreshControl={

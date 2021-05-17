@@ -17,7 +17,7 @@ const IdeaListScreen = props => {
 
   useEffect(() => {
     setLoading(true)
-    axios.get('ideas').then(async response => {
+    axios.get('cc-ideas').then(async response => {
       setIdeas(response.data.data)
       setLoading(false)
     }).catch(async error => {

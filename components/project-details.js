@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useState} from 'react'
 import {
   ActivityIndicator,
   RefreshControl,
@@ -15,28 +15,20 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
+import {AppContext} from '../util/app-context'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
 import {isEmpty, showAlert} from '../util/common-helpers'
 
 const ProjectDetails = props => {
+  const appContext = useContext(AppContext)
+
   const contentWidth = useWindowDimensions().width
 
-  const project = props.project.navigation.getParam('project')
-
-  const [id, setId] = useState('')
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState(`<p></p>`)
-  const [createdDate, setCreatedDate] = useState('')
-  const [socialMediaPlatformName, setSocialMediaPlatformName] = useState('')
-  const [contentSubmissionLink, setContentSubmissionLink] = useState('')
-  const [resultSubmissionLink, setResultSubmissionLink] = useState('')
-  const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
-  const [jobAcceptationStatus, setJobAcceptationStatus] = useState(0)
-  const [contentSubmissionStatus, setContentSubmissionStatus] = useState(0)
-  const [resultSubmissionStatus, setResultSubmissionStatus] = useState(0)
-  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(contentSubmissionStatus !== 0)
-  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(resultSubmissionStatus !== 0)
+  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] =
+    useState(appContext.projectDetails.contentSubmissionStatus !== 0)
+  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] =
+    useState(appContext.projectDetails.resultSubmissionStatus !== 0)
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
@@ -45,33 +37,6 @@ const ProjectDetails = props => {
   const [visibleResultSubmit, setVisibleResultSubmit] = useState(false)
   const [visibleResultDelete, setVisibleResultDelete] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
-
-  useEffect(() => {
-    setLoading(true)
-    axios.get(`project-cc-strategy/${project}`).then(async response => {
-      if (response.status === 200) {
-        setId(response.data.data.id)
-        setName(response.data.data.name)
-        setDescription(response.data.data.description)
-        setCreatedDate(response.data.data.createdDate)
-        setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
-        setContentSubmissionLink(response.data.data.contentSubmissionLink)
-        setResultSubmissionLink(response.data.data.resultSubmissionLink)
-        setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
-        setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
-        setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
-        setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
-        setLoading(false)
-      } else {
-        setLoading(false)
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
-    }).catch(async error => {
-      setLoading(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
-    })
-  }, [])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
@@ -130,7 +95,7 @@ const ProjectDetails = props => {
     setVisibleAccept(false)
     setLoading(true)
     let data = {
-      id: project
+      id: appContext.projectDetails.id
     }
     axios.put('project-cc-strategy/accept', data).then(async response => {
       if (response.status === 200) {
@@ -151,7 +116,7 @@ const ProjectDetails = props => {
     setVisibleReject(false)
     setLoading(true)
     let data = {
-      id: project
+      id: appContext.projectDetails.id
     }
     axios.put('project-cc-strategy/reject', data).then(async response => {
       if (response.status === 200) {
@@ -173,8 +138,8 @@ const ProjectDetails = props => {
     setVisibleContentSubmit(false)
     setLoading(true)
     let data = {
-      id: project,
-      contentLink: contentSubmissionLink
+      id: appContext.projectDetails.id,
+      contentLink: appContext.projectDetails.contentSubmissionLink
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
       if (response.status === 200) {
@@ -195,7 +160,7 @@ const ProjectDetails = props => {
     setVisibleContentDelete(false)
     setLoading(true)
     let data = {
-      id: project,
+      id: appContext.projectDetails.id,
       contentLink: null
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
@@ -217,8 +182,8 @@ const ProjectDetails = props => {
     setVisibleResultSubmit(false)
     setLoading(true)
     let data = {
-      id: project,
-      resultLink: resultSubmissionLink
+      id: appContext.projectDetails.id,
+      resultLink: appContext.projectDetails.resultSubmissionLink
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
       if (response.status === 200) {
@@ -239,7 +204,7 @@ const ProjectDetails = props => {
     setVisibleResultDelete(false)
     setLoading(true)
     let data = {
-      id: project,
+      id: appContext.projectDetails.id,
       resultLink: null
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
@@ -259,12 +224,12 @@ const ProjectDetails = props => {
 
   const onChangeContentSubmissionLink = async contentSubmissionLink => {
     setContentSubmissionLinkValid(!await isEmpty(contentSubmissionLink.trim()))
-    setContentSubmissionLink(contentSubmissionLink)
+    // setContentSubmissionLink(contentSubmissionLink)
   }
 
   const onChangeResultSubmissionLink = async resultSubmissionLink => {
     setResultSubmissionLinkValid(!await isEmpty(resultSubmissionLink.trim()))
-    setResultSubmissionLink(resultSubmissionLink)
+    // setResultSubmissionLink(resultSubmissionLink)
   }
 
   function isDisabledContentSubmit() {
@@ -363,46 +328,28 @@ const ProjectDetails = props => {
       }>
         <View style={styles.mainViewStyle}>
           <Text>
-            {id}
+            {appContext.projectDetails.id}
           </Text>
           <Text>
-            {name}
+            {appContext.projectDetails.name}
           </Text>
           <Text>
-            {createdDate}
+            {appContext.projectDetails.createdDate}
           </Text>
           <Text>
-            {socialMediaPlatformName}
-          </Text>
-          <Text>
-            {contentSubmissionLink}
-          </Text>
-          <Text>
-            {resultSubmissionLink}
-          </Text>
-          <Text>
-            {isContentGivenByStrategyMember.toString()}
-          </Text>
-          <Text>
-            {jobAcceptationStatus}
-          </Text>
-          <Text>
-            {contentSubmissionStatus}
-          </Text>
-          <Text>
-            {resultSubmissionStatus}
+            {appContext.projectDetails.socialMediaPlatformName}
           </Text>
           <View style={styles.viewStyle}>
             {
-              description &&
+              appContext.projectDetails.description &&
               <HTML contentWidth={contentWidth}
                     source={{
-                      html: description
+                      html: appContext.projectDetails.description
                     }}/>
             }
           </View>
           {
-            jobAcceptationStatus === 0 &&
+            appContext.projectDetails.jobAcceptationStatus === 0 &&
             <View>
               <TouchableOpacity style={styles.buttonStyle}
                                 onPress={showDialogAccept}>
@@ -419,14 +366,14 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            jobAcceptationStatus === 1 &&
+            appContext.projectDetails.jobAcceptationStatus === 1 &&
             <View>
               <Text style={styles.labelStyle}>
                 Content Submission Link
               </Text>
               <TextInput style={styles.textInputStyle}
                          onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
-                         value={contentSubmissionLink}
+                         value={appContext.projectDetails.contentSubmissionLink}
                          placeholder='Enter URL'
                          placeholderTextColor={Colors.tertiaryColor}/>
               <TouchableOpacity style={isDisabledContentSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
@@ -447,14 +394,15 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            jobAcceptationStatus === 1 && contentSubmissionStatus === 1 &&
+            appContext.projectDetails.jobAcceptationStatus === 1 &&
+            appContext.projectDetails.contentSubmissionStatus === 1 &&
             <View>
               <Text style={styles.labelStyle}>
                 Result Submission Link
               </Text>
               <TextInput style={styles.textInputStyle}
                          onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
-                         value={resultSubmissionLink}
+                         value={appContext.projectDetails.resultSubmissionLink}
                          placeholder='Enter URL'
                          placeholderTextColor={Colors.tertiaryColor}/>
               <TouchableOpacity style={isDisabledResultSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}

@@ -1,13 +1,29 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import axios from 'axios'
 import Colors from '../util/colors'
+import {AppContext} from '../util/app-context'
+import {showAlert} from '../util/common-helpers'
+import Constants from '../util/constants'
 
 const ProjectListItem = props => {
+  const appContext = useContext(AppContext)
+
   const project = props.itemData.item.id
 
   const redirectToDetailsScreen = () => {
-    props.navigation.navigate(props.screen, {project})
+    axios.get(`project-cc-strategy/${project}`).then(async response => {
+      if (response.status === 200) {
+        await appContext.SetProjectDetails(response.data.data)
+        props.navigation.navigate(props.screen)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
   }
 
   return (
