@@ -24,10 +24,7 @@ const ProjectListItem = props => {
           {props.itemData.item.isContentGivenByStrategyMember.toString()}
         </Text>
         <Text style={styles.textStyle}>
-          {props.itemData.item.createdDate}
-        </Text>
-        <Text style={styles.textStyle}>
-          {props.itemData.item.id}
+          {props.itemData.item.createdDate.slice(0, 10)}
         </Text>
       </View>
     </TouchableOpacity>

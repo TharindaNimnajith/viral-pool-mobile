@@ -383,34 +383,13 @@ const ProjectDetails = props => {
       }>
         <View style={styles.mainViewStyle}>
           <Text>
-            {id}
-          </Text>
-          <Text>
             {name}
           </Text>
           <Text>
-            {createdDate}
+            {createdDate.slice(0, 10)}
           </Text>
           <Text>
             {socialMediaPlatformName}
-          </Text>
-          <Text>
-            {contentSubmissionLink}
-          </Text>
-          <Text>
-            {resultSubmissionLink}
-          </Text>
-          <Text>
-            {isContentGivenByStrategyMember.toString()}
-          </Text>
-          <Text>
-            {jobAcceptationStatus}
-          </Text>
-          <Text>
-            {contentSubmissionStatus}
-          </Text>
-          <Text>
-            {resultSubmissionStatus}
           </Text>
           <View style={styles.viewStyle}>
             {
