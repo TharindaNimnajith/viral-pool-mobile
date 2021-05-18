@@ -19,8 +19,10 @@ import Colors from '../util/colors'
 import Constants from '../util/constants'
 import CombinedButtons from '../components/combined-buttons'
 
-const AddIdeaScreen = () => {
+const AddIdeaScreen = props => {
   const appContext = useContext(AppContext)
+
+  const idea = props.navigation.getParam('idea')
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -32,6 +34,7 @@ const AddIdeaScreen = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
+    idea.refresh()
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
@@ -71,6 +74,7 @@ const AddIdeaScreen = () => {
       contentCreatorDetailId: appContext.userData.id
     }
     axios.post('cc-ideas', data).then(async response => {
+      idea.refresh()
       setLoading(false)
       if (response.status === 200) {
         await reset()
@@ -79,6 +83,7 @@ const AddIdeaScreen = () => {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
+      idea.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)

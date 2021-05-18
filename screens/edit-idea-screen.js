@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
   RefreshControl,
@@ -13,16 +13,19 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
+import {AppContext} from '../util/app-context'
 import {isEmpty, showAlert} from '../util/common-helpers'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
 import CombinedButtons from '../components/combined-buttons'
 
 const EditIdeaScreen = props => {
+  const appContext = useContext(AppContext)
+
   const idea = props.navigation.getParam('idea')
 
-  const [title, setTitle] = useState(idea.idea.title)
-  const [description, setDescription] = useState(idea.idea.description)
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const [titleValid, setTitleValid] = useState(true)
   const [descriptionValid, setDescriptionValid] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -30,8 +33,38 @@ const EditIdeaScreen = props => {
   const [visibleDelete, setVisibleDelete] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
+  useEffect(() => {
+    setLoading(true)
+    idea.refresh()
+    axios.get(`cc-ideas/${idea.idea}`).then(async response => {
+      setLoading(false)
+      if (response.status === 200) {
+        setTitle(response.data.data.title)
+        setDescription(response.data.data.description)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }, [])
+
   const onRefresh = useCallback(() => {
     setRefreshing(true)
+    idea.refresh()
+    axios.get(`cc-ideas/${idea.idea}`).then(async response => {
+      if (response.status === 200) {
+        setTitle(response.data.data.title)
+        setDescription(response.data.data.description)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
@@ -69,18 +102,20 @@ const EditIdeaScreen = props => {
     setVisibleEdit(false)
     setLoading(true)
     const data = {
-      id: idea.idea.id,
+      id: idea.idea,
       title: title.trim(),
       description: description.trim(),
-      contentCreatorDetailId: idea.idea.contentCreatorDetailId
+      contentCreatorDetailId: appContext.userData.id
     }
     axios.put('cc-ideas', data).then(async response => {
+      idea.refresh()
       setLoading(false)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.UPDATED)
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
+      idea.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -90,8 +125,8 @@ const EditIdeaScreen = props => {
   const deleteIdea = async () => {
     setVisibleDelete(false)
     setLoading(true)
-    const id = idea.idea.id
-    axios.delete(`cc-ideas/${id}`).then(async response => {
+    axios.delete(`cc-ideas/${idea.idea}`).then(async response => {
+      idea.refresh()
       setLoading(false)
       if (response.status === 200) {
         await showAlert(Constants.SUCCESS, Constants.DELETED)
@@ -100,6 +135,7 @@ const EditIdeaScreen = props => {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
+      idea.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)

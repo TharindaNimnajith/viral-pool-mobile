@@ -14,8 +14,10 @@ const IdeaListScreen = props => {
   const [ideas, setIdeas] = useState(null)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
+    setRefresh(false)
     setLoading(true)
     axios.get('cc-ideas').then(async response => {
       setIdeas(response.data.data)
@@ -25,7 +27,7 @@ const IdeaListScreen = props => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
-  }, [])
+  }, [refresh])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
@@ -38,15 +40,23 @@ const IdeaListScreen = props => {
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
+  const refreshFunction = () => {
+    setRefresh(true)
+  }
+
   const renderItemsFunction = itemData => {
     return (
       <IdeaListItem navigation={props.navigation}
-                    itemData={itemData}/>
+                    itemData={itemData}
+                    refreshFunction={refreshFunction}/>
     )
   }
 
   const redirectToAddIdeaScreen = () => {
-    props.navigation.navigate('AddIdea')
+    const idea = {
+      refresh: refreshFunction
+    }
+    props.navigation.navigate('AddIdea', {idea})
   }
 
   return (

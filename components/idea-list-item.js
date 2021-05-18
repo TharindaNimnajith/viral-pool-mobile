@@ -5,8 +5,9 @@ import Colors from '../util/colors'
 
 const IdeaListItem = props => {
   const idea = {
-    idea: props.itemData.item,
-    navigation: props.navigation
+    idea: props.itemData.item.id,
+    navigation: props.navigation,
+    refresh: props.refreshFunction
   }
 
   const redirectToDetailsScreen = () => {
