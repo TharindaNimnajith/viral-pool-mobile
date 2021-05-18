@@ -27,5 +27,6 @@ export default {
   ACCEPTED: 'Accepted successfully!',
   REJECTED: 'Rejected successfully!',
   CONFIRMATION: 'Are you sure?',
+  EMPTY_LIST: 'Oops! No items, yet.',
   DESCRIPTION: 'Manage Your Team, Clients, Content Creators | Create Strategies, Discuss, Execute | Statistics'
 }

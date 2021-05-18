@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, TouchableOpacity, View} from 'react-native'
+import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
@@ -62,16 +62,34 @@ const IdeaListScreen = props => {
 
   return (
     <View style={styles.mainViewStyle}>
-      <View style={styles.listStyle}>
-        <FlatList keyExtractor={(item, index) => index.toString()}
-                  data={ideas}
-                  numColumns={1}
-                  renderItem={renderItemsFunction}
-                  refreshControl={
-                    <RefreshControl refreshing={refreshing}
-                                    onRefresh={onRefresh}/>
-                  }/>
-      </View>
+      {
+        ideas.length > 0 ? (
+          <View style={styles.listStyle}>
+            <FlatList keyExtractor={(item, index) => index.toString()}
+                      data={ideas}
+                      numColumns={1}
+                      renderItem={renderItemsFunction}
+                      refreshControl={
+                        <RefreshControl refreshing={refreshing}
+                                        onRefresh={onRefresh}/>
+                      }/>
+          </View>
+        ) : (
+          <View style={styles.emptyListStyle}>
+            <Ionicons name='warning'
+                      size={80}
+                      color={Colors.tertiaryColor}/>
+            <Text style={styles.errorMessageStyle}>
+              {Constants.EMPTY_LIST}
+            </Text>
+            <TouchableOpacity onPress={refreshFunction}>
+              <Text style={styles.reloadMessageStyle}>
+                Reload?
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )
+      }
       <TouchableOpacity style={styles.buttonStyle}
                         onPress={redirectToAddIdeaScreen}>
         <Ionicons name='add'
@@ -103,16 +121,33 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryColor,
     borderRadius: 35
   },
+  emptyListStyle: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  errorMessageStyle: {
+    color: Colors.tertiaryColor,
+    fontSize: 18
+  },
   listStyle: {
     width: wp('95%'),
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 15
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
     alignItems: 'center',
-    minWidth: wp('100%'),
     minHeight: hp('100%')
+  },
+  reloadMessageStyle: {
+    color: Colors.primaryColor,
+    fontSize: 16,
+    marginTop: 10
   }
 })
 
