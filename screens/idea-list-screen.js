@@ -17,13 +17,14 @@ const IdeaListScreen = props => {
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
-    setRefresh(false)
     setLoading(true)
     axios.get('cc-ideas').then(async response => {
       setIdeas(response.data.data)
       setLoading(false)
+      setRefresh(false)
     }).catch(async error => {
       setLoading(false)
+      setRefresh(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })

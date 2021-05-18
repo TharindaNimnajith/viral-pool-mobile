@@ -47,7 +47,8 @@ const ProjectDetails = props => {
 
   useEffect(() => {
     setLoading(true)
-    axios.get(`project-cc-strategy/${project}`).then(async response => {
+    project.refresh()
+    axios.get(`project-cc-strategy/${project.project}`).then(async response => {
       setLoading(false)
       console.log(response.data.data.projectFileResponses)
       if (response.status === 200) {
@@ -73,7 +74,8 @@ const ProjectDetails = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    axios.get(`project-cc-strategy/${project}`).then(async response => {
+    project.refresh()
+    axios.get(`project-cc-strategy/${project.project}`).then(async response => {
       if (response.status === 200) {
         setName(response.data.data.name)
         setDescription(response.data.data.description)
@@ -147,15 +149,17 @@ const ProjectDetails = props => {
     setVisibleAccept(false)
     setLoading(true)
     let data = {
-      id: project
+      id: project.project
     }
     axios.put('project-cc-strategy/accept', data).then(async response => {
+      project.refresh()
       setLoading(false)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
+      project.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -166,9 +170,10 @@ const ProjectDetails = props => {
     setVisibleReject(false)
     setLoading(true)
     let data = {
-      id: project
+      id: project.project
     }
     axios.put('project-cc-strategy/reject', data).then(async response => {
+      project.refresh()
       setLoading(false)
       if (response.status === 200) {
         await showAlert(Constants.SUCCESS, Constants.REJECTED)
@@ -177,6 +182,7 @@ const ProjectDetails = props => {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
+      project.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -187,16 +193,18 @@ const ProjectDetails = props => {
     setVisibleContentSubmit(false)
     setLoading(true)
     let data = {
-      id: project,
+      id: project.project,
       contentLink: contentSubmissionLink
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
+      project.refresh()
       setLoading(false)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
+      project.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -207,16 +215,18 @@ const ProjectDetails = props => {
     setVisibleContentDelete(false)
     setLoading(true)
     let data = {
-      id: project,
+      id: project.project,
       contentLink: null
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
+      project.refresh()
       setLoading(false)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
+      project.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -227,16 +237,18 @@ const ProjectDetails = props => {
     setVisibleResultSubmit(false)
     setLoading(true)
     let data = {
-      id: project,
+      id: project.project,
       resultLink: resultSubmissionLink
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
+      project.refresh()
       setLoading(false)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
+      project.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -247,16 +259,18 @@ const ProjectDetails = props => {
     setVisibleResultDelete(false)
     setLoading(true)
     let data = {
-      id: project,
+      id: project.project,
       resultLink: null
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
+      project.refresh()
       setLoading(false)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
+      project.refresh()
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -559,7 +573,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   viewStyle: {
-    margin: 25
+    marginLeft: 25
   }
 })
 

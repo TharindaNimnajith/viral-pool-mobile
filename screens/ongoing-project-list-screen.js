@@ -13,21 +13,24 @@ const OngoingProjectListScreen = props => {
   const [ongoingProjects, setOngoingProjects] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     setLoading(true)
     axios.get('project-cc-strategy?status=1').then(async response => {
       setLoading(false)
+      setRefresh(false)
       if (response.status === 200)
         setOngoingProjects(response.data.data)
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
       setLoading(false)
+      setRefresh(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
-  }, [])
+  }, [refresh])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
@@ -43,11 +46,16 @@ const OngoingProjectListScreen = props => {
     wait(2000).then(() => setRefreshing(false))
   }, [])
 
+  const refreshFunction = () => {
+    setRefresh(true)
+  }
+
   const renderItemsFunction = itemData => {
     return (
       <ProjectListItem navigation={props.navigation}
                        itemData={itemData}
-                       screen='OngoingProjectDetails'/>
+                       screen='OngoingProjectDetails'
+                       refreshFunction={refreshFunction}/>
     )
   }
 

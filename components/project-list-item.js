@@ -4,7 +4,10 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../util/colors'
 
 const ProjectListItem = props => {
-  const project = props.itemData.item.id
+  const project = {
+    project: props.itemData.item.id,
+    refresh: props.refreshFunction
+  }
 
   const redirectToDetailsScreen = () => {
     props.navigation.navigate(props.screen, {project})
