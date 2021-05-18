@@ -412,8 +412,8 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            jobAcceptationStatus === 0 &&
-            <View>
+            // jobAcceptationStatus === 0 &&
+            <View style={styles.centerViewStyle}>
               <TouchableOpacity style={styles.acceptButtonStyle}
                                 onPress={showDialogAccept}>
                 <Text style={styles.buttonTextStyle}>
@@ -429,8 +429,8 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            jobAcceptationStatus === 1 &&
-            <View>
+            // jobAcceptationStatus === 1 &&
+            <View style={styles.centerViewStyle}>
               <Text style={styles.labelStyle}>
                 Content Submission Link
               </Text>
@@ -457,8 +457,8 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            jobAcceptationStatus === 1 && contentSubmissionStatus === 1 &&
-            <View>
+            // jobAcceptationStatus === 1 && contentSubmissionStatus === 1 &&
+            <View style={styles.centerViewStyle}>
               <Text style={styles.labelStyle}>
                 Result Submission Link
               </Text>
@@ -525,6 +525,9 @@ const styles = StyleSheet.create({
     color: Colors.secondaryColor,
     textTransform: 'uppercase'
   },
+  centerViewStyle: {
+    alignItems: 'center'
+  },
   deleteButtonStyle: {
     marginTop: 15,
     backgroundColor: Colors.errorColor,
@@ -536,13 +539,14 @@ const styles = StyleSheet.create({
   labelStyle: {
     marginTop: 20,
     color: Colors.primaryColor,
-    alignSelf: 'baseline'
+    alignSelf: 'baseline',
+    marginLeft: wp('10%')
   },
   lineStyle: {
     borderBottomColor: Colors.tertiaryColor,
     borderBottomWidth: 1,
-    marginLeft: 25,
-    marginRight: 25
+    marginLeft: wp('10%'),
+    marginRight: wp('10%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -573,7 +577,9 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   viewStyle: {
-    marginLeft: 25
+    marginLeft: wp('10%'),
+    marginTop: 10,
+    marginBottom: 10
   }
 })
 
