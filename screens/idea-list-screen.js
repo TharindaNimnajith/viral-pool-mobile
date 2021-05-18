@@ -11,7 +11,7 @@ import CombinedButtons from '../components/combined-buttons'
 import IdeaListItem from '../components/idea-list-item'
 
 const IdeaListScreen = props => {
-  const [ideas, setIdeas] = useState(null)
+  const [ideas, setIdeas] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)

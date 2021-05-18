@@ -13,8 +13,7 @@ export const storeStringData = async (key, value) => {
 
 export const getStringData = async key => {
   try {
-    const value = await AsyncStorage.getItem(key)
-    return value != null ? value : null
+    return await AsyncStorage.getItem(key)
   } catch (error) {
     await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     console.log(error)
