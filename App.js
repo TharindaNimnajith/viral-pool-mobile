@@ -6,14 +6,14 @@ import NavigationBar from './components/navigation-bar'
 import ExpoPushNotifications from './components/expo-push-notifications'
 
 const App = () => {
-  const patterns = [
+  const warnings = [
     Constants.WARNING_1,
     Constants.WARNING_2,
     Constants.WARNING_3,
     Constants.WARNING_4
   ]
 
-  LogBox.ignoreLogs(patterns)
+  LogBox.ignoreLogs(warnings)
 
   return (
     <GlobalState>

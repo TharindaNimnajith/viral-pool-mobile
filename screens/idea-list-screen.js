@@ -139,6 +139,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 15
   },
+  loadingStyle: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.blurEffectColor
+  },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
     alignItems: 'center',
