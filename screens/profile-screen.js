@@ -82,9 +82,8 @@ const ProfileScreen = props => {
     })
     if (!result.cancelled) {
       setLoading(true)
-      const localUri = result.uri
-      setImage(localUri)
-      const filename = localUri.split('/').pop()
+      setImage(result.uri)
+      const filename = result.uri.split('/').pop()
       const match = /\.(\w+)$/.exec(filename)
       const type = match ? `image/${match[1]}` : `image`
       const headers = {
@@ -93,28 +92,31 @@ const ProfileScreen = props => {
         'Authorization': `Bearer ${appContext.accessToken}`,
         'client_id': `${Constants.CLIENT_ID_VALUE}`
       }
+      const parameters = {
+        'id': appContext.userData.id,
+        'email': appContext.userData.email,
+        'userRole': Constants.USER_ROLE,
+        'firstName': appContext.userData.firstName,
+        'lastName': appContext.userData.lastName,
+        'gender': appContext.userData.gender,
+        'birthDate': appContext.userData.birthDate,
+        'address': appContext.userData.address,
+        'phoneNumber': appContext.userData.phoneNumber
+      }
+      const options = {
+        headers: headers,
+        httpMethod: 'PUT',
+        sessionType: FileSystemSessionType.BACKGROUND,
+        uploadType: FileSystemUploadType.MULTIPART,
+        fieldName: 'FormFile',
+        mimeType: type,
+        parameters: parameters
+      }
       uploadAsync(
         `${ApiUrl.BASE_URL}User`,
-        `${localUri}`,
-        {
-          headers: headers,
-          httpMethod: 'PUT',
-          sessionType: FileSystemSessionType.BACKGROUND,
-          uploadType: FileSystemUploadType.MULTIPART,
-          fieldName: 'FormFile',
-          mimeType: type,
-          parameters: {
-            'id': appContext.userData.id,
-            'email': appContext.userData.email,
-            'userRole': Constants.USER_ROLE,
-            'firstName': appContext.userData.firstName,
-            'lastName': appContext.userData.lastName,
-            'gender': appContext.userData.gender,
-            'birthDate': appContext.userData.birthDate,
-            'address': appContext.userData.address,
-            'phoneNumber': appContext.userData.phoneNumber
-          }
-        }).then(async response => {
+        result.uri,
+        options
+      ).then(async response => {
         setLoading(false)
         if (response.status === 200) {
           const data = JSON.parse(response.body).data
