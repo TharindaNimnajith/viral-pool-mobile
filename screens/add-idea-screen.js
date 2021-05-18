@@ -35,7 +35,9 @@ const AddIdeaScreen = props => {
   const onRefresh = useCallback(() => {
     setRefreshing(true)
     idea.refresh()
-    wait(2000).then(() => setRefreshing(false))
+    wait(2000).then(() => {
+      setRefreshing(false)
+    })
   }, [])
 
   const showDialog = async () => {
@@ -229,7 +231,9 @@ const wait = timeout => {
 AddIdeaScreen.navigationOptions = navData => {
   return {
     headerTitle: 'New Idea',
-    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
+    headerRight: () => (
+      <CombinedButtons navigation={navData.navigation}/>
+    )
   }
 }
 

@@ -18,6 +18,7 @@ import axios from 'axios'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
 import {isEmpty, showAlert} from '../util/common-helpers'
+import {contentSubmissionStatusEnum, jobAcceptationStatusEnum, resultSubmissionStatusEnum} from '../util/enum'
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
@@ -29,13 +30,16 @@ const ProjectDetails = props => {
   const [projectFileResponses, setProjectFileResponses] = useState([])
   const [createdDate, setCreatedDate] = useState('')
   const [socialMediaPlatformName, setSocialMediaPlatformName] = useState('')
+  const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
   const [contentSubmissionLink, setContentSubmissionLink] = useState('')
   const [resultSubmissionLink, setResultSubmissionLink] = useState('')
-  const [jobAcceptationStatus, setJobAcceptationStatus] = useState(0)
-  const [contentSubmissionStatus, setContentSubmissionStatus] = useState(0)
-  const [resultSubmissionStatus, setResultSubmissionStatus] = useState(0)
-  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(contentSubmissionStatus !== 0)
-  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(resultSubmissionStatus !== 0)
+  const [jobAcceptationStatus, setJobAcceptationStatus] = useState(jobAcceptationStatusEnum.Pending)
+  const [contentSubmissionStatus, setContentSubmissionStatus] = useState(contentSubmissionStatusEnum.Default)
+  const [resultSubmissionStatus, setResultSubmissionStatus] = useState(resultSubmissionStatusEnum.Default)
+  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] =
+    useState(contentSubmissionStatus !== contentSubmissionStatusEnum.Default)
+  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] =
+    useState(resultSubmissionStatus !== contentSubmissionStatusEnum.Default)
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
@@ -57,6 +61,7 @@ const ProjectDetails = props => {
         setProjectFileResponses(response.data.data.projectFileResponses)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
+        setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setContentSubmissionLink(response.data.data.contentSubmissionLink)
         setResultSubmissionLink(response.data.data.resultSubmissionLink)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
@@ -82,6 +87,7 @@ const ProjectDetails = props => {
         setProjectFileResponses(response.data.data.projectFileResponses)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
+        setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setContentSubmissionLink(response.data.data.contentSubmissionLink)
         setResultSubmissionLink(response.data.data.resultSubmissionLink)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
@@ -94,7 +100,9 @@ const ProjectDetails = props => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
-    wait(2000).then(() => setRefreshing(false))
+    wait(2000).then(() => {
+      setRefreshing(false)
+    })
   }, [])
 
   const showDialogAccept = async () => {
@@ -412,7 +420,7 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            // jobAcceptationStatus === 0 &&
+            jobAcceptationStatus === jobAcceptationStatusEnum.Pending &&
             <View style={styles.centerViewStyle}>
               <TouchableOpacity style={styles.acceptButtonStyle}
                                 onPress={showDialogAccept}>
@@ -429,7 +437,7 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            // jobAcceptationStatus === 1 &&
+            jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && !isContentGivenByStrategyMember &&
             <View style={styles.centerViewStyle}>
               <Text style={styles.labelStyle}>
                 Content Submission Link
@@ -438,26 +446,33 @@ const ProjectDetails = props => {
                          onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
                          value={contentSubmissionLink}
                          placeholder='Enter URL'
-                         placeholderTextColor={Colors.tertiaryColor}/>
-              <TouchableOpacity style={isDisabledContentSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                                disabled={isDisabledContentSubmit()}
-                                onPress={showDialogContentSubmit}>
-                <Text style={styles.buttonTextStyle}>
-                  Submit
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity disabled={isDisabledContentDelete()}
-                                onPress={showDialogContentDelete}
-                                style={isDisabledContentDelete() ? styles.buttonDisabledStyle
-                                  : styles.deleteButtonStyle}>
-                <Text style={styles.buttonTextStyle}>
-                  Delete
-                </Text>
-              </TouchableOpacity>
+                         placeholderTextColor={Colors.tertiaryColor}
+                         editable={contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
+              {
+                contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
+                <View>
+                  <TouchableOpacity style={isDisabledContentSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                    disabled={isDisabledContentSubmit()}
+                                    onPress={showDialogContentSubmit}>
+                    <Text style={styles.buttonTextStyle}>
+                      Submit
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity disabled={isDisabledContentDelete()}
+                                    onPress={showDialogContentDelete}
+                                    style={isDisabledContentDelete() ? styles.buttonDisabledStyle
+                                      : styles.deleteButtonStyle}>
+                    <Text style={styles.buttonTextStyle}>
+                      Delete
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              }
             </View>
           }
           {
-            // jobAcceptationStatus === 1 && contentSubmissionStatus === 1 &&
+            jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
+            contentSubmissionStatus === contentSubmissionStatusEnum.Approved &&
             <View style={styles.centerViewStyle}>
               <Text style={styles.labelStyle}>
                 Result Submission Link
@@ -466,21 +481,28 @@ const ProjectDetails = props => {
                          onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
                          value={resultSubmissionLink}
                          placeholder='Enter URL'
-                         placeholderTextColor={Colors.tertiaryColor}/>
-              <TouchableOpacity style={isDisabledResultSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                                disabled={isDisabledResultSubmit()}
-                                onPress={showDialogResultSubmit}>
-                <Text style={styles.buttonTextStyle}>
-                  Submit
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={isDisabledResultDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
-                                disabled={isDisabledResultDelete()}
-                                onPress={showDialogResultDelete}>
-                <Text style={styles.buttonTextStyle}>
-                  Delete
-                </Text>
-              </TouchableOpacity>
+                         placeholderTextColor={Colors.tertiaryColor}
+                         editable={resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
+              {
+                resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
+                <View>
+                  <TouchableOpacity style={isDisabledResultSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                    disabled={isDisabledResultSubmit()}
+                                    onPress={showDialogResultSubmit}>
+                    <Text style={styles.buttonTextStyle}>
+                      Submit
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={isDisabledResultDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
+                    disabled={isDisabledResultDelete()}
+                    onPress={showDialogResultDelete}>
+                    <Text style={styles.buttonTextStyle}>
+                      Delete
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              }
             </View>
           }
           {

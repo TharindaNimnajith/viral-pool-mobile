@@ -65,7 +65,9 @@ const EditIdeaScreen = props => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
-    wait(2000).then(() => setRefreshing(false))
+    wait(2000).then(() => {
+      setRefreshing(false)
+    })
   }, [])
 
   const showDialogEdit = async () => {
@@ -307,7 +309,9 @@ const wait = timeout => {
 EditIdeaScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Edit Idea',
-    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
+    headerRight: () => (
+      <CombinedButtons navigation={navData.navigation}/>
+    )
   }
 }
 

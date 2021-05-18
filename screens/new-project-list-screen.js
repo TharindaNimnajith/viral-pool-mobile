@@ -44,7 +44,9 @@ const NewProjectListScreen = props => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
-    wait(2000).then(() => setRefreshing(false))
+    wait(2000).then(() => {
+      setRefreshing(false)
+    })
   }, [])
 
   const refreshFunction = () => {
@@ -151,8 +153,12 @@ const wait = timeout => {
 NewProjectListScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Job Pool',
-    headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
+    headerLeft: () => (
+      <Menu navigation={navData.navigation}/>
+    ),
+    headerRight: () => (
+      <CombinedButtons navigation={navData.navigation}/>
+    )
   }
 }
 

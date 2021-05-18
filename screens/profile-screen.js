@@ -55,7 +55,9 @@ const ProfileScreen = props => {
       }
     })()
     setRefreshing(true)
-    wait(2000).then(() => setRefreshing(false))
+    wait(2000).then(() => {
+      setRefreshing(false)
+    })
   }, [])
 
   const showDialog = async () => {
@@ -341,8 +343,12 @@ const wait = timeout => {
 ProfileScreen.navigationOptions = navData => {
   return {
     headerTitle: 'My Profile',
-    headerLeft: () => <Menu navigation={navData.navigation}/>,
-    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
+    headerLeft: () => (
+      <Menu navigation={navData.navigation}/>
+    ),
+    headerRight: () => (
+      <CombinedButtons navigation={navData.navigation}/>
+    )
   }
 }
 

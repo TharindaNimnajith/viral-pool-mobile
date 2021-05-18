@@ -19,7 +19,7 @@ import {AppContext} from '../util/app-context'
 import {isEmpty, showAlert} from '../util/common-helpers'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
-import {genderOptions} from '../util/enum'
+import {genderOptionsEnum} from '../util/enum'
 import CombinedButtons from '../components/combined-buttons'
 
 const EditProfileScreen = () => {
@@ -41,7 +41,9 @@ const EditProfileScreen = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    wait(2000).then(() => setRefreshing(false))
+    wait(2000).then(() => {
+      setRefreshing(false)
+    })
   }, [])
 
   const showConfirmAlert = () => {
@@ -147,7 +149,7 @@ const EditProfileScreen = () => {
             <Text style={styles.labelStyle}>
               Gender
             </Text>
-            <RadioForm radio_props={genderOptions}
+            <RadioForm radio_props={genderOptionsEnum}
                        initial={gender}
                        formHorizontal={true}
                        buttonColor={Colors.primaryColor}
@@ -321,7 +323,9 @@ const wait = timeout => {
 EditProfileScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Edit Profile',
-    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
+    headerRight: () => (
+      <CombinedButtons navigation={navData.navigation}/>
+    )
   }
 }
 

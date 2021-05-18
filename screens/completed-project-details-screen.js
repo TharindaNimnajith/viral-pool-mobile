@@ -11,7 +11,9 @@ const CompletedProjectDetailsScreen = props => {
 CompletedProjectDetailsScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Job Details',
-    headerRight: () => <CombinedButtons navigation={navData.navigation}/>
+    headerRight: () => (
+      <CombinedButtons navigation={navData.navigation}/>
+    )
   }
 }
 
