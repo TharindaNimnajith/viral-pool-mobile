@@ -5,23 +5,18 @@ import {FontAwesome5} from '@expo/vector-icons'
 import Colors from '../util/colors'
 
 const FileListItem = props => {
-  const file = {
-    file: props.itemData,
-    navigation: props.navigation
-  }
-
   const getFileItem = () => {
-    if (file.file.fileType === 'application/pdf')
+    if (props.itemData.fileType === 'application/pdf')
       return 'file-pdf'
-    else if (file.file.fileType === 'application/msword' ||
-      file.file.fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingm')
+    else if (props.itemData.fileType === 'application/msword' || props.itemData.fileType ===
+      'application/vnd.openxmlformats-officedocument.wordprocessingm')
       return 'file-word'
     else
       return 'file-image'
   }
 
   const download = () => {
-    console.log(file)
+    console.log(props.itemData)
   }
 
   return (
@@ -31,13 +26,13 @@ const FileListItem = props => {
                     size={35}
                     color={Colors.primaryColor}/>
       {
-        file.file.fileName.length < 12 ? (
+        props.itemData.fileName.length < 12 ? (
           <Text style={styles.textStyle}>
-            {file.file.fileName}
+            {props.itemData.fileName}
           </Text>
         ) : (
           <Text style={styles.textStyle}>
-            {file.file.fileName.substring(0, 8)}...
+            {props.itemData.fileName.substring(0, 8)}...
           </Text>
         )
       }

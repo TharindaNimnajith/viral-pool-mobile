@@ -21,49 +21,6 @@ import Constants from '../util/constants'
 import {isEmpty, showAlert} from '../util/common-helpers'
 import FileListItem from './file-list-item'
 
-const data = [
-  {
-    "createdDate": "2021-05-19T05:31:00.2033538",
-    "fileCategory": 2,
-    "fileName": "managing.pdf",
-    "fileType": "application/pdf",
-    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
-    "id": 18
-  },
-  {
-    "createdDate": "2021-05-19T05:31:00.2033538",
-    "fileCategory": 2,
-    "fileName": "images.docx",
-    "fileType": "application/msword",
-    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
-    "id": 18
-  },
-  {
-    "createdDate": "2021-05-19T05:31:00.2033538",
-    "fileCategory": 2,
-    "fileName": "Containers.png",
-    "fileType": "image/png",
-    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
-    "id": 18
-  },
-  {
-    "createdDate": "2021-05-19T05:31:00.2033538",
-    "fileCategory": 2,
-    "fileName": "Managing Images.jpeg",
-    "fileType": "image/jpeg",
-    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
-    "id": 18
-  },
-  {
-    "createdDate": "2021-05-19T05:31:00.2033538",
-    "fileCategory": 2,
-    "fileName": "Managing Images & Containers.jpg",
-    "fileType": "image/jpg",
-    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
-    "id": 18
-  }
-]
-
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
 
@@ -100,7 +57,7 @@ const ProjectDetails = props => {
       if (response.status === 200) {
         setName(response.data.data.name)
         setDescription(response.data.data.description)
-        setProjectFileResponses(data)
+        setProjectFileResponses(response.data.data.projectFileResponses)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
@@ -130,7 +87,7 @@ const ProjectDetails = props => {
       if (response.status === 200) {
         setName(response.data.data.name)
         setDescription(response.data.data.description)
-        setProjectFileResponses(data)
+        setProjectFileResponses(response.data.data.projectFileResponses)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
@@ -471,7 +428,6 @@ const ProjectDetails = props => {
                 {
                   projectFileResponses.map((file, key) =>
                     <FileListItem key={key}
-                                  navigation={props.project.navigation}
                                   itemData={file}/>
                   )
                 }
