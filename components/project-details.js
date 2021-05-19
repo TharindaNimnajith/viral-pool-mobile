@@ -25,7 +25,23 @@ const data = [
   {
     "createdDate": "2021-05-19T05:31:00.2033538",
     "fileCategory": 2,
-    "fileName": "12. Managing Images & Containers.png",
+    "fileName": "managing.pdf",
+    "fileType": "application/pdf",
+    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
+    "id": 18
+  },
+  {
+    "createdDate": "2021-05-19T05:31:00.2033538",
+    "fileCategory": 2,
+    "fileName": "images.docx",
+    "fileType": "application/msword",
+    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
+    "id": 18
+  },
+  {
+    "createdDate": "2021-05-19T05:31:00.2033538",
+    "fileCategory": 2,
+    "fileName": "Containers.png",
     "fileType": "image/png",
     "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
     "id": 18
@@ -33,32 +49,16 @@ const data = [
   {
     "createdDate": "2021-05-19T05:31:00.2033538",
     "fileCategory": 2,
-    "fileName": "12. Managing Images & Containers.png",
-    "fileType": "image/png",
+    "fileName": "Managing Images.jpeg",
+    "fileType": "image/jpeg",
     "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
     "id": 18
   },
   {
     "createdDate": "2021-05-19T05:31:00.2033538",
     "fileCategory": 2,
-    "fileName": "12. Managing Images & Containers.png",
-    "fileType": "image/png",
-    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
-    "id": 18
-  },
-  {
-    "createdDate": "2021-05-19T05:31:00.2033538",
-    "fileCategory": 2,
-    "fileName": "12. Managing Images & Containers.png",
-    "fileType": "image/png",
-    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
-    "id": 18
-  },
-  {
-    "createdDate": "2021-05-19T05:31:00.2033538",
-    "fileCategory": 2,
-    "fileName": "12. Managing Images & Containers.png",
-    "fileType": "image/png",
+    "fileName": "Managing Images & Containers.jpg",
+    "fileType": "image/jpg",
     "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
     "id": 18
   }
