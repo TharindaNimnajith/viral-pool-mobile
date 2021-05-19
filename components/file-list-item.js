@@ -2,21 +2,43 @@ import React from 'react'
 import {StyleSheet, Text, TouchableOpacity} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {FontAwesome5} from '@expo/vector-icons'
+import {createAlbumAsync, createAssetAsync} from 'expo-media-library'
+import {askAsync, MEDIA_LIBRARY} from 'expo-permissions'
+import axios from 'axios'
+import {showAlert} from '../util/common-helpers'
+import Constants from '../util/constants'
 import Colors from '../util/colors'
 
 const FileListItem = props => {
   const getFileItem = () => {
-    if (props.itemData.fileType === 'application/pdf')
-      return 'file-pdf'
-    else if (props.itemData.fileType === 'application/msword' || props.itemData.fileType ===
-      'application/vnd.openxmlformats-officedocument.wordprocessingm')
-      return 'file-word'
-    else
-      return 'file-image'
+    switch (props.itemData.fileType) {
+      case Constants.PDF:
+        return 'file-pdf'
+      case Constants.WORD:
+      case Constants.WORD_PROCESSING:
+        return 'file-word'
+      default:
+        return 'file-image'
+    }
   }
 
-  const download = () => {
-    console.log(props.itemData)
+  const saveFile = async fileUri => {
+    const {
+      status
+    } = await askAsync(MEDIA_LIBRARY)
+    if (status === 'granted')
+      await createAlbumAsync('viralpool', await createAssetAsync(fileUri), false)
+    else
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+  }
+
+  const download = async () => {
+    axios.get(`project-strategy/file/${props.itemData.id}`).then(async response => {
+      await saveFile(response.data)
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
   }
 
   return (
