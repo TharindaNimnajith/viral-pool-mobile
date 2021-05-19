@@ -15,14 +15,57 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
+import {contentSubmissionStatusEnum, jobAcceptationStatusEnum, resultSubmissionStatusEnum} from '../util/enum'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
 import {isEmpty, showAlert} from '../util/common-helpers'
-import {contentSubmissionStatusEnum, jobAcceptationStatusEnum, resultSubmissionStatusEnum} from '../util/enum'
+import FileListItem from './file-list-item'
+
+const data = [
+  {
+    "createdDate": "2021-05-19T05:31:00.2033538",
+    "fileCategory": 2,
+    "fileName": "12. Managing Images & Containers.png",
+    "fileType": "image/png",
+    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
+    "id": 18
+  },
+  {
+    "createdDate": "2021-05-19T05:31:00.2033538",
+    "fileCategory": 2,
+    "fileName": "12. Managing Images & Containers.png",
+    "fileType": "image/png",
+    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
+    "id": 18
+  },
+  {
+    "createdDate": "2021-05-19T05:31:00.2033538",
+    "fileCategory": 2,
+    "fileName": "12. Managing Images & Containers.png",
+    "fileType": "image/png",
+    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
+    "id": 18
+  },
+  {
+    "createdDate": "2021-05-19T05:31:00.2033538",
+    "fileCategory": 2,
+    "fileName": "12. Managing Images & Containers.png",
+    "fileType": "image/png",
+    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
+    "id": 18
+  },
+  {
+    "createdDate": "2021-05-19T05:31:00.2033538",
+    "fileCategory": 2,
+    "fileName": "12. Managing Images & Containers.png",
+    "fileType": "image/png",
+    "fileUrl": "https://viralpool.blob.core.windows.net/ezcashmarketingcampaign2ac76306-eed1-4fce-a278-b3f21ffb70c7/strategy/12. Managing Images & Containers.png",
+    "id": 18
+  }
+]
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
-  console.log(contentWidth)
 
   const project = props.project.navigation.getParam('project')
 
@@ -53,11 +96,11 @@ const ProjectDetails = props => {
     project.refresh()
     axios.get(`project-cc-strategy/${project.project}`).then(async response => {
       setLoading(false)
-      console.log(response.data.data)
+      console.log(response.data.data.projectFileResponses)
       if (response.status === 200) {
         setName(response.data.data.name)
         setDescription(response.data.data.description)
-        setProjectFileResponses(response.data.data.projectFileResponses)
+        setProjectFileResponses(data)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
@@ -87,7 +130,7 @@ const ProjectDetails = props => {
       if (response.status === 200) {
         setName(response.data.data.name)
         setDescription(response.data.data.description)
-        setProjectFileResponses(response.data.data.projectFileResponses)
+        setProjectFileResponses(data)
         setCreatedDate(response.data.data.createdDate)
         setSocialMediaPlatformName(response.data.data.socialMediaPlatformName)
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
@@ -424,6 +467,15 @@ const ProjectDetails = props => {
               <Text style={styles.titleStyle}>
                 Samples
               </Text>
+              <View style={styles.fileStyle}>
+                {
+                  projectFileResponses.map((file, key) =>
+                    <FileListItem key={key}
+                                  navigation={props.project.navigation}
+                                  itemData={file}/>
+                  )
+                }
+              </View>
             </View>
           }
           {
@@ -565,6 +617,13 @@ const styles = StyleSheet.create({
     padding: 10,
     width: wp('80%'),
     borderRadius: 5
+  },
+  fileStyle: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'flex-start',
+    marginTop: 10
   },
   labelStyle: {
     marginTop: 20,
