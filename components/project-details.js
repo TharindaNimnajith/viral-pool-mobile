@@ -22,6 +22,7 @@ import {contentSubmissionStatusEnum, jobAcceptationStatusEnum, resultSubmissionS
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
+  console.log(contentWidth)
 
   const project = props.project.navigation.getParam('project')
 
@@ -36,10 +37,8 @@ const ProjectDetails = props => {
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(jobAcceptationStatusEnum.Pending)
   const [contentSubmissionStatus, setContentSubmissionStatus] = useState(contentSubmissionStatusEnum.Default)
   const [resultSubmissionStatus, setResultSubmissionStatus] = useState(resultSubmissionStatusEnum.Default)
-  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] =
-    useState(contentSubmissionStatus !== contentSubmissionStatusEnum.Default)
-  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] =
-    useState(resultSubmissionStatus !== contentSubmissionStatusEnum.Default)
+  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(false)
+  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(false)
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
@@ -54,7 +53,7 @@ const ProjectDetails = props => {
     project.refresh()
     axios.get(`project-cc-strategy/${project.project}`).then(async response => {
       setLoading(false)
-      console.log(response.data.data.projectFileResponses)
+      console.log(response.data.data)
       if (response.status === 200) {
         setName(response.data.data.name)
         setDescription(response.data.data.description)
@@ -67,6 +66,10 @@ const ProjectDetails = props => {
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
         setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
+        setContentSubmissionLinkValid(response.data.data.contentSubmissionStatus !==
+          contentSubmissionStatusEnum.Default)
+        setResultSubmissionLinkValid(response.data.data.resultSubmissionStatus !==
+          contentSubmissionStatusEnum.Default)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -93,6 +96,10 @@ const ProjectDetails = props => {
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
         setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
+        setContentSubmissionLinkValid(response.data.data.contentSubmissionStatus !==
+          contentSubmissionStatusEnum.Default)
+        setResultSubmissionLinkValid(response.data.data.resultSubmissionStatus !==
+          contentSubmissionStatusEnum.Default)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -548,7 +555,8 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   centerViewStyle: {
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 30
   },
   deleteButtonStyle: {
     marginTop: 15,
@@ -582,7 +590,7 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    minHeight: hp('95%')
+    minHeight: hp('100%')
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
@@ -599,9 +607,10 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   viewStyle: {
-    marginLeft: wp('10%'),
-    marginTop: 10,
-    marginBottom: 10
+    marginLeft: wp('9%'),
+    marginRight: wp('9%'),
+    marginTop: wp('2%'),
+    marginBottom: wp('2%')
   }
 })
 
