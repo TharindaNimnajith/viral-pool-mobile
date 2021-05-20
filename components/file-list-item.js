@@ -26,7 +26,6 @@ const FileListItem = props => {
   const download = async () => {
     axios.get(`project-strategy/file/${props.itemData.id}`).then(async response => {
       if (response.status === 200) {
-        console.log(response.data)
         const {
           status
         } = await askAsync(MEDIA_LIBRARY)
@@ -35,12 +34,14 @@ const FileListItem = props => {
         if (status === 'granted') {
           await downloadAsync(uri, fileUri).then(async uri => {
             await createAssetAsync(uri.uri).then(async asset => {
-              await createAlbumAsync('Download', asset, false).catch(async error => {
+              await createAlbumAsync('Download', asset, false).then(async () => {
+                await showAlert(Constants.SUCCESS, Constants.DOWNLOADED)
+              }).catch(async error => {
                 await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
                 console.log(error)
               })
             }).catch(async error => {
-              await showAlert(Constants.ERROR, '------')
+              await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
               console.log(error)
             })
           }).catch(async error => {
@@ -48,7 +49,7 @@ const FileListItem = props => {
             console.log(error)
           })
         } else {
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          await showAlert(Constants.ERROR, Constants.CAMERA_PERMISSION)
         }
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
