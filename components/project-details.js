@@ -1,7 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
-  Platform,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -13,7 +12,6 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {requestPermissionsAsync} from 'expo-media-library'
 import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
@@ -53,18 +51,6 @@ const ProjectDetails = props => {
   useEffect(() => {
     setLoading(true)
     project.refresh()
-    (async () => {
-      if (Platform.OS !== 'web') {
-        const {
-          status
-        } = await requestPermissionsAsync().catch(async error => {
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
-        })
-        if (status !== 'granted')
-          showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
-      }
-    })()
     axios.get(`project-cc-strategy/${project.project}`).then(async response => {
       setLoading(false)
       if (response.status === 200) {
@@ -95,19 +81,6 @@ const ProjectDetails = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    project.refresh()
-    (async () => {
-      if (Platform.OS !== 'web') {
-        const {
-          status
-        } = await requestPermissionsAsync().catch(async error => {
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
-        })
-        if (status !== 'granted')
-          showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
-      }
-    })()
     axios.get(`project-cc-strategy/${project.project}`).then(async response => {
       if (response.status === 200) {
         setName(response.data.data.name)

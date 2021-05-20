@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {FontAwesome5} from '@expo/vector-icons'
-import {createAlbumAsync, createAssetAsync, getPermissionsAsync} from 'expo-media-library'
+import {createAlbumAsync, createAssetAsync, requestPermissionsAsync} from 'expo-media-library'
 import {documentDirectory, downloadAsync, FileSystemSessionType} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
 import {AppContext} from '../util/app-context'
@@ -41,7 +41,7 @@ const FileListItem = props => {
     props.setLoadingTrue()
     const {
       status
-    } = await getPermissionsAsync().catch(async error => {
+    } = await requestPermissionsAsync().catch(async error => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
