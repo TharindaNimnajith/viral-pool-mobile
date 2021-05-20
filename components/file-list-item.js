@@ -3,6 +3,7 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {FontAwesome5} from '@expo/vector-icons'
 import {createAlbumAsync, createAssetAsync} from 'expo-media-library'
+import {documentDirectory, downloadAsync} from 'expo-file-system'
 import {askAsync, MEDIA_LIBRARY} from 'expo-permissions'
 import axios from 'axios'
 import {showAlert} from '../util/common-helpers'
@@ -22,19 +23,36 @@ const FileListItem = props => {
     }
   }
 
-  const saveFile = async fileUri => {
-    const {
-      status
-    } = await askAsync(MEDIA_LIBRARY)
-    if (status === 'granted')
-      await createAlbumAsync('viralpool', await createAssetAsync(fileUri), false)
-    else
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-  }
-
   const download = async () => {
     axios.get(`project-strategy/file/${props.itemData.id}`).then(async response => {
-      await saveFile(response.data)
+      if (response.status === 200) {
+        console.log(response.data)
+        const {
+          status
+        } = await askAsync(MEDIA_LIBRARY)
+        const uri = 'http://www.pdf995.com/samples/pdf.pdf'
+        const fileUri = documentDirectory + 'test.pdf'
+        if (status === 'granted') {
+          await downloadAsync(uri, fileUri).then(async uri => {
+            await createAssetAsync(uri.uri).then(async asset => {
+              await createAlbumAsync('Download', asset, false).catch(async error => {
+                await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+                console.log(error)
+              })
+            }).catch(async error => {
+              await showAlert(Constants.ERROR, '------')
+              console.log(error)
+            })
+          }).catch(async error => {
+            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+            console.log(error)
+          })
+        } else {
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+        }
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
