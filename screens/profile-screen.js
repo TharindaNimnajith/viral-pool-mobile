@@ -37,7 +37,10 @@ const ProfileScreen = props => {
       if (Platform.OS !== 'web') {
         const {
           status
-        } = await requestMediaLibraryPermissionsAsync()
+        } = await requestMediaLibraryPermissionsAsync().catch(async error => {
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          console.log(error)
+        })
         if (status !== 'granted')
           showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
@@ -49,7 +52,10 @@ const ProfileScreen = props => {
       if (Platform.OS !== 'web') {
         const {
           status
-        } = await requestMediaLibraryPermissionsAsync()
+        } = await requestMediaLibraryPermissionsAsync().catch(async error => {
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          console.log(error)
+        })
         if (status !== 'granted')
           showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
@@ -81,6 +87,9 @@ const ProfileScreen = props => {
       quality: 1,
       base64: true,
       allowsMultipleSelection: false
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
     })
     if (!result.cancelled) {
       setLoading(true)
@@ -114,7 +123,7 @@ const ProfileScreen = props => {
         mimeType: type,
         parameters: parameters
       }
-      uploadAsync(`${ApiUrl.BASE_URL}User`, result.uri, options).then(async response => {
+      await uploadAsync(`${ApiUrl.BASE_URL}User`, result.uri, options).then(async response => {
         setLoading(false)
         if (response.status === 200) {
           const data = JSON.parse(response.body).data

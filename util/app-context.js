@@ -5,6 +5,7 @@ export const AppContext = createContext({
   refreshToken: null,
   expoPushToken: null,
   userData: null,
+  newNotifications: false,
   SetAccessToken: async () => {
   },
   SetRefreshToken: async () => {
@@ -12,5 +13,7 @@ export const AppContext = createContext({
   SetExpoPushToken: async () => {
   },
   SetUserData: async () => {
+  },
+  SetNewNotifications: async () => {
   }
 })

@@ -11,7 +11,6 @@ import {
   TouchableWithoutFeedback,
   View
 } from 'react-native'
-import {SocialIcon} from 'react-native-elements'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../util/app-context'
@@ -142,49 +141,6 @@ const DashboardScreen = props => {
                 </Text>
               </View>
             </TouchableOpacity>
-            <View style={styles.socialAccountsViewStyle}>
-              <TouchableOpacity activeOpacity={1}>
-                <SocialIcon title='Connect with Facebook'
-                            button
-                            raised={false}
-                            type='facebook'
-                            iconSize={25}
-                            fontStyle={styles.socialIconFontStyle}
-                            style={styles.socialIconButtonStyle}/>
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={1}>
-                <SocialIcon title='Connect with Youtube'
-                            button
-                            raised={false}
-                            type='youtube'
-                            iconSize={25}
-                            fontStyle={styles.socialIconFontStyle}
-                            style={styles.socialIconButtonStyle}/>
-              </TouchableOpacity>
-              <TouchableOpacity activeOpacity={1}>
-                <SocialIcon title='Connect with Instagram'
-                            button
-                            raised={false}
-                            type='instagram'
-                            iconSize={25}
-                            fontStyle={styles.socialIconFontStyle}
-                            style={styles.socialIconButtonStyle}/>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.tiktokViewStyle}
-                                activeOpacity={1}>
-                <Image style={styles.tiktokIconStyle}
-                       source={require('../assets/tiktok.png')}/>
-                <View style={styles.tiktokButtonStyle}>
-                  <SocialIcon title='Connect with Tiktok'
-                              button
-                              raised={false}
-                              type='github'
-                              iconSize={0}
-                              fontStyle={styles.socialIconFontStyle}
-                              style={styles.socialIconButtonStyle}/>
-                </View>
-              </TouchableOpacity>
-            </View>
           </View>
           {
             loading &&
@@ -282,39 +238,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center'
   },
-  socialAccountsViewStyle: {
-    marginTop: hp('4%')
-  },
-  socialIconButtonStyle: {
-    marginTop: 5,
-    marginBottom: 5,
-    alignSelf: 'center',
-    width: wp('85%'),
-    height: hp('6%'),
-    borderRadius: 25
-  },
-  socialIconFontStyle: {
-    fontSize: 18
-  },
   statTitleStyle: {
     alignSelf: 'center',
     fontSize: 15,
     lineHeight: 17
-  },
-  tiktokButtonStyle: {
-    justifyContent: 'center',
-    flex: 1
-  },
-  tiktokIconStyle: {
-    position: 'absolute',
-    zIndex: 1,
-    marginLeft: wp('25%'),
-    width: 32,
-    height: 32
-  },
-  tiktokViewStyle: {
-    flexDirection: 'row',
-    alignItems: 'center'
   },
   titleStyle: {
     fontSize: 22,

@@ -15,7 +15,7 @@
     "userInterfaceStyle": "light",
     "backgroundColor": "#ffffff",
     "primaryColor": "#204ecf",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/icon.png",
     "notification": {
       "icon": "",
       "color": "#ffffff",
@@ -33,7 +33,7 @@
       "silentLaunch": true
     },
     "splash": {
-      "image": "./assets/logo.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -51,14 +51,14 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/logo.png",
+        "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "package": "com.tharindarajapakshe.viralpoolapp",
       "useNextNotificationsApi": true
     },
     "web": {
-      "favicon": "./assets/logo.png"
+      "favicon": "./assets/favicon.png"
     }
   }
 }

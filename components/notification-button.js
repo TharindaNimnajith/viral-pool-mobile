@@ -1,18 +1,32 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import CustomHeaderButton from './custom-header-button'
+import {AppContext} from '../util/app-context'
+import Colors from '../util/colors'
+import IoniconsHeaderButton from './custom-header-button'
+import MaterialHeaderButton from './material-header-button'
 
 const NotificationButton = props => {
+  const appContext = useContext(AppContext)
+
   const displayNotifications = async () => {
     props.navigation.navigate('Notifications')
   }
 
   return (
-    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-      <Item title='Notifications'
-            iconName='notifications'
-            onPress={displayNotifications}/>
-    </HeaderButtons>
+    appContext.newNotifications ? (
+      <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+        <Item title='Notifications'
+              iconName='notifications'
+              onPress={displayNotifications}/>
+      </HeaderButtons>
+    ) : (
+      <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+        <Item title='Notifications'
+              iconName='bell-alert'
+              color={Colors.errorColor}
+              onPress={displayNotifications}/>
+      </HeaderButtons>
+    )
   )
 }
 

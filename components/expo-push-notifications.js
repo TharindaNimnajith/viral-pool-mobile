@@ -22,12 +22,17 @@ const ExpoPushNotifications = () => {
   useEffect(() => {
     registerForPushNotificationsAsync().then(async token => {
       await appContext.SetExpoPushToken(token)
+    }).catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
     })
-    notificationListener.current = addNotificationReceivedListener(notification => {
+    notificationListener.current = addNotificationReceivedListener(async notification => {
       console.log(notification.request.content.data)
+      await appContext.SetNewNotifications(true)
     })
-    responseListener.current = addNotificationResponseReceivedListener(response => {
+    responseListener.current = addNotificationResponseReceivedListener(async response => {
       console.log(response.notification.request.content.data)
+      await appContext.SetNewNotifications(true)
     })
     return () => {
       removeNotificationSubscription(notificationListener)
@@ -51,21 +56,30 @@ async function registerForPushNotificationsAsync() {
   if (ExpoConstants.isDevice) {
     const {
       status: existingStatus
-    } = await getPermissionsAsync()
+    } = await getPermissionsAsync().catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
     let finalStatus = existingStatus
     if (existingStatus !== 'granted') {
       const {
         status
-      } = await requestPermissionsAsync()
+      } = await requestPermissionsAsync().catch(async error => {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+        console.log(error)
+      })
       finalStatus = status
     }
     if (finalStatus !== 'granted') {
-      showAlert(Constants.ERROR, Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
+      await showAlert(Constants.ERROR, Constants.EXPO_PUSH_NOTIFICATION_TOKEN_ERROR)
       return
     }
-    token = (await getExpoPushTokenAsync()).data
+    token = (await getExpoPushTokenAsync().catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })).data
   } else {
-    showAlert(Constants.ERROR, Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
+    await showAlert(Constants.ERROR, Constants.EXPO_PUSH_NOTIFICATION_DEVICE_ERROR)
   }
   return token
 }

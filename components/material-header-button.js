@@ -1,10 +1,13 @@
 import React from 'react'
 import {StyleSheet} from 'react-native'
 import {HeaderButton} from 'react-navigation-header-buttons'
+import {MaterialCommunityIcons} from '@expo/vector-icons'
+import Colors from '../util/colors'
 
-const CustomHeaderButton = props => {
+const MaterialHeaderButton = props => {
   return (
     <HeaderButton {...props}
+                  IconComponent={MaterialCommunityIcons}
                   iconSize={25}
                   buttonStyle={styles.buttonStyle}/>
   )
@@ -18,4 +21,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default CustomHeaderButton
+export default MaterialHeaderButton

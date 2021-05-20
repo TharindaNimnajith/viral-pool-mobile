@@ -1,12 +1,12 @@
 import React, {useContext, useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Dialog from 'react-native-dialog'
 import {FontAwesome5} from '@expo/vector-icons'
-import {createAlbumAsync, createAssetAsync} from 'expo-media-library'
+import {createAlbumAsync, createAssetAsync, getPermissionsAsync} from 'expo-media-library'
 import {documentDirectory, downloadAsync, FileSystemSessionType} from 'expo-file-system'
-import {askAsync, MEDIA_LIBRARY} from 'expo-permissions'
+import Dialog from 'react-native-dialog'
 import {AppContext} from '../util/app-context'
+import {ApiUrl} from '../util/api-url'
 import {showAlert} from '../util/common-helpers'
 import Constants from '../util/constants'
 import Colors from '../util/colors'
@@ -41,20 +41,20 @@ const FileListItem = props => {
     props.setLoadingTrue()
     const {
       status
-    } = await askAsync(MEDIA_LIBRARY)
-    const uri = props.itemData.fileUrl
+    } = await getPermissionsAsync().catch(async error => {
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+    const uri = `${ApiUrl.BASE_URL}project-strategy/file/${props.itemData.id}`
     const fileUri = documentDirectory + props.itemData.fileName
     if (status === 'granted') {
       const headers = {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${appContext.accessToken}`,
-        'client_id': `${Constants.CLIENT_ID_VALUE}`
+        'Authorization': `Bearer ${appContext.accessToken}`
       }
       const options = {
         headers: headers,
         md5: false,
-        sessionType: FileSystemSessionType.BACKGROUND,
+        sessionType: FileSystemSessionType.BACKGROUND
       }
       await downloadAsync(uri, fileUri, options).then(async uri => {
         await createAssetAsync(uri.uri).then(async asset => {
@@ -78,7 +78,7 @@ const FileListItem = props => {
       })
     } else {
       props.setLoadingFalse()
-      await showAlert(Constants.ERROR, Constants.CAMERA_PERMISSION)
+      await showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
     }
   }
 
