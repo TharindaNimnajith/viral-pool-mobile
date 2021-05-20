@@ -317,6 +317,14 @@ const ProjectDetails = props => {
     return !resultSubmissionLinkValid
   }
 
+  const setLoadingTrue = () => {
+    setLoading(true)
+  }
+
+  const setLoadingFalse = () => {
+    setLoading(false)
+  }
+
   return (
     <SafeAreaView>
       <Dialog.Container visible={visibleAccept}>
@@ -427,7 +435,9 @@ const ProjectDetails = props => {
                 {
                   projectFileResponses.map((file, key) =>
                     <FileListItem key={key}
-                                  itemData={file}/>
+                                  itemData={file}
+                                  setLoadingTrue={setLoadingTrue}
+                                  setLoadingFalse={setLoadingFalse}/>
                   )
                 }
               </View>
@@ -519,14 +529,14 @@ const ProjectDetails = props => {
               }
             </View>
           }
-          {
-            loading &&
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
-            </View>
-          }
         </View>
+        {
+          loading &&
+          <View style={styles.loadingStyle}>
+            <ActivityIndicator size='large'
+                               color={Colors.secondaryColor}/>
+          </View>
+        }
       </ScrollView>
     </SafeAreaView>
   )

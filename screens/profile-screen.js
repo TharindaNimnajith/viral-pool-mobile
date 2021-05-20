@@ -114,11 +114,7 @@ const ProfileScreen = props => {
         mimeType: type,
         parameters: parameters
       }
-      uploadAsync(
-        `${ApiUrl.BASE_URL}User`,
-        result.uri,
-        options
-      ).then(async response => {
+      uploadAsync(`${ApiUrl.BASE_URL}User`, result.uri, options).then(async response => {
         setLoading(false)
         if (response.status === 200) {
           const data = JSON.parse(response.body).data
