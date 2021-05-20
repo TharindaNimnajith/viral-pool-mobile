@@ -7,11 +7,14 @@ import Colors from '../util/colors'
 import LoginScreen from '../screens/login-screen'
 import DashboardScreen from '../screens/dashboard-screen'
 import NotificationsScreen from '../screens/notifications-screen'
+import NotificationProjectDetailsScreen from '../screens/notification-project-details-screen'
 import ProfileScreen from '../screens/profile-screen'
 import EditProfileScreen from '../screens/edit-profile-screen'
+import EarningsScreen from '../screens/earnings-screen'
 import IdeaListScreen from '../screens/idea-list-screen'
 import AddIdeaScreen from '../screens/add-idea-screen'
 import EditIdeaScreen from '../screens/edit-idea-screen'
+import SocialMediaScreen from '../screens/social-media-screen'
 import NewProjectListScreen from '../screens/new-project-list-screen'
 import NewProjectDetailsScreen from '../screens/new-project-details-screen'
 import OngoingProjectListScreen from '../screens/ongoing-project-list-screen'
@@ -41,7 +44,8 @@ const DashboardNavigator = createStackNavigator({
 })
 
 const NotificationsNavigator = createStackNavigator({
-  Notifications: NotificationsScreen
+  Notifications: NotificationsScreen,
+  NotificationProjectDetails: NotificationProjectDetailsScreen
 }, {
   defaultNavigationOptions: {
     headerTitleAlign: 'center',
@@ -91,10 +95,34 @@ const CompletedProjectsNavigator = createStackNavigator({
   }
 })
 
+const EarningsNavigator = createStackNavigator({
+  Earnings: EarningsScreen
+}, {
+  defaultNavigationOptions: {
+    headerTitleAlign: 'center',
+    headerStyle: {
+      backgroundColor: Colors.primaryColor
+    },
+    headerTintColor: Colors.secondaryColor
+  }
+})
+
 const IdeasNavigator = createStackNavigator({
   IdeaList: IdeaListScreen,
   AddIdea: AddIdeaScreen,
   EditIdea: EditIdeaScreen
+}, {
+  defaultNavigationOptions: {
+    headerTitleAlign: 'center',
+    headerStyle: {
+      backgroundColor: Colors.primaryColor
+    },
+    headerTintColor: Colors.secondaryColor
+  }
+})
+
+const SocialMediaNavigator = createStackNavigator({
+  SocialMedia: SocialMediaScreen
 }, {
   defaultNavigationOptions: {
     headerTitleAlign: 'center',
@@ -164,10 +192,28 @@ const InternalNavigator = createDrawerNavigator({
                             color={Colors.primaryColor}/>
     }
   },
+  Earnings: {
+    screen: EarningsNavigator,
+    navigationOptions: {
+      drawerLabel: 'Earnings',
+      drawerIcon: <Ionicons name='notifications'
+                            size={25}
+                            color={Colors.primaryColor}/>
+    }
+  },
   Ideas: {
     screen: IdeasNavigator,
     navigationOptions: {
       drawerLabel: 'My Ideas',
+      drawerIcon: <Ionicons name='bulb'
+                            size={25}
+                            color={Colors.primaryColor}/>
+    }
+  },
+  SocialMedia: {
+    screen: SocialMediaNavigator,
+    navigationOptions: {
+      drawerLabel: 'Social Media',
       drawerIcon: <Ionicons name='bulb'
                             size={25}
                             color={Colors.primaryColor}/>

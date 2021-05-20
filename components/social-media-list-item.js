@@ -3,25 +3,15 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../util/colors'
 
-const NotificationListItem = props => {
-  const project = {
-    project: props.itemData.item.id,
-    refresh: props.refreshFunction
-  }
-
-  const pressNotification = () => {
-    props.navigation.navigate('NotificationProjectDetails', {project})
-  }
-
+const SocialMediaListItem = props => {
   return (
-    <TouchableOpacity style={styles.itemStyle}
-                      onPress={pressNotification}>
+    <TouchableOpacity style={styles.itemStyle}>
       <View style={styles.viewStyle}>
-        <Text style={styles.textStyle}>
-          {props.itemData.item.notification}
+        <Text style={styles.titleStyle}>
+          Text
         </Text>
-        <Text style={styles.dateStyle}>
-          {props.itemData.item.createdDate.slice(0, 10)}
+        <Text style={styles.textStyle}>
+          Text
         </Text>
       </View>
     </TouchableOpacity>
@@ -29,11 +19,6 @@ const NotificationListItem = props => {
 }
 
 const styles = StyleSheet.create({
-  dateStyle: {
-    color: Colors.tertiaryColor,
-    fontSize: 12,
-    alignSelf: 'flex-end'
-  },
   itemStyle: {
     padding: 15,
     elevation: 5,
@@ -50,6 +35,12 @@ const styles = StyleSheet.create({
     alignContent: 'center'
   },
   textStyle: {
+    color: Colors.tertiaryColor,
+    fontSize: 15,
+    marginTop: 3,
+    marginBottom: 3
+  },
+  titleStyle: {
     fontWeight: 'bold',
     fontSize: 16,
     color: Colors.primaryColor
@@ -59,4 +50,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default NotificationListItem
+export default SocialMediaListItem

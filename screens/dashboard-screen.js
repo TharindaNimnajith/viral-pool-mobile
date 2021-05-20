@@ -269,7 +269,7 @@ const wait = timeout => {
 
 DashboardScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Viral Pool',
+    headerTitle: 'VIRAL POOL',
     headerLeft: () => (
       <Menu navigation={navData.navigation}/>
     ),
