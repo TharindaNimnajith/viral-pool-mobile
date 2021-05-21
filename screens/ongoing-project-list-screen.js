@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../util/colors'
@@ -134,8 +134,7 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center',
-    minHeight: hp('95%')
+    alignItems: 'center'
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,

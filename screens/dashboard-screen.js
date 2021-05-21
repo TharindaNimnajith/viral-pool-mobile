@@ -7,7 +7,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native'
@@ -87,61 +86,15 @@ const DashboardScreen = props => {
                     onPress={onProfilePress}>
                 {appContext.userData.firstName} {appContext.userData.lastName}
               </Text>
+              <Text>
+                Points
+              </Text>
             </View>
           </View>
           <View style={styles.bodyStyle}>
-            <View style={styles.smallCardsViewStyle}>
-              <TouchableOpacity style={styles.cardStyle}>
-                <Text style={styles.ongoingProjectStatStyle}>
-                  3
-                </Text>
-                <Text style={styles.statTitleStyle}>
-                  Ongoing{'\n'}Projects
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.cardStyle}>
-                <Text style={styles.completedProjectStatStyle}>
-                  10
-                </Text>
-                <Text style={styles.statTitleStyle}>
-                  Completed{'\n'}Projects
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.cardStyle}>
-                <Text style={styles.rejectedProjectStatStyle}>
-                  7
-                </Text>
-                <Text style={styles.statTitleStyle}>
-                  Rejected{'\n'}Projects
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <TouchableOpacity style={styles.largeCardViewStyle}>
-              <View style={styles.cardViewStyle}>
-                <Text style={styles.keyStyle}>
-                  Total Earnings
-                </Text>
-                <Text style={styles.valueStyle}>
-                  145,000 LKR
-                </Text>
-              </View>
-              <View style={styles.cardViewStyle}>
-                <Text style={styles.keyStyle}>
-                  Total Top-ups
-                </Text>
-                <Text style={styles.valueStyle}>
-                  10,000 LKR
-                </Text>
-              </View>
-              <View style={styles.cardViewStyle}>
-                <Text style={styles.keyStyle}>
-                  Total Viralpool Points
-                </Text>
-                <Text style={styles.valueStyle}>
-                  50
-                </Text>
-              </View>
-            </TouchableOpacity>
+            <Text>
+              Body
+            </Text>
           </View>
           {
             loading &&
@@ -161,7 +114,7 @@ const styles = StyleSheet.create({
     width: wp('30%'),
     height: wp('30%'),
     borderRadius: wp('15%'),
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: Colors.secondaryColor,
     position: 'absolute',
     marginTop: wp('5%'),
@@ -169,24 +122,6 @@ const styles = StyleSheet.create({
   },
   bodyStyle: {
     marginTop: hp('4%')
-  },
-  cardStyle: {
-    width: wp('28%'),
-    height: wp('28%'),
-    borderRadius: wp('10%'),
-    margin: wp('1%'),
-    backgroundColor: Colors.fadedEffectColor
-  },
-  cardViewStyle: {
-    flexDirection: 'row',
-    marginTop: 5,
-    marginBottom: 5
-  },
-  completedProjectStatStyle: {
-    fontSize: 60,
-    fontWeight: 'bold',
-    color: Colors.successColor,
-    alignSelf: 'center'
   },
   loadingStyle: {
     position: 'absolute',
@@ -209,52 +144,12 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: wp('10%'),
     borderBottomLeftRadius: wp('10%')
   },
-  keyStyle: {
-    left: wp('8%'),
-    fontSize: 17
-  },
-  largeCardViewStyle: {
-    width: wp('90%'),
-    height: hp('15%'),
-    borderRadius: wp('10%'),
-    backgroundColor: Colors.fadedEffectColor,
-    marginTop: hp('18%'),
-    alignSelf: 'center',
-    justifyContent: 'center'
-  },
-  ongoingProjectStatStyle: {
-    fontSize: 60,
-    fontWeight: 'bold',
-    alignSelf: 'center'
-  },
-  rejectedProjectStatStyle: {
-    fontSize: 60,
-    fontWeight: 'bold',
-    color: Colors.primaryColor,
-    alignSelf: 'center'
-  },
-  smallCardsViewStyle: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center'
-  },
-  statTitleStyle: {
-    alignSelf: 'center',
-    fontSize: 15,
-    lineHeight: 17
-  },
   titleStyle: {
     fontSize: 22,
     color: Colors.secondaryColor,
     marginTop: wp('15%'),
     marginLeft: wp('44%'),
     marginRight: wp('5%')
-  },
-  valueStyle: {
-    fontWeight: 'bold',
-    right: wp('8%'),
-    position: 'absolute',
-    fontSize: 17
   },
   viewStyle: {
     flexDirection: 'row'

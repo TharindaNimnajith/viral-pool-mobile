@@ -19,7 +19,7 @@ import {AppContext} from '../util/app-context'
 import {isEmpty, showAlert} from '../util/common-helpers'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
-import {genderOptionsEnum} from '../util/enum'
+import {genderOptionsEnum} from '../util/enums'
 import CombinedButtons from '../components/combined-buttons'
 
 const EditProfileScreen = () => {

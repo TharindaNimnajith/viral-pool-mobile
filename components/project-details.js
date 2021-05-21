@@ -15,7 +15,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
 import axios from 'axios'
-import {contentSubmissionStatusEnum, jobAcceptationStatusEnum, resultSubmissionStatusEnum} from '../util/enum'
+import {contentSubmissionStatusEnum, jobAcceptationStatusEnum, resultSubmissionStatusEnum} from '../util/enums'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
 import {isEmpty, showAlert} from '../util/common-helpers'
