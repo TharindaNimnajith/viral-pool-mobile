@@ -19,7 +19,7 @@ import {showAlert} from '../util/common-helpers'
 import Constants from '../util/constants'
 import Menu from '../components/menu-button'
 import CombinedButtons from '../components/combined-buttons'
-import DashboardLogo from "../components/dashboard-logo";
+import DashboardLogo from '../components/dashboard-logo'
 
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)
