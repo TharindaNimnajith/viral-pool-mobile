@@ -178,8 +178,8 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     marginBottom: 25,
-    // width: 50,
-    // height: 50
+    width: 160,
+    height: 160
   },
   headerStyle: {
     alignItems: 'center',

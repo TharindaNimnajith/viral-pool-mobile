@@ -269,9 +269,21 @@ const wait = timeout => {
 
 DashboardScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'VIRAL POOL',
+    headerTitle: '',
     headerLeft: () => (
-      <Menu navigation={navData.navigation}/>
+      <View>
+        <Menu navigation={navData.navigation}/>
+        <Image source={require('../assets/dashboard-logo.png')}
+               style={{
+                 position:'absolute',
+                 // alignContent: 'center',
+                 // alignItems: 'center',
+                 justifyContent: 'center',
+                 marginLeft: wp('30%'),
+                 marginRight: wp('30%'),
+                 width: wp('40%'),
+               }}/>
+      </View>
     ),
     headerRight: () => (
       <CombinedButtons navigation={navData.navigation}/>
