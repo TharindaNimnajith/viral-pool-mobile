@@ -2,7 +2,7 @@ import React from 'react'
 import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
-import {Ionicons} from '@expo/vector-icons'
+import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import Colors from '../util/colors'
 import LoginScreen from '../screens/login-screen'
 import DashboardScreen from '../screens/dashboard-screen'
@@ -151,9 +151,9 @@ const InternalNavigator = createDrawerNavigator({
     screen: DashboardNavigator,
     navigationOptions: {
       drawerLabel: 'Dashboard',
-      drawerIcon: <Ionicons name='speedometer'
+      drawerIcon: <Ionicons name='home'
                             size={25}
-                            color={Colors.primaryColor}/>
+                            color={Colors.secondaryColor}/>
     }
   },
   Notifications: {
@@ -162,7 +162,7 @@ const InternalNavigator = createDrawerNavigator({
       drawerLabel: 'Notifications',
       drawerIcon: <Ionicons name='notifications'
                             size={25}
-                            color={Colors.primaryColor}/>
+                            color={Colors.secondaryColor}/>
     }
   },
   NewProjects: {
@@ -171,16 +171,16 @@ const InternalNavigator = createDrawerNavigator({
       drawerLabel: 'Job Pool',
       drawerIcon: <Ionicons name='layers'
                             size={25}
-                            color={Colors.primaryColor}/>
+                            color={Colors.secondaryColor}/>
     }
   },
   OngoingProjects: {
     screen: OngoingProjectsNavigator,
     navigationOptions: {
       drawerLabel: 'Ongoing Jobs',
-      drawerIcon: <Ionicons name='flash'
+      drawerIcon: <Ionicons name='timer'
                             size={25}
-                            color={Colors.primaryColor}/>
+                            color={Colors.secondaryColor}/>
     }
   },
   CompletedProjects: {
@@ -189,34 +189,34 @@ const InternalNavigator = createDrawerNavigator({
       drawerLabel: 'Completed Jobs',
       drawerIcon: <Ionicons name='checkmark-done'
                             size={25}
-                            color={Colors.primaryColor}/>
+                            color={Colors.secondaryColor}/>
     }
   },
   Earnings: {
     screen: EarningsNavigator,
     navigationOptions: {
-      drawerLabel: 'Earnings',
-      drawerIcon: <Ionicons name='notifications'
-                            size={25}
-                            color={Colors.primaryColor}/>
+      drawerLabel: 'My Earnings',
+      drawerIcon: <FontAwesome name='dollar'
+                               size={25}
+                               color={Colors.secondaryColor}/>
     }
   },
   Ideas: {
     screen: IdeasNavigator,
     navigationOptions: {
       drawerLabel: 'My Ideas',
-      drawerIcon: <Ionicons name='bulb'
-                            size={25}
-                            color={Colors.primaryColor}/>
+      drawerIcon: <FontAwesome name='comments'
+                               size={25}
+                               color={Colors.secondaryColor}/>
     }
   },
   SocialMedia: {
     screen: SocialMediaNavigator,
     navigationOptions: {
-      drawerLabel: 'Social Media',
-      drawerIcon: <Ionicons name='bulb'
+      drawerLabel: 'My Social Media',
+      drawerIcon: <Ionicons name='apps'
                             size={25}
-                            color={Colors.primaryColor}/>
+                            color={Colors.secondaryColor}/>
     }
   },
   Profile: {
@@ -225,13 +225,14 @@ const InternalNavigator = createDrawerNavigator({
       drawerLabel: 'My Profile',
       drawerIcon: <Ionicons name='person'
                             size={25}
-                            color={Colors.primaryColor}/>
+                            color={Colors.secondaryColor}/>
     }
   }
 }, {
-  drawerBackgroundColor: Colors.secondaryColor,
+  drawerBackgroundColor: Colors.defaultColor,
   contentOptions: {
-    activeTintColor: Colors.primaryColor
+    activeTintColor: Colors.secondaryColor,
+    inactiveTintColor: Colors.tertiaryColor
   }
 })
 
