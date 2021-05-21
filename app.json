@@ -14,7 +14,7 @@
     "orientation": "portrait",
     "userInterfaceStyle": "light",
     "backgroundColor": "#ffffff",
-    "primaryColor": "#204ecf",
+    "primaryColor": "#e82128",
     "icon": "./assets/icon.png",
     "notification": {
       "icon": "",
@@ -25,7 +25,7 @@
     },
     "androidStatusBar": {
       "barStyle": "light-content",
-      "backgroundColor": "#204ecf",
+      "backgroundColor": "#e82128",
       "hidden": false,
       "translucent": true
     },
