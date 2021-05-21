@@ -42,7 +42,7 @@ const ProfileScreen = props => {
           console.log(error)
         })
         if (status !== 'granted')
-          showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
+          await showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
     })()
   }, [])
@@ -57,7 +57,7 @@ const ProfileScreen = props => {
           console.log(error)
         })
         if (status !== 'granted')
-          showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
+          await showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
     })()
     setRefreshing(true)
@@ -103,16 +103,28 @@ const ProfileScreen = props => {
         'Authorization': `Bearer ${appContext.accessToken}`,
         'client_id': `${Constants.CLIENT_ID_VALUE}`
       }
+      let firstName = ''
+      if (appContext.userData.firstName !== null)
+        firstName = appContext.userData.firstName
+      let lastName = ''
+      if (appContext.userData.lastName !== null)
+        lastName = appContext.userData.lastName
+      let address = ''
+      if (appContext.userData.address !== null)
+        address = appContext.userData.address
+      let phoneNumber = ''
+      if (appContext.userData.phoneNumber !== null)
+        phoneNumber = appContext.userData.phoneNumber
       const parameters = {
         'id': appContext.userData.id,
         'email': appContext.userData.email,
         'userRole': Constants.USER_ROLE,
-        'firstName': appContext.userData.firstName,
-        'lastName': appContext.userData.lastName,
+        'firstName': firstName,
+        'lastName': lastName,
         'gender': appContext.userData.gender,
         'birthDate': appContext.userData.birthDate,
-        'address': appContext.userData.address,
-        'phoneNumber': appContext.userData.phoneNumber
+        'address': address,
+        'phoneNumber': phoneNumber
       }
       const options = {
         headers: headers,
@@ -262,7 +274,7 @@ const styles = StyleSheet.create({
     width: wp('50%'),
     height: wp('50%'),
     borderRadius: wp('25%'),
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: Colors.secondaryColor,
     alignSelf: 'center',
     position: 'absolute',

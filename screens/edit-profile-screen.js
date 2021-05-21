@@ -16,7 +16,7 @@ import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
 import {AppContext} from '../util/app-context'
-import {isEmpty, showAlert} from '../util/common-helpers'
+import {showAlert} from '../util/common-helpers'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
 import {genderOptionsEnum} from '../util/enums'
@@ -32,9 +32,6 @@ const EditProfileScreen = () => {
   const [birthDate, setBirthDate] = useState(appContext.userData.birthDate)
   const [address, setAddress] = useState(appContext.userData.address)
   const [phoneNumber, setPhoneNumber] = useState(appContext.userData.phoneNumber)
-  const [firstNameValid, setFirstNameValid] = useState(true)
-  const [lastNameValid, setLastNameValid] = useState(true)
-  const [addressValid, setAddressValid] = useState(true)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
@@ -63,12 +60,10 @@ const EditProfileScreen = () => {
   }
 
   const onChangeFirstName = async firstName => {
-    setFirstNameValid(!await isEmpty(firstName.trim()))
     setFirstName(firstName)
   }
 
   const onChangeLastName = async lastName => {
-    setLastNameValid(!await isEmpty(lastName.trim()))
     setLastName(lastName)
   }
 
@@ -81,18 +76,20 @@ const EditProfileScreen = () => {
   }
 
   const onChangeAddress = async address => {
-    setAddressValid(!await isEmpty(address.trim()))
     setAddress(address)
   }
 
   const onChangePhoneNumber = async phoneNumber => {
-    setPhoneNumberValid(phoneNumber.length === 10 && !isNaN(phoneNumber)
-      && !await isEmpty(phoneNumber.trim()))
+    if (phoneNumber !== null)
+      setPhoneNumberValid(phoneNumber.trim().length === 10 && !isNaN(phoneNumber))
     setPhoneNumber(phoneNumber)
   }
 
   function isDisabled() {
-    return !firstNameValid || !lastNameValid || !addressValid || !phoneNumberValid
+    if (phoneNumber !== null)
+      if (phoneNumber.trim().length === 0)
+        return false
+    return !phoneNumberValid
   }
 
   const editProfile = async () => {
@@ -101,12 +98,24 @@ const EditProfileScreen = () => {
     formData.append('id', appContext.userData.id)
     formData.append('email', appContext.userData.email)
     formData.append('userRole', Constants.USER_ROLE)
-    formData.append('firstName', firstName.trim())
-    formData.append('lastName', lastName.trim())
     formData.append('gender', gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender)
     formData.append('birthDate', birthDate)
-    formData.append('address', address.trim())
-    formData.append('phoneNumber', phoneNumber.trim())
+    if (firstName === null)
+      formData.append('firstName', '')
+    else
+      formData.append('firstName', firstName.trim())
+    if (lastName === null)
+      formData.append('lastName', '')
+    else
+      formData.append('lastName', lastName.trim())
+    if (address === null)
+      formData.append('address', '')
+    else
+      formData.append('address', address.trim())
+    if (phoneNumber === null)
+      formData.append('phoneNumber', '')
+    else
+      formData.append('phoneNumber', phoneNumber.trim())
     axios.put('User', formData).then(async response => {
       setLoading(false)
       if (response.status === 200) {
