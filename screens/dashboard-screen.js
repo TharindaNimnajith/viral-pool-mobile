@@ -7,10 +7,12 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {FontAwesome, FontAwesome5} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../util/app-context'
 import Colors from '../util/colors'
@@ -60,6 +62,10 @@ const DashboardScreen = props => {
     props.navigation.navigate('Profile')
   }
 
+  const onEarningsPress = async () => {
+    props.navigation.navigate('Earnings')
+  }
+
   return (
     <SafeAreaView>
       <ScrollView refreshControl={
@@ -86,9 +92,37 @@ const DashboardScreen = props => {
                     onPress={onProfilePress}>
                 {appContext.userData.firstName} {appContext.userData.lastName}
               </Text>
-              <Text>
-                Points
+              <Text style={styles.textStyle}
+                    onPress={onProfilePress}>
+                {Constants.RANK}
               </Text>
+              <TouchableOpacity style={styles.cardStyle}
+                                onPress={onEarningsPress}>
+                <View style={styles.horizontalContentStyle1}>
+                  <FontAwesome name='dollar'
+                               size={25}
+                               color={Colors.primaryColor}/>
+                  <Text style={styles.cardTitleStyle}>
+                    Total Earnings
+                  </Text>
+                </View>
+                <View style={styles.horizontalContentStyle2}>
+                  <Text style={styles.earnedAmountStyle}>
+                    54,000
+                  </Text>
+                  <Text style={styles.unitStyle}>
+                    LKR
+                  </Text>
+                </View>
+                <View style={styles.horizontalContentStyle3}>
+                  <Text style={styles.cardTextStyle}>
+                    View All
+                  </Text>
+                  <FontAwesome5 name='chevron-circle-right'
+                                size={16}
+                                color={Colors.primaryColor}/>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
           <View style={styles.bodyStyle}>
@@ -111,17 +145,47 @@ const DashboardScreen = props => {
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    width: wp('30%'),
-    height: wp('30%'),
-    borderRadius: wp('15%'),
+    width: hp('16%'),
+    height: hp('16%'),
+    borderRadius: hp('8%'),
     borderWidth: 2,
     borderColor: Colors.secondaryColor,
-    position: 'absolute',
-    marginTop: wp('5%'),
-    marginLeft: wp('8%')
+    marginTop: hp('4%')
   },
   bodyStyle: {
-    marginTop: hp('4%')
+    marginTop: hp('5%')
+  },
+  cardStyle: {
+    backgroundColor: Colors.secondaryColor,
+    borderRadius: hp('5%'),
+    alignItems: 'center',
+    paddingVertical: hp('2%'),
+    paddingHorizontal: wp('20%'),
+    marginVertical: hp('3%')
+  },
+  cardTextStyle: {
+    marginRight: 8,
+    fontSize: 17,
+    bottom: 2
+  },
+  cardTitleStyle: {
+    fontSize: 22,
+    marginLeft: 8
+  },
+  earnedAmountStyle: {
+    fontSize: 50,
+    color: Colors.primaryColor
+  },
+  horizontalContentStyle1: {
+    flexDirection: 'row',
+    marginVertical: hp('1%')
+  },
+  horizontalContentStyle2: {
+    flexDirection: 'row',
+    marginBottom: hp('2%')
+  },
+  horizontalContentStyle3: {
+    flexDirection: 'row'
   },
   loadingStyle: {
     position: 'absolute',
@@ -134,25 +198,32 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    width: wp('100%'),
-    height: hp('93.6%'),
     backgroundColor: Colors.secondaryColor
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: wp('42%'),
-    borderBottomRightRadius: wp('10%'),
-    borderBottomLeftRadius: wp('10%')
+    height: hp('58%'),
+    borderBottomRightRadius: hp('6%'),
+    borderBottomLeftRadius: hp('6%')
+  },
+  textStyle: {
+    color: Colors.secondaryColor
   },
   titleStyle: {
     fontSize: 22,
     color: Colors.secondaryColor,
-    marginTop: wp('15%'),
-    marginLeft: wp('44%'),
-    marginRight: wp('5%')
+    marginTop: hp('2%'),
+    marginBottom: hp('1%')
   },
   viewStyle: {
-    flexDirection: 'row'
+    alignItems: 'center'
+  },
+  unitStyle: {
+    color: Colors.primaryColor,
+    fontSize: 30,
+    textAlignVertical: 'bottom',
+    marginLeft: 10,
+    marginBottom: 5
   }
 })
 

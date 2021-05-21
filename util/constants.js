@@ -32,5 +32,6 @@ export default {
   DOWNLOADED: 'Downloaded successfully!',
   CONFIRMATION: 'Are you sure?',
   EMPTY_LIST: 'Oops! No items, yet.',
-  DESCRIPTION: 'Manage Your Team, Clients, Content Creators | Create Strategies, Discuss, Execute | Statistics'
+  DESCRIPTION: 'Manage Your Team, Clients, Content Creators | Create Strategies, Discuss, Execute | Statistics',
+  RANK: '34 VP Points | 10th Ranked'
 }
