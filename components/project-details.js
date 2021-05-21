@@ -576,7 +576,7 @@ const styles = StyleSheet.create({
   },
   deleteButtonStyle: {
     marginTop: 15,
-    backgroundColor: Colors.errorColor,
+    backgroundColor: Colors.primaryColor,
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),

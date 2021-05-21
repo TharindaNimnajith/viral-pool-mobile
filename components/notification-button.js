@@ -20,7 +20,7 @@ const NotificationButton = props => {
           <Item title='New Notifications'
                 iconName='bell-alert'
                 IconComponent={MaterialCommunityIcons}
-                color={Colors.errorColor}
+                color={Colors.primaryColor}
                 onPress={displayNotifications}/>
         ) : (
           <Item title='Notifications'

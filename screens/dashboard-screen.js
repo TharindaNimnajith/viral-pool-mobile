@@ -225,13 +225,12 @@ const styles = StyleSheet.create({
   ongoingProjectStatStyle: {
     fontSize: 60,
     fontWeight: 'bold',
-    color: Colors.styleColor,
     alignSelf: 'center'
   },
   rejectedProjectStatStyle: {
     fontSize: 60,
     fontWeight: 'bold',
-    color: Colors.errorColor,
+    color: Colors.primaryColor,
     alignSelf: 'center'
   },
   smallCardsViewStyle: {
