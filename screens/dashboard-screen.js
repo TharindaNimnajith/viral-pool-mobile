@@ -1,6 +1,7 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
+  FlatList,
   Image,
   RefreshControl,
   SafeAreaView,
@@ -21,10 +22,12 @@ import Constants from '../util/constants'
 import Menu from '../components/menu-button'
 import CombinedButtons from '../components/combined-buttons'
 import DashboardLogo from '../components/dashboard-logo'
+import ProjectListItem from '../components/project-list-item'
 
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)
 
+  const [ongoingProjects, setOngoingProjects] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
@@ -36,8 +39,26 @@ const DashboardScreen = props => {
       contentCreatorId: appContext.userData.id,
       expoToken: appContext.expoPushToken
     }
-    axios.post('content-creator-notification/token', data).then(() => {
-      setLoading(false)
+    axios.post('content-creator-notification/token', data).then(async response => {
+      if (response.status === 200) {
+        axios.get('project-cc-strategy?status=1').then(async response => {
+          setLoading(false)
+          setRefresh(false)
+          if (response.status === 200)
+            setOngoingProjects(response.data.data)
+          else
+            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+        }).catch(async error => {
+          setLoading(false)
+          setRefresh(false)
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          console.log(error)
+        })
+      } else {
+        setLoading(false)
+        setRefresh(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       setLoading(false)
       setRefresh(false)
@@ -52,7 +73,21 @@ const DashboardScreen = props => {
       contentCreatorId: appContext.userData.id,
       expoToken: appContext.expoPushToken
     }
-    axios.post('content-creator-notification/token', data).catch(async error => {
+    axios.post('content-creator-notification/token', data).then(async response => {
+      if (response.status === 200) {
+        axios.get('project-cc-strategy?status=1').then(async response => {
+          if (response.status === 200)
+            setOngoingProjects(response.data.data)
+          else
+            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+        }).catch(async error => {
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          console.log(error)
+        })
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
@@ -60,6 +95,15 @@ const DashboardScreen = props => {
       setRefreshing(false)
     })
   }, [])
+
+  const renderItemsFunction = itemData => {
+    return (
+      <ProjectListItem navigation={props.navigation}
+                       itemData={itemData}
+                       screen='OngoingProjectDetails'
+                       refreshFunction={refreshFunction}/>
+    )
+  }
 
   const onProfilePress = async () => {
     props.navigation.navigate('Profile')
@@ -137,19 +181,30 @@ const DashboardScreen = props => {
               Recent Jobs
             </Text>
             <View style={styles.listStyle}>
-              <View style={styles.emptyListStyle}>
-                <Ionicons name='warning'
-                          size={80}
-                          color={Colors.tertiaryColor}/>
-                <Text style={styles.errorMessageStyle}>
-                  {Constants.EMPTY_LIST}
-                </Text>
-                <TouchableOpacity onPress={refreshFunction}>
-                  <Text style={styles.reloadMessageStyle}>
-                    Reload?
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              {
+                ongoingProjects.length > 0 ? (
+                  <View>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={ongoingProjects}
+                              numColumns={1}
+                              renderItem={renderItemsFunction}/>
+                  </View>
+                ) : (
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )
+              }
             </View>
           </View>
           {
