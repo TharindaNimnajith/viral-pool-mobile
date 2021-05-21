@@ -8,6 +8,8 @@ export default {
     ' It can now be installed and imported from \'@react-native-community/datetimepicker\' instead' +
     ' of \'react-native\'. See https://github.com/react-native-community/datetimepicker',
   WARNING_4: 'Animated: `useNativeDriver`',
+  WARNING_5: 'VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use' +
+    ' another VirtualizedList-backed container instead.',
   USER_ROLE: 'Influencer',
   ACCESS_TOKEN: 'access_token',
   CLIENT_ID: 'client_id',

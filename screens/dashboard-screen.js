@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
   },
   bodyStyle: {
     marginTop: hp('5%'),
-    marginBottom: hp('4%'),
+    marginBottom: hp('3.5%'),
     marginHorizontal: wp('7%')
   },
   cardStyle: {
@@ -277,9 +277,9 @@ const styles = StyleSheet.create({
   listStyle: {
     marginTop: hp('2%'),
     backgroundColor: Colors.fadedEffectColor,
-    borderRadius: hp('5%'),
-    paddingVertical: hp('3%'),
-    paddingHorizontal: wp('10%')
+    borderRadius: 25,
+    paddingVertical: 18,
+    paddingHorizontal: 5
   },
   loadingStyle: {
     position: 'absolute',
@@ -296,7 +296,7 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: hp('58%'),
+    height: hp('60%'),
     borderBottomRightRadius: hp('6%'),
     borderBottomLeftRadius: hp('6%')
   },
@@ -310,10 +310,12 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   textStyle: {
+    marginVertical: 10,
+    fontSize: 16,
     color: Colors.secondaryColor
   },
   titleStyle: {
-    fontSize: 22,
+    fontSize: 26,
     color: Colors.secondaryColor,
     marginTop: hp('2%'),
     marginBottom: hp('1%')

@@ -5,7 +5,8 @@ const warnings = [
   Constants.WARNING_1,
   Constants.WARNING_2,
   Constants.WARNING_3,
-  Constants.WARNING_4
+  Constants.WARNING_4,
+  Constants.WARNING_5
 ]
 
 const isEmpty = async value => {
