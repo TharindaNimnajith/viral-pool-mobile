@@ -12,9 +12,9 @@ const DashboardLogo = () => {
 const styles = StyleSheet.create({
   logoStyle: {
     position: 'absolute',
-    marginTop: 4,
+    marginTop: 5,
     justifyContent: 'center',
-    marginLeft: wp('28%'),
+    marginLeft: wp('30%'),
     width: wp('40%'),
     height: wp('8.5%')
   }

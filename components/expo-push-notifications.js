@@ -13,6 +13,14 @@ import {AppContext} from '../util/app-context'
 import Constants from '../util/constants'
 import {showAlert} from '../util/common-helpers'
 
+setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true
+  })
+})
+
 const ExpoPushNotifications = () => {
   const appContext = useContext(AppContext)
 
@@ -42,14 +50,6 @@ const ExpoPushNotifications = () => {
 
   return (<></>)
 }
-
-setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true
-  })
-})
 
 async function registerForPushNotificationsAsync() {
   let token
