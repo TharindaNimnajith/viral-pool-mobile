@@ -1,8 +1,9 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
+import {AppContext} from '../util/app-context'
 import Colors from '../util/colors'
 import {showAlert} from '../util/common-helpers'
 import Constants from '../util/constants'
@@ -11,6 +12,8 @@ import CombinedButtons from '../components/combined-buttons'
 import NotificationListItem from '../components/notification-list-item'
 
 const NotificationsScreen = props => {
+  const appContext = useContext(AppContext)
+
   const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
@@ -18,6 +21,8 @@ const NotificationsScreen = props => {
 
   useEffect(() => {
     setLoading(true)
+    appContext.SetNewNotifications(false).then(() => {
+    })
     axios.get('content-creator-notification').then(async response => {
       setNotifications(response.data.data)
       setLoading(false)
@@ -32,6 +37,8 @@ const NotificationsScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
+    appContext.SetNewNotifications(false).then(() => {
+    })
     axios.get('content-creator-notification').then(async response => {
       setNotifications(response.data.data)
     }).catch(async error => {
