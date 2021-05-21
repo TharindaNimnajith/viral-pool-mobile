@@ -10,7 +10,7 @@ import Menu from '../components/menu-button'
 import CombinedButtons from '../components/combined-buttons'
 import EarningsListItem from "../components/earnings-list-item";
 
-const EarningsScreen = props => {
+const EarningsScreen = () => {
   const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)

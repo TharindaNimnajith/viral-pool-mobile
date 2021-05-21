@@ -10,7 +10,7 @@ import Menu from '../components/menu-button'
 import CombinedButtons from '../components/combined-buttons'
 import SocialMediaListItem from '../components/social-media-list-item'
 
-const SocialMediaScreen = props => {
+const SocialMediaScreen = () => {
   const [notifications, setNotifications] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)

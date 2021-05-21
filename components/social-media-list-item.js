@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../util/colors'
 
-const SocialMediaListItem = props => {
+const SocialMediaListItem = () => {
   return (
     <TouchableOpacity style={styles.itemStyle}>
       <View style={styles.viewStyle}>
