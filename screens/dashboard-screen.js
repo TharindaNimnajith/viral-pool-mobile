@@ -19,6 +19,7 @@ import {showAlert} from '../util/common-helpers'
 import Constants from '../util/constants'
 import Menu from '../components/menu-button'
 import CombinedButtons from '../components/combined-buttons'
+import DashboardLogo from "../components/dashboard-logo";
 
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)
@@ -273,16 +274,7 @@ DashboardScreen.navigationOptions = navData => {
     headerLeft: () => (
       <View>
         <Menu navigation={navData.navigation}/>
-        <Image source={require('../assets/dashboard-logo.png')}
-               style={{
-                 position:'absolute',
-                 // alignContent: 'center',
-                 // alignItems: 'center',
-                 justifyContent: 'center',
-                 marginLeft: wp('30%'),
-                 marginRight: wp('30%'),
-                 width: wp('40%'),
-               }}/>
+        <DashboardLogo/>
       </View>
     ),
     headerRight: () => (
