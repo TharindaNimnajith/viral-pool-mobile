@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {FontAwesome, FontAwesome5} from '@expo/vector-icons'
+import {FontAwesome, FontAwesome5, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../util/app-context'
 import Colors from '../util/colors'
@@ -27,9 +27,11 @@ const DashboardScreen = props => {
 
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     setLoading(true)
+    setRefresh(false)
     const data = {
       contentCreatorId: appContext.userData.id,
       expoToken: appContext.expoPushToken
@@ -38,10 +40,11 @@ const DashboardScreen = props => {
       setLoading(false)
     }).catch(async error => {
       setLoading(false)
+      setRefresh(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
-  }, [])
+  }, [refresh])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
@@ -64,6 +67,10 @@ const DashboardScreen = props => {
 
   const onEarningsPress = async () => {
     props.navigation.navigate('Earnings')
+  }
+
+  const refreshFunction = () => {
+    setRefresh(true)
   }
 
   return (
@@ -126,9 +133,24 @@ const DashboardScreen = props => {
             </View>
           </View>
           <View style={styles.bodyStyle}>
-            <Text>
-              Body
+            <Text style={styles.sectionTitleStyle}>
+              Recent Jobs
             </Text>
+            <View style={styles.listStyle}>
+              <View style={styles.emptyListStyle}>
+                <Ionicons name='warning'
+                          size={80}
+                          color={Colors.tertiaryColor}/>
+                <Text style={styles.errorMessageStyle}>
+                  {Constants.EMPTY_LIST}
+                </Text>
+                <TouchableOpacity onPress={refreshFunction}>
+                  <Text style={styles.reloadMessageStyle}>
+                    Reload?
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
           {
             loading &&
@@ -153,10 +175,12 @@ const styles = StyleSheet.create({
     marginTop: hp('4%')
   },
   bodyStyle: {
-    marginTop: hp('5%')
+    marginTop: hp('5%'),
+    marginBottom: hp('4%'),
+    marginHorizontal: wp('7%')
   },
   cardStyle: {
-    backgroundColor: Colors.secondaryColor,
+    backgroundColor: Colors.fadedEffectColor,
     borderRadius: hp('5%'),
     alignItems: 'center',
     paddingVertical: hp('2%'),
@@ -176,6 +200,14 @@ const styles = StyleSheet.create({
     fontSize: 50,
     color: Colors.primaryColor
   },
+  emptyListStyle: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  errorMessageStyle: {
+    color: Colors.tertiaryColor,
+    fontSize: 18
+  },
   horizontalContentStyle1: {
     flexDirection: 'row',
     marginVertical: hp('1%')
@@ -186,6 +218,13 @@ const styles = StyleSheet.create({
   },
   horizontalContentStyle3: {
     flexDirection: 'row'
+  },
+  listStyle: {
+    marginTop: hp('2%'),
+    backgroundColor: Colors.fadedEffectColor,
+    borderRadius: hp('5%'),
+    paddingVertical: hp('3%'),
+    paddingHorizontal: wp('10%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -205,6 +244,15 @@ const styles = StyleSheet.create({
     height: hp('58%'),
     borderBottomRightRadius: hp('6%'),
     borderBottomLeftRadius: hp('6%')
+  },
+  reloadMessageStyle: {
+    color: Colors.primaryColor,
+    fontSize: 16,
+    marginTop: 10
+  },
+  sectionTitleStyle: {
+    fontSize: 22,
+    marginLeft: 10
   },
   textStyle: {
     color: Colors.secondaryColor
