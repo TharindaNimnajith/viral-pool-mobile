@@ -93,6 +93,7 @@ const EarningsScreen = props => {
                   LKR
                 </Text>
               </View>
+              <View style={styles.lineStyle}/>
               <Text style={styles.cardTitleStyle}>
                 Pending Income
               </Text>
@@ -104,6 +105,7 @@ const EarningsScreen = props => {
                   LKR
                 </Text>
               </View>
+              <View style={styles.lineStyle}/>
               <Text style={styles.cardTitleStyle}>
                 Total Top-ups
               </Text>
@@ -119,7 +121,7 @@ const EarningsScreen = props => {
           </View>
           <View style={styles.bodyStyle}>
             <Text style={styles.sectionTitleStyle}>
-              Recent Jobs
+              Completed Jobs
             </Text>
             <View style={styles.listStyle}>
               {
@@ -163,8 +165,7 @@ const EarningsScreen = props => {
 
 const styles = StyleSheet.create({
   bodyStyle: {
-    marginTop: hp('5%'),
-    marginBottom: hp('3.5%'),
+    marginBottom: hp('4%'),
     marginHorizontal: wp('7%')
   },
   cardStyle: {
@@ -177,7 +178,8 @@ const styles = StyleSheet.create({
   },
   cardTitleStyle: {
     fontSize: 24,
-    marginLeft: 8
+    marginTop: hp('2%'),
+    marginBottom: hp('1%')
   },
   earnedAmountStyle: {
     fontSize: 50,
@@ -191,9 +193,21 @@ const styles = StyleSheet.create({
     color: Colors.tertiaryColor,
     fontSize: 18
   },
+  headerStyle: {
+    width: wp('85%'),
+    borderBottomRightRadius: hp('6%'),
+    borderBottomLeftRadius: hp('6%'),
+    alignSelf: 'center'
+  },
   horizontalContentStyle: {
     flexDirection: 'row',
     marginBottom: hp('2%')
+  },
+  lineStyle: {
+    height: 1.5,
+    width: wp('60%'),
+    backgroundColor: Colors.defaultColor,
+    marginVertical: hp('1.5%')
   },
   listStyle: {
     marginTop: hp('2.5%'),
@@ -215,11 +229,6 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor
   },
-  headerStyle: {
-    height: hp('50%'),
-    borderBottomRightRadius: hp('6%'),
-    borderBottomLeftRadius: hp('6%')
-  },
   reloadMessageStyle: {
     color: Colors.primaryColor,
     fontSize: 16,
@@ -227,7 +236,8 @@ const styles = StyleSheet.create({
   },
   sectionTitleStyle: {
     fontSize: 22,
-    marginLeft: 10
+    marginLeft: 10,
+    marginVertical: hp('1%')
   },
   unitStyle: {
     color: Colors.primaryColor,

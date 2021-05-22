@@ -296,7 +296,6 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: hp('60%'),
     borderBottomRightRadius: hp('6%'),
     borderBottomLeftRadius: hp('6%')
   },
@@ -307,7 +306,8 @@ const styles = StyleSheet.create({
   },
   sectionTitleStyle: {
     fontSize: 22,
-    marginLeft: 10
+    marginLeft: 10,
+    marginVertical: hp('1%')
   },
   textStyle: {
     marginVertical: 10,
