@@ -328,8 +328,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    width: wp('100%'),
-    height: hp('93.6%'),
+    height: hp('100%'),
     backgroundColor: Colors.secondaryColor
   },
   subtitleStyle: {
