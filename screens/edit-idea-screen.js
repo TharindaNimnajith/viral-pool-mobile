@@ -193,7 +193,7 @@ const EditIdeaScreen = props => {
                        placeholder='Enter Description'
                        placeholderTextColor={Colors.tertiaryColor}
                        multiline={true}
-                       numberOfLines={17}/>
+                       numberOfLines={30}/>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
                               onPress={showDialogEdit}>
@@ -223,15 +223,15 @@ const EditIdeaScreen = props => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: 30,
-    backgroundColor: Colors.primaryColor,
+    marginTop: hp('4%'),
+    backgroundColor: Colors.successColor,
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),
     borderRadius: 5
   },
   buttonDisabledStyle: {
-    marginTop: 30,
+    marginTop: hp('4%'),
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 10,
@@ -249,7 +249,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   deleteButtonStyle: {
-    marginTop: 15,
+    marginTop: hp('2%'),
+    marginBottom: hp('4%'),
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
     padding: 10,
@@ -257,8 +258,8 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   labelStyle: {
-    marginLeft: 40,
-    marginTop: 20,
+    marginLeft: wp('10%'),
+    marginTop: hp('3%'),
     color: Colors.primaryColor,
     alignSelf: 'baseline'
   },
@@ -273,17 +274,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    height: hp('100%'),
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.secondaryColor,
+    justifyContent: 'center'
   },
   multilineTextInputStyle: {
     textAlignVertical: 'top',
     borderColor: Colors.primaryColor,
     width: wp('80%'),
-    height: hp('32%'),
+    height: hp('55%'),
     borderWidth: 1,
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: hp('1.5%'),
     padding: 10,
     color: Colors.tertiaryColor
   },
@@ -293,7 +294,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     height: 40,
-    marginTop: 10,
+    marginTop: hp('1.5%'),
     padding: 10,
     color: Colors.tertiaryColor
   }
