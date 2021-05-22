@@ -39,7 +39,7 @@ const IdeaListItem = props => {
               </Text>
             )
           }
-          <Text>
+          <Text style={styles.dateStyle}>
             Posted on {props.itemData.item.createdDate.slice(0, 10)}
           </Text>
         </View>
@@ -58,6 +58,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 5
   },
+  dateStyle: {
+    color: Colors.tertiaryColor,
+    fontSize: 12
+  },
   iconViewStyle: {
     width: wp('10.5%'),
     marginLeft: wp('3%')
@@ -73,20 +77,18 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     alignContent: 'center',
-    marginTop: 10,
-    marginBottom: 10
+    marginVertical: 6
   },
   mainViewStyle: {
     flexDirection: 'row',
   },
   textStyle: {
-    color: Colors.tertiaryColor,
+    color: Colors.defaultColor,
     fontSize: 15,
     marginVertical: 7
   },
   titleStyle: {
-    fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: 17,
     color: Colors.primaryColor
   },
   viewStyle: {

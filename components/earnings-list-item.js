@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Colors from '../util/colors'
 
-const EarningsListItem = props => {
+const EarningsListItem = () => {
   return (
     <TouchableOpacity style={styles.itemStyle}>
       <View style={styles.viewStyle}>
