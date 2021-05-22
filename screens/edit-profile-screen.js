@@ -32,6 +32,10 @@ const EditProfileScreen = () => {
   const [birthDate, setBirthDate] = useState(appContext.userData.birthDate)
   const [address, setAddress] = useState(appContext.userData.address)
   const [phoneNumber, setPhoneNumber] = useState(appContext.userData.phoneNumber)
+  const [bankAccountName, setBankAccountName] = useState(appContext.userData.bankAccountName)
+  const [bankAccountNumber, setBankAccountNumber] = useState(appContext.userData.bankAccountNumber)
+  const [bankName, setBankName] = useState(appContext.userData.bankName)
+  const [branchName, setBranchName] = useState(appContext.userData.branchName)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
@@ -85,6 +89,22 @@ const EditProfileScreen = () => {
     setPhoneNumber(phoneNumber)
   }
 
+  const onChangeBankAccountName = async bankAccountName => {
+    setBankAccountName(bankAccountName)
+  }
+
+  const onChangeBankAccountNumber = async bankAccountNumber => {
+    setBankAccountNumber(bankAccountNumber)
+  }
+
+  const onChangeBankName = async bankName => {
+    setBankName(bankName)
+  }
+
+  const onChangeBranchName = async branchName => {
+    setBranchName(branchName)
+  }
+
   function isDisabled() {
     if (phoneNumber !== null)
       if (phoneNumber.trim().length === 0)
@@ -116,6 +136,22 @@ const EditProfileScreen = () => {
       formData.append('phoneNumber', '')
     else
       formData.append('phoneNumber', phoneNumber.trim())
+    if (bankAccountName === null)
+      formData.append('bankAccountName', '')
+    else
+      formData.append('bankAccountName', bankAccountName.trim())
+    if (bankAccountNumber === null)
+      formData.append('bankAccountNumber', '')
+    else
+      formData.append('bankAccountNumber', bankAccountNumber.trim())
+    if (bankName === null)
+      formData.append('bankName', '')
+    else
+      formData.append('bankName', bankName.trim())
+    if (branchName === null)
+      formData.append('branchName', '')
+    else
+      formData.append('branchName', branchName.trim())
     axios.put('User', formData).then(async response => {
       setLoading(false)
       if (response.status === 200) {
@@ -139,6 +175,9 @@ const EditProfileScreen = () => {
       }>
         <View style={styles.mainViewStyle}>
           <View style={styles.containerStyle}>
+            <Text style={styles.titleStyle}>
+              Personal Details
+            </Text>
             <Text style={styles.labelStyle}>
               First Name
             </Text>
@@ -217,6 +256,45 @@ const EditProfileScreen = () => {
                        value={phoneNumber}
                        placeholder='Enter Phone Number'
                        placeholderTextColor={Colors.tertiaryColor}/>
+          </View>
+          <View style={styles.containerStyle}>
+            <Text style={styles.titleStyle}>
+              Payment Details
+            </Text>
+            <Text style={styles.labelStyle}>
+              Bank Account Name
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={bankAccountName => onChangeBankAccountName(bankAccountName)}
+                       value={bankAccountName}
+                       placeholder='Enter Bank Account Name'
+                       placeholderTextColor={Colors.tertiaryColor}/>
+            <Text style={styles.labelStyle}>
+              Bank Account Number
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={bankAccountNumber => onChangeBankAccountNumber(bankAccountNumber)}
+                       value={bankAccountNumber}
+                       placeholder='Enter Bank Account Number'
+                       placeholderTextColor={Colors.tertiaryColor}/>
+            <Text style={styles.labelStyle}>
+              Bank Name
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={bankName => onChangeBankName(bankName)}
+                       value={bankName}
+                       placeholder='Enter Bank Name'
+                       placeholderTextColor={Colors.tertiaryColor}/>
+            <Text style={styles.labelStyle}>
+              Branch Name
+            </Text>
+            <TextInput style={styles.textInputStyle}
+                       onChangeText={branchName => onChangeBranchName(branchName)}
+                       value={branchName}
+                       placeholder='Enter Branch Name'
+                       placeholderTextColor={Colors.tertiaryColor}/>
+          </View>
+          <View style={styles.containerStyle}>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
                               onPress={showConfirmAlert}>
@@ -240,7 +318,8 @@ const EditProfileScreen = () => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: 30,
+    marginTop: hp('3%'),
+    marginBottom: hp('4%'),
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
     padding: 10,
@@ -248,7 +327,8 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   buttonDisabledStyle: {
-    marginTop: 30,
+    marginTop: hp('3%'),
+    marginBottom: hp('4%'),
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 10,
@@ -268,14 +348,19 @@ const styles = StyleSheet.create({
   datePickerStyle: {
     borderColor: Colors.secondaryColor,
     width: wp('80%'),
-    marginTop: 10,
+    marginTop: hp('1%'),
     color: Colors.tertiaryColor
   },
   labelStyle: {
-    marginLeft: 40,
-    marginTop: 20,
+    marginLeft: wp('10%'),
+    marginTop: hp('2%'),
     color: Colors.primaryColor,
     alignSelf: 'baseline'
+  },
+  lineStyle: {
+    borderBottomColor: Colors.primaryColor,
+    borderBottomWidth: 4,
+    marginHorizontal: wp('10%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -288,7 +373,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    height: hp('100%'),
     backgroundColor: Colors.secondaryColor
   },
   multilineTextInputStyle: {
@@ -298,7 +382,7 @@ const styles = StyleSheet.create({
     height: hp('20%'),
     borderWidth: 1,
     borderRadius: 5,
-    marginTop: 10,
+    marginTop: hp('1%'),
     padding: 10,
     color: Colors.tertiaryColor
   },
@@ -307,7 +391,7 @@ const styles = StyleSheet.create({
     marginRight: wp('20%')
   },
   radioStyle: {
-    marginTop: 10,
+    marginTop: hp('1%'),
     width: wp('80%')
   },
   textInputStyle: {
@@ -316,9 +400,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     height: 40,
-    marginTop: 10,
+    marginTop: hp('1%'),
     padding: 10,
     color: Colors.tertiaryColor
+  },
+  titleStyle: {
+    marginLeft: wp('10%'),
+    marginTop: hp('1.5%'),
+    marginBottom: hp('1%'),
+    color: Colors.primaryColor,
+    fontSize: 22,
+    alignSelf: 'baseline'
   }
 })
 

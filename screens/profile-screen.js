@@ -115,6 +115,18 @@ const ProfileScreen = props => {
       let phoneNumber = ''
       if (appContext.userData.phoneNumber !== null)
         phoneNumber = appContext.userData.phoneNumber
+      let bankAccountName = ''
+      if (appContext.userData.bankAccountName !== null)
+        bankAccountName = appContext.userData.bankAccountName
+      let bankAccountNumber = ''
+      if (appContext.userData.bankAccountNumber !== null)
+        bankAccountNumber = appContext.userData.bankAccountNumber
+      let bankName = ''
+      if (appContext.userData.bankName !== null)
+        bankName = appContext.userData.bankName
+      let branchName = ''
+      if (appContext.userData.branchName !== null)
+        branchName = appContext.userData.branchName
       const parameters = {
         'id': appContext.userData.id,
         'email': appContext.userData.email,
@@ -124,7 +136,11 @@ const ProfileScreen = props => {
         'gender': appContext.userData.gender,
         'birthDate': appContext.userData.birthDate,
         'address': address,
-        'phoneNumber': phoneNumber
+        'phoneNumber': phoneNumber,
+        'bankAccountName': bankAccountName,
+        'bankAccountNumber': bankAccountNumber,
+        'bankName': bankName,
+        'branchName': branchName
       }
       const options = {
         headers: headers,
@@ -174,24 +190,34 @@ const ProfileScreen = props => {
           <View style={styles.headerStyle}>
             {
               image ? (
-                <Image style={styles.avatarStyle}
-                       source={{
-                         uri: image
-                       }}/>
+                <View>
+                  <Image style={styles.avatarStyle}
+                         source={{
+                           uri: image
+                         }}/>
+                  <TouchableOpacity style={styles.editPhotoStyle}
+                                    onPress={showDialog}>
+                    <Ionicons name='camera'
+                              size={30}
+                              color={Colors.primaryColor}/>
+                  </TouchableOpacity>
+                </View>
               ) : (
-                <Image style={styles.avatarStyle}
-                       source={require('../assets/user.jpg')}/>
+                <View>
+                  <Image style={styles.avatarStyle}
+                         source={require('../assets/user.jpg')}/>
+                  <TouchableOpacity style={styles.editPhotoStyle}
+                                    onPress={showDialog}>
+                    <Ionicons name='camera'
+                              size={30}
+                              color={Colors.primaryColor}/>
+                  </TouchableOpacity>
+                </View>
               )
             }
           </View>
           <View style={styles.bodyStyle}>
             <View style={styles.bodyContentStyle}>
-              <TouchableOpacity style={styles.editPhotoStyle}
-                                onPress={showDialog}>
-                <Text style={styles.buttonTextStyle}>
-                  Edit Profile Picture
-                </Text>
-              </TouchableOpacity>
               <Text style={styles.titleStyle}>
                 {appContext.userData.firstName} {appContext.userData.lastName}
               </Text>
@@ -291,11 +317,11 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   bodyStyle: {
-    marginTop: hp('10%'),
-    marginBottom: hp('3%')
+    marginTop: hp('11%'),
+    marginBottom: hp('4%')
   },
   buttonStyle: {
-    marginTop: 30,
+    marginTop: hp('4.5%'),
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
     padding: 10,
@@ -307,10 +333,14 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   editPhotoStyle: {
-    marginTop: 10,
-    backgroundColor: Colors.primaryColor,
-    padding: 10,
-    borderRadius: 5
+    backgroundColor: Colors.secondaryColor,
+    borderRadius: 25,
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: hp('21%'),
+    left: hp('32%')
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
@@ -334,8 +364,8 @@ const styles = StyleSheet.create({
   subtitleStyle: {
     fontSize: 16,
     color: Colors.primaryColor,
-    marginTop: 10,
-    marginBottom: 30
+    marginTop: hp('4%'),
+    marginBottom: hp('4.5%')
   },
   textStyle: {
     fontSize: 16,
@@ -344,10 +374,9 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   titleStyle: {
-    fontSize: 26,
+    fontSize: 28,
     color: Colors.primaryColor,
-    marginTop: 30,
-    marginBottom: 10
+    marginTop: hp('3%')
   },
   viewStyle: {
     paddingVertical: 10,
