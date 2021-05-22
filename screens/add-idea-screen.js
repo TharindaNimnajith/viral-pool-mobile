@@ -197,8 +197,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    backgroundColor: Colors.secondaryColor,
-    justifyContent: 'center'
+    backgroundColor: Colors.secondaryColor
   },
   multilineTextInputStyle: {
     textAlignVertical: 'top',

@@ -223,7 +223,7 @@ const EditIdeaScreen = props => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: hp('4%'),
+    marginTop: hp('5%'),
     backgroundColor: Colors.successColor,
     alignItems: 'center',
     padding: 10,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     borderRadius: 5
   },
   buttonDisabledStyle: {
-    marginTop: hp('4%'),
+    marginTop: hp('5%'),
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 10,
@@ -243,14 +243,14 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   containerStyle: {
-    marginTop: hp('3%'),
+    marginTop: hp('1%'),
     alignItems: 'center',
     justifyContent: 'flex-start',
     flex: 1
   },
   deleteButtonStyle: {
     marginTop: hp('2%'),
-    marginBottom: hp('4%'),
+    marginBottom: hp('4.5%'),
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
     padding: 10,
@@ -274,8 +274,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    backgroundColor: Colors.secondaryColor,
-    justifyContent: 'center'
+    backgroundColor: Colors.secondaryColor
   },
   multilineTextInputStyle: {
     textAlignVertical: 'top',
