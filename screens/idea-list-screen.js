@@ -115,13 +115,13 @@ const styles = StyleSheet.create({
     borderColor: Colors.primaryColor,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 70,
+    width: 60,
+    height: 60,
     position: 'absolute',
     bottom: hp('10%'),
     right: wp('9%'),
-    height: 70,
     backgroundColor: Colors.primaryColor,
-    borderRadius: 35
+    borderRadius: 30
   },
   emptyListStyle: {
     position: 'absolute',
@@ -138,8 +138,8 @@ const styles = StyleSheet.create({
   },
   listStyle: {
     width: wp('95%'),
-    marginTop: 10,
-    marginBottom: 15
+    marginTop: hp('1%'),
+    marginBottom: hp('7%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -153,12 +153,13 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: hp('100%')
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,
     fontSize: 16,
-    marginTop: 10
+    marginTop: hp('1%')
   }
 })
 

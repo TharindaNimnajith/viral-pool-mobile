@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../util/app-context'
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
   },
   listStyle: {
     width: wp('95%'),
-    marginTop: 10,
-    marginBottom: 15
+    marginTop: hp('1%'),
+    marginBottom: hp('7%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -134,12 +134,13 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center'
+    alignItems: 'center',
+    minHeight: hp('100%')
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,
     fontSize: 16,
-    marginTop: 10
+    marginTop: hp('1%')
   }
 })
 
