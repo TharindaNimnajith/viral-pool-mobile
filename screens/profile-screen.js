@@ -201,7 +201,8 @@ const ProfileScreen = props => {
               <View>
                 <View style={styles.viewStyle}>
                   <Ionicons name='mail'
-                            size={20}/>
+                            size={20}
+                            color={Colors.primaryColor}/>
                   <Text style={styles.textStyle}>
                     {appContext.userData.email}
                   </Text>
@@ -210,13 +211,16 @@ const ProfileScreen = props => {
                   {
                     appContext.userData.gender?.toUpperCase() === 'MALE' ? (
                       <Ionicons name='man'
-                                size={20}/>
+                                size={20}
+                                color={Colors.primaryColor}/>
                     ) : appContext.userData.gender?.toUpperCase() === 'FEMALE' ? (
                       <Ionicons name='woman'
-                                size={20}/>
+                                size={20}
+                                color={Colors.primaryColor}/>
                     ) : (
                       <Ionicons name='person'
-                                size={20}/>
+                                size={20}
+                                color={Colors.primaryColor}/>
                     )
                   }
                   {
@@ -228,21 +232,24 @@ const ProfileScreen = props => {
                 </View>
                 <View style={styles.viewStyle}>
                   <Ionicons name='calendar'
-                            size={20}/>
+                            size={20}
+                            color={Colors.primaryColor}/>
                   <Text style={styles.textStyle}>
                     {appContext.userData.birthDate?.slice(0, 10)}
                   </Text>
                 </View>
                 <View style={styles.viewStyle}>
                   <Ionicons name='location'
-                            size={20}/>
+                            size={20}
+                            color={Colors.primaryColor}/>
                   <Text style={styles.textStyle}>
                     {appContext.userData.address}
                   </Text>
                 </View>
                 <View style={styles.viewStyle}>
                   <Ionicons name='call'
-                            size={20}/>
+                            size={20}
+                            color={Colors.primaryColor}/>
                   <Text style={styles.textStyle}>
                     {appContext.userData.phoneNumber}
                   </Text>
