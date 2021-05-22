@@ -21,6 +21,14 @@ const genderOptions = [{
   value: 1
 }]
 
+const tabs = [{
+  key: 'personalDetails',
+  title: 'Personal Details'
+}, {
+  key: 'paymentDetails',
+  title: 'Payment Details'
+}]
+
 const showAlert = async (title, message) => {
   Alert.alert(
     title,
@@ -35,5 +43,6 @@ export {
   ApiUrl,
   warnings,
   genderOptions,
+  tabs,
   showAlert
 }

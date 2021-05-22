@@ -9,19 +9,21 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
+  useWindowDimensions,
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {SceneMap, TabView} from 'react-native-tab-view'
 import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
 import {AppContext} from '../util/app-context'
-import {genderOptions, showAlert} from '../util/helpers'
+import {genderOptions, showAlert, tabs} from '../util/helpers'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
 import CombinedButtons from '../components/combined-buttons'
 
-const EditProfileScreen = () => {
+const PersonalDetailsRoute = () => {
   const appContext = useContext(AppContext)
 
   const [firstName, setFirstName] = useState(appContext.userData.firstName)
@@ -31,10 +33,6 @@ const EditProfileScreen = () => {
   const [birthDate, setBirthDate] = useState(appContext.userData.birthDate)
   const [address, setAddress] = useState(appContext.userData.address)
   const [phoneNumber, setPhoneNumber] = useState(appContext.userData.phoneNumber)
-  const [bankAccountName, setBankAccountName] = useState(appContext.userData.bankAccountName)
-  const [bankAccountNumber, setBankAccountNumber] = useState(appContext.userData.bankAccountNumber)
-  const [bankName, setBankName] = useState(appContext.userData.bankName)
-  const [branchName, setBranchName] = useState(appContext.userData.branchName)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
@@ -88,22 +86,6 @@ const EditProfileScreen = () => {
     setPhoneNumber(phoneNumber)
   }
 
-  const onChangeBankAccountName = async bankAccountName => {
-    setBankAccountName(bankAccountName)
-  }
-
-  const onChangeBankAccountNumber = async bankAccountNumber => {
-    setBankAccountNumber(bankAccountNumber)
-  }
-
-  const onChangeBankName = async bankName => {
-    setBankName(bankName)
-  }
-
-  const onChangeBranchName = async branchName => {
-    setBranchName(branchName)
-  }
-
   function isDisabled() {
     if (phoneNumber !== null)
       if (phoneNumber.trim().length === 0)
@@ -135,22 +117,22 @@ const EditProfileScreen = () => {
       formData.append('phoneNumber', '')
     else
       formData.append('phoneNumber', phoneNumber.trim())
-    if (bankAccountName === null)
+    if (appContext.userData.bankAccountName === null)
       formData.append('bankAccountName', '')
     else
-      formData.append('bankAccountName', bankAccountName.trim())
-    if (bankAccountNumber === null)
+      formData.append('bankAccountName', appContext.userData.bankAccountName.trim())
+    if (appContext.userData.bankAccountNumber === null)
       formData.append('bankAccountNumber', '')
     else
-      formData.append('bankAccountNumber', bankAccountNumber.trim())
-    if (bankName === null)
+      formData.append('bankAccountNumber', appContext.userData.bankAccountNumber.trim())
+    if (appContext.userData.bankName === null)
       formData.append('bankName', '')
     else
-      formData.append('bankName', bankName.trim())
-    if (branchName === null)
+      formData.append('bankName', appContext.userData.bankName.trim())
+    if (appContext.userData.branchName === null)
       formData.append('branchName', '')
     else
-      formData.append('branchName', branchName.trim())
+      formData.append('branchName', appContext.userData.branchName.trim())
     axios.put('User', formData).then(async response => {
       setLoading(false)
       if (response.status === 200) {
@@ -174,9 +156,6 @@ const EditProfileScreen = () => {
       }>
         <View style={styles.mainViewStyle}>
           <View style={styles.containerStyle}>
-            <Text style={styles.titleStyle}>
-              Personal Details
-            </Text>
             <Text style={styles.labelStyle}>
               First Name
             </Text>
@@ -256,11 +235,145 @@ const EditProfileScreen = () => {
                        placeholder='Enter Phone Number'
                        placeholderTextColor={Colors.tertiaryColor}/>
           </View>
-          <View style={styles.lineStyle}/>
           <View style={styles.containerStyle}>
-            <Text style={styles.titleStyle}>
-              Payment Details
-            </Text>
+            <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                              disabled={isDisabled()}
+                              onPress={showConfirmAlert}>
+              <Text style={styles.buttonTextStyle}>
+                Update
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
+          }
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  )
+}
+
+const PaymentDetailsRoute = () => {
+  const appContext = useContext(AppContext)
+
+  const [bankAccountName, setBankAccountName] = useState(appContext.userData.bankAccountName)
+  const [bankAccountNumber, setBankAccountNumber] = useState(appContext.userData.bankAccountNumber)
+  const [bankName, setBankName] = useState(appContext.userData.bankName)
+  const [branchName, setBranchName] = useState(appContext.userData.branchName)
+  const [loading, setLoading] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true)
+    wait(2000).then(() => {
+      setRefreshing(false)
+    })
+  }, [])
+
+  const showConfirmAlert = () => {
+    Alert.alert(
+      'EDIT PROFILE',
+      Constants.CONFIRMATION,
+      [{
+        text: 'Yes',
+        onPress: editProfile,
+      }, {
+        text: 'No'
+      }],
+      {
+        cancelable: false
+      }
+    )
+  }
+
+  const onChangeBankAccountName = async bankAccountName => {
+    setBankAccountName(bankAccountName)
+  }
+
+  const onChangeBankAccountNumber = async bankAccountNumber => {
+    setBankAccountNumber(bankAccountNumber)
+  }
+
+  const onChangeBankName = async bankName => {
+    setBankName(bankName)
+  }
+
+  const onChangeBranchName = async branchName => {
+    setBranchName(branchName)
+  }
+
+  function isDisabled() {
+    return false
+  }
+
+  const editProfile = async () => {
+    setLoading(true)
+    const formData = new FormData()
+    formData.append('id', appContext.userData.id)
+    formData.append('email', appContext.userData.email)
+    formData.append('userRole', Constants.USER_ROLE)
+    formData.append('gender', appContext.userData.gender === 0 ? 'female' :
+      appContext.userData.gender === 1 ? 'male' : appContext.userData.gender)
+    formData.append('birthDate', appContext.userData.birthDate)
+    if (appContext.userData.firstName === null)
+      formData.append('firstName', '')
+    else
+      formData.append('firstName', appContext.userData.firstName.trim())
+    if (appContext.userData.lastName === null)
+      formData.append('lastName', '')
+    else
+      formData.append('lastName', appContext.userData.lastName.trim())
+    if (appContext.userData.address === null)
+      formData.append('address', '')
+    else
+      formData.append('address', appContext.userData.address.trim())
+    if (appContext.userData.phoneNumber === null)
+      formData.append('phoneNumber', '')
+    else
+      formData.append('phoneNumber', appContext.userData.phoneNumber.trim())
+    if (bankAccountName === null)
+      formData.append('bankAccountName', '')
+    else
+      formData.append('bankAccountName', bankAccountName.trim())
+    if (bankAccountNumber === null)
+      formData.append('bankAccountNumber', '')
+    else
+      formData.append('bankAccountNumber', bankAccountNumber.trim())
+    if (bankName === null)
+      formData.append('bankName', '')
+    else
+      formData.append('bankName', bankName.trim())
+    if (branchName === null)
+      formData.append('branchName', '')
+    else
+      formData.append('branchName', branchName.trim())
+    axios.put('User', formData).then(async response => {
+      setLoading(false)
+      if (response.status === 200) {
+        await appContext.SetUserData(response.data.data)
+        await showAlert(Constants.SUCCESS, Constants.UPDATED)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }
+
+  return (
+    <SafeAreaView>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.containerStyle}>
             <Text style={styles.labelStyle}>
               Bank Account Name
             </Text>
@@ -316,6 +429,27 @@ const EditProfileScreen = () => {
   )
 }
 
+const renderScene = SceneMap({
+  personalDetails: PersonalDetailsRoute,
+  paymentDetails: PaymentDetailsRoute
+})
+
+const EditProfileScreen = () => {
+  const layout = useWindowDimensions()
+
+  const [index, setIndex] = React.useState(0)
+  const [routes] = React.useState(tabs)
+
+  return (
+    <TabView navigationState={{index, routes}}
+             renderScene={renderScene}
+             onIndexChange={setIndex}
+             initialLayout={{
+               width: layout.width
+             }}/>
+  )
+}
+
 const styles = StyleSheet.create({
   buttonStyle: {
     marginTop: hp('3%'),
@@ -356,14 +490,6 @@ const styles = StyleSheet.create({
     marginTop: hp('2%'),
     color: Colors.primaryColor,
     alignSelf: 'baseline'
-  },
-  lineStyle: {
-    height: 3,
-    width: wp('90%'),
-    backgroundColor: Colors.primaryColor,
-    marginTop: hp('5%'),
-    marginBottom: hp('2%'),
-    alignSelf: 'center'
   },
   loadingStyle: {
     position: 'absolute',
@@ -406,11 +532,6 @@ const styles = StyleSheet.create({
     marginTop: hp('1%'),
     padding: 10,
     color: Colors.tertiaryColor
-  },
-  titleStyle: {
-    marginBottom: hp('1%'),
-    color: Colors.primaryColor,
-    fontSize: 22
   }
 })
 
