@@ -17,10 +17,9 @@ import {launchImageLibraryAsync, MediaTypeOptions, requestMediaLibraryPermission
 import {FileSystemSessionType, FileSystemUploadType, uploadAsync} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
 import {AppContext} from '../util/app-context'
-import {ApiUrl} from '../util/api-url'
+import {ApiUrl, showAlert} from '../util/helpers'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
-import {showAlert} from '../util/common-helpers'
 import Menu from '../components/menu-button'
 import CombinedButtons from '../components/combined-buttons'
 

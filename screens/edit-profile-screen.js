@@ -16,10 +16,9 @@ import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
 import {AppContext} from '../util/app-context'
-import {showAlert} from '../util/common-helpers'
+import {genderOptions, showAlert} from '../util/helpers'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
-import {genderOptionsEnum} from '../util/enums'
 import CombinedButtons from '../components/combined-buttons'
 
 const EditProfileScreen = () => {
@@ -197,7 +196,7 @@ const EditProfileScreen = () => {
             <Text style={styles.labelStyle}>
               Gender
             </Text>
-            <RadioForm radio_props={genderOptionsEnum}
+            <RadioForm radio_props={genderOptions}
                        initial={gender}
                        formHorizontal={true}
                        buttonColor={Colors.primaryColor}

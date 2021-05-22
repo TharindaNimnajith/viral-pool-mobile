@@ -6,8 +6,7 @@ import {createAlbumAsync, createAssetAsync, requestPermissionsAsync} from 'expo-
 import {documentDirectory, downloadAsync, FileSystemSessionType} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
 import {AppContext} from '../util/app-context'
-import {ApiUrl} from '../util/api-url'
-import {showAlert} from '../util/common-helpers'
+import {ApiUrl, showAlert} from '../util/helpers'
 import Constants from '../util/constants'
 import Colors from '../util/colors'
 

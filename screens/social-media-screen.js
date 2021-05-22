@@ -4,7 +4,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../util/colors'
-import {showAlert} from '../util/common-helpers'
+import {showAlert} from '../util/helpers'
 import Constants from '../util/constants'
 import Menu from '../components/menu-button'
 import CombinedButtons from '../components/combined-buttons'

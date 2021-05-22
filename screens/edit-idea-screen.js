@@ -14,7 +14,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../util/app-context'
-import {isEmpty, showAlert} from '../util/common-helpers'
+import {showAlert} from '../util/helpers'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
 import CombinedButtons from '../components/combined-buttons'
@@ -87,12 +87,12 @@ const EditIdeaScreen = props => {
   }
 
   const onChangeTitle = async title => {
-    setTitleValid(!await isEmpty(title.trim()))
+    setTitleValid(title.trim().length > 0)
     setTitle(title)
   }
 
   const onChangeDescription = async description => {
-    setDescriptionValid(!await isEmpty(description.trim()))
+    setDescriptionValid(description.trim().length > 0)
     setDescription(description)
   }
 

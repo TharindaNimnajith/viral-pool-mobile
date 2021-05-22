@@ -1,11 +1,3 @@
-export const genderOptionsEnum = [{
-  label: 'Female',
-  value: 0
-}, {
-  label: 'Male',
-  value: 1
-}]
-
 export const jobAcceptationStatusEnum = Object.freeze({
   Pending: 0,
   Accepted: 1,

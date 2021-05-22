@@ -21,8 +21,19 @@ const IdeaListItem = props => {
         <Text style={styles.titleStyle}>
           {props.itemData.item.title}
         </Text>
-        <Text style={styles.textStyle}>
-          {props.itemData.item.description}
+        {
+          props.itemData.item.description.length < 100 ? (
+            <Text style={styles.textStyle}>
+              {props.itemData.item.description}
+            </Text>
+          ) : (
+            <Text style={styles.textStyle}>
+              {props.itemData.item.description.substring(0, 96)}...
+            </Text>
+          )
+        }
+        <Text>
+          Posted on {props.itemData.item.createdDate.slice(0, 10)}
         </Text>
       </View>
     </TouchableOpacity>

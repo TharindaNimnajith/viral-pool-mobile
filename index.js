@@ -1,6 +1,6 @@
 import registerRootComponent from 'expo/build/launch/registerRootComponent'
 import axios from 'axios'
-import {ApiUrl} from './util/api-url'
+import {ApiUrl} from './util/helpers'
 import Constants from './util/constants'
 import {getStringData} from './util/local-storage'
 import App from './App'

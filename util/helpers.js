@@ -1,6 +1,10 @@
 import {Alert} from 'react-native'
 import Constants from './constants'
 
+class ApiUrl {
+  static BASE_URL = 'https://cube360viralpoolapi.herokuapp.com/api/'
+}
+
 const warnings = [
   Constants.WARNING_1,
   Constants.WARNING_2,
@@ -9,9 +13,13 @@ const warnings = [
   Constants.WARNING_5
 ]
 
-const isEmpty = async value => {
-  return value === '' || value === null || value === undefined || value === 'null' || value === 'undefined'
-}
+const genderOptions = [{
+  label: 'Female',
+  value: 0
+}, {
+  label: 'Male',
+  value: 1
+}]
 
 const showAlert = async (title, message) => {
   Alert.alert(
@@ -24,7 +32,8 @@ const showAlert = async (title, message) => {
 }
 
 export {
+  ApiUrl,
   warnings,
-  isEmpty,
+  genderOptions,
   showAlert
 }

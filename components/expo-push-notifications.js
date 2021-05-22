@@ -11,7 +11,7 @@ import {
 } from 'expo-notifications'
 import {AppContext} from '../util/app-context'
 import Constants from '../util/constants'
-import {showAlert} from '../util/common-helpers'
+import {showAlert} from '../util/helpers'
 
 setNotificationHandler({
   handleNotification: async () => ({

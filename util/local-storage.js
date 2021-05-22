@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import {showAlert} from './common-helpers'
+import {showAlert} from './helpers'
 import Constants from './constants'
 
 export const storeStringData = async (key, value) => {

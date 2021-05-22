@@ -18,7 +18,7 @@ import axios from 'axios'
 import {contentSubmissionStatusEnum, jobAcceptationStatusEnum, resultSubmissionStatusEnum} from '../util/enums'
 import Colors from '../util/colors'
 import Constants from '../util/constants'
-import {isEmpty, showAlert} from '../util/common-helpers'
+import {showAlert} from '../util/helpers'
 import FileListItem from './file-list-item'
 
 const ProjectDetails = props => {
@@ -291,12 +291,12 @@ const ProjectDetails = props => {
   }
 
   const onChangeContentSubmissionLink = async contentSubmissionLink => {
-    setContentSubmissionLinkValid(!await isEmpty(contentSubmissionLink.trim()))
+    setContentSubmissionLinkValid(contentSubmissionLink.trim().length > 0)
     setContentSubmissionLink(contentSubmissionLink)
   }
 
   const onChangeResultSubmissionLink = async resultSubmissionLink => {
-    setResultSubmissionLinkValid(!await isEmpty(resultSubmissionLink.trim()))
+    setResultSubmissionLinkValid(resultSubmissionLink.trim().length > 0)
     setResultSubmissionLink(resultSubmissionLink)
   }
 
