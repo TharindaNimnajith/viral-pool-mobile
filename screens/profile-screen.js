@@ -278,20 +278,21 @@ const ProfileScreen = props => {
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    width: wp('50%'),
-    height: wp('50%'),
-    borderRadius: wp('25%'),
+    width: hp('22%'),
+    height: hp('22%'),
+    borderRadius: hp('11%'),
     borderWidth: 2,
     borderColor: Colors.secondaryColor,
     alignSelf: 'center',
     position: 'absolute',
-    marginTop: wp('20%')
+    marginTop: hp('16%')
   },
   bodyContentStyle: {
     alignItems: 'center'
   },
   bodyStyle: {
-    marginTop: hp('8%')
+    marginTop: hp('10%'),
+    marginBottom: hp('3%')
   },
   buttonStyle: {
     marginTop: 30,
@@ -313,7 +314,7 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: wp('55%'),
+    height: hp('28%'),
     borderBottomRightRadius: wp('10%'),
     borderBottomLeftRadius: wp('10%')
   },
@@ -328,7 +329,6 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    height: hp('100%'),
     backgroundColor: Colors.secondaryColor
   },
   subtitleStyle: {
