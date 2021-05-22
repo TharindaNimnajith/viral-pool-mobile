@@ -1,6 +1,7 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {FontAwesome, FontAwesome5} from '@expo/vector-icons'
 import Colors from '../util/colors'
 
 const IdeaListItem = props => {
@@ -17,50 +18,71 @@ const IdeaListItem = props => {
   return (
     <TouchableOpacity style={styles.itemStyle}
                       onPress={redirectToDetailsScreen}>
-      <View style={styles.viewStyle}>
-        <Text style={styles.titleStyle}>
-          {props.itemData.item.title}
-        </Text>
-        {
-          props.itemData.item.description.length < 100 ? (
-            <Text style={styles.textStyle}>
-              {props.itemData.item.description}
-            </Text>
-          ) : (
-            <Text style={styles.textStyle}>
-              {props.itemData.item.description.substring(0, 96)}...
-            </Text>
-          )
-        }
-        <Text>
-          Posted on {props.itemData.item.createdDate.slice(0, 10)}
-        </Text>
+      <View style={styles.mainViewStyle}>
+        <View style={styles.iconViewStyle}>
+          <FontAwesome name='comments'
+                       size={30}
+                       color={Colors.primaryColor}/>
+        </View>
+        <View style={styles.viewStyle}>
+          <Text style={styles.titleStyle}>
+            {props.itemData.item.title}
+          </Text>
+          {
+            props.itemData.item.description.length < 80 ? (
+              <Text style={styles.textStyle}>
+                {props.itemData.item.description}
+              </Text>
+            ) : (
+              <Text style={styles.textStyle}>
+                {props.itemData.item.description.substring(0, 76)}...
+              </Text>
+            )
+          }
+          <Text>
+            Posted on {props.itemData.item.createdDate.slice(0, 10)}
+          </Text>
+        </View>
+        <View style={styles.arrowStyle}>
+          <FontAwesome5 name='chevron-circle-right'
+                        size={16}
+                        color={Colors.primaryColor}/>
+        </View>
       </View>
     </TouchableOpacity>
   )
 }
 
 const styles = StyleSheet.create({
+  arrowStyle: {
+    justifyContent: 'center',
+    marginLeft: 5
+  },
+  iconViewStyle: {
+    width: wp('10.5%'),
+    marginLeft: wp('3%')
+  },
   itemStyle: {
-    padding: 15,
     elevation: 5,
     borderRadius: 10,
     backgroundColor: Colors.secondaryColor,
     marginHorizontal: wp('4%'),
-    height: 90,
+    height: 110,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-start',
-    marginTop: 6,
-    marginBottom: 6,
-    alignContent: 'center'
+    alignContent: 'center',
+    marginTop: 10,
+    marginBottom: 10
+  },
+  mainViewStyle: {
+    flexDirection: 'row',
   },
   textStyle: {
     color: Colors.tertiaryColor,
     fontSize: 15,
-    marginTop: 3,
-    marginBottom: 3
+    marginVertical: 7
   },
   titleStyle: {
     fontWeight: 'bold',
@@ -68,7 +90,7 @@ const styles = StyleSheet.create({
     color: Colors.primaryColor
   },
   viewStyle: {
-    width: wp('80%')
+    width: wp('65%')
   }
 })
 
