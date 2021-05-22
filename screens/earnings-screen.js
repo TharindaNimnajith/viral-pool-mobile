@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {FontAwesome, Ionicons} from '@expo/vector-icons'
+import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../util/colors'
 import {showAlert} from '../util/helpers'
@@ -82,15 +82,10 @@ const EarningsScreen = props => {
         <View style={styles.mainViewStyle}>
           <View style={styles.headerStyle}>
             <TouchableOpacity style={styles.cardStyle}>
-              <View style={styles.horizontalContentStyle1}>
-                <FontAwesome name='dollar'
-                             size={25}
-                             color={Colors.primaryColor}/>
-                <Text style={styles.cardTitleStyle}>
-                  Total Earnings
-                </Text>
-              </View>
-              <View style={styles.horizontalContentStyle2}>
+              <Text style={styles.cardTitleStyle}>
+                Net Income
+              </Text>
+              <View style={styles.horizontalContentStyle}>
                 <Text style={styles.earnedAmountStyle}>
                   54,000
                 </Text>
@@ -98,15 +93,10 @@ const EarningsScreen = props => {
                   LKR
                 </Text>
               </View>
-              <View style={styles.horizontalContentStyle1}>
-                <FontAwesome name='dollar'
-                             size={25}
-                             color={Colors.primaryColor}/>
-                <Text style={styles.cardTitleStyle}>
-                  Total Earnings
-                </Text>
-              </View>
-              <View style={styles.horizontalContentStyle2}>
+              <Text style={styles.cardTitleStyle}>
+                Pending Income
+              </Text>
+              <View style={styles.horizontalContentStyle}>
                 <Text style={styles.earnedAmountStyle}>
                   54,000
                 </Text>
@@ -114,15 +104,10 @@ const EarningsScreen = props => {
                   LKR
                 </Text>
               </View>
-              <View style={styles.horizontalContentStyle1}>
-                <FontAwesome name='dollar'
-                             size={25}
-                             color={Colors.primaryColor}/>
-                <Text style={styles.cardTitleStyle}>
-                  Total Earnings
-                </Text>
-              </View>
-              <View style={styles.horizontalContentStyle2}>
+              <Text style={styles.cardTitleStyle}>
+                Total Top-ups
+              </Text>
+              <View style={styles.horizontalContentStyle}>
                 <Text style={styles.earnedAmountStyle}>
                   54,000
                 </Text>
@@ -177,14 +162,6 @@ const EarningsScreen = props => {
 }
 
 const styles = StyleSheet.create({
-  avatarStyle: {
-    width: hp('16%'),
-    height: hp('16%'),
-    borderRadius: hp('8%'),
-    borderWidth: 2,
-    borderColor: Colors.secondaryColor,
-    marginTop: hp('4%')
-  },
   bodyStyle: {
     marginTop: hp('5%'),
     marginBottom: hp('3.5%'),
@@ -198,13 +175,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp('20%'),
     marginVertical: hp('3%')
   },
-  cardTextStyle: {
-    marginRight: 8,
-    fontSize: 17,
-    bottom: 2
-  },
   cardTitleStyle: {
-    fontSize: 22,
+    fontSize: 24,
     marginLeft: 8
   },
   earnedAmountStyle: {
@@ -219,16 +191,9 @@ const styles = StyleSheet.create({
     color: Colors.tertiaryColor,
     fontSize: 18
   },
-  horizontalContentStyle1: {
-    flexDirection: 'row',
-    marginVertical: hp('1%')
-  },
-  horizontalContentStyle2: {
+  horizontalContentStyle: {
     flexDirection: 'row',
     marginBottom: hp('2%')
-  },
-  horizontalContentStyle3: {
-    flexDirection: 'row'
   },
   listStyle: {
     marginTop: hp('2.5%'),
@@ -251,8 +216,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor
   },
   headerStyle: {
-    backgroundColor: Colors.primaryColor,
-    height: hp('60%'),
+    height: hp('50%'),
     borderBottomRightRadius: hp('6%'),
     borderBottomLeftRadius: hp('6%')
   },
@@ -264,20 +228,6 @@ const styles = StyleSheet.create({
   sectionTitleStyle: {
     fontSize: 22,
     marginLeft: 10
-  },
-  textStyle: {
-    marginVertical: 10,
-    fontSize: 16,
-    color: Colors.secondaryColor
-  },
-  titleStyle: {
-    fontSize: 26,
-    color: Colors.secondaryColor,
-    marginTop: hp('2%'),
-    marginBottom: hp('1%')
-  },
-  viewStyle: {
-    alignItems: 'center'
   },
   unitStyle: {
     color: Colors.primaryColor,
