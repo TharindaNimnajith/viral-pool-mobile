@@ -196,7 +196,7 @@ const ProfileScreen = props => {
                 {appContext.userData.firstName} {appContext.userData.lastName}
               </Text>
               <Text style={styles.subtitleStyle}>
-                {appContext.userData.userRole}
+                34 VP Points | 10th Ranked
               </Text>
               <View>
                 <View style={styles.viewStyle}>
@@ -338,7 +338,7 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   titleStyle: {
-    fontSize: 22,
+    fontSize: 26,
     color: Colors.primaryColor,
     marginTop: 30,
     marginBottom: 10

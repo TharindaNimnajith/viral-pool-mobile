@@ -145,7 +145,7 @@ const DashboardScreen = props => {
               </Text>
               <Text style={styles.textStyle}
                     onPress={onProfilePress}>
-                {Constants.RANK}
+                34 VP Points | 10th Ranked
               </Text>
               <TouchableOpacity style={styles.cardStyle}
                                 onPress={onEarningsPress}>
