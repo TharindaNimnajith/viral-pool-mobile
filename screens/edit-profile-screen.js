@@ -256,6 +256,7 @@ const EditProfileScreen = () => {
                        placeholder='Enter Phone Number'
                        placeholderTextColor={Colors.tertiaryColor}/>
           </View>
+          <View style={styles.lineStyle}/>
           <View style={styles.containerStyle}>
             <Text style={styles.titleStyle}>
               Payment Details
@@ -357,9 +358,12 @@ const styles = StyleSheet.create({
     alignSelf: 'baseline'
   },
   lineStyle: {
-    borderBottomColor: Colors.primaryColor,
-    borderBottomWidth: 4,
-    marginHorizontal: wp('10%')
+    height: 3,
+    width: wp('90%'),
+    backgroundColor: Colors.primaryColor,
+    marginTop: hp('5%'),
+    marginBottom: hp('2%'),
+    alignSelf: 'center'
   },
   loadingStyle: {
     position: 'absolute',
@@ -404,12 +408,9 @@ const styles = StyleSheet.create({
     color: Colors.tertiaryColor
   },
   titleStyle: {
-    marginLeft: wp('10%'),
-    marginTop: hp('1.5%'),
     marginBottom: hp('1%'),
     color: Colors.primaryColor,
-    fontSize: 22,
-    alignSelf: 'baseline'
+    fontSize: 22
   }
 })
 
