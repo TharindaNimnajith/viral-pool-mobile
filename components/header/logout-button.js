@@ -26,7 +26,7 @@ const Logout = props => {
     <View>
       <Dialog.Container visible={visible}>
         <Dialog.Title>
-          LOGOUT
+          SIGN OUT
         </Dialog.Title>
         <Dialog.Description>
           {Constants.CONFIRMATION}

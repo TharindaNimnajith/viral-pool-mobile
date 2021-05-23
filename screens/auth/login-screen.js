@@ -108,7 +108,7 @@ const LoginScreen = props => {
                 {Constants.DESCRIPTION}
               </Text>
               <Text style={styles.titleStyle}>
-                Login
+                Sign in
               </Text>
             </View>
             <Text style={styles.labelStyle}>
@@ -133,7 +133,7 @@ const LoginScreen = props => {
                               disabled={isDisabled()}
                               onPress={login}>
               <Text style={styles.buttonTextStyle}>
-                Login
+                Sign in
               </Text>
             </TouchableOpacity>
           </View>
@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     width: wp('70%'),
     color: Colors.tertiaryColor,
     textAlign: 'center',
-    lineHeight: 20
+    lineHeight: 22
   },
   titleStyle: {
     textTransform: 'uppercase',
