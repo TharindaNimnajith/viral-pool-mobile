@@ -126,12 +126,10 @@ const EarningsScreen = props => {
             <View style={styles.listStyle}>
               {
                 completedProjects.length > 0 ? (
-                  <View>
-                    <FlatList keyExtractor={(item, index) => index.toString()}
-                              data={completedProjects}
-                              numColumns={1}
-                              renderItem={renderItemsFunction}/>
-                  </View>
+                  <FlatList keyExtractor={(item, index) => index.toString()}
+                            data={completedProjects}
+                            numColumns={1}
+                            renderItem={renderItemsFunction}/>
                 ) : (
                   <View style={styles.emptyListStyle}>
                     <Ionicons name='warning'
@@ -165,7 +163,7 @@ const EarningsScreen = props => {
 
 const styles = StyleSheet.create({
   bodyStyle: {
-    marginBottom: hp('4%'),
+    marginBottom: hp('1%'),
     marginHorizontal: wp('7%')
   },
   cardStyle: {
@@ -227,7 +225,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.secondaryColor,
+    minHeight: hp('93.6%')
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,

@@ -183,12 +183,10 @@ const DashboardScreen = props => {
             <View style={styles.listStyle}>
               {
                 ongoingProjects.length > 0 ? (
-                  <View>
-                    <FlatList keyExtractor={(item, index) => index.toString()}
-                              data={ongoingProjects}
-                              numColumns={1}
-                              renderItem={renderItemsFunction}/>
-                  </View>
+                  <FlatList keyExtractor={(item, index) => index.toString()}
+                            data={ongoingProjects}
+                            numColumns={1}
+                            renderItem={renderItemsFunction}/>
                 ) : (
                   <View style={styles.emptyListStyle}>
                     <Ionicons name='warning'
@@ -231,7 +229,7 @@ const styles = StyleSheet.create({
   },
   bodyStyle: {
     marginTop: hp('5%'),
-    marginBottom: hp('3.5%'),
+    marginBottom: hp('1%'),
     marginHorizontal: wp('7%')
   },
   cardStyle: {
@@ -292,7 +290,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.secondaryColor,
+    minHeight: hp('93.6%')
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,

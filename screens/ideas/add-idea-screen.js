@@ -153,8 +153,8 @@ const AddIdeaScreen = props => {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    marginTop: hp('5%'),
-    marginBottom: hp('9%'),
+    marginTop: hp('4%'),
+    marginBottom: hp('1%'),
     backgroundColor: Colors.successColor,
     alignItems: 'center',
     padding: 10,
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
   buttonDisabledStyle: {
     marginTop: hp('4%'),
-    marginBottom: hp('9%'),
+    marginBottom: hp('1%'),
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 10,
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   containerStyle: {
-    marginTop: hp('3%'),
+    marginTop: hp('1%'),
     alignItems: 'center',
     justifyContent: 'flex-start',
     flex: 1
@@ -197,7 +197,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.secondaryColor,
+    minHeight: hp('93.6%')
   },
   multilineTextInputStyle: {
     textAlignVertical: 'top',

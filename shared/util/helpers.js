@@ -23,10 +23,14 @@ const genderOptions = [{
 
 const tabs = [{
   key: 'personalDetails',
-  title: 'Personal Details'
+  title: 'Personal Details',
+  iconFocused: 'person',
+  icon: 'person-outline'
 }, {
   key: 'paymentDetails',
-  title: 'Payment Details'
+  title: 'Payment Details',
+  iconFocused: 'card',
+  icon: 'card-outline'
 }]
 
 const showAlert = async (title, message) => {

@@ -193,7 +193,7 @@ const PaymentDetailsRoute = () => {
 const styles = StyleSheet.create({
   buttonStyle: {
     marginTop: hp('3%'),
-    marginBottom: hp('4%'),
+    marginBottom: hp('1%'),
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
     padding: 10,
@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   },
   buttonDisabledStyle: {
     marginTop: hp('3%'),
-    marginBottom: hp('4%'),
+    marginBottom: hp('1%'),
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 10,
@@ -214,10 +214,9 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase'
   },
   containerStyle: {
-    marginTop: hp('2%'),
+    marginTop: hp('1%'),
     alignItems: 'center',
-    justifyContent: 'flex-start',
-    flex: 1
+    justifyContent: 'flex-start'
   },
   labelStyle: {
     marginLeft: wp('10%'),
@@ -236,7 +235,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.secondaryColor,
+    minHeight: hp('86%')
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,

@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
   },
   bodyStyle: {
     marginTop: hp('11%'),
-    marginBottom: hp('4%')
+    marginBottom: hp('1%')
   },
   buttonStyle: {
     marginTop: hp('4.5%'),
@@ -358,7 +358,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.secondaryColor,
+    minHeight: hp('93.6%')
   },
   subtitleStyle: {
     fontSize: 16,
