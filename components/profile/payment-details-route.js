@@ -219,12 +219,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flex: 1
   },
-  datePickerStyle: {
-    borderColor: Colors.secondaryColor,
-    width: wp('80%'),
-    marginTop: hp('1%'),
-    color: Colors.tertiaryColor
-  },
   labelStyle: {
     marginLeft: wp('10%'),
     marginTop: hp('2%'),
@@ -243,25 +237,6 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor
-  },
-  multilineTextInputStyle: {
-    textAlignVertical: 'top',
-    borderColor: Colors.primaryColor,
-    width: wp('80%'),
-    height: hp('20%'),
-    borderWidth: 1,
-    borderRadius: 5,
-    marginTop: hp('1%'),
-    padding: 10,
-    color: Colors.tertiaryColor
-  },
-  radioLabelStyle: {
-    color: Colors.primaryColor,
-    marginRight: wp('20%')
-  },
-  radioStyle: {
-    marginTop: hp('1%'),
-    width: wp('80%')
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
