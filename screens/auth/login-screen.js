@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    height: hp('102.2%'),
+    minHeight: hp('102.2%'),
     backgroundColor: Colors.secondaryColor
   },
   refreshStyle: {
