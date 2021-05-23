@@ -1,7 +1,7 @@
 import React from 'react'
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {FontAwesome5, Ionicons} from '@expo/vector-icons'
+import {MaterialIcons} from '@expo/vector-icons'
 import Colors from '../../shared/const/colors'
 
 const YoutubeListItem = props => {
@@ -9,22 +9,29 @@ const YoutubeListItem = props => {
     <TouchableOpacity style={styles.itemStyle}>
       <View style={styles.mainViewStyle}>
         <View style={styles.iconViewStyle}>
-          <Ionicons name='notifications'
-                    size={30}
-                    color={Colors.primaryColor}/>
+          <Image style={styles.avatarStyle}
+                 source={{
+                   uri: props.itemData.item.iconPath
+                 }}/>
         </View>
         <View style={styles.viewStyle}>
           <Text style={styles.textStyle}>
-            {/*{props.itemData.item.notification}*/}
+            {props.itemData.item.channelName}
           </Text>
-          <Text style={styles.dateStyle}>
-            {/*{props.itemData.item.createdDate.slice(0, 10)}*/}
+          <Text style={styles.statStyle}>
+            Videos {props.itemData.item.videoCount}
+          </Text>
+          <Text style={styles.statStyle}>
+            Subscribers {props.itemData.item.subscriptionCount}
+          </Text>
+          <Text style={styles.statStyle}>
+            Views {props.itemData.item.viewCount}
           </Text>
         </View>
-        <View style={styles.arrowStyle}>
-          <FontAwesome5 name='chevron-circle-right'
-                        size={16}
-                        color={Colors.primaryColor}/>
+        <View style={styles.deleteStyle}>
+          <MaterialIcons name='delete-forever'
+                         size={35}
+                         color={Colors.primaryColor}/>
         </View>
       </View>
     </TouchableOpacity>
@@ -32,15 +39,9 @@ const YoutubeListItem = props => {
 }
 
 const styles = StyleSheet.create({
-  arrowStyle: {
+  deleteStyle: {
     justifyContent: 'center',
     marginLeft: 10
-  },
-  dateStyle: {
-    color: Colors.tertiaryColor,
-    fontSize: 12,
-    alignSelf: 'flex-end',
-    marginRight: 5
   },
   iconViewStyle: {
     width: wp('10.5%'),
@@ -69,12 +70,16 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     flexDirection: 'row'
   },
+  statStyle: {
+    color: Colors.tertiaryColor,
+    fontSize: 14
+  },
   textStyle: {
     fontSize: 15,
     color: Colors.defaultColor
   },
   viewStyle: {
-    width: wp('62%')
+    width: wp('58%')
   }
 })
 

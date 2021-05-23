@@ -194,7 +194,7 @@ const ProjectDetails = props => {
       setLoading(false)
       if (response.status === 200) {
         await showAlert(Constants.SUCCESS, Constants.REJECTED)
-        props.navigation.navigate('NewProjectList')
+        props.project.navigation.navigate('NewProjectList')
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -498,8 +498,9 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
-            contentSubmissionStatus === contentSubmissionStatusEnum.Approved &&
+            ((jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && isContentGivenByStrategyMember) ||
+              (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
+                contentSubmissionStatus === contentSubmissionStatusEnum.Approved)) &&
             <View style={styles.centerViewStyle}>
               <Text style={styles.labelStyle}>
                 Result Submission Link

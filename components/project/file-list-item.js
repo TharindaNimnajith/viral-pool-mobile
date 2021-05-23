@@ -23,7 +23,7 @@ const FileListItem = props => {
     setVisible(false)
   }
 
-  const getFileItem = async () => {
+  const getFileItem = () => {
     switch (props.itemData.fileType) {
       case Constants.PDF:
         return 'file-pdf'
