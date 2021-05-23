@@ -17,7 +17,7 @@ import {launchImageLibraryAsync, MediaTypeOptions, requestMediaLibraryPermission
 import {FileSystemSessionType, FileSystemUploadType, uploadAsync} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
 import {AppContext} from '../../shared/global/app-context'
-import {ApiUrl, showAlert} from '../../shared/util/helpers'
+import {ApiUrl, isNullAsync, showAlert} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
@@ -103,28 +103,28 @@ const ProfileScreen = props => {
         'client_id': `${Constants.CLIENT_ID_VALUE}`
       }
       let firstName = ''
-      if (appContext.userData.firstName !== null)
+      if (!await isNullAsync(appContext.userData.firstName))
         firstName = appContext.userData.firstName
       let lastName = ''
-      if (appContext.userData.lastName !== null)
+      if (!await isNullAsync(appContext.userData.lastName))
         lastName = appContext.userData.lastName
       let address = ''
-      if (appContext.userData.address !== null)
+      if (!await isNullAsync(appContext.userData.address))
         address = appContext.userData.address
       let phoneNumber = ''
-      if (appContext.userData.phoneNumber !== null)
+      if (!await isNullAsync(appContext.userData.phoneNumber))
         phoneNumber = appContext.userData.phoneNumber
       let bankAccountName = ''
-      if (appContext.userData.bankAccountName !== null)
+      if (!await isNullAsync(appContext.userData.bankAccountName))
         bankAccountName = appContext.userData.bankAccountName
       let bankAccountNumber = ''
-      if (appContext.userData.bankAccountNumber !== null)
+      if (!await isNullAsync(appContext.userData.bankAccountNumber))
         bankAccountNumber = appContext.userData.bankAccountNumber
       let bankName = ''
-      if (appContext.userData.bankName !== null)
+      if (!await isNullAsync(appContext.userData.bankName))
         bankName = appContext.userData.bankName
       let branchName = ''
-      if (appContext.userData.branchName !== null)
+      if (!await isNullAsync(appContext.userData.branchName))
         branchName = appContext.userData.branchName
       const parameters = {
         'id': appContext.userData.id,
@@ -171,7 +171,7 @@ const ProfileScreen = props => {
     <SafeAreaView>
       <Dialog.Container visible={visible}>
         <Dialog.Title>
-          EDIT PROFILE PICTURE
+          UPDATE PROFILE PICTURE
         </Dialog.Title>
         <Dialog.Description>
           {Constants.CONFIRMATION}
@@ -283,7 +283,7 @@ const ProfileScreen = props => {
               <TouchableOpacity style={styles.buttonStyle}
                                 onPress={onEditButtonPress}>
                 <Text style={styles.buttonTextStyle}>
-                  Edit Profile
+                  Update Profile
                 </Text>
               </TouchableOpacity>
             </View>
@@ -368,10 +368,10 @@ const styles = StyleSheet.create({
     marginBottom: hp('4.5%')
   },
   textStyle: {
-    fontSize: 16,
-    color: Colors.tertiaryColor,
+    fontSize: 18,
+    color: Colors.defaultColor,
     textAlign: 'center',
-    marginLeft: 10
+    marginLeft: 15
   },
   titleStyle: {
     fontSize: 28,

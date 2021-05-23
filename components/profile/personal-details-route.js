@@ -16,7 +16,7 @@ import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
-import {genderOptions, showAlert} from '../../shared/util/helpers'
+import {genderOptions, isNull, isNullAsync, showAlert} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 
@@ -42,19 +42,14 @@ const PersonalDetailsRoute = () => {
   }, [])
 
   const showConfirmAlert = () => {
-    Alert.alert(
-      'EDIT PROFILE',
-      Constants.CONFIRMATION,
-      [{
-        text: 'Yes',
-        onPress: editProfile,
-      }, {
-        text: 'No'
-      }],
-      {
-        cancelable: false
-      }
-    )
+    Alert.alert('UPDATE PERSONAL DETAILS', Constants.CONFIRMATION, [{
+      text: 'Yes',
+      onPress: editPersonalDetails,
+    }, {
+      text: 'No'
+    }], {
+      cancelable: true
+    })
   }
 
   const onChangeFirstName = async firstName => {
@@ -78,19 +73,19 @@ const PersonalDetailsRoute = () => {
   }
 
   const onChangePhoneNumber = async phoneNumber => {
-    if (phoneNumber !== null)
+    if (!await isNullAsync(phoneNumber))
       setPhoneNumberValid(phoneNumber.trim().length === 10 && !isNaN(phoneNumber))
     setPhoneNumber(phoneNumber)
   }
 
   function isDisabled() {
-    if (phoneNumber !== null)
+    if (!isNull(phoneNumber))
       if (phoneNumber.trim().length === 0)
         return false
     return !phoneNumberValid
   }
 
-  const editProfile = async () => {
+  const editPersonalDetails = async () => {
     setLoading(true)
     const formData = new FormData()
     formData.append('id', appContext.userData.id)
@@ -98,35 +93,35 @@ const PersonalDetailsRoute = () => {
     formData.append('userRole', Constants.USER_ROLE)
     formData.append('gender', gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender)
     formData.append('birthDate', birthDate)
-    if (firstName === null)
+    if (await isNullAsync(firstName))
       formData.append('firstName', '')
     else
       formData.append('firstName', firstName.trim())
-    if (lastName === null)
+    if (await isNullAsync(lastName))
       formData.append('lastName', '')
     else
       formData.append('lastName', lastName.trim())
-    if (address === null)
+    if (await isNullAsync(address))
       formData.append('address', '')
     else
       formData.append('address', address.trim())
-    if (phoneNumber === null)
+    if (await isNullAsync(phoneNumber))
       formData.append('phoneNumber', '')
     else
       formData.append('phoneNumber', phoneNumber.trim())
-    if (appContext.userData.bankAccountName === null)
+    if (await isNullAsync(appContext.userData.bankAccountName))
       formData.append('bankAccountName', '')
     else
       formData.append('bankAccountName', appContext.userData.bankAccountName.trim())
-    if (appContext.userData.bankAccountNumber === null)
+    if (await isNullAsync(appContext.userData.bankAccountNumber))
       formData.append('bankAccountNumber', '')
     else
       formData.append('bankAccountNumber', appContext.userData.bankAccountNumber.trim())
-    if (appContext.userData.bankName === null)
+    if (await isNullAsync(appContext.userData.bankName))
       formData.append('bankName', '')
     else
       formData.append('bankName', appContext.userData.bankName.trim())
-    if (appContext.userData.branchName === null)
+    if (await isNullAsync(appContext.userData.branchName))
       formData.append('branchName', '')
     else
       formData.append('branchName', appContext.userData.branchName.trim())
@@ -237,7 +232,7 @@ const PersonalDetailsRoute = () => {
                               disabled={isDisabled()}
                               onPress={showConfirmAlert}>
               <Text style={styles.buttonTextStyle}>
-                Update
+                Update Personal Details
               </Text>
             </TouchableOpacity>
           </View>

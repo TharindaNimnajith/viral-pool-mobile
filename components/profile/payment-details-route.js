@@ -14,7 +14,7 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
-import {showAlert} from '../../shared/util/helpers'
+import {isNullAsync, showAlert} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 
@@ -36,19 +36,14 @@ const PaymentDetailsRoute = () => {
   }, [])
 
   const showConfirmAlert = () => {
-    Alert.alert(
-      'EDIT PROFILE',
-      Constants.CONFIRMATION,
-      [{
-        text: 'Yes',
-        onPress: editProfile,
-      }, {
-        text: 'No'
-      }],
-      {
-        cancelable: false
-      }
-    )
+    Alert.alert('UPDATE PAYMENT DETAILS', Constants.CONFIRMATION, [{
+      text: 'Yes',
+      onPress: editPaymentDetails,
+    }, {
+      text: 'No'
+    }], {
+      cancelable: true
+    })
   }
 
   const onChangeBankAccountName = async bankAccountName => {
@@ -71,7 +66,7 @@ const PaymentDetailsRoute = () => {
     return false
   }
 
-  const editProfile = async () => {
+  const editPaymentDetails = async () => {
     setLoading(true)
     const formData = new FormData()
     formData.append('id', appContext.userData.id)
@@ -80,35 +75,35 @@ const PaymentDetailsRoute = () => {
     formData.append('gender', appContext.userData.gender === 0 ? 'female' :
       appContext.userData.gender === 1 ? 'male' : appContext.userData.gender)
     formData.append('birthDate', appContext.userData.birthDate)
-    if (appContext.userData.firstName === null)
+    if (await isNullAsync(appContext.userData.firstName))
       formData.append('firstName', '')
     else
       formData.append('firstName', appContext.userData.firstName.trim())
-    if (appContext.userData.lastName === null)
+    if (await isNullAsync(appContext.userData.lastName))
       formData.append('lastName', '')
     else
       formData.append('lastName', appContext.userData.lastName.trim())
-    if (appContext.userData.address === null)
+    if (await isNullAsync(appContext.userData.address))
       formData.append('address', '')
     else
       formData.append('address', appContext.userData.address.trim())
-    if (appContext.userData.phoneNumber === null)
+    if (await isNullAsync(appContext.userData.phoneNumber))
       formData.append('phoneNumber', '')
     else
       formData.append('phoneNumber', appContext.userData.phoneNumber.trim())
-    if (bankAccountName === null)
+    if (await isNullAsync(bankAccountName))
       formData.append('bankAccountName', '')
     else
       formData.append('bankAccountName', bankAccountName.trim())
-    if (bankAccountNumber === null)
+    if (await isNullAsync(bankAccountNumber))
       formData.append('bankAccountNumber', '')
     else
       formData.append('bankAccountNumber', bankAccountNumber.trim())
-    if (bankName === null)
+    if (await isNullAsync(bankName))
       formData.append('bankName', '')
     else
       formData.append('bankName', bankName.trim())
-    if (branchName === null)
+    if (await isNullAsync(branchName))
       formData.append('branchName', '')
     else
       formData.append('branchName', branchName.trim())
@@ -173,7 +168,7 @@ const PaymentDetailsRoute = () => {
                               disabled={isDisabled()}
                               onPress={showConfirmAlert}>
               <Text style={styles.buttonTextStyle}>
-                Update
+                Update Payment Details
               </Text>
             </TouchableOpacity>
           </View>

@@ -148,7 +148,7 @@ const EditIdeaScreen = props => {
     <SafeAreaView>
       <Dialog.Container visible={visibleEdit}>
         <Dialog.Title>
-          EDIT IDEA
+          UPDATE IDEA
         </Dialog.Title>
         <Dialog.Description>
           {Constants.CONFIRMATION}
@@ -307,7 +307,7 @@ const wait = timeout => {
 
 EditIdeaScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Edit Idea',
+    headerTitle: 'Update Idea',
     headerRight: () => (
       <CombinedButtons navigation={navData.navigation}/>
     )

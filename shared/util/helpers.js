@@ -34,13 +34,19 @@ const tabs = [{
 }]
 
 const showAlert = async (title, message) => {
-  Alert.alert(
-    title,
-    message,
-    [{
-      text: 'OK'
-    }]
-  )
+  Alert.alert(title, message, [{
+    text: 'OK'
+  }], {
+    cancelable: true
+  })
+}
+
+const isNullAsync = async value => {
+  return value === null || value === undefined || value === 'null' || value === 'undefined'
+}
+
+const isNull = value => {
+  return value === null || value === undefined || value === 'null' || value === 'undefined'
 }
 
 export {
@@ -48,5 +54,7 @@ export {
   warnings,
   genderOptions,
   tabs,
-  showAlert
+  showAlert,
+  isNullAsync,
+  isNull
 }

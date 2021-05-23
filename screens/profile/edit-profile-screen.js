@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
 
 EditProfileScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Edit Profile',
+    headerTitle: 'Update Profile',
     headerRight: () => (
       <CombinedButtons navigation={navData.navigation}/>
     )
