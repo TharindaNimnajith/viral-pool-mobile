@@ -1,5 +1,15 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
@@ -8,18 +18,18 @@ import {showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
-import SocialMediaListItem from '../../components/list-items/social-media-list-item'
+import YoutubeListItem from '../../components/list-items/youtube-list-item'
 
 const SocialMediaScreen = () => {
-  const [notifications, setNotifications] = useState([])
+  const [youtubeAccounts, setYoutubeAccounts] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     setLoading(true)
-    axios.get('content-creator-notification').then(async response => {
-      setNotifications(response.data.data)
+    axios.get('cc-social-media/youtube').then(async response => {
+      setYoutubeAccounts(response.data.data)
       setLoading(false)
       setRefresh(false)
     }).catch(async error => {
@@ -32,8 +42,8 @@ const SocialMediaScreen = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    axios.get('content-creator-notification').then(async response => {
-      setNotifications(response.data.data)
+    axios.get('cc-social-media/youtube').then(async response => {
+      setYoutubeAccounts(response.data.data)
     }).catch(async error => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -49,48 +59,61 @@ const SocialMediaScreen = () => {
 
   const renderItemsFunction = itemData => {
     return (
-      <SocialMediaListItem itemData={itemData}/>
+      <YoutubeListItem itemData={itemData}/>
     )
   }
 
   return (
-    <View style={styles.mainViewStyle}>
-      {
-        notifications.length > 0 ? (
-          <View style={styles.listStyle}>
-            <FlatList keyExtractor={(item, index) => index.toString()}
-                      data={notifications}
-                      numColumns={1}
-                      renderItem={renderItemsFunction}
-                      refreshControl={
-                        <RefreshControl refreshing={refreshing}
-                                        onRefresh={onRefresh}/>
-                      }/>
-          </View>
-        ) : (
-          <View style={styles.emptyListStyle}>
-            <Ionicons name='warning'
-                      size={80}
-                      color={Colors.tertiaryColor}/>
-            <Text style={styles.errorMessageStyle}>
-              {Constants.EMPTY_LIST}
-            </Text>
-            <TouchableOpacity onPress={refreshFunction}>
-              <Text style={styles.reloadMessageStyle}>
-                Reload?
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )
-      }
-      {
-        loading &&
-        <View style={styles.loadingStyle}>
-          <ActivityIndicator size='large'
-                             color={Colors.secondaryColor}/>
+    <SafeAreaView>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+        <View style={styles.mainViewStyle}>
+          {
+            youtubeAccounts.length > 0 ? (
+              <View style={styles.socialMediaViewStyle}>
+                <View style={styles.horizontalViewStyle}>
+                  <Ionicons name='logo-youtube'
+                            size={36}
+                            color={Colors.primaryColor}/>
+                  <Text style={styles.youtubeTitleStyle}>
+                    YouTube
+                  </Text>
+                </View>
+                <View style={styles.listStyle}>
+                  <FlatList keyExtractor={(item, index) => index.toString()}
+                            data={youtubeAccounts}
+                            numColumns={1}
+                            renderItem={renderItemsFunction}/>
+                </View>
+              </View>
+            ) : (
+              <View style={styles.emptyListStyle}>
+                <Ionicons name='warning'
+                          size={80}
+                          color={Colors.tertiaryColor}/>
+                <Text style={styles.errorMessageStyle}>
+                  {Constants.EMPTY_LIST}
+                </Text>
+                <TouchableOpacity onPress={refreshFunction}>
+                  <Text style={styles.reloadMessageStyle}>
+                    Reload?
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )
+          }
         </View>
-      }
-    </View>
+        {
+          loading &&
+          <View style={styles.loadingStyle}>
+            <ActivityIndicator size='large'
+                               color={Colors.secondaryColor}/>
+          </View>
+        }
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -108,10 +131,18 @@ const styles = StyleSheet.create({
     color: Colors.tertiaryColor,
     fontSize: 18
   },
+  horizontalViewStyle: {
+    flexDirection: 'row',
+    alignSelf: 'flex-start',
+    marginTop: hp('2%'),
+    marginBottom: hp('1%'),
+    marginLeft: wp('4%'),
+    alignItems: 'center'
+  },
   listStyle: {
     width: wp('95%'),
     marginTop: hp('1%'),
-    marginBottom: hp('7%')
+    marginBottom: hp('1%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -132,6 +163,15 @@ const styles = StyleSheet.create({
     color: Colors.primaryColor,
     fontSize: 16,
     marginTop: hp('1%')
+  },
+  socialMediaViewStyle: {
+    marginTop: hp('1%'),
+    marginBottom: hp('2%')
+  },
+  youtubeTitleStyle: {
+    color: Colors.primaryColor,
+    fontSize: 30,
+    marginLeft: wp('2%')
   }
 })
 
