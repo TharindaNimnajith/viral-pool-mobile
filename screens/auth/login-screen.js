@@ -48,7 +48,13 @@ const LoginScreen = props => {
   }
 
   function isDisabled() {
-    return !emailValid || !passwordValid || true
+    return !emailValid || !passwordValid
+  }
+
+  const forgotPassword = () => {
+    props.navigation.navigate({
+      routeName: 'ForgotPassword'
+    })
   }
 
   const login = async () => {
@@ -129,6 +135,12 @@ const LoginScreen = props => {
                        placeholder='Enter Password'
                        placeholderTextColor={Colors.tertiaryColor}
                        secureTextEntry={true}/>
+            <TouchableOpacity onPress={forgotPassword}
+                              style={styles.forgotPasswordStyle}>
+              <Text style={styles.forgotPasswordLabelStyle}>
+                Forgot password?
+              </Text>
+            </TouchableOpacity>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
                               onPress={login}>
@@ -175,6 +187,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  forgotPasswordLabelStyle: {
+    color: Colors.primaryColor
+  },
+  forgotPasswordStyle: {
+    marginRight: 40,
+    marginTop: 20,
+    alignSelf: 'flex-end'
   },
   imageStyle: {
     marginBottom: 25,
