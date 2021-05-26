@@ -32,42 +32,14 @@ const SocialMediaScreen = () => {
 
   useEffect(() => {
     setLoading(true)
-    axios.get('cc-social-media/youtube').then(async response => {
+    axios.get('cc-social-media').then(async response => {
+      setLoading(false)
+      setRefresh(false)
       if (response.status === 200) {
-        setYoutubeAccounts(response.data.data)
-        axios.get('cc-social-media/youtube').then(async response => {
-          if (response.status === 200) {
-            setFacebookAccounts(response.data.data)
-            axios.get('cc-social-media/youtube').then(async response => {
-              if (response.status === 200) {
-                setInstagramAccounts(response.data.data)
-                setLoading(false)
-                setRefresh(false)
-              } else {
-                setLoading(false)
-                setRefresh(false)
-                await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-              }
-            }).catch(async error => {
-              setLoading(false)
-              setRefresh(false)
-              await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-              console.log(error)
-            })
-          } else {
-            setLoading(false)
-            setRefresh(false)
-            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          }
-        }).catch(async error => {
-          setLoading(false)
-          setRefresh(false)
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
-        })
+        setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
+        setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
+        setInstagramAccounts(response.data.data.ccInstagramPageProfiles)
       } else {
-        setLoading(false)
-        setRefresh(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
@@ -80,36 +52,13 @@ const SocialMediaScreen = () => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    axios.get('cc-social-media/youtube').then(async response => {
+    axios.get('cc-social-media').then(async response => {
+      setRefresh(false)
       if (response.status === 200) {
-        setYoutubeAccounts(response.data.data)
-        axios.get('cc-social-media/youtube').then(async response => {
-          if (response.status === 200) {
-            setFacebookAccounts(response.data.data)
-            axios.get('cc-social-media/youtube').then(async response => {
-              if (response.status === 200) {
-                setInstagramAccounts(response.data.data)
-                setRefresh(false)
-              } else {
-                setRefresh(false)
-                await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-              }
-            }).catch(async error => {
-              setRefresh(false)
-              await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-              console.log(error)
-            })
-          } else {
-            setRefresh(false)
-            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          }
-        }).catch(async error => {
-          setRefresh(false)
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
-        })
+        setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
+        setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
+        setInstagramAccounts(response.data.data.ccInstagramPageProfiles)
       } else {
-        setRefresh(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {

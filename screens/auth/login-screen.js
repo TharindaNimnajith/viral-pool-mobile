@@ -23,10 +23,10 @@ import {storeStringData} from '../../shared/util/local-storage'
 const LoginScreen = props => {
   const appContext = useContext(AppContext)
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailValid, setEmailValid] = useState(false)
-  const [passwordValid, setPasswordValid] = useState(false)
+  const [email, setEmail] = useState('tharindarajapakshe@y7mail.com')
+  const [password, setPassword] = useState('tharinda')
+  const [emailValid, setEmailValid] = useState(true)
+  const [passwordValid, setPasswordValid] = useState(true)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -48,7 +48,7 @@ const LoginScreen = props => {
   }
 
   function isDisabled() {
-    return !emailValid || !passwordValid || true
+    return !emailValid || !passwordValid
   }
 
   const login = async () => {
