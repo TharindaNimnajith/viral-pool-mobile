@@ -19,9 +19,13 @@ import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
 import YoutubeListItem from '../../components/list-items/youtube-list-item'
+import FacebookListItem from '../../components/list-items/facebook-list-item'
+import InstagramListItem from '../../components/list-items/instagram-list-item'
 
 const SocialMediaScreen = () => {
   const [youtubeAccounts, setYoutubeAccounts] = useState([])
+  const [facebookAccounts, setFacebookAccounts] = useState([])
+  const [instagramAccounts, setInstagramAccounts] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
@@ -29,9 +33,43 @@ const SocialMediaScreen = () => {
   useEffect(() => {
     setLoading(true)
     axios.get('cc-social-media/youtube').then(async response => {
-      setYoutubeAccounts(response.data.data)
-      setLoading(false)
-      setRefresh(false)
+      if (response.status === 200) {
+        setYoutubeAccounts(response.data.data)
+        axios.get('cc-social-media/youtube').then(async response => {
+          if (response.status === 200) {
+            setFacebookAccounts(response.data.data)
+            axios.get('cc-social-media/youtube').then(async response => {
+              if (response.status === 200) {
+                setInstagramAccounts(response.data.data)
+                setLoading(false)
+                setRefresh(false)
+              } else {
+                setLoading(false)
+                setRefresh(false)
+                await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+              }
+            }).catch(async error => {
+              setLoading(false)
+              setRefresh(false)
+              await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+              console.log(error)
+            })
+          } else {
+            setLoading(false)
+            setRefresh(false)
+            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          }
+        }).catch(async error => {
+          setLoading(false)
+          setRefresh(false)
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          console.log(error)
+        })
+      } else {
+        setLoading(false)
+        setRefresh(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       setLoading(false)
       setRefresh(false)
@@ -43,8 +81,39 @@ const SocialMediaScreen = () => {
   const onRefresh = useCallback(() => {
     setRefreshing(true)
     axios.get('cc-social-media/youtube').then(async response => {
-      setYoutubeAccounts(response.data.data)
+      if (response.status === 200) {
+        setYoutubeAccounts(response.data.data)
+        axios.get('cc-social-media/youtube').then(async response => {
+          if (response.status === 200) {
+            setFacebookAccounts(response.data.data)
+            axios.get('cc-social-media/youtube').then(async response => {
+              if (response.status === 200) {
+                setInstagramAccounts(response.data.data)
+                setRefresh(false)
+              } else {
+                setRefresh(false)
+                await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+              }
+            }).catch(async error => {
+              setRefresh(false)
+              await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+              console.log(error)
+            })
+          } else {
+            setRefresh(false)
+            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          }
+        }).catch(async error => {
+          setRefresh(false)
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          console.log(error)
+        })
+      } else {
+        setRefresh(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
+      setRefresh(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
@@ -57,9 +126,21 @@ const SocialMediaScreen = () => {
     setRefresh(true)
   }
 
-  const renderItemsFunction = itemData => {
+  const renderYoutubeItemsFunction = itemData => {
     return (
       <YoutubeListItem itemData={itemData}/>
+    )
+  }
+
+  const renderFacebookItemsFunction = itemData => {
+    return (
+      <FacebookListItem itemData={itemData}/>
+    )
+  }
+
+  const renderInstagramItemsFunction = itemData => {
+    return (
+      <InstagramListItem itemData={itemData}/>
     )
   }
 
@@ -90,7 +171,7 @@ const SocialMediaScreen = () => {
                   <FlatList keyExtractor={(item, index) => index.toString()}
                             data={youtubeAccounts}
                             numColumns={1}
-                            renderItem={renderItemsFunction}/>
+                            renderItem={renderYoutubeItemsFunction}/>
                 </View>
               </View>
             ) : (
@@ -110,11 +191,11 @@ const SocialMediaScreen = () => {
             )
           }
           <View style={styles.horizontalViewStyle}>
-            <Ionicons name='logo-youtube'
+            <Ionicons name='logo-facebook'
                       size={36}
                       color={Colors.primaryColor}/>
-            <Text style={styles.youtubeTitleStyle}>
-              YouTube
+            <Text style={styles.facebookTitleStyle}>
+              Facebook
             </Text>
             <View style={styles.addIconStyle}>
               <Ionicons name='add'
@@ -123,13 +204,13 @@ const SocialMediaScreen = () => {
             </View>
           </View>
           {
-            youtubeAccounts.length > 0 ? (
+            facebookAccounts.length > 0 ? (
               <View style={styles.socialMediaViewStyle}>
                 <View style={styles.listStyle}>
                   <FlatList keyExtractor={(item, index) => index.toString()}
-                            data={youtubeAccounts}
+                            data={facebookAccounts}
                             numColumns={1}
-                            renderItem={renderItemsFunction}/>
+                            renderItem={renderFacebookItemsFunction}/>
                 </View>
               </View>
             ) : (
@@ -149,11 +230,11 @@ const SocialMediaScreen = () => {
             )
           }
           <View style={styles.horizontalViewStyle}>
-            <Ionicons name='logo-youtube'
+            <Ionicons name='logo-instagram'
                       size={36}
                       color={Colors.primaryColor}/>
-            <Text style={styles.youtubeTitleStyle}>
-              YouTube
+            <Text style={styles.instagramTitleStyle}>
+              Instagram
             </Text>
             <View style={styles.addIconStyle}>
               <Ionicons name='add'
@@ -162,13 +243,13 @@ const SocialMediaScreen = () => {
             </View>
           </View>
           {
-            youtubeAccounts.length > 0 ? (
+            instagramAccounts.length > 0 ? (
               <View style={styles.socialMediaViewStyle}>
                 <View style={styles.listStyle}>
                   <FlatList keyExtractor={(item, index) => index.toString()}
-                            data={youtubeAccounts}
+                            data={instagramAccounts}
                             numColumns={1}
-                            renderItem={renderItemsFunction}/>
+                            renderItem={renderInstagramItemsFunction}/>
                 </View>
               </View>
             ) : (
@@ -219,6 +300,11 @@ const styles = StyleSheet.create({
     color: Colors.tertiaryColor,
     fontSize: 18
   },
+  facebookTitleStyle: {
+    color: Colors.primaryColor,
+    fontSize: 30,
+    marginLeft: wp('2%')
+  },
   horizontalViewStyle: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
@@ -226,6 +312,11 @@ const styles = StyleSheet.create({
     marginBottom: hp('1%'),
     marginLeft: wp('7%'),
     alignItems: 'center'
+  },
+  instagramTitleStyle: {
+    color: Colors.primaryColor,
+    fontSize: 30,
+    marginLeft: wp('2%')
   },
   listStyle: {
     width: wp('95%'),
