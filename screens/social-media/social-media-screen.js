@@ -18,9 +18,9 @@ import {showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
-import YoutubeListItem from '../../components/list-items/youtube-list-item'
-import FacebookListItem from '../../components/list-items/facebook-list-item'
-import InstagramListItem from '../../components/list-items/instagram-list-item'
+import YoutubeListItem from '../../components/list-items/social-media/youtube-list-item'
+import FacebookListItem from '../../components/list-items/social-media/facebook-list-item'
+import InstagramListItem from '../../components/list-items/social-media/instagram-list-item'
 
 const SocialMediaScreen = () => {
   const [youtubeAccounts, setYoutubeAccounts] = useState([])

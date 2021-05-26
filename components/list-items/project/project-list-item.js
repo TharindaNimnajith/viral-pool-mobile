@@ -1,7 +1,7 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Colors from '../../shared/const/colors'
+import Colors from '../../../shared/const/colors'
 
 const ProjectListItem = props => {
   const project = {

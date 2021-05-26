@@ -18,7 +18,7 @@ import {showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
-import ProjectListItem from '../../components/list-items/project-list-item'
+import ProjectListItem from '../../components/list-items/project/project-list-item'
 
 const EarningsScreen = props => {
   const [completedProjects, setCompletedProjects] = useState([])

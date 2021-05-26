@@ -2,7 +2,7 @@ import React from 'react'
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {MaterialIcons} from '@expo/vector-icons'
-import Colors from '../../shared/const/colors'
+import Colors from '../../../shared/const/colors'
 
 const FacebookListItem = props => {
   return (
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    borderLeftColor: Colors.primaryColor
+    borderLeftColor: Colors.facebookColor
   },
   mainViewStyle: {
     flexDirection: 'row'

@@ -2,8 +2,8 @@ import React, {useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {FontAwesome5, Ionicons} from '@expo/vector-icons'
-import {notificationTypeEnum} from '../../shared/const/enums'
-import Colors from '../../shared/const/colors'
+import {notificationTypeEnum} from '../../../shared/const/enums'
+import Colors from '../../../shared/const/colors'
 
 const NotificationListItem = props => {
   const project = {
