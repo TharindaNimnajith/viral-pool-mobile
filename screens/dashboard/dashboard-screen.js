@@ -177,10 +177,10 @@ const DashboardScreen = props => {
             </View>
           </View>
           <View style={styles.bodyStyle}>
-            <Text style={styles.sectionTitleStyle}>
-              Recent Jobs
-            </Text>
             <View style={styles.listStyle}>
+              <Text style={styles.sectionTitleStyle}>
+                Recent Jobs
+              </Text>
               {
                 ongoingProjects.length > 0 ? (
                   <FlatList keyExtractor={(item, index) => index.toString()}
@@ -305,8 +305,9 @@ const styles = StyleSheet.create({
   },
   sectionTitleStyle: {
     fontSize: 22,
-    marginLeft: 10,
-    marginVertical: hp('1%')
+    marginLeft: wp('4%'),
+    marginTop: hp('1%'),
+    marginBottom: hp('2%')
   },
   textStyle: {
     marginVertical: 10,

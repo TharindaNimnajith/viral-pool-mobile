@@ -5,6 +5,7 @@ import {createDrawerNavigator} from 'react-navigation-drawer'
 import {FontAwesome, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
 import Colors from '../../shared/const/colors'
 import LoginScreen from '../../screens/auth/login-screen'
+import ForgotPasswordScreen from '../../screens/auth/forgot-password'
 import DashboardScreen from '../../screens/dashboard/dashboard-screen'
 import NotificationsScreen from '../../screens/notifications/notifications-screen'
 import NotificationProjectDetailsScreen from '../../screens/notifications/notification-project-details-screen'
@@ -23,7 +24,8 @@ import CompletedProjectListScreen from '../../screens/projects/completed/complet
 import CompletedProjectDetailsScreen from '../../screens/projects/completed/completed-project-details-screen'
 
 const LoginNavigator = createStackNavigator({
-  Login: LoginScreen
+  Login: LoginScreen,
+  ForgotPassword: ForgotPasswordScreen
 }, {
   headerMode: 'none',
   navigationOptions: {
