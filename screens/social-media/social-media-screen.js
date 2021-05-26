@@ -37,8 +37,8 @@ const SocialMediaScreen = () => {
       setRefresh(false)
       if (response.status === 200) {
         setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
-        setFacebookAccounts(response.data.data.ccYouTubeProfiles)
-        setInstagramAccounts(response.data.data.ccYouTubeProfiles)
+        setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
+        setInstagramAccounts(response.data.data.ccInstagramPageProfiles)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -75,21 +75,38 @@ const SocialMediaScreen = () => {
     setRefresh(true)
   }
 
+  const loadingFunctionTrue = () => {
+    setLoading(true)
+  }
+
+  const loadingFunctionFalse = () => {
+    setLoading(false)
+  }
+
   const renderYoutubeItemsFunction = itemData => {
     return (
-      <YoutubeListItem itemData={itemData}/>
+      <YoutubeListItem itemData={itemData}
+                       refreshFunction={refreshFunction}
+                       loadingFunctionTrue={loadingFunctionTrue}
+                       loadingFunctionFalse={loadingFunctionFalse}/>
     )
   }
 
   const renderFacebookItemsFunction = itemData => {
     return (
-      <FacebookListItem itemData={itemData}/>
+      <FacebookListItem itemData={itemData}
+                        refreshFunction={refreshFunction}
+                        loadingFunctionTrue={loadingFunctionTrue}
+                        loadingFunctionFalse={loadingFunctionFalse}/>
     )
   }
 
   const renderInstagramItemsFunction = itemData => {
     return (
-      <InstagramListItem itemData={itemData}/>
+      <InstagramListItem itemData={itemData}
+                         refreshFunction={refreshFunction}
+                         loadingFunctionTrue={loadingFunctionTrue}
+                         loadingFunctionFalse={loadingFunctionFalse}/>
     )
   }
 

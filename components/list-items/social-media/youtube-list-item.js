@@ -1,53 +1,105 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Dialog from 'react-native-dialog'
 import {MaterialIcons} from '@expo/vector-icons'
+import axios from 'axios'
+import {showAlert} from '../../../shared/util/helpers'
+import Constants from '../../../shared/const/constants'
 import Colors from '../../../shared/const/colors'
 
 const YoutubeListItem = props => {
+  const [visible, setVisible] = useState(false)
+
+  const showDialog = async () => {
+    setVisible(true)
+  }
+
+  const hideDialog = async () => {
+    setVisible(false)
+  }
+
+  const deleteAccount = async () => {
+    setVisible(false)
+    props.loadingFunctionTrue()
+    const data = {
+      id: props.itemData.item.id,
+      channelId: props.itemData.item.channelId
+    }
+    axios.post('cc-social-media/youtube/deactivate', data).then(async response => {
+      props.loadingFunctionFalse()
+      props.refreshFunction()
+      if (response.status === 200)
+        await showAlert(Constants.SUCCESS, Constants.DELETED)
+      else
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+    }).catch(async error => {
+      props.itemData.item.refresh()
+      props.loadingFunctionFalse()
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      props.refreshFunction()
+      console.log(error)
+    })
+  }
+
   return (
-    <View style={styles.itemStyle}>
-      <View style={styles.mainViewStyle}>
-        <View style={styles.iconViewStyle}>
-          <Image style={styles.avatarStyle}
-                 source={{
-                   uri: props.itemData.item.iconPath
-                 }}/>
+    <View>
+      <Dialog.Container visible={visible}>
+        <Dialog.Title>
+          DELETE ACCOUNT
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       onPress={deleteAccount}/>
+        <Dialog.Button label='No'
+                       onPress={hideDialog}/>
+      </Dialog.Container>
+      <View style={styles.itemStyle}>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.iconViewStyle}>
+            <Image style={styles.avatarStyle}
+                   source={{
+                     uri: props.itemData.item.iconPath
+                   }}/>
+          </View>
+          <View style={styles.viewStyle}>
+            <Text style={styles.textStyle}>
+              {props.itemData.item.channelName}
+            </Text>
+            <View style={styles.horizontalStyle}>
+              <Text style={styles.statTitleStyle}>
+                Videos
+              </Text>
+              <Text style={styles.statStyle}>
+                {props.itemData.item.videoCount}
+              </Text>
+            </View>
+            <View style={styles.horizontalStyle}>
+              <Text style={styles.statTitleStyle}>
+                Subscribers
+              </Text>
+              <Text style={styles.statStyle}>
+                {props.itemData.item.subscriptionCount}
+              </Text>
+            </View>
+            <View style={styles.horizontalStyle}>
+              <Text style={styles.statTitleStyle}>
+                Views
+              </Text>
+              <Text style={styles.statStyle}>
+                {props.itemData.item.viewCount}
+              </Text>
+            </View>
+          </View>
+          <TouchableOpacity style={styles.deleteStyle}
+                            onPress={showDialog}>
+            <MaterialIcons name='delete-forever'
+                           size={35}
+                           color={Colors.primaryColor}/>
+          </TouchableOpacity>
         </View>
-        <View style={styles.viewStyle}>
-          <Text style={styles.textStyle}>
-            {props.itemData.item.channelName}
-          </Text>
-          <View style={styles.horizontalStyle}>
-            <Text style={styles.statTitleStyle}>
-              Videos
-            </Text>
-            <Text style={styles.statStyle}>
-              {props.itemData.item.videoCount}
-            </Text>
-          </View>
-          <View style={styles.horizontalStyle}>
-            <Text style={styles.statTitleStyle}>
-              Subscribers
-            </Text>
-            <Text style={styles.statStyle}>
-              {props.itemData.item.subscriptionCount}
-            </Text>
-          </View>
-          <View style={styles.horizontalStyle}>
-            <Text style={styles.statTitleStyle}>
-              Views
-            </Text>
-            <Text style={styles.statStyle}>
-              {props.itemData.item.viewCount}
-            </Text>
-          </View>
-        </View>
-        <TouchableOpacity style={styles.deleteStyle}>
-          <MaterialIcons name='delete-forever'
-                         size={35}
-                         color={Colors.primaryColor}/>
-        </TouchableOpacity>
       </View>
     </View>
   )
