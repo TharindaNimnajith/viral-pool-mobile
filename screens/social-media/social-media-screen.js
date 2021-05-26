@@ -37,8 +37,8 @@ const SocialMediaScreen = () => {
       setRefresh(false)
       if (response.status === 200) {
         setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
-        setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
-        setInstagramAccounts(response.data.data.ccInstagramPageProfiles)
+        setFacebookAccounts(response.data.data.ccYouTubeProfiles)
+        setInstagramAccounts(response.data.data.ccYouTubeProfiles)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }

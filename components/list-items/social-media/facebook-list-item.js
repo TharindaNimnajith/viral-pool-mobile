@@ -1,7 +1,7 @@
 import React from 'react'
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {MaterialIcons} from '@expo/vector-icons'
+import {Ionicons, MaterialIcons} from '@expo/vector-icons'
 import Colors from '../../../shared/const/colors'
 
 const FacebookListItem = props => {
@@ -9,8 +9,9 @@ const FacebookListItem = props => {
     <View style={styles.itemStyle}>
       <View style={styles.mainViewStyle}>
         <View style={styles.iconViewStyle}>
-          <Image style={styles.avatarStyle}
-                 source={require('../../../assets/user.jpg')}/>
+          <Ionicons name='logo-facebook'
+                    size={50}
+                    color={Colors.facebookColor}/>
         </View>
         <View style={styles.viewStyle}>
           <Text style={styles.textStyle}>
@@ -52,11 +53,6 @@ const FacebookListItem = props => {
 }
 
 const styles = StyleSheet.create({
-  avatarStyle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30
-  },
   deleteStyle: {
     width: '8%',
     alignSelf: 'center',
