@@ -65,30 +65,14 @@ const FacebookListItem = props => {
           </View>
           <View style={styles.viewStyle}>
             <Text style={styles.textStyle}>
-              {props.itemData.item.channelName}
+              {props.itemData.item.name}
             </Text>
             <View style={styles.horizontalStyle}>
               <Text style={styles.statTitleStyle}>
-                Videos
+                Likes
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.videoCount}
-              </Text>
-            </View>
-            <View style={styles.horizontalStyle}>
-              <Text style={styles.statTitleStyle}>
-                Subscribers
-              </Text>
-              <Text style={styles.statStyle}>
-                {props.itemData.item.subscriptionCount}
-              </Text>
-            </View>
-            <View style={styles.horizontalStyle}>
-              <Text style={styles.statTitleStyle}>
-                Views
-              </Text>
-              <Text style={styles.statStyle}>
-                {props.itemData.item.viewCount}
+                {props.itemData.item.fanCount}
               </Text>
             </View>
           </View>

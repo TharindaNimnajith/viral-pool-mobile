@@ -65,30 +65,22 @@ const InstagramListItem = props => {
           </View>
           <View style={styles.viewStyle}>
             <Text style={styles.textStyle}>
-              {props.itemData.item.channelName}
+              {props.itemData.item.username}
             </Text>
             <View style={styles.horizontalStyle}>
               <Text style={styles.statTitleStyle}>
-                Videos
+                Following
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.videoCount}
+                {props.itemData.item.followsCount}
               </Text>
             </View>
             <View style={styles.horizontalStyle}>
               <Text style={styles.statTitleStyle}>
-                Subscribers
+                Followers
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.subscriptionCount}
-              </Text>
-            </View>
-            <View style={styles.horizontalStyle}>
-              <Text style={styles.statTitleStyle}>
-                Views
-              </Text>
-              <Text style={styles.statStyle}>
-                {props.itemData.item.viewCount}
+                {props.itemData.item.followersCount}
               </Text>
             </View>
           </View>

@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react'
+import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
   FlatList,
@@ -13,6 +13,7 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
+import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
 import {showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
@@ -21,11 +22,35 @@ import CombinedButtons from '../../components/header/combined-buttons'
 import YoutubeListItem from '../../components/list-items/social-media/youtube-list-item'
 import FacebookListItem from '../../components/list-items/social-media/facebook-list-item'
 import InstagramListItem from '../../components/list-items/social-media/instagram-list-item'
+import Dialog from "react-native-dialog";
 
 const SocialMediaScreen = () => {
+  const appContext = useContext(AppContext)
+
   const [youtubeAccounts, setYoutubeAccounts] = useState([])
   const [facebookAccounts, setFacebookAccounts] = useState([])
   const [instagramAccounts, setInstagramAccounts] = useState([])
+  const [youtubeChannelId, setYoutubeChannelId] = useState('')
+  const [facebookPageId, setFacebookPageId] = useState('')
+  const [facebookPageName, setFacebookPageName] = useState('')
+  const [facebookPageLink, setFacebookPageLink] = useState('')
+  const [facebookPageLikeCount, setFacebookPageLikeCount] = useState(0)
+  const [instagramUsername, setInstagramUsername] = useState('')
+  const [instagramLink, setInstagramLink] = useState('')
+  const [instagramFollowingCount, setInstagramFollowingCount] = useState(0)
+  const [instagramFollowerCount, setInstagramFollowerCount] = useState(0)
+  const [youtubeChannelIdValid, setYoutubeChannelIdValid] = useState(false)
+  const [facebookPageIdValid, setFacebookPageIdValid] = useState(false)
+  const [facebookPageNameValid, setFacebookPageNameValid] = useState(false)
+  const [facebookPageLinkValid, setFacebookPageLinkValid] = useState(false)
+  const [facebookPageLikeCountValid, setFacebookPageLikeCountValid] = useState(false)
+  const [instagramUsernameValid, setInstagramUsernameValid] = useState(false)
+  const [instagramLinkValid, setInstagramLinkValid] = useState(false)
+  const [instagramFollowingCountValid, setInstagramFollowingCountValid] = useState(false)
+  const [instagramFollowerCountValid, setInstagramFollowerCountValid] = useState(false)
+  const [visibleYoutube, setVisibleYoutube] = useState(false)
+  const [visibleFacebook, setVisibleFacebook] = useState(false)
+  const [visibleInstagram, setVisibleInstagram] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
@@ -110,12 +135,190 @@ const SocialMediaScreen = () => {
     )
   }
 
+  const showDialogYoutube = async () => {
+    setVisibleYoutube(true)
+  }
+
+  const hideDialogYoutube = async () => {
+    setVisibleYoutube(false)
+  }
+
+  const showDialogFacebook = async () => {
+    setVisibleFacebook(true)
+  }
+
+  const hideDialogFacebook = async () => {
+    setVisibleFacebook(false)
+  }
+
+  const showDialogInstagram = async () => {
+    setVisibleInstagram(true)
+  }
+
+  const hideDialogInstagram = async () => {
+    setVisibleInstagram(false)
+  }
+
+  const onChangeYoutubeChannelId = async youtubeChannelId => {
+    setYoutubeChannelIdValid(youtubeChannelId.trim().length > 0)
+    setYoutubeChannelId(youtubeChannelId)
+  }
+
+  function isDisabledYoutube() {
+    return !youtubeChannelIdValid
+  }
+
+  const onChangeFacebookPageId = async facebookPageId => {
+    setFacebookPageIdValid(facebookPageId.trim().length > 0)
+    setFacebookPageId(facebookPageId)
+  }
+
+  const onChangeFacebookPageName = async facebookPageName => {
+    setFacebookPageNameValid(facebookPageName.trim().length > 0)
+    setFacebookPageName(facebookPageName)
+  }
+
+  const onChangeFacebookPageLink = async facebookPageLink => {
+    setFacebookPageLinkValid(facebookPageLink.trim().length > 0)
+    setFacebookPageLink(facebookPageLink)
+  }
+
+  const onChangeFacebookPageLikeCount = async facebookPageLikeCount => {
+    setFacebookPageLikeCountValid(facebookPageLikeCount.trim().length > 0 && !NaN(facebookPageLikeCount.trim()))
+    setFacebookPageLikeCount(facebookPageLikeCount)
+  }
+
+  function isDisabledFacebook() {
+    return !facebookPageIdValid || !facebookPageNameValid || !facebookPageLinkValid || !facebookPageLikeCountValid
+  }
+
+  const onChangeInstagramUsername = async instagramUsername => {
+    setInstagramUsernameValid(instagramUsername.trim().length > 0)
+    setInstagramUsername(instagramUsername)
+  }
+
+  const onChangeInstagramLink = async instagramLink => {
+    setInstagramLinkValid(instagramLink.trim().length > 0)
+    setInstagramLink(instagramLink)
+  }
+
+  const onChangeInstagramFollowingCount = async instagramFollowingCount => {
+    setInstagramFollowingCountValid(instagramFollowingCount.trim().length > 0 &&
+      !NaN(instagramFollowingCount.trim()))
+    setInstagramFollowingCount(instagramFollowingCount)
+  }
+
+  const onChangeInstagramFollowerCount = async instagramFollowerCount => {
+    setInstagramFollowerCountValid(instagramFollowerCount.trim().length > 0 &&
+      !NaN(instagramFollowerCount.trim()))
+    setInstagramFollowerCount(instagramFollowerCount)
+  }
+
+  function isDisabledInstagram() {
+    return !instagramUsernameValid || !instagramLinkValid || !instagramFollowerCountValid ||
+      !instagramFollowingCountValid
+  }
+
+  const addYoutube = () => {
+    setLoading(true)
+    const data = {
+      channelId: youtubeChannelId,
+      contentCreatorDetailId: appContext.userData.id
+    }
+    axios.post('cc-social-media/youtube/add-profile', data).then(async response => {
+      setLoading(false)
+      if (response.status === 200) {
+        console.log(response.data.data)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }
+
+  const addFacebook = () => {
+    setLoading(true)
+    const data = {
+      pageId: facebookPageId,
+      name: facebookPageName,
+      link: facebookPageLink,
+      fanCount: facebookPageLikeCount
+    }
+    axios.post('cc-social-media/facebook/add-profile', data).then(async response => {
+      setLoading(false)
+      if (response.status === 200) {
+        console.log(response.data.data)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }
+
+  const addInstagram = () => {
+    setLoading(true)
+    const data = {
+      username: instagramUsername,
+      link: instagramLink,
+      followsCount: instagramFollowingCount,
+      followersCount: instagramFollowerCount
+    }
+    axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
+      setLoading(false)
+      if (response.status === 200) {
+        console.log(response.data.data)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
+  }
+
   return (
     <SafeAreaView>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
       }>
+        <Dialog.Container visible={visibleYoutube}>
+          <Dialog.Title>
+            ADD ACCOUNT
+          </Dialog.Title>
+          <Dialog.Input label='Channel ID'/>
+          <Dialog.Button label='Yes'
+                         onPress={addYoutube}/>
+          <Dialog.Button label='No'
+                         onPress={hideDialogYoutube}/>
+        </Dialog.Container>
+        <Dialog.Container visible={visibleFacebook}>
+          <Dialog.Title>
+            ADD ACCOUNT
+          </Dialog.Title>
+
+          <Dialog.Button label='Yes'
+                         onPress={addFacebook}/>
+          <Dialog.Button label='No'
+                         onPress={hideDialogFacebook}/>
+        </Dialog.Container>
+        <Dialog.Container visible={visibleInstagram}>
+          <Dialog.Title>
+            ADD ACCOUNT
+          </Dialog.Title>
+
+          <Dialog.Button label='Yes'
+                         onPress={addInstagram}/>
+          <Dialog.Button label='No'
+                         onPress={hideDialogInstagram}/>
+        </Dialog.Container>
         <View style={styles.mainViewStyle}>
           <View>
             <View style={styles.horizontalViewStyle}>
@@ -125,7 +328,8 @@ const SocialMediaScreen = () => {
               <Text style={styles.youtubeTitleStyle}>
                 YouTube
               </Text>
-              <TouchableOpacity style={styles.addIconStyle}>
+              <TouchableOpacity style={styles.addIconStyle}
+                                onPress={showDialogYoutube}>
                 <Ionicons name='add'
                           size={36}
                           color={Colors.primaryColor}/>
@@ -168,7 +372,8 @@ const SocialMediaScreen = () => {
               <Text style={styles.facebookTitleStyle}>
                 Facebook
               </Text>
-              <TouchableOpacity style={styles.addIconStyle}>
+              <TouchableOpacity style={styles.addIconStyle}
+                                onPress={showDialogFacebook}>
                 <Ionicons name='add'
                           size={36}
                           color={Colors.facebookColor}/>
@@ -211,7 +416,8 @@ const SocialMediaScreen = () => {
               <Text style={styles.instagramTitleStyle}>
                 Instagram
               </Text>
-              <TouchableOpacity style={styles.addIconStyle}>
+              <TouchableOpacity style={styles.addIconStyle}
+                                onPress={showDialogInstagram}>
                 <Ionicons name='add'
                           size={36}
                           color={Colors.instagramColor}/>
