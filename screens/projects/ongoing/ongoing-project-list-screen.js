@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   listStyle: {
     width: wp('95%'),
     marginTop: hp('1%'),
-    marginBottom: hp('1%')
+    marginBottom: hp('7%')
   },
   loadingStyle: {
     position: 'absolute',

@@ -166,7 +166,7 @@ const ProjectDetails = props => {
     setVisibleAccept(false)
     setLoading(true)
     let data = {
-      id: project.project
+      strategyId: project.project
     }
     axios.put('project-cc-strategy/accept', data).then(async response => {
       project.refresh()
@@ -187,7 +187,7 @@ const ProjectDetails = props => {
     setVisibleReject(false)
     setLoading(true)
     let data = {
-      id: project.project
+      strategyId: project.project
     }
     axios.put('project-cc-strategy/reject', data).then(async response => {
       project.refresh()
