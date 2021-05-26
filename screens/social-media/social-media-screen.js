@@ -100,123 +100,135 @@ const SocialMediaScreen = () => {
                         onRefresh={onRefresh}/>
       }>
         <View style={styles.mainViewStyle}>
-          <View style={styles.horizontalViewStyle}>
-            <Ionicons name='logo-youtube'
-                      size={36}
-                      color={Colors.primaryColor}/>
-            <Text style={styles.youtubeTitleStyle}>
-              YouTube
-            </Text>
-            <View style={styles.addIconStyle}>
-              <Ionicons name='add'
+          <View>
+            <View style={styles.horizontalViewStyle}>
+              <Ionicons name='logo-youtube'
                         size={36}
                         color={Colors.primaryColor}/>
+              <Text style={styles.youtubeTitleStyle}>
+                YouTube
+              </Text>
+              <TouchableOpacity style={styles.addIconStyle}>
+                <Ionicons name='add'
+                          size={36}
+                          color={Colors.primaryColor}/>
+              </TouchableOpacity>
             </View>
-          </View>
-          {
-            youtubeAccounts.length > 0 ? (
-              <View style={styles.socialMediaViewStyle}>
-                <View style={styles.listStyle}>
-                  <FlatList keyExtractor={(item, index) => index.toString()}
-                            data={youtubeAccounts}
-                            numColumns={1}
-                            renderItem={renderYoutubeItemsFunction}/>
+            {
+              youtubeAccounts.length > 0 ? (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.listStyle}>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={youtubeAccounts}
+                              numColumns={1}
+                              renderItem={renderYoutubeItemsFunction}/>
+                  </View>
                 </View>
-              </View>
-            ) : (
-              <View style={styles.emptyListStyle}>
-                <Ionicons name='warning'
-                          size={80}
-                          color={Colors.tertiaryColor}/>
-                <Text style={styles.errorMessageStyle}>
-                  {Constants.EMPTY_LIST}
-                </Text>
-                <TouchableOpacity onPress={refreshFunction}>
-                  <Text style={styles.reloadMessageStyle}>
-                    Reload?
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )
-          }
-          <View style={styles.horizontalViewStyle}>
-            <Ionicons name='logo-facebook'
-                      size={36}
-                      color={Colors.primaryColor}/>
-            <Text style={styles.facebookTitleStyle}>
-              Facebook
-            </Text>
-            <View style={styles.addIconStyle}>
-              <Ionicons name='add'
+              ) : (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
+          </View>
+          <View>
+            <View style={styles.horizontalViewStyle}>
+              <Ionicons name='logo-facebook'
                         size={36}
-                        color={Colors.primaryColor}/>
+                        color={Colors.facebookColor}/>
+              <Text style={styles.facebookTitleStyle}>
+                Facebook
+              </Text>
+              <TouchableOpacity style={styles.addIconStyle}>
+                <Ionicons name='add'
+                          size={36}
+                          color={Colors.facebookColor}/>
+              </TouchableOpacity>
             </View>
-          </View>
-          {
-            facebookAccounts.length > 0 ? (
-              <View style={styles.socialMediaViewStyle}>
-                <View style={styles.listStyle}>
-                  <FlatList keyExtractor={(item, index) => index.toString()}
-                            data={facebookAccounts}
-                            numColumns={1}
-                            renderItem={renderFacebookItemsFunction}/>
+            {
+              facebookAccounts.length > 0 ? (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.listStyle}>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={facebookAccounts}
+                              numColumns={1}
+                              renderItem={renderFacebookItemsFunction}/>
+                  </View>
                 </View>
-              </View>
-            ) : (
-              <View style={styles.emptyListStyle}>
-                <Ionicons name='warning'
-                          size={80}
-                          color={Colors.tertiaryColor}/>
-                <Text style={styles.errorMessageStyle}>
-                  {Constants.EMPTY_LIST}
-                </Text>
-                <TouchableOpacity onPress={refreshFunction}>
-                  <Text style={styles.reloadMessageStyle}>
-                    Reload?
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )
-          }
-          <View style={styles.horizontalViewStyle}>
-            <Ionicons name='logo-instagram'
-                      size={36}
-                      color={Colors.primaryColor}/>
-            <Text style={styles.instagramTitleStyle}>
-              Instagram
-            </Text>
-            <View style={styles.addIconStyle}>
-              <Ionicons name='add'
+              ) : (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
+          </View>
+          <View>
+            <View style={styles.horizontalViewStyle}>
+              <Ionicons name='logo-instagram'
                         size={36}
-                        color={Colors.primaryColor}/>
+                        color={Colors.instagramColor}/>
+              <Text style={styles.instagramTitleStyle}>
+                Instagram
+              </Text>
+              <TouchableOpacity style={styles.addIconStyle}>
+                <Ionicons name='add'
+                          size={36}
+                          color={Colors.instagramColor}/>
+              </TouchableOpacity>
             </View>
-          </View>
-          {
-            instagramAccounts.length > 0 ? (
-              <View style={styles.socialMediaViewStyle}>
-                <View style={styles.listStyle}>
-                  <FlatList keyExtractor={(item, index) => index.toString()}
-                            data={instagramAccounts}
-                            numColumns={1}
-                            renderItem={renderInstagramItemsFunction}/>
+            {
+              instagramAccounts.length > 0 ? (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.listStyle}>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={instagramAccounts}
+                              numColumns={1}
+                              renderItem={renderInstagramItemsFunction}/>
+                  </View>
                 </View>
-              </View>
-            ) : (
-              <View style={styles.emptyListStyle}>
-                <Ionicons name='warning'
-                          size={80}
-                          color={Colors.tertiaryColor}/>
-                <Text style={styles.errorMessageStyle}>
-                  {Constants.EMPTY_LIST}
-                </Text>
-                <TouchableOpacity onPress={refreshFunction}>
-                  <Text style={styles.reloadMessageStyle}>
-                    Reload?
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            )
-          }
+              ) : (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
+          </View>
         </View>
         {
           loading &&
@@ -237,11 +249,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   emptyListStyle: {
-    position: 'absolute',
     left: 0,
     right: 0,
-    top: 0,
-    bottom: 0,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -268,9 +277,9 @@ const styles = StyleSheet.create({
     marginLeft: wp('2%')
   },
   listStyle: {
+    alignSelf: 'center',
     width: wp('95%'),
-    marginTop: hp('1%'),
-    marginBottom: hp('1%')
+    marginVertical: hp('1%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -285,7 +294,7 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
     alignItems: 'center',
-    minHeight: hp('100%')
+    minHeight: hp('93.6%')
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,

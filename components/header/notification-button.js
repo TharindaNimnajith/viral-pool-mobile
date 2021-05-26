@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
-import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
 import CustomHeaderButton from './custom-header-button'
@@ -24,8 +24,8 @@ const NotificationButton = props => {
                 onPress={displayNotifications}/>
         ) : (
           <Item title='Notifications'
-                iconName='notifications'
-                IconComponent={Ionicons}
+                iconName='bell'
+                IconComponent={MaterialCommunityIcons}
                 color={Colors.secondaryColor}
                 onPress={displayNotifications}/>
         )

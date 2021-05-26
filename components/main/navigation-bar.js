@@ -2,7 +2,7 @@ import React from 'react'
 import {createAppContainer, createSwitchNavigator} from 'react-navigation'
 import {createStackNavigator} from 'react-navigation-stack'
 import {createDrawerNavigator} from 'react-navigation-drawer'
-import {FontAwesome, Ionicons} from '@expo/vector-icons'
+import {FontAwesome, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
 import Colors from '../../shared/const/colors'
 import LoginScreen from '../../screens/auth/login-screen'
 import DashboardScreen from '../../screens/dashboard/dashboard-screen'
@@ -160,9 +160,9 @@ const InternalNavigator = createDrawerNavigator({
     screen: NotificationsNavigator,
     navigationOptions: {
       drawerLabel: 'Notifications',
-      drawerIcon: <Ionicons name='notifications'
-                            size={25}
-                            color={Colors.secondaryColor}/>
+      drawerIcon: <MaterialCommunityIcons name='bell'
+                                          size={25}
+                                          color={Colors.secondaryColor}/>
     }
   },
   NewProjects: {
