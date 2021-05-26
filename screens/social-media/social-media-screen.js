@@ -250,7 +250,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   facebookTitleStyle: {
-    color: Colors.primaryColor,
+    color: Colors.facebookColor,
     fontSize: 30,
     marginLeft: wp('2%')
   },
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   instagramTitleStyle: {
-    color: Colors.primaryColor,
+    color: Colors.instagramColor,
     fontSize: 30,
     marginLeft: wp('2%')
   },
