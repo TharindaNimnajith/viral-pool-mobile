@@ -9,7 +9,6 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableWithoutFeedback,
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
@@ -126,7 +125,7 @@ const DashboardScreen = props => {
         <View style={styles.mainViewStyle}>
           <View style={styles.headerStyle}>
             <View style={styles.viewStyle}>
-              <TouchableWithoutFeedback onPress={onProfilePress}>
+              <TouchableOpacity onPress={onProfilePress}>
                 {
                   appContext.userData.profileImagePath ? (
                     <Image style={styles.avatarStyle}
@@ -138,11 +137,12 @@ const DashboardScreen = props => {
                            source={require('../../assets/user.jpg')}/>
                   )
                 }
-              </TouchableWithoutFeedback>
-              <Text style={styles.titleStyle}
-                    onPress={onProfilePress}>
-                {appContext.userData.firstName} {appContext.userData.lastName}
-              </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={onProfilePress}>
+                <Text style={styles.titleStyle}>
+                  {appContext.userData.firstName} {appContext.userData.lastName}
+                </Text>
+              </TouchableOpacity>
               <Text style={styles.textStyle}
                     onPress={onProfilePress}>
                 34 VP Points | 10th Ranked

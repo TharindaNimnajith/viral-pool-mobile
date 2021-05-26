@@ -70,17 +70,100 @@ const SocialMediaScreen = () => {
                         onRefresh={onRefresh}/>
       }>
         <View style={styles.mainViewStyle}>
+          <View style={styles.horizontalViewStyle}>
+            <Ionicons name='logo-youtube'
+                      size={36}
+                      color={Colors.primaryColor}/>
+            <Text style={styles.youtubeTitleStyle}>
+              YouTube
+            </Text>
+            <View style={styles.addIconStyle}>
+              <Ionicons name='add'
+                        size={36}
+                        color={Colors.primaryColor}/>
+            </View>
+          </View>
           {
             youtubeAccounts.length > 0 ? (
               <View style={styles.socialMediaViewStyle}>
-                <View style={styles.horizontalViewStyle}>
-                  <Ionicons name='logo-youtube'
-                            size={36}
-                            color={Colors.primaryColor}/>
-                  <Text style={styles.youtubeTitleStyle}>
-                    YouTube
-                  </Text>
+                <View style={styles.listStyle}>
+                  <FlatList keyExtractor={(item, index) => index.toString()}
+                            data={youtubeAccounts}
+                            numColumns={1}
+                            renderItem={renderItemsFunction}/>
                 </View>
+              </View>
+            ) : (
+              <View style={styles.emptyListStyle}>
+                <Ionicons name='warning'
+                          size={80}
+                          color={Colors.tertiaryColor}/>
+                <Text style={styles.errorMessageStyle}>
+                  {Constants.EMPTY_LIST}
+                </Text>
+                <TouchableOpacity onPress={refreshFunction}>
+                  <Text style={styles.reloadMessageStyle}>
+                    Reload?
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )
+          }
+          <View style={styles.horizontalViewStyle}>
+            <Ionicons name='logo-youtube'
+                      size={36}
+                      color={Colors.primaryColor}/>
+            <Text style={styles.youtubeTitleStyle}>
+              YouTube
+            </Text>
+            <View style={styles.addIconStyle}>
+              <Ionicons name='add'
+                        size={36}
+                        color={Colors.primaryColor}/>
+            </View>
+          </View>
+          {
+            youtubeAccounts.length > 0 ? (
+              <View style={styles.socialMediaViewStyle}>
+                <View style={styles.listStyle}>
+                  <FlatList keyExtractor={(item, index) => index.toString()}
+                            data={youtubeAccounts}
+                            numColumns={1}
+                            renderItem={renderItemsFunction}/>
+                </View>
+              </View>
+            ) : (
+              <View style={styles.emptyListStyle}>
+                <Ionicons name='warning'
+                          size={80}
+                          color={Colors.tertiaryColor}/>
+                <Text style={styles.errorMessageStyle}>
+                  {Constants.EMPTY_LIST}
+                </Text>
+                <TouchableOpacity onPress={refreshFunction}>
+                  <Text style={styles.reloadMessageStyle}>
+                    Reload?
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )
+          }
+          <View style={styles.horizontalViewStyle}>
+            <Ionicons name='logo-youtube'
+                      size={36}
+                      color={Colors.primaryColor}/>
+            <Text style={styles.youtubeTitleStyle}>
+              YouTube
+            </Text>
+            <View style={styles.addIconStyle}>
+              <Ionicons name='add'
+                        size={36}
+                        color={Colors.primaryColor}/>
+            </View>
+          </View>
+          {
+            youtubeAccounts.length > 0 ? (
+              <View style={styles.socialMediaViewStyle}>
                 <View style={styles.listStyle}>
                   <FlatList keyExtractor={(item, index) => index.toString()}
                             data={youtubeAccounts}
@@ -118,6 +201,11 @@ const SocialMediaScreen = () => {
 }
 
 const styles = StyleSheet.create({
+  addIconStyle: {
+    alignItems: 'flex-end',
+    marginRight: wp('7%'),
+    flex: 1
+  },
   emptyListStyle: {
     position: 'absolute',
     left: 0,
@@ -136,7 +224,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     marginTop: hp('2%'),
     marginBottom: hp('1%'),
-    marginLeft: wp('4%'),
+    marginLeft: wp('7%'),
     alignItems: 'center'
   },
   listStyle: {

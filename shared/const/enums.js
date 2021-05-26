@@ -1,7 +1,8 @@
 export const jobAcceptationStatusEnum = Object.freeze({
   Pending: 0,
   Accepted: 1,
-  Rejected: 2
+  Completed: 2,
+  Rejected: 3
 })
 
 export const contentSubmissionStatusEnum = Object.freeze({
