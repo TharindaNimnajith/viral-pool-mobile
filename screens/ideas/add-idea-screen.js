@@ -94,7 +94,8 @@ const AddIdeaScreen = props => {
 
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visible}>
+      <Dialog.Container visible={visible}
+                        onBackdropPress={hideDialog}>
         <Dialog.Title>
           NEW IDEA
         </Dialog.Title>
@@ -102,8 +103,10 @@ const AddIdeaScreen = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={addIdea}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
       <ScrollView refreshControl={

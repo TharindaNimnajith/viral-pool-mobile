@@ -24,7 +24,8 @@ const Logout = props => {
 
   return (
     <View>
-      <Dialog.Container visible={visible}>
+      <Dialog.Container visible={visible}
+                        onBackdropPress={hideDialog}>
         <Dialog.Title>
           SIGN OUT
         </Dialog.Title>
@@ -32,8 +33,10 @@ const Logout = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={handleLogout}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>

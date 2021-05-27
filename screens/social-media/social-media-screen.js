@@ -11,6 +11,7 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Dialog from 'react-native-dialog'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
@@ -22,7 +23,6 @@ import CombinedButtons from '../../components/header/combined-buttons'
 import YoutubeListItem from '../../components/list-items/social-media/youtube-list-item'
 import FacebookListItem from '../../components/list-items/social-media/facebook-list-item'
 import InstagramListItem from '../../components/list-items/social-media/instagram-list-item'
-import Dialog from "react-native-dialog";
 
 const SocialMediaScreen = () => {
   const appContext = useContext(AppContext)
@@ -285,40 +285,67 @@ const SocialMediaScreen = () => {
 
   return (
     <SafeAreaView>
+      <Dialog.Container visible={visibleYoutube}
+                        onBackdropPress={hideDialogYoutube}>
+        <Dialog.Title>
+          NEW CHANNEL
+        </Dialog.Title>
+        <Dialog.Input label='YouTube Channel ID'
+                      style={styles.textInputStyle}
+                      wrapperStyle={styles.wrapperStyle}
+                      onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
+                      value={youtubeChannelId}
+                      placeholder='Enter YouTube Channel ID'
+                      placeholderTextColor={Colors.tertiaryColor}/>
+        <Dialog.Button label='Submit'
+                       color={Colors.primaryColor}
+                       onPress={addYoutube}/>
+        <Dialog.Button label='Cancel'
+                       color={Colors.primaryColor}
+                       onPress={hideDialogYoutube}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleFacebook}
+                        onBackdropPress={hideDialogFacebook}>
+        <Dialog.Title>
+          NEW PAGE
+        </Dialog.Title>
+        <Dialog.Input label='YouTube Channel ID'
+                      style={styles.textInputStyle}
+                      wrapperStyle={styles.wrapperStyle}
+                      onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
+                      value={youtubeChannelId}
+                      placeholder='Enter YouTube Channel ID'
+                      placeholderTextColor={Colors.tertiaryColor}/>
+        <Dialog.Button label='Submit'
+                       color={Colors.primaryColor}
+                       onPress={addFacebook}/>
+        <Dialog.Button label='Cancel'
+                       color={Colors.primaryColor}
+                       onPress={hideDialogFacebook}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleInstagram}
+                        onBackdropPress={hideDialogInstagram}>
+        <Dialog.Title>
+          NEW ACCOUNT
+        </Dialog.Title>
+        <Dialog.Input label='YouTube Channel ID'
+                      style={styles.textInputStyle}
+                      wrapperStyle={styles.wrapperStyle}
+                      onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
+                      value={youtubeChannelId}
+                      placeholder='Enter YouTube Channel ID'
+                      placeholderTextColor={Colors.tertiaryColor}/>
+        <Dialog.Button label='Submit'
+                       color={Colors.primaryColor}
+                       onPress={addInstagram}/>
+        <Dialog.Button label='Cancel'
+                       color={Colors.primaryColor}
+                       onPress={hideDialogInstagram}/>
+      </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
       }>
-        <Dialog.Container visible={visibleYoutube}>
-          <Dialog.Title>
-            ADD ACCOUNT
-          </Dialog.Title>
-          <Dialog.Input label='Channel ID'/>
-          <Dialog.Button label='Yes'
-                         onPress={addYoutube}/>
-          <Dialog.Button label='No'
-                         onPress={hideDialogYoutube}/>
-        </Dialog.Container>
-        <Dialog.Container visible={visibleFacebook}>
-          <Dialog.Title>
-            ADD ACCOUNT
-          </Dialog.Title>
-
-          <Dialog.Button label='Yes'
-                         onPress={addFacebook}/>
-          <Dialog.Button label='No'
-                         onPress={hideDialogFacebook}/>
-        </Dialog.Container>
-        <Dialog.Container visible={visibleInstagram}>
-          <Dialog.Title>
-            ADD ACCOUNT
-          </Dialog.Title>
-
-          <Dialog.Button label='Yes'
-                         onPress={addInstagram}/>
-          <Dialog.Button label='No'
-                         onPress={hideDialogInstagram}/>
-        </Dialog.Container>
         <View style={styles.mainViewStyle}>
           <View>
             <View style={styles.horizontalViewStyle}>
@@ -527,6 +554,21 @@ const styles = StyleSheet.create({
   socialMediaViewStyle: {
     marginTop: hp('1%'),
     marginBottom: hp('2%')
+  },
+  textInputStyle: {
+    borderColor: Colors.tertiaryColor,
+    width: wp('70%'),
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+    marginTop: 10,
+    marginLeft: 0.5,
+    paddingVertical: 10,
+    paddingLeft: 5,
+    color: Colors.tertiaryColor
+  },
+  wrapperStyle: {
+    marginTop: 8
   },
   youtubeTitleStyle: {
     color: Colors.primaryColor,

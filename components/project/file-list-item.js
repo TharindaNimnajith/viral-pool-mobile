@@ -83,7 +83,8 @@ const FileListItem = props => {
 
   return (
     <View>
-      <Dialog.Container visible={visible}>
+      <Dialog.Container visible={visible}
+                        onBackdropPress={hideDialog}>
         <Dialog.Title>
           DOWNLOAD
         </Dialog.Title>
@@ -91,8 +92,10 @@ const FileListItem = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={download}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
       <TouchableOpacity style={styles.itemStyle}

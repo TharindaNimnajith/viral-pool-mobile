@@ -44,16 +44,19 @@ const YoutubeListItem = props => {
 
   return (
     <View>
-      <Dialog.Container visible={visible}>
+      <Dialog.Container visible={visible}
+                        onBackdropPress={hideDialog}>
         <Dialog.Title>
-          DELETE ACCOUNT
+          DELETE CHANNEL
         </Dialog.Title>
         <Dialog.Description>
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={deleteAccount}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
       <View style={styles.itemStyle}>

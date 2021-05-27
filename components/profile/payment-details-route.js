@@ -1,7 +1,6 @@
 import React, {useCallback, useContext, useState} from 'react'
 import {
   ActivityIndicator,
-  Alert,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -12,6 +11,7 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import {isNullAsync, showAlert} from '../../shared/util/helpers'
@@ -25,6 +25,7 @@ const PaymentDetailsRoute = () => {
   const [bankAccountNumber, setBankAccountNumber] = useState(appContext.userData.bankAccountNumber)
   const [bankName, setBankName] = useState(appContext.userData.bankName)
   const [branchName, setBranchName] = useState(appContext.userData.branchName)
+  const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -35,15 +36,12 @@ const PaymentDetailsRoute = () => {
     })
   }, [])
 
-  const showConfirmAlert = () => {
-    Alert.alert('UPDATE PAYMENT DETAILS', Constants.CONFIRMATION, [{
-      text: 'Yes',
-      onPress: editPaymentDetails,
-    }, {
-      text: 'No'
-    }], {
-      cancelable: true
-    })
+  const showDialog = async () => {
+    setVisible(true)
+  }
+
+  const hideDialog = async () => {
+    setVisible(false)
   }
 
   const onChangeBankAccountName = async bankAccountName => {
@@ -124,6 +122,21 @@ const PaymentDetailsRoute = () => {
 
   return (
     <SafeAreaView>
+      <Dialog.Container visible={visible}
+                        onBackdropPress={hideDialog}>
+        <Dialog.Title>
+          UPDATE PAYMENT DETAILS
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
+                       onPress={editPaymentDetails}/>
+        <Dialog.Button label='No'
+                       color={Colors.primaryColor}
+                       onPress={hideDialog}/>
+      </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
@@ -166,7 +179,7 @@ const PaymentDetailsRoute = () => {
           <View style={styles.containerStyle}>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
-                              onPress={showConfirmAlert}>
+                              onPress={showDialog}>
               <Text style={styles.buttonTextStyle}>
                 Update Payment Details
               </Text>

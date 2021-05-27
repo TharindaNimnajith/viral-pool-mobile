@@ -44,7 +44,8 @@ const InstagramListItem = props => {
 
   return (
     <View>
-      <Dialog.Container visible={visible}>
+      <Dialog.Container visible={visible}
+                        onBackdropPress={hideDialog}>
         <Dialog.Title>
           DELETE ACCOUNT
         </Dialog.Title>
@@ -52,8 +53,10 @@ const InstagramListItem = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={deleteAccount}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
       <View style={styles.itemStyle}>

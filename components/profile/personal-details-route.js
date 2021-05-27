@@ -1,7 +1,6 @@
 import React, {useCallback, useContext, useState} from 'react'
 import {
   ActivityIndicator,
-  Alert,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -14,6 +13,7 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
+import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import {genderOptions, isNull, isNullAsync, showAlert} from '../../shared/util/helpers'
@@ -25,12 +25,13 @@ const PersonalDetailsRoute = () => {
 
   const [firstName, setFirstName] = useState(appContext.userData.firstName)
   const [lastName, setLastName] = useState(appContext.userData.lastName)
-  const [gender, setGender] = useState(appContext.userData.gender?.toUpperCase() === 'MALE' ? 1 :
-    appContext.userData.gender?.toUpperCase() === 'FEMALE' ? 0 : null)
+  const [gender, setGender] = useState(appContext.userData.gender?.toLowerCase() === 'male' ? 1 :
+    appContext.userData.gender?.toLowerCase() === 'female' ? 0 : null)
   const [birthDate, setBirthDate] = useState(appContext.userData.birthDate)
   const [address, setAddress] = useState(appContext.userData.address)
   const [phoneNumber, setPhoneNumber] = useState(appContext.userData.phoneNumber)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
+  const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -41,15 +42,12 @@ const PersonalDetailsRoute = () => {
     })
   }, [])
 
-  const showConfirmAlert = () => {
-    Alert.alert('UPDATE PERSONAL DETAILS', Constants.CONFIRMATION, [{
-      text: 'Yes',
-      onPress: editPersonalDetails,
-    }, {
-      text: 'No'
-    }], {
-      cancelable: true
-    })
+  const showDialog = async () => {
+    setVisible(true)
+  }
+
+  const hideDialog = async () => {
+    setVisible(false)
   }
 
   const onChangeFirstName = async firstName => {
@@ -142,6 +140,21 @@ const PersonalDetailsRoute = () => {
 
   return (
     <SafeAreaView>
+      <Dialog.Container visible={visible}
+                        onBackdropPress={hideDialog}>
+        <Dialog.Title>
+          UPDATE PERSONAL DETAILS
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
+                       onPress={editPersonalDetails}/>
+        <Dialog.Button label='No'
+                       color={Colors.primaryColor}
+                       onPress={hideDialog}/>
+      </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
@@ -230,7 +243,7 @@ const PersonalDetailsRoute = () => {
           <View style={styles.containerStyle}>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
-                              onPress={showConfirmAlert}>
+                              onPress={showDialog}>
               <Text style={styles.buttonTextStyle}>
                 Update Personal Details
               </Text>

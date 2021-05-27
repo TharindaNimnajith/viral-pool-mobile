@@ -330,7 +330,8 @@ const ProjectDetails = props => {
 
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visibleAccept}>
+      <Dialog.Container visible={visibleAccept}
+                        onBackdropPress={hideDialogAccept}>
         <Dialog.Title>
           ACCEPT JOB
         </Dialog.Title>
@@ -338,11 +339,14 @@ const ProjectDetails = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={acceptJob}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialogAccept}/>
       </Dialog.Container>
-      <Dialog.Container visible={visibleReject}>
+      <Dialog.Container visible={visibleReject}
+                        onBackdropPress={hideDialogReject}>
         <Dialog.Title>
           REJECT JOB
         </Dialog.Title>
@@ -350,11 +354,14 @@ const ProjectDetails = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={rejectJob}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialogReject}/>
       </Dialog.Container>
-      <Dialog.Container visible={visibleContentSubmit}>
+      <Dialog.Container visible={visibleContentSubmit}
+                        onBackdropPress={hideDialogContentSubmit}>
         <Dialog.Title>
           SUBMIT CONTENT
         </Dialog.Title>
@@ -362,11 +369,14 @@ const ProjectDetails = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={contentSubmit}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialogContentSubmit}/>
       </Dialog.Container>
-      <Dialog.Container visible={visibleContentDelete}>
+      <Dialog.Container visible={visibleContentDelete}
+                        onBackdropPress={hideDialogContentDelete}>
         <Dialog.Title>
           DELETE CONTENT
         </Dialog.Title>
@@ -374,11 +384,14 @@ const ProjectDetails = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={contentDelete}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialogContentDelete}/>
       </Dialog.Container>
-      <Dialog.Container visible={visibleResultSubmit}>
+      <Dialog.Container visible={visibleResultSubmit}
+                        onBackdropPress={hideDialogResultSubmit}>
         <Dialog.Title>
           SUBMIT RESULT
         </Dialog.Title>
@@ -386,11 +399,14 @@ const ProjectDetails = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={resultSubmit}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialogResultSubmit}/>
       </Dialog.Container>
-      <Dialog.Container visible={visibleResultDelete}>
+      <Dialog.Container visible={visibleResultDelete}
+                        onBackdropPress={hideDialogResultDelete}>
         <Dialog.Title>
           DELETE RESULT
         </Dialog.Title>
@@ -398,8 +414,10 @@ const ProjectDetails = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={resultDelete}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialogResultDelete}/>
       </Dialog.Container>
       <ScrollView refreshControl={

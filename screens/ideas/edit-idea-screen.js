@@ -146,7 +146,8 @@ const EditIdeaScreen = props => {
 
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visibleEdit}>
+      <Dialog.Container visible={visibleEdit}
+                        onBackdropPress={hideDialogEdit}>
         <Dialog.Title>
           UPDATE IDEA
         </Dialog.Title>
@@ -154,11 +155,14 @@ const EditIdeaScreen = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={editIdea}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialogEdit}/>
       </Dialog.Container>
-      <Dialog.Container visible={visibleDelete}>
+      <Dialog.Container visible={visibleDelete}
+                        onBackdropPress={hideDialogDelete}>
         <Dialog.Title>
           DELETE IDEA
         </Dialog.Title>
@@ -166,8 +170,10 @@ const EditIdeaScreen = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={deleteIdea}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialogDelete}/>
       </Dialog.Container>
       <ScrollView refreshControl={

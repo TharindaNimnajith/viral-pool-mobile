@@ -169,7 +169,8 @@ const ProfileScreen = props => {
 
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visible}>
+      <Dialog.Container visible={visible}
+                        onBackdropPress={hideDialog}>
         <Dialog.Title>
           UPDATE PROFILE PICTURE
         </Dialog.Title>
@@ -177,8 +178,10 @@ const ProfileScreen = props => {
           {Constants.CONFIRMATION}
         </Dialog.Description>
         <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
                        onPress={pickImage}/>
         <Dialog.Button label='No'
+                       color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
       <ScrollView refreshControl={
@@ -234,11 +237,11 @@ const ProfileScreen = props => {
                 </View>
                 <View style={styles.viewStyle}>
                   {
-                    appContext.userData.gender?.toUpperCase() === 'MALE' ? (
+                    appContext.userData.gender?.toLowerCase() === 'male' ? (
                       <Ionicons name='man'
                                 size={20}
                                 color={Colors.primaryColor}/>
-                    ) : appContext.userData.gender?.toUpperCase() === 'FEMALE' ? (
+                    ) : appContext.userData.gender?.toLowerCase() === 'female' ? (
                       <Ionicons name='woman'
                                 size={20}
                                 color={Colors.primaryColor}/>
