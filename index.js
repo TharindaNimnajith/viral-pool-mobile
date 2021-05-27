@@ -20,8 +20,8 @@ axios.interceptors.request.use(async request => {
 axios.interceptors.response.use(async response => {
   return response
 }, async error => {
-  console.log(error)
   if (error.response.status !== 401) {
+    console.log(error)
     return new Promise((resolve, reject) => {
       reject(error)
     })
@@ -37,14 +37,16 @@ axios.interceptors.response.use(async response => {
     await storeStringData(Constants.REFRESH_TOKEN, response.data.refresh_token)
     error.config.headers[Constants.AUTHORIZATION] = `${Constants.BEARER} ${response.data.access_token}`
     return new Promise((resolve, reject) => {
-      axios.request(error.config).then(response => {
+      axios.request(error.config).then(async response => {
         resolve(response)
-      }).catch(error => {
+      }).catch(async error => {
+        console.log(error)
         error.response.status = 403
         reject(error)
       })
     })
-  }).catch(error => {
+  }).catch(async error => {
+    console.log(error)
     Promise.reject(error)
   })
 })
