@@ -1,7 +1,9 @@
 import React, {useCallback, useState} from 'react'
-import {RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native'
+import {RefreshControl, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native'
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import WebView from 'react-native-webview'
 import Colors from '../../shared/const/colors'
+import {ApiUrl} from '../../shared/util/helpers'
 
 const ForgotPasswordScreen = () => {
   const [refreshing, setRefreshing] = useState(false)
@@ -21,9 +23,10 @@ const ForgotPasswordScreen = () => {
                                     onRefresh={onRefresh}/>
                   }>
         <View style={styles.mainViewStyle}>
-          <View style={styles.viewStyle}>
-            <Text>Forgot Password</Text>
-          </View>
+          <WebView style={styles.webViewStyle}
+                   source={{
+                     uri: `${ApiUrl.ROOT_URL}Identity365/PasswordResetEmail`
+                   }}/>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -33,15 +36,14 @@ const ForgotPasswordScreen = () => {
 const styles = StyleSheet.create({
   mainViewStyle: {
     minHeight: hp('102.2%'),
-    backgroundColor: Colors.secondaryColor
+    backgroundColor: Colors.primaryColor
   },
   refreshStyle: {
     marginTop: 10
   },
-  viewStyle: {
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center'
+  webViewStyle: {
+    marginTop: 12,
+    marginHorizontal: 15
   }
 })
 

@@ -1,18 +1,16 @@
-import React, {useContext, useState} from 'react'
+import React, {useState} from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {FontAwesome5} from '@expo/vector-icons'
 import {createAlbumAsync, createAssetAsync, requestPermissionsAsync} from 'expo-media-library'
 import {documentDirectory, downloadAsync, FileSystemSessionType} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
-import {AppContext} from '../../shared/global/app-context'
 import {ApiUrl, showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Colors from '../../shared/const/colors'
+import {getStringData} from '../../shared/util/local-storage'
 
 const FileListItem = props => {
-  const appContext = useContext(AppContext)
-
   const [visible, setVisible] = useState(false)
 
   const showDialog = async () => {
@@ -47,8 +45,9 @@ const FileListItem = props => {
     const uri = `${ApiUrl.BASE_URL}project-strategy/file/${props.itemData.id}`
     const fileUri = documentDirectory + props.itemData.fileName
     if (status === 'granted') {
+      const accessToken = await getStringData(Constants.ACCESS_TOKEN)
       const headers = {
-        'Authorization': `Bearer ${appContext.accessToken}`
+        'Authorization': `Bearer ${accessToken}`
       }
       const options = {
         headers: headers,

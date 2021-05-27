@@ -30,3 +30,9 @@ export const notificationTypeEnum = Object.freeze({
   ResultAccepted: 5,
   PaymentAdded: 6
 })
+
+export const socialMediaPlatformNameEnum = Object.freeze({
+  Youtube: 'YouTube',
+  Facebook: 'Facebook',
+  Instagram: 'Instagram'
+})

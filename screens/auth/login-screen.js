@@ -70,8 +70,7 @@ const LoginScreen = props => {
     }
     axios.post('oauth/mobile-login', data).then(async response => {
       await storeStringData(Constants.ACCESS_TOKEN, response.data.access_token)
-      await appContext.SetAccessToken(response.data.access_token)
-      await appContext.SetRefreshToken(response.data.refresh_token)
+      await storeStringData(Constants.REFRESH_TOKEN, response.data.refresh_token)
       if (response.status === 200) {
         axios.get('User').then(async response => {
           if (response.status === 200) {

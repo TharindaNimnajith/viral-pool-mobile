@@ -2,7 +2,8 @@ import {Alert} from 'react-native'
 import Constants from '../const/constants'
 
 class ApiUrl {
-  static BASE_URL = 'https://cube360viralpoolapi.herokuapp.com/api/'
+  static ROOT_URL = 'https://cube360viralpoolapi.herokuapp.com/'
+  static BASE_URL = `${this.ROOT_URL}api/`
 }
 
 const warnings = [

@@ -22,6 +22,7 @@ import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
+import {getStringData} from '../../shared/util/local-storage'
 
 const ProfileScreen = props => {
   const appContext = useContext(AppContext)
@@ -96,10 +97,11 @@ const ProfileScreen = props => {
       const filename = result.uri.split('/').pop()
       const match = /\.(\w+)$/.exec(filename)
       const type = match ? `image/${match[1]}` : `image`
+      const accessToken = await getStringData(Constants.ACCESS_TOKEN)
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${appContext.accessToken}`,
+        'Authorization': `Bearer ${accessToken}`,
         'client_id': `${Constants.CLIENT_ID_VALUE}`
       }
       let firstName = ''
