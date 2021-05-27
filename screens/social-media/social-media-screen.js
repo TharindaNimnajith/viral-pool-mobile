@@ -253,10 +253,14 @@ const SocialMediaScreen = () => {
     }
     axios.post('cc-social-media/youtube/add-profile', data).then(async response => {
       setLoading(false)
-      if (response.status === 200)
+      if (response.status === 200) {
+        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
         await resetYoutube()
-      else
+        setRefresh(true)
+      }
+      else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -275,10 +279,14 @@ const SocialMediaScreen = () => {
     }
     axios.post('cc-social-media/facebook/add-profile', data).then(async response => {
       setLoading(false)
-      if (response.status === 200)
+      if (response.status === 200) {
+        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
         await resetFacebook()
-      else
+        setRefresh(true)
+      }
+      else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -297,10 +305,14 @@ const SocialMediaScreen = () => {
     }
     axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
       setLoading(false)
-      if (response.status === 200)
+      if (response.status === 200) {
+        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
         await resetInstagram()
-      else
+        setRefresh(true)
+      }
+      else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
