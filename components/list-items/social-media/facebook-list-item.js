@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import {Ionicons, MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
-import {showAlert} from '../../../shared/util/helpers'
+import {formatNumber, showAlert} from '../../../shared/util/helpers'
 import Constants from '../../../shared/const/constants'
 import Colors from '../../../shared/const/colors'
 
@@ -75,7 +75,7 @@ const FacebookListItem = props => {
                 Likes
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.fanCount}
+                {formatNumber(props.itemData.item.fanCount)}
               </Text>
             </View>
           </View>

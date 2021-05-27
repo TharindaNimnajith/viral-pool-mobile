@@ -34,11 +34,11 @@ const SocialMediaScreen = () => {
   const [facebookPageId, setFacebookPageId] = useState('')
   const [facebookPageName, setFacebookPageName] = useState('')
   const [facebookPageLink, setFacebookPageLink] = useState('')
-  const [facebookPageLikeCount, setFacebookPageLikeCount] = useState(0)
+  const [facebookPageLikeCount, setFacebookPageLikeCount] = useState('')
   const [instagramUsername, setInstagramUsername] = useState('')
   const [instagramLink, setInstagramLink] = useState('')
-  const [instagramFollowingCount, setInstagramFollowingCount] = useState(0)
-  const [instagramFollowerCount, setInstagramFollowerCount] = useState(0)
+  const [instagramFollowingCount, setInstagramFollowingCount] = useState('')
+  const [instagramFollowerCount, setInstagramFollowerCount] = useState('')
   const [youtubeChannelIdValid, setYoutubeChannelIdValid] = useState(false)
   const [facebookPageIdValid, setFacebookPageIdValid] = useState(false)
   const [facebookPageNameValid, setFacebookPageNameValid] = useState(false)
@@ -184,7 +184,10 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeFacebookPageLikeCount = async facebookPageLikeCount => {
-    setFacebookPageLikeCountValid(facebookPageLikeCount.trim().length > 0 && !NaN(facebookPageLikeCount.trim()))
+    if (facebookPageLikeCount.trim().length > 0)
+      setFacebookPageLikeCountValid(!isNaN(facebookPageLikeCount.trim()))
+    else
+      setFacebookPageLikeCountValid(false)
     setFacebookPageLikeCount(facebookPageLikeCount)
   }
 
@@ -203,14 +206,18 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeInstagramFollowingCount = async instagramFollowingCount => {
-    setInstagramFollowingCountValid(instagramFollowingCount.trim().length > 0 &&
-      !NaN(instagramFollowingCount.trim()))
+    if (instagramFollowingCount.trim().length > 0)
+      setInstagramFollowingCountValid(!isNaN(instagramFollowingCount.trim()))
+    else
+      setInstagramFollowingCountValid(false)
     setInstagramFollowingCount(instagramFollowingCount)
   }
 
   const onChangeInstagramFollowerCount = async instagramFollowerCount => {
-    setInstagramFollowerCountValid(instagramFollowerCount.trim().length > 0 &&
-      !NaN(instagramFollowerCount.trim()))
+    if (instagramFollowerCount.trim().length > 0)
+      setInstagramFollowerCountValid(!isNaN(instagramFollowerCount.trim()))
+    else
+      setInstagramFollowerCountValid(false)
     setInstagramFollowerCount(instagramFollowerCount)
   }
 
@@ -222,7 +229,7 @@ const SocialMediaScreen = () => {
   const addYoutube = () => {
     setLoading(true)
     const data = {
-      channelId: youtubeChannelId,
+      channelId: youtubeChannelId.trim(),
       contentCreatorDetailId: appContext.userData.id
     }
     axios.post('cc-social-media/youtube/add-profile', data).then(async response => {
@@ -242,10 +249,10 @@ const SocialMediaScreen = () => {
   const addFacebook = () => {
     setLoading(true)
     const data = {
-      pageId: facebookPageId,
-      name: facebookPageName,
-      link: facebookPageLink,
-      fanCount: facebookPageLikeCount
+      pageId: facebookPageId.trim(),
+      name: facebookPageName.trim(),
+      link: facebookPageLink.trim(),
+      fanCount: facebookPageLikeCount.trim()
     }
     axios.post('cc-social-media/facebook/add-profile', data).then(async response => {
       setLoading(false)
@@ -264,10 +271,10 @@ const SocialMediaScreen = () => {
   const addInstagram = () => {
     setLoading(true)
     const data = {
-      username: instagramUsername,
-      link: instagramLink,
-      followsCount: instagramFollowingCount,
-      followersCount: instagramFollowerCount
+      username: instagramUsername.trim(),
+      link: instagramLink.trim(),
+      followsCount: instagramFollowingCount.trim(),
+      followersCount: instagramFollowerCount.trim()
     }
     axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
       setLoading(false)
@@ -285,67 +292,118 @@ const SocialMediaScreen = () => {
 
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visibleYoutube}
-                        onBackdropPress={hideDialogYoutube}>
-        <Dialog.Title>
-          NEW CHANNEL
-        </Dialog.Title>
-        <Dialog.Input label='YouTube Channel ID'
-                      style={styles.textInputStyle}
-                      wrapperStyle={styles.wrapperStyle}
-                      onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
-                      value={youtubeChannelId}
-                      placeholder='Enter YouTube Channel ID'
-                      placeholderTextColor={Colors.tertiaryColor}/>
-        <Dialog.Button label='Submit'
-                       color={Colors.primaryColor}
-                       onPress={addYoutube}/>
-        <Dialog.Button label='Cancel'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogYoutube}/>
-      </Dialog.Container>
-      <Dialog.Container visible={visibleFacebook}
-                        onBackdropPress={hideDialogFacebook}>
-        <Dialog.Title>
-          NEW PAGE
-        </Dialog.Title>
-        <Dialog.Input label='YouTube Channel ID'
-                      style={styles.textInputStyle}
-                      wrapperStyle={styles.wrapperStyle}
-                      onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
-                      value={youtubeChannelId}
-                      placeholder='Enter YouTube Channel ID'
-                      placeholderTextColor={Colors.tertiaryColor}/>
-        <Dialog.Button label='Submit'
-                       color={Colors.primaryColor}
-                       onPress={addFacebook}/>
-        <Dialog.Button label='Cancel'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogFacebook}/>
-      </Dialog.Container>
-      <Dialog.Container visible={visibleInstagram}
-                        onBackdropPress={hideDialogInstagram}>
-        <Dialog.Title>
-          NEW ACCOUNT
-        </Dialog.Title>
-        <Dialog.Input label='YouTube Channel ID'
-                      style={styles.textInputStyle}
-                      wrapperStyle={styles.wrapperStyle}
-                      onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
-                      value={youtubeChannelId}
-                      placeholder='Enter YouTube Channel ID'
-                      placeholderTextColor={Colors.tertiaryColor}/>
-        <Dialog.Button label='Submit'
-                       color={Colors.primaryColor}
-                       onPress={addInstagram}/>
-        <Dialog.Button label='Cancel'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogInstagram}/>
-      </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
       }>
+        <Dialog.Container visible={visibleYoutube}
+                          onBackdropPress={hideDialogYoutube}
+                          headerStyle={styles.headerStyle}
+                          footerStyle={styles.footerStyle}>
+          <Dialog.Title style={styles.titleStyle}>
+            NEW CHANNEL
+          </Dialog.Title>
+          <Dialog.Input label='Channel ID'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
+                        value={youtubeChannelId}
+                        placeholder='Enter Channel ID'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Button label='Submit'
+                         color={isDisabledYoutube() ? Colors.tertiaryColor : Colors.primaryColor}
+                         onPress={addYoutube}
+                         disabled={isDisabledYoutube()}/>
+          <Dialog.Button label='Cancel'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogYoutube}/>
+        </Dialog.Container>
+        <Dialog.Container visible={visibleFacebook}
+                          onBackdropPress={hideDialogFacebook}
+                          headerStyle={styles.headerStyle}
+                          footerStyle={styles.footerStyle}>
+          <Dialog.Title style={styles.titleStyle}>
+            NEW PAGE
+          </Dialog.Title>
+          <Dialog.Input label='Page ID'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={facebookPageId => onChangeFacebookPageId(facebookPageId)}
+                        value={facebookPageId}
+                        placeholder='Enter Page ID'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Page Name'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={facebookPageName => onChangeFacebookPageName(facebookPageName)}
+                        value={facebookPageName}
+                        placeholder='Enter Page Name'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Page Link'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={facebookPageLink => onChangeFacebookPageLink(facebookPageLink)}
+                        value={facebookPageLink}
+                        placeholder='Enter Page Link'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Likes Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={facebookPageLikeCount => onChangeFacebookPageLikeCount(facebookPageLikeCount)}
+                        value={facebookPageLikeCount}
+                        placeholder='Enter Likes Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Button label='Submit'
+                         color={isDisabledFacebook() ? Colors.tertiaryColor : Colors.primaryColor}
+                         onPress={addFacebook}
+                         disabled={isDisabledFacebook()}/>
+          <Dialog.Button label='Cancel'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogFacebook}/>
+        </Dialog.Container>
+        <Dialog.Container visible={visibleInstagram}
+                          onBackdropPress={hideDialogInstagram}
+                          headerStyle={styles.headerStyle}
+                          footerStyle={styles.footerStyle}>
+          <Dialog.Title style={styles.titleStyle}>
+            NEW ACCOUNT
+          </Dialog.Title>
+          <Dialog.Input label='Account Username'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramUsername => onChangeInstagramUsername(instagramUsername)}
+                        value={instagramUsername}
+                        placeholder='Enter Account Username'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Account Link'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramLink => onChangeInstagramLink(instagramLink)}
+                        value={instagramLink}
+                        placeholder='Enter Account Link'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Followers Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramFollowerCount => onChangeInstagramFollowerCount(instagramFollowerCount)}
+                        value={instagramFollowerCount}
+                        placeholder='Enter Followers Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Following Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
+                        value={instagramFollowingCount}
+                        placeholder='Enter Following Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Button label='Submit'
+                         color={isDisabledInstagram() ? Colors.tertiaryColor : Colors.primaryColor}
+                         onPress={addInstagram}
+                         disabled={isDisabledInstagram()}/>
+          <Dialog.Button label='Cancel'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogInstagram}/>
+        </Dialog.Container>
         <View style={styles.mainViewStyle}>
           <View>
             <View style={styles.horizontalViewStyle}>
@@ -513,6 +571,12 @@ const styles = StyleSheet.create({
     fontSize: 30,
     marginLeft: wp('2%')
   },
+  footerStyle: {
+    marginTop: 10
+  },
+  headerStyle: {
+    marginBottom: 25
+  },
   horizontalViewStyle: {
     flexDirection: 'row',
     alignSelf: 'flex-start',
@@ -556,7 +620,7 @@ const styles = StyleSheet.create({
     marginBottom: hp('2%')
   },
   textInputStyle: {
-    borderColor: Colors.tertiaryColor,
+    borderColor: Colors.primaryColor,
     width: wp('70%'),
     borderWidth: 1,
     borderRadius: 5,
@@ -567,8 +631,11 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     color: Colors.tertiaryColor
   },
+  titleStyle: {
+    color: Colors.primaryColor
+  },
   wrapperStyle: {
-    marginTop: 8
+    marginTop: 2
   },
   youtubeTitleStyle: {
     color: Colors.primaryColor,

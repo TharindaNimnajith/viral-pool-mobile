@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import {Ionicons, MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
-import {showAlert} from '../../../shared/util/helpers'
+import {formatNumber, showAlert} from '../../../shared/util/helpers'
 import Constants from '../../../shared/const/constants'
 import Colors from '../../../shared/const/colors'
 
@@ -75,7 +75,7 @@ const InstagramListItem = props => {
                 Following
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.followsCount}
+                {formatNumber(props.itemData.item.followsCount)}
               </Text>
             </View>
             <View style={styles.horizontalStyle}>
@@ -83,7 +83,7 @@ const InstagramListItem = props => {
                 Followers
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.followersCount}
+                {formatNumber(props.itemData.item.followersCount)}
               </Text>
             </View>
           </View>

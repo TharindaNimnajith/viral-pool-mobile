@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import {MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
-import {showAlert} from '../../../shared/util/helpers'
+import {formatNumber, showAlert} from '../../../shared/util/helpers'
 import Constants from '../../../shared/const/constants'
 import Colors from '../../../shared/const/colors'
 
@@ -76,7 +76,7 @@ const YoutubeListItem = props => {
                 Videos
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.videoCount}
+                {formatNumber(props.itemData.item.videoCount)}
               </Text>
             </View>
             <View style={styles.horizontalStyle}>
@@ -84,7 +84,7 @@ const YoutubeListItem = props => {
                 Subscribers
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.subscriptionCount}
+                {formatNumber(props.itemData.item.subscriptionCount)}
               </Text>
             </View>
             <View style={styles.horizontalStyle}>
@@ -92,7 +92,7 @@ const YoutubeListItem = props => {
                 Views
               </Text>
               <Text style={styles.statStyle}>
-                {props.itemData.item.viewCount}
+                {formatNumber(props.itemData.item.viewCount)}
               </Text>
             </View>
           </View>
