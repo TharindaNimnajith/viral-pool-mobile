@@ -73,7 +73,8 @@ const styles = StyleSheet.create({
   },
   arrowStyle: {
     flex: 0.1,
-    backgroundColor: Colors.tertiaryColor
+    backgroundColor: Colors.tertiaryColor,
+    alignItems: 'center'
   },
   avatarStyle: {
     width: 30,
