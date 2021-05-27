@@ -11,7 +11,6 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import {isNullAsync, showAlert} from '../../shared/util/helpers'
@@ -25,7 +24,6 @@ const PaymentDetailsRoute = () => {
   const [bankAccountNumber, setBankAccountNumber] = useState(appContext.userData.bankAccountNumber)
   const [bankName, setBankName] = useState(appContext.userData.bankName)
   const [branchName, setBranchName] = useState(appContext.userData.branchName)
-  const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -35,14 +33,6 @@ const PaymentDetailsRoute = () => {
       setRefreshing(false)
     })
   }, [])
-
-  const showDialog = async () => {
-    setVisible(true)
-  }
-
-  const hideDialog = async () => {
-    setVisible(false)
-  }
 
   const onChangeBankAccountName = async bankAccountName => {
     setBankAccountName(bankAccountName)
@@ -122,21 +112,6 @@ const PaymentDetailsRoute = () => {
 
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visible}
-                        onBackdropPress={hideDialog}>
-        <Dialog.Title>
-          UPDATE PAYMENT DETAILS
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       color={Colors.primaryColor}
-                       onPress={editPaymentDetails}/>
-        <Dialog.Button label='No'
-                       color={Colors.primaryColor}
-                       onPress={hideDialog}/>
-      </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
@@ -179,21 +154,21 @@ const PaymentDetailsRoute = () => {
           <View style={styles.containerStyle}>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
-                              onPress={showDialog}>
+                              onPress={editPaymentDetails}>
               <Text style={styles.buttonTextStyle}>
                 Update Payment Details
               </Text>
             </TouchableOpacity>
           </View>
-          {
-            loading &&
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
-            </View>
-          }
         </View>
       </ScrollView>
+      {
+        loading &&
+        <View style={styles.loadingStyle}>
+          <ActivityIndicator size='large'
+                             color={Colors.secondaryColor}/>
+        </View>
+      }
     </SafeAreaView>
   )
 }

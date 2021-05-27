@@ -30,7 +30,6 @@ const PersonalDetailsRoute = () => {
   const [address, setAddress] = useState(appContext.userData.address)
   const [phoneNumber, setPhoneNumber] = useState(appContext.userData.phoneNumber)
   const [phoneNumberValid, setPhoneNumberValid] = useState(true)
-  const [visible, setVisible] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -40,14 +39,6 @@ const PersonalDetailsRoute = () => {
       setRefreshing(false)
     })
   }, [])
-
-  const showDialog = async () => {
-    setVisible(true)
-  }
-
-  const hideDialog = async () => {
-    setVisible(false)
-  }
 
   const onChangeFirstName = async firstName => {
     setFirstName(firstName)
@@ -227,21 +218,21 @@ const PersonalDetailsRoute = () => {
           <View style={styles.containerStyle}>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
-                              onPress={showDialog}>
+                              onPress={editPersonalDetails}>
               <Text style={styles.buttonTextStyle}>
                 Update Personal Details
               </Text>
             </TouchableOpacity>
           </View>
-          {
-            loading &&
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
-            </View>
-          }
         </View>
       </ScrollView>
+      {
+        loading &&
+        <View style={styles.loadingStyle}>
+          <ActivityIndicator size='large'
+                             color={Colors.secondaryColor}/>
+        </View>
+      }
     </SafeAreaView>
   )
 }
