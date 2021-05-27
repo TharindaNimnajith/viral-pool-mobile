@@ -164,10 +164,6 @@ const SocialMediaScreen = () => {
     setYoutubeChannelId(youtubeChannelId)
   }
 
-  function isDisabledYoutube() {
-    return !youtubeChannelIdValid
-  }
-
   const onChangeFacebookPageId = async facebookPageId => {
     setFacebookPageIdValid(facebookPageId.trim().length > 0)
     setFacebookPageId(facebookPageId)
@@ -189,10 +185,6 @@ const SocialMediaScreen = () => {
     else
       setFacebookPageLikeCountValid(false)
     setFacebookPageLikeCount(facebookPageLikeCount)
-  }
-
-  function isDisabledFacebook() {
-    return !facebookPageIdValid || !facebookPageNameValid || !facebookPageLinkValid || !facebookPageLikeCountValid
   }
 
   const onChangeInstagramUsername = async instagramUsername => {
@@ -221,12 +213,39 @@ const SocialMediaScreen = () => {
     setInstagramFollowerCount(instagramFollowerCount)
   }
 
+  function isDisabledYoutube() {
+    return !youtubeChannelIdValid
+  }
+
+  function isDisabledFacebook() {
+    return !facebookPageIdValid || !facebookPageNameValid || !facebookPageLinkValid || !facebookPageLikeCountValid
+  }
+
   function isDisabledInstagram() {
     return !instagramUsernameValid || !instagramLinkValid || !instagramFollowerCountValid ||
       !instagramFollowingCountValid
   }
 
+  const resetYoutube = async () => {
+    await onChangeYoutubeChannelId('')
+  }
+
+  const resetFacebook = async () => {
+    await onChangeFacebookPageId('')
+    await onChangeFacebookPageName('')
+    await onChangeFacebookPageLink('')
+    await onChangeFacebookPageLikeCount('')
+  }
+
+  const resetInstagram = async () => {
+    await onChangeInstagramUsername('')
+    await onChangeInstagramLink('')
+    await onChangeInstagramFollowingCount('')
+    await onChangeInstagramFollowerCount('')
+  }
+
   const addYoutube = async () => {
+    await hideDialogYoutube()
     setLoading(true)
     const data = {
       channelId: youtubeChannelId.trim(),
@@ -234,11 +253,10 @@ const SocialMediaScreen = () => {
     }
     axios.post('cc-social-media/youtube/add-profile', data).then(async response => {
       setLoading(false)
-      if (response.status === 200) {
-        console.log(response.data.data)
-      } else {
+      if (response.status === 200)
+        await resetYoutube()
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -247,7 +265,7 @@ const SocialMediaScreen = () => {
   }
 
   const addFacebook = async () => {
-    hideDialogFacebook()
+    await hideDialogFacebook()
     setLoading(true)
     const data = {
       pageId: facebookPageId.trim(),
@@ -257,11 +275,10 @@ const SocialMediaScreen = () => {
     }
     axios.post('cc-social-media/facebook/add-profile', data).then(async response => {
       setLoading(false)
-      if (response.status === 200) {
-        console.log(response.data.data)
-      } else {
+      if (response.status === 200)
+        await resetFacebook()
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -270,6 +287,7 @@ const SocialMediaScreen = () => {
   }
 
   const addInstagram = async () => {
+    await hideDialogInstagram()
     setLoading(true)
     const data = {
       username: instagramUsername.trim(),
@@ -277,14 +295,12 @@ const SocialMediaScreen = () => {
       followsCount: instagramFollowingCount.trim(),
       followersCount: instagramFollowerCount.trim()
     }
-    console.log(data)
     axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
       setLoading(false)
-      if (response.status === 200) {
-        console.log(response.data.data)
-      } else {
+      if (response.status === 200)
+        await resetInstagram()
+      else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
