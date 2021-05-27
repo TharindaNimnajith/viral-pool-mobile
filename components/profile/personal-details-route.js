@@ -13,7 +13,6 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
-import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import {genderOptions, isNull, isNullAsync, showAlert} from '../../shared/util/helpers'
@@ -140,42 +139,6 @@ const PersonalDetailsRoute = () => {
 
   return (
     <SafeAreaView>
-      {/*<Modal animationType='none'*/}
-      {/*       transparent={true}*/}
-      {/*       visible={visible}*/}
-      {/*       onRequestClose={hideDialog}>*/}
-      {/*  <View style={styles.centeredView}>*/}
-      {/*    <View style={styles.modalView}>*/}
-      {/*      <Text style={styles.modalText}>*/}
-      {/*        Hello World*/}
-      {/*      </Text>*/}
-      {/*      <Pressable style={[*/}
-      {/*        styles.button,*/}
-      {/*        styles.buttonClose*/}
-      {/*      ]}*/}
-      {/*                 onPress={hideDialog}>*/}
-      {/*        <Text style={styles.textStyle}>*/}
-      {/*          Hide Modal*/}
-      {/*        </Text>*/}
-      {/*      </Pressable>*/}
-      {/*    </View>*/}
-      {/*  </View>*/}
-      {/*</Modal>*/}
-      <Dialog.Container visible={visible}
-                        onBackdropPress={hideDialog}>
-        <Dialog.Title>
-          UPDATE PERSONAL DETAILS
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       color={Colors.primaryColor}
-                       onPress={editPersonalDetails}/>
-        <Dialog.Button label='No'
-                       color={Colors.primaryColor}
-                       onPress={hideDialog}/>
-      </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
@@ -284,47 +247,6 @@ const PersonalDetailsRoute = () => {
 }
 
 const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center"
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center"
-  },
   buttonStyle: {
     marginTop: hp('3%'),
     marginBottom: hp('1%'),
