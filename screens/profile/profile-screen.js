@@ -16,13 +16,14 @@ import {Ionicons} from '@expo/vector-icons'
 import {launchImageLibraryAsync, MediaTypeOptions, requestMediaLibraryPermissionsAsync} from 'expo-image-picker'
 import {FileSystemSessionType, FileSystemUploadType, uploadAsync} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
+import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import {ApiUrl, isNullAsync, showAlert} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
-import {getStringData} from '../../shared/util/local-storage'
+import {getStringData, storeStringData} from '../../shared/util/local-storage'
 
 const ProfileScreen = props => {
   const appContext = useContext(AppContext)
@@ -84,93 +85,107 @@ const ProfileScreen = props => {
 
   const pickImage = async () => {
     setVisible(false)
-    const result = await launchImageLibraryAsync({
-      mediaTypes: MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [3, 3],
-      quality: 1,
-      base64: true,
-      allowsMultipleSelection: false
-    }).catch(async error => {
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
-    })
-    if (!result.cancelled) {
-      setLoading(true)
-      setImage(result.uri)
-      const filename = result.uri.split('/').pop()
-      const match = /\.(\w+)$/.exec(filename)
-      const type = match ? `image/${match[1]}` : `image`
-      const accessToken = await getStringData(Constants.ACCESS_TOKEN)
-      const headers = {
-        Accept: 'application/json',
-        'Content-Type': 'multipart/form-data',
-        'Authorization': `${Constants.BEARER} ${accessToken}`,
-        'client_id': `${Constants.CLIENT_ID_VALUE}`
-      }
-      let firstName = ''
-      if (!await isNullAsync(appContext.userData.firstName))
-        firstName = appContext.userData.firstName
-      let lastName = ''
-      if (!await isNullAsync(appContext.userData.lastName))
-        lastName = appContext.userData.lastName
-      let address = ''
-      if (!await isNullAsync(appContext.userData.address))
-        address = appContext.userData.address
-      let phoneNumber = ''
-      if (!await isNullAsync(appContext.userData.phoneNumber))
-        phoneNumber = appContext.userData.phoneNumber
-      let bankAccountName = ''
-      if (!await isNullAsync(appContext.userData.bankAccountName))
-        bankAccountName = appContext.userData.bankAccountName
-      let bankAccountNumber = ''
-      if (!await isNullAsync(appContext.userData.bankAccountNumber))
-        bankAccountNumber = appContext.userData.bankAccountNumber
-      let bankName = ''
-      if (!await isNullAsync(appContext.userData.bankName))
-        bankName = appContext.userData.bankName
-      let branchName = ''
-      if (!await isNullAsync(appContext.userData.branchName))
-        branchName = appContext.userData.branchName
-      const parameters = {
-        'id': appContext.userData.id,
-        'email': appContext.userData.email,
-        'userRole': Constants.USER_ROLE,
-        'firstName': firstName,
-        'lastName': lastName,
-        'gender': appContext.userData.gender,
-        'birthDate': appContext.userData.birthDate,
-        'address': address,
-        'phoneNumber': phoneNumber,
-        'bankAccountName': bankAccountName,
-        'bankAccountNumber': bankAccountNumber,
-        'bankName': bankName,
-        'branchName': branchName
-      }
-      const options = {
-        headers: headers,
-        httpMethod: 'PUT',
-        sessionType: FileSystemSessionType.BACKGROUND,
-        uploadType: FileSystemUploadType.MULTIPART,
-        fieldName: 'FormFile',
-        mimeType: type,
-        parameters: parameters
-      }
-      await uploadAsync(`${ApiUrl.BASE_URL}User`, result.uri, options).then(async response => {
-        setLoading(false)
-        if (response.status === 200) {
-          const data = JSON.parse(response.body).data
-          await appContext.SetUserData(data)
-          await showAlert(Constants.SUCCESS, Constants.UPDATED)
-        } else {
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-        }
+    const accessToken = await getStringData(Constants.ACCESS_TOKEN)
+    const refreshToken = await getStringData(Constants.REFRESH_TOKEN)
+    const data = {
+      accessToken,
+      refreshToken
+    }
+    axios.post('oauth/refresh-token', data).then(async response => {
+      await storeStringData(Constants.ACCESS_TOKEN, response.data.access_token)
+      await storeStringData(Constants.REFRESH_TOKEN, response.data.refresh_token)
+      const result = await launchImageLibraryAsync({
+        mediaTypes: MediaTypeOptions.All,
+        allowsEditing: true,
+        aspect: [3, 3],
+        quality: 1,
+        base64: true,
+        allowsMultipleSelection: false
       }).catch(async error => {
-        setLoading(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
         console.log(error)
       })
-    }
+      if (!result.cancelled) {
+        setLoading(true)
+        setImage(result.uri)
+        const filename = result.uri.split('/').pop()
+        const match = /\.(\w+)$/.exec(filename)
+        const type = match ? `image/${match[1]}` : `image`
+        const accessToken = await getStringData(Constants.ACCESS_TOKEN)
+        const headers = {
+          Accept: 'application/json',
+          'Content-Type': 'multipart/form-data',
+          'Authorization': `${Constants.BEARER} ${accessToken}`,
+          'client_id': `${Constants.CLIENT_ID_VALUE}`
+        }
+        let firstName = ''
+        if (!await isNullAsync(appContext.userData.firstName))
+          firstName = appContext.userData.firstName
+        let lastName = ''
+        if (!await isNullAsync(appContext.userData.lastName))
+          lastName = appContext.userData.lastName
+        let address = ''
+        if (!await isNullAsync(appContext.userData.address))
+          address = appContext.userData.address
+        let phoneNumber = ''
+        if (!await isNullAsync(appContext.userData.phoneNumber))
+          phoneNumber = appContext.userData.phoneNumber
+        let bankAccountName = ''
+        if (!await isNullAsync(appContext.userData.bankAccountName))
+          bankAccountName = appContext.userData.bankAccountName
+        let bankAccountNumber = ''
+        if (!await isNullAsync(appContext.userData.bankAccountNumber))
+          bankAccountNumber = appContext.userData.bankAccountNumber
+        let bankName = ''
+        if (!await isNullAsync(appContext.userData.bankName))
+          bankName = appContext.userData.bankName
+        let branchName = ''
+        if (!await isNullAsync(appContext.userData.branchName))
+          branchName = appContext.userData.branchName
+        const parameters = {
+          'id': appContext.userData.id,
+          'email': appContext.userData.email,
+          'userRole': Constants.USER_ROLE,
+          'firstName': firstName,
+          'lastName': lastName,
+          'gender': appContext.userData.gender,
+          'birthDate': appContext.userData.birthDate,
+          'address': address,
+          'phoneNumber': phoneNumber,
+          'bankAccountName': bankAccountName,
+          'bankAccountNumber': bankAccountNumber,
+          'bankName': bankName,
+          'branchName': branchName
+        }
+        const options = {
+          headers: headers,
+          httpMethod: 'PUT',
+          sessionType: FileSystemSessionType.BACKGROUND,
+          uploadType: FileSystemUploadType.MULTIPART,
+          fieldName: 'FormFile',
+          mimeType: type,
+          parameters: parameters
+        }
+        await uploadAsync(`${ApiUrl.BASE_URL}User`, result.uri, options).then(async response => {
+          setLoading(false)
+          if (response.status === 200) {
+            const data = JSON.parse(response.body).data
+            await appContext.SetUserData(data)
+            await showAlert(Constants.SUCCESS, Constants.UPDATED)
+          } else {
+            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          }
+        }).catch(async error => {
+          setLoading(false)
+          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          console.log(error)
+        })
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
+    })
   }
 
   return (
