@@ -257,8 +257,7 @@ const SocialMediaScreen = () => {
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
         await resetYoutube()
         setRefresh(true)
-      }
-      else {
+      } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
@@ -283,8 +282,7 @@ const SocialMediaScreen = () => {
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
         await resetFacebook()
         setRefresh(true)
-      }
-      else {
+      } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
@@ -309,8 +307,7 @@ const SocialMediaScreen = () => {
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
         await resetInstagram()
         setRefresh(true)
-      }
-      else {
+      } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
