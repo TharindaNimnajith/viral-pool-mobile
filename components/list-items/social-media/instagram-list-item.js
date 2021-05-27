@@ -147,11 +147,12 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 18,
     color: Colors.defaultColor,
-    marginBottom: 5
+    marginBottom: 7
   },
   viewStyle: {
     width: '64%',
-    marginLeft: '4%'
+    marginLeft: '4%',
+    justifyContent: 'center'
   }
 })
 

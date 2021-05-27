@@ -2,6 +2,7 @@ import React, {useCallback, useContext, useState} from 'react'
 import {
   ActivityIndicator,
   Image,
+  ImageBackground,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -106,56 +107,59 @@ const LoginScreen = props => {
                                     onRefresh={onRefresh}/>
                   }>
         <View style={styles.mainViewStyle}>
-          <View style={styles.containerStyle}>
-            <View style={styles.headerStyle}>
-              <Image style={styles.imageStyle}
-                     source={require('../../assets/login-logo.png')}/>
-              <Text style={styles.textStyle}>
-                {Constants.DESCRIPTION}
+          <ImageBackground style={styles.image}
+                           source={require('../../assets/background.png')}>
+            <View style={styles.containerStyle}>
+              <View style={styles.headerStyle}>
+                <Image style={styles.imageStyle}
+                       source={require('../../assets/login-logo.png')}/>
+                <Text style={styles.textStyle}>
+                  {Constants.DESCRIPTION}
+                </Text>
+                <Text style={styles.titleStyle}>
+                  Sign in
+                </Text>
+              </View>
+              <Text style={styles.labelStyle}>
+                Email
               </Text>
-              <Text style={styles.titleStyle}>
-                Sign in
+              <TextInput style={styles.textInputStyle}
+                         onChangeText={email => onChangeEmail(email)}
+                         value={email}
+                         placeholder='Enter Email'
+                         textContentType={'emailAddress'}
+                         placeholderTextColor={Colors.tertiaryColor}/>
+              <Text style={styles.labelStyle}>
+                Password
               </Text>
+              <TextInput style={styles.textInputStyle}
+                         onChangeText={password => onChangePassword(password)}
+                         value={password}
+                         placeholder='Enter Password'
+                         placeholderTextColor={Colors.tertiaryColor}
+                         secureTextEntry={true}/>
+              <TouchableOpacity onPress={forgotPassword}
+                                style={styles.forgotPasswordStyle}>
+                <Text style={styles.forgotPasswordLabelStyle}>
+                  Forgot password?
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                disabled={isDisabled()}
+                                onPress={login}>
+                <Text style={styles.buttonTextStyle}>
+                  Sign in
+                </Text>
+              </TouchableOpacity>
             </View>
-            <Text style={styles.labelStyle}>
-              Email
-            </Text>
-            <TextInput style={styles.textInputStyle}
-                       onChangeText={email => onChangeEmail(email)}
-                       value={email}
-                       placeholder='Enter Email'
-                       textContentType={'emailAddress'}
-                       placeholderTextColor={Colors.tertiaryColor}/>
-            <Text style={styles.labelStyle}>
-              Password
-            </Text>
-            <TextInput style={styles.textInputStyle}
-                       onChangeText={password => onChangePassword(password)}
-                       value={password}
-                       placeholder='Enter Password'
-                       placeholderTextColor={Colors.tertiaryColor}
-                       secureTextEntry={true}/>
-            <TouchableOpacity onPress={forgotPassword}
-                              style={styles.forgotPasswordStyle}>
-              <Text style={styles.forgotPasswordLabelStyle}>
-                Forgot password?
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                              disabled={isDisabled()}
-                              onPress={login}>
-              <Text style={styles.buttonTextStyle}>
-                Sign in
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {
-            loading &&
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
-            </View>
-          }
+            {
+              loading &&
+              <View style={styles.loadingStyle}>
+                <ActivityIndicator size='large'
+                                   color={Colors.secondaryColor}/>
+              </View>
+            }
+          </ImageBackground>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -165,7 +169,7 @@ const LoginScreen = props => {
 const styles = StyleSheet.create({
   buttonStyle: {
     marginTop: 30,
-    backgroundColor: Colors.primaryColor,
+    backgroundColor: Colors.defaultColor,
     alignItems: 'center',
     padding: 10,
     width: wp('80%'),
@@ -186,15 +190,21 @@ const styles = StyleSheet.create({
   containerStyle: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    flexDirection: 'column'
   },
   forgotPasswordLabelStyle: {
-    color: Colors.primaryColor
+    color: Colors.secondaryColor
   },
   forgotPasswordStyle: {
     marginRight: 40,
     marginTop: 20,
     alignSelf: 'flex-end'
+  },
+  image: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center'
   },
   imageStyle: {
     marginBottom: 25,
@@ -208,7 +218,7 @@ const styles = StyleSheet.create({
   labelStyle: {
     marginLeft: 40,
     marginTop: 20,
-    color: Colors.primaryColor,
+    color: Colors.secondaryColor,
     alignSelf: 'baseline'
   },
   loadingStyle: {
@@ -229,6 +239,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   textInputStyle: {
+    backgroundColor: Colors.secondaryColor,
     borderColor: Colors.primaryColor,
     width: wp('80%'),
     borderWidth: 1,
@@ -240,13 +251,13 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     width: wp('70%'),
-    color: Colors.tertiaryColor,
+    color: Colors.secondaryColor,
     textAlign: 'center',
     lineHeight: 22
   },
   titleStyle: {
     textTransform: 'uppercase',
-    color: Colors.primaryColor,
+    color: Colors.secondaryColor,
     marginTop: hp('5%'),
     fontSize: 30
   }

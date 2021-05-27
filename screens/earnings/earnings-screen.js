@@ -163,8 +163,9 @@ const EarningsScreen = props => {
 
 const styles = StyleSheet.create({
   bodyStyle: {
+    marginTop: hp('2%'),
     marginBottom: hp('1%'),
-    marginHorizontal: wp('7%')
+    marginHorizontal: wp('2%')
   },
   cardStyle: {
     backgroundColor: Colors.fadedEffectColor,
@@ -172,7 +173,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: hp('2%'),
     paddingHorizontal: wp('20%'),
-    marginVertical: hp('3%')
+    marginTop: hp('3%')
   },
   cardTitleStyle: {
     fontSize: 24,
@@ -208,8 +209,6 @@ const styles = StyleSheet.create({
     marginVertical: hp('1.5%')
   },
   listStyle: {
-    marginTop: hp('2.5%'),
-    backgroundColor: Colors.fadedEffectColor,
     borderRadius: 25,
     paddingVertical: 18,
     paddingHorizontal: 5

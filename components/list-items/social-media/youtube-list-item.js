@@ -165,7 +165,8 @@ const styles = StyleSheet.create({
   },
   viewStyle: {
     width: '64%',
-    marginLeft: '4%'
+    marginLeft: '4%',
+    justifyContent: 'center'
   }
 })
 

@@ -228,9 +228,9 @@ const styles = StyleSheet.create({
     marginTop: hp('4%')
   },
   bodyStyle: {
-    marginTop: hp('5%'),
+    marginTop: hp('2%'),
     marginBottom: hp('1%'),
-    marginHorizontal: wp('7%')
+    marginHorizontal: wp('2%')
   },
   cardStyle: {
     backgroundColor: Colors.fadedEffectColor,
@@ -273,8 +273,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   listStyle: {
-    marginTop: hp('2.5%'),
-    backgroundColor: Colors.fadedEffectColor,
     borderRadius: 25,
     paddingVertical: 18,
     paddingHorizontal: 5
