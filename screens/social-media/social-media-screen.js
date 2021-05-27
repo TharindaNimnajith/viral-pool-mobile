@@ -96,15 +96,15 @@ const SocialMediaScreen = () => {
     })
   }, [])
 
-  const refreshFunction = () => {
+  const refreshFunction = async () => {
     setRefresh(true)
   }
 
-  const loadingFunctionTrue = () => {
+  const loadingFunctionTrue = async () => {
     setLoading(true)
   }
 
-  const loadingFunctionFalse = () => {
+  const loadingFunctionFalse = async () => {
     setLoading(false)
   }
 
@@ -226,7 +226,7 @@ const SocialMediaScreen = () => {
       !instagramFollowingCountValid
   }
 
-  const addYoutube = () => {
+  const addYoutube = async () => {
     setLoading(true)
     const data = {
       channelId: youtubeChannelId.trim(),
@@ -246,7 +246,8 @@ const SocialMediaScreen = () => {
     })
   }
 
-  const addFacebook = () => {
+  const addFacebook = async () => {
+    hideDialogFacebook()
     setLoading(true)
     const data = {
       pageId: facebookPageId.trim(),
@@ -268,7 +269,7 @@ const SocialMediaScreen = () => {
     })
   }
 
-  const addInstagram = () => {
+  const addInstagram = async () => {
     setLoading(true)
     const data = {
       username: instagramUsername.trim(),
@@ -276,6 +277,7 @@ const SocialMediaScreen = () => {
       followsCount: instagramFollowingCount.trim(),
       followersCount: instagramFollowerCount.trim()
     }
+    console.log(data)
     axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
       setLoading(false)
       if (response.status === 200) {

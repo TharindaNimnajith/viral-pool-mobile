@@ -69,7 +69,7 @@ const EarningsScreen = props => {
     )
   }
 
-  const refreshFunction = () => {
+  const refreshFunction = async () => {
     setRefresh(true)
   }
 

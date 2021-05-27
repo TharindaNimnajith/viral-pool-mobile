@@ -49,7 +49,7 @@ const CompletedProjectListScreen = props => {
     })
   }, [])
 
-  const refreshFunction = () => {
+  const refreshFunction = async () => {
     setRefresh(true)
   }
 

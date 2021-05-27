@@ -320,11 +320,11 @@ const ProjectDetails = props => {
     return !resultSubmissionLinkValid
   }
 
-  const setLoadingTrue = () => {
+  const setLoadingTrue = async () => {
     setLoading(true)
   }
 
-  const setLoadingFalse = () => {
+  const setLoadingFalse = async () => {
     setLoading(false)
   }
 

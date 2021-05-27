@@ -11,7 +11,7 @@ const IdeaListItem = props => {
     refresh: props.refreshFunction
   }
 
-  const redirectToDetailsScreen = () => {
+  const redirectToDetailsScreen = async () => {
     props.navigation.navigate('EditIdea', {idea})
   }
 

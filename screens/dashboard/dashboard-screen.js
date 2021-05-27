@@ -112,7 +112,7 @@ const DashboardScreen = props => {
     props.navigation.navigate('Earnings')
   }
 
-  const refreshFunction = () => {
+  const refreshFunction = async () => {
     setRefresh(true)
   }
 

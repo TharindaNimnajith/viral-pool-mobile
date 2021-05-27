@@ -14,7 +14,7 @@ const ProjectListItem = props => {
 
   const [type] = useState(props.itemData.item.socialMediaPlatformName)
 
-  const redirectToDetailsScreen = () => {
+  const redirectToDetailsScreen = async () => {
     props.navigation.navigate(props.screen, {project})
   }
 

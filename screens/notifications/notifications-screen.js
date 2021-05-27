@@ -50,7 +50,7 @@ const NotificationsScreen = props => {
     })
   }, [])
 
-  const refreshFunction = () => {
+  const refreshFunction = async () => {
     setRefresh(true)
   }
 

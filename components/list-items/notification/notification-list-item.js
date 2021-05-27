@@ -13,7 +13,7 @@ const NotificationListItem = props => {
 
   const [type] = useState(props.itemData.item.notificationType)
 
-  const pressNotification = () => {
+  const pressNotification = async () => {
     props.navigation.navigate('NotificationProjectDetails', {project})
   }
 

@@ -52,7 +52,7 @@ const LoginScreen = props => {
     return !emailValid || !passwordValid
   }
 
-  const forgotPassword = () => {
+  const forgotPassword = async () => {
     props.navigation.navigate({
       routeName: 'ForgotPassword'
     })

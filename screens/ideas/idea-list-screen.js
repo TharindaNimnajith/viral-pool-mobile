@@ -43,7 +43,7 @@ const IdeaListScreen = props => {
     })
   }, [])
 
-  const refreshFunction = () => {
+  const refreshFunction = async () => {
     setRefresh(true)
   }
 
@@ -55,7 +55,7 @@ const IdeaListScreen = props => {
     )
   }
 
-  const redirectToAddIdeaScreen = () => {
+  const redirectToAddIdeaScreen = async () => {
     const idea = {
       refresh: refreshFunction
     }
