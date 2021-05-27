@@ -78,6 +78,10 @@ const ProfileScreen = props => {
     props.navigation.navigate('EditProfile')
   }
 
+  const onResetPassword = async () => {
+    props.navigation.navigate('ForgotPassword')
+  }
+
   const pickImage = async () => {
     setVisible(false)
     const result = await launchImageLibraryAsync({
@@ -101,7 +105,7 @@ const ProfileScreen = props => {
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'multipart/form-data',
-        'Authorization': `Bearer ${accessToken}`,
+        'Authorization': `${Constants.BEARER} ${accessToken}`,
         'client_id': `${Constants.CLIENT_ID_VALUE}`
       }
       let firstName = ''
@@ -225,10 +229,7 @@ const ProfileScreen = props => {
               <Text style={styles.titleStyle}>
                 {appContext.userData.firstName} {appContext.userData.lastName}
               </Text>
-              <Text style={styles.subtitleStyle}>
-                34 VP Points | 10th Ranked
-              </Text>
-              <View>
+              <View style={styles.infoStyle}>
                 <View style={styles.viewStyle}>
                   <Ionicons name='mail'
                             size={20}
@@ -289,6 +290,12 @@ const ProfileScreen = props => {
                                 onPress={onEditButtonPress}>
                 <Text style={styles.buttonTextStyle}>
                   Update Profile
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.resetButtonStyle}
+                                onPress={onResetPassword}>
+                <Text style={styles.buttonTextStyle}>
+                  Reset Password
                 </Text>
               </TouchableOpacity>
             </View>
@@ -352,6 +359,9 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: wp('10%'),
     borderBottomLeftRadius: wp('10%')
   },
+  infoStyle: {
+    marginTop: hp('4%')
+  },
   loadingStyle: {
     position: 'absolute',
     left: 0,
@@ -366,11 +376,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor,
     minHeight: hp('93.6%')
   },
-  subtitleStyle: {
-    fontSize: 16,
-    color: Colors.primaryColor,
-    marginTop: hp('4%'),
-    marginBottom: hp('4.5%')
+  resetButtonStyle: {
+    marginTop: hp('2%'),
+    backgroundColor: Colors.defaultColor,
+    alignItems: 'center',
+    padding: 10,
+    width: wp('80%'),
+    borderRadius: 5
   },
   textStyle: {
     fontSize: 18,
@@ -381,7 +393,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     fontSize: 28,
     color: Colors.primaryColor,
-    marginTop: hp('3%')
+    marginTop: hp('2%')
   },
   viewStyle: {
     paddingVertical: 10,

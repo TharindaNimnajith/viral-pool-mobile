@@ -12,6 +12,8 @@ export default {
   USER_ROLE: 'Influencer',
   ACCESS_TOKEN: 'access_token',
   REFRESH_TOKEN: 'refresh_token',
+  AUTHORIZATION: 'Authorization',
+  BEARER: 'Bearer',
   CLIENT_ID: 'client_id',
   CLIENT_ID_VALUE: 'UFwv4s5sAHYyRS2q',
   PDF: 'application/pdf',

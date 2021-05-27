@@ -47,7 +47,7 @@ const FileListItem = props => {
     if (status === 'granted') {
       const accessToken = await getStringData(Constants.ACCESS_TOKEN)
       const headers = {
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `${Constants.BEARER} ${accessToken}`
       }
       const options = {
         headers: headers,
