@@ -40,6 +40,9 @@ const ProjectListItem = props => {
             </Text>
           </View>
           <View style={styles.horizontalStyle}>
+            <Text style={styles.amountStyle}>
+              {formatNumber(props.itemData.item.amount)} LKR
+            </Text>
             {
               props.itemData.item.isContentGivenByStrategyMember ? (
                 <Text style={styles.contentProvidedStyle}>
@@ -51,9 +54,6 @@ const ProjectListItem = props => {
                 </Text>
               )
             }
-            <Text style={styles.amountStyle}>
-              {formatNumber(props.itemData.item.amount)} LKR
-            </Text>
           </View>
         </View>
         <View style={styles.arrowStyle}>
@@ -69,38 +69,48 @@ const ProjectListItem = props => {
 const styles = StyleSheet.create({
   amountStyle: {
     color: Colors.primaryColor,
-    fontSize: 16
+    fontSize: 17,
+    fontWeight: 'bold',
+    marginLeft: 50
   },
   arrowStyle: {
-    flex: 0.1,
-    backgroundColor: Colors.tertiaryColor,
-    alignItems: 'center'
+    flex: 0.08,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   avatarStyle: {
-    width: 30,
-    height: 30,
-    borderRadius: 30
+    width: 40,
+    height: 40,
+    borderRadius: 20
   },
   contentProvidedStyle: {
     color: Colors.successColor,
-    fontSize: 13
+    fontSize: 13,
+    flex: 1,
+    alignSelf: 'flex-end',
+    textAlign: 'right',
+    marginRight: 10,
+    marginBottom: 2
   },
   contentRequiredStyle: {
     color: Colors.primaryColor,
-    fontSize: 13
+    fontSize: 13,
+    flex: 1,
+    alignSelf: 'flex-end',
+    textAlign: 'right',
+    marginRight: 10,
+    marginBottom: 2
   },
   contentStyle: {
-    flex: 0.9,
-    backgroundColor: Colors.successColor
+    flex: 0.92
   },
   horizontalStyle: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    backgroundColor: Colors.successColor
+    marginVertical: 5
   },
   iconViewStyle: {
-    width: '20%',
     alignSelf: 'center',
     alignItems: 'center'
   },
@@ -119,7 +129,7 @@ const styles = StyleSheet.create({
     borderLeftColor: Colors.defaultColor,
     marginVertical: 6,
     marginHorizontal: wp('4%'),
-    padding: 10
+    paddingHorizontal: 10
   },
   itemStyleFacebook: {
     elevation: 5,
@@ -136,7 +146,7 @@ const styles = StyleSheet.create({
     borderLeftColor: Colors.primaryColor,
     marginVertical: 6,
     marginHorizontal: wp('4%'),
-    padding: 10
+    paddingHorizontal: 10
   },
   itemStyleInstagram: {
     elevation: 5,
@@ -153,7 +163,7 @@ const styles = StyleSheet.create({
     borderLeftColor: Colors.primaryColor,
     marginVertical: 6,
     marginHorizontal: wp('4%'),
-    padding: 10
+    paddingHorizontal: 10
   },
   itemStyleYoutube: {
     elevation: 5,
@@ -170,11 +180,15 @@ const styles = StyleSheet.create({
     borderLeftColor: Colors.primaryColor,
     marginVertical: 6,
     marginHorizontal: wp('4%'),
-    padding: 10
+    paddingHorizontal: 10
   },
   titleStyle: {
-    color: Colors.primaryColor,
-    fontSize: 16
+    color: Colors.defaultColor,
+    fontSize: 18,
+    flex: 1,
+    flexWrap: 'wrap',
+    textAlignVertical: 'center',
+    marginLeft: 10
   }
 })
 
