@@ -38,32 +38,28 @@ const DashboardScreen = props => {
       if (response.status === 200) {
         await appContext.SetUserData(response.data.data)
         const data = {
-          contentCreatorId: appContext.userData.id,
+          contentCreatorId: response.data.data.id,
           expoToken: appContext.expoPushToken
         }
         axios.post('content-creator-notification/token', data).then(async response => {
           if (response.status === 200) {
             axios.get('project-cc-strategy?status=1').then(async response => {
               setLoading(false)
-              setRefresh(false)
               if (response.status === 200)
                 setOngoingProjects(response.data.data)
               else
                 await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
             }).catch(async error => {
               setLoading(false)
-              setRefresh(false)
               await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
               console.log(error)
             })
           } else {
             setLoading(false)
-            setRefresh(false)
             await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
           }
         }).catch(async error => {
           setLoading(false)
-          setRefresh(false)
           await showErrors(error.response.data)
           console.log(error.response.data)
         })
@@ -84,7 +80,7 @@ const DashboardScreen = props => {
       if (response.status === 200) {
         await appContext.SetUserData(response.data.data)
         const data = {
-          contentCreatorId: appContext.userData.id,
+          contentCreatorId: response.data.data.id,
           expoToken: appContext.expoPushToken
         }
         axios.post('content-creator-notification/token', data).then(async response => {

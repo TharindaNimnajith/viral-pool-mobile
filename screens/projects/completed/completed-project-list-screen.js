@@ -18,16 +18,15 @@ const CompletedProjectListScreen = props => {
 
   useEffect(() => {
     setLoading(true)
+    setRefresh(false)
     axios.get('project-cc-strategy?status=2').then(async response => {
       setLoading(false)
-      setRefresh(false)
       if (response.status === 200)
         setCompletedProjects(response.data.data)
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
       setLoading(false)
-      setRefresh(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })

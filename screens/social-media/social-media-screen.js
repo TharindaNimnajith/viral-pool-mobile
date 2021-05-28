@@ -57,9 +57,9 @@ const SocialMediaScreen = () => {
 
   useEffect(() => {
     setLoading(true)
+    setRefresh(false)
     axios.get('cc-social-media').then(async response => {
       setLoading(false)
-      setRefresh(false)
       if (response.status === 200) {
         setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
         setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
@@ -69,7 +69,6 @@ const SocialMediaScreen = () => {
       }
     }).catch(async error => {
       setLoading(false)
-      setRefresh(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
@@ -78,7 +77,6 @@ const SocialMediaScreen = () => {
   const onRefresh = useCallback(() => {
     setRefreshing(true)
     axios.get('cc-social-media').then(async response => {
-      setRefresh(false)
       if (response.status === 200) {
         setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
         setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
@@ -87,7 +85,6 @@ const SocialMediaScreen = () => {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
-      setRefresh(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })

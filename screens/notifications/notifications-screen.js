@@ -21,15 +21,18 @@ const NotificationsScreen = props => {
 
   useEffect(() => {
     setLoading(true)
+    setRefresh(false)
     appContext.SetNewNotifications(false).then(() => {
-    })
-    axios.get('content-creator-notification').then(async response => {
-      setNotifications(response.data.data)
-      setLoading(false)
-      setRefresh(false)
+      axios.get('content-creator-notification').then(async response => {
+        setNotifications(response.data.data)
+        setLoading(false)
+      }).catch(async error => {
+        setLoading(false)
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+        console.log(error)
+      })
     }).catch(async error => {
       setLoading(false)
-      setRefresh(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
@@ -38,9 +41,12 @@ const NotificationsScreen = props => {
   const onRefresh = useCallback(() => {
     setRefreshing(true)
     appContext.SetNewNotifications(false).then(() => {
-    })
-    axios.get('content-creator-notification').then(async response => {
-      setNotifications(response.data.data)
+      axios.get('content-creator-notification').then(async response => {
+        setNotifications(response.data.data)
+      }).catch(async error => {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+        console.log(error)
+      })
     }).catch(async error => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
