@@ -34,13 +34,13 @@ const DashboardScreen = props => {
   useEffect(() => {
     setLoading(true)
     setRefresh(false)
-    const data = {
-      contentCreatorId: appContext.userData.id,
-      expoToken: appContext.expoPushToken
-    }
     axios.get('User').then(async response => {
       if (response.status === 200) {
         await appContext.SetUserData(response.data.data)
+        const data = {
+          contentCreatorId: appContext.userData.id,
+          expoToken: appContext.expoPushToken
+        }
         axios.post('content-creator-notification/token', data).then(async response => {
           if (response.status === 200) {
             axios.get('project-cc-strategy?status=1').then(async response => {
@@ -53,8 +53,8 @@ const DashboardScreen = props => {
             }).catch(async error => {
               setLoading(false)
               setRefresh(false)
-              await showErrors(error.response.data)
-              console.log(error.response.data)
+              await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+              console.log(error)
             })
           } else {
             setLoading(false)
@@ -73,20 +73,20 @@ const DashboardScreen = props => {
       }
     }).catch(async error => {
       setLoading(false)
-      await showErrors(error.response.data)
-      console.log(error.response.data)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
     })
   }, [refresh])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    const data = {
-      contentCreatorId: appContext.userData.id,
-      expoToken: appContext.expoPushToken
-    }
     axios.get('User').then(async response => {
       if (response.status === 200) {
         await appContext.SetUserData(response.data.data)
+        const data = {
+          contentCreatorId: appContext.userData.id,
+          expoToken: appContext.expoPushToken
+        }
         axios.post('content-creator-notification/token', data).then(async response => {
           if (response.status === 200) {
             axios.get('project-cc-strategy?status=1').then(async response => {
@@ -95,8 +95,8 @@ const DashboardScreen = props => {
               else
                 await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
             }).catch(async error => {
-              await showErrors(error.response.data)
-              console.log(error.response.data)
+              await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+              console.log(error)
             })
           } else {
             await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -109,8 +109,8 @@ const DashboardScreen = props => {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
-      await showErrors(error.response.data)
-      console.log(error.response.data)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
     })
     wait(2000).then(() => {
       setRefreshing(false)
@@ -149,7 +149,7 @@ const DashboardScreen = props => {
             <View style={styles.viewStyle}>
               <TouchableOpacity onPress={onProfilePress}>
                 {
-                  appContext.userData.profileImagePath ? (
+                  appContext.userData && appContext.userData.profileImagePath ? (
                     <Image style={styles.avatarStyle}
                            source={{
                              uri: appContext.userData.profileImagePath
@@ -162,7 +162,7 @@ const DashboardScreen = props => {
               </TouchableOpacity>
               <TouchableOpacity onPress={onProfilePress}>
                 <Text style={styles.titleStyle}>
-                  {appContext.userData.firstName} {appContext.userData.lastName}
+                  {appContext.userData?.firstName} {appContext.userData?.lastName}
                 </Text>
               </TouchableOpacity>
               <Text style={styles.textStyle}

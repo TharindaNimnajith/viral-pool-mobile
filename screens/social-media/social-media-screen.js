@@ -70,8 +70,8 @@ const SocialMediaScreen = () => {
     }).catch(async error => {
       setLoading(false)
       setRefresh(false)
-      await showErrors(error.response.data)
-      console.log(error.response.data)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
     })
   }, [refresh])
 
@@ -88,8 +88,8 @@ const SocialMediaScreen = () => {
       }
     }).catch(async error => {
       setRefresh(false)
-      await showErrors(error.response.data)
-      console.log(error.response.data)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      console.log(error)
     })
     wait(2000).then(() => {
       setRefreshing(false)
