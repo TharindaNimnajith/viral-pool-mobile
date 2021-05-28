@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    borderLeftColor: Colors.primaryColor,
+    borderLeftColor: Colors.facebookColor,
     marginVertical: 6,
     marginHorizontal: wp('4%'),
     paddingHorizontal: 10
@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    borderLeftColor: Colors.primaryColor,
+    borderLeftColor: Colors.instagramColor,
     marginVertical: 6,
     marginHorizontal: wp('4%'),
     paddingHorizontal: 10

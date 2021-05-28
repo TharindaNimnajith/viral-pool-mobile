@@ -13,7 +13,7 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
-import {isNullAsync, showAlert} from '../../shared/util/helpers'
+import {isNullAsync, showAlert, showErrors} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 
@@ -105,8 +105,8 @@ const PaymentDetailsRoute = () => {
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }
 

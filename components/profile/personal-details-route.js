@@ -15,7 +15,7 @@ import RadioForm from 'react-native-simple-radio-button'
 import DatePicker from 'react-native-datepicker'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
-import {genderOptions, isNull, isNullAsync, showAlert} from '../../shared/util/helpers'
+import {genderOptions, isNull, isNullAsync, showAlert, showErrors} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 
@@ -123,8 +123,8 @@ const PersonalDetailsRoute = () => {
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }
 

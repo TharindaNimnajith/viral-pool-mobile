@@ -4,7 +4,7 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import {Ionicons, MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
-import {formatNumber, showAlert} from '../../../shared/util/helpers'
+import {formatNumber, showAlert, showErrors} from '../../../shared/util/helpers'
 import {socialMediaPlatformActiveStatusEnum} from '../../../shared/const/enums'
 import Constants from '../../../shared/const/constants'
 import Colors from '../../../shared/const/colors'
@@ -37,9 +37,9 @@ const FacebookListItem = props => {
     }).catch(async error => {
       props.itemData.item.refresh()
       props.loadingFunctionFalse()
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       props.refreshFunction()
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }
 

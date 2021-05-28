@@ -20,12 +20,11 @@ axios.interceptors.request.use(async request => {
 axios.interceptors.response.use(async response => {
   return response
 }, async error => {
-  if (error.response.status !== 401) {
-    console.log(error)
+  console.log(error)
+  if (error.response.status !== 401)
     return new Promise((resolve, reject) => {
       reject(error)
     })
-  }
   const accessToken = await getStringData(Constants.ACCESS_TOKEN)
   const refreshToken = await getStringData(Constants.REFRESH_TOKEN)
   const data = {
