@@ -42,8 +42,19 @@ const showAlert = async (title, message) => {
   })
 }
 
-const formatNumber = num => {
-  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+const showErrors = async error => {
+  if (error != null) {
+    if (Array.isArray(error.errors))
+      await showAlert(Constants.ERROR, error.errors[0])
+    else if (error.title == null)
+      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+    else
+      await showAlert(Constants.ERROR, error.title)
+  }
+}
+
+const formatNumber = number => {
+  return number.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
 
 const isNullAsync = async value => {
@@ -60,6 +71,7 @@ export {
   genderOptions,
   tabs,
   showAlert,
+  showErrors,
   formatNumber,
   isNullAsync,
   isNull

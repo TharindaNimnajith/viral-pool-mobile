@@ -5,6 +5,7 @@ import Dialog from 'react-native-dialog'
 import {Ionicons, MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
 import {formatNumber, showAlert} from '../../../shared/util/helpers'
+import {socialMediaPlatformActiveStatusEnum} from '../../../shared/const/enums'
 import Constants from '../../../shared/const/constants'
 import Colors from '../../../shared/const/colors'
 
@@ -59,42 +60,46 @@ const InstagramListItem = props => {
                        color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
-      <View style={styles.itemStyle}>
-        <View style={styles.mainViewStyle}>
-          <View style={styles.iconViewStyle}>
-            <Ionicons name='logo-instagram'
-                      size={50}
-                      color={Colors.instagramColor}/>
-          </View>
-          <View style={styles.viewStyle}>
-            <Text style={styles.textStyle}>
-              {props.itemData.item.username}
-            </Text>
-            <View style={styles.horizontalStyle}>
-              <Text style={styles.statTitleStyle}>
-                Following
-              </Text>
-              <Text style={styles.statStyle}>
-                {formatNumber(props.itemData.item.followsCount)}
-              </Text>
+      {
+        props.itemData.item.status === socialMediaPlatformActiveStatusEnum.Activated && (
+          <View style={styles.itemStyle}>
+            <View style={styles.mainViewStyle}>
+              <View style={styles.iconViewStyle}>
+                <Ionicons name='logo-instagram'
+                          size={50}
+                          color={Colors.instagramColor}/>
+              </View>
+              <View style={styles.viewStyle}>
+                <Text style={styles.textStyle}>
+                  {props.itemData.item.username}
+                </Text>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Following
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.followsCount)}
+                  </Text>
+                </View>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Followers
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.followersCount)}
+                  </Text>
+                </View>
+              </View>
+              <TouchableOpacity style={styles.deleteStyle}
+                                onPress={showDialog}>
+                <MaterialIcons name='delete-forever'
+                               size={35}
+                               color={Colors.primaryColor}/>
+              </TouchableOpacity>
             </View>
-            <View style={styles.horizontalStyle}>
-              <Text style={styles.statTitleStyle}>
-                Followers
-              </Text>
-              <Text style={styles.statStyle}>
-                {formatNumber(props.itemData.item.followersCount)}
-              </Text>
-            </View>
           </View>
-          <TouchableOpacity style={styles.deleteStyle}
-                            onPress={showDialog}>
-            <MaterialIcons name='delete-forever'
-                           size={35}
-                           color={Colors.primaryColor}/>
-          </TouchableOpacity>
-        </View>
-      </View>
+        )
+      }
     </View>
   )
 }

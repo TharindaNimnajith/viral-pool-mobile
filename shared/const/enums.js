@@ -36,3 +36,8 @@ export const socialMediaPlatformNameEnum = Object.freeze({
   Facebook: 'Facebook',
   Instagram: 'Instagram'
 })
+
+export const socialMediaPlatformActiveStatusEnum = Object.freeze({
+  Deactivated: 0,
+  Activated: 1
+})

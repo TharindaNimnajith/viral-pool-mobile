@@ -16,7 +16,7 @@ import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
-import {showAlert} from '../../shared/util/helpers'
+import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
@@ -262,8 +262,8 @@ const SocialMediaScreen = () => {
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }
 
