@@ -76,10 +76,10 @@ const PersonalDetailsRoute = () => {
   const editPersonalDetails = async () => {
     setLoading(true)
     const formData = new FormData()
-    formData.append('id', appContext.userData.id)
-    formData.append('email', appContext.userData.email)
+    formData.append('id', appContext.userData?.id)
+    formData.append('email', appContext.userData?.email)
     formData.append('userRole', Constants.USER_ROLE)
-    formData.append('gender', gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData.gender)
+    formData.append('gender', gender === 0 ? 'female' : gender === 1 ? 'male' : appContext.userData?.gender)
     formData.append('birthDate', birthDate)
     if (await isNullAsync(firstName))
       formData.append('firstName', '')
@@ -97,22 +97,22 @@ const PersonalDetailsRoute = () => {
       formData.append('phoneNumber', '')
     else
       formData.append('phoneNumber', phoneNumber.trim())
-    if (await isNullAsync(appContext.userData.bankAccountName))
+    if (await isNullAsync(appContext.userData?.bankAccountName))
       formData.append('bankAccountName', '')
     else
-      formData.append('bankAccountName', appContext.userData.bankAccountName.trim())
-    if (await isNullAsync(appContext.userData.bankAccountNumber))
+      formData.append('bankAccountName', appContext.userData?.bankAccountName.trim())
+    if (await isNullAsync(appContext.userData?.bankAccountNumber))
       formData.append('bankAccountNumber', '')
     else
-      formData.append('bankAccountNumber', appContext.userData.bankAccountNumber.trim())
-    if (await isNullAsync(appContext.userData.bankName))
+      formData.append('bankAccountNumber', appContext.userData?.bankAccountNumber.trim())
+    if (await isNullAsync(appContext.userData?.bankName))
       formData.append('bankName', '')
     else
-      formData.append('bankName', appContext.userData.bankName.trim())
-    if (await isNullAsync(appContext.userData.branchName))
+      formData.append('bankName', appContext.userData?.bankName.trim())
+    if (await isNullAsync(appContext.userData?.branchName))
       formData.append('branchName', '')
     else
-      formData.append('branchName', appContext.userData.branchName.trim())
+      formData.append('branchName', appContext.userData?.branchName.trim())
     axios.put('User', formData).then(async response => {
       setLoading(false)
       if (response.status === 200) {

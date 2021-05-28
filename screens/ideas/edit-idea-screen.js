@@ -107,7 +107,7 @@ const EditIdeaScreen = props => {
       id: idea.idea,
       title: title.trim(),
       description: description.trim(),
-      contentCreatorDetailId: appContext.userData.id
+      contentCreatorDetailId: appContext.userData?.id
     }
     axios.put('cc-ideas', data).then(async response => {
       idea.refresh()

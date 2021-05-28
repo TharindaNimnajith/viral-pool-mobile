@@ -246,7 +246,7 @@ const SocialMediaScreen = () => {
     setLoading(true)
     const data = {
       channelId: youtubeChannelId.trim(),
-      contentCreatorDetailId: appContext.userData.id
+      contentCreatorDetailId: appContext.userData?.id
     }
     axios.post('cc-social-media/youtube/add-profile', data).then(async response => {
       setLoading(false)

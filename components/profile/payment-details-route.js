@@ -57,28 +57,28 @@ const PaymentDetailsRoute = () => {
   const editPaymentDetails = async () => {
     setLoading(true)
     const formData = new FormData()
-    formData.append('id', appContext.userData.id)
-    formData.append('email', appContext.userData.email)
+    formData.append('id', appContext.userData?.id)
+    formData.append('email', appContext.userData?.email)
     formData.append('userRole', Constants.USER_ROLE)
-    formData.append('gender', appContext.userData.gender === 0 ? 'female' :
-      appContext.userData.gender === 1 ? 'male' : appContext.userData.gender)
-    formData.append('birthDate', appContext.userData.birthDate)
-    if (await isNullAsync(appContext.userData.firstName))
+    formData.append('gender', appContext.userData?.gender === 0 ? 'female' :
+      appContext.userData?.gender === 1 ? 'male' : appContext.userData?.gender)
+    formData.append('birthDate', appContext.userData?.birthDate)
+    if (await isNullAsync(appContext.userData?.firstName))
       formData.append('firstName', '')
     else
-      formData.append('firstName', appContext.userData.firstName.trim())
-    if (await isNullAsync(appContext.userData.lastName))
+      formData.append('firstName', appContext.userData?.firstName.trim())
+    if (await isNullAsync(appContext.userData?.lastName))
       formData.append('lastName', '')
     else
-      formData.append('lastName', appContext.userData.lastName.trim())
-    if (await isNullAsync(appContext.userData.address))
+      formData.append('lastName', appContext.userData?.lastName.trim())
+    if (await isNullAsync(appContext.userData?.address))
       formData.append('address', '')
     else
-      formData.append('address', appContext.userData.address.trim())
-    if (await isNullAsync(appContext.userData.phoneNumber))
+      formData.append('address', appContext.userData?.address.trim())
+    if (await isNullAsync(appContext.userData?.phoneNumber))
       formData.append('phoneNumber', '')
     else
-      formData.append('phoneNumber', appContext.userData.phoneNumber.trim())
+      formData.append('phoneNumber', appContext.userData?.phoneNumber.trim())
     if (await isNullAsync(bankAccountName))
       formData.append('bankAccountName', '')
     else

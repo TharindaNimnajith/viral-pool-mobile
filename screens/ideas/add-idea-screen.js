@@ -73,7 +73,7 @@ const AddIdeaScreen = props => {
     const data = {
       title: title.trim(),
       description: description.trim(),
-      contentCreatorDetailId: appContext.userData.id
+      contentCreatorDetailId: appContext.userData?.id
     }
     axios.post('cc-ideas', data).then(async response => {
       idea.refresh()

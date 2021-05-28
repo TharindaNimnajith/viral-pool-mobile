@@ -145,10 +145,10 @@ const DashboardScreen = props => {
             <View style={styles.viewStyle}>
               <TouchableOpacity onPress={onProfilePress}>
                 {
-                  appContext.userData && appContext.userData.profileImagePath ? (
+                  appContext.userData && appContext.userData?.profileImagePath ? (
                     <Image style={styles.avatarStyle}
                            source={{
-                             uri: appContext.userData.profileImagePath
+                             uri: appContext.userData?.profileImagePath
                            }}/>
                   ) : (
                     <Image style={styles.avatarStyle}

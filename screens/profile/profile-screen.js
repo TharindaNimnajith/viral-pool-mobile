@@ -119,37 +119,37 @@ const ProfileScreen = props => {
           'client_id': `${Constants.CLIENT_ID_VALUE}`
         }
         let firstName = ''
-        if (!await isNullAsync(appContext.userData.firstName))
-          firstName = appContext.userData.firstName
+        if (!await isNullAsync(appContext.userData?.firstName))
+          firstName = appContext.userData?.firstName
         let lastName = ''
-        if (!await isNullAsync(appContext.userData.lastName))
-          lastName = appContext.userData.lastName
+        if (!await isNullAsync(appContext.userData?.lastName))
+          lastName = appContext.userData?.lastName
         let address = ''
-        if (!await isNullAsync(appContext.userData.address))
-          address = appContext.userData.address
+        if (!await isNullAsync(appContext.userData?.address))
+          address = appContext.userData?.address
         let phoneNumber = ''
-        if (!await isNullAsync(appContext.userData.phoneNumber))
-          phoneNumber = appContext.userData.phoneNumber
+        if (!await isNullAsync(appContext.userData?.phoneNumber))
+          phoneNumber = appContext.userData?.phoneNumber
         let bankAccountName = ''
-        if (!await isNullAsync(appContext.userData.bankAccountName))
-          bankAccountName = appContext.userData.bankAccountName
+        if (!await isNullAsync(appContext.userData?.bankAccountName))
+          bankAccountName = appContext.userData?.bankAccountName
         let bankAccountNumber = ''
-        if (!await isNullAsync(appContext.userData.bankAccountNumber))
-          bankAccountNumber = appContext.userData.bankAccountNumber
+        if (!await isNullAsync(appContext.userData?.bankAccountNumber))
+          bankAccountNumber = appContext.userData?.bankAccountNumber
         let bankName = ''
-        if (!await isNullAsync(appContext.userData.bankName))
-          bankName = appContext.userData.bankName
+        if (!await isNullAsync(appContext.userData?.bankName))
+          bankName = appContext.userData?.bankName
         let branchName = ''
-        if (!await isNullAsync(appContext.userData.branchName))
-          branchName = appContext.userData.branchName
+        if (!await isNullAsync(appContext.userData?.branchName))
+          branchName = appContext.userData?.branchName
         const parameters = {
-          'id': appContext.userData.id,
-          'email': appContext.userData.email,
+          'id': appContext.userData?.id,
+          'email': appContext.userData?.email,
           'userRole': Constants.USER_ROLE,
           'firstName': firstName,
           'lastName': lastName,
-          'gender': appContext.userData.gender,
-          'birthDate': appContext.userData.birthDate,
+          'gender': appContext.userData?.gender,
+          'birthDate': appContext.userData?.birthDate,
           'address': address,
           'phoneNumber': phoneNumber,
           'bankAccountName': bankAccountName,
@@ -242,7 +242,7 @@ const ProfileScreen = props => {
           <View style={styles.bodyStyle}>
             <View style={styles.bodyContentStyle}>
               <Text style={styles.titleStyle}>
-                {appContext.userData.firstName} {appContext.userData.lastName}
+                {appContext.userData?.firstName} {appContext.userData?.lastName}
               </Text>
               <View style={styles.infoStyle}>
                 <View style={styles.viewStyle}>
@@ -250,16 +250,16 @@ const ProfileScreen = props => {
                             size={20}
                             color={Colors.primaryColor}/>
                   <Text style={styles.textStyle}>
-                    {appContext.userData.email}
+                    {appContext.userData?.email}
                   </Text>
                 </View>
                 <View style={styles.viewStyle}>
                   {
-                    appContext.userData.gender?.toLowerCase() === 'male' ? (
+                    appContext.userData?.gender?.toLowerCase() === 'male' ? (
                       <Ionicons name='man'
                                 size={20}
                                 color={Colors.primaryColor}/>
-                    ) : appContext.userData.gender?.toLowerCase() === 'female' ? (
+                    ) : appContext.userData?.gender?.toLowerCase() === 'female' ? (
                       <Ionicons name='woman'
                                 size={20}
                                 color={Colors.primaryColor}/>
@@ -270,9 +270,9 @@ const ProfileScreen = props => {
                     )
                   }
                   {
-                    appContext.userData.gender &&
+                    appContext.userData?.gender &&
                     <Text style={styles.textStyle}>
-                      {appContext.userData.gender.charAt(0).toUpperCase() + appContext.userData.gender.slice(1)}
+                      {appContext.userData?.gender.charAt(0).toUpperCase() + appContext.userData?.gender.slice(1)}
                     </Text>
                   }
                 </View>
@@ -281,7 +281,7 @@ const ProfileScreen = props => {
                             size={20}
                             color={Colors.primaryColor}/>
                   <Text style={styles.textStyle}>
-                    {appContext.userData.birthDate?.slice(0, 10)}
+                    {appContext.userData?.birthDate?.slice(0, 10)}
                   </Text>
                 </View>
                 <View style={styles.viewStyle}>
@@ -289,7 +289,7 @@ const ProfileScreen = props => {
                             size={20}
                             color={Colors.primaryColor}/>
                   <Text style={styles.textStyle}>
-                    {appContext.userData.address}
+                    {appContext.userData?.address}
                   </Text>
                 </View>
                 <View style={styles.viewStyle}>
@@ -297,7 +297,7 @@ const ProfileScreen = props => {
                             size={20}
                             color={Colors.primaryColor}/>
                   <Text style={styles.textStyle}>
-                    {appContext.userData.phoneNumber}
+                    {appContext.userData?.phoneNumber}
                   </Text>
                 </View>
               </View>
