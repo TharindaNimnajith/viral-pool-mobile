@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useState} from 'react'
+import React, {useCallback, useState} from 'react'
 import {
   ActivityIndicator,
   Image,
@@ -15,15 +15,12 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import validator from 'validator'
-import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
-import {showAlert} from '../../shared/util/helpers'
+import {showAlert, showErrors} from '../../shared/util/helpers'
 import {storeStringData} from '../../shared/util/local-storage'
 
 const LoginScreen = props => {
-  const appContext = useContext(AppContext)
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [emailValid, setEmailValid] = useState(false)
@@ -72,20 +69,8 @@ const LoginScreen = props => {
       await storeStringData(Constants.ACCESS_TOKEN, response.data.access_token)
       await storeStringData(Constants.REFRESH_TOKEN, response.data.refresh_token)
       if (response.status === 200) {
-        axios.get('User').then(async response => {
-          if (response.status === 200) {
-            await appContext.SetUserData(response.data.data)
-            props.navigation.navigate({
-              routeName: 'Navigator'
-            })
-          } else {
-            setLoading(false)
-            await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          }
-        }).catch(async error => {
-          setLoading(false)
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
+        props.navigation.navigate({
+          routeName: 'Navigator'
         })
       } else {
         setLoading(false)
@@ -93,8 +78,8 @@ const LoginScreen = props => {
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.LOGIN_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }
 

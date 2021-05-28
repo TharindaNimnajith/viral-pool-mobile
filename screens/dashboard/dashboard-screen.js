@@ -16,7 +16,7 @@ import {FontAwesome, FontAwesome5, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
-import {showAlert} from '../../shared/util/helpers'
+import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
@@ -38,31 +38,43 @@ const DashboardScreen = props => {
       contentCreatorId: appContext.userData.id,
       expoToken: appContext.expoPushToken
     }
-    axios.post('content-creator-notification/token', data).then(async response => {
+    axios.get('User').then(async response => {
       if (response.status === 200) {
-        axios.get('project-cc-strategy?status=1').then(async response => {
-          setLoading(false)
-          setRefresh(false)
-          if (response.status === 200)
-            setOngoingProjects(response.data.data)
-          else
+        await appContext.SetUserData(response.data.data)
+        axios.post('content-creator-notification/token', data).then(async response => {
+          if (response.status === 200) {
+            axios.get('project-cc-strategy?status=1').then(async response => {
+              setLoading(false)
+              setRefresh(false)
+              if (response.status === 200)
+                setOngoingProjects(response.data.data)
+              else
+                await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+            }).catch(async error => {
+              setLoading(false)
+              setRefresh(false)
+              await showErrors(error.response.data)
+              console.log(error.response.data)
+            })
+          } else {
+            setLoading(false)
+            setRefresh(false)
             await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          }
         }).catch(async error => {
           setLoading(false)
           setRefresh(false)
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
+          await showErrors(error.response.data)
+          console.log(error.response.data)
         })
       } else {
         setLoading(false)
-        setRefresh(false)
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
       setLoading(false)
-      setRefresh(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }, [refresh])
 
@@ -72,23 +84,33 @@ const DashboardScreen = props => {
       contentCreatorId: appContext.userData.id,
       expoToken: appContext.expoPushToken
     }
-    axios.post('content-creator-notification/token', data).then(async response => {
+    axios.get('User').then(async response => {
       if (response.status === 200) {
-        axios.get('project-cc-strategy?status=1').then(async response => {
-          if (response.status === 200)
-            setOngoingProjects(response.data.data)
-          else
+        await appContext.SetUserData(response.data.data)
+        axios.post('content-creator-notification/token', data).then(async response => {
+          if (response.status === 200) {
+            axios.get('project-cc-strategy?status=1').then(async response => {
+              if (response.status === 200)
+                setOngoingProjects(response.data.data)
+              else
+                await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+            }).catch(async error => {
+              await showErrors(error.response.data)
+              console.log(error.response.data)
+            })
+          } else {
             await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+          }
         }).catch(async error => {
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
+          await showErrors(error.response.data)
+          console.log(error.response.data)
         })
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
     }).catch(async error => {
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
     wait(2000).then(() => {
       setRefreshing(false)

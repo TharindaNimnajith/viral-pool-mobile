@@ -14,7 +14,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../shared/const/colors'
-import {showAlert} from '../../shared/util/helpers'
+import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
@@ -39,8 +39,8 @@ const EarningsScreen = props => {
     }).catch(async error => {
       setLoading(false)
       setRefresh(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }, [refresh])
 
@@ -52,8 +52,8 @@ const EarningsScreen = props => {
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
     wait(2000).then(() => {
       setRefreshing(false)

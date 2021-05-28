@@ -70,8 +70,8 @@ const SocialMediaScreen = () => {
     }).catch(async error => {
       setLoading(false)
       setRefresh(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }, [refresh])
 
@@ -88,8 +88,8 @@ const SocialMediaScreen = () => {
       }
     }).catch(async error => {
       setRefresh(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
     wait(2000).then(() => {
       setRefreshing(false)
@@ -287,8 +287,8 @@ const SocialMediaScreen = () => {
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }
 
@@ -312,8 +312,8 @@ const SocialMediaScreen = () => {
       }
     }).catch(async error => {
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }
 
