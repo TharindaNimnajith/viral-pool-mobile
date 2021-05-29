@@ -14,7 +14,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
-import {showAlert} from '../../shared/util/helpers'
+import {showAlert, showErrors} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 import CombinedButtons from '../../components/header/combined-buttons'
@@ -87,8 +87,8 @@ const AddIdeaScreen = props => {
     }).catch(async error => {
       idea.refresh()
       setLoading(false)
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-      console.log(error)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
     })
   }
 

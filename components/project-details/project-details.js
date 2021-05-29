@@ -58,6 +58,7 @@ const ProjectDetails = props => {
     axios.get(`project-cc-strategy/${project.project}`).then(async response => {
       setLoading(false)
       if (response.status === 200) {
+        console.log(response.data.data)
         setName(response.data.data.name)
         setDescription(response.data.data.description)
         setProjectFileResponses(response.data.data.projectFileResponses)
