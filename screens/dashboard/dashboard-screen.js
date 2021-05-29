@@ -235,60 +235,69 @@ const DashboardScreen = props => {
                 </View>
               </View>
             </View>
-            <View style={styles.horizontalContentStyle}>
-              <View>
-                <Text>
-                  Rank
-                </Text>
-                <Text>
-                  1
-                </Text>
-              </View>
-              <View>
-                <Text>
-                  2000
-                </Text>
-                <Text>
-                  VP Points
-                </Text>
+            <View style={styles.rankViewStyle}>
+              <View style={styles.horizontalContentStyle}>
+                <View style={styles.rankCardStyle}>
+                  <Text style={styles.rankTitleStyle}>
+                    Rank
+                  </Text>
+                  <Text style={styles.rankValueStyle}>
+                    {formatNumber(rank)}
+                  </Text>
+                </View>
+                <View style={styles.pointsViewStyle}>
+                  <Text style={styles.pointsValueStyle}>
+                    {formatNumber(points)}
+                  </Text>
+                  <View style={styles.horizontalContentStyle}>
+                    <Ionicons name='star'
+                              size={20}
+                              color={Colors.secondaryColor}/>
+                    <Text style={styles.pointsTitleStyle}>
+                      VP Points
+                    </Text>
+                  </View>
+                </View>
               </View>
             </View>
-            <View style={styles.horizontalContentStyle}>
-              <View>
-                <TouchableOpacity>
-                  <Text>
-                    5
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text>
-                    Job{'\n'}Pool
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View>
-                <TouchableOpacity>
-                  <Text>
-                    5
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text>
-                    Ongoing{'\n'}Jobs
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <View>
-                <TouchableOpacity>
-                  <Text>
-                    5
-                  </Text>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                  <Text>
-                    Completed{'\n'}Jobs
-                  </Text>
-                </TouchableOpacity>
+            <View style={styles.projectViewStyle}>
+              <View style={styles.horizontalContentStyle}>
+                <View>
+                  <TouchableOpacity>
+                    <Text>
+                      {formatNumber(pendingProjectCount)}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text>
+                      Job{'\n'}Pool
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity>
+                    <Text>
+                      {formatNumber(ongoingProjectCount)}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text>
+                      Ongoing{'\n'}Jobs
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View>
+                  <TouchableOpacity>
+                    <Text>
+                      {formatNumber(completedProjectCount)}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity>
+                    <Text>
+                      Completed{'\n'}Jobs
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
             <TouchableOpacity style={styles.cardStyle}
@@ -447,9 +456,53 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor,
     minHeight: hp('93.6%')
   },
+  pointsTitleStyle: {
+    textTransform: 'uppercase',
+    color: Colors.secondaryColor,
+    fontSize: 20,
+    marginLeft: 5,
+    marginBottom: 2
+  },
+  pointsValueStyle: {
+    color: Colors.secondaryColor,
+    fontSize: 60,
+    marginBottom: 5
+  },
+  pointsViewStyle: {
+    alignItems: 'center',
+    paddingTop: 5
+  },
   profileStyle: {
     marginLeft: wp('4%'),
     justifyContent: 'center'
+  },
+  projectViewStyle: {
+    marginVertical: hp('3%'),
+    backgroundColor: Colors.tertiaryColor
+  },
+  rankCardStyle: {
+    alignItems: 'center',
+    backgroundColor: Colors.secondaryColor,
+    borderRadius: 20,
+    paddingTop: 25,
+    paddingBottom: 16,
+    paddingHorizontal: 35,
+    marginRight: wp('10%')
+  },
+  rankTitleStyle: {
+    textTransform: 'uppercase',
+    color: Colors.primaryColor,
+    fontSize: 20
+  },
+  rankValueStyle: {
+    color: Colors.primaryColor,
+    fontSize: 50
+  },
+  rankViewStyle: {
+    marginTop: hp('4%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center'
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,
