@@ -16,7 +16,7 @@ import {FontAwesome, FontAwesome5, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
-import {showAlert, showErrors} from '../../shared/util/helpers'
+import {formatNumber, showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
@@ -27,6 +27,16 @@ const DashboardScreen = props => {
   const appContext = useContext(AppContext)
 
   const [ongoingProjects, setOngoingProjects] = useState([])
+  const [pendingProjectCount, setPendingProjectCount] = useState('')
+  const [ongoingProjectCount, setOngoingProjectCount] = useState('')
+  const [completedProjectCount, setCompletedProjectCount] = useState('')
+  const [youtubeCount, setYoutubeCount] = useState(0)
+  const [facebookCount, setFacebookCount] = useState(0)
+  const [instagramCount, setInstagramCount] = useState(0)
+  const [totalEarnings, setTotalEarnings] = useState('')
+  const [pendingEarnings, setPendingEarnings] = useState('')
+  const [points, setPoints] = useState('')
+  const [rank, setRank] = useState('')
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
@@ -43,12 +53,23 @@ const DashboardScreen = props => {
         }
         axios.post('content-creator-notification/token', data).then(async response => {
           if (response.status === 200) {
-            axios.get('project-cc-strategy?status=1').then(async response => {
+            axios.get('dashboard/cc').then(async response => {
               setLoading(false)
-              if (response.status === 200)
-                setOngoingProjects(response.data.data)
-              else
+              if (response.status === 200) {
+                setOngoingProjects(response.data.data.creatorsStrategySummaryResponses)
+                setPendingProjectCount(response.data.data.pendingProjectCount)
+                setOngoingProjectCount(response.data.data.ongoingProjectCount)
+                setCompletedProjectCount(response.data.data.completedProjectCount)
+                setYoutubeCount(response.data.data.socialMediaAccountCount.youTubeCount)
+                setFacebookCount(response.data.data.socialMediaAccountCount.faceBookCount)
+                setInstagramCount(response.data.data.socialMediaAccountCount.instagramCount)
+                setTotalEarnings(response.data.data.totalEarnings)
+                setPendingEarnings(response.data.data.pendingEarnings)
+                setPoints(response.data.data.points)
+                setRank(response.data.data.rank)
+              } else {
                 await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+              }
             }).catch(async error => {
               setLoading(false)
               await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -85,11 +106,22 @@ const DashboardScreen = props => {
         }
         axios.post('content-creator-notification/token', data).then(async response => {
           if (response.status === 200) {
-            axios.get('project-cc-strategy?status=1').then(async response => {
-              if (response.status === 200)
-                setOngoingProjects(response.data.data)
-              else
+            axios.get('dashboard/cc').then(async response => {
+              if (response.status === 200) {
+                setOngoingProjects(response.data.data.creatorsStrategySummaryResponses)
+                setPendingProjectCount(response.data.data.pendingProjectCount)
+                setOngoingProjectCount(response.data.data.ongoingProjectCount)
+                setCompletedProjectCount(response.data.data.completedProjectCount)
+                setYoutubeCount(response.data.data.socialMediaAccountCount.youTubeCount)
+                setFacebookCount(response.data.data.socialMediaAccountCount.faceBookCount)
+                setInstagramCount(response.data.data.socialMediaAccountCount.instagramCount)
+                setTotalEarnings(response.data.data.totalEarnings)
+                setPendingEarnings(response.data.data.pendingEarnings)
+                setPoints(response.data.data.points)
+                setRank(response.data.data.rank)
+              } else {
                 await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+              }
             }).catch(async error => {
               await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
               console.log(error)
@@ -126,6 +158,10 @@ const DashboardScreen = props => {
     props.navigation.navigate('Profile')
   }
 
+  const onSocialMediaPress = async () => {
+    props.navigation.navigate('SocialMedia')
+  }
+
   const onEarningsPress = async () => {
     props.navigation.navigate('CompletedProjectList')
   }
@@ -143,28 +179,66 @@ const DashboardScreen = props => {
         <View style={styles.mainViewStyle}>
           <View style={styles.headerStyle}>
             <View style={styles.viewStyle}>
-              <TouchableOpacity onPress={onProfilePress}>
-                {
-                  appContext.userData && appContext.userData?.profileImagePath ? (
-                    <Image style={styles.avatarStyle}
-                           source={{
-                             uri: appContext.userData?.profileImagePath
-                           }}/>
-                  ) : (
-                    <Image style={styles.avatarStyle}
-                           source={require('../../assets/user.jpg')}/>
-                  )
-                }
-              </TouchableOpacity>
-              <TouchableOpacity onPress={onProfilePress}>
-                <Text style={styles.titleStyle}>
-                  {appContext.userData?.firstName} {appContext.userData?.lastName}
-                </Text>
-              </TouchableOpacity>
-              <Text style={styles.textStyle}
-                    onPress={onProfilePress}>
-                34 VP Points | 10th Ranked
-              </Text>
+              <View style={styles.horizontalContentStyle}>
+                <TouchableOpacity onPress={onProfilePress}>
+                  {
+                    appContext.userData && appContext.userData?.profileImagePath ? (
+                      <Image style={styles.avatarStyle}
+                             source={{
+                               uri: appContext.userData?.profileImagePath
+                             }}/>
+                    ) : (
+                      <Image style={styles.avatarStyle}
+                             source={require('../../assets/user.jpg')}/>
+                    )
+                  }
+                </TouchableOpacity>
+                <View style={styles.profileStyle}>
+                  <TouchableOpacity onPress={onProfilePress}>
+                    <Text style={styles.titleStyle}>
+                      {appContext.userData?.firstName} {appContext.userData?.lastName}
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={onSocialMediaPress}>
+                    <View style={styles.socialMediaStyle}>
+                      <View style={styles.horizontalContentStyle}>
+                        <View style={styles.betweenStyle}>
+                          <View style={styles.horizontalContentStyle}>
+                            <Ionicons name='logo-youtube'
+                                      size={20}
+                                      color={Colors.secondaryColor}/>
+                            <Text style={styles.countStyle}>
+                              {formatNumber(youtubeCount)}
+                            </Text>
+                          </View>
+                        </View>
+                        <View style={styles.betweenStyle}>
+                          <View style={styles.horizontalContentStyle}>
+                            <Ionicons name='logo-facebook'
+                                      size={20}
+                                      color={Colors.secondaryColor}/>
+                            <Text style={styles.countStyle}>
+                              {formatNumber(facebookCount)}
+                            </Text>
+                          </View>
+                        </View>
+                        <View style={styles.betweenStyle}>
+                          <View style={styles.horizontalContentStyle}>
+                            <Ionicons name='logo-instagram'
+                                      size={20}
+                                      color={Colors.secondaryColor}/>
+                            <Text style={styles.countStyle}>
+                              {formatNumber(instagramCount)}
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+            <View>
               <TouchableOpacity style={styles.cardStyle}
                                 onPress={onEarningsPress}>
                 <View style={styles.horizontalContentStyle1}>
@@ -238,12 +312,14 @@ const DashboardScreen = props => {
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    width: hp('16%'),
-    height: hp('16%'),
-    borderRadius: hp('8%'),
-    borderWidth: 2,
-    borderColor: Colors.secondaryColor,
-    marginTop: hp('4%')
+    width: wp('24%'),
+    height: wp('24%'),
+    borderRadius: wp('12%'),
+    borderWidth: 1,
+    borderColor: Colors.secondaryColor
+  },
+  betweenStyle: {
+    marginLeft: 6
   },
   bodyStyle: {
     marginTop: hp('2%'),
@@ -253,10 +329,11 @@ const styles = StyleSheet.create({
   cardStyle: {
     backgroundColor: Colors.fadedEffectColor,
     borderRadius: hp('5%'),
-    alignItems: 'center',
     paddingVertical: hp('2%'),
     paddingHorizontal: wp('20%'),
-    marginVertical: hp('3%')
+    marginVertical: hp('3%'),
+    alignItems: 'center',
+    alignSelf: 'center'
   },
   cardTextStyle: {
     marginRight: 8,
@@ -266,6 +343,11 @@ const styles = StyleSheet.create({
   cardTitleStyle: {
     fontSize: 22,
     marginLeft: 8
+  },
+  countStyle: {
+    marginHorizontal: 6,
+    color: Colors.secondaryColor,
+    textAlignVertical: 'center'
   },
   earnedAmountStyle: {
     fontSize: 50,
@@ -278,6 +360,14 @@ const styles = StyleSheet.create({
   errorMessageStyle: {
     color: Colors.tertiaryColor,
     fontSize: 18
+  },
+  headerStyle: {
+    backgroundColor: Colors.primaryColor,
+    borderBottomRightRadius: hp('6%'),
+    borderBottomLeftRadius: hp('6%')
+  },
+  horizontalContentStyle: {
+    flexDirection: 'row'
   },
   horizontalContentStyle1: {
     flexDirection: 'row',
@@ -309,10 +399,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor,
     minHeight: hp('93.6%')
   },
-  headerStyle: {
-    backgroundColor: Colors.primaryColor,
-    borderBottomRightRadius: hp('6%'),
-    borderBottomLeftRadius: hp('6%')
+  profileStyle: {
+    marginLeft: wp('4%'),
+    justifyContent: 'center'
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,
@@ -325,19 +414,17 @@ const styles = StyleSheet.create({
     marginTop: hp('1%'),
     marginBottom: hp('2%')
   },
-  textStyle: {
-    marginVertical: 10,
-    fontSize: 16,
-    color: Colors.secondaryColor
+  socialMediaStyle: {
+    marginTop: 8,
+    alignSelf: 'baseline'
   },
   titleStyle: {
-    fontSize: 26,
-    color: Colors.secondaryColor,
-    marginTop: hp('2%'),
-    marginBottom: hp('1%')
+    fontSize: 22,
+    color: Colors.secondaryColor
   },
   viewStyle: {
-    alignItems: 'center'
+    marginLeft: wp('6%'),
+    marginTop: wp('6%')
   },
   unitStyle: {
     color: Colors.primaryColor,

@@ -14,7 +14,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../../shared/const/colors'
-import {showAlert} from '../../../shared/util/helpers'
+import {formatNumber, showAlert} from '../../../shared/util/helpers'
 import Constants from '../../../shared/const/constants'
 import Menu from '../../../components/header/menu-button'
 import CombinedButtons from '../../../components/header/combined-buttons'
@@ -22,6 +22,8 @@ import ProjectListItem from '../../../components/list-items/project/project-list
 
 const CompletedProjectListScreen = props => {
   const [completedProjects, setCompletedProjects] = useState([])
+  const [totalEarnings, setTotalEarnings] = useState([])
+  const [pendingEarnings, setPendingEarnings] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
@@ -29,12 +31,15 @@ const CompletedProjectListScreen = props => {
   useEffect(() => {
     setLoading(true)
     setRefresh(false)
-    axios.get('project-cc-strategy?status=2').then(async response => {
+    axios.get('project-cc-strategy/earnings').then(async response => {
       setLoading(false)
-      if (response.status === 200)
-        setCompletedProjects(response.data.data)
-      else
+      if (response.status === 200) {
+        setCompletedProjects(response.data.data.creatorsStrategySummaryResponses)
+        setTotalEarnings(response.data.data.totalEarnings)
+        setPendingEarnings(response.data.data.pendingEarnings)
+      } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -44,11 +49,14 @@ const CompletedProjectListScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    axios.get('project-cc-strategy?status=2').then(async response => {
-      if (response.status === 200)
-        setCompletedProjects(response.data.data)
-      else
+    axios.get('project-cc-strategy/earnings').then(async response => {
+      if (response.status === 200) {
+        setCompletedProjects(response.data.data.creatorsStrategySummaryResponses)
+        setTotalEarnings(response.data.data.totalEarnings)
+        setPendingEarnings(response.data.data.pendingEarnings)
+      } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -90,7 +98,7 @@ const CompletedProjectListScreen = props => {
               </View>
               <View style={styles.horizontalContentStyle}>
                 <Text style={styles.totalAmountStyle}>
-                  54,000
+                  {formatNumber(totalEarnings)}
                 </Text>
                 <Text style={styles.totalUnitStyle}>
                   LKR
@@ -107,7 +115,7 @@ const CompletedProjectListScreen = props => {
               </View>
               <View style={styles.horizontalContentStyle}>
                 <Text style={styles.pendingAmountStyle}>
-                  54,000
+                  {formatNumber(pendingEarnings)}
                 </Text>
                 <Text style={styles.pendingUnitStyle}>
                   LKR
