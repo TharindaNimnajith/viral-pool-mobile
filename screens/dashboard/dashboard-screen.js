@@ -159,7 +159,15 @@ const DashboardScreen = props => {
     props.navigation.navigate('SocialMedia')
   }
 
-  const onEarningsPress = async () => {
+  const onNewProjectsPress = async () => {
+    props.navigation.navigate('NewProjectList')
+  }
+
+  const onOngoingProjectsPress = async () => {
+    props.navigation.navigate('OngoingProjectList')
+  }
+
+  const onCompletedProjectsPress = async () => {
     props.navigation.navigate('CompletedProjectList')
   }
 
@@ -235,7 +243,7 @@ const DashboardScreen = props => {
                 </View>
               </View>
             </View>
-            <View style={styles.rankViewStyle}>
+            <View style={styles.rowViewStyle}>
               <View style={styles.horizontalContentStyle}>
                 <View style={styles.rankCardStyle}>
                   <Text style={styles.rankTitleStyle}>
@@ -260,40 +268,43 @@ const DashboardScreen = props => {
                 </View>
               </View>
             </View>
-            <View style={styles.projectViewStyle}>
+            <View style={styles.rowViewStyle}>
               <View style={styles.horizontalContentStyle}>
-                <View>
-                  <TouchableOpacity>
-                    <Text>
+                <View style={styles.circleViewStyle}>
+                  <TouchableOpacity style={styles.circleStyle}
+                                    onPress={onNewProjectsPress}>
+                    <Text style={styles.circleTextStyle}>
                       {formatNumber(pendingProjectCount)}
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text>
+                  <TouchableOpacity onPress={onNewProjectsPress}>
+                    <Text style={styles.circleTitleStyle}>
                       Job{'\n'}Pool
                     </Text>
                   </TouchableOpacity>
                 </View>
-                <View>
-                  <TouchableOpacity>
-                    <Text>
+                <View style={styles.circleViewStyle}>
+                  <TouchableOpacity style={styles.circleStyle}
+                                    onPress={onOngoingProjectsPress}>
+                    <Text style={styles.circleTextStyle}>
                       {formatNumber(ongoingProjectCount)}
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text>
+                  <TouchableOpacity onPress={onOngoingProjectsPress}>
+                    <Text style={styles.circleTitleStyle}>
                       Ongoing{'\n'}Jobs
                     </Text>
                   </TouchableOpacity>
                 </View>
-                <View>
-                  <TouchableOpacity>
-                    <Text>
+                <View style={styles.circleViewStyle}>
+                  <TouchableOpacity style={styles.circleStyle}
+                                    onPress={onCompletedProjectsPress}>
+                    <Text style={styles.circleTextStyle}>
                       {formatNumber(completedProjectCount)}
                     </Text>
                   </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Text>
+                  <TouchableOpacity onPress={onCompletedProjectsPress}>
+                    <Text style={styles.circleTitleStyle}>
                       Completed{'\n'}Jobs
                     </Text>
                   </TouchableOpacity>
@@ -301,7 +312,7 @@ const DashboardScreen = props => {
               </View>
             </View>
             <TouchableOpacity style={styles.cardStyle}
-                              onPress={onEarningsPress}>
+                              onPress={onCompletedProjectsPress}>
               <View style={styles.horizontalContentStyle1}>
                 <FontAwesome name='dollar'
                              size={25}
@@ -391,7 +402,7 @@ const styles = StyleSheet.create({
     borderRadius: hp('5%'),
     paddingVertical: hp('1.5%'),
     paddingHorizontal: wp('20%'),
-    marginVertical: hp('3%'),
+    marginVertical: hp('4%'),
     alignItems: 'center',
     alignSelf: 'center'
   },
@@ -403,6 +414,28 @@ const styles = StyleSheet.create({
   cardTitleStyle: {
     fontSize: 22,
     marginLeft: 8
+  },
+  circleStyle: {
+    backgroundColor: Colors.secondaryColor,
+    width: wp('22%'),
+    height: wp('22%'),
+    borderRadius: wp('11%')
+  },
+  circleTextStyle: {
+    alignSelf: 'center',
+    color: Colors.primaryColor,
+    fontSize: 40,
+    flex: 1,
+    textAlignVertical: 'center'
+  },
+  circleTitleStyle: {
+    textAlign: 'center',
+    color: Colors.secondaryColor,
+    marginTop: 6,
+    fontSize: 16
+  },
+  circleViewStyle: {
+    marginRight: wp('6%')
   },
   countStyle: {
     marginHorizontal: 6,
@@ -476,10 +509,6 @@ const styles = StyleSheet.create({
     marginLeft: wp('4%'),
     justifyContent: 'center'
   },
-  projectViewStyle: {
-    marginVertical: hp('3%'),
-    backgroundColor: Colors.tertiaryColor
-  },
   rankCardStyle: {
     alignItems: 'center',
     backgroundColor: Colors.secondaryColor,
@@ -498,16 +527,14 @@ const styles = StyleSheet.create({
     color: Colors.primaryColor,
     fontSize: 50
   },
-  rankViewStyle: {
-    marginTop: hp('4%'),
-    alignItems: 'center',
-    justifyContent: 'center',
-    alignSelf: 'center'
-  },
   reloadMessageStyle: {
     color: Colors.primaryColor,
     fontSize: 16,
     marginTop: 10
+  },
+  rowViewStyle: {
+    marginTop: hp('4%'),
+    alignSelf: 'center'
   },
   sectionTitleStyle: {
     fontSize: 22,
