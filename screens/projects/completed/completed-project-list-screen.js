@@ -11,7 +11,7 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {Ionicons} from '@expo/vector-icons'
+import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../../shared/const/colors'
 import {showAlert} from '../../../shared/util/helpers'
@@ -79,43 +79,41 @@ const CompletedProjectListScreen = props => {
       }>
         <View style={styles.mainViewStyle}>
           <View style={styles.headerStyle}>
-            <TouchableOpacity style={styles.cardStyle}>
-              <Text style={styles.cardTitleStyle}>
-                Net Income
-              </Text>
+            <View style={styles.cardStyle}>
+              <View style={styles.iconViewStyle}>
+                <FontAwesome name='dollar'
+                             size={28}
+                             color={Colors.primaryColor}/>
+                <Text style={styles.cardTitleStyle}>
+                  Total Earnings
+                </Text>
+              </View>
               <View style={styles.horizontalContentStyle}>
-                <Text style={styles.earnedAmountStyle}>
+                <Text style={styles.totalAmountStyle}>
                   54,000
                 </Text>
-                <Text style={styles.unitStyle}>
+                <Text style={styles.totalUnitStyle}>
                   LKR
                 </Text>
               </View>
               <View style={styles.lineStyle}/>
-              <Text style={styles.cardTitleStyle}>
-                Pending Income
-              </Text>
+              <View style={styles.iconViewStyle}>
+                <FontAwesome name='dollar'
+                             size={28}
+                             color={Colors.primaryColor}/>
+                <Text style={styles.cardTitleStyle}>
+                  Pending Earnings
+                </Text>
+              </View>
               <View style={styles.horizontalContentStyle}>
-                <Text style={styles.earnedAmountStyle}>
+                <Text style={styles.pendingAmountStyle}>
                   54,000
                 </Text>
-                <Text style={styles.unitStyle}>
+                <Text style={styles.pendingUnitStyle}>
                   LKR
                 </Text>
               </View>
-              <View style={styles.lineStyle}/>
-              <Text style={styles.cardTitleStyle}>
-                Total Top-ups
-              </Text>
-              <View style={styles.horizontalContentStyle}>
-                <Text style={styles.earnedAmountStyle}>
-                  54,000
-                </Text>
-                <Text style={styles.unitStyle}>
-                  LKR
-                </Text>
-              </View>
-            </TouchableOpacity>
+            </View>
           </View>
           <View style={styles.bodyStyle}>
             <View style={styles.listStyle}>
@@ -166,21 +164,19 @@ const styles = StyleSheet.create({
     marginHorizontal: wp('2%')
   },
   cardStyle: {
-    backgroundColor: Colors.fadedEffectColor,
     borderRadius: hp('5%'),
+    borderColor: Colors.primaryColor,
+    borderWidth: 3,
     alignItems: 'center',
     paddingVertical: hp('2%'),
-    paddingHorizontal: wp('20%'),
-    marginTop: hp('3%')
+    width: wp('85%'),
+    marginTop: hp('3%'),
+    alignSelf: 'center'
   },
   cardTitleStyle: {
     fontSize: 24,
-    marginTop: hp('2%'),
-    marginBottom: hp('1%')
-  },
-  earnedAmountStyle: {
-    fontSize: 50,
-    color: Colors.primaryColor
+    marginLeft: 8,
+    marginVertical: 5
   },
   emptyListStyle: {
     alignItems: 'center',
@@ -200,10 +196,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: hp('2%')
   },
+  iconViewStyle: {
+    flexDirection: 'row',
+    marginTop: hp('2%'),
+    marginBottom: hp('1%'),
+    alignItems: 'center'
+  },
   lineStyle: {
     height: 1.5,
-    width: wp('60%'),
-    backgroundColor: Colors.defaultColor,
+    width: wp('62%'),
+    backgroundColor: Colors.primaryColor,
     marginVertical: hp('1.5%')
   },
   listStyle: {
@@ -225,6 +227,17 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.secondaryColor,
     minHeight: hp('93.6%')
   },
+  pendingAmountStyle: {
+    fontSize: 50,
+    color: Colors.tertiaryColor
+  },
+  pendingUnitStyle: {
+    color: Colors.tertiaryColor,
+    fontSize: 30,
+    textAlignVertical: 'bottom',
+    marginLeft: 10,
+    marginBottom: 5
+  },
   reloadMessageStyle: {
     color: Colors.primaryColor,
     fontSize: 16,
@@ -236,7 +249,11 @@ const styles = StyleSheet.create({
     marginTop: hp('1%'),
     marginBottom: hp('2%')
   },
-  unitStyle: {
+  totalAmountStyle: {
+    fontSize: 50,
+    color: Colors.primaryColor
+  },
+  totalUnitStyle: {
     color: Colors.primaryColor,
     fontSize: 30,
     textAlignVertical: 'bottom',

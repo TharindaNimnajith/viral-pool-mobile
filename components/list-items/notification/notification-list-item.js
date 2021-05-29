@@ -7,7 +7,7 @@ import Colors from '../../../shared/const/colors'
 
 const NotificationListItem = props => {
   const project = {
-    project: props.itemData.item.id,
+    project: props.itemData.item.strategyId,
     refresh: props.refreshFunction
   }
 

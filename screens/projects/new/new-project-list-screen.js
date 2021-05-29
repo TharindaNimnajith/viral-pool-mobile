@@ -5,6 +5,7 @@ import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../../shared/const/colors'
 import {showAlert} from '../../../shared/util/helpers'
+import {projectStatusEnum} from '../../../shared/const/enums'
 import Constants from '../../../shared/const/constants'
 import Menu from '../../../components/header/menu-button'
 import CombinedButtons from '../../../components/header/combined-buttons'
@@ -19,7 +20,7 @@ const NewProjectListScreen = props => {
   useEffect(() => {
     setLoading(true)
     setRefresh(false)
-    axios.get('project-cc-strategy?status=0').then(async response => {
+    axios.get(`project-cc-strategy?status=${projectStatusEnum.New}`).then(async response => {
       setLoading(false)
       if (response.status === 200)
         setNewProjects(response.data.data)
@@ -34,7 +35,7 @@ const NewProjectListScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    axios.get('project-cc-strategy?status=0').then(async response => {
+    axios.get(`project-cc-strategy?status=${projectStatusEnum.New}`).then(async response => {
       if (response.status === 200)
         setNewProjects(response.data.data)
       else

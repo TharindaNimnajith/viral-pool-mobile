@@ -41,3 +41,9 @@ export const socialMediaPlatformActiveStatusEnum = Object.freeze({
   Deactivated: 0,
   Activated: 1
 })
+
+export const projectStatusEnum = Object.freeze({
+  New: 0,
+  Ongoing: 1,
+  Completed: 2
+})
