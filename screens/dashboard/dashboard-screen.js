@@ -33,8 +33,7 @@ const DashboardScreen = props => {
   const [youtubeCount, setYoutubeCount] = useState(0)
   const [facebookCount, setFacebookCount] = useState(0)
   const [instagramCount, setInstagramCount] = useState(0)
-  const [totalEarnings, setTotalEarnings] = useState('')
-  const [pendingEarnings, setPendingEarnings] = useState('')
+  const [totalEarnings, setTotalEarnings] = useState(0)
   const [points, setPoints] = useState('')
   const [rank, setRank] = useState('')
   const [loading, setLoading] = useState(false)
@@ -64,7 +63,6 @@ const DashboardScreen = props => {
                 setFacebookCount(response.data.data.socialMediaAccountCount.faceBookCount)
                 setInstagramCount(response.data.data.socialMediaAccountCount.instagramCount)
                 setTotalEarnings(response.data.data.totalEarnings)
-                setPendingEarnings(response.data.data.pendingEarnings)
                 setPoints(response.data.data.points)
                 setRank(response.data.data.rank)
               } else {
@@ -116,7 +114,6 @@ const DashboardScreen = props => {
                 setFacebookCount(response.data.data.socialMediaAccountCount.faceBookCount)
                 setInstagramCount(response.data.data.socialMediaAccountCount.instagramCount)
                 setTotalEarnings(response.data.data.totalEarnings)
-                setPendingEarnings(response.data.data.pendingEarnings)
                 setPoints(response.data.data.points)
                 setRank(response.data.data.rank)
               } else {
@@ -238,35 +235,89 @@ const DashboardScreen = props => {
                 </View>
               </View>
             </View>
-            <View>
-              <TouchableOpacity style={styles.cardStyle}
-                                onPress={onEarningsPress}>
-                <View style={styles.horizontalContentStyle1}>
-                  <FontAwesome name='dollar'
-                               size={25}
-                               color={Colors.primaryColor}/>
-                  <Text style={styles.cardTitleStyle}>
-                    Total Earnings
-                  </Text>
-                </View>
-                <View style={styles.horizontalContentStyle2}>
-                  <Text style={styles.earnedAmountStyle}>
-                    54,000
-                  </Text>
-                  <Text style={styles.unitStyle}>
-                    LKR
-                  </Text>
-                </View>
-                <View style={styles.horizontalContentStyle3}>
-                  <Text style={styles.cardTextStyle}>
-                    View All
-                  </Text>
-                  <FontAwesome5 name='chevron-circle-right'
-                                size={16}
-                                color={Colors.primaryColor}/>
-                </View>
-              </TouchableOpacity>
+            <View style={styles.horizontalContentStyle}>
+              <View>
+                <Text>
+                  Rank
+                </Text>
+                <Text>
+                  1
+                </Text>
+              </View>
+              <View>
+                <Text>
+                  2000
+                </Text>
+                <Text>
+                  VP Points
+                </Text>
+              </View>
             </View>
+            <View style={styles.horizontalContentStyle}>
+              <View>
+                <TouchableOpacity>
+                  <Text>
+                    5
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text>
+                    Job{'\n'}Pool
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                <TouchableOpacity>
+                  <Text>
+                    5
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text>
+                    Ongoing{'\n'}Jobs
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                <TouchableOpacity>
+                  <Text>
+                    5
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Text>
+                    Completed{'\n'}Jobs
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <TouchableOpacity style={styles.cardStyle}
+                              onPress={onEarningsPress}>
+              <View style={styles.horizontalContentStyle1}>
+                <FontAwesome name='dollar'
+                             size={25}
+                             color={Colors.primaryColor}/>
+                <Text style={styles.cardTitleStyle}>
+                  Total Earnings
+                </Text>
+              </View>
+              <View style={styles.horizontalContentStyle2}>
+                <Text style={styles.earnedAmountStyle}>
+                  {formatNumber(totalEarnings)}
+                </Text>
+                <Text style={styles.unitStyle}>
+                  LKR
+                </Text>
+              </View>
+              <View style={styles.horizontalContentStyle}>
+                <Text style={styles.cardTextStyle}>
+                  View All
+                </Text>
+                <FontAwesome5 name='chevron-circle-right'
+                              size={16}
+                              color={Colors.primaryColor}/>
+              </View>
+            </TouchableOpacity>
           </View>
           <View style={styles.bodyStyle}>
             <View style={styles.listStyle}>
@@ -329,7 +380,7 @@ const styles = StyleSheet.create({
   cardStyle: {
     backgroundColor: Colors.fadedEffectColor,
     borderRadius: hp('5%'),
-    paddingVertical: hp('2%'),
+    paddingVertical: hp('1.5%'),
     paddingHorizontal: wp('20%'),
     marginVertical: hp('3%'),
     alignItems: 'center',
@@ -376,9 +427,6 @@ const styles = StyleSheet.create({
   horizontalContentStyle2: {
     flexDirection: 'row',
     marginBottom: hp('2%')
-  },
-  horizontalContentStyle3: {
-    flexDirection: 'row'
   },
   listStyle: {
     borderRadius: 25,

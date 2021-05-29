@@ -22,8 +22,8 @@ import ProjectListItem from '../../../components/list-items/project/project-list
 
 const CompletedProjectListScreen = props => {
   const [completedProjects, setCompletedProjects] = useState([])
-  const [totalEarnings, setTotalEarnings] = useState([])
-  const [pendingEarnings, setPendingEarnings] = useState([])
+  const [totalEarnings, setTotalEarnings] = useState(0)
+  const [pendingEarnings, setPendingEarnings] = useState(0)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
