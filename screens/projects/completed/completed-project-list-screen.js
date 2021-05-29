@@ -1,5 +1,15 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {
+  ActivityIndicator,
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
@@ -48,10 +58,6 @@ const CompletedProjectListScreen = props => {
     })
   }, [])
 
-  const refreshFunction = async () => {
-    setRefresh(true)
-  }
-
   const renderItemsFunction = itemData => {
     return (
       <ProjectListItem navigation={props.navigation}
@@ -61,54 +67,122 @@ const CompletedProjectListScreen = props => {
     )
   }
 
+  const refreshFunction = async () => {
+    setRefresh(true)
+  }
+
   return (
-    <View style={styles.mainViewStyle}>
-      {
-        completedProjects.length > 0 ? (
-          <View style={styles.listStyle}>
-            <FlatList keyExtractor={(item, index) => index.toString()}
-                      data={completedProjects}
-                      numColumns={1}
-                      renderItem={renderItemsFunction}
-                      refreshControl={
-                        <RefreshControl refreshing={refreshing}
-                                        onRefresh={onRefresh}/>
-                      }/>
-          </View>
-        ) : (
-          <View style={styles.emptyListStyle}>
-            <Ionicons name='warning'
-                      size={80}
-                      color={Colors.tertiaryColor}/>
-            <Text style={styles.errorMessageStyle}>
-              {Constants.EMPTY_LIST}
-            </Text>
-            <TouchableOpacity onPress={refreshFunction}>
-              <Text style={styles.reloadMessageStyle}>
-                Reload?
+    <SafeAreaView>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+        <View style={styles.mainViewStyle}>
+          <View style={styles.headerStyle}>
+            <TouchableOpacity style={styles.cardStyle}>
+              <Text style={styles.cardTitleStyle}>
+                Net Income
               </Text>
+              <View style={styles.horizontalContentStyle}>
+                <Text style={styles.earnedAmountStyle}>
+                  54,000
+                </Text>
+                <Text style={styles.unitStyle}>
+                  LKR
+                </Text>
+              </View>
+              <View style={styles.lineStyle}/>
+              <Text style={styles.cardTitleStyle}>
+                Pending Income
+              </Text>
+              <View style={styles.horizontalContentStyle}>
+                <Text style={styles.earnedAmountStyle}>
+                  54,000
+                </Text>
+                <Text style={styles.unitStyle}>
+                  LKR
+                </Text>
+              </View>
+              <View style={styles.lineStyle}/>
+              <Text style={styles.cardTitleStyle}>
+                Total Top-ups
+              </Text>
+              <View style={styles.horizontalContentStyle}>
+                <Text style={styles.earnedAmountStyle}>
+                  54,000
+                </Text>
+                <Text style={styles.unitStyle}>
+                  LKR
+                </Text>
+              </View>
             </TouchableOpacity>
           </View>
-        )
-      }
-      {
-        loading &&
-        <View style={styles.loadingStyle}>
-          <ActivityIndicator size='large'
-                             color={Colors.secondaryColor}/>
+          <View style={styles.bodyStyle}>
+            <View style={styles.listStyle}>
+              <Text style={styles.sectionTitleStyle}>
+                Completed Jobs
+              </Text>
+              {
+                completedProjects.length > 0 ? (
+                  <FlatList keyExtractor={(item, index) => index.toString()}
+                            data={completedProjects}
+                            numColumns={1}
+                            renderItem={renderItemsFunction}/>
+                ) : (
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )
+              }
+            </View>
+          </View>
+          {
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
+          }
         </View>
-      }
-    </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
+  bodyStyle: {
+    marginTop: hp('2%'),
+    marginBottom: hp('1%'),
+    marginHorizontal: wp('2%')
+  },
+  cardStyle: {
+    backgroundColor: Colors.fadedEffectColor,
+    borderRadius: hp('5%'),
+    alignItems: 'center',
+    paddingVertical: hp('2%'),
+    paddingHorizontal: wp('20%'),
+    marginTop: hp('3%')
+  },
+  cardTitleStyle: {
+    fontSize: 24,
+    marginTop: hp('2%'),
+    marginBottom: hp('1%')
+  },
+  earnedAmountStyle: {
+    fontSize: 50,
+    color: Colors.primaryColor
+  },
   emptyListStyle: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
     alignItems: 'center',
     justifyContent: 'center'
   },
@@ -116,10 +190,26 @@ const styles = StyleSheet.create({
     color: Colors.tertiaryColor,
     fontSize: 18
   },
+  headerStyle: {
+    width: wp('85%'),
+    borderBottomRightRadius: hp('6%'),
+    borderBottomLeftRadius: hp('6%'),
+    alignSelf: 'center'
+  },
+  horizontalContentStyle: {
+    flexDirection: 'row',
+    marginBottom: hp('2%')
+  },
+  lineStyle: {
+    height: 1.5,
+    width: wp('60%'),
+    backgroundColor: Colors.defaultColor,
+    marginVertical: hp('1.5%')
+  },
   listStyle: {
-    width: wp('95%'),
-    marginTop: hp('1%'),
-    marginBottom: hp('7%')
+    borderRadius: 25,
+    paddingVertical: 18,
+    paddingHorizontal: 5
   },
   loadingStyle: {
     position: 'absolute',
@@ -133,13 +223,25 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    alignItems: 'center',
-    minHeight: hp('100%')
+    minHeight: hp('93.6%')
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,
     fontSize: 16,
-    marginTop: hp('1%')
+    marginTop: 10
+  },
+  sectionTitleStyle: {
+    fontSize: 22,
+    marginLeft: wp('4%'),
+    marginTop: hp('1%'),
+    marginBottom: hp('2%')
+  },
+  unitStyle: {
+    color: Colors.primaryColor,
+    fontSize: 30,
+    textAlignVertical: 'bottom',
+    marginLeft: 10,
+    marginBottom: 5
   }
 })
 
@@ -151,7 +253,7 @@ const wait = timeout => {
 
 CompletedProjectListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Completed Jobs',
+    headerTitle: 'My Earnings',
     headerLeft: () => (
       <Menu navigation={navData.navigation}/>
     ),

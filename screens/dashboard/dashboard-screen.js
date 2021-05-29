@@ -127,7 +127,7 @@ const DashboardScreen = props => {
   }
 
   const onEarningsPress = async () => {
-    props.navigation.navigate('Earnings')
+    props.navigation.navigate('CompletedProjectList')
   }
 
   const refreshFunction = async () => {

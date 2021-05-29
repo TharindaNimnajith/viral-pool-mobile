@@ -11,7 +11,6 @@ import NotificationsScreen from '../../screens/notifications/notifications-scree
 import NotificationProjectDetailsScreen from '../../screens/notifications/notification-project-details-screen'
 import ProfileScreen from '../../screens/profile/profile-screen'
 import EditProfileScreen from '../../screens/profile/edit-profile-screen'
-import EarningsScreen from '../../screens/earnings/earnings-screen'
 import IdeaListScreen from '../../screens/ideas/idea-list-screen'
 import AddIdeaScreen from '../../screens/ideas/add-idea-screen'
 import EditIdeaScreen from '../../screens/ideas/edit-idea-screen'
@@ -87,18 +86,6 @@ const OngoingProjectsNavigator = createStackNavigator({
 const CompletedProjectsNavigator = createStackNavigator({
   CompletedProjectList: CompletedProjectListScreen,
   CompletedProjectDetails: CompletedProjectDetailsScreen
-}, {
-  defaultNavigationOptions: {
-    headerTitleAlign: 'center',
-    headerStyle: {
-      backgroundColor: Colors.primaryColor
-    },
-    headerTintColor: Colors.secondaryColor
-  }
-})
-
-const EarningsNavigator = createStackNavigator({
-  Earnings: EarningsScreen
 }, {
   defaultNavigationOptions: {
     headerTitleAlign: 'center',
@@ -187,15 +174,6 @@ const InternalNavigator = createDrawerNavigator({
   },
   CompletedProjects: {
     screen: CompletedProjectsNavigator,
-    navigationOptions: {
-      drawerLabel: 'Completed Jobs',
-      drawerIcon: <Ionicons name='checkmark-done'
-                            size={25}
-                            color={Colors.secondaryColor}/>
-    }
-  },
-  Earnings: {
-    screen: EarningsNavigator,
     navigationOptions: {
       drawerLabel: 'My Earnings',
       drawerIcon: <FontAwesome name='dollar'
