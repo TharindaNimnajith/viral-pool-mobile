@@ -453,60 +453,93 @@ const ProjectDetails = props => {
             <Text style={{
               fontSize: 20,
               fontWeight: 'bold',
-              marginBottom: 10
+              marginBottom: 12
             }}>
               {name}
             </Text>
             <Text style={{
               color: Colors.tertiaryColor,
-              marginBottom: 10
+              marginBottom: 12,
+              fontSize: 16
             }}>
               Created by {createdUserFirstName} {createdUserLastName}
             </Text>
             <View style={{
-              marginBottom: 10
+              marginBottom: 15
             }}>
               <View style={styles.horizontalStyle}>
-                <Text style={styles.titleStyle}>
+                <Text style={{
+                  color: Colors.primaryColor,
+                  fontSize: 20,
+                  fontWeight: 'bold'
+                }}>
                   {formatNumber(amount)} LKR
                 </Text>
-                <Text style={styles.titleStyle}>
-                  {formatNumber(complexity)}
-                </Text>
+                <View style={{
+                  flex: 1,
+                  alignItems: 'flex-end'
+                }}>
+                  <View style={styles.horizontalStyle}>
+                    <View style={{
+                      justifyContent: 'center'
+                    }}>
+                      <Ionicons name='star'
+                                size={17}
+                                color={Colors.primaryColor}/>
+                    </View>
+                    <Text style={{
+                      color: Colors.primaryColor,
+                      fontSize: 20,
+                      fontWeight: 'bold',
+                      textAlign: 'right',
+                      marginLeft: 3
+                    }}>
+                      {formatNumber(complexity)} Points
+                    </Text>
+                  </View>
+                </View>
               </View>
             </View>
-            <View style={styles.horizontalStyle}>
-              {
-                socialMediaPlatformName === socialMediaPlatformNameEnum.Youtube ? (
-                    <Ionicons name='logo-youtube'
-                              size={25}
-                              color={Colors.primaryColor}/>
-                  ) :
-                  socialMediaPlatformName === socialMediaPlatformNameEnum.Facebook ? (
-                    <Ionicons name='logo-facebook'
-                              size={25}
-                              color={Colors.facebookColor}/>
-                  ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Instagram ? (
-                    <Ionicons name='logo-instagram'
-                              size={25}
-                              color={Colors.instagramColor}/>
-                  ) : null
-              }
-              {
-                isContentGivenByStrategyMember ? (
-                  <Text style={styles.contentProvidedStyle}>
-                    Content Provided
-                  </Text>
-                ) : (
-                  <Text style={styles.contentRequiredStyle}>
-                    Content Required
-                  </Text>
-                )
-              }
-              <Text style={styles.titleStyle}>
-                {createdDate.slice(0, 10)}
-              </Text>
-            </View>
+              <View style={styles.horizontalStyle}>
+                <View style={{
+                  width: '30%'
+                }}>
+                  {
+                    socialMediaPlatformName === socialMediaPlatformNameEnum.Youtube ? (
+                        <Ionicons name='logo-youtube'
+                                  size={20}
+                                  color={Colors.primaryColor}/>
+                      ) :
+                      socialMediaPlatformName === socialMediaPlatformNameEnum.Facebook ? (
+                        <Ionicons name='logo-facebook'
+                                  size={20}
+                                  color={Colors.facebookColor}/>
+                      ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Instagram ? (
+                        <Ionicons name='logo-instagram'
+                                  size={20}
+                                  color={Colors.instagramColor}/>
+                      ) : null
+                  }
+                </View>
+                <View style={{
+                  width: '40%'
+                }}>
+                  {
+                    isContentGivenByStrategyMember ? (
+                      <Text style={styles.contentProvidedStyle}>
+                        Content Provided
+                      </Text>
+                    ) : (
+                      <Text style={styles.contentRequiredStyle}>
+                        Content Required
+                      </Text>
+                    )
+                  }
+                </View>
+                <Text style={styles.dateStyle}>
+                  {createdDate.slice(0, 10)}
+                </Text>
+              </View>
           </View>
           {
             description &&
@@ -703,17 +736,22 @@ const styles = StyleSheet.create({
   },
   contentProvidedStyle: {
     color: Colors.successColor,
-    fontSize: 13,
-    flex: 1,
-    alignSelf: 'flex-end',
-    textAlign: 'right'
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 4
   },
   contentRequiredStyle: {
     color: Colors.primaryColor,
-    fontSize: 13,
-    flex: 1,
-    alignSelf: 'flex-end',
-    textAlign: 'right'
+    fontSize: 14,
+    textAlign: 'center',
+    marginTop: 4
+  },
+  dateStyle: {
+    color: Colors.tertiaryColor,
+    fontSize: 14,
+    width: '30%',
+    textAlign: 'right',
+    marginTop: 4
   },
   deleteButtonStyle: {
     marginTop: hp('3%'),
@@ -752,7 +790,7 @@ const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    minHeight: hp('100%')
+    minHeight: hp('93.6%')
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
