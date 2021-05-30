@@ -45,10 +45,8 @@ const ProjectDetails = props => {
   const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(jobAcceptationStatusEnum.Pending)
   const [contentCreatorSubmissionResponses, setContentCreatorSubmissionResponses] = useState([])
-  const [contentSubmissionLink, setContentSubmissionLink] = useState('')
-  const [resultSubmissionLink, setResultSubmissionLink] = useState('')
-  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(false)
-  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(false)
+  const [link, setLink] = useState('')
+  const [id, setId] = useState('')
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
@@ -132,36 +130,62 @@ const ProjectDetails = props => {
     setVisibleReject(false)
   }
 
-  const showDialogContentSubmit = async () => {
+  const showDialogContentSubmit = async (id, link) => {
+    setId(id)
+    setLink(link)
     setVisibleContentSubmit(true)
   }
 
   const hideDialogContentSubmit = async () => {
+    setId('')
+    setLink('')
     setVisibleContentSubmit(false)
   }
 
-  const showDialogContentDelete = async () => {
+  const showDialogContentDelete = async id => {
+    setId(id)
     setVisibleContentDelete(true)
   }
 
   const hideDialogContentDelete = async () => {
+    setId('')
+    setLink('')
     setVisibleContentDelete(false)
   }
 
-  const showDialogResultSubmit = async () => {
+  const showDialogResultSubmit = async (id, link) => {
+    setId(id)
+    setLink(link)
     setVisibleResultSubmit(true)
   }
 
   const hideDialogResultSubmit = async () => {
+    setId('')
+    setLink('')
     setVisibleResultSubmit(false)
   }
 
-  const showDialogResultDelete = async () => {
+  const showDialogResultDelete = async id => {
+    setId(id)
     setVisibleResultDelete(true)
   }
 
   const hideDialogResultDelete = async () => {
+    setId('')
+    setLink('')
     setVisibleResultDelete(false)
+  }
+
+  const onChangeLink = async link => {
+    setLink(link)
+  }
+
+  const setLoadingTrue = async () => {
+    setLoading(true)
+  }
+
+  const setLoadingFalse = async () => {
+    setLoading(false)
   }
 
   const acceptJob = async () => {
@@ -209,11 +233,12 @@ const ProjectDetails = props => {
     })
   }
 
-  const contentSubmit = async () => {
+  const contentSubmit = async (jobId, contentSubmissionLink) => {
     setVisibleContentSubmit(false)
     setLoading(true)
     let data = {
-      id: project.project,
+      strategyId: project.project,
+      id: jobId,
       contentLink: contentSubmissionLink
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
@@ -232,11 +257,12 @@ const ProjectDetails = props => {
     })
   }
 
-  const contentDelete = async () => {
+  const contentDelete = async jobId => {
     setVisibleContentDelete(false)
     setLoading(true)
     let data = {
-      id: project.project,
+      strategyId: project.project,
+      id: jobId,
       contentLink: null
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
@@ -255,11 +281,12 @@ const ProjectDetails = props => {
     })
   }
 
-  const resultSubmit = async () => {
+  const resultSubmit = async (jobId, resultSubmissionLink) => {
     setVisibleResultSubmit(false)
     setLoading(true)
     let data = {
-      id: project.project,
+      strategyId: project.project,
+      id: jobId,
       resultLink: resultSubmissionLink
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
@@ -278,11 +305,12 @@ const ProjectDetails = props => {
     })
   }
 
-  const resultDelete = async () => {
+  const resultDelete = async jobId => {
     setVisibleResultDelete(false)
     setLoading(true)
     let data = {
-      id: project.project,
+      strategyId: project.project,
+      id: jobId,
       resultLink: null
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
@@ -299,40 +327,6 @@ const ProjectDetails = props => {
       await showErrors(error.response.data)
       console.log(error.response.data)
     })
-  }
-
-  const onChangeContentSubmissionLink = async contentSubmissionLink => {
-    setContentSubmissionLinkValid(contentSubmissionLink.trim().length > 0)
-    setContentSubmissionLink(contentSubmissionLink)
-  }
-
-  const onChangeResultSubmissionLink = async resultSubmissionLink => {
-    setResultSubmissionLinkValid(resultSubmissionLink.trim().length > 0)
-    setResultSubmissionLink(resultSubmissionLink)
-  }
-
-  function isDisabledContentSubmit() {
-    return !contentSubmissionLinkValid
-  }
-
-  function isDisabledContentDelete() {
-    return !contentSubmissionLinkValid
-  }
-
-  function isDisabledResultSubmit() {
-    return !resultSubmissionLinkValid
-  }
-
-  function isDisabledResultDelete() {
-    return !resultSubmissionLinkValid
-  }
-
-  const setLoadingTrue = async () => {
-    setLoading(true)
-  }
-
-  const setLoadingFalse = async () => {
-    setLoading(false)
   }
 
   return (
@@ -377,7 +371,7 @@ const ProjectDetails = props => {
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        color={Colors.primaryColor}
-                       onPress={contentSubmit}/>
+                       onPress={contentSubmit(id, link)}/>
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogContentSubmit}/>
@@ -392,7 +386,7 @@ const ProjectDetails = props => {
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        color={Colors.primaryColor}
-                       onPress={contentDelete}/>
+                       onPress={contentDelete(id)}/>
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogContentDelete}/>
@@ -407,7 +401,7 @@ const ProjectDetails = props => {
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        color={Colors.primaryColor}
-                       onPress={resultSubmit}/>
+                       onPress={resultSubmit(id, link)}/>
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogResultSubmit}/>
@@ -422,7 +416,7 @@ const ProjectDetails = props => {
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        color={Colors.primaryColor}
-                       onPress={resultDelete}/>
+                       onPress={resultDelete(id)}/>
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogResultDelete}/>
@@ -600,8 +594,7 @@ const ProjectDetails = props => {
                       Content Submission Link
                     </Text>
                     <TextInput style={styles.textInputStyle}
-                               onChangeText={contentSubmissionLink =>
-                                 onChangeContentSubmissionLink(contentSubmissionLink)}
+                               onChangeText={link => onChangeLink(link)}
                                value={value.contentSubmissionLink}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
@@ -609,10 +602,9 @@ const ProjectDetails = props => {
                     {
                       value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
-                        <TouchableOpacity disabled={isDisabledContentDelete()}
-                                          onPress={showDialogContentDelete}
-                                          style={isDisabledContentDelete() ? styles.buttonDisabledStyle :
-                                            styles.deleteButtonStyle}>
+                        <TouchableOpacity disabled={false}
+                                          onPress={showDialogContentDelete(value.id)}
+                                          style={styles.deleteButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Entypo name='cross'
                                     size={19}
@@ -622,10 +614,9 @@ const ProjectDetails = props => {
                             </Text>
                           </View>
                         </TouchableOpacity>
-                        <TouchableOpacity disabled={isDisabledContentSubmit()}
-                                          onPress={showDialogContentSubmit}
-                                          style={isDisabledContentSubmit() ? styles.buttonDisabledStyle :
-                                            styles.submitButtonStyle}>
+                        <TouchableOpacity disabled={false}
+                                          onPress={showDialogContentSubmit(value.id, value.contentSubmissionLink)}
+                                          style={styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
                                       size={19}
@@ -647,8 +638,7 @@ const ProjectDetails = props => {
                       Result Submission Link
                     </Text>
                     <TextInput style={styles.textInputStyle}
-                               onChangeText={resultSubmissionLink =>
-                                 onChangeResultSubmissionLink(resultSubmissionLink)}
+                               onChangeText={link => onChangeLink(link)}
                                value={value.resultSubmissionLink}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
@@ -656,10 +646,9 @@ const ProjectDetails = props => {
                     {
                       value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
-                        <TouchableOpacity disabled={isDisabledResultDelete()}
-                                          onPress={showDialogResultDelete}
-                                          style={isDisabledResultDelete() ? styles.buttonDisabledStyle :
-                                            styles.deleteButtonStyle}>
+                        <TouchableOpacity disabled={false}
+                                          onPress={showDialogResultDelete(value.id)}
+                                          style={styles.deleteButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Entypo name='cross'
                                     size={19}
@@ -669,10 +658,9 @@ const ProjectDetails = props => {
                             </Text>
                           </View>
                         </TouchableOpacity>
-                        <TouchableOpacity disabled={isDisabledResultSubmit()}
-                                          onPress={showDialogResultSubmit}
-                                          style={isDisabledResultSubmit() ? styles.buttonDisabledStyle :
-                                            styles.submitButtonStyle}>
+                        <TouchableOpacity disabled={false}
+                                          onPress={showDialogResultSubmit(value.id, value.resultSubmissionLink)}
+                                          style={styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
                                       size={19}
