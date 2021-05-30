@@ -246,26 +246,29 @@ const SocialMediaScreen = () => {
     setTiktokUsername(tiktokUsername)
   }
 
-  // const onChangeTiktokUsername = async instagramLink => {
-  //   setInstagramLinkValid(instagramLink.trim().length > 0)
-  //   setInstagramLink(instagramLink)
-  // }
-  //
-  // const onChangeTiktokUsername = async instagramFollowingCount => {
-  //   if (instagramFollowingCount.trim().length > 0)
-  //     setInstagramFollowingCountValid(!isNaN(instagramFollowingCount.trim()))
-  //   else
-  //     setInstagramFollowingCountValid(false)
-  //   setInstagramFollowingCount(instagramFollowingCount)
-  // }
-  //
-  // const onChangeTiktokUsername = async instagramFollowerCount => {
-  //   if (instagramFollowerCount.trim().length > 0)
-  //     setInstagramFollowerCountValid(!isNaN(instagramFollowerCount.trim()))
-  //   else
-  //     setInstagramFollowerCountValid(false)
-  //   setInstagramFollowerCount(instagramFollowerCount)
-  // }
+  const onChangeTiktokVideos = async tiktokVideos => {
+    if (tiktokVideos.trim().length > 0)
+      setTiktokVideosValid(!isNaN(tiktokVideos.trim()))
+    else
+      setTiktokVideosValid(false)
+    setTiktokVideos(tiktokVideos)
+  }
+
+  const onChangeTiktokFollowers = async tiktokFollowers => {
+    if (tiktokFollowers.trim().length > 0)
+      setTiktokFollowersValid(!isNaN(tiktokFollowers.trim()))
+    else
+      setTiktokFollowersValid(false)
+    setTiktokFollowers(tiktokFollowers)
+  }
+
+  const onChangeTiktokTotalLikes = async tiktokTotalLikes => {
+    if (tiktokTotalLikes.trim().length > 0)
+      setTiktokTotalLikesValid(!isNaN(tiktokTotalLikes.trim()))
+    else
+      setTiktokTotalLikesValid(false)
+    setTiktokTotalLikes(tiktokTotalLikes)
+  }
 
   function isDisabledYoutube() {
     return !youtubeChannelIdValid
@@ -281,8 +284,7 @@ const SocialMediaScreen = () => {
   }
 
   function isDisabledTiktok() {
-    return !tiktokUsernameValid || !instagramLinkValid || !instagramFollowerCountValid ||
-      !instagramFollowingCountValid
+    return !tiktokUsernameValid || !tiktokFollowersValid || !tiktokVideosValid || !tiktokTotalLikesValid
   }
 
   const resetYoutube = async () => {
@@ -305,9 +307,9 @@ const SocialMediaScreen = () => {
 
   const resetTiktok = async () => {
     await onChangeTiktokUsername('')
-    await onChangeInstagramLink('')
-    await onChangeInstagramFollowingCount('')
-    await onChangeInstagramFollowerCount('')
+    await onChangeTiktokFollowers('')
+    await onChangeTiktokVideos('')
+    await onChangeTiktokTotalLikes('')
   }
 
   const addYoutube = async () => {
@@ -388,9 +390,9 @@ const SocialMediaScreen = () => {
     setLoading(true)
     const data = {
       username: tiktokUsername.trim(),
-      totalLikes: instagramLink.trim(),
-      videos: instagramFollowingCount.trim(),
-      followers: instagramFollowerCount.trim()
+      totalLikes: tiktokTotalLikes.trim(),
+      videos: tiktokVideos.trim(),
+      followers: tiktokFollowers.trim()
     }
     axios.post('cc-social-media/ticktok/add-profile', data).then(async response => {
       setLoading(false)
@@ -536,26 +538,26 @@ const SocialMediaScreen = () => {
                         value={tiktokUsername}
                         placeholder='Enter Account Username'
                         placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Account Link'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={instagramLink => onChangeInstagramLink(instagramLink)}
-                        value={instagramLink}
-                        placeholder='Enter Account Link'
-                        placeholderTextColor={Colors.tertiaryColor}/>
           <Dialog.Input label='Followers Count'
                         style={styles.textInputStyle}
                         wrapperStyle={styles.wrapperStyle}
-                        onChangeText={instagramFollowerCount => onChangeInstagramFollowerCount(instagramFollowerCount)}
-                        value={instagramFollowerCount}
+                        onChangeText={tiktokFollowers => onChangeTiktokFollowers(tiktokFollowers)}
+                        value={tiktokFollowers}
                         placeholder='Enter Followers Count'
                         placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Following Count'
+          <Dialog.Input label='Videos Count'
                         style={styles.textInputStyle}
                         wrapperStyle={styles.wrapperStyle}
-                        onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
-                        value={instagramFollowingCount}
-                        placeholder='Enter Following Count'
+                        onChangeText={tiktokVideos => onChangeTiktokVideos(tiktokVideos)}
+                        value={tiktokVideos}
+                        placeholder='Enter Videos Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Likes Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokTotalLikes => onChangeTiktokTotalLikes(tiktokTotalLikes)}
+                        value={tiktokTotalLikes}
+                        placeholder='Enter Likes Count'
                         placeholderTextColor={Colors.tertiaryColor}/>
           <Dialog.Button label='Submit'
                          color={isDisabledTiktok() ? Colors.tertiaryColor : Colors.primaryColor}

@@ -70,18 +70,26 @@ const TiktokListItem = props => {
                 </Text>
                 <View style={styles.horizontalStyle}>
                   <Text style={styles.statTitleStyle}>
-                    Following
+                    Followers
                   </Text>
                   <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.followsCount)}
+                    {formatNumber(props.itemData.item.followers)}
                   </Text>
                 </View>
                 <View style={styles.horizontalStyle}>
                   <Text style={styles.statTitleStyle}>
-                    Followers
+                    Videos
                   </Text>
                   <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.followersCount)}
+                    {formatNumber(props.itemData.item.videos)}
+                  </Text>
+                </View>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Likes
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.totalLikes)}
                   </Text>
                 </View>
               </View>
