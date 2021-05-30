@@ -1,6 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
+  Image,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -474,9 +475,8 @@ const ProjectDetails = props => {
                                 size={20}
                                 color={Colors.instagramColor}/>
                     ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Tiktok ? (
-                      <Ionicons name='logo-instagram'
-                                size={20}
-                                color={Colors.defaultColor}/>
+                      <Image style={styles.tiktokStyle}
+                             source={require('../../assets/tiktok-logo.png')}/>
                     ) : null
                 }
               </View>
@@ -532,7 +532,7 @@ const ProjectDetails = props => {
             jobAcceptationStatus === jobAcceptationStatusEnum.Pending &&
             <View style={styles.centerViewStyle}>
               <View style={styles.horizontalStyle}>
-                <TouchableOpacity style={styles.deleteButtonStyle}
+                <TouchableOpacity style={styles.rejectButtonStyle}
                                   onPress={showDialogReject}>
                   <View style={styles.horizontalStyle}>
                     <Entypo name='cross'
@@ -563,6 +563,36 @@ const ProjectDetails = props => {
             contentCreatorSubmissionResponses.map(value =>
               <View key={value.id}
                     style={styles.submissionViewStyle}>
+                <View style={styles.headerStyle}>
+                  <View style={styles.horizontalStyle}>
+                    <View style={styles.iconViewStyle}>
+                      <Image style={styles.avatarStyle}
+                             source={{
+                               uri: value.socialMediaAccountResponse.profileImage
+                             }}/>
+                    </View>
+                    <Text style={styles.nameStyle}>
+                      {value.socialMediaAccountResponse.profileName}
+                    </Text>
+                    <View>
+                      {
+                        value.isPaid ? (
+                          <View style={styles.statusPaidStyle}>
+                            <Text style={styles.statusTextStyle}>
+                              Paid
+                            </Text>
+                          </View>
+                        ) : (
+                          <View style={styles.statusNotPaidStyle}>
+                            <Text style={styles.statusTextStyle}>
+                              Not Paid
+                            </Text>
+                          </View>
+                        )
+                      }
+                    </View>
+                  </View>
+                </View>
                 {
                   !isContentGivenByStrategyMember &&
                   <View style={styles.centerViewStyle}>
@@ -595,7 +625,7 @@ const ProjectDetails = props => {
                         <TouchableOpacity disabled={isDisabledContentSubmit()}
                                           onPress={showDialogContentSubmit}
                                           style={isDisabledContentSubmit() ? styles.buttonDisabledStyle :
-                                            styles.acceptButtonStyle}>
+                                            styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
                                       size={19}
@@ -642,7 +672,7 @@ const ProjectDetails = props => {
                         <TouchableOpacity disabled={isDisabledResultSubmit()}
                                           onPress={showDialogResultSubmit}
                                           style={isDisabledResultSubmit() ? styles.buttonDisabledStyle :
-                                            styles.acceptButtonStyle}>
+                                            styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
                                       size={19}
@@ -682,6 +712,11 @@ const styles = StyleSheet.create({
     width: wp('40%'),
     borderRadius: 5
   },
+  avatarStyle: {
+    width: 56,
+    height: 56,
+    borderRadius: 28
+  },
   amountStyle: {
     color: Colors.primaryColor,
     fontSize: 20,
@@ -693,7 +728,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
     padding: 8,
-    width: wp('40%'),
+    width: wp('38%'),
     borderRadius: 5
   },
   buttonTextStyle: {
@@ -710,13 +745,13 @@ const styles = StyleSheet.create({
     color: Colors.successColor,
     fontSize: 14,
     textAlign: 'center',
-    marginTop: 4
+    marginTop: 2
   },
   contentRequiredStyle: {
     color: Colors.primaryColor,
     fontSize: 14,
     textAlign: 'center',
-    marginTop: 4
+    marginTop: 2
   },
   contentStatusStyle: {
     width: '40%'
@@ -731,7 +766,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     width: '30%',
     textAlign: 'right',
-    marginTop: 4
+    marginTop: 2
   },
   deleteButtonStyle: {
     marginTop: hp('3%'),
@@ -739,7 +774,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
     padding: 8,
-    width: wp('40%'),
+    width: wp('38%'),
     borderRadius: 5
   },
   fileStyle: {
@@ -749,14 +784,24 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 10
   },
+  headerStyle: {
+    marginTop: 5,
+    marginBottom: 27,
+    marginLeft: 5
+  },
   horizontalStyle: {
     flexDirection: 'row'
   },
+  iconViewStyle: {
+    width: '20%',
+    alignSelf: 'center',
+    alignItems: 'center'
+  },
   labelStyle: {
-    marginTop: 20,
+    marginTop: 5,
     color: Colors.primaryColor,
     alignSelf: 'baseline',
-    marginLeft: wp('8%')
+    marginLeft: wp('4%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -771,6 +816,12 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
     minHeight: hp('93.6%')
+  },
+  nameStyle: {
+    width: '52%',
+    alignSelf: 'center',
+    marginLeft: 5,
+    fontSize: 20
   },
   pointsIconStyle: {
     justifyContent: 'center'
@@ -791,8 +842,17 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 12
   },
+  rejectButtonStyle: {
+    marginTop: hp('3%'),
+    marginHorizontal: 7,
+    backgroundColor: Colors.primaryColor,
+    alignItems: 'center',
+    padding: 8,
+    width: wp('40%'),
+    borderRadius: 5
+  },
   rewardsViewStyle: {
-    marginBottom: 15
+    marginBottom: 16
   },
   sampleViewStyle: {
     marginHorizontal: wp('6%'),
@@ -806,23 +866,54 @@ const styles = StyleSheet.create({
   socialMediaIconStyle: {
     width: '30%'
   },
+  statusNotPaidStyle: {
+    backgroundColor: Colors.primaryColor,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10
+  },
+  statusPaidStyle: {
+    backgroundColor: Colors.successColor,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    borderRadius: 10
+  },
+  statusTextStyle: {
+    color: Colors.secondaryColor,
+    fontSize: 16
+  },
   submissionViewStyle: {
     backgroundColor: Colors.fadedEffectColor,
-    marginVertical: hp('1.5%'),
+    marginTop: hp('1%'),
+    marginBottom: hp('2%'),
     marginHorizontal: wp('6%'),
     borderRadius: 20,
-    paddingVertical: 15,
-    paddingHorizontal: 20
+    paddingTop: 20
+  },
+  submitButtonStyle: {
+    marginTop: hp('3%'),
+    marginHorizontal: 7,
+    backgroundColor: Colors.successColor,
+    alignItems: 'center',
+    padding: 8,
+    width: wp('38%'),
+    borderRadius: 5
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
-    width: wp('84%'),
+    width: wp('80%'),
     borderWidth: 1,
     borderRadius: 5,
     height: 40,
     marginTop: 10,
     padding: 10,
     color: Colors.tertiaryColor
+  },
+  tiktokStyle: {
+    width: wp('7%'),
+    height: wp('7%'),
+    marginLeft: -wp('0.5%'),
+    marginBottom: -5
   },
   titleStyle: {
     color: Colors.primaryColor,
