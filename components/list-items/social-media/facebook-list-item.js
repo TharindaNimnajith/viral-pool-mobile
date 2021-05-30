@@ -35,7 +35,6 @@ const FacebookListItem = props => {
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
-      props.itemData.item.refresh()
       props.loadingFunctionFalse()
       props.refreshFunction()
       await showErrors(error.response.data)

@@ -44,14 +44,10 @@ const ProjectDetails = props => {
   const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(jobAcceptationStatusEnum.Pending)
   const [contentCreatorSubmissionResponses, setContentCreatorSubmissionResponses] = useState([])
-
   const [contentSubmissionLink, setContentSubmissionLink] = useState('')
   const [resultSubmissionLink, setResultSubmissionLink] = useState('')
-  const [contentSubmissionStatus, setContentSubmissionStatus] = useState(contentSubmissionStatusEnum.Default)
-  const [resultSubmissionStatus, setResultSubmissionStatus] = useState(resultSubmissionStatusEnum.Default)
   const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(false)
   const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(false)
-
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
@@ -81,15 +77,6 @@ const ProjectDetails = props => {
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentCreatorSubmissionResponses(response.data.data.contentCreatorSubmissionResponses)
-
-        setContentSubmissionLink(response.data.data.contentSubmissionLink)
-        setResultSubmissionLink(response.data.data.resultSubmissionLink)
-        setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
-        setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
-        setContentSubmissionLinkValid(response.data.data.contentSubmissionStatus !==
-          contentSubmissionStatusEnum.Default)
-        setResultSubmissionLinkValid(response.data.data.resultSubmissionStatus !==
-          contentSubmissionStatusEnum.Default)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -116,15 +103,6 @@ const ProjectDetails = props => {
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentCreatorSubmissionResponses(response.data.data.contentCreatorSubmissionResponses)
-
-        setContentSubmissionLink(response.data.data.contentSubmissionLink)
-        setResultSubmissionLink(response.data.data.resultSubmissionLink)
-        setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
-        setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
-        setContentSubmissionLinkValid(response.data.data.contentSubmissionStatus !==
-          contentSubmissionStatusEnum.Default)
-        setResultSubmissionLinkValid(response.data.data.resultSubmissionStatus !==
-          contentSubmissionStatusEnum.Default)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -580,12 +558,12 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
-            jobAcceptationStatus === jobAcceptationStatusEnum.Completed &&
+            (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted ||
+              jobAcceptationStatus === jobAcceptationStatusEnum.Completed) &&
             contentCreatorSubmissionResponses.map(value =>
               <View key={value.id}>
                 {
-                  // jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && !isContentGivenByStrategyMember &&
+                  !isContentGivenByStrategyMember &&
                   <View style={styles.centerViewStyle}>
                     <Text style={styles.labelStyle}>
                       Content Submission Link
@@ -596,9 +574,9 @@ const ProjectDetails = props => {
                                value={contentSubmissionLink}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
-                               editable={contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
+                               editable={value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
                     {
-                      // contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
+                      value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
                         <TouchableOpacity disabled={isDisabledContentDelete()}
                                           onPress={showDialogContentDelete}
@@ -631,9 +609,8 @@ const ProjectDetails = props => {
                   </View>
                 }
                 {
-                  // ((jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && isContentGivenByStrategyMember) ||
-                  //   (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
-                  //     contentSubmissionStatus === contentSubmissionStatusEnum.Approved)) &&
+                  isContentGivenByStrategyMember ||
+                  value.contentSubmissionStatus === contentSubmissionStatusEnum.Approved &&
                   <View style={styles.centerViewStyle}>
                     <Text style={styles.labelStyle}>
                       Result Submission Link
@@ -644,9 +621,9 @@ const ProjectDetails = props => {
                                value={resultSubmissionLink}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
-                               editable={resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
+                               editable={value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
                     {
-                      // resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
+                      value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
                         <TouchableOpacity disabled={isDisabledResultDelete()}
                                           onPress={showDialogResultDelete}

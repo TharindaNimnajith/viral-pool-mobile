@@ -35,7 +35,6 @@ const YoutubeListItem = props => {
       else
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
-      props.itemData.item.refresh()
       props.loadingFunctionFalse()
       await showErrors(error.response.data)
       props.refreshFunction()
