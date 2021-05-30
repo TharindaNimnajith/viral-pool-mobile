@@ -176,10 +176,6 @@ const ProjectDetails = props => {
     setVisibleResultDelete(false)
   }
 
-  const onChangeLink = async link => {
-    setLink(link)
-  }
-
   const setLoadingTrue = async () => {
     setLoading(true)
   }
@@ -602,7 +598,6 @@ const ProjectDetails = props => {
                       Content Submission Link
                     </Text>
                     <TextInput style={styles.textInputStyle}
-                               onChangeText={link => onChangeLink(link)}
                                value={value.contentSubmissionLink}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
@@ -623,7 +618,7 @@ const ProjectDetails = props => {
                           </View>
                         </TouchableOpacity>
                         <TouchableOpacity disabled={false}
-                                          onPress={showDialogContentSubmit(value.id, 'value.contentSubmissionLink')}
+                                          onPress={showDialogContentSubmit(value.id, value.contentSubmissionLink)}
                                           style={styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
@@ -646,7 +641,6 @@ const ProjectDetails = props => {
                       Result Submission Link
                     </Text>
                     <TextInput style={styles.textInputStyle}
-                               onChangeText={link => onChangeLink(link)}
                                value={value.resultSubmissionLink}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
@@ -667,7 +661,7 @@ const ProjectDetails = props => {
                           </View>
                         </TouchableOpacity>
                         <TouchableOpacity disabled={false}
-                                          onPress={showDialogResultSubmit(value.id, 'value.resultSubmissionLink')}
+                                          onPress={showDialogResultSubmit(value.id, value.resultSubmissionLink)}
                                           style={styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
