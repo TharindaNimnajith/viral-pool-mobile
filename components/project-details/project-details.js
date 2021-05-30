@@ -512,7 +512,7 @@ const ProjectDetails = props => {
           }
           {
             projectFileResponses.length > 0 &&
-            <View style={styles.viewStyle}>
+            <View style={styles.sampleViewStyle}>
               <Text style={styles.titleStyle}>
                 Samples
               </Text>
@@ -561,7 +561,8 @@ const ProjectDetails = props => {
             (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted ||
               jobAcceptationStatus === jobAcceptationStatusEnum.Completed) &&
             contentCreatorSubmissionResponses.map(value =>
-              <View key={value.id}>
+              <View key={value.id}
+                    style={styles.submissionViewStyle}>
                 {
                   !isContentGivenByStrategyMember &&
                   <View style={styles.centerViewStyle}>
@@ -571,7 +572,7 @@ const ProjectDetails = props => {
                     <TextInput style={styles.textInputStyle}
                                onChangeText={contentSubmissionLink =>
                                  onChangeContentSubmissionLink(contentSubmissionLink)}
-                               value={contentSubmissionLink}
+                               value={value.contentSubmissionLink}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
                                editable={value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
@@ -609,8 +610,8 @@ const ProjectDetails = props => {
                   </View>
                 }
                 {
-                  isContentGivenByStrategyMember ||
-                  value.contentSubmissionStatus === contentSubmissionStatusEnum.Approved &&
+                  (isContentGivenByStrategyMember ||
+                    value.contentSubmissionStatus === contentSubmissionStatusEnum.Approved) &&
                   <View style={styles.centerViewStyle}>
                     <Text style={styles.labelStyle}>
                       Result Submission Link
@@ -618,7 +619,7 @@ const ProjectDetails = props => {
                     <TextInput style={styles.textInputStyle}
                                onChangeText={resultSubmissionLink =>
                                  onChangeResultSubmissionLink(resultSubmissionLink)}
-                               value={resultSubmissionLink}
+                               value={value.resultSubmissionLink}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
                                editable={value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
@@ -793,8 +794,25 @@ const styles = StyleSheet.create({
   rewardsViewStyle: {
     marginBottom: 15
   },
+  sampleViewStyle: {
+    marginHorizontal: wp('6%'),
+    marginTop: hp('2.5%'),
+    marginBottom: hp('1.5%'),
+    backgroundColor: Colors.fadedEffectColor,
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 20
+  },
   socialMediaIconStyle: {
     width: '30%'
+  },
+  submissionViewStyle: {
+    backgroundColor: Colors.fadedEffectColor,
+    marginVertical: hp('1.5%'),
+    marginHorizontal: wp('6%'),
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 20
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
