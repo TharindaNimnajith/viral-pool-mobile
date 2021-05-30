@@ -43,9 +43,9 @@ const SocialMediaScreen = () => {
   const [instagramFollowingCount, setInstagramFollowingCount] = useState('')
   const [instagramFollowerCount, setInstagramFollowerCount] = useState('')
   const [tiktokUsername, setTiktokUsername] = useState('')
-  // const [tiktok, setTiktok] = useState('')
-  // const [tiktok, setTiktok] = useState('')
-  // const [tiktok, setTiktok] = useState('')
+  const [tiktokTotalLikes, setTiktokTotalLikes] = useState('')
+  const [tiktokVideos, setTiktokVideos] = useState('')
+  const [tiktokFollowers, setTiktokFollowers] = useState('')
   const [youtubeChannelIdValid, setYoutubeChannelIdValid] = useState(false)
   const [facebookPageIdValid, setFacebookPageIdValid] = useState(false)
   const [facebookPageNameValid, setFacebookPageNameValid] = useState(false)
@@ -56,9 +56,9 @@ const SocialMediaScreen = () => {
   const [instagramFollowingCountValid, setInstagramFollowingCountValid] = useState(false)
   const [instagramFollowerCountValid, setInstagramFollowerCountValid] = useState(false)
   const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
-  // const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
-  // const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
-  // const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
+  const [tiktokTotalLikesValid, setTiktokTotalLikesValid] = useState(false)
+  const [tiktokVideosValid, setTiktokVideosValid] = useState(false)
+  const [tiktokFollowersValid, setTiktokFollowersValid] = useState(false)
   const [visibleYoutube, setVisibleYoutube] = useState(false)
   const [visibleFacebook, setVisibleFacebook] = useState(false)
   const [visibleInstagram, setVisibleInstagram] = useState(false)
@@ -76,8 +76,7 @@ const SocialMediaScreen = () => {
         setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
         setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
         setInstagramAccounts(response.data.data.ccInstagramPageProfiles)
-        // setTiktokAccounts(response.data.data.ccTiktokPageProfiles)
-        setTiktokAccounts(response.data.data.ccInstagramPageProfiles)
+        setTiktokAccounts(response.data.data.ccTickToks)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -95,8 +94,7 @@ const SocialMediaScreen = () => {
         setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
         setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
         setInstagramAccounts(response.data.data.ccInstagramPageProfiles)
-        // setTiktokAccounts(response.data.data.ccTiktokPageProfiles)
-        setTiktokAccounts(response.data.data.ccInstagramPageProfiles)
+        setTiktokAccounts(response.data.data.ccTickToks)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -390,11 +388,11 @@ const SocialMediaScreen = () => {
     setLoading(true)
     const data = {
       username: tiktokUsername.trim(),
-      link: instagramLink.trim(),
-      followsCount: instagramFollowingCount.trim(),
-      followersCount: instagramFollowerCount.trim()
+      totalLikes: instagramLink.trim(),
+      videos: instagramFollowingCount.trim(),
+      followers: instagramFollowerCount.trim()
     }
-    axios.post('cc-social-media/tiktok/add-profile', data).then(async response => {
+    axios.post('cc-social-media/ticktok/add-profile', data).then(async response => {
       setLoading(false)
       setRefresh(true)
       if (response.status === 200) {

@@ -23,11 +23,7 @@ const TiktokListItem = props => {
   const deleteAccount = async () => {
     setVisible(false)
     props.loadingFunctionTrue()
-    const data = {
-      id: props.itemData.item.id,
-      link: props.itemData.item.link
-    }
-    axios.post('cc-social-media/tiktok/deactivate', data).then(async response => {
+    axios.post('cc-social-media/ticktok/deactivate', props.itemData.item).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200)

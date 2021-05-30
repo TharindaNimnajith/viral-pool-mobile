@@ -580,6 +580,8 @@ const ProjectDetails = props => {
             </View>
           }
           {
+            jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
+            jobAcceptationStatus === jobAcceptationStatusEnum.Completed &&
             contentCreatorSubmissionResponses.map(value =>
               <View key={value.id}>
                 {
