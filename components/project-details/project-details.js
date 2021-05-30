@@ -51,9 +51,11 @@ const ProjectDetails = props => {
   const [visibleResultSubmit, setVisibleResultSubmit] = useState(false)
   const [visibleResultDelete, setVisibleResultDelete] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
     setLoading(true)
+    setRefresh(false)
     project.refresh()
     axios.get(`project-cc-strategy/${project.project}`).then(async response => {
       setLoading(false)
@@ -86,7 +88,7 @@ const ProjectDetails = props => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
-  }, [])
+  }, [refresh])
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
@@ -181,6 +183,7 @@ const ProjectDetails = props => {
     axios.put('project-cc-strategy/accept', data).then(async response => {
       project.refresh()
       setLoading(false)
+      setRefresh(true)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.ACCEPTED)
       else
@@ -216,7 +219,7 @@ const ProjectDetails = props => {
     })
   }
 
-  const contentSubmit = async () => {
+  const contentSubmit = async contentSubmissionLink => {
     setVisibleContentSubmit(false)
     setLoading(true)
     let data = {
@@ -226,6 +229,7 @@ const ProjectDetails = props => {
     axios.put('project-cc-strategy/content-link', data).then(async response => {
       project.refresh()
       setLoading(false)
+      setRefresh(true)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       else
@@ -248,6 +252,7 @@ const ProjectDetails = props => {
     axios.put('project-cc-strategy/content-link', data).then(async response => {
       project.refresh()
       setLoading(false)
+      setRefresh(true)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
       else
@@ -260,7 +265,7 @@ const ProjectDetails = props => {
     })
   }
 
-  const resultSubmit = async () => {
+  const resultSubmit = async resultSubmissionLink => {
     setVisibleResultSubmit(false)
     setLoading(true)
     let data = {
@@ -270,6 +275,7 @@ const ProjectDetails = props => {
     axios.put('project-cc-strategy/result-link', data).then(async response => {
       project.refresh()
       setLoading(false)
+      setRefresh(true)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       else
@@ -292,6 +298,7 @@ const ProjectDetails = props => {
     axios.put('project-cc-strategy/result-link', data).then(async response => {
       project.refresh()
       setLoading(false)
+      setRefresh(true)
       if (response.status === 200)
         await showAlert(Constants.SUCCESS, Constants.DELETED)
       else
