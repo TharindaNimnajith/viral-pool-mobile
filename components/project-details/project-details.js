@@ -176,6 +176,12 @@ const ProjectDetails = props => {
     setVisibleResultDelete(false)
   }
 
+  function isDisabled(link) {
+    if (link !== null)
+      return !link.trim().length > 0
+    return true
+  }
+
   const setLoadingTrue = async () => {
     setLoading(true)
   }
@@ -605,9 +611,10 @@ const ProjectDetails = props => {
                     {
                       value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
-                        <TouchableOpacity disabled={false}
+                        <TouchableOpacity disabled={isDisabled(value.contentSubmissionStatus)}
                                           onPress={showDialogContentDelete(value.id)}
-                                          style={styles.deleteButtonStyle}>
+                                          style={isDisabled(value.contentSubmissionStatus) ?
+                                            styles.buttonDisabledStyle : styles.deleteButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Entypo name='cross'
                                     size={19}
@@ -617,9 +624,10 @@ const ProjectDetails = props => {
                             </Text>
                           </View>
                         </TouchableOpacity>
-                        <TouchableOpacity disabled={false}
+                        <TouchableOpacity disabled={isDisabled(value.contentSubmissionStatus)}
                                           onPress={showDialogContentSubmit(value.id, value.contentSubmissionLink)}
-                                          style={styles.submitButtonStyle}>
+                                          style={isDisabled(value.contentSubmissionStatus) ?
+                                            styles.buttonDisabledStyle : styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
                                       size={19}
@@ -648,9 +656,10 @@ const ProjectDetails = props => {
                     {
                       value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
-                        <TouchableOpacity disabled={false}
+                        <TouchableOpacity disabled={isDisabled(value.resultSubmissionLink)}
                                           onPress={showDialogResultDelete(value.id)}
-                                          style={styles.deleteButtonStyle}>
+                                          style={isDisabled(value.resultSubmissionLink) ?
+                                            styles.buttonDisabledStyle : styles.deleteButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Entypo name='cross'
                                     size={19}
@@ -660,9 +669,10 @@ const ProjectDetails = props => {
                             </Text>
                           </View>
                         </TouchableOpacity>
-                        <TouchableOpacity disabled={false}
+                        <TouchableOpacity disabled={isDisabled(value.resultSubmissionLink)}
                                           onPress={showDialogResultSubmit(value.id, value.resultSubmissionLink)}
-                                          style={styles.submitButtonStyle}>
+                                          style={isDisabled(value.resultSubmissionLink) ?
+                                            styles.buttonDisabledStyle : styles.deleteButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
                                       size={19}
