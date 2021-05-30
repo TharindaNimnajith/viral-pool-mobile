@@ -450,50 +450,25 @@ const ProjectDetails = props => {
       }>
         <View style={styles.mainViewStyle}>
           <View style={styles.viewStyle}>
-            <Text style={{
-              fontSize: 20,
-              fontWeight: 'bold',
-              marginBottom: 12
-            }}>
+            <Text style={styles.projectNameStyle}>
               {name}
             </Text>
-            <Text style={{
-              color: Colors.tertiaryColor,
-              marginBottom: 12,
-              fontSize: 16
-            }}>
+            <Text style={styles.creatorStyle}>
               Created by {createdUserFirstName} {createdUserLastName}
             </Text>
-            <View style={{
-              marginBottom: 15
-            }}>
+            <View style={styles.rewardsViewStyle}>
               <View style={styles.horizontalStyle}>
-                <Text style={{
-                  color: Colors.primaryColor,
-                  fontSize: 20,
-                  fontWeight: 'bold'
-                }}>
+                <Text style={styles.amountStyle}>
                   {formatNumber(amount)} LKR
                 </Text>
-                <View style={{
-                  flex: 1,
-                  alignItems: 'flex-end'
-                }}>
+                <View style={styles.pointsStyle}>
                   <View style={styles.horizontalStyle}>
-                    <View style={{
-                      justifyContent: 'center'
-                    }}>
+                    <View style={styles.pointsIconStyle}>
                       <Ionicons name='star'
                                 size={17}
                                 color={Colors.primaryColor}/>
                     </View>
-                    <Text style={{
-                      color: Colors.primaryColor,
-                      fontSize: 20,
-                      fontWeight: 'bold',
-                      textAlign: 'right',
-                      marginLeft: 3
-                    }}>
+                    <Text style={styles.pointsTextStyle}>
                       {formatNumber(complexity)} Points
                     </Text>
                   </View>
@@ -501,9 +476,7 @@ const ProjectDetails = props => {
               </View>
             </View>
             <View style={styles.horizontalStyle}>
-              <View style={{
-                width: '30%'
-              }}>
+              <View style={styles.socialMediaIconStyle}>
                 {
                   socialMediaPlatformName === socialMediaPlatformNameEnum.Youtube ? (
                       <Ionicons name='logo-youtube'
@@ -521,9 +494,7 @@ const ProjectDetails = props => {
                     ) : null
                 }
               </View>
-              <View style={{
-                width: '40%'
-              }}>
+              <View style={styles.contentStatusStyle}>
                 {
                   isContentGivenByStrategyMember ? (
                     <Text style={styles.contentProvidedStyle}>
@@ -572,7 +543,7 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            // jobAcceptationStatus === jobAcceptationStatusEnum.Pending &&
+            jobAcceptationStatus === jobAcceptationStatusEnum.Pending &&
             <View style={styles.centerViewStyle}>
               <View style={styles.horizontalStyle}>
                 <TouchableOpacity style={styles.deleteButtonStyle}
@@ -601,96 +572,104 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            // jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && !isContentGivenByStrategyMember &&
-            <View style={styles.centerViewStyle}>
-              <Text style={styles.labelStyle}>
-                Content Submission Link
-              </Text>
-              <TextInput style={styles.textInputStyle}
-                         onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
-                         value={contentSubmissionLink}
-                         placeholder='Paste Link Here'
-                         placeholderTextColor={Colors.tertiaryColor}
-                         editable={contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
-              {
-                // contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
-                <View style={styles.horizontalStyle}>
-                  <TouchableOpacity disabled={isDisabledContentDelete()}
-                                    onPress={showDialogContentDelete}
-                                    style={isDisabledContentDelete() ? styles.buttonDisabledStyle :
-                                      styles.deleteButtonStyle}>
-                    <View style={styles.horizontalStyle}>
-                      <Entypo name='cross'
-                              size={19}
-                              color={Colors.secondaryColor}/>
-                      <Text style={styles.buttonTextStyle}>
-                        Delete
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity disabled={isDisabledContentSubmit()}
-                                    onPress={showDialogContentSubmit}
-                                    style={isDisabledContentSubmit() ? styles.buttonDisabledStyle :
-                                      styles.acceptButtonStyle}>
-                    <View style={styles.horizontalStyle}>
-                      <Ionicons name='checkmark'
-                                size={19}
-                                color={Colors.secondaryColor}/>
-                      <Text style={styles.buttonTextStyle}>
-                        Submit
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              }
-            </View>
-          }
-          {
-            // ((jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && isContentGivenByStrategyMember) ||
-            //   (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
-            //     contentSubmissionStatus === contentSubmissionStatusEnum.Approved)) &&
-            <View style={styles.centerViewStyle}>
-              <Text style={styles.labelStyle}>
-                Result Submission Link
-              </Text>
-              <TextInput style={styles.textInputStyle}
-                         onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
-                         value={resultSubmissionLink}
-                         placeholder='Paste Link Here'
-                         placeholderTextColor={Colors.tertiaryColor}
-                         editable={resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
-              {
-                // resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
-                <View style={styles.horizontalStyle}>
-                  <TouchableOpacity disabled={isDisabledResultDelete()}
-                                    onPress={showDialogResultDelete}
-                                    style={isDisabledResultDelete() ? styles.buttonDisabledStyle :
-                                      styles.deleteButtonStyle}>
-                    <View style={styles.horizontalStyle}>
-                      <Entypo name='cross'
-                              size={19}
-                              color={Colors.secondaryColor}/>
-                      <Text style={styles.buttonTextStyle}>
-                        Delete
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                  <TouchableOpacity disabled={isDisabledResultSubmit()}
-                                    onPress={showDialogResultSubmit}
-                                    style={isDisabledResultSubmit() ? styles.buttonDisabledStyle :
-                                      styles.acceptButtonStyle}>
-                    <View style={styles.horizontalStyle}>
-                      <Ionicons name='checkmark'
-                                size={19}
-                                color={Colors.secondaryColor}/>
-                      <Text style={styles.buttonTextStyle}>
-                        Submit
-                      </Text>
-                    </View>
-                  </TouchableOpacity>
-                </View>
-              }
-            </View>
+            contentCreatorSubmissionResponses.map(value =>
+              <View key={value.id}>
+                {
+                  // jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && !isContentGivenByStrategyMember &&
+                  <View style={styles.centerViewStyle}>
+                    <Text style={styles.labelStyle}>
+                      Content Submission Link
+                    </Text>
+                    <TextInput style={styles.textInputStyle}
+                               onChangeText={contentSubmissionLink =>
+                                 onChangeContentSubmissionLink(contentSubmissionLink)}
+                               value={contentSubmissionLink}
+                               placeholder='Paste Link Here'
+                               placeholderTextColor={Colors.tertiaryColor}
+                               editable={contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
+                    {
+                      // contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
+                      <View style={styles.horizontalStyle}>
+                        <TouchableOpacity disabled={isDisabledContentDelete()}
+                                          onPress={showDialogContentDelete}
+                                          style={isDisabledContentDelete() ? styles.buttonDisabledStyle :
+                                            styles.deleteButtonStyle}>
+                          <View style={styles.horizontalStyle}>
+                            <Entypo name='cross'
+                                    size={19}
+                                    color={Colors.secondaryColor}/>
+                            <Text style={styles.buttonTextStyle}>
+                              Delete
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity disabled={isDisabledContentSubmit()}
+                                          onPress={showDialogContentSubmit}
+                                          style={isDisabledContentSubmit() ? styles.buttonDisabledStyle :
+                                            styles.acceptButtonStyle}>
+                          <View style={styles.horizontalStyle}>
+                            <Ionicons name='checkmark'
+                                      size={19}
+                                      color={Colors.secondaryColor}/>
+                            <Text style={styles.buttonTextStyle}>
+                              Submit
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                    }
+                  </View>
+                }
+                {
+                  // ((jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && isContentGivenByStrategyMember) ||
+                  //   (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
+                  //     contentSubmissionStatus === contentSubmissionStatusEnum.Approved)) &&
+                  <View style={styles.centerViewStyle}>
+                    <Text style={styles.labelStyle}>
+                      Result Submission Link
+                    </Text>
+                    <TextInput style={styles.textInputStyle}
+                               onChangeText={resultSubmissionLink =>
+                                 onChangeResultSubmissionLink(resultSubmissionLink)}
+                               value={resultSubmissionLink}
+                               placeholder='Paste Link Here'
+                               placeholderTextColor={Colors.tertiaryColor}
+                               editable={resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
+                    {
+                      // resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
+                      <View style={styles.horizontalStyle}>
+                        <TouchableOpacity disabled={isDisabledResultDelete()}
+                                          onPress={showDialogResultDelete}
+                                          style={isDisabledResultDelete() ? styles.buttonDisabledStyle :
+                                            styles.deleteButtonStyle}>
+                          <View style={styles.horizontalStyle}>
+                            <Entypo name='cross'
+                                    size={19}
+                                    color={Colors.secondaryColor}/>
+                            <Text style={styles.buttonTextStyle}>
+                              Delete
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity disabled={isDisabledResultSubmit()}
+                                          onPress={showDialogResultSubmit}
+                                          style={isDisabledResultSubmit() ? styles.buttonDisabledStyle :
+                                            styles.acceptButtonStyle}>
+                          <View style={styles.horizontalStyle}>
+                            <Ionicons name='checkmark'
+                                      size={19}
+                                      color={Colors.secondaryColor}/>
+                            <Text style={styles.buttonTextStyle}>
+                              Submit
+                            </Text>
+                          </View>
+                        </TouchableOpacity>
+                      </View>
+                    }
+                  </View>
+                }
+              </View>
+            )
           }
         </View>
         {
@@ -714,6 +693,11 @@ const styles = StyleSheet.create({
     padding: 8,
     width: wp('40%'),
     borderRadius: 5
+  },
+  amountStyle: {
+    color: Colors.primaryColor,
+    fontSize: 20,
+    fontWeight: 'bold'
   },
   buttonDisabledStyle: {
     marginTop: hp('3%'),
@@ -745,6 +729,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     marginTop: 4
+  },
+  contentStatusStyle: {
+    width: '40%'
+  },
+  creatorStyle: {
+    color: Colors.tertiaryColor,
+    marginBottom: 12,
+    fontSize: 16
   },
   dateStyle: {
     color: Colors.tertiaryColor,
@@ -791,6 +783,31 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
     minHeight: hp('93.6%')
+  },
+  pointsIconStyle: {
+    justifyContent: 'center'
+  },
+  pointsStyle: {
+    flex: 1,
+    alignItems: 'flex-end'
+  },
+  pointsTextStyle: {
+    color: Colors.primaryColor,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    marginLeft: 3
+  },
+  projectNameStyle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 12
+  },
+  rewardsViewStyle: {
+    marginBottom: 15
+  },
+  socialMediaIconStyle: {
+    width: '30%'
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
