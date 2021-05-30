@@ -2,6 +2,7 @@ import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
   FlatList,
+  Image,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -23,6 +24,7 @@ import CombinedButtons from '../../components/header/combined-buttons'
 import YoutubeListItem from '../../components/list-items/social-media/youtube-list-item'
 import FacebookListItem from '../../components/list-items/social-media/facebook-list-item'
 import InstagramListItem from '../../components/list-items/social-media/instagram-list-item'
+import TiktokListItem from '../../components/list-items/social-media/tiktok-list-item'
 
 const SocialMediaScreen = () => {
   const appContext = useContext(AppContext)
@@ -30,6 +32,7 @@ const SocialMediaScreen = () => {
   const [youtubeAccounts, setYoutubeAccounts] = useState([])
   const [facebookAccounts, setFacebookAccounts] = useState([])
   const [instagramAccounts, setInstagramAccounts] = useState([])
+  const [tiktokAccounts, setTiktokAccounts] = useState([])
   const [youtubeChannelId, setYoutubeChannelId] = useState('')
   const [facebookPageId, setFacebookPageId] = useState('')
   const [facebookPageName, setFacebookPageName] = useState('')
@@ -39,6 +42,10 @@ const SocialMediaScreen = () => {
   const [instagramLink, setInstagramLink] = useState('')
   const [instagramFollowingCount, setInstagramFollowingCount] = useState('')
   const [instagramFollowerCount, setInstagramFollowerCount] = useState('')
+  const [tiktokUsername, setTiktokUsername] = useState('')
+  // const [tiktok, setTiktok] = useState('')
+  // const [tiktok, setTiktok] = useState('')
+  // const [tiktok, setTiktok] = useState('')
   const [youtubeChannelIdValid, setYoutubeChannelIdValid] = useState(false)
   const [facebookPageIdValid, setFacebookPageIdValid] = useState(false)
   const [facebookPageNameValid, setFacebookPageNameValid] = useState(false)
@@ -48,9 +55,14 @@ const SocialMediaScreen = () => {
   const [instagramLinkValid, setInstagramLinkValid] = useState(false)
   const [instagramFollowingCountValid, setInstagramFollowingCountValid] = useState(false)
   const [instagramFollowerCountValid, setInstagramFollowerCountValid] = useState(false)
+  const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
+  // const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
+  // const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
+  // const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
   const [visibleYoutube, setVisibleYoutube] = useState(false)
   const [visibleFacebook, setVisibleFacebook] = useState(false)
   const [visibleInstagram, setVisibleInstagram] = useState(false)
+  const [visibleTiktok, setVisibleTiktok] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
@@ -64,6 +76,8 @@ const SocialMediaScreen = () => {
         setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
         setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
         setInstagramAccounts(response.data.data.ccInstagramPageProfiles)
+        // setTiktokAccounts(response.data.data.ccTiktokPageProfiles)
+        setTiktokAccounts(response.data.data.ccInstagramPageProfiles)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -81,6 +95,8 @@ const SocialMediaScreen = () => {
         setYoutubeAccounts(response.data.data.ccYouTubeProfiles)
         setFacebookAccounts(response.data.data.ccFaceBookPageProfiles)
         setInstagramAccounts(response.data.data.ccInstagramPageProfiles)
+        // setTiktokAccounts(response.data.data.ccTiktokPageProfiles)
+        setTiktokAccounts(response.data.data.ccInstagramPageProfiles)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -132,6 +148,15 @@ const SocialMediaScreen = () => {
     )
   }
 
+  const renderTiktokItemsFunction = itemData => {
+    return (
+      <TiktokListItem itemData={itemData}
+                      refreshFunction={refreshFunction}
+                      loadingFunctionTrue={loadingFunctionTrue}
+                      loadingFunctionFalse={loadingFunctionFalse}/>
+    )
+  }
+
   const showDialogYoutube = async () => {
     setVisibleYoutube(true)
   }
@@ -154,6 +179,14 @@ const SocialMediaScreen = () => {
 
   const hideDialogInstagram = async () => {
     setVisibleInstagram(false)
+  }
+
+  const showDialogTiktok = async () => {
+    setVisibleTiktok(true)
+  }
+
+  const hideDialogTiktok = async () => {
+    setVisibleTiktok(false)
   }
 
   const onChangeYoutubeChannelId = async youtubeChannelId => {
@@ -210,6 +243,32 @@ const SocialMediaScreen = () => {
     setInstagramFollowerCount(instagramFollowerCount)
   }
 
+  const onChangeTiktokUsername = async tiktokUsername => {
+    setTiktokUsernameValid(tiktokUsername.trim().length > 0)
+    setTiktokUsername(tiktokUsername)
+  }
+
+  // const onChangeTiktokUsername = async instagramLink => {
+  //   setInstagramLinkValid(instagramLink.trim().length > 0)
+  //   setInstagramLink(instagramLink)
+  // }
+  //
+  // const onChangeTiktokUsername = async instagramFollowingCount => {
+  //   if (instagramFollowingCount.trim().length > 0)
+  //     setInstagramFollowingCountValid(!isNaN(instagramFollowingCount.trim()))
+  //   else
+  //     setInstagramFollowingCountValid(false)
+  //   setInstagramFollowingCount(instagramFollowingCount)
+  // }
+  //
+  // const onChangeTiktokUsername = async instagramFollowerCount => {
+  //   if (instagramFollowerCount.trim().length > 0)
+  //     setInstagramFollowerCountValid(!isNaN(instagramFollowerCount.trim()))
+  //   else
+  //     setInstagramFollowerCountValid(false)
+  //   setInstagramFollowerCount(instagramFollowerCount)
+  // }
+
   function isDisabledYoutube() {
     return !youtubeChannelIdValid
   }
@@ -220,6 +279,11 @@ const SocialMediaScreen = () => {
 
   function isDisabledInstagram() {
     return !instagramUsernameValid || !instagramLinkValid || !instagramFollowerCountValid ||
+      !instagramFollowingCountValid
+  }
+
+  function isDisabledTiktok() {
+    return !tiktokUsernameValid || !instagramLinkValid || !instagramFollowerCountValid ||
       !instagramFollowingCountValid
   }
 
@@ -236,6 +300,13 @@ const SocialMediaScreen = () => {
 
   const resetInstagram = async () => {
     await onChangeInstagramUsername('')
+    await onChangeInstagramLink('')
+    await onChangeInstagramFollowingCount('')
+    await onChangeInstagramFollowerCount('')
+  }
+
+  const resetTiktok = async () => {
+    await onChangeTiktokUsername('')
     await onChangeInstagramLink('')
     await onChangeInstagramFollowingCount('')
     await onChangeInstagramFollowerCount('')
@@ -304,6 +375,31 @@ const SocialMediaScreen = () => {
       if (response.status === 200) {
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
         await resetInstagram()
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
+    }).catch(async error => {
+      setLoading(false)
+      await showErrors(error.response.data)
+      console.log(error.response.data)
+    })
+  }
+
+  const addTiktok = async () => {
+    await hideDialogTiktok()
+    setLoading(true)
+    const data = {
+      username: tiktokUsername.trim(),
+      link: instagramLink.trim(),
+      followsCount: instagramFollowingCount.trim(),
+      followersCount: instagramFollowerCount.trim()
+    }
+    axios.post('cc-social-media/tiktok/add-profile', data).then(async response => {
+      setLoading(false)
+      setRefresh(true)
+      if (response.status === 200) {
+        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
+        await resetTiktok()
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -427,6 +523,49 @@ const SocialMediaScreen = () => {
           <Dialog.Button label='Cancel'
                          color={Colors.primaryColor}
                          onPress={hideDialogInstagram}/>
+        </Dialog.Container>
+        <Dialog.Container visible={visibleTiktok}
+                          onBackdropPress={hideDialogTiktok}
+                          headerStyle={styles.headerStyle}
+                          footerStyle={styles.footerStyle}>
+          <Dialog.Title style={styles.titleStyle}>
+            NEW ACCOUNT
+          </Dialog.Title>
+          <Dialog.Input label='Account Username'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokUsername => onChangeTiktokUsername(tiktokUsername)}
+                        value={tiktokUsername}
+                        placeholder='Enter Account Username'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Account Link'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramLink => onChangeInstagramLink(instagramLink)}
+                        value={instagramLink}
+                        placeholder='Enter Account Link'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Followers Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramFollowerCount => onChangeInstagramFollowerCount(instagramFollowerCount)}
+                        value={instagramFollowerCount}
+                        placeholder='Enter Followers Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Following Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
+                        value={instagramFollowingCount}
+                        placeholder='Enter Following Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Button label='Submit'
+                         color={isDisabledTiktok() ? Colors.tertiaryColor : Colors.primaryColor}
+                         onPress={addTiktok}
+                         disabled={isDisabledTiktok()}/>
+          <Dialog.Button label='Cancel'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogTiktok}/>
         </Dialog.Container>
         <View style={styles.mainViewStyle}>
           <View>
@@ -561,6 +700,49 @@ const SocialMediaScreen = () => {
               )
             }
           </View>
+          <View>
+            <View style={styles.horizontalViewStyle}>
+              <Image style={styles.avatarStyle}
+                     source={require('../../assets/tiktok-logo.png')}/>
+              <Text style={styles.tiktokTitleStyle}>
+                Tiktok
+              </Text>
+              <TouchableOpacity style={styles.addIconStyle}
+                                onPress={showDialogTiktok}>
+                <Ionicons name='add'
+                          size={36}
+                          color={Colors.defaultColor}/>
+              </TouchableOpacity>
+            </View>
+            {
+              tiktokAccounts.length > 0 ? (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.listStyle}>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={tiktokAccounts}
+                              numColumns={1}
+                              renderItem={renderTiktokItemsFunction}/>
+                  </View>
+                </View>
+              ) : (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
+          </View>
         </View>
         {
           loading &&
@@ -575,6 +757,11 @@ const SocialMediaScreen = () => {
 }
 
 const styles = StyleSheet.create({
+  avatarStyle: {
+    width: wp('12%'),
+    height: wp('12%'),
+    marginLeft: -wp('1.4%')
+  },
   addIconStyle: {
     alignItems: 'flex-end',
     marginRight: wp('7%'),
@@ -654,6 +841,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingLeft: 5,
     color: Colors.tertiaryColor
+  },
+  tiktokTitleStyle: {
+    color: Colors.defaultColor,
+    fontSize: 30,
+    marginLeft: wp('0.6%')
   },
   titleStyle: {
     color: Colors.primaryColor

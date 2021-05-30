@@ -178,7 +178,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column'
   },
   forgotPasswordLabelStyle: {
-    color: Colors.secondaryColor
+    color: Colors.secondaryColor,
+    marginRight: 5
   },
   forgotPasswordStyle: {
     marginRight: 40,

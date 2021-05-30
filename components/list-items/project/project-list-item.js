@@ -24,7 +24,8 @@ const ProjectListItem = props => {
                         type === socialMediaPlatformNameEnum.Youtube ? styles.itemStyleYoutube :
                           type === socialMediaPlatformNameEnum.Facebook ? styles.itemStyleFacebook :
                             type === socialMediaPlatformNameEnum.Instagram ? styles.itemStyleInstagram :
-                              styles.itemStyleDefault
+                              type === socialMediaPlatformNameEnum.Tiktok ? styles.itemStyleTiktok :
+                                styles.itemStyleDefault
                       }>
       <View style={styles.horizontalStyle}>
         <View style={styles.contentStyle}>
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    borderLeftColor: Colors.defaultColor,
+    borderLeftColor: Colors.tertiaryColor,
     marginVertical: 6,
     marginHorizontal: wp('4%'),
     paddingHorizontal: 10
@@ -161,6 +162,23 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
     borderLeftColor: Colors.instagramColor,
+    marginVertical: 6,
+    marginHorizontal: wp('4%'),
+    paddingHorizontal: 10
+  },
+  itemStyleTiktok: {
+    elevation: 5,
+    borderRadius: 10,
+    backgroundColor: Colors.secondaryColor,
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+    borderLeftWidth: 6,
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+    borderLeftColor: Colors.defaultColor,
     marginVertical: 6,
     marginHorizontal: wp('4%'),
     paddingHorizontal: 10

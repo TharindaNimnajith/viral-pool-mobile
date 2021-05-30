@@ -34,7 +34,8 @@ export const notificationTypeEnum = Object.freeze({
 export const socialMediaPlatformNameEnum = Object.freeze({
   Youtube: 'YouTube',
   Facebook: 'FaceBook',
-  Instagram: 'Instagram'
+  Instagram: 'Instagram',
+  Tiktok: 'TikTok'
 })
 
 export const socialMediaPlatformActiveStatusEnum = Object.freeze({

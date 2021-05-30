@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {FontAwesome, FontAwesome5, Ionicons} from '@expo/vector-icons'
+import {FontAwesome, FontAwesome5, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
@@ -33,6 +33,7 @@ const DashboardScreen = props => {
   const [youtubeCount, setYoutubeCount] = useState(0)
   const [facebookCount, setFacebookCount] = useState(0)
   const [instagramCount, setInstagramCount] = useState(0)
+  const [tiktokCount, setTiktokCount] = useState(0)
   const [totalEarnings, setTotalEarnings] = useState(0)
   const [points, setPoints] = useState(0)
   const [rank, setRank] = useState(0)
@@ -62,6 +63,8 @@ const DashboardScreen = props => {
                 setYoutubeCount(response.data.data.socialMediaAccountCount.youTubeCount)
                 setFacebookCount(response.data.data.socialMediaAccountCount.faceBookCount)
                 setInstagramCount(response.data.data.socialMediaAccountCount.instagramCount)
+                // setTiktokCount(response.data.data.socialMediaAccountCount.tiktokCount)
+                setTiktokCount(1)
                 setTotalEarnings(response.data.data.totalEarnings)
                 setPoints(response.data.data.points)
                 setRank(response.data.data.rank)
@@ -113,6 +116,8 @@ const DashboardScreen = props => {
                 setYoutubeCount(response.data.data.socialMediaAccountCount.youTubeCount)
                 setFacebookCount(response.data.data.socialMediaAccountCount.faceBookCount)
                 setInstagramCount(response.data.data.socialMediaAccountCount.instagramCount)
+                // setTiktokCount(response.data.data.socialMediaAccountCount.tiktokCount)
+                setTiktokCount(1)
                 setTotalEarnings(response.data.data.totalEarnings)
                 setPoints(response.data.data.points)
                 setRank(response.data.data.rank)
@@ -234,6 +239,16 @@ const DashboardScreen = props => {
                                       color={Colors.secondaryColor}/>
                             <Text style={styles.countStyle}>
                               {formatNumber(instagramCount)}
+                            </Text>
+                          </View>
+                        </View>
+                        <View style={styles.betweenStyle}>
+                          <View style={styles.horizontalContentStyle}>
+                            <MaterialCommunityIcons name='music-note'
+                                                    size={20}
+                                                    color={Colors.secondaryColor}/>
+                            <Text style={styles.tiktokCountStyle}>
+                              {formatNumber(tiktokCount)}
                             </Text>
                           </View>
                         </View>
@@ -545,6 +560,11 @@ const styles = StyleSheet.create({
   socialMediaStyle: {
     marginTop: 8,
     alignSelf: 'baseline'
+  },
+  tiktokCountStyle: {
+    marginHorizontal: 3,
+    color: Colors.secondaryColor,
+    textAlignVertical: 'center'
   },
   titleStyle: {
     fontSize: 22,

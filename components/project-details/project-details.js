@@ -44,12 +44,14 @@ const ProjectDetails = props => {
   const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(jobAcceptationStatusEnum.Pending)
   const [contentCreatorSubmissionResponses, setContentCreatorSubmissionResponses] = useState([])
+
   const [contentSubmissionLink, setContentSubmissionLink] = useState('')
   const [resultSubmissionLink, setResultSubmissionLink] = useState('')
   const [contentSubmissionStatus, setContentSubmissionStatus] = useState(contentSubmissionStatusEnum.Default)
   const [resultSubmissionStatus, setResultSubmissionStatus] = useState(resultSubmissionStatusEnum.Default)
   const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(false)
   const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(false)
+
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
@@ -79,6 +81,7 @@ const ProjectDetails = props => {
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentCreatorSubmissionResponses(response.data.data.contentCreatorSubmissionResponses)
+
         setContentSubmissionLink(response.data.data.contentSubmissionLink)
         setResultSubmissionLink(response.data.data.resultSubmissionLink)
         setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
@@ -113,6 +116,7 @@ const ProjectDetails = props => {
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentCreatorSubmissionResponses(response.data.data.contentCreatorSubmissionResponses)
+
         setContentSubmissionLink(response.data.data.contentSubmissionLink)
         setResultSubmissionLink(response.data.data.resultSubmissionLink)
         setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
@@ -491,6 +495,10 @@ const ProjectDetails = props => {
                       <Ionicons name='logo-instagram'
                                 size={20}
                                 color={Colors.instagramColor}/>
+                    ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Tiktok ? (
+                      <Ionicons name='logo-instagram'
+                                size={20}
+                                color={Colors.defaultColor}/>
                     ) : null
                 }
               </View>
