@@ -19,11 +19,12 @@ import axios from 'axios'
 import {
   contentSubmissionStatusEnum,
   jobAcceptationStatusEnum,
-  resultSubmissionStatusEnum
+  resultSubmissionStatusEnum,
+  socialMediaPlatformNameEnum
 } from '../../shared/const/enums'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
-import {showAlert, showErrors} from '../../shared/util/helpers'
+import {formatNumber, showAlert, showErrors} from '../../shared/util/helpers'
 import FileListItem from './file-list-item'
 
 const ProjectDetails = props => {
@@ -38,8 +39,8 @@ const ProjectDetails = props => {
   const [createdUserFirstName, setCreatedUserFirstName] = useState('')
   const [createdUserLastName, setCreatedUserLastName] = useState('')
   const [socialMediaPlatformName, setSocialMediaPlatformName] = useState('')
-  const [complexity, setComplexity] = useState('')
-  const [amount, setAmount] = useState('')
+  const [complexity, setComplexity] = useState(0)
+  const [amount, setAmount] = useState(0)
   const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(jobAcceptationStatusEnum.Pending)
   const [contentCreatorSubmissionResponses, setContentCreatorSubmissionResponses] = useState([])
@@ -449,17 +450,64 @@ const ProjectDetails = props => {
       }>
         <View style={styles.mainViewStyle}>
           <View style={styles.viewStyle}>
-            <Text style={styles.titleStyle}>
+            <Text style={{
+              fontSize: 20,
+              fontWeight: 'bold',
+              marginBottom: 10
+            }}>
               {name}
             </Text>
-            <Text style={styles.titleStyle}>
-              {createdDate.slice(0, 10)}
+            <Text style={{
+              color: Colors.tertiaryColor,
+              marginBottom: 10
+            }}>
+              Created by {createdUserFirstName} {createdUserLastName}
             </Text>
-            <Text style={styles.titleStyle}>
-              {socialMediaPlatformName}
-            </Text>
+            <View style={{
+              marginBottom: 10
+            }}>
+              <View style={styles.horizontalStyle}>
+                <Text style={styles.titleStyle}>
+                  {formatNumber(amount)} LKR
+                </Text>
+                <Text style={styles.titleStyle}>
+                  {formatNumber(complexity)}
+                </Text>
+              </View>
+            </View>
+            <View style={styles.horizontalStyle}>
+              {
+                socialMediaPlatformName === socialMediaPlatformNameEnum.Youtube ? (
+                    <Ionicons name='logo-youtube'
+                              size={25}
+                              color={Colors.primaryColor}/>
+                  ) :
+                  socialMediaPlatformName === socialMediaPlatformNameEnum.Facebook ? (
+                    <Ionicons name='logo-facebook'
+                              size={25}
+                              color={Colors.facebookColor}/>
+                  ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Instagram ? (
+                    <Ionicons name='logo-instagram'
+                              size={25}
+                              color={Colors.instagramColor}/>
+                  ) : null
+              }
+              {
+                isContentGivenByStrategyMember ? (
+                  <Text style={styles.contentProvidedStyle}>
+                    Content Provided
+                  </Text>
+                ) : (
+                  <Text style={styles.contentRequiredStyle}>
+                    Content Required
+                  </Text>
+                )
+              }
+              <Text style={styles.titleStyle}>
+                {createdDate.slice(0, 10)}
+              </Text>
+            </View>
           </View>
-          <View style={styles.lineStyle}/>
           {
             description &&
             <View style={styles.viewStyle}>
@@ -653,6 +701,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 30
   },
+  contentProvidedStyle: {
+    color: Colors.successColor,
+    fontSize: 13,
+    flex: 1,
+    alignSelf: 'flex-end',
+    textAlign: 'right'
+  },
+  contentRequiredStyle: {
+    color: Colors.primaryColor,
+    fontSize: 13,
+    flex: 1,
+    alignSelf: 'flex-end',
+    textAlign: 'right'
+  },
   deleteButtonStyle: {
     marginTop: hp('3%'),
     marginHorizontal: 7,
@@ -677,11 +739,6 @@ const styles = StyleSheet.create({
     color: Colors.primaryColor,
     alignSelf: 'baseline',
     marginLeft: wp('8%')
-  },
-  lineStyle: {
-    borderBottomColor: Colors.tertiaryColor,
-    borderBottomWidth: 1,
-    marginHorizontal: wp('10%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -712,8 +769,13 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   viewStyle: {
-    marginHorizontal: wp('9%'),
-    marginVertical: wp('2%')
+    marginHorizontal: wp('6%'),
+    marginTop: hp('2.5%'),
+    marginBottom: hp('0.5%'),
+    backgroundColor: Colors.fadedEffectColor,
+    borderRadius: 20,
+    paddingVertical: 15,
+    paddingHorizontal: 20
   }
 })
 
