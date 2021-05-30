@@ -132,7 +132,7 @@ const AddIdeaScreen = props => {
                        placeholder='Enter Description'
                        placeholderTextColor={Colors.tertiaryColor}
                        multiline={true}
-                       numberOfLines={30}/>
+                       numberOfLines={25}/>
             <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
                               disabled={isDisabled()}
                               onPress={showDialog}>
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     borderColor: Colors.primaryColor,
     width: wp('80%'),
-    height: hp('55%'),
+    height: hp('47%'),
     borderWidth: 1,
     borderRadius: 5,
     marginTop: hp('1.5%'),

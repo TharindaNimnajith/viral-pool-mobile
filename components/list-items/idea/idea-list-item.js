@@ -1,7 +1,7 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {FontAwesome, FontAwesome5} from '@expo/vector-icons'
+import {FontAwesome, FontAwesome5, Ionicons} from '@expo/vector-icons'
 import Colors from '../../../shared/const/colors'
 
 const IdeaListItem = props => {
@@ -39,9 +39,18 @@ const IdeaListItem = props => {
               </Text>
             )
           }
-          <Text style={styles.dateStyle}>
-            Posted on {props.itemData.item.createdDate.slice(0, 10)}
-          </Text>
+          <View style={styles.horizontalStyle}>
+            {
+              props.itemData.item.comment && (
+                <Ionicons name='ios-chatbubble-ellipses'
+                          size={15}
+                          color={Colors.tertiaryColor}/>
+              )
+            }
+            <Text style={styles.dateStyle}>
+              Posted on {props.itemData.item.createdDate.slice(0, 10)}
+            </Text>
+          </View>
         </View>
         <View style={styles.arrowStyle}>
           <FontAwesome5 name='chevron-circle-right'
@@ -59,8 +68,15 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   dateStyle: {
+    flex: 1,
+    textAlign: 'right',
     color: Colors.tertiaryColor,
-    fontSize: 12
+    fontSize: 12,
+    marginRight: 10
+  },
+  horizontalStyle: {
+    flexDirection: 'row',
+    marginTop: 5
   },
   iconViewStyle: {
     width: wp('10.5%'),
@@ -71,13 +87,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: Colors.secondaryColor,
     marginHorizontal: wp('4%'),
-    height: 110,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'flex-start',
     alignContent: 'center',
-    marginVertical: 6
+    marginVertical: 6,
+    paddingVertical: 15
   },
   mainViewStyle: {
     flexDirection: 'row',

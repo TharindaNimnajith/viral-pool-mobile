@@ -27,6 +27,7 @@ const EditIdeaScreen = props => {
 
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [comment, setComment] = useState(null)
   const [titleValid, setTitleValid] = useState(true)
   const [descriptionValid, setDescriptionValid] = useState(true)
   const [loading, setLoading] = useState(false)
@@ -42,6 +43,7 @@ const EditIdeaScreen = props => {
       if (response.status === 200) {
         setTitle(response.data.data.title)
         setDescription(response.data.data.description)
+        setComment(response.data.data.comment)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -59,6 +61,7 @@ const EditIdeaScreen = props => {
       if (response.status === 200) {
         setTitle(response.data.data.title)
         setDescription(response.data.data.description)
+        setComment(response.data.data.comment)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -200,7 +203,19 @@ const EditIdeaScreen = props => {
                        placeholder='Enter Description'
                        placeholderTextColor={Colors.tertiaryColor}
                        multiline={true}
-                       numberOfLines={30}/>
+                       numberOfLines={25}/>
+            {
+              comment && (
+                <View style={styles.commentViewStyle}>
+                  <Text style={styles.commentLabelStyle}>
+                    Comments
+                  </Text>
+                  <Text style={styles.commentStyle}>
+                    {comment}
+                  </Text>
+                </View>
+              )
+            }
             <View style={styles.horizontalStyle}>
               <TouchableOpacity style={styles.deleteButtonStyle}
                                 onPress={showDialogDelete}>
@@ -265,6 +280,24 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 16
   },
+  commentLabelStyle: {
+    color: Colors.primaryColor,
+    marginBottom: 10,
+    fontSize: 17
+  },
+  commentStyle: {
+    color: Colors.defaultColor,
+    fontSize: 16,
+    marginBottom: 3
+  },
+  commentViewStyle: {
+    backgroundColor: Colors.fadedEffectColor,
+    borderRadius: 20,
+    width: wp('80%'),
+    marginTop: hp('3%'),
+    paddingVertical: 15,
+    paddingHorizontal: 20
+  },
   containerStyle: {
     marginTop: hp('1%'),
     alignItems: 'center',
@@ -307,7 +340,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
     borderColor: Colors.primaryColor,
     width: wp('80%'),
-    height: hp('55%'),
+    height: hp('47%'),
     borderWidth: 1,
     borderRadius: 5,
     marginTop: hp('1.5%'),
