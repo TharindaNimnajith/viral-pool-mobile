@@ -500,46 +500,46 @@ const ProjectDetails = props => {
                 </View>
               </View>
             </View>
-              <View style={styles.horizontalStyle}>
-                <View style={{
-                  width: '30%'
-                }}>
-                  {
-                    socialMediaPlatformName === socialMediaPlatformNameEnum.Youtube ? (
-                        <Ionicons name='logo-youtube'
-                                  size={20}
-                                  color={Colors.primaryColor}/>
-                      ) :
-                      socialMediaPlatformName === socialMediaPlatformNameEnum.Facebook ? (
-                        <Ionicons name='logo-facebook'
-                                  size={20}
-                                  color={Colors.facebookColor}/>
-                      ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Instagram ? (
-                        <Ionicons name='logo-instagram'
-                                  size={20}
-                                  color={Colors.instagramColor}/>
-                      ) : null
-                  }
-                </View>
-                <View style={{
-                  width: '40%'
-                }}>
-                  {
-                    isContentGivenByStrategyMember ? (
-                      <Text style={styles.contentProvidedStyle}>
-                        Content Provided
-                      </Text>
-                    ) : (
-                      <Text style={styles.contentRequiredStyle}>
-                        Content Required
-                      </Text>
-                    )
-                  }
-                </View>
-                <Text style={styles.dateStyle}>
-                  {createdDate.slice(0, 10)}
-                </Text>
+            <View style={styles.horizontalStyle}>
+              <View style={{
+                width: '30%'
+              }}>
+                {
+                  socialMediaPlatformName === socialMediaPlatformNameEnum.Youtube ? (
+                      <Ionicons name='logo-youtube'
+                                size={20}
+                                color={Colors.primaryColor}/>
+                    ) :
+                    socialMediaPlatformName === socialMediaPlatformNameEnum.Facebook ? (
+                      <Ionicons name='logo-facebook'
+                                size={20}
+                                color={Colors.facebookColor}/>
+                    ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Instagram ? (
+                      <Ionicons name='logo-instagram'
+                                size={20}
+                                color={Colors.instagramColor}/>
+                    ) : null
+                }
               </View>
+              <View style={{
+                width: '40%'
+              }}>
+                {
+                  isContentGivenByStrategyMember ? (
+                    <Text style={styles.contentProvidedStyle}>
+                      Content Provided
+                    </Text>
+                  ) : (
+                    <Text style={styles.contentRequiredStyle}>
+                      Content Required
+                    </Text>
+                  )
+                }
+              </View>
+              <Text style={styles.dateStyle}>
+                {createdDate.slice(0, 10)}
+              </Text>
+            </View>
           </View>
           {
             description &&
