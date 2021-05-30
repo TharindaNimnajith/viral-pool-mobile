@@ -876,7 +876,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.successColor,
     paddingVertical: 5,
     paddingHorizontal: 10,
-    borderRadius: 10
+    borderRadius: 10,
+    marginLeft: 15
   },
   statusTextStyle: {
     color: Colors.secondaryColor,
