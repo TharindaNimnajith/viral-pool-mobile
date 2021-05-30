@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
+import {Entypo, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import {showAlert, showErrors} from '../../shared/util/helpers'
@@ -200,19 +201,31 @@ const EditIdeaScreen = props => {
                        placeholderTextColor={Colors.tertiaryColor}
                        multiline={true}
                        numberOfLines={30}/>
-            <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                              disabled={isDisabled()}
-                              onPress={showDialogEdit}>
-              <Text style={styles.buttonTextStyle}>
-                Update
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.deleteButtonStyle}
-                              onPress={showDialogDelete}>
-              <Text style={styles.buttonTextStyle}>
-                Delete
-              </Text>
-            </TouchableOpacity>
+            <View style={styles.horizontalStyle}>
+              <TouchableOpacity style={styles.deleteButtonStyle}
+                                onPress={showDialogDelete}>
+                <View style={styles.horizontalStyle}>
+                  <Entypo name='cross'
+                          size={19}
+                          color={Colors.secondaryColor}/>
+                  <Text style={styles.buttonTextStyle}>
+                    Delete
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={isDisabled() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                disabled={isDisabled()}
+                                onPress={showDialogEdit}>
+                <View style={styles.horizontalStyle}>
+                  <Ionicons name='checkmark'
+                            size={19}
+                            color={Colors.secondaryColor}/>
+                  <Text style={styles.buttonTextStyle}>
+                    Update
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
           {
             loading &&
@@ -230,23 +243,27 @@ const EditIdeaScreen = props => {
 const styles = StyleSheet.create({
   buttonStyle: {
     marginTop: hp('4%'),
+    marginHorizontal: 7,
     backgroundColor: Colors.successColor,
     alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
+    padding: 8,
+    width: wp('38%'),
     borderRadius: 5
   },
   buttonDisabledStyle: {
     marginTop: hp('4%'),
+    marginHorizontal: 7,
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
+    padding: 8,
+    width: wp('38%'),
     borderRadius: 5
   },
   buttonTextStyle: {
     color: Colors.secondaryColor,
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    marginLeft: 5,
+    fontSize: 16
   },
   containerStyle: {
     marginTop: hp('1%'),
@@ -255,12 +272,16 @@ const styles = StyleSheet.create({
     flex: 1
   },
   deleteButtonStyle: {
-    marginVertical: hp('1%'),
+    marginTop: hp('4%'),
+    marginHorizontal: 7,
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
+    padding: 8,
+    width: wp('38%'),
     borderRadius: 5
+  },
+  horizontalStyle: {
+    flexDirection: 'row'
   },
   labelStyle: {
     marginLeft: wp('10%'),

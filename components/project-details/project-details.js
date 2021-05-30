@@ -225,7 +225,7 @@ const ProjectDetails = props => {
     })
   }
 
-  const contentSubmit = async contentSubmissionLink => {
+  const contentSubmit = async () => {
     setVisibleContentSubmit(false)
     setLoading(true)
     let data = {
@@ -271,7 +271,7 @@ const ProjectDetails = props => {
     })
   }
 
-  const resultSubmit = async resultSubmissionLink => {
+  const resultSubmit = async () => {
     setVisibleResultSubmit(false)
     setLoading(true)
     let data = {
@@ -498,7 +498,7 @@ const ProjectDetails = props => {
                                   onPress={showDialogReject}>
                   <View style={styles.horizontalStyle}>
                     <Entypo name='cross'
-                            size={24}
+                            size={19}
                             color={Colors.secondaryColor}/>
                     <Text style={styles.buttonTextStyle}>
                       Reject
@@ -509,7 +509,7 @@ const ProjectDetails = props => {
                                   onPress={showDialogAccept}>
                   <View style={styles.horizontalStyle}>
                     <Ionicons name='checkmark'
-                              size={24}
+                              size={19}
                               color={Colors.secondaryColor}/>
                     <Text style={styles.buttonTextStyle}>
                       Accept
@@ -528,26 +528,37 @@ const ProjectDetails = props => {
               <TextInput style={styles.textInputStyle}
                          onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
                          value={contentSubmissionLink}
-                         placeholder='Enter URL'
+                         placeholder='Paste Link Here'
                          placeholderTextColor={Colors.tertiaryColor}
                          editable={contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
               {
-                contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
-                <View>
-                  <TouchableOpacity style={isDisabledContentSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                                    disabled={isDisabledContentSubmit()}
-                                    onPress={showDialogContentSubmit}>
-                    <Text style={styles.buttonTextStyle}>
-                      Submit
-                    </Text>
-                  </TouchableOpacity>
+                // contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
+                <View style={styles.horizontalStyle}>
                   <TouchableOpacity disabled={isDisabledContentDelete()}
                                     onPress={showDialogContentDelete}
-                                    style={isDisabledContentDelete() ? styles.buttonDisabledStyle
-                                      : styles.deleteButtonStyle}>
-                    <Text style={styles.buttonTextStyle}>
-                      Delete
-                    </Text>
+                                    style={isDisabledContentDelete() ? styles.buttonDisabledStyle :
+                                      styles.deleteButtonStyle}>
+                    <View style={styles.horizontalStyle}>
+                      <Entypo name='cross'
+                              size={19}
+                              color={Colors.secondaryColor}/>
+                      <Text style={styles.buttonTextStyle}>
+                        Delete
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity disabled={isDisabledContentSubmit()}
+                                    onPress={showDialogContentSubmit}
+                                    style={isDisabledContentSubmit() ? styles.buttonDisabledStyle :
+                                      styles.acceptButtonStyle}>
+                    <View style={styles.horizontalStyle}>
+                      <Ionicons name='checkmark'
+                                size={19}
+                                color={Colors.secondaryColor}/>
+                      <Text style={styles.buttonTextStyle}>
+                        Submit
+                      </Text>
+                    </View>
                   </TouchableOpacity>
                 </View>
               }
@@ -564,26 +575,37 @@ const ProjectDetails = props => {
               <TextInput style={styles.textInputStyle}
                          onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
                          value={resultSubmissionLink}
-                         placeholder='Enter URL'
+                         placeholder='Paste Link Here'
                          placeholderTextColor={Colors.tertiaryColor}
                          editable={resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
               {
-                resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
-                <View>
-                  <TouchableOpacity style={isDisabledResultSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
-                                    disabled={isDisabledResultSubmit()}
-                                    onPress={showDialogResultSubmit}>
-                    <Text style={styles.buttonTextStyle}>
-                      Submit
-                    </Text>
+                // resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
+                <View style={styles.horizontalStyle}>
+                  <TouchableOpacity disabled={isDisabledResultDelete()}
+                                    onPress={showDialogResultDelete}
+                                    style={isDisabledResultDelete() ? styles.buttonDisabledStyle :
+                                      styles.deleteButtonStyle}>
+                    <View style={styles.horizontalStyle}>
+                      <Entypo name='cross'
+                              size={19}
+                              color={Colors.secondaryColor}/>
+                      <Text style={styles.buttonTextStyle}>
+                        Delete
+                      </Text>
+                    </View>
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    style={isDisabledResultDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
-                    disabled={isDisabledResultDelete()}
-                    onPress={showDialogResultDelete}>
-                    <Text style={styles.buttonTextStyle}>
-                      Delete
-                    </Text>
+                  <TouchableOpacity disabled={isDisabledResultSubmit()}
+                                    onPress={showDialogResultSubmit}
+                                    style={isDisabledResultSubmit() ? styles.buttonDisabledStyle :
+                                      styles.acceptButtonStyle}>
+                    <View style={styles.horizontalStyle}>
+                      <Ionicons name='checkmark'
+                                size={19}
+                                color={Colors.secondaryColor}/>
+                      <Text style={styles.buttonTextStyle}>
+                        Submit
+                      </Text>
+                    </View>
                   </TouchableOpacity>
                 </View>
               }
@@ -604,43 +626,40 @@ const ProjectDetails = props => {
 
 const styles = StyleSheet.create({
   acceptButtonStyle: {
-    marginTop: 30,
+    marginTop: hp('3%'),
+    marginHorizontal: 7,
     backgroundColor: Colors.successColor,
     alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
-    borderRadius: 5
-  },
-  buttonStyle: {
-    marginTop: 15,
-    backgroundColor: Colors.primaryColor,
-    alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
+    padding: 8,
+    width: wp('40%'),
     borderRadius: 5
   },
   buttonDisabledStyle: {
-    marginTop: 15,
+    marginTop: hp('3%'),
+    marginHorizontal: 7,
     backgroundColor: Colors.tertiaryColor,
     alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
+    padding: 8,
+    width: wp('40%'),
     borderRadius: 5
   },
   buttonTextStyle: {
     color: Colors.secondaryColor,
-    textTransform: 'uppercase'
+    textTransform: 'uppercase',
+    marginLeft: 5,
+    fontSize: 16
   },
   centerViewStyle: {
     alignItems: 'center',
     marginBottom: 30
   },
   deleteButtonStyle: {
-    marginTop: 15,
+    marginTop: hp('3%'),
+    marginHorizontal: 7,
     backgroundColor: Colors.primaryColor,
     alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
+    padding: 8,
+    width: wp('40%'),
     borderRadius: 5
   },
   fileStyle: {
@@ -657,13 +676,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
     color: Colors.primaryColor,
     alignSelf: 'baseline',
-    marginLeft: wp('10%')
+    marginLeft: wp('8%')
   },
   lineStyle: {
     borderBottomColor: Colors.tertiaryColor,
     borderBottomWidth: 1,
-    marginLeft: wp('10%'),
-    marginRight: wp('10%')
+    marginHorizontal: wp('10%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -681,7 +699,7 @@ const styles = StyleSheet.create({
   },
   textInputStyle: {
     borderColor: Colors.primaryColor,
-    width: wp('80%'),
+    width: wp('84%'),
     borderWidth: 1,
     borderRadius: 5,
     height: 40,
