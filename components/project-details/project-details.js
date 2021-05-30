@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   useWindowDimensions,
   View
@@ -13,8 +14,13 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
+import {Entypo, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
-import {jobAcceptationStatusEnum} from '../../shared/const/enums'
+import {
+  contentSubmissionStatusEnum,
+  jobAcceptationStatusEnum,
+  resultSubmissionStatusEnum
+} from '../../shared/const/enums'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 import {showAlert, showErrors} from '../../shared/util/helpers'
@@ -37,12 +43,12 @@ const ProjectDetails = props => {
   const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(jobAcceptationStatusEnum.Pending)
   const [contentCreatorSubmissionResponses, setContentCreatorSubmissionResponses] = useState([])
-  // const [contentSubmissionLink, setContentSubmissionLink] = useState('')
-  // const [resultSubmissionLink, setResultSubmissionLink] = useState('')
-  // const [contentSubmissionStatus, setContentSubmissionStatus] = useState(contentSubmissionStatusEnum.Default)
-  // const [resultSubmissionStatus, setResultSubmissionStatus] = useState(resultSubmissionStatusEnum.Default)
-  // const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(false)
-  // const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(false)
+  const [contentSubmissionLink, setContentSubmissionLink] = useState('')
+  const [resultSubmissionLink, setResultSubmissionLink] = useState('')
+  const [contentSubmissionStatus, setContentSubmissionStatus] = useState(contentSubmissionStatusEnum.Default)
+  const [resultSubmissionStatus, setResultSubmissionStatus] = useState(resultSubmissionStatusEnum.Default)
+  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] = useState(false)
+  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] = useState(false)
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
@@ -72,14 +78,14 @@ const ProjectDetails = props => {
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentCreatorSubmissionResponses(response.data.data.contentCreatorSubmissionResponses)
-        // setContentSubmissionLink(response.data.data.contentSubmissionLink)
-        // setResultSubmissionLink(response.data.data.resultSubmissionLink)
-        // setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
-        // setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
-        // setContentSubmissionLinkValid(response.data.data.contentSubmissionStatus !==
-        //   contentSubmissionStatusEnum.Default)
-        // setResultSubmissionLinkValid(response.data.data.resultSubmissionStatus !==
-        //   contentSubmissionStatusEnum.Default)
+        setContentSubmissionLink(response.data.data.contentSubmissionLink)
+        setResultSubmissionLink(response.data.data.resultSubmissionLink)
+        setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
+        setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
+        setContentSubmissionLinkValid(response.data.data.contentSubmissionStatus !==
+          contentSubmissionStatusEnum.Default)
+        setResultSubmissionLinkValid(response.data.data.resultSubmissionStatus !==
+          contentSubmissionStatusEnum.Default)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -106,14 +112,14 @@ const ProjectDetails = props => {
         setIsContentGivenByStrategyMember(response.data.data.isContentGivenByStrategyMember)
         setJobAcceptationStatus(response.data.data.jobAcceptationStatus)
         setContentCreatorSubmissionResponses(response.data.data.contentCreatorSubmissionResponses)
-        // setContentSubmissionLink(response.data.data.contentSubmissionLink)
-        // setResultSubmissionLink(response.data.data.resultSubmissionLink)
-        // setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
-        // setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
-        // setContentSubmissionLinkValid(response.data.data.contentSubmissionStatus !==
-        //   contentSubmissionStatusEnum.Default)
-        // setResultSubmissionLinkValid(response.data.data.resultSubmissionStatus !==
-        //   contentSubmissionStatusEnum.Default)
+        setContentSubmissionLink(response.data.data.contentSubmissionLink)
+        setResultSubmissionLink(response.data.data.resultSubmissionLink)
+        setContentSubmissionStatus(response.data.data.contentSubmissionStatus)
+        setResultSubmissionStatus(response.data.data.resultSubmissionStatus)
+        setContentSubmissionLinkValid(response.data.data.contentSubmissionStatus !==
+          contentSubmissionStatusEnum.Default)
+        setResultSubmissionLinkValid(response.data.data.resultSubmissionStatus !==
+          contentSubmissionStatusEnum.Default)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       }
@@ -311,31 +317,31 @@ const ProjectDetails = props => {
     })
   }
 
-  // const onChangeContentSubmissionLink = async contentSubmissionLink => {
-  //   setContentSubmissionLinkValid(contentSubmissionLink.trim().length > 0)
-  //   setContentSubmissionLink(contentSubmissionLink)
-  // }
+  const onChangeContentSubmissionLink = async contentSubmissionLink => {
+    setContentSubmissionLinkValid(contentSubmissionLink.trim().length > 0)
+    setContentSubmissionLink(contentSubmissionLink)
+  }
 
-  // const onChangeResultSubmissionLink = async resultSubmissionLink => {
-  //   setResultSubmissionLinkValid(resultSubmissionLink.trim().length > 0)
-  //   setResultSubmissionLink(resultSubmissionLink)
-  // }
+  const onChangeResultSubmissionLink = async resultSubmissionLink => {
+    setResultSubmissionLinkValid(resultSubmissionLink.trim().length > 0)
+    setResultSubmissionLink(resultSubmissionLink)
+  }
 
-  // function isDisabledContentSubmit() {
-  //   return !contentSubmissionLinkValid
-  // }
+  function isDisabledContentSubmit() {
+    return !contentSubmissionLinkValid
+  }
 
-  // function isDisabledContentDelete() {
-  //   return !contentSubmissionLinkValid
-  // }
+  function isDisabledContentDelete() {
+    return !contentSubmissionLinkValid
+  }
 
-  // function isDisabledResultSubmit() {
-  //   return !resultSubmissionLinkValid
-  // }
+  function isDisabledResultSubmit() {
+    return !resultSubmissionLinkValid
+  }
 
-  // function isDisabledResultDelete() {
-  //   return !resultSubmissionLinkValid
-  // }
+  function isDisabledResultDelete() {
+    return !resultSubmissionLinkValid
+  }
 
   const setLoadingTrue = async () => {
     setLoading(true)
@@ -457,6 +463,9 @@ const ProjectDetails = props => {
           {
             description &&
             <View style={styles.viewStyle}>
+              <Text style={styles.titleStyle}>
+                Strategy
+              </Text>
               <HTML contentWidth={contentWidth}
                     source={{
                       html: description
@@ -482,92 +491,104 @@ const ProjectDetails = props => {
             </View>
           }
           {
-            jobAcceptationStatus === jobAcceptationStatusEnum.Pending &&
+            // jobAcceptationStatus === jobAcceptationStatusEnum.Pending &&
             <View style={styles.centerViewStyle}>
-              <TouchableOpacity style={styles.acceptButtonStyle}
-                                onPress={showDialogAccept}>
-                <Text style={styles.buttonTextStyle}>
-                  Accept
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.deleteButtonStyle}
-                                onPress={showDialogReject}>
-                <Text style={styles.buttonTextStyle}>
-                  Reject
-                </Text>
-              </TouchableOpacity>
+              <View style={styles.horizontalStyle}>
+                <TouchableOpacity style={styles.deleteButtonStyle}
+                                  onPress={showDialogReject}>
+                  <View style={styles.horizontalStyle}>
+                    <Entypo name='cross'
+                            size={24}
+                            color={Colors.secondaryColor}/>
+                    <Text style={styles.buttonTextStyle}>
+                      Reject
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.acceptButtonStyle}
+                                  onPress={showDialogAccept}>
+                  <View style={styles.horizontalStyle}>
+                    <Ionicons name='checkmark'
+                              size={24}
+                              color={Colors.secondaryColor}/>
+                    <Text style={styles.buttonTextStyle}>
+                      Accept
+                    </Text>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
           }
-          {/*{*/}
-          {/*  jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && !isContentGivenByStrategyMember &&*/}
-          {/*  <View style={styles.centerViewStyle}>*/}
-          {/*    <Text style={styles.labelStyle}>*/}
-          {/*      Content Submission Link*/}
-          {/*    </Text>*/}
-          {/*    <TextInput style={styles.textInputStyle}*/}
-          {/*               onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}*/}
-          {/*               value={contentSubmissionLink}*/}
-          {/*               placeholder='Enter URL'*/}
-          {/*               placeholderTextColor={Colors.tertiaryColor}*/}
-          {/*               editable={contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>*/}
-          {/*    {*/}
-          {/*      contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&*/}
-          {/*      <View>*/}
-          {/*        <TouchableOpacity style={isDisabledContentSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}*/}
-          {/*                          disabled={isDisabledContentSubmit()}*/}
-          {/*                          onPress={showDialogContentSubmit}>*/}
-          {/*          <Text style={styles.buttonTextStyle}>*/}
-          {/*            Submit*/}
-          {/*          </Text>*/}
-          {/*        </TouchableOpacity>*/}
-          {/*        <TouchableOpacity disabled={isDisabledContentDelete()}*/}
-          {/*                          onPress={showDialogContentDelete}*/}
-          {/*                          style={isDisabledContentDelete() ? styles.buttonDisabledStyle*/}
-          {/*                            : styles.deleteButtonStyle}>*/}
-          {/*          <Text style={styles.buttonTextStyle}>*/}
-          {/*            Delete*/}
-          {/*          </Text>*/}
-          {/*        </TouchableOpacity>*/}
-          {/*      </View>*/}
-          {/*    }*/}
-          {/*  </View>*/}
-          {/*}*/}
-          {/*{*/}
-          {/*  ((jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && isContentGivenByStrategyMember) ||*/}
-          {/*    (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&*/}
-          {/*      contentSubmissionStatus === contentSubmissionStatusEnum.Approved)) &&*/}
-          {/*  <View style={styles.centerViewStyle}>*/}
-          {/*    <Text style={styles.labelStyle}>*/}
-          {/*      Result Submission Link*/}
-          {/*    </Text>*/}
-          {/*    <TextInput style={styles.textInputStyle}*/}
-          {/*               onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}*/}
-          {/*               value={resultSubmissionLink}*/}
-          {/*               placeholder='Enter URL'*/}
-          {/*               placeholderTextColor={Colors.tertiaryColor}*/}
-          {/*               editable={resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>*/}
-          {/*    {*/}
-          {/*      resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&*/}
-          {/*      <View>*/}
-          {/*        <TouchableOpacity style={isDisabledResultSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}*/}
-          {/*                          disabled={isDisabledResultSubmit()}*/}
-          {/*                          onPress={showDialogResultSubmit}>*/}
-          {/*          <Text style={styles.buttonTextStyle}>*/}
-          {/*            Submit*/}
-          {/*          </Text>*/}
-          {/*        </TouchableOpacity>*/}
-          {/*        <TouchableOpacity*/}
-          {/*          style={isDisabledResultDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}*/}
-          {/*          disabled={isDisabledResultDelete()}*/}
-          {/*          onPress={showDialogResultDelete}>*/}
-          {/*          <Text style={styles.buttonTextStyle}>*/}
-          {/*            Delete*/}
-          {/*          </Text>*/}
-          {/*        </TouchableOpacity>*/}
-          {/*      </View>*/}
-          {/*    }*/}
-          {/*  </View>*/}
-          {/*}*/}
+          {
+            // jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && !isContentGivenByStrategyMember &&
+            <View style={styles.centerViewStyle}>
+              <Text style={styles.labelStyle}>
+                Content Submission Link
+              </Text>
+              <TextInput style={styles.textInputStyle}
+                         onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
+                         value={contentSubmissionLink}
+                         placeholder='Enter URL'
+                         placeholderTextColor={Colors.tertiaryColor}
+                         editable={contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
+              {
+                contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
+                <View>
+                  <TouchableOpacity style={isDisabledContentSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                    disabled={isDisabledContentSubmit()}
+                                    onPress={showDialogContentSubmit}>
+                    <Text style={styles.buttonTextStyle}>
+                      Submit
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity disabled={isDisabledContentDelete()}
+                                    onPress={showDialogContentDelete}
+                                    style={isDisabledContentDelete() ? styles.buttonDisabledStyle
+                                      : styles.deleteButtonStyle}>
+                    <Text style={styles.buttonTextStyle}>
+                      Delete
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              }
+            </View>
+          }
+          {
+            // ((jobAcceptationStatus === jobAcceptationStatusEnum.Accepted && isContentGivenByStrategyMember) ||
+            //   (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted &&
+            //     contentSubmissionStatus === contentSubmissionStatusEnum.Approved)) &&
+            <View style={styles.centerViewStyle}>
+              <Text style={styles.labelStyle}>
+                Result Submission Link
+              </Text>
+              <TextInput style={styles.textInputStyle}
+                         onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
+                         value={resultSubmissionLink}
+                         placeholder='Enter URL'
+                         placeholderTextColor={Colors.tertiaryColor}
+                         editable={resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
+              {
+                resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
+                <View>
+                  <TouchableOpacity style={isDisabledResultSubmit() ? styles.buttonDisabledStyle : styles.buttonStyle}
+                                    disabled={isDisabledResultSubmit()}
+                                    onPress={showDialogResultSubmit}>
+                    <Text style={styles.buttonTextStyle}>
+                      Submit
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={isDisabledResultDelete() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}
+                    disabled={isDisabledResultDelete()}
+                    onPress={showDialogResultDelete}>
+                    <Text style={styles.buttonTextStyle}>
+                      Delete
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              }
+            </View>
+          }
         </View>
         {
           loading &&
@@ -629,6 +650,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 10
   },
+  horizontalStyle: {
+    flexDirection: 'row'
+  },
   labelStyle: {
     marginTop: 20,
     color: Colors.primaryColor,
@@ -670,10 +694,8 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   viewStyle: {
-    marginLeft: wp('9%'),
-    marginRight: wp('9%'),
-    marginTop: wp('2%'),
-    marginBottom: wp('2%')
+    marginHorizontal: wp('9%'),
+    marginVertical: wp('2%')
   }
 })
 
