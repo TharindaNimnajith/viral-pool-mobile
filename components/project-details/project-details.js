@@ -130,56 +130,54 @@ const ProjectDetails = props => {
     setVisibleReject(false)
   }
 
-  const showDialogContentSubmit = async (id, link) => {
+  const showDialogContentSubmit = (id, link) => {
     setId(id)
     setLink(link)
     setVisibleContentSubmit(true)
   }
 
-  const hideDialogContentSubmit = async () => {
+  const hideDialogContentSubmit = () => {
     setId('')
     setLink('')
     setVisibleContentSubmit(false)
   }
 
-  const showDialogContentDelete = async id => {
+  const showDialogContentDelete = id => {
     setId(id)
     setVisibleContentDelete(true)
   }
 
-  const hideDialogContentDelete = async () => {
+  const hideDialogContentDelete = () => {
     setId('')
     setLink('')
     setVisibleContentDelete(false)
   }
 
-  const showDialogResultSubmit = async (id, link) => {
+  const showDialogResultSubmit = (id, link) => {
     setId(id)
     setLink(link)
     setVisibleResultSubmit(true)
   }
 
-  const hideDialogResultSubmit = async () => {
+  const hideDialogResultSubmit = () => {
     setId('')
     setLink('')
     setVisibleResultSubmit(false)
   }
 
-  const showDialogResultDelete = async id => {
+  const showDialogResultDelete = id => {
     setId(id)
     setVisibleResultDelete(true)
   }
 
-  const hideDialogResultDelete = async () => {
+  const hideDialogResultDelete = () => {
     setId('')
     setLink('')
     setVisibleResultDelete(false)
   }
 
-  function isDisabled(link) {
-    if (link !== null)
-      return !link.trim().length > 0
-    return true
+  const onChangeLink = async link => {
+    setLink(link)
   }
 
   const setLoadingTrue = async () => {
@@ -188,6 +186,10 @@ const ProjectDetails = props => {
 
   const setLoadingFalse = async () => {
     setLoading(false)
+  }
+
+  function isDisabled() {
+    return false
   }
 
   const acceptJob = async () => {
@@ -605,16 +607,16 @@ const ProjectDetails = props => {
                     </Text>
                     <TextInput style={styles.textInputStyle}
                                value={value.contentSubmissionLink}
+                               onChangeText={link => onChangeLink(link)}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
                                editable={value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
                     {
                       value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
-                        <TouchableOpacity disabled={isDisabled(value.contentSubmissionStatus)}
-                                          onPress={showDialogContentDelete(value.id)}
-                                          style={isDisabled(value.contentSubmissionStatus) ?
-                                            styles.buttonDisabledStyle : styles.deleteButtonStyle}>
+                        <TouchableOpacity disabled={isDisabled()}
+                                          onPress={() => showDialogContentDelete(value)}
+                                          style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Entypo name='cross'
                                     size={19}
@@ -624,10 +626,9 @@ const ProjectDetails = props => {
                             </Text>
                           </View>
                         </TouchableOpacity>
-                        <TouchableOpacity disabled={isDisabled(value.contentSubmissionStatus)}
-                                          onPress={showDialogContentSubmit(value.id, value.contentSubmissionLink)}
-                                          style={isDisabled(value.contentSubmissionStatus) ?
-                                            styles.buttonDisabledStyle : styles.submitButtonStyle}>
+                        <TouchableOpacity disabled={isDisabled()}
+                                          onPress={() => showDialogContentSubmit(value.id, value.contentSubmissionLink)}
+                                          style={isDisabled() ? styles.buttonDisabledStyle : styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
                                       size={19}
@@ -650,16 +651,16 @@ const ProjectDetails = props => {
                     </Text>
                     <TextInput style={styles.textInputStyle}
                                value={value.resultSubmissionLink}
+                               onChangeText={link => onChangeLink(link)}
                                placeholder='Paste Link Here'
                                placeholderTextColor={Colors.tertiaryColor}
                                editable={value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
                     {
                       value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
-                        <TouchableOpacity disabled={isDisabled(value.resultSubmissionLink)}
-                                          onPress={showDialogResultDelete(value.id)}
-                                          style={isDisabled(value.resultSubmissionLink) ?
-                                            styles.buttonDisabledStyle : styles.deleteButtonStyle}>
+                        <TouchableOpacity disabled={isDisabled()}
+                                          onPress={() => showDialogResultDelete(value.id)}
+                                          style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Entypo name='cross'
                                     size={19}
@@ -669,10 +670,9 @@ const ProjectDetails = props => {
                             </Text>
                           </View>
                         </TouchableOpacity>
-                        <TouchableOpacity disabled={isDisabled(value.resultSubmissionLink)}
-                                          onPress={showDialogResultSubmit(value.id, value.resultSubmissionLink)}
-                                          style={isDisabled(value.resultSubmissionLink) ?
-                                            styles.buttonDisabledStyle : styles.deleteButtonStyle}>
+                        <TouchableOpacity disabled={isDisabled()}
+                                          onPress={() => showDialogResultSubmit(value.id, value.resultSubmissionLink)}
+                                          style={isDisabled() ? styles.buttonDisabledStyle : styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
                                       size={19}
