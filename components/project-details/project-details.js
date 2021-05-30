@@ -130,47 +130,45 @@ const ProjectDetails = props => {
     setVisibleReject(false)
   }
 
-  const showDialogContentSubmit = (id, link) => {
+  const showDialogContentSubmit = async id => {
     setId(id)
-    setLink(link)
     setVisibleContentSubmit(true)
   }
 
-  const hideDialogContentSubmit = () => {
+  const hideDialogContentSubmit = async () => {
     setId('')
     setLink('')
     setVisibleContentSubmit(false)
   }
 
-  const showDialogContentDelete = id => {
+  const showDialogContentDelete = async id => {
     setId(id)
     setVisibleContentDelete(true)
   }
 
-  const hideDialogContentDelete = () => {
+  const hideDialogContentDelete = async () => {
     setId('')
     setLink('')
     setVisibleContentDelete(false)
   }
 
-  const showDialogResultSubmit = (id, link) => {
+  const showDialogResultSubmit = async id => {
     setId(id)
-    setLink(link)
     setVisibleResultSubmit(true)
   }
 
-  const hideDialogResultSubmit = () => {
+  const hideDialogResultSubmit = async () => {
     setId('')
     setLink('')
     setVisibleResultSubmit(false)
   }
 
-  const showDialogResultDelete = id => {
+  const showDialogResultDelete = async id => {
     setId(id)
     setVisibleResultDelete(true)
   }
 
-  const hideDialogResultDelete = () => {
+  const hideDialogResultDelete = async () => {
     setId('')
     setLink('')
     setVisibleResultDelete(false)
@@ -615,7 +613,7 @@ const ProjectDetails = props => {
                       value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
                       <View style={styles.horizontalStyle}>
                         <TouchableOpacity disabled={isDisabled()}
-                                          onPress={() => showDialogContentDelete(value)}
+                                          onPress={() => showDialogContentDelete(value.id)}
                                           style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Entypo name='cross'
