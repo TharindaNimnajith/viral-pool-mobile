@@ -233,16 +233,18 @@ const ProjectDetails = props => {
     })
   }
 
-  const contentSubmit = async (jobId, contentSubmissionLink) => {
+  const contentSubmit = async () => {
     setVisibleContentSubmit(false)
     setLoading(true)
     let data = {
       strategyId: project.project,
-      id: jobId,
-      contentLink: contentSubmissionLink
+      id: id,
+      contentLink: link
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
       project.refresh()
+      setId('')
+      setLink('')
       setLoading(false)
       setRefresh(true)
       if (response.status === 200)
@@ -257,16 +259,18 @@ const ProjectDetails = props => {
     })
   }
 
-  const contentDelete = async jobId => {
+  const contentDelete = async () => {
     setVisibleContentDelete(false)
     setLoading(true)
     let data = {
       strategyId: project.project,
-      id: jobId,
+      id: id,
       contentLink: null
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
       project.refresh()
+      setId('')
+      setLink('')
       setLoading(false)
       setRefresh(true)
       if (response.status === 200)
@@ -281,16 +285,18 @@ const ProjectDetails = props => {
     })
   }
 
-  const resultSubmit = async (jobId, resultSubmissionLink) => {
+  const resultSubmit = async () => {
     setVisibleResultSubmit(false)
     setLoading(true)
     let data = {
       strategyId: project.project,
-      id: jobId,
-      resultLink: resultSubmissionLink
+      id: id,
+      resultLink: link
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
       project.refresh()
+      setId('')
+      setLink('')
       setLoading(false)
       setRefresh(true)
       if (response.status === 200)
@@ -305,16 +311,18 @@ const ProjectDetails = props => {
     })
   }
 
-  const resultDelete = async jobId => {
+  const resultDelete = async () => {
     setVisibleResultDelete(false)
     setLoading(true)
     let data = {
       strategyId: project.project,
-      id: jobId,
+      id: id,
       resultLink: null
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
       project.refresh()
+      setId('')
+      setLink('')
       setLoading(false)
       setRefresh(true)
       if (response.status === 200)
@@ -371,7 +379,7 @@ const ProjectDetails = props => {
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        color={Colors.primaryColor}
-                       onPress={contentSubmit(id, link)}/>
+                       onPress={contentSubmit}/>
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogContentSubmit}/>
@@ -386,7 +394,7 @@ const ProjectDetails = props => {
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        color={Colors.primaryColor}
-                       onPress={contentDelete(id)}/>
+                       onPress={contentDelete}/>
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogContentDelete}/>
@@ -401,7 +409,7 @@ const ProjectDetails = props => {
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        color={Colors.primaryColor}
-                       onPress={resultSubmit(id, link)}/>
+                       onPress={resultSubmit}/>
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogResultSubmit}/>
@@ -416,7 +424,7 @@ const ProjectDetails = props => {
         </Dialog.Description>
         <Dialog.Button label='Yes'
                        color={Colors.primaryColor}
-                       onPress={resultDelete(id)}/>
+                       onPress={resultDelete}/>
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogResultDelete}/>
@@ -615,7 +623,7 @@ const ProjectDetails = props => {
                           </View>
                         </TouchableOpacity>
                         <TouchableOpacity disabled={false}
-                                          onPress={showDialogContentSubmit(value.id, value.contentSubmissionLink)}
+                                          onPress={showDialogContentSubmit(value.id, 'value.contentSubmissionLink')}
                                           style={styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
@@ -659,7 +667,7 @@ const ProjectDetails = props => {
                           </View>
                         </TouchableOpacity>
                         <TouchableOpacity disabled={false}
-                                          onPress={showDialogResultSubmit(value.id, value.resultSubmissionLink)}
+                                          onPress={showDialogResultSubmit(value.id, 'value.resultSubmissionLink')}
                                           style={styles.submitButtonStyle}>
                           <View style={styles.horizontalStyle}>
                             <Ionicons name='checkmark'
