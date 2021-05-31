@@ -135,17 +135,16 @@ const FileListItem = props => {
 
 const styles = StyleSheet.create({
   itemStyle: {
-    padding: 12,
     elevation: 5,
     borderRadius: 10,
     backgroundColor: Colors.secondaryColor,
-    marginRight: wp('3%'),
-    height: wp('24%'),
-    width: wp('24%'),
+    marginRight: wp('2.5%'),
+    marginVertical: 10,
+    height: wp('23%'),
+    width: wp('23%'),
     alignItems: 'center',
     alignContent: 'center',
-    justifyContent: 'center',
-    marginVertical: 10
+    justifyContent: 'center'
   },
   textStyle: {
     marginTop: 8
