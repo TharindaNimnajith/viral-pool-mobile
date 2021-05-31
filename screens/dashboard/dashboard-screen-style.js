@@ -8,42 +8,7 @@ export const styles = StyleSheet.create({
         // mawath add karapn kammaliy
     },
 
-    container: {
-        width: '100%',
-        paddingRight: 15,
-        paddingLeft: 15,
-        marginRight: 'auto',
-        marginLeft: 'auto',
-        flexDirection: 'row',
-        marginTop:20,
-        marginBottom:20,
-    },
 
-    userNameStyle:{
-      fontSize:23,
-      color:Colors.secondaryColor
-    },
-
-    socialMediaIcon:{
-        marginBottom: 10,
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'row'
-    },
-    socialMediaIconText: {
-        color: Colors.secondaryColor,
-        marginRight: 10
-    },
-
-
-
-    avatarStyle: {
-        width: wp('25%'),
-        height: wp('25%'),
-        borderRadius: wp('100%'),
-        borderWidth: 1,
-        borderColor: Colors.secondaryColor
-    },
 
     // END
     betweenStyle: {

@@ -185,95 +185,92 @@ const DashboardScreen = props => {
         }>
           <View style={styles.mainViewStyle}>
 
-            <View style={styles.headerStyle}>
 
-              <DashboardUserProfile facebookCount={facebookCount}
-                                    youtubeCount={youtubeCount}
-                                    tiktokCount={tiktokCount}
-                                    instagramCount={instagramCount}
-                                    rank={rank}
-                                    points={points}
-                                    firstName={appContext?.userData?.firstName}
-                                    lastName={appContext?.userData?.lastName}
-                                    profileImagePath={appContext?.userData?.profileImagePath}/>
-
+            <DashboardUserProfile facebookCount={facebookCount}
+                                  youtubeCount={youtubeCount}
+                                  tiktokCount={tiktokCount}
+                                  instagramCount={instagramCount}
+                                  rank={rank}
+                                  points={points}
+                                  firstName={appContext?.userData?.firstName}
+                                  lastName={appContext?.userData?.lastName}
+                                  profileImagePath={appContext?.userData?.profileImagePath}/>
 
 
+            {/*Ag - User name*/}
+            {/*<View style={styles.viewStyle}>*/}
+            {/*  <View style={styles.horizontalContentStyle}>*/}
+            {/*    <TouchableOpacity onPress={onProfilePress}>*/}
+            {/*      {*/}
+            {/*        appContext.userData && appContext.userData?.profileImagePath ? (*/}
+            {/*            <Image style={styles.avatarStyle}*/}
+            {/*                   source={{*/}
+            {/*                     uri: appContext.userData?.profileImagePath*/}
+            {/*                   }}/>*/}
+            {/*        ) : (*/}
+            {/*            <Image style={styles.avatarStyle}*/}
+            {/*                   source={require('../../assets/user.jpg')}/>*/}
+            {/*        )*/}
+            {/*      }*/}
+            {/*    </TouchableOpacity>*/}
+            {/*    <View style={styles.profileStyle}>*/}
+            {/*      <TouchableOpacity onPress={onProfilePress}>*/}
+            {/*        <Text style={styles.titleStyle}>*/}
+            {/*          {appContext.userData?.firstName} {appContext.userData?.lastName}*/}
+            {/*        </Text>*/}
+            {/*      </TouchableOpacity>*/}
+            {/*      <TouchableOpacity onPress={onSocialMediaPress}>*/}
+            {/*        <View style={styles.socialMediaStyle}>*/}
+            {/*          <View style={styles.horizontalContentStyle}>*/}
+            {/*            <View style={styles.betweenStyle}>*/}
+            {/*              <View style={styles.horizontalContentStyle}>*/}
+            {/*                <Ionicons name='logo-youtube'*/}
+            {/*                          size={20}*/}
+            {/*                          color={Colors.secondaryColor}/>*/}
+            {/*                <Text style={styles.countStyle}>*/}
+            {/*                  {formatNumber(youtubeCount)}*/}
+            {/*                </Text>*/}
+            {/*              </View>*/}
+            {/*            </View>*/}
+            {/*            <View style={styles.betweenStyle}>*/}
+            {/*              <View style={styles.horizontalContentStyle}>*/}
+            {/*                <Ionicons name='logo-facebook'*/}
+            {/*                          size={20}*/}
+            {/*                          color={Colors.secondaryColor}/>*/}
+            {/*                <Text style={styles.countStyle}>*/}
+            {/*                  {formatNumber(facebookCount)}*/}
+            {/*                </Text>*/}
+            {/*              </View>*/}
+            {/*            </View>*/}
+            {/*            <View style={styles.betweenStyle}>*/}
+            {/*              <View style={styles.horizontalContentStyle}>*/}
+            {/*                <Ionicons name='logo-instagram'*/}
+            {/*                          size={20}*/}
+            {/*                          color={Colors.secondaryColor}/>*/}
+            {/*                <Text style={styles.countStyle}>*/}
+            {/*                  {formatNumber(instagramCount)}*/}
+            {/*                </Text>*/}
+            {/*              </View>*/}
+            {/*            </View>*/}
+            {/*            <View style={styles.betweenStyle}>*/}
+            {/*              <View style={styles.horizontalContentStyle}>*/}
+            {/*                <MaterialCommunityIcons name='music-note'*/}
+            {/*                                        size={20}*/}
+            {/*                                        color={Colors.secondaryColor}/>*/}
+            {/*                <Text style={styles.tiktokCountStyle}>*/}
+            {/*                  {formatNumber(tiktokCount)}*/}
+            {/*                </Text>*/}
+            {/*              </View>*/}
+            {/*            </View>*/}
+            {/*          </View>*/}
+            {/*        </View>*/}
+            {/*      </TouchableOpacity>*/}
+            {/*    </View>*/}
+            {/*  </View>*/}
+            {/*</View>*/}
 
-              {/*Ag - User name*/}
-              {/*<View style={styles.viewStyle}>*/}
-              {/*  <View style={styles.horizontalContentStyle}>*/}
-              {/*    <TouchableOpacity onPress={onProfilePress}>*/}
-              {/*      {*/}
-              {/*        appContext.userData && appContext.userData?.profileImagePath ? (*/}
-              {/*            <Image style={styles.avatarStyle}*/}
-              {/*                   source={{*/}
-              {/*                     uri: appContext.userData?.profileImagePath*/}
-              {/*                   }}/>*/}
-              {/*        ) : (*/}
-              {/*            <Image style={styles.avatarStyle}*/}
-              {/*                   source={require('../../assets/user.jpg')}/>*/}
-              {/*        )*/}
-              {/*      }*/}
-              {/*    </TouchableOpacity>*/}
-              {/*    <View style={styles.profileStyle}>*/}
-              {/*      <TouchableOpacity onPress={onProfilePress}>*/}
-              {/*        <Text style={styles.titleStyle}>*/}
-              {/*          {appContext.userData?.firstName} {appContext.userData?.lastName}*/}
-              {/*        </Text>*/}
-              {/*      </TouchableOpacity>*/}
-              {/*      <TouchableOpacity onPress={onSocialMediaPress}>*/}
-              {/*        <View style={styles.socialMediaStyle}>*/}
-              {/*          <View style={styles.horizontalContentStyle}>*/}
-              {/*            <View style={styles.betweenStyle}>*/}
-              {/*              <View style={styles.horizontalContentStyle}>*/}
-              {/*                <Ionicons name='logo-youtube'*/}
-              {/*                          size={20}*/}
-              {/*                          color={Colors.secondaryColor}/>*/}
-              {/*                <Text style={styles.countStyle}>*/}
-              {/*                  {formatNumber(youtubeCount)}*/}
-              {/*                </Text>*/}
-              {/*              </View>*/}
-              {/*            </View>*/}
-              {/*            <View style={styles.betweenStyle}>*/}
-              {/*              <View style={styles.horizontalContentStyle}>*/}
-              {/*                <Ionicons name='logo-facebook'*/}
-              {/*                          size={20}*/}
-              {/*                          color={Colors.secondaryColor}/>*/}
-              {/*                <Text style={styles.countStyle}>*/}
-              {/*                  {formatNumber(facebookCount)}*/}
-              {/*                </Text>*/}
-              {/*              </View>*/}
-              {/*            </View>*/}
-              {/*            <View style={styles.betweenStyle}>*/}
-              {/*              <View style={styles.horizontalContentStyle}>*/}
-              {/*                <Ionicons name='logo-instagram'*/}
-              {/*                          size={20}*/}
-              {/*                          color={Colors.secondaryColor}/>*/}
-              {/*                <Text style={styles.countStyle}>*/}
-              {/*                  {formatNumber(instagramCount)}*/}
-              {/*                </Text>*/}
-              {/*              </View>*/}
-              {/*            </View>*/}
-              {/*            <View style={styles.betweenStyle}>*/}
-              {/*              <View style={styles.horizontalContentStyle}>*/}
-              {/*                <MaterialCommunityIcons name='music-note'*/}
-              {/*                                        size={20}*/}
-              {/*                                        color={Colors.secondaryColor}/>*/}
-              {/*                <Text style={styles.tiktokCountStyle}>*/}
-              {/*                  {formatNumber(tiktokCount)}*/}
-              {/*                </Text>*/}
-              {/*              </View>*/}
-              {/*            </View>*/}
-              {/*          </View>*/}
-              {/*        </View>*/}
-              {/*      </TouchableOpacity>*/}
-              {/*    </View>*/}
-              {/*  </View>*/}
-              {/*</View>*/}
+            {/*Ag - Stats*/}
 
-              {/*Ag - Stats*/}
-            </View>
             {/*<View style={styles.rowViewStyle}>*/}
 
             {/*  /!*AG*!/*/}

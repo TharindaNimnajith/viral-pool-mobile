@@ -6,7 +6,7 @@ import {
     View, StyleSheet
 } from 'react-native'
 import Colors from "../../../shared/const/colors";
-import {widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
 
 
 export const DashboardUserProfile = props => {
@@ -17,7 +17,7 @@ export const DashboardUserProfile = props => {
 
 
     return (
-        <View style={styles.container}>
+        <View style={[styles.container]}>
 
             <TouchableOpacity   onPress={onProfilePress}>
                 {
@@ -82,13 +82,6 @@ export const DashboardUserProfile = props => {
 }
 
 export const styles = StyleSheet.create({
-    textWrapper:{
-        flexShrink: 1,maxWidth: 250
-    },
-
-    dashboardStyle: {
-        paddingHorizontal: 10
-    },
     container: {
         width: '100%',
         paddingRight: 15,
@@ -96,8 +89,15 @@ export const styles = StyleSheet.create({
         marginRight: 'auto',
         marginLeft: 'auto',
         flexDirection: 'row',
-        marginTop:20,
-        marginBottom:20,
+        paddingTop:20,
+        paddingBottom:20,
+        backgroundColor: Colors.primaryColor,
+        borderBottomRightRadius: hp('6%'),
+        borderBottomLeftRadius: hp('6%')
+    },
+
+    textWrapper:{
+        flexShrink: 1,maxWidth: 250
     },
 
     userNameStyle:{
