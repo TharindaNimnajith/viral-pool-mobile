@@ -21,7 +21,7 @@ import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
 import DashboardLogo from '../../components/header/dashboard-logo'
-import ProjectListItem from '../../components/list-items/project/project-list-item'
+import ProjectListItem from '../../components/lists/project/project-list-item'
 
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)

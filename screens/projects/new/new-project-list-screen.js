@@ -9,7 +9,7 @@ import {projectStatusEnum} from '../../../shared/const/enums'
 import Constants from '../../../shared/const/constants'
 import Menu from '../../../components/header/menu-button'
 import CombinedButtons from '../../../components/header/combined-buttons'
-import ProjectListItem from '../../../components/list-items/project/project-list-item'
+import ProjectListItem from '../../../components/lists/project/project-list-item'
 
 const NewProjectListScreen = props => {
   const [newProjects, setNewProjects] = useState([])
