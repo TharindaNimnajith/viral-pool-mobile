@@ -257,7 +257,7 @@ const ProjectDetails = props => {
                                 color={Colors.instagramColor}/>
                     ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Tiktok ? (
                       <Image style={styles.tiktokStyle}
-                             source={require('../../../assets/tiktok-logo.png')}/>
+                             source={require('../../../assets/icons/tiktok-logo.png')}/>
                     ) : null
                 }
               </View>

@@ -1,15 +1,8 @@
 import React from 'react'
-import {Image, StyleSheet} from 'react-native'
+import {StyleSheet} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 
-const DashboardLogo = () => {
-  return (
-    <Image source={require('../../assets/dashboard-logo.png')}
-           style={styles.logoStyle}/>
-  )
-}
-
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   logoStyle: {
     position: 'absolute',
     marginTop: 5,
@@ -19,5 +12,3 @@ const styles = StyleSheet.create({
     height: wp('8.5%')
   }
 })
-
-export default DashboardLogo

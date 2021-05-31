@@ -6,8 +6,8 @@ import axios from 'axios'
 import Colors from '../../shared/const/colors'
 import {showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
-import Menu from '../../components/header/menu-button'
-import CombinedButtons from '../../components/header/combined-buttons'
+import Menu from '../../components/header/menu-button/menu-button'
+import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
 import IdeaListItem from '../../components/lists/idea/idea-list-item'
 
 const IdeaListScreen = props => {

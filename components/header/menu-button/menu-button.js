@@ -1,8 +1,8 @@
 import React from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import {Ionicons} from '@expo/vector-icons'
-import CustomHeaderButton from './custom-header-button'
-import Colors from '../../shared/const/colors'
+import CustomHeaderButton from '../custom-header-button/custom-header-button'
+import Colors from '../../../shared/const/colors'
 
 const Menu = props => {
   const toggleDrawer = async () => {

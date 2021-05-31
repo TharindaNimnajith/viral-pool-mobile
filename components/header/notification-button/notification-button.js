@@ -1,9 +1,9 @@
 import React, {useContext} from 'react'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
-import {AppContext} from '../../shared/global/app-context'
-import Colors from '../../shared/const/colors'
-import CustomHeaderButton from './custom-header-button'
+import {AppContext} from '../../../shared/global/app-context'
+import Colors from '../../../shared/const/colors'
+import CustomHeaderButton from '../custom-header-button/custom-header-button'
 
 const NotificationButton = props => {
   const appContext = useContext(AppContext)

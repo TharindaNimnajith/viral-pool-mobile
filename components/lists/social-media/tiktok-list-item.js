@@ -61,7 +61,7 @@ const TiktokListItem = props => {
             <View style={styles.mainViewStyle}>
               <View style={styles.iconViewStyle}>
                 <Image style={styles.avatarStyle}
-                       source={require('../../../assets/tiktok-logo.png')}/>
+                       source={require('../../../assets/icons/tiktok-logo.png')}/>
               </View>
               <View style={styles.viewStyle}>
                 <Text style={styles.textStyle}>

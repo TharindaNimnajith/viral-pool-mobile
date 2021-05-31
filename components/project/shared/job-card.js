@@ -223,22 +223,20 @@ const JobCard = props => {
       </Dialog.Container>
       <View style={styles.submissionViewStyle}>
 
-        <View style={{alignItems:'flex-end',paddingRight:15, width:'100%'}}>
+        <View style={{alignItems: 'flex-end', paddingRight: 15, width: '100%'}}>
           {
             props.itemData.isPaid ? (
-                <Text style={styles.statusPaidStyle}>
-                  Paid
-                </Text>
+              <Text style={styles.statusPaidStyle}>
+                Paid
+              </Text>
             ) : (
-                <Text style={styles.statusNotPaidStyle}>
-                  Not Paid
-                </Text>
+              <Text style={styles.statusNotPaidStyle}>
+                Not Paid
+              </Text>
             )
           }
         </View>
         <View style={styles.headerStyle}>
-
-
 
 
           <View style={styles.horizontalStyle}>
@@ -252,7 +250,6 @@ const JobCard = props => {
               {props.itemData.socialMediaAccountResponse.profileName}
             </Text>
           </View>
-
 
 
         </View>

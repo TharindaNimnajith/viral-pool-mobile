@@ -92,11 +92,11 @@ const LoginScreen = props => {
                   }>
         <View style={styles.mainViewStyle}>
           <ImageBackground style={styles.image}
-                           source={require('../../assets/background.png')}>
+                           source={require('../../assets/background/background.png')}>
             <View style={styles.containerStyle}>
               <View style={styles.headerStyle}>
                 <Image style={styles.imageStyle}
-                       source={require('../../assets/login-logo.png')}/>
+                       source={require('../../assets/logo/login-logo.png')}/>
                 <Text style={styles.textStyle}>
                   {Constants.DESCRIPTION}
                 </Text>

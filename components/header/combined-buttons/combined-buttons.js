@@ -1,7 +1,8 @@
 import React from 'react'
-import {StyleSheet, View} from 'react-native'
-import NotificationButton from './notification-button'
-import Logout from './logout-button'
+import {View} from 'react-native'
+import NotificationButton from '../notification-button/notification-button'
+import Logout from '../logout-button/logout-button'
+import {styles} from './combined-buttons-styles'
 
 const CombinedButtons = props => {
   return (
@@ -15,14 +16,5 @@ const CombinedButtons = props => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  iconStyle: {
-    left: 20
-  },
-  viewStyle: {
-    flexDirection: 'row'
-  }
-})
 
 export default CombinedButtons

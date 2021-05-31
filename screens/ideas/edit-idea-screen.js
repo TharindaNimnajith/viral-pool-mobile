@@ -18,7 +18,7 @@ import {AppContext} from '../../shared/global/app-context'
 import {showAlert, showErrors} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
-import CombinedButtons from '../../components/header/combined-buttons'
+import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
 
 const EditIdeaScreen = props => {
   const appContext = useContext(AppContext)

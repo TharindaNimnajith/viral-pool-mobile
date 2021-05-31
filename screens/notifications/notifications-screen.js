@@ -7,8 +7,8 @@ import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
 import {showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
-import Menu from '../../components/header/menu-button'
-import CombinedButtons from '../../components/header/combined-buttons'
+import Menu from '../../components/header/menu-button/menu-button'
+import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
 import NotificationListItem from '../../components/lists/notification/notification-list-item'
 
 const NotificationsScreen = props => {

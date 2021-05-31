@@ -21,8 +21,8 @@ import {AppContext} from '../../shared/global/app-context'
 import {ApiUrl, isNullAsync, showAlert} from '../../shared/util/helpers'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
-import Menu from '../../components/header/menu-button'
-import CombinedButtons from '../../components/header/combined-buttons'
+import Menu from '../../components/header/menu-button/menu-button'
+import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
 import {getStringData, storeStringData} from '../../shared/util/local-storage'
 
 const ProfileScreen = props => {
@@ -228,7 +228,7 @@ const ProfileScreen = props => {
               ) : (
                 <View>
                   <Image style={styles.avatarStyle}
-                         source={require('../../assets/user.jpg')}/>
+                         source={require('../../assets/user/user.jpg')}/>
                   <TouchableOpacity style={styles.editPhotoStyle}
                                     onPress={showDialog}>
                     <Ionicons name='camera'

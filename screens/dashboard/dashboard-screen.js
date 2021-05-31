@@ -15,14 +15,14 @@ import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
 import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
-import Menu from '../../components/header/menu-button'
-import CombinedButtons from '../../components/header/combined-buttons'
-import DashboardLogo from '../../components/header/dashboard-logo'
+import Menu from '../../components/header/menu-button/menu-button'
+import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
+import DashboardLogo from '../../components/header/dashboard-logo/dashboard-logo'
 import ProjectListItem from '../../components/lists/project/project-list-item'
+import {DashboardUserProfile} from './components/dashboard-user-profile'
+import {DashboardStats} from './components/dashboard-stats'
+import {DashboardEarnings} from './components/dashboard-earnings'
 import {styles} from './dashboard-screen-style'
-import {DashboardUserProfile} from './components/dashboard-user-profile';
-import {DashboardStats} from './components/dashboard-stats';
-import {DashboardEarnings} from "./components/dashboard-earnings";
 
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)
@@ -151,14 +151,12 @@ const DashboardScreen = props => {
 
   const renderItemsFunction = itemData => {
     return (
-        <ProjectListItem navigation={props.navigation}
-                         itemData={itemData}
-                         screen='OngoingProjectDetails'
-                         refreshFunction={refreshFunction}/>
+      <ProjectListItem navigation={props.navigation}
+                       itemData={itemData}
+                       screen='OngoingProjectDetails'
+                       refreshFunction={refreshFunction}/>
     )
   }
-
-
 
 
   const refreshFunction = async () => {
@@ -166,78 +164,71 @@ const DashboardScreen = props => {
   }
 
   return (
-      <SafeAreaView>
-        <ScrollView refreshControl={
-          <RefreshControl refreshing={refreshing}
-                          onRefresh={onRefresh}/>
-        }>
-          <View style={styles.mainViewStyle}>
+    <SafeAreaView>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+        <View style={styles.mainViewStyle}>
 
 
-            <DashboardUserProfile facebookCount={facebookCount}
-                                  youtubeCount={youtubeCount}
-                                  tiktokCount={tiktokCount}
-                                  instagramCount={instagramCount}
-                                  rank={rank}
-                                  points={points}
-                                  firstName={appContext?.userData?.firstName}
-                                  lastName={appContext?.userData?.lastName}
-                                  profileImagePath={appContext?.userData?.profileImagePath}/>
+          <DashboardUserProfile facebookCount={facebookCount}
+                                youtubeCount={youtubeCount}
+                                tiktokCount={tiktokCount}
+                                instagramCount={instagramCount}
+                                rank={rank}
+                                points={points}
+                                firstName={appContext?.userData?.firstName}
+                                lastName={appContext?.userData?.lastName}
+                                profileImagePath={appContext?.userData?.profileImagePath}/>
 
-            <DashboardStats  pendingProjectCount={pendingProjectCount}
-                             ongoingProjectCount={ongoingProjectCount}
-                             completedProjectCount={completedProjectCount}/>
-
-
-            <DashboardEarnings totalEarnings={totalEarnings} pendingEarnings={pendingEarnings}/>
+          <DashboardStats pendingProjectCount={pendingProjectCount}
+                          ongoingProjectCount={ongoingProjectCount}
+                          completedProjectCount={completedProjectCount}/>
 
 
+          <DashboardEarnings totalEarnings={totalEarnings} pendingEarnings={pendingEarnings}/>
 
 
-
-
-
-
-
-            <View style={styles.bodyStyle}>
-              <View style={styles.listStyle}>
-                <Text style={styles.sectionTitleStyle}>
-                  Recent Jobs
-                </Text>
-                {
-                  ongoingProjects.length > 0 ? (
-                      <FlatList keyExtractor={(item, index) => index.toString()}
-                                data={ongoingProjects}
-                                numColumns={1}
-                                renderItem={renderItemsFunction}/>
-                  ) : (
-                      <View style={styles.emptyListStyle}>
-                        <Ionicons name='warning'
-                                  size={80}
-                                  color={Colors.tertiaryColor}/>
-                        <Text style={styles.errorMessageStyle}>
-                          {Constants.EMPTY_LIST}
-                        </Text>
-                        <TouchableOpacity onPress={refreshFunction}>
-                          <Text style={styles.reloadMessageStyle}>
-                            Reload?
-                          </Text>
-                        </TouchableOpacity>
-                      </View>
-                  )
-                }
-              </View>
+          <View style={styles.bodyStyle}>
+            <View style={styles.listStyle}>
+              <Text style={styles.sectionTitleStyle}>
+                Recent Jobs
+              </Text>
+              {
+                ongoingProjects.length > 0 ? (
+                  <FlatList keyExtractor={(item, index) => index.toString()}
+                            data={ongoingProjects}
+                            numColumns={1}
+                            renderItem={renderItemsFunction}/>
+                ) : (
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )
+              }
             </View>
-            {
-              loading &&
-              <View style={styles.loadingStyle}>
-                <ActivityIndicator size='large'
-                                   color={Colors.secondaryColor}/>
-              </View>
-            }
           </View>
-        </ScrollView>
-      </SafeAreaView>
+          {
+            loading &&
+            <View style={styles.loadingStyle}>
+              <ActivityIndicator size='large'
+                                 color={Colors.secondaryColor}/>
+            </View>
+          }
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -252,13 +243,13 @@ DashboardScreen.navigationOptions = navData => {
   return {
     headerTitle: '',
     headerLeft: () => (
-        <View>
-          <Menu navigation={navData.navigation}/>
-          <DashboardLogo/>
-        </View>
+      <View>
+        <Menu navigation={navData.navigation}/>
+        <DashboardLogo/>
+      </View>
     ),
     headerRight: () => (
-        <CombinedButtons navigation={navData.navigation}/>
+      <CombinedButtons navigation={navData.navigation}/>
     )
   }
 }

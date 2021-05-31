@@ -19,8 +19,8 @@ import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
 import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
-import Menu from '../../components/header/menu-button'
-import CombinedButtons from '../../components/header/combined-buttons'
+import Menu from '../../components/header/menu-button/menu-button'
+import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
 import YoutubeListItem from '../../components/lists/social-media/youtube-list-item'
 import FacebookListItem from '../../components/lists/social-media/facebook-list-item'
 import InstagramListItem from '../../components/lists/social-media/instagram-list-item'
@@ -121,37 +121,37 @@ const SocialMediaScreen = () => {
 
   const renderYoutubeItemsFunction = itemData => {
     return (
-        <YoutubeListItem itemData={itemData}
+      <YoutubeListItem itemData={itemData}
+                       refreshFunction={refreshFunction}
+                       loadingFunctionTrue={loadingFunctionTrue}
+                       loadingFunctionFalse={loadingFunctionFalse}/>
+    )
+  }
+
+  const renderFacebookItemsFunction = itemData => {
+    return (
+      <FacebookListItem itemData={itemData}
+                        refreshFunction={refreshFunction}
+                        loadingFunctionTrue={loadingFunctionTrue}
+                        loadingFunctionFalse={loadingFunctionFalse}/>
+    )
+  }
+
+  const renderInstagramItemsFunction = itemData => {
+    return (
+      <InstagramListItem itemData={itemData}
                          refreshFunction={refreshFunction}
                          loadingFunctionTrue={loadingFunctionTrue}
                          loadingFunctionFalse={loadingFunctionFalse}/>
     )
   }
 
-  const renderFacebookItemsFunction = itemData => {
-    return (
-        <FacebookListItem itemData={itemData}
-                          refreshFunction={refreshFunction}
-                          loadingFunctionTrue={loadingFunctionTrue}
-                          loadingFunctionFalse={loadingFunctionFalse}/>
-    )
-  }
-
-  const renderInstagramItemsFunction = itemData => {
-    return (
-        <InstagramListItem itemData={itemData}
-                           refreshFunction={refreshFunction}
-                           loadingFunctionTrue={loadingFunctionTrue}
-                           loadingFunctionFalse={loadingFunctionFalse}/>
-    )
-  }
-
   const renderTiktokItemsFunction = itemData => {
     return (
-        <TiktokListItem itemData={itemData}
-                        refreshFunction={refreshFunction}
-                        loadingFunctionTrue={loadingFunctionTrue}
-                        loadingFunctionFalse={loadingFunctionFalse}/>
+      <TiktokListItem itemData={itemData}
+                      refreshFunction={refreshFunction}
+                      loadingFunctionTrue={loadingFunctionTrue}
+                      loadingFunctionFalse={loadingFunctionFalse}/>
     )
   }
 
@@ -280,7 +280,7 @@ const SocialMediaScreen = () => {
 
   function isDisabledInstagram() {
     return !instagramUsernameValid || !instagramLinkValid || !instagramFollowerCountValid ||
-        !instagramFollowingCountValid
+      !instagramFollowingCountValid
   }
 
   function isDisabledTiktok() {
@@ -411,358 +411,358 @@ const SocialMediaScreen = () => {
   }
 
   return (
-      <SafeAreaView>
-        <ScrollView refreshControl={
-          <RefreshControl refreshing={refreshing}
-                          onRefresh={onRefresh}/>
-        }>
+    <SafeAreaView>
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
 
-          <Dialog.Container visible={visibleYoutube}
-                            onBackdropPress={hideDialogYoutube}
-                            headerStyle={styles.headerStyle}
-                            footerStyle={styles.footerStyle}>
-            <Dialog.Title style={styles.titleStyle}>
-              NEW CHANNEL
-            </Dialog.Title>
+        <Dialog.Container visible={visibleYoutube}
+                          onBackdropPress={hideDialogYoutube}
+                          headerStyle={styles.headerStyle}
+                          footerStyle={styles.footerStyle}>
+          <Dialog.Title style={styles.titleStyle}>
+            NEW CHANNEL
+          </Dialog.Title>
 
-            <ScrollView style={{flexGrow: 0}}>
+          <ScrollView style={{flexGrow: 0}}>
 
-              <Dialog.Input label='Channel ID'
-                            style={styles.textInputStyle}
-                            wrapperStyle={styles.wrapperStyle}
-                            onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
-                            value={youtubeChannelId}
-                            placeholder='Enter Channel ID'
-                            placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Channel ID'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
+                          value={youtubeChannelId}
+                          placeholder='Enter Channel ID'
+                          placeholderTextColor={Colors.tertiaryColor}/>
 
-            </ScrollView>
+          </ScrollView>
 
-            <Dialog.Button label='Submit'
-                           color={isDisabledYoutube() ? Colors.tertiaryColor : Colors.primaryColor}
-                           onPress={addYoutube}
-                           disabled={isDisabledYoutube()}/>
-            <Dialog.Button label='Cancel'
-                           color={Colors.primaryColor}
-                           onPress={hideDialogYoutube}/>
+          <Dialog.Button label='Submit'
+                         color={isDisabledYoutube() ? Colors.tertiaryColor : Colors.primaryColor}
+                         onPress={addYoutube}
+                         disabled={isDisabledYoutube()}/>
+          <Dialog.Button label='Cancel'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogYoutube}/>
 
 
-          </Dialog.Container>
+        </Dialog.Container>
 
-          <Dialog.Container visible={visibleFacebook}
-                            onBackdropPress={hideDialogFacebook}
-                            headerStyle={styles.headerStyle}
-                            footerStyle={styles.footerStyle}>
-            <Dialog.Title style={styles.titleStyle}>
-              NEW PAGE
-            </Dialog.Title>
-            <Dialog.Input label='Page ID'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={facebookPageId => onChangeFacebookPageId(facebookPageId)}
-                          value={facebookPageId}
-                          placeholder='Enter Page ID'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Page Name'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={facebookPageName => onChangeFacebookPageName(facebookPageName)}
-                          value={facebookPageName}
-                          placeholder='Enter Page Name'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Page Link'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={facebookPageLink => onChangeFacebookPageLink(facebookPageLink)}
-                          value={facebookPageLink}
-                          placeholder='Enter Page Link'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Likes Count'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={facebookPageLikeCount => onChangeFacebookPageLikeCount(facebookPageLikeCount)}
-                          value={facebookPageLikeCount}
-                          placeholder='Enter Likes Count'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Button label='Submit'
-                           color={isDisabledFacebook() ? Colors.tertiaryColor : Colors.primaryColor}
-                           onPress={addFacebook}
-                           disabled={isDisabledFacebook()}/>
-            <Dialog.Button label='Cancel'
-                           color={Colors.primaryColor}
-                           onPress={hideDialogFacebook}/>
-          </Dialog.Container>
-          <Dialog.Container visible={visibleInstagram}
-                            onBackdropPress={hideDialogInstagram}
-                            headerStyle={styles.headerStyle}
-                            footerStyle={styles.footerStyle}>
-            <Dialog.Title style={styles.titleStyle}>
-              NEW ACCOUNT
-            </Dialog.Title>
-            <Dialog.Input label='Account Username'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={instagramUsername => onChangeInstagramUsername(instagramUsername)}
-                          value={instagramUsername}
-                          placeholder='Enter Account Username'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Account Link'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={instagramLink => onChangeInstagramLink(instagramLink)}
-                          value={instagramLink}
-                          placeholder='Enter Account Link'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Followers Count'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={instagramFollowerCount => onChangeInstagramFollowerCount(instagramFollowerCount)}
-                          value={instagramFollowerCount}
-                          placeholder='Enter Followers Count'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Following Count'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
-                          value={instagramFollowingCount}
-                          placeholder='Enter Following Count'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Button label='Submit'
-                           color={isDisabledInstagram() ? Colors.tertiaryColor : Colors.primaryColor}
-                           onPress={addInstagram}
-                           disabled={isDisabledInstagram()}/>
-            <Dialog.Button label='Cancel'
-                           color={Colors.primaryColor}
-                           onPress={hideDialogInstagram}/>
-          </Dialog.Container>
-          <Dialog.Container visible={visibleTiktok}
-                            onBackdropPress={hideDialogTiktok}
-                            headerStyle={styles.headerStyle}
-                            footerStyle={styles.footerStyle}>
-            <Dialog.Title style={styles.titleStyle}>
-              NEW ACCOUNT
-            </Dialog.Title>
-            <Dialog.Input label='Account Username'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={tiktokUsername => onChangeTiktokUsername(tiktokUsername)}
-                          value={tiktokUsername}
-                          placeholder='Enter Account Username'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Followers Count'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={tiktokFollowers => onChangeTiktokFollowers(tiktokFollowers)}
-                          value={tiktokFollowers}
-                          placeholder='Enter Followers Count'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Videos Count'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={tiktokVideos => onChangeTiktokVideos(tiktokVideos)}
-                          value={tiktokVideos}
-                          placeholder='Enter Videos Count'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Input label='Likes Count'
-                          style={styles.textInputStyle}
-                          wrapperStyle={styles.wrapperStyle}
-                          onChangeText={tiktokTotalLikes => onChangeTiktokTotalLikes(tiktokTotalLikes)}
-                          value={tiktokTotalLikes}
-                          placeholder='Enter Likes Count'
-                          placeholderTextColor={Colors.tertiaryColor}/>
-            <Dialog.Button label='Submit'
-                           color={isDisabledTiktok() ? Colors.tertiaryColor : Colors.primaryColor}
-                           onPress={addTiktok}
-                           disabled={isDisabledTiktok()}/>
-            <Dialog.Button label='Cancel'
-                           color={Colors.primaryColor}
-                           onPress={hideDialogTiktok}/>
-          </Dialog.Container>
-          <View style={styles.mainViewStyle}>
-            <View>
-              <View style={styles.horizontalViewStyle}>
-                <Ionicons name='logo-youtube'
+        <Dialog.Container visible={visibleFacebook}
+                          onBackdropPress={hideDialogFacebook}
+                          headerStyle={styles.headerStyle}
+                          footerStyle={styles.footerStyle}>
+          <Dialog.Title style={styles.titleStyle}>
+            NEW PAGE
+          </Dialog.Title>
+          <Dialog.Input label='Page ID'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={facebookPageId => onChangeFacebookPageId(facebookPageId)}
+                        value={facebookPageId}
+                        placeholder='Enter Page ID'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Page Name'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={facebookPageName => onChangeFacebookPageName(facebookPageName)}
+                        value={facebookPageName}
+                        placeholder='Enter Page Name'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Page Link'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={facebookPageLink => onChangeFacebookPageLink(facebookPageLink)}
+                        value={facebookPageLink}
+                        placeholder='Enter Page Link'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Likes Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={facebookPageLikeCount => onChangeFacebookPageLikeCount(facebookPageLikeCount)}
+                        value={facebookPageLikeCount}
+                        placeholder='Enter Likes Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Button label='Submit'
+                         color={isDisabledFacebook() ? Colors.tertiaryColor : Colors.primaryColor}
+                         onPress={addFacebook}
+                         disabled={isDisabledFacebook()}/>
+          <Dialog.Button label='Cancel'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogFacebook}/>
+        </Dialog.Container>
+        <Dialog.Container visible={visibleInstagram}
+                          onBackdropPress={hideDialogInstagram}
+                          headerStyle={styles.headerStyle}
+                          footerStyle={styles.footerStyle}>
+          <Dialog.Title style={styles.titleStyle}>
+            NEW ACCOUNT
+          </Dialog.Title>
+          <Dialog.Input label='Account Username'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramUsername => onChangeInstagramUsername(instagramUsername)}
+                        value={instagramUsername}
+                        placeholder='Enter Account Username'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Account Link'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramLink => onChangeInstagramLink(instagramLink)}
+                        value={instagramLink}
+                        placeholder='Enter Account Link'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Followers Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramFollowerCount => onChangeInstagramFollowerCount(instagramFollowerCount)}
+                        value={instagramFollowerCount}
+                        placeholder='Enter Followers Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Following Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
+                        value={instagramFollowingCount}
+                        placeholder='Enter Following Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Button label='Submit'
+                         color={isDisabledInstagram() ? Colors.tertiaryColor : Colors.primaryColor}
+                         onPress={addInstagram}
+                         disabled={isDisabledInstagram()}/>
+          <Dialog.Button label='Cancel'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogInstagram}/>
+        </Dialog.Container>
+        <Dialog.Container visible={visibleTiktok}
+                          onBackdropPress={hideDialogTiktok}
+                          headerStyle={styles.headerStyle}
+                          footerStyle={styles.footerStyle}>
+          <Dialog.Title style={styles.titleStyle}>
+            NEW ACCOUNT
+          </Dialog.Title>
+          <Dialog.Input label='Account Username'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokUsername => onChangeTiktokUsername(tiktokUsername)}
+                        value={tiktokUsername}
+                        placeholder='Enter Account Username'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Followers Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokFollowers => onChangeTiktokFollowers(tiktokFollowers)}
+                        value={tiktokFollowers}
+                        placeholder='Enter Followers Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Videos Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokVideos => onChangeTiktokVideos(tiktokVideos)}
+                        value={tiktokVideos}
+                        placeholder='Enter Videos Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Likes Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokTotalLikes => onChangeTiktokTotalLikes(tiktokTotalLikes)}
+                        value={tiktokTotalLikes}
+                        placeholder='Enter Likes Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Button label='Submit'
+                         color={isDisabledTiktok() ? Colors.tertiaryColor : Colors.primaryColor}
+                         onPress={addTiktok}
+                         disabled={isDisabledTiktok()}/>
+          <Dialog.Button label='Cancel'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogTiktok}/>
+        </Dialog.Container>
+        <View style={styles.mainViewStyle}>
+          <View>
+            <View style={styles.horizontalViewStyle}>
+              <Ionicons name='logo-youtube'
+                        size={36}
+                        color={Colors.primaryColor}/>
+              <Text style={styles.youtubeTitleStyle}>
+                YouTube
+              </Text>
+              <TouchableOpacity style={styles.addIconStyle}
+                                onPress={showDialogYoutube}>
+                <Ionicons name='add'
                           size={36}
                           color={Colors.primaryColor}/>
-                <Text style={styles.youtubeTitleStyle}>
-                  YouTube
-                </Text>
-                <TouchableOpacity style={styles.addIconStyle}
-                                  onPress={showDialogYoutube}>
-                  <Ionicons name='add'
-                            size={36}
-                            color={Colors.primaryColor}/>
-                </TouchableOpacity>
-              </View>
-              {
-                youtubeAccounts.length > 0 ? (
-                    <View style={styles.socialMediaViewStyle}>
-                      <View style={styles.listStyle}>
-                        <FlatList keyExtractor={(item, index) => index.toString()}
-                                  data={youtubeAccounts}
-                                  numColumns={1}
-                                  renderItem={renderYoutubeItemsFunction}/>
-                      </View>
-                    </View>
-                ) : (
-                    <View style={styles.socialMediaViewStyle}>
-                      <View style={styles.emptyListStyle}>
-                        <Ionicons name='warning'
-                                  size={80}
-                                  color={Colors.tertiaryColor}/>
-                        <Text style={styles.errorMessageStyle}>
-                          {Constants.EMPTY_LIST}
-                        </Text>
-                        <TouchableOpacity onPress={refreshFunction}>
-                          <Text style={styles.reloadMessageStyle}>
-                            Reload?
-                          </Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                )
-              }
+              </TouchableOpacity>
             </View>
-            <View>
-              <View style={styles.horizontalViewStyle}>
-                <Ionicons name='logo-facebook'
+            {
+              youtubeAccounts.length > 0 ? (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.listStyle}>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={youtubeAccounts}
+                              numColumns={1}
+                              renderItem={renderYoutubeItemsFunction}/>
+                  </View>
+                </View>
+              ) : (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
+          </View>
+          <View>
+            <View style={styles.horizontalViewStyle}>
+              <Ionicons name='logo-facebook'
+                        size={36}
+                        color={Colors.facebookColor}/>
+              <Text style={styles.facebookTitleStyle}>
+                Facebook
+              </Text>
+              <TouchableOpacity style={styles.addIconStyle}
+                                onPress={showDialogFacebook}>
+                <Ionicons name='add'
                           size={36}
                           color={Colors.facebookColor}/>
-                <Text style={styles.facebookTitleStyle}>
-                  Facebook
-                </Text>
-                <TouchableOpacity style={styles.addIconStyle}
-                                  onPress={showDialogFacebook}>
-                  <Ionicons name='add'
-                            size={36}
-                            color={Colors.facebookColor}/>
-                </TouchableOpacity>
-              </View>
-              {
-                facebookAccounts.length > 0 ? (
-                    <View style={styles.socialMediaViewStyle}>
-                      <View style={styles.listStyle}>
-                        <FlatList keyExtractor={(item, index) => index.toString()}
-                                  data={facebookAccounts}
-                                  numColumns={1}
-                                  renderItem={renderFacebookItemsFunction}/>
-                      </View>
-                    </View>
-                ) : (
-                    <View style={styles.socialMediaViewStyle}>
-                      <View style={styles.emptyListStyle}>
-                        <Ionicons name='warning'
-                                  size={80}
-                                  color={Colors.tertiaryColor}/>
-                        <Text style={styles.errorMessageStyle}>
-                          {Constants.EMPTY_LIST}
-                        </Text>
-                        <TouchableOpacity onPress={refreshFunction}>
-                          <Text style={styles.reloadMessageStyle}>
-                            Reload?
-                          </Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                )
-              }
+              </TouchableOpacity>
             </View>
-            <View>
-              <View style={styles.horizontalViewStyle}>
-                <Ionicons name='logo-instagram'
+            {
+              facebookAccounts.length > 0 ? (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.listStyle}>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={facebookAccounts}
+                              numColumns={1}
+                              renderItem={renderFacebookItemsFunction}/>
+                  </View>
+                </View>
+              ) : (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
+          </View>
+          <View>
+            <View style={styles.horizontalViewStyle}>
+              <Ionicons name='logo-instagram'
+                        size={36}
+                        color={Colors.instagramColor}/>
+              <Text style={styles.instagramTitleStyle}>
+                Instagram
+              </Text>
+              <TouchableOpacity style={styles.addIconStyle}
+                                onPress={showDialogInstagram}>
+                <Ionicons name='add'
                           size={36}
                           color={Colors.instagramColor}/>
-                <Text style={styles.instagramTitleStyle}>
-                  Instagram
-                </Text>
-                <TouchableOpacity style={styles.addIconStyle}
-                                  onPress={showDialogInstagram}>
-                  <Ionicons name='add'
-                            size={36}
-                            color={Colors.instagramColor}/>
-                </TouchableOpacity>
-              </View>
-              {
-                instagramAccounts.length > 0 ? (
-                    <View style={styles.socialMediaViewStyle}>
-                      <View style={styles.listStyle}>
-                        <FlatList keyExtractor={(item, index) => index.toString()}
-                                  data={instagramAccounts}
-                                  numColumns={1}
-                                  renderItem={renderInstagramItemsFunction}/>
-                      </View>
-                    </View>
-                ) : (
-                    <View style={styles.socialMediaViewStyle}>
-                      <View style={styles.emptyListStyle}>
-                        <Ionicons name='warning'
-                                  size={80}
-                                  color={Colors.tertiaryColor}/>
-                        <Text style={styles.errorMessageStyle}>
-                          {Constants.EMPTY_LIST}
-                        </Text>
-                        <TouchableOpacity onPress={refreshFunction}>
-                          <Text style={styles.reloadMessageStyle}>
-                            Reload?
-                          </Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                )
-              }
+              </TouchableOpacity>
             </View>
-            <View>
-              <View style={styles.horizontalViewStyle}>
-                <Image style={styles.avatarStyle}
-                       source={require('../../assets/tiktok-logo.png')}/>
-                <Text style={styles.tiktokTitleStyle}>
-                  Tiktok
-                </Text>
-                <TouchableOpacity style={styles.addIconStyle}
-                                  onPress={showDialogTiktok}>
-                  <Ionicons name='add'
-                            size={36}
-                            color={Colors.defaultColor}/>
-                </TouchableOpacity>
-              </View>
-              {
-                tiktokAccounts.length > 0 ? (
-                    <View style={styles.socialMediaViewStyle}>
-                      <View style={styles.listStyle}>
-                        <FlatList keyExtractor={(item, index) => index.toString()}
-                                  data={tiktokAccounts}
-                                  numColumns={1}
-                                  renderItem={renderTiktokItemsFunction}/>
-                      </View>
-                    </View>
-                ) : (
-                    <View style={styles.socialMediaViewStyle}>
-                      <View style={styles.emptyListStyle}>
-                        <Ionicons name='warning'
-                                  size={80}
-                                  color={Colors.tertiaryColor}/>
-                        <Text style={styles.errorMessageStyle}>
-                          {Constants.EMPTY_LIST}
-                        </Text>
-                        <TouchableOpacity onPress={refreshFunction}>
-                          <Text style={styles.reloadMessageStyle}>
-                            Reload?
-                          </Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                )
-              }
-            </View>
+            {
+              instagramAccounts.length > 0 ? (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.listStyle}>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={instagramAccounts}
+                              numColumns={1}
+                              renderItem={renderInstagramItemsFunction}/>
+                  </View>
+                </View>
+              ) : (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
           </View>
-          {
-            loading &&
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
+          <View>
+            <View style={styles.horizontalViewStyle}>
+              <Image style={styles.avatarStyle}
+                     source={require('../../assets/icons/tiktok-logo.png')}/>
+              <Text style={styles.tiktokTitleStyle}>
+                Tiktok
+              </Text>
+              <TouchableOpacity style={styles.addIconStyle}
+                                onPress={showDialogTiktok}>
+                <Ionicons name='add'
+                          size={36}
+                          color={Colors.defaultColor}/>
+              </TouchableOpacity>
             </View>
-          }
-        </ScrollView>
-      </SafeAreaView>
+            {
+              tiktokAccounts.length > 0 ? (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.listStyle}>
+                    <FlatList keyExtractor={(item, index) => index.toString()}
+                              data={tiktokAccounts}
+                              numColumns={1}
+                              renderItem={renderTiktokItemsFunction}/>
+                  </View>
+                </View>
+              ) : (
+                <View style={styles.socialMediaViewStyle}>
+                  <View style={styles.emptyListStyle}>
+                    <Ionicons name='warning'
+                              size={80}
+                              color={Colors.tertiaryColor}/>
+                    <Text style={styles.errorMessageStyle}>
+                      {Constants.EMPTY_LIST}
+                    </Text>
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <Text style={styles.reloadMessageStyle}>
+                        Reload?
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              )
+            }
+          </View>
+        </View>
+        {
+          loading &&
+          <View style={styles.loadingStyle}>
+            <ActivityIndicator size='large'
+                               color={Colors.secondaryColor}/>
+          </View>
+        }
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -880,10 +880,10 @@ SocialMediaScreen.navigationOptions = navData => {
   return {
     headerTitle: 'My Social Media',
     headerLeft: () => (
-        <Menu navigation={navData.navigation}/>
+      <Menu navigation={navData.navigation}/>
     ),
     headerRight: () => (
-        <CombinedButtons navigation={navData.navigation}/>
+      <CombinedButtons navigation={navData.navigation}/>
     )
   }
 }
