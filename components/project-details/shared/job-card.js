@@ -10,59 +10,51 @@ import Constants from '../../../shared/const/constants'
 import {showAlert, showErrors} from '../../../shared/util/helpers'
 
 const JobCard = props => {
-  const [link, setLink] = useState('')
-  const [id, setId] = useState('')
+  const [contentSubmissionLink, setContentSubmissionLink] = useState(props.itemData.contentSubmissionLink)
+  const [resultSubmissionLink, setResultSubmissionLink] = useState(props.itemData.resultSubmissionLink)
   const [visibleContentSubmit, setVisibleContentSubmit] = useState(false)
   const [visibleContentDelete, setVisibleContentDelete] = useState(false)
   const [visibleResultSubmit, setVisibleResultSubmit] = useState(false)
   const [visibleResultDelete, setVisibleResultDelete] = useState(false)
 
-  const showDialogContentSubmit = async id => {
-    setId(id)
+  const showDialogContentSubmit = async () => {
     setVisibleContentSubmit(true)
   }
 
   const hideDialogContentSubmit = async () => {
-    setId('')
-    setLink('')
     setVisibleContentSubmit(false)
   }
 
-  const showDialogContentDelete = async id => {
-    setId(id)
+  const showDialogContentDelete = async () => {
     setVisibleContentDelete(true)
   }
 
   const hideDialogContentDelete = async () => {
-    setId('')
-    setLink('')
     setVisibleContentDelete(false)
   }
 
-  const showDialogResultSubmit = async id => {
-    setId(id)
+  const showDialogResultSubmit = async () => {
     setVisibleResultSubmit(true)
   }
 
   const hideDialogResultSubmit = async () => {
-    setId('')
-    setLink('')
     setVisibleResultSubmit(false)
   }
 
-  const showDialogResultDelete = async id => {
-    setId(id)
+  const showDialogResultDelete = async () => {
     setVisibleResultDelete(true)
   }
 
   const hideDialogResultDelete = async () => {
-    setId('')
-    setLink('')
     setVisibleResultDelete(false)
   }
 
-  const onChangeLink = async link => {
-    setLink(link)
+  const onChangeContentSubmissionLink = async contentSubmissionLink => {
+    setContentSubmissionLink(contentSubmissionLink)
+  }
+
+  const onChangeResultSubmissionLink = async resultSubmissionLink => {
+    setResultSubmissionLink(resultSubmissionLink)
   }
 
   function isDisabled() {
@@ -74,13 +66,11 @@ const JobCard = props => {
     props.setLoadingTrue()
     let data = {
       strategyId: props.strategyId,
-      id: id,
-      contentLink: link
+      id: props.itemData.id,
+      contentLink: contentSubmissionLink
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
       props.refresh()
-      setId('')
-      setLink('')
       props.setLoadingFalse()
       props.refreshFunction()
       if (response.status === 200)
@@ -100,13 +90,11 @@ const JobCard = props => {
     props.setLoadingTrue()
     let data = {
       strategyId: props.strategyId,
-      id: id,
+      id: props.itemData.id,
       contentLink: null
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
       props.refresh()
-      setId('')
-      setLink('')
       props.setLoadingFalse()
       props.refreshFunction()
       if (response.status === 200)
@@ -126,13 +114,11 @@ const JobCard = props => {
     props.setLoadingTrue()
     let data = {
       strategyId: props.strategyId,
-      id: id,
-      resultLink: link
+      id: props.itemData.id,
+      resultLink: resultSubmissionLink
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
       props.refresh()
-      setId('')
-      setLink('')
       props.setLoadingFalse()
       props.refreshFunction()
       if (response.status === 200)
@@ -152,13 +138,11 @@ const JobCard = props => {
     props.setLoadingTrue()
     let data = {
       strategyId: props.strategyId,
-      id: id,
+      id: props.itemData.id,
       resultLink: null
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
       props.refresh()
-      setId('')
-      setLink('')
       props.setLoadingFalse()
       props.refreshFunction()
       if (response.status === 200)
@@ -273,8 +257,8 @@ const JobCard = props => {
               Content Submission Link
             </Text>
             <TextInput style={styles.textInputStyle}
-                       value={props.itemData.contentSubmissionLink}
-                       onChangeText={link => onChangeLink(link)}
+                       value={contentSubmissionLink}
+                       onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
                        placeholder='Paste Link Here'
                        placeholderTextColor={Colors.tertiaryColor}
                        editable={props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
@@ -282,7 +266,7 @@ const JobCard = props => {
               props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
               <View style={styles.horizontalStyle}>
                 <TouchableOpacity disabled={isDisabled()}
-                                  onPress={() => showDialogContentDelete(props.itemData.id)}
+                                  onPress={showDialogContentDelete}
                                   style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
                   <View style={styles.horizontalStyle}>
                     <Entypo name='cross'
@@ -294,8 +278,7 @@ const JobCard = props => {
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity disabled={isDisabled()}
-                                  onPress={() => showDialogContentSubmit(props.itemData.id,
-                                    props.itemData.contentSubmissionLink)}
+                                  onPress={showDialogContentSubmit}
                                   style={isDisabled() ? styles.buttonDisabledStyle : styles.submitButtonStyle}>
                   <View style={styles.horizontalStyle}>
                     <Ionicons name='checkmark'
@@ -318,8 +301,8 @@ const JobCard = props => {
               Result Submission Link
             </Text>
             <TextInput style={styles.textInputStyle}
-                       value={props.itemData.resultSubmissionLink}
-                       onChangeText={link => onChangeLink(link)}
+                       value={resultSubmissionLink}
+                       onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
                        placeholder='Paste Link Here'
                        placeholderTextColor={Colors.tertiaryColor}
                        editable={props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
@@ -327,7 +310,7 @@ const JobCard = props => {
               props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
               <View style={styles.horizontalStyle}>
                 <TouchableOpacity disabled={isDisabled()}
-                                  onPress={() => showDialogResultDelete(props.itemData.id)}
+                                  onPress={showDialogResultDelete}
                                   style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
                   <View style={styles.horizontalStyle}>
                     <Entypo name='cross'
@@ -339,8 +322,7 @@ const JobCard = props => {
                   </View>
                 </TouchableOpacity>
                 <TouchableOpacity disabled={isDisabled()}
-                                  onPress={() => showDialogResultSubmit(props.itemData.id,
-                                    props.itemData.resultSubmissionLink)}
+                                  onPress={showDialogResultSubmit}
                                   style={isDisabled() ? styles.buttonDisabledStyle : styles.submitButtonStyle}>
                   <View style={styles.horizontalStyle}>
                     <Ionicons name='checkmark'
