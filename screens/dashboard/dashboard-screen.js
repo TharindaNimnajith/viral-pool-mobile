@@ -2,26 +2,25 @@ import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {
   ActivityIndicator,
   FlatList,
-  Image,
   RefreshControl,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {FontAwesome, FontAwesome5, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
+import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
-import {formatNumber, showAlert, showErrors} from '../../shared/util/helpers'
+import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons'
 import DashboardLogo from '../../components/header/dashboard-logo'
 import ProjectListItem from '../../components/lists/project/project-list-item'
+import {styles} from './dashboard-screen-style'
+import {DashboardUserProfile} from './components/dashboard-user-profile';
 
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)
@@ -147,10 +146,10 @@ const DashboardScreen = props => {
 
   const renderItemsFunction = itemData => {
     return (
-      <ProjectListItem navigation={props.navigation}
-                       itemData={itemData}
-                       screen='OngoingProjectDetails'
-                       refreshFunction={refreshFunction}/>
+        <ProjectListItem navigation={props.navigation}
+                         itemData={itemData}
+                         screen='OngoingProjectDetails'
+                         refreshFunction={refreshFunction}/>
     )
   }
 
@@ -179,405 +178,248 @@ const DashboardScreen = props => {
   }
 
   return (
-    <SafeAreaView>
-      <ScrollView refreshControl={
-        <RefreshControl refreshing={refreshing}
-                        onRefresh={onRefresh}/>
-      }>
-        <View style={styles.mainViewStyle}>
-          <View style={styles.headerStyle}>
-            <View style={styles.viewStyle}>
-              <View style={styles.horizontalContentStyle}>
-                <TouchableOpacity onPress={onProfilePress}>
-                  {
-                    appContext.userData && appContext.userData?.profileImagePath ? (
-                      <Image style={styles.avatarStyle}
-                             source={{
-                               uri: appContext.userData?.profileImagePath
-                             }}/>
-                    ) : (
-                      <Image style={styles.avatarStyle}
-                             source={require('../../assets/user.jpg')}/>
-                    )
-                  }
-                </TouchableOpacity>
-                <View style={styles.profileStyle}>
-                  <TouchableOpacity onPress={onProfilePress}>
-                    <Text style={styles.titleStyle}>
-                      {appContext.userData?.firstName} {appContext.userData?.lastName}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={onSocialMediaPress}>
-                    <View style={styles.socialMediaStyle}>
-                      <View style={styles.horizontalContentStyle}>
-                        <View style={styles.betweenStyle}>
-                          <View style={styles.horizontalContentStyle}>
-                            <Ionicons name='logo-youtube'
-                                      size={20}
-                                      color={Colors.secondaryColor}/>
-                            <Text style={styles.countStyle}>
-                              {formatNumber(youtubeCount)}
-                            </Text>
-                          </View>
-                        </View>
-                        <View style={styles.betweenStyle}>
-                          <View style={styles.horizontalContentStyle}>
-                            <Ionicons name='logo-facebook'
-                                      size={20}
-                                      color={Colors.secondaryColor}/>
-                            <Text style={styles.countStyle}>
-                              {formatNumber(facebookCount)}
-                            </Text>
-                          </View>
-                        </View>
-                        <View style={styles.betweenStyle}>
-                          <View style={styles.horizontalContentStyle}>
-                            <Ionicons name='logo-instagram'
-                                      size={20}
-                                      color={Colors.secondaryColor}/>
-                            <Text style={styles.countStyle}>
-                              {formatNumber(instagramCount)}
-                            </Text>
-                          </View>
-                        </View>
-                        <View style={styles.betweenStyle}>
-                          <View style={styles.horizontalContentStyle}>
-                            <MaterialCommunityIcons name='music-note'
-                                                    size={20}
-                                                    color={Colors.secondaryColor}/>
-                            <Text style={styles.tiktokCountStyle}>
-                              {formatNumber(tiktokCount)}
-                            </Text>
-                          </View>
-                        </View>
+      <SafeAreaView>
+        <ScrollView refreshControl={
+          <RefreshControl refreshing={refreshing}
+                          onRefresh={onRefresh}/>
+        }>
+          <View style={styles.mainViewStyle}>
+
+            <View style={styles.headerStyle}>
+
+              <DashboardUserProfile facebookCount={facebookCount}
+                                    youtubeCount={youtubeCount}
+                                    tiktokCount={tiktokCount}
+                                    instagramCount={instagramCount}
+                                    rank={rank}
+                                    points={points}
+                                    firstName={appContext?.userData?.firstName}
+                                    lastName={appContext?.userData?.lastName}
+                                    profileImagePath={appContext?.userData?.profileImagePath}/>
+
+
+
+
+              {/*Ag - User name*/}
+              {/*<View style={styles.viewStyle}>*/}
+              {/*  <View style={styles.horizontalContentStyle}>*/}
+              {/*    <TouchableOpacity onPress={onProfilePress}>*/}
+              {/*      {*/}
+              {/*        appContext.userData && appContext.userData?.profileImagePath ? (*/}
+              {/*            <Image style={styles.avatarStyle}*/}
+              {/*                   source={{*/}
+              {/*                     uri: appContext.userData?.profileImagePath*/}
+              {/*                   }}/>*/}
+              {/*        ) : (*/}
+              {/*            <Image style={styles.avatarStyle}*/}
+              {/*                   source={require('../../assets/user.jpg')}/>*/}
+              {/*        )*/}
+              {/*      }*/}
+              {/*    </TouchableOpacity>*/}
+              {/*    <View style={styles.profileStyle}>*/}
+              {/*      <TouchableOpacity onPress={onProfilePress}>*/}
+              {/*        <Text style={styles.titleStyle}>*/}
+              {/*          {appContext.userData?.firstName} {appContext.userData?.lastName}*/}
+              {/*        </Text>*/}
+              {/*      </TouchableOpacity>*/}
+              {/*      <TouchableOpacity onPress={onSocialMediaPress}>*/}
+              {/*        <View style={styles.socialMediaStyle}>*/}
+              {/*          <View style={styles.horizontalContentStyle}>*/}
+              {/*            <View style={styles.betweenStyle}>*/}
+              {/*              <View style={styles.horizontalContentStyle}>*/}
+              {/*                <Ionicons name='logo-youtube'*/}
+              {/*                          size={20}*/}
+              {/*                          color={Colors.secondaryColor}/>*/}
+              {/*                <Text style={styles.countStyle}>*/}
+              {/*                  {formatNumber(youtubeCount)}*/}
+              {/*                </Text>*/}
+              {/*              </View>*/}
+              {/*            </View>*/}
+              {/*            <View style={styles.betweenStyle}>*/}
+              {/*              <View style={styles.horizontalContentStyle}>*/}
+              {/*                <Ionicons name='logo-facebook'*/}
+              {/*                          size={20}*/}
+              {/*                          color={Colors.secondaryColor}/>*/}
+              {/*                <Text style={styles.countStyle}>*/}
+              {/*                  {formatNumber(facebookCount)}*/}
+              {/*                </Text>*/}
+              {/*              </View>*/}
+              {/*            </View>*/}
+              {/*            <View style={styles.betweenStyle}>*/}
+              {/*              <View style={styles.horizontalContentStyle}>*/}
+              {/*                <Ionicons name='logo-instagram'*/}
+              {/*                          size={20}*/}
+              {/*                          color={Colors.secondaryColor}/>*/}
+              {/*                <Text style={styles.countStyle}>*/}
+              {/*                  {formatNumber(instagramCount)}*/}
+              {/*                </Text>*/}
+              {/*              </View>*/}
+              {/*            </View>*/}
+              {/*            <View style={styles.betweenStyle}>*/}
+              {/*              <View style={styles.horizontalContentStyle}>*/}
+              {/*                <MaterialCommunityIcons name='music-note'*/}
+              {/*                                        size={20}*/}
+              {/*                                        color={Colors.secondaryColor}/>*/}
+              {/*                <Text style={styles.tiktokCountStyle}>*/}
+              {/*                  {formatNumber(tiktokCount)}*/}
+              {/*                </Text>*/}
+              {/*              </View>*/}
+              {/*            </View>*/}
+              {/*          </View>*/}
+              {/*        </View>*/}
+              {/*      </TouchableOpacity>*/}
+              {/*    </View>*/}
+              {/*  </View>*/}
+              {/*</View>*/}
+
+              {/*Ag - Stats*/}
+            </View>
+            {/*<View style={styles.rowViewStyle}>*/}
+
+            {/*  /!*AG*!/*/}
+            {/*  <View style={styles.horizontalContentStyle}>*/}
+
+            {/*    <View style={styles.rankCardStyle}>*/}
+            {/*      <Text style={styles.rankTitleStyle}>*/}
+            {/*        Rank*/}
+            {/*      </Text>*/}
+            {/*      <Text style={styles.rankValueStyle}>*/}
+            {/*        {formatNumber(rank)}*/}
+            {/*      </Text>*/}
+            {/*    </View>*/}
+
+            {/*    <View style={styles.pointsViewStyle}>*/}
+            {/*      <Text style={styles.pointsValueStyle}>*/}
+            {/*        {formatNumber(points)}*/}
+            {/*      </Text>*/}
+            {/*      <View style={styles.horizontalContentStyle}>*/}
+            {/*        <Ionicons name='star'*/}
+            {/*                  size={20}*/}
+            {/*                  color={Colors.secondaryColor}/>*/}
+            {/*        <Text style={styles.pointsTitleStyle}>*/}
+            {/*          VP Points*/}
+            {/*        </Text>*/}
+            {/*      </View>*/}
+            {/*    </View>*/}
+
+
+            {/*  </View>*/}
+            {/*</View>*/}
+
+            {/*<View style={styles.rowViewStyle}>*/}
+            {/*  <View style={styles.horizontalContentStyle}>*/}
+            {/*    <View style={styles.circleViewStyle}>*/}
+            {/*      <TouchableOpacity style={styles.circleStyle}*/}
+            {/*                        onPress={onNewProjectsPress}>*/}
+            {/*        <Text style={styles.circleTextStyle}>*/}
+            {/*          {formatNumber(pendingProjectCount)}*/}
+            {/*        </Text>*/}
+            {/*      </TouchableOpacity>*/}
+            {/*      <TouchableOpacity onPress={onNewProjectsPress}>*/}
+            {/*        <Text style={styles.circleTitleStyle}>*/}
+            {/*          Job{'\n'}Pool*/}
+            {/*        </Text>*/}
+            {/*      </TouchableOpacity>*/}
+            {/*    </View>*/}
+            {/*    <View style={styles.circleViewStyle}>*/}
+            {/*      <TouchableOpacity style={styles.circleStyle}*/}
+            {/*                        onPress={onOngoingProjectsPress}>*/}
+            {/*        <Text style={styles.circleTextStyle}>*/}
+            {/*          {formatNumber(ongoingProjectCount)}*/}
+            {/*        </Text>*/}
+            {/*      </TouchableOpacity>*/}
+            {/*      <TouchableOpacity onPress={onOngoingProjectsPress}>*/}
+            {/*        <Text style={styles.circleTitleStyle}>*/}
+            {/*          Ongoing{'\n'}Jobs*/}
+            {/*        </Text>*/}
+            {/*      </TouchableOpacity>*/}
+            {/*    </View>*/}
+            {/*    <View style={styles.circleViewStyle}>*/}
+            {/*      <TouchableOpacity style={styles.circleStyle}*/}
+            {/*                        onPress={onCompletedProjectsPress}>*/}
+            {/*        <Text style={styles.circleTextStyle}>*/}
+            {/*          {formatNumber(completedProjectCount)}*/}
+            {/*        </Text>*/}
+            {/*      </TouchableOpacity>*/}
+            {/*      <TouchableOpacity onPress={onCompletedProjectsPress}>*/}
+            {/*        <Text style={styles.circleTitleStyle}>*/}
+            {/*          Completed{'\n'}Jobs*/}
+            {/*        </Text>*/}
+            {/*      </TouchableOpacity>*/}
+            {/*    </View>*/}
+            {/*  </View>*/}
+            {/*</View>*/}
+            {/*<TouchableOpacity style={styles.cardStyle}*/}
+            {/*                  onPress={onCompletedProjectsPress}>*/}
+            {/*  <View style={styles.horizontalContentStyle1}>*/}
+            {/*    <FontAwesome name='dollar'*/}
+            {/*                 size={20}*/}
+            {/*                 color={Colors.primaryColor}/>*/}
+            {/*    <Text style={styles.cardTitleStyle}>*/}
+            {/*      Total Earnings*/}
+            {/*    </Text>*/}
+            {/*  </View>*/}
+            {/*  <View style={styles.horizontalContentStyle2}>*/}
+            {/*    <Text style={styles.earnedAmountStyle}>*/}
+            {/*      {formatNumber(totalEarnings)}*/}
+            {/*    </Text>*/}
+            {/*    <Text style={styles.unitStyle}>*/}
+            {/*      LKR*/}
+            {/*    </Text>*/}
+            {/*  </View>*/}
+            {/*  <View style={styles.horizontalContentStyle}>*/}
+            {/*    <Text style={styles.cardTextStyle}>*/}
+            {/*      View All*/}
+            {/*    </Text>*/}
+            {/*    <FontAwesome5 name='chevron-circle-right'*/}
+            {/*                  size={16}*/}
+            {/*                  color={Colors.primaryColor}/>*/}
+            {/*  </View>*/}
+            {/*</TouchableOpacity>*/}
+
+
+            <View style={styles.bodyStyle}>
+              <View style={styles.listStyle}>
+                <Text style={styles.sectionTitleStyle}>
+                  Recent Jobs
+                </Text>
+                {
+                  ongoingProjects.length > 0 ? (
+                      <FlatList keyExtractor={(item, index) => index.toString()}
+                                data={ongoingProjects}
+                                numColumns={1}
+                                renderItem={renderItemsFunction}/>
+                  ) : (
+                      <View style={styles.emptyListStyle}>
+                        <Ionicons name='warning'
+                                  size={80}
+                                  color={Colors.tertiaryColor}/>
+                        <Text style={styles.errorMessageStyle}>
+                          {Constants.EMPTY_LIST}
+                        </Text>
+                        <TouchableOpacity onPress={refreshFunction}>
+                          <Text style={styles.reloadMessageStyle}>
+                            Reload?
+                          </Text>
+                        </TouchableOpacity>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                </View>
+                  )
+                }
               </View>
             </View>
-            <View style={styles.rowViewStyle}>
-              <View style={styles.horizontalContentStyle}>
-                <View style={styles.rankCardStyle}>
-                  <Text style={styles.rankTitleStyle}>
-                    Rank
-                  </Text>
-                  <Text style={styles.rankValueStyle}>
-                    {formatNumber(rank)}
-                  </Text>
-                </View>
-                <View style={styles.pointsViewStyle}>
-                  <Text style={styles.pointsValueStyle}>
-                    {formatNumber(points)}
-                  </Text>
-                  <View style={styles.horizontalContentStyle}>
-                    <Ionicons name='star'
-                              size={20}
-                              color={Colors.secondaryColor}/>
-                    <Text style={styles.pointsTitleStyle}>
-                      VP Points
-                    </Text>
-                  </View>
-                </View>
+            {
+              loading &&
+              <View style={styles.loadingStyle}>
+                <ActivityIndicator size='large'
+                                   color={Colors.secondaryColor}/>
               </View>
-            </View>
-            <View style={styles.rowViewStyle}>
-              <View style={styles.horizontalContentStyle}>
-                <View style={styles.circleViewStyle}>
-                  <TouchableOpacity style={styles.circleStyle}
-                                    onPress={onNewProjectsPress}>
-                    <Text style={styles.circleTextStyle}>
-                      {formatNumber(pendingProjectCount)}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={onNewProjectsPress}>
-                    <Text style={styles.circleTitleStyle}>
-                      Job{'\n'}Pool
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.circleViewStyle}>
-                  <TouchableOpacity style={styles.circleStyle}
-                                    onPress={onOngoingProjectsPress}>
-                    <Text style={styles.circleTextStyle}>
-                      {formatNumber(ongoingProjectCount)}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={onOngoingProjectsPress}>
-                    <Text style={styles.circleTitleStyle}>
-                      Ongoing{'\n'}Jobs
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.circleViewStyle}>
-                  <TouchableOpacity style={styles.circleStyle}
-                                    onPress={onCompletedProjectsPress}>
-                    <Text style={styles.circleTextStyle}>
-                      {formatNumber(completedProjectCount)}
-                    </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={onCompletedProjectsPress}>
-                    <Text style={styles.circleTitleStyle}>
-                      Completed{'\n'}Jobs
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-            <TouchableOpacity style={styles.cardStyle}
-                              onPress={onCompletedProjectsPress}>
-              <View style={styles.horizontalContentStyle1}>
-                <FontAwesome name='dollar'
-                             size={20}
-                             color={Colors.primaryColor}/>
-                <Text style={styles.cardTitleStyle}>
-                  Total Earnings
-                </Text>
-              </View>
-              <View style={styles.horizontalContentStyle2}>
-                <Text style={styles.earnedAmountStyle}>
-                  {formatNumber(totalEarnings)}
-                </Text>
-                <Text style={styles.unitStyle}>
-                  LKR
-                </Text>
-              </View>
-              <View style={styles.horizontalContentStyle}>
-                <Text style={styles.cardTextStyle}>
-                  View All
-                </Text>
-                <FontAwesome5 name='chevron-circle-right'
-                              size={16}
-                              color={Colors.primaryColor}/>
-              </View>
-            </TouchableOpacity>
+            }
           </View>
-          <View style={styles.bodyStyle}>
-            <View style={styles.listStyle}>
-              <Text style={styles.sectionTitleStyle}>
-                Recent Jobs
-              </Text>
-              {
-                ongoingProjects.length > 0 ? (
-                  <FlatList keyExtractor={(item, index) => index.toString()}
-                            data={ongoingProjects}
-                            numColumns={1}
-                            renderItem={renderItemsFunction}/>
-                ) : (
-                  <View style={styles.emptyListStyle}>
-                    <Ionicons name='warning'
-                              size={80}
-                              color={Colors.tertiaryColor}/>
-                    <Text style={styles.errorMessageStyle}>
-                      {Constants.EMPTY_LIST}
-                    </Text>
-                    <TouchableOpacity onPress={refreshFunction}>
-                      <Text style={styles.reloadMessageStyle}>
-                        Reload?
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                )
-              }
-            </View>
-          </View>
-          {
-            loading &&
-            <View style={styles.loadingStyle}>
-              <ActivityIndicator size='large'
-                                 color={Colors.secondaryColor}/>
-            </View>
-          }
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
   )
 }
 
-const styles = StyleSheet.create({
-  avatarStyle: {
-    width: wp('20%'),
-    height: wp('20%'),
-    borderRadius: wp('10%'),
-    borderWidth: 1,
-    borderColor: Colors.secondaryColor
-  },
-  betweenStyle: {
-    marginLeft: 6
-  },
-  bodyStyle: {
-    marginBottom: hp('0.5%'),
-    marginHorizontal: wp('2%')
-  },
-  cardStyle: {
-    backgroundColor: Colors.fadedEffectColor,
-    borderRadius: hp('5%'),
-    paddingTop: hp('0.7%'),
-    paddingBottom: hp('1%'),
-    paddingHorizontal: wp('20%'),
-    marginVertical: hp('2%'),
-    alignItems: 'center',
-    alignSelf: 'center'
-  },
-  cardTextStyle: {
-    marginRight: 8,
-    fontSize: 16,
-    bottom: 2
-  },
-  cardTitleStyle: {
-    fontSize: 18,
-    marginLeft: 8
-  },
-  circleStyle: {
-    backgroundColor: Colors.secondaryColor,
-    width: wp('18%'),
-    height: wp('18%'),
-    borderRadius: wp('9%')
-  },
-  circleTextStyle: {
-    flex: 1,
-    textAlignVertical: 'center',
-    alignSelf: 'center',
-    color: Colors.primaryColor,
-    fontSize: 30
-  },
-  circleTitleStyle: {
-    textAlign: 'center',
-    color: Colors.secondaryColor,
-    marginTop: 3
-  },
-  circleViewStyle: {
-    marginRight: wp('6%')
-  },
-  countStyle: {
-    marginHorizontal: 6,
-    color: Colors.secondaryColor,
-    textAlignVertical: 'center'
-  },
-  earnedAmountStyle: {
-    fontSize: 40,
-    color: Colors.primaryColor
-  },
-  emptyListStyle: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  errorMessageStyle: {
-    color: Colors.tertiaryColor,
-    fontSize: 18
-  },
-  headerStyle: {
-    backgroundColor: Colors.primaryColor,
-    borderBottomRightRadius: hp('6%'),
-    borderBottomLeftRadius: hp('6%')
-  },
-  horizontalContentStyle: {
-    flexDirection: 'row'
-  },
-  horizontalContentStyle1: {
-    flexDirection: 'row',
-    marginVertical: hp('0.5%')
-  },
-  horizontalContentStyle2: {
-    flexDirection: 'row',
-    marginBottom: hp('1%')
-  },
-  listStyle: {
-    borderRadius: 25,
-    paddingVertical: 15,
-    paddingHorizontal: 5
-  },
-  loadingStyle: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.blurEffectColor
-  },
-  mainViewStyle: {
-    backgroundColor: Colors.secondaryColor,
-    minHeight: hp('93.6%')
-  },
-  pointsTitleStyle: {
-    textTransform: 'uppercase',
-    color: Colors.secondaryColor,
-    fontSize: 20,
-    marginLeft: 5,
-    marginBottom: 2
-  },
-  pointsValueStyle: {
-    color: Colors.secondaryColor,
-    fontSize: 45
-  },
-  pointsViewStyle: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  profileStyle: {
-    marginLeft: wp('4%'),
-    justifyContent: 'center'
-  },
-  rankCardStyle: {
-    alignItems: 'center',
-    backgroundColor: Colors.secondaryColor,
-    borderRadius: 20,
-    paddingHorizontal: 25,
-    paddingVertical: 7,
-    marginRight: wp('10%'),
-    justifyContent: 'center'
-  },
-  rankTitleStyle: {
-    textTransform: 'uppercase',
-    color: Colors.primaryColor,
-    fontSize: 18
-  },
-  rankValueStyle: {
-    color: Colors.primaryColor,
-    fontSize: 45
-  },
-  reloadMessageStyle: {
-    color: Colors.primaryColor,
-    fontSize: 16,
-    marginTop: 10
-  },
-  rowViewStyle: {
-    marginTop: hp('2.5%'),
-    alignSelf: 'center'
-  },
-  sectionTitleStyle: {
-    fontSize: 22,
-    marginLeft: wp('4%'),
-    marginTop: hp('1%'),
-    marginBottom: hp('2%')
-  },
-  socialMediaStyle: {
-    marginTop: 8,
-    alignSelf: 'baseline'
-  },
-  tiktokCountStyle: {
-    marginHorizontal: 3,
-    color: Colors.secondaryColor,
-    textAlignVertical: 'center'
-  },
-  titleStyle: {
-    fontSize: 22,
-    color: Colors.secondaryColor
-  },
-  viewStyle: {
-    marginLeft: wp('6%'),
-    marginTop: wp('4%')
-  },
-  unitStyle: {
-    color: Colors.primaryColor,
-    fontSize: 22,
-    textAlignVertical: 'bottom',
-    marginLeft: 10,
-    marginBottom: 5
-  }
-})
 
 const wait = timeout => {
   return new Promise(resolve => {
@@ -589,13 +431,13 @@ DashboardScreen.navigationOptions = navData => {
   return {
     headerTitle: '',
     headerLeft: () => (
-      <View>
-        <Menu navigation={navData.navigation}/>
-        <DashboardLogo/>
-      </View>
+        <View>
+          <Menu navigation={navData.navigation}/>
+          <DashboardLogo/>
+        </View>
     ),
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+        <CombinedButtons navigation={navData.navigation}/>
     )
   }
 }

@@ -100,9 +100,9 @@ const LoginScreen = props => {
                 <Text style={styles.textStyle}>
                   {Constants.DESCRIPTION}
                 </Text>
-                <Text style={styles.titleStyle}>
-                  Sign in
-                </Text>
+                {/*<Text style={styles.titleStyle}>*/}
+                {/*  Sign in*/}
+                {/*</Text>*/}
               </View>
               <Text style={styles.labelStyle}>
                 Email
@@ -219,8 +219,10 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    minHeight: hp('104%'),
-    backgroundColor: Colors.secondaryColor
+    // minHeight: hp('100%'),
+    // padding: 20,
+    minHeight: hp('103.5%'),
+    backgroundColor: Colors.primaryColor
   },
   refreshStyle: {
     marginTop: 10
