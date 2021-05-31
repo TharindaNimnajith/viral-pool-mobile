@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import Colors from "../../../shared/const/colors";
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {formatNumber} from "../../../shared/util/helpers";
 
 
 export const DashboardUserProfile = props => {
@@ -15,6 +16,9 @@ export const DashboardUserProfile = props => {
         props.navigation.navigate('Profile')
     }
 
+    const onSocialMediaPress = async () => {
+        props.navigation.navigate('SocialMedia')
+    }
 
     return (
         <View style={[styles.container]}>
@@ -44,12 +48,12 @@ export const DashboardUserProfile = props => {
                 <View style={styles.socialMediaIcon}>
                     <Text style={styles.socialMediaIconText}>
                         <Image source={require('../../../assets/icons/facebook.png')}/>
-                        <Text style={styles.socialMediaIconText} > {props.facebookCount} </Text>
+                        <Text style={styles.socialMediaIconText}> {props.facebookCount} </Text>
                     </Text>
 
                     <Text style={styles.socialMediaIconText}>
                         <Image source={require('../../../assets/icons/youtube.png')}/>
-                        <Text style={styles.socialMediaIconText} > {props.youtubeCount} </Text>
+                        <Text style={styles.socialMediaIconText}> {props.youtubeCount} </Text>
                     </Text>
 
                     <Text style={styles.socialMediaIconText}>
@@ -67,12 +71,12 @@ export const DashboardUserProfile = props => {
                     <Text style={styles.socialMediaIconText}>
                         <Text style={{
                             fontWeight: 'bold'
-                        }} >{props.points}</Text><Text> VP Points   | </Text>
+                        }} >{formatNumber(props.points)}</Text><Text style={{color: Colors.tertiaryColor}}> VP Points   | </Text>
                     </Text>
                     <Text style={styles.socialMediaIconText}>
                         <Text style={{
                             fontWeight: 'bold'
-                        }} >{props.rank}</Text><Text> Rank </Text>
+                        }} >{formatNumber(props.rank)}</Text><Text style={{color: Colors.tertiaryColor}}> Rank </Text>
                     </Text>
 
                 </View>

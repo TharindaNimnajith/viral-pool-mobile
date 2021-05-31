@@ -18,55 +18,15 @@ export const styles = StyleSheet.create({
         marginBottom: hp('0.5%'),
         marginHorizontal: wp('2%')
     },
-    cardStyle: {
-        backgroundColor: Colors.fadedEffectColor,
-        borderRadius: hp('5%'),
-        // paddingTop: hp('0.7%'),
-        // paddingBottom: hp('1%'),
-        // paddingHorizontal: wp('20%'),
-        // marginVertical: hp('2%'),
-        alignItems: 'center',
-        alignSelf: 'center'
-    },
-    cardTextStyle: {
-        // marginRight: 8,
-        fontSize: 16,
-        // bottom: 2
-    },
-    cardTitleStyle: {
-        fontSize: 18,
-        // marginLeft: 8
-    },
-    circleStyle: {
-        backgroundColor: Colors.secondaryColor,
-        width: wp('18%'),
-        height: wp('18%'),
-        borderRadius: wp('9%')
-    },
-    circleTextStyle: {
-        flex: 1,
-        textAlignVertical: 'center',
-        alignSelf: 'center',
-        color: Colors.primaryColor,
-        fontSize: 30
-    },
-    circleTitleStyle: {
-        textAlign: 'center',
-        color: Colors.secondaryColor,
-        // marginTop: 3
-    },
-    circleViewStyle: {
-        // marginRight: wp('6%')
-    },
+
+
+
     countStyle: {
         marginHorizontal: 6,
         color: Colors.secondaryColor,
         textAlignVertical: 'center'
     },
-    earnedAmountStyle: {
-        fontSize: 30,
-        color: Colors.primaryColor
-    },
+
     emptyListStyle: {
         alignItems: 'center',
         justifyContent: 'center'
@@ -82,10 +42,6 @@ export const styles = StyleSheet.create({
     },
     horizontalContentStyle: {
         flexDirection: 'row'
-    },
-    horizontalContentStyle1: {
-        flexDirection: 'row',
-        marginVertical: hp('0.5%')
     },
     horizontalContentStyle2: {
         flexDirection: 'row',
@@ -151,10 +107,7 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         marginTop: 10
     },
-    rowViewStyle: {
-        marginTop: hp('2.5%'),
-        alignSelf: 'center'
-    },
+
     sectionTitleStyle: {
         fontSize: 22,
         marginLeft: wp('4%'),

@@ -21,6 +21,8 @@ import DashboardLogo from '../../components/header/dashboard-logo'
 import ProjectListItem from '../../components/lists/project/project-list-item'
 import {styles} from './dashboard-screen-style'
 import {DashboardUserProfile} from './components/dashboard-user-profile';
+import {DashboardStats} from './components/dashboard-stats';
+import {DashboardEarnings} from "./components/dashboard-earnings";
 
 const DashboardScreen = props => {
   const appContext = useContext(AppContext)
@@ -34,6 +36,7 @@ const DashboardScreen = props => {
   const [instagramCount, setInstagramCount] = useState(0)
   const [tiktokCount, setTiktokCount] = useState(0)
   const [totalEarnings, setTotalEarnings] = useState(0)
+  const [pendingEarnings, setPendingEarnings] = useState(0)
   const [points, setPoints] = useState(0)
   const [rank, setRank] = useState(0)
   const [loading, setLoading] = useState(false)
@@ -64,6 +67,7 @@ const DashboardScreen = props => {
                 setInstagramCount(response.data.data.socialMediaAccountCount.instagramCount)
                 setTiktokCount(response.data.data.socialMediaAccountCount.tiktokCount)
                 setTotalEarnings(response.data.data.totalEarnings)
+                setPendingEarnings(response.data.data.pendingEarnings)
                 setPoints(response.data.data.points)
                 setRank(response.data.data.rank)
               } else {
@@ -116,6 +120,7 @@ const DashboardScreen = props => {
                 setInstagramCount(response.data.data.socialMediaAccountCount.instagramCount)
                 setTiktokCount(response.data.data.socialMediaAccountCount.tiktokCount)
                 setTotalEarnings(response.data.data.totalEarnings)
+                setPendingEarnings(response.data.data.pendingEarnings)
                 setPoints(response.data.data.points)
                 setRank(response.data.data.rank)
               } else {
@@ -153,25 +158,8 @@ const DashboardScreen = props => {
     )
   }
 
-  const onProfilePress = async () => {
-    props.navigation.navigate('Profile')
-  }
 
-  const onSocialMediaPress = async () => {
-    props.navigation.navigate('SocialMedia')
-  }
 
-  const onNewProjectsPress = async () => {
-    props.navigation.navigate('NewProjectList')
-  }
-
-  const onOngoingProjectsPress = async () => {
-    props.navigation.navigate('OngoingProjectList')
-  }
-
-  const onCompletedProjectsPress = async () => {
-    props.navigation.navigate('CompletedProjectList')
-  }
 
   const refreshFunction = async () => {
     setRefresh(true)
@@ -196,183 +184,19 @@ const DashboardScreen = props => {
                                   lastName={appContext?.userData?.lastName}
                                   profileImagePath={appContext?.userData?.profileImagePath}/>
 
-
-            {/*Ag - User name*/}
-            {/*<View style={styles.viewStyle}>*/}
-            {/*  <View style={styles.horizontalContentStyle}>*/}
-            {/*    <TouchableOpacity onPress={onProfilePress}>*/}
-            {/*      {*/}
-            {/*        appContext.userData && appContext.userData?.profileImagePath ? (*/}
-            {/*            <Image style={styles.avatarStyle}*/}
-            {/*                   source={{*/}
-            {/*                     uri: appContext.userData?.profileImagePath*/}
-            {/*                   }}/>*/}
-            {/*        ) : (*/}
-            {/*            <Image style={styles.avatarStyle}*/}
-            {/*                   source={require('../../assets/user.jpg')}/>*/}
-            {/*        )*/}
-            {/*      }*/}
-            {/*    </TouchableOpacity>*/}
-            {/*    <View style={styles.profileStyle}>*/}
-            {/*      <TouchableOpacity onPress={onProfilePress}>*/}
-            {/*        <Text style={styles.titleStyle}>*/}
-            {/*          {appContext.userData?.firstName} {appContext.userData?.lastName}*/}
-            {/*        </Text>*/}
-            {/*      </TouchableOpacity>*/}
-            {/*      <TouchableOpacity onPress={onSocialMediaPress}>*/}
-            {/*        <View style={styles.socialMediaStyle}>*/}
-            {/*          <View style={styles.horizontalContentStyle}>*/}
-            {/*            <View style={styles.betweenStyle}>*/}
-            {/*              <View style={styles.horizontalContentStyle}>*/}
-            {/*                <Ionicons name='logo-youtube'*/}
-            {/*                          size={20}*/}
-            {/*                          color={Colors.secondaryColor}/>*/}
-            {/*                <Text style={styles.countStyle}>*/}
-            {/*                  {formatNumber(youtubeCount)}*/}
-            {/*                </Text>*/}
-            {/*              </View>*/}
-            {/*            </View>*/}
-            {/*            <View style={styles.betweenStyle}>*/}
-            {/*              <View style={styles.horizontalContentStyle}>*/}
-            {/*                <Ionicons name='logo-facebook'*/}
-            {/*                          size={20}*/}
-            {/*                          color={Colors.secondaryColor}/>*/}
-            {/*                <Text style={styles.countStyle}>*/}
-            {/*                  {formatNumber(facebookCount)}*/}
-            {/*                </Text>*/}
-            {/*              </View>*/}
-            {/*            </View>*/}
-            {/*            <View style={styles.betweenStyle}>*/}
-            {/*              <View style={styles.horizontalContentStyle}>*/}
-            {/*                <Ionicons name='logo-instagram'*/}
-            {/*                          size={20}*/}
-            {/*                          color={Colors.secondaryColor}/>*/}
-            {/*                <Text style={styles.countStyle}>*/}
-            {/*                  {formatNumber(instagramCount)}*/}
-            {/*                </Text>*/}
-            {/*              </View>*/}
-            {/*            </View>*/}
-            {/*            <View style={styles.betweenStyle}>*/}
-            {/*              <View style={styles.horizontalContentStyle}>*/}
-            {/*                <MaterialCommunityIcons name='music-note'*/}
-            {/*                                        size={20}*/}
-            {/*                                        color={Colors.secondaryColor}/>*/}
-            {/*                <Text style={styles.tiktokCountStyle}>*/}
-            {/*                  {formatNumber(tiktokCount)}*/}
-            {/*                </Text>*/}
-            {/*              </View>*/}
-            {/*            </View>*/}
-            {/*          </View>*/}
-            {/*        </View>*/}
-            {/*      </TouchableOpacity>*/}
-            {/*    </View>*/}
-            {/*  </View>*/}
-            {/*</View>*/}
-
-            {/*Ag - Stats*/}
-
-            {/*<View style={styles.rowViewStyle}>*/}
-
-            {/*  /!*AG*!/*/}
-            {/*  <View style={styles.horizontalContentStyle}>*/}
-
-            {/*    <View style={styles.rankCardStyle}>*/}
-            {/*      <Text style={styles.rankTitleStyle}>*/}
-            {/*        Rank*/}
-            {/*      </Text>*/}
-            {/*      <Text style={styles.rankValueStyle}>*/}
-            {/*        {formatNumber(rank)}*/}
-            {/*      </Text>*/}
-            {/*    </View>*/}
-
-            {/*    <View style={styles.pointsViewStyle}>*/}
-            {/*      <Text style={styles.pointsValueStyle}>*/}
-            {/*        {formatNumber(points)}*/}
-            {/*      </Text>*/}
-            {/*      <View style={styles.horizontalContentStyle}>*/}
-            {/*        <Ionicons name='star'*/}
-            {/*                  size={20}*/}
-            {/*                  color={Colors.secondaryColor}/>*/}
-            {/*        <Text style={styles.pointsTitleStyle}>*/}
-            {/*          VP Points*/}
-            {/*        </Text>*/}
-            {/*      </View>*/}
-            {/*    </View>*/}
+            <DashboardStats  pendingProjectCount={pendingProjectCount}
+                             ongoingProjectCount={ongoingProjectCount}
+                             completedProjectCount={completedProjectCount}/>
 
 
-            {/*  </View>*/}
-            {/*</View>*/}
+            <DashboardEarnings totalEarnings={totalEarnings} pendingEarnings={pendingEarnings}/>
 
-            {/*<View style={styles.rowViewStyle}>*/}
-            {/*  <View style={styles.horizontalContentStyle}>*/}
-            {/*    <View style={styles.circleViewStyle}>*/}
-            {/*      <TouchableOpacity style={styles.circleStyle}*/}
-            {/*                        onPress={onNewProjectsPress}>*/}
-            {/*        <Text style={styles.circleTextStyle}>*/}
-            {/*          {formatNumber(pendingProjectCount)}*/}
-            {/*        </Text>*/}
-            {/*      </TouchableOpacity>*/}
-            {/*      <TouchableOpacity onPress={onNewProjectsPress}>*/}
-            {/*        <Text style={styles.circleTitleStyle}>*/}
-            {/*          Job{'\n'}Pool*/}
-            {/*        </Text>*/}
-            {/*      </TouchableOpacity>*/}
-            {/*    </View>*/}
-            {/*    <View style={styles.circleViewStyle}>*/}
-            {/*      <TouchableOpacity style={styles.circleStyle}*/}
-            {/*                        onPress={onOngoingProjectsPress}>*/}
-            {/*        <Text style={styles.circleTextStyle}>*/}
-            {/*          {formatNumber(ongoingProjectCount)}*/}
-            {/*        </Text>*/}
-            {/*      </TouchableOpacity>*/}
-            {/*      <TouchableOpacity onPress={onOngoingProjectsPress}>*/}
-            {/*        <Text style={styles.circleTitleStyle}>*/}
-            {/*          Ongoing{'\n'}Jobs*/}
-            {/*        </Text>*/}
-            {/*      </TouchableOpacity>*/}
-            {/*    </View>*/}
-            {/*    <View style={styles.circleViewStyle}>*/}
-            {/*      <TouchableOpacity style={styles.circleStyle}*/}
-            {/*                        onPress={onCompletedProjectsPress}>*/}
-            {/*        <Text style={styles.circleTextStyle}>*/}
-            {/*          {formatNumber(completedProjectCount)}*/}
-            {/*        </Text>*/}
-            {/*      </TouchableOpacity>*/}
-            {/*      <TouchableOpacity onPress={onCompletedProjectsPress}>*/}
-            {/*        <Text style={styles.circleTitleStyle}>*/}
-            {/*          Completed{'\n'}Jobs*/}
-            {/*        </Text>*/}
-            {/*      </TouchableOpacity>*/}
-            {/*    </View>*/}
-            {/*  </View>*/}
-            {/*</View>*/}
-            {/*<TouchableOpacity style={styles.cardStyle}*/}
-            {/*                  onPress={onCompletedProjectsPress}>*/}
-            {/*  <View style={styles.horizontalContentStyle1}>*/}
-            {/*    <FontAwesome name='dollar'*/}
-            {/*                 size={20}*/}
-            {/*                 color={Colors.primaryColor}/>*/}
-            {/*    <Text style={styles.cardTitleStyle}>*/}
-            {/*      Total Earnings*/}
-            {/*    </Text>*/}
-            {/*  </View>*/}
-            {/*  <View style={styles.horizontalContentStyle2}>*/}
-            {/*    <Text style={styles.earnedAmountStyle}>*/}
-            {/*      {formatNumber(totalEarnings)}*/}
-            {/*    </Text>*/}
-            {/*    <Text style={styles.unitStyle}>*/}
-            {/*      LKR*/}
-            {/*    </Text>*/}
-            {/*  </View>*/}
-            {/*  <View style={styles.horizontalContentStyle}>*/}
-            {/*    <Text style={styles.cardTextStyle}>*/}
-            {/*      View All*/}
-            {/*    </Text>*/}
-            {/*    <FontAwesome5 name='chevron-circle-right'*/}
-            {/*                  size={16}*/}
-            {/*                  color={Colors.primaryColor}/>*/}
-            {/*  </View>*/}
-            {/*</TouchableOpacity>*/}
+
+
+
+
+
+
 
 
             <View style={styles.bodyStyle}>
