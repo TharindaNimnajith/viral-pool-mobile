@@ -12,6 +12,10 @@ import {showAlert, showErrors} from '../../../shared/util/helpers'
 const JobCard = props => {
   const [contentSubmissionLink, setContentSubmissionLink] = useState(props.itemData.contentSubmissionLink)
   const [resultSubmissionLink, setResultSubmissionLink] = useState(props.itemData.resultSubmissionLink)
+  const [contentSubmissionLinkValid, setContentSubmissionLinkValid] =
+    useState(props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Default)
+  const [resultSubmissionLinkValid, setResultSubmissionLinkValid] =
+    useState(props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Default)
   const [visibleContentSubmit, setVisibleContentSubmit] = useState(false)
   const [visibleContentDelete, setVisibleContentDelete] = useState(false)
   const [visibleResultSubmit, setVisibleResultSubmit] = useState(false)
@@ -50,15 +54,13 @@ const JobCard = props => {
   }
 
   const onChangeContentSubmissionLink = async contentSubmissionLink => {
+    setContentSubmissionLinkValid(contentSubmissionLink.trim().length > 0)
     setContentSubmissionLink(contentSubmissionLink)
   }
 
   const onChangeResultSubmissionLink = async resultSubmissionLink => {
+    setResultSubmissionLinkValid(resultSubmissionLink.trim().length > 0)
     setResultSubmissionLink(resultSubmissionLink)
-  }
-
-  function isDisabled() {
-    return false
   }
 
   const contentSubmit = async () => {
@@ -265,9 +267,10 @@ const JobCard = props => {
             {
               props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
               <View style={styles.horizontalStyle}>
-                <TouchableOpacity disabled={isDisabled()}
+                <TouchableOpacity disabled={!contentSubmissionLinkValid}
                                   onPress={showDialogContentDelete}
-                                  style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
+                                  style={contentSubmissionLinkValid ? styles.deleteButtonStyle :
+                                    styles.buttonDisabledStyle}>
                   <View style={styles.horizontalStyle}>
                     <Entypo name='cross'
                             size={19}
@@ -277,9 +280,10 @@ const JobCard = props => {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity disabled={isDisabled()}
+                <TouchableOpacity disabled={!contentSubmissionLinkValid}
                                   onPress={showDialogContentSubmit}
-                                  style={isDisabled() ? styles.buttonDisabledStyle : styles.submitButtonStyle}>
+                                  style={contentSubmissionLinkValid ? styles.submitButtonStyle :
+                                    styles.buttonDisabledStyle}>
                   <View style={styles.horizontalStyle}>
                     <Ionicons name='checkmark'
                               size={19}
@@ -309,9 +313,10 @@ const JobCard = props => {
             {
               props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
               <View style={styles.horizontalStyle}>
-                <TouchableOpacity disabled={isDisabled()}
+                <TouchableOpacity disabled={!resultSubmissionLinkValid}
                                   onPress={showDialogResultDelete}
-                                  style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
+                                  style={resultSubmissionLinkValid ? styles.deleteButtonStyle :
+                                    styles.buttonDisabledStyle}>
                   <View style={styles.horizontalStyle}>
                     <Entypo name='cross'
                             size={19}
@@ -321,9 +326,10 @@ const JobCard = props => {
                     </Text>
                   </View>
                 </TouchableOpacity>
-                <TouchableOpacity disabled={isDisabled()}
+                <TouchableOpacity disabled={!resultSubmissionLinkValid}
                                   onPress={showDialogResultSubmit}
-                                  style={isDisabled() ? styles.buttonDisabledStyle : styles.submitButtonStyle}>
+                                  style={resultSubmissionLinkValid ? styles.submitButtonStyle :
+                                    styles.buttonDisabledStyle}>
                   <View style={styles.horizontalStyle}>
                     <Ionicons name='checkmark'
                               size={19}
