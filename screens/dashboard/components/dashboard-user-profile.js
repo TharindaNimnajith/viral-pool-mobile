@@ -45,7 +45,7 @@ export const DashboardUserProfile = props => {
                 </Text>
                 </View>
 
-                <View style={styles.socialMediaIcon}>
+                <View style={styles.socialMediaIcon} onPress={onSocialMediaPress}>
                     <Text style={styles.socialMediaIconText}>
                         <Image source={require('../../../assets/icons/facebook.png')}/>
                         <Text style={styles.socialMediaIconText}> {props.facebookCount} </Text>
