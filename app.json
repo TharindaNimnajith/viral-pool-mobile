@@ -17,7 +17,7 @@
     "primaryColor": "#e82128",
     "icon": "./assets/icon.png",
     "notification": {
-      "icon": "",
+      "icon": "./assets/icon.png",
       "color": "#ffffff",
       "iosDisplayInForeground": true,
       "androidMode": "collapse",
