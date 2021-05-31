@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
     marginLeft: -wp('1.5%')
   },
   deleteStyle: {
-    width: '8%',
+    width: '10%',
     alignSelf: 'center',
     alignItems: 'center'
   },
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
   statTitleStyle: {
     color: Colors.tertiaryColor,
     fontSize: 13,
-    width: '30%'
+    width: '40%'
   },
   textStyle: {
     fontSize: 18,

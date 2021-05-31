@@ -222,7 +222,25 @@ const JobCard = props => {
                        onPress={hideDialogResultDelete}/>
       </Dialog.Container>
       <View style={styles.submissionViewStyle}>
+
+        <View style={{alignItems:'flex-end',paddingRight:15, width:'100%'}}>
+          {
+            props.itemData.isPaid ? (
+                <Text style={styles.statusPaidStyle}>
+                  Paid
+                </Text>
+            ) : (
+                <Text style={styles.statusNotPaidStyle}>
+                  Not Paid
+                </Text>
+            )
+          }
+        </View>
         <View style={styles.headerStyle}>
+
+
+
+
           <View style={styles.horizontalStyle}>
             <View style={styles.iconViewStyle}>
               <Image style={styles.avatarStyle}
@@ -233,24 +251,10 @@ const JobCard = props => {
             <Text style={styles.nameStyle}>
               {props.itemData.socialMediaAccountResponse.profileName}
             </Text>
-            <View>
-              {
-                props.itemData.isPaid ? (
-                  <View style={styles.statusPaidStyle}>
-                    <Text style={styles.statusTextStyle}>
-                      Paid
-                    </Text>
-                  </View>
-                ) : (
-                  <View style={styles.statusNotPaidStyle}>
-                    <Text style={styles.statusTextStyle}>
-                      Not Paid
-                    </Text>
-                  </View>
-                )
-              }
-            </View>
           </View>
+
+
+
         </View>
         {
           !props.isContentGivenByStrategyMember &&
@@ -402,27 +406,21 @@ const styles = StyleSheet.create({
     marginLeft: wp('4%')
   },
   nameStyle: {
-    width: '52%',
+    width: '100%',
+    flexShrink: 1,
     alignSelf: 'center',
     marginLeft: 5,
     fontSize: 20
   },
   statusNotPaidStyle: {
-    backgroundColor: Colors.primaryColor,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10
+    color: Colors.primaryColor,
+    fontSize: 10,
+    fontWeight: 'bold'
   },
   statusPaidStyle: {
-    backgroundColor: Colors.successColor,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    marginLeft: 15
-  },
-  statusTextStyle: {
-    color: Colors.secondaryColor,
-    fontSize: 16
+    color: Colors.successColor,
+    fontWeight: 'bold',
+    fontSize: 10
   },
   submissionViewStyle: {
     backgroundColor: Colors.fadedEffectColor,

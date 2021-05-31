@@ -105,7 +105,7 @@ const InstagramListItem = props => {
 
 const styles = StyleSheet.create({
   deleteStyle: {
-    width: '8%',
+    width: '10%',
     alignSelf: 'center',
     alignItems: 'center'
   },
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
   statTitleStyle: {
     color: Colors.tertiaryColor,
     fontSize: 13,
-    width: '30%'
+    width: '40%'
   },
   textStyle: {
     fontSize: 18,
