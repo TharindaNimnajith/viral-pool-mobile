@@ -328,7 +328,7 @@ const DashboardScreen = props => {
                               onPress={onCompletedProjectsPress}>
               <View style={styles.horizontalContentStyle1}>
                 <FontAwesome name='dollar'
-                             size={25}
+                             size={20}
                              color={Colors.primaryColor}/>
                 <Text style={styles.cardTitleStyle}>
                   Total Earnings
@@ -396,9 +396,9 @@ const DashboardScreen = props => {
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    width: wp('24%'),
-    height: wp('24%'),
-    borderRadius: wp('12%'),
+    width: wp('20%'),
+    height: wp('20%'),
+    borderRadius: wp('10%'),
     borderWidth: 1,
     borderColor: Colors.secondaryColor
   },
@@ -406,46 +406,45 @@ const styles = StyleSheet.create({
     marginLeft: 6
   },
   bodyStyle: {
-    marginTop: hp('2%'),
-    marginBottom: hp('1%'),
+    marginBottom: hp('0.5%'),
     marginHorizontal: wp('2%')
   },
   cardStyle: {
     backgroundColor: Colors.fadedEffectColor,
     borderRadius: hp('5%'),
-    paddingVertical: hp('1.5%'),
+    paddingTop: hp('0.7%'),
+    paddingBottom: hp('1%'),
     paddingHorizontal: wp('20%'),
-    marginVertical: hp('4%'),
+    marginVertical: hp('2%'),
     alignItems: 'center',
     alignSelf: 'center'
   },
   cardTextStyle: {
     marginRight: 8,
-    fontSize: 17,
+    fontSize: 16,
     bottom: 2
   },
   cardTitleStyle: {
-    fontSize: 22,
+    fontSize: 18,
     marginLeft: 8
   },
   circleStyle: {
     backgroundColor: Colors.secondaryColor,
-    width: wp('22%'),
-    height: wp('22%'),
-    borderRadius: wp('11%')
+    width: wp('18%'),
+    height: wp('18%'),
+    borderRadius: wp('9%')
   },
   circleTextStyle: {
+    flex: 1,
+    textAlignVertical: 'center',
     alignSelf: 'center',
     color: Colors.primaryColor,
-    fontSize: 40,
-    flex: 1,
-    textAlignVertical: 'center'
+    fontSize: 30
   },
   circleTitleStyle: {
     textAlign: 'center',
     color: Colors.secondaryColor,
-    marginTop: 6,
-    fontSize: 16
+    marginTop: 3
   },
   circleViewStyle: {
     marginRight: wp('6%')
@@ -456,7 +455,7 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center'
   },
   earnedAmountStyle: {
-    fontSize: 50,
+    fontSize: 40,
     color: Colors.primaryColor
   },
   emptyListStyle: {
@@ -477,15 +476,15 @@ const styles = StyleSheet.create({
   },
   horizontalContentStyle1: {
     flexDirection: 'row',
-    marginVertical: hp('1%')
+    marginVertical: hp('0.5%')
   },
   horizontalContentStyle2: {
     flexDirection: 'row',
-    marginBottom: hp('2%')
+    marginBottom: hp('1%')
   },
   listStyle: {
     borderRadius: 25,
-    paddingVertical: 18,
+    paddingVertical: 15,
     paddingHorizontal: 5
   },
   loadingStyle: {
@@ -511,12 +510,11 @@ const styles = StyleSheet.create({
   },
   pointsValueStyle: {
     color: Colors.secondaryColor,
-    fontSize: 60,
-    marginBottom: 5
+    fontSize: 45
   },
   pointsViewStyle: {
     alignItems: 'center',
-    paddingTop: 5
+    justifyContent: 'center'
   },
   profileStyle: {
     marginLeft: wp('4%'),
@@ -526,19 +524,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: Colors.secondaryColor,
     borderRadius: 20,
-    paddingTop: 25,
-    paddingBottom: 16,
-    paddingHorizontal: 35,
-    marginRight: wp('10%')
+    paddingHorizontal: 25,
+    paddingVertical: 7,
+    marginRight: wp('10%'),
+    justifyContent: 'center'
   },
   rankTitleStyle: {
     textTransform: 'uppercase',
     color: Colors.primaryColor,
-    fontSize: 20
+    fontSize: 18
   },
   rankValueStyle: {
     color: Colors.primaryColor,
-    fontSize: 50
+    fontSize: 45
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,
@@ -546,7 +544,7 @@ const styles = StyleSheet.create({
     marginTop: 10
   },
   rowViewStyle: {
-    marginTop: hp('4%'),
+    marginTop: hp('2.5%'),
     alignSelf: 'center'
   },
   sectionTitleStyle: {
@@ -570,11 +568,11 @@ const styles = StyleSheet.create({
   },
   viewStyle: {
     marginLeft: wp('6%'),
-    marginTop: wp('6%')
+    marginTop: wp('4%')
   },
   unitStyle: {
     color: Colors.primaryColor,
-    fontSize: 30,
+    fontSize: 22,
     textAlignVertical: 'bottom',
     marginLeft: 10,
     marginBottom: 5
