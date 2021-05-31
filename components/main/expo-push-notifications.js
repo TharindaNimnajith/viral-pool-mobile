@@ -31,7 +31,6 @@ const ExpoPushNotifications = () => {
     registerForPushNotificationsAsync().then(async token => {
       await appContext.SetExpoPushToken(token)
     }).catch(async error => {
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
     notificationListener.current = addNotificationReceivedListener(async notification => {
@@ -57,7 +56,6 @@ async function registerForPushNotificationsAsync() {
     const {
       status: existingStatus
     } = await getPermissionsAsync().catch(async error => {
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })
     let finalStatus = existingStatus
@@ -65,7 +63,6 @@ async function registerForPushNotificationsAsync() {
       const {
         status
       } = await requestPermissionsAsync().catch(async error => {
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
         console.log(error)
       })
       finalStatus = status
@@ -75,7 +72,6 @@ async function registerForPushNotificationsAsync() {
       return
     }
     token = (await getExpoPushTokenAsync().catch(async error => {
-      await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
     })).data
   } else {

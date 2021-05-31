@@ -21,10 +21,10 @@ import {showAlert, showErrors} from '../../shared/util/helpers'
 import {storeStringData} from '../../shared/util/local-storage'
 
 const LoginScreen = props => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [emailValid, setEmailValid] = useState(false)
-  const [passwordValid, setPasswordValid] = useState(false)
+  const [email, setEmail] = useState('tharindarajapakshe@y7mail.com')
+  const [password, setPassword] = useState('tharinda')
+  const [emailValid, setEmailValid] = useState(true)
+  const [passwordValid, setPasswordValid] = useState(true)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
@@ -153,6 +153,7 @@ const LoginScreen = props => {
 const styles = StyleSheet.create({
   buttonStyle: {
     marginTop: 30,
+    marginBottom: 20,
     backgroundColor: Colors.defaultColor,
     alignItems: 'center',
     padding: 10,
@@ -192,9 +193,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   imageStyle: {
-    marginBottom: 25,
-    width: 160,
-    height: 160
+    width: 140,
+    height: 140,
+    marginBottom: 20,
+    marginTop: 20
   },
   headerStyle: {
     alignItems: 'center',
@@ -217,7 +219,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.blurEffectColor
   },
   mainViewStyle: {
-    minHeight: hp('102.2%'),
+    minHeight: hp('104%'),
     backgroundColor: Colors.secondaryColor
   },
   refreshStyle: {
