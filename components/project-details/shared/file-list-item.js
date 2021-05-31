@@ -6,10 +6,10 @@ import {createAlbumAsync, createAssetAsync, requestPermissionsAsync} from 'expo-
 import {documentDirectory, downloadAsync, FileSystemSessionType} from 'expo-file-system'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
-import {ApiUrl, showAlert} from '../../shared/util/helpers'
-import Constants from '../../shared/const/constants'
-import Colors from '../../shared/const/colors'
-import {getStringData, storeStringData} from '../../shared/util/local-storage'
+import {ApiUrl, showAlert} from '../../../shared/util/helpers'
+import Constants from '../../../shared/const/constants'
+import Colors from '../../../shared/const/colors'
+import {getStringData, storeStringData} from '../../../shared/util/local-storage'
 
 const FileListItem = props => {
   const [visible, setVisible] = useState(false)

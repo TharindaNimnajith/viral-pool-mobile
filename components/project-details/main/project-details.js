@@ -16,12 +16,12 @@ import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
 import {Entypo, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
-import {jobAcceptationStatusEnum, socialMediaPlatformNameEnum} from '../../shared/const/enums'
-import Colors from '../../shared/const/colors'
-import Constants from '../../shared/const/constants'
-import {formatNumber, showAlert, showErrors} from '../../shared/util/helpers'
-import FileListItem from './file-list-item'
-import JobCard from './job-card'
+import {jobAcceptationStatusEnum, socialMediaPlatformNameEnum} from '../../../shared/const/enums'
+import Colors from '../../../shared/const/colors'
+import Constants from '../../../shared/const/constants'
+import {formatNumber, showAlert, showErrors} from '../../../shared/util/helpers'
+import FileListItem from '../shared/file-list-item'
+import JobCard from '../shared/job-card'
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
@@ -257,7 +257,7 @@ const ProjectDetails = props => {
                                 color={Colors.instagramColor}/>
                     ) : socialMediaPlatformName === socialMediaPlatformNameEnum.Tiktok ? (
                       <Image style={styles.tiktokStyle}
-                             source={require('../../assets/tiktok-logo.png')}/>
+                             source={require('../../../assets/tiktok-logo.png')}/>
                     ) : null
                 }
               </View>

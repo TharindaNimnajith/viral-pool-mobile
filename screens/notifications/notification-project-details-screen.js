@@ -1,6 +1,6 @@
 import React from 'react'
 import CombinedButtons from '../../components/header/combined-buttons'
-import ProjectDetails from '../../components/project-details/project-details'
+import ProjectDetails from '../../components/project-details/main/project-details'
 
 const NotificationProjectDetailsScreen = props => {
   return (
