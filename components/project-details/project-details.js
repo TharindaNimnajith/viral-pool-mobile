@@ -7,7 +7,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   useWindowDimensions,
   View
@@ -17,16 +16,12 @@ import Dialog from 'react-native-dialog'
 import HTML from 'react-native-render-html'
 import {Entypo, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
-import {
-  contentSubmissionStatusEnum,
-  jobAcceptationStatusEnum,
-  resultSubmissionStatusEnum,
-  socialMediaPlatformNameEnum
-} from '../../shared/const/enums'
+import {jobAcceptationStatusEnum, socialMediaPlatformNameEnum} from '../../shared/const/enums'
 import Colors from '../../shared/const/colors'
 import Constants from '../../shared/const/constants'
 import {formatNumber, showAlert, showErrors} from '../../shared/util/helpers'
 import FileListItem from './file-list-item'
+import JobCard from './job-card'
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width
@@ -45,15 +40,9 @@ const ProjectDetails = props => {
   const [isContentGivenByStrategyMember, setIsContentGivenByStrategyMember] = useState(false)
   const [jobAcceptationStatus, setJobAcceptationStatus] = useState(jobAcceptationStatusEnum.Pending)
   const [contentCreatorSubmissionResponses, setContentCreatorSubmissionResponses] = useState([])
-  const [link, setLink] = useState('')
-  const [id, setId] = useState('')
   const [loading, setLoading] = useState(false)
   const [visibleAccept, setVisibleAccept] = useState(false)
   const [visibleReject, setVisibleReject] = useState(false)
-  const [visibleContentSubmit, setVisibleContentSubmit] = useState(false)
-  const [visibleContentDelete, setVisibleContentDelete] = useState(false)
-  const [visibleResultSubmit, setVisibleResultSubmit] = useState(false)
-  const [visibleResultDelete, setVisibleResultDelete] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
 
@@ -130,54 +119,6 @@ const ProjectDetails = props => {
     setVisibleReject(false)
   }
 
-  const showDialogContentSubmit = async id => {
-    setId(id)
-    setVisibleContentSubmit(true)
-  }
-
-  const hideDialogContentSubmit = async () => {
-    setId('')
-    setLink('')
-    setVisibleContentSubmit(false)
-  }
-
-  const showDialogContentDelete = async id => {
-    setId(id)
-    setVisibleContentDelete(true)
-  }
-
-  const hideDialogContentDelete = async () => {
-    setId('')
-    setLink('')
-    setVisibleContentDelete(false)
-  }
-
-  const showDialogResultSubmit = async id => {
-    setId(id)
-    setVisibleResultSubmit(true)
-  }
-
-  const hideDialogResultSubmit = async () => {
-    setId('')
-    setLink('')
-    setVisibleResultSubmit(false)
-  }
-
-  const showDialogResultDelete = async id => {
-    setId(id)
-    setVisibleResultDelete(true)
-  }
-
-  const hideDialogResultDelete = async () => {
-    setId('')
-    setLink('')
-    setVisibleResultDelete(false)
-  }
-
-  const onChangeLink = async link => {
-    setLink(link)
-  }
-
   const setLoadingTrue = async () => {
     setLoading(true)
   }
@@ -186,8 +127,8 @@ const ProjectDetails = props => {
     setLoading(false)
   }
 
-  function isDisabled() {
-    return false
+  const refreshFunction = async () => {
+    setRefresh(true)
   }
 
   const acceptJob = async () => {
@@ -235,110 +176,6 @@ const ProjectDetails = props => {
     })
   }
 
-  const contentSubmit = async () => {
-    setVisibleContentSubmit(false)
-    setLoading(true)
-    let data = {
-      strategyId: project.project,
-      id: id,
-      contentLink: link
-    }
-    axios.put('project-cc-strategy/content-link', data).then(async response => {
-      project.refresh()
-      setId('')
-      setLink('')
-      setLoading(false)
-      setRefresh(true)
-      if (response.status === 200)
-        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
-      else
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-    }).catch(async error => {
-      project.refresh()
-      setLoading(false)
-      await showErrors(error.response.data)
-      console.log(error.response.data)
-    })
-  }
-
-  const contentDelete = async () => {
-    setVisibleContentDelete(false)
-    setLoading(true)
-    let data = {
-      strategyId: project.project,
-      id: id,
-      contentLink: null
-    }
-    axios.put('project-cc-strategy/content-link', data).then(async response => {
-      project.refresh()
-      setId('')
-      setLink('')
-      setLoading(false)
-      setRefresh(true)
-      if (response.status === 200)
-        await showAlert(Constants.SUCCESS, Constants.DELETED)
-      else
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-    }).catch(async error => {
-      project.refresh()
-      setLoading(false)
-      await showErrors(error.response.data)
-      console.log(error.response.data)
-    })
-  }
-
-  const resultSubmit = async () => {
-    setVisibleResultSubmit(false)
-    setLoading(true)
-    let data = {
-      strategyId: project.project,
-      id: id,
-      resultLink: link
-    }
-    axios.put('project-cc-strategy/result-link', data).then(async response => {
-      project.refresh()
-      setId('')
-      setLink('')
-      setLoading(false)
-      setRefresh(true)
-      if (response.status === 200)
-        await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
-      else
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-    }).catch(async error => {
-      project.refresh()
-      setLoading(false)
-      await showErrors(error.response.data)
-      console.log(error.response.data)
-    })
-  }
-
-  const resultDelete = async () => {
-    setVisibleResultDelete(false)
-    setLoading(true)
-    let data = {
-      strategyId: project.project,
-      id: id,
-      resultLink: null
-    }
-    axios.put('project-cc-strategy/result-link', data).then(async response => {
-      project.refresh()
-      setId('')
-      setLink('')
-      setLoading(false)
-      setRefresh(true)
-      if (response.status === 200)
-        await showAlert(Constants.SUCCESS, Constants.DELETED)
-      else
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-    }).catch(async error => {
-      project.refresh()
-      setLoading(false)
-      await showErrors(error.response.data)
-      console.log(error.response.data)
-    })
-  }
-
   return (
     <SafeAreaView>
       <Dialog.Container visible={visibleAccept}
@@ -370,66 +207,6 @@ const ProjectDetails = props => {
         <Dialog.Button label='No'
                        color={Colors.primaryColor}
                        onPress={hideDialogReject}/>
-      </Dialog.Container>
-      <Dialog.Container visible={visibleContentSubmit}
-                        onBackdropPress={hideDialogContentSubmit}>
-        <Dialog.Title>
-          SUBMIT CONTENT
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       color={Colors.primaryColor}
-                       onPress={contentSubmit}/>
-        <Dialog.Button label='No'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogContentSubmit}/>
-      </Dialog.Container>
-      <Dialog.Container visible={visibleContentDelete}
-                        onBackdropPress={hideDialogContentDelete}>
-        <Dialog.Title>
-          DELETE CONTENT
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       color={Colors.primaryColor}
-                       onPress={contentDelete}/>
-        <Dialog.Button label='No'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogContentDelete}/>
-      </Dialog.Container>
-      <Dialog.Container visible={visibleResultSubmit}
-                        onBackdropPress={hideDialogResultSubmit}>
-        <Dialog.Title>
-          SUBMIT RESULT
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       color={Colors.primaryColor}
-                       onPress={resultSubmit}/>
-        <Dialog.Button label='No'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogResultSubmit}/>
-      </Dialog.Container>
-      <Dialog.Container visible={visibleResultDelete}
-                        onBackdropPress={hideDialogResultDelete}>
-        <Dialog.Title>
-          DELETE RESULT
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       color={Colors.primaryColor}
-                       onPress={resultDelete}/>
-        <Dialog.Button label='No'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogResultDelete}/>
       </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
@@ -564,127 +341,15 @@ const ProjectDetails = props => {
           {
             (jobAcceptationStatus === jobAcceptationStatusEnum.Accepted ||
               jobAcceptationStatus === jobAcceptationStatusEnum.Completed) &&
-            contentCreatorSubmissionResponses.map(value =>
-              <View key={value.id}
-                    style={styles.submissionViewStyle}>
-                <View style={styles.headerStyle}>
-                  <View style={styles.horizontalStyle}>
-                    <View style={styles.iconViewStyle}>
-                      <Image style={styles.avatarStyle}
-                             source={{
-                               uri: value.socialMediaAccountResponse.profileImage
-                             }}/>
-                    </View>
-                    <Text style={styles.nameStyle}>
-                      {value.socialMediaAccountResponse.profileName}
-                    </Text>
-                    <View>
-                      {
-                        value.isPaid ? (
-                          <View style={styles.statusPaidStyle}>
-                            <Text style={styles.statusTextStyle}>
-                              Paid
-                            </Text>
-                          </View>
-                        ) : (
-                          <View style={styles.statusNotPaidStyle}>
-                            <Text style={styles.statusTextStyle}>
-                              Not Paid
-                            </Text>
-                          </View>
-                        )
-                      }
-                    </View>
-                  </View>
-                </View>
-                {
-                  !isContentGivenByStrategyMember &&
-                  <View style={styles.centerViewStyle}>
-                    <Text style={styles.labelStyle}>
-                      Content Submission Link
-                    </Text>
-                    <TextInput style={styles.textInputStyle}
-                               value={value.contentSubmissionLink}
-                               onChangeText={link => onChangeLink(link)}
-                               placeholder='Paste Link Here'
-                               placeholderTextColor={Colors.tertiaryColor}
-                               editable={value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
-                    {
-                      value.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
-                      <View style={styles.horizontalStyle}>
-                        <TouchableOpacity disabled={isDisabled()}
-                                          onPress={() => showDialogContentDelete(value.id)}
-                                          style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
-                          <View style={styles.horizontalStyle}>
-                            <Entypo name='cross'
-                                    size={19}
-                                    color={Colors.secondaryColor}/>
-                            <Text style={styles.buttonTextStyle}>
-                              Delete
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity disabled={isDisabled()}
-                                          onPress={() => showDialogContentSubmit(value.id, value.contentSubmissionLink)}
-                                          style={isDisabled() ? styles.buttonDisabledStyle : styles.submitButtonStyle}>
-                          <View style={styles.horizontalStyle}>
-                            <Ionicons name='checkmark'
-                                      size={19}
-                                      color={Colors.secondaryColor}/>
-                            <Text style={styles.buttonTextStyle}>
-                              Submit
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      </View>
-                    }
-                  </View>
-                }
-                {
-                  (isContentGivenByStrategyMember ||
-                    value.contentSubmissionStatus === contentSubmissionStatusEnum.Approved) &&
-                  <View style={styles.centerViewStyle}>
-                    <Text style={styles.labelStyle}>
-                      Result Submission Link
-                    </Text>
-                    <TextInput style={styles.textInputStyle}
-                               value={value.resultSubmissionLink}
-                               onChangeText={link => onChangeLink(link)}
-                               placeholder='Paste Link Here'
-                               placeholderTextColor={Colors.tertiaryColor}
-                               editable={value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
-                    {
-                      value.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
-                      <View style={styles.horizontalStyle}>
-                        <TouchableOpacity disabled={isDisabled()}
-                                          onPress={() => showDialogResultDelete(value.id)}
-                                          style={isDisabled() ? styles.buttonDisabledStyle : styles.deleteButtonStyle}>
-                          <View style={styles.horizontalStyle}>
-                            <Entypo name='cross'
-                                    size={19}
-                                    color={Colors.secondaryColor}/>
-                            <Text style={styles.buttonTextStyle}>
-                              Delete
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity disabled={isDisabled()}
-                                          onPress={() => showDialogResultSubmit(value.id, value.resultSubmissionLink)}
-                                          style={isDisabled() ? styles.buttonDisabledStyle : styles.submitButtonStyle}>
-                          <View style={styles.horizontalStyle}>
-                            <Ionicons name='checkmark'
-                                      size={19}
-                                      color={Colors.secondaryColor}/>
-                            <Text style={styles.buttonTextStyle}>
-                              Submit
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      </View>
-                    }
-                  </View>
-                }
-              </View>
+            contentCreatorSubmissionResponses.map((value, key) =>
+              <JobCard key={key}
+                       itemData={value}
+                       setLoadingTrue={setLoadingTrue}
+                       setLoadingFalse={setLoadingFalse}
+                       refreshFunction={refreshFunction}
+                       refresh={project.refresh}
+                       strategyId={project.project}
+                       isContentGivenByStrategyMember={isContentGivenByStrategyMember}/>
             )
           }
         </View>
@@ -710,24 +375,10 @@ const styles = StyleSheet.create({
     width: wp('40%'),
     borderRadius: 5
   },
-  avatarStyle: {
-    width: 56,
-    height: 56,
-    borderRadius: 28
-  },
   amountStyle: {
     color: Colors.primaryColor,
     fontSize: 20,
     fontWeight: 'bold'
-  },
-  buttonDisabledStyle: {
-    marginTop: hp('3%'),
-    marginHorizontal: 7,
-    backgroundColor: Colors.tertiaryColor,
-    alignItems: 'center',
-    padding: 8,
-    width: wp('38%'),
-    borderRadius: 5
   },
   buttonTextStyle: {
     color: Colors.secondaryColor,
@@ -766,15 +417,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     marginTop: 2
   },
-  deleteButtonStyle: {
-    marginTop: hp('3%'),
-    marginHorizontal: 7,
-    backgroundColor: Colors.primaryColor,
-    alignItems: 'center',
-    padding: 8,
-    width: wp('38%'),
-    borderRadius: 5
-  },
   fileStyle: {
     flex: 1,
     flexDirection: 'row',
@@ -782,24 +424,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     marginTop: 10
   },
-  headerStyle: {
-    marginTop: 5,
-    marginBottom: 27,
-    marginLeft: 5
-  },
   horizontalStyle: {
     flexDirection: 'row'
-  },
-  iconViewStyle: {
-    width: '20%',
-    alignSelf: 'center',
-    alignItems: 'center'
-  },
-  labelStyle: {
-    marginTop: 5,
-    color: Colors.primaryColor,
-    alignSelf: 'baseline',
-    marginLeft: wp('4%')
   },
   loadingStyle: {
     position: 'absolute',
@@ -814,12 +440,6 @@ const styles = StyleSheet.create({
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
     minHeight: hp('93.6%')
-  },
-  nameStyle: {
-    width: '52%',
-    alignSelf: 'center',
-    marginLeft: 5,
-    fontSize: 20
   },
   pointsIconStyle: {
     justifyContent: 'center'
@@ -863,50 +483,6 @@ const styles = StyleSheet.create({
   },
   socialMediaIconStyle: {
     width: '30%'
-  },
-  statusNotPaidStyle: {
-    backgroundColor: Colors.primaryColor,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10
-  },
-  statusPaidStyle: {
-    backgroundColor: Colors.successColor,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-    borderRadius: 10,
-    marginLeft: 15
-  },
-  statusTextStyle: {
-    color: Colors.secondaryColor,
-    fontSize: 16
-  },
-  submissionViewStyle: {
-    backgroundColor: Colors.fadedEffectColor,
-    marginTop: hp('1%'),
-    marginBottom: hp('2%'),
-    marginHorizontal: wp('6%'),
-    borderRadius: 20,
-    paddingTop: 20
-  },
-  submitButtonStyle: {
-    marginTop: hp('3%'),
-    marginHorizontal: 7,
-    backgroundColor: Colors.successColor,
-    alignItems: 'center',
-    padding: 8,
-    width: wp('38%'),
-    borderRadius: 5
-  },
-  textInputStyle: {
-    borderColor: Colors.primaryColor,
-    width: wp('80%'),
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 40,
-    marginTop: 10,
-    padding: 10,
-    color: Colors.tertiaryColor
   },
   tiktokStyle: {
     width: wp('7%'),
