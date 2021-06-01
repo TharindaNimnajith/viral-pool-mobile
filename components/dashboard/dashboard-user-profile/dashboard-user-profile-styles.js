@@ -11,44 +11,61 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.secondaryColor
   },
-  container: {
+  containerStyle: {
     width: '100%',
-    paddingRight: 15,
-    paddingLeft: 15,
+    paddingHorizontal: 15,
     marginRight: 'auto',
     marginLeft: 'auto',
     flexDirection: 'row',
-    paddingTop: 20,
-    paddingBottom: 20,
+    paddingVertical: 20,
     backgroundColor: Colors.primaryColor,
     borderBottomRightRadius: hp('6%'),
     borderBottomLeftRadius: hp('6%')
   },
-  points: {
-    marginBottom: 10,
-    display: 'flex',
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginLeft: 6
+  lineStyle: {
+    color: Colors.tertiaryColor,
+    marginHorizontal: 10
   },
-  socialMediaIcon: {
-    marginTop: 8,
+  pointsStyle: {
     marginBottom: 10,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
     marginLeft: 3
-
   },
-  socialMediaIconText: {
+  socialMediaIconStyle: {
+    paddingVertical: 10,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginLeft: 3
+  },
+  socialMediaIconTextStyle: {
     color: Colors.secondaryColor,
-    marginRight: 10
+    marginRight: 10,
+    marginLeft: 4
   },
-  textWrapper: {
-    flexShrink: 1, maxWidth: 250
+  socialMediaIconViewStyle: {
+    flexDirection: 'row'
   },
-  userNameStyle: {
+  textWrapperStyle: {
+    flexShrink: 1,
+    maxWidth: 250
+  },
+  titleStyle: {
+    color: Colors.tertiaryColor
+  },
+  usernameStyle: {
     fontSize: 23,
     color: Colors.secondaryColor
+  },
+  valueStyle: {
+    color: Colors.secondaryColor,
+    fontWeight: 'bold',
+    marginRight: 5
+  },
+  viewStyle: {
+    marginLeft: 6,
+    justifyContent: 'center'
   }
 })

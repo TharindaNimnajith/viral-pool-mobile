@@ -4,10 +4,6 @@ import Colors from '../../../shared/const/colors'
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
 
 export const styles = StyleSheet.create({
-  amountCurrencyTextStyle: {
-    textAlign: 'right',
-    fontSize: 20
-  },
   amountTextStyle: {
     textAlign: 'center',
     fontSize: 30,
@@ -25,25 +21,21 @@ export const styles = StyleSheet.create({
     height: 130,
     borderRadius: hp('3%')
   },
-  cardTitleStyle: {
-    fontSize: 18
-  },
-  col: {
+  columnStyle: {
     width: '50%'
   },
-  earnedAmountStyle: {
-    fontSize: 30,
-    color: Colors.primaryColor
-  },
-  horizontalContentStyle2: {
-    flexDirection: 'row',
-    marginBottom: hp('1%')
-  },
-  iconText: {
+  iconTextStyle: {
     marginBottom: 10,
+    marginLeft: 5,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row'
+  },
+  iconTitleStyle: {
+    marginLeft: 5
+  },
+  pendingEarningsTextStyle: {
+    color: Colors.tertiaryColor
   },
   rowViewStyle: {
     display: 'flex',
@@ -55,7 +47,13 @@ export const styles = StyleSheet.create({
     width: '100%',
     flexDirection: 'row'
   },
-  verticalLine: {
+  totalEarningsTextStyle: {
+    color: Colors.primaryColor
+  },
+  unitStyle: {
+    fontSize: 20
+  },
+  verticalLineStyle: {
     paddingLeft: 10,
     borderLeftWidth: 2,
     borderLeftColor: Colors.primaryColor

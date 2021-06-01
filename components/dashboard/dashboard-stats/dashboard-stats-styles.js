@@ -13,7 +13,6 @@ export const styles = StyleSheet.create({
     borderRadius: wp('9%')
   },
   circleTextStyle: {
-    //flex: 1,
     textAlignVertical: 'center',
     alignSelf: 'center',
     color: Colors.primaryColor,
