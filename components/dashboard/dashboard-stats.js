@@ -1,12 +1,10 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import Colors from "../../../shared/const/colors";
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
-import {formatNumber} from "../../../shared/util/helpers";
-
+import Colors from '../../shared/const/colors'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {formatNumber} from '../../shared/util/helpers'
 
 export const DashboardStats = props => {
-
   const onNewProjectsPress = async () => {
     props.navigation.navigate('NewProjectList')
   }
@@ -19,12 +17,9 @@ export const DashboardStats = props => {
     props.navigation.navigate('CompletedProjectList')
   }
 
-
   return (
     <View style={styles.rowViewStyle}>
-
-
-      <View style={styles.circleViewStyle}>
+      <View>
         <TouchableOpacity style={styles.circleStyle}
                           onPress={onNewProjectsPress}>
           <Text style={styles.circleTextStyle}>
@@ -37,8 +32,7 @@ export const DashboardStats = props => {
           </Text>
         </TouchableOpacity>
       </View>
-
-      <View style={styles.circleViewStyle}>
+      <View>
         <TouchableOpacity style={styles.circleStyle}
                           onPress={onOngoingProjectsPress}>
           <Text style={styles.circleTextStyle}>
@@ -51,8 +45,7 @@ export const DashboardStats = props => {
           </Text>
         </TouchableOpacity>
       </View>
-
-      <View style={styles.circleViewStyle}>
+      <View>
         <TouchableOpacity style={styles.circleStyle}
                           onPress={onCompletedProjectsPress}>
           <Text style={styles.circleTextStyle}>
@@ -65,16 +58,12 @@ export const DashboardStats = props => {
           </Text>
         </TouchableOpacity>
       </View>
-
-
     </View>
   )
 }
 
 export const styles = StyleSheet.create({
-
   circleStyle: {
-    // backgroundColor: Colors.primaryColor,
     borderColor: Colors.primaryColor,
     borderWidth: 3,
     width: wp('18%'),
@@ -90,8 +79,7 @@ export const styles = StyleSheet.create({
   },
   circleTitleStyle: {
     textAlign: 'center',
-    color: Colors.defaultColor,
-    // marginTop: 3
+    color: Colors.defaultColor
   },
   rowViewStyle: {
     paddingRight: 50,
@@ -101,8 +89,5 @@ export const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'row'
-  },
-
-  // END
+  }
 })
-

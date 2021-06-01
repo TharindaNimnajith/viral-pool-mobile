@@ -1,12 +1,10 @@
 import React from 'react'
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import Colors from "../../../shared/const/colors";
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
-import {formatNumber} from "../../../shared/util/helpers";
-
+import Colors from '../../shared/const/colors'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {formatNumber} from '../../shared/util/helpers'
 
 export const DashboardUserProfile = props => {
-
   const onProfilePress = async () => {
     props.navigation.navigate('Profile')
   }
@@ -17,7 +15,6 @@ export const DashboardUserProfile = props => {
 
   return (
     <View style={[styles.container]}>
-
       <TouchableOpacity onPress={onProfilePress}>
         {
           props?.profileImagePath ? (
@@ -27,41 +24,34 @@ export const DashboardUserProfile = props => {
                    }}/>
           ) : (
             <Image style={styles.avatarStyle}
-                   source={require('../../../assets/user/user.jpg')}/>
+                   source={require('../../assets/user/user.jpg')}/>
           )
         }
       </TouchableOpacity>
-
       <View style={{marginLeft: 5}}>
         <View style={styles.textWrapper}>
-
           <Text style={styles.userNameStyle}>
             {props?.firstName} {props?.lastName}
           </Text>
         </View>
-
         <View style={styles.socialMediaIcon} onPress={onSocialMediaPress}>
           <Text style={styles.socialMediaIconText}>
-            <Image source={require('../../../assets/icons/facebook.png')}/>
+            <Image source={require('../../assets/icons/facebook.png')}/>
             <Text style={styles.socialMediaIconText}> {props.facebookCount} </Text>
           </Text>
-
           <Text style={styles.socialMediaIconText}>
-            <Image source={require('../../../assets/icons/youtube.png')}/>
+            <Image source={require('../../assets/icons/youtube.png')}/>
             <Text style={styles.socialMediaIconText}> {props.youtubeCount} </Text>
           </Text>
-
           <Text style={styles.socialMediaIconText}>
-            <Image source={require('../../../assets/icons/instagram.png')}/>
+            <Image source={require('../../assets/icons/instagram.png')}/>
             <Text style={styles.socialMediaIconText}> {props.instagramCount} </Text>
           </Text>
-
           <Text style={styles.socialMediaIconText}>
-            <Image source={require('../../../assets/icons/tiktok.png')}/>
+            <Image source={require('../../assets/icons/tiktok.png')}/>
             <Text style={styles.socialMediaIconText}> {props.tiktokCount} </Text>
           </Text>
         </View>
-
         <View style={styles.socialMediaIcon}>
           <Text style={styles.socialMediaIconText}>
             <Text style={{
@@ -73,7 +63,6 @@ export const DashboardUserProfile = props => {
               fontWeight: 'bold'
             }}>{formatNumber(props.rank)}</Text><Text style={{color: Colors.tertiaryColor}}> Rank </Text>
           </Text>
-
         </View>
       </View>
     </View>
@@ -94,16 +83,13 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: hp('6%'),
     borderBottomLeftRadius: hp('6%')
   },
-
   textWrapper: {
     flexShrink: 1, maxWidth: 250
   },
-
   userNameStyle: {
     fontSize: 23,
     color: Colors.secondaryColor
   },
-
   socialMediaIcon: {
     marginBottom: 10,
     display: 'flex',
@@ -114,14 +100,11 @@ export const styles = StyleSheet.create({
     color: Colors.secondaryColor,
     marginRight: 10
   },
-
   avatarStyle: {
     width: wp('25%'),
     height: wp('25%'),
     borderRadius: wp('100%'),
     borderWidth: 1,
     borderColor: Colors.secondaryColor
-  },
-  // END
+  }
 })
-

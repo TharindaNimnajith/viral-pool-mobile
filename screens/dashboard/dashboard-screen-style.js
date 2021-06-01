@@ -1,15 +1,8 @@
-import {StyleSheet} from "react-native";
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
-import Colors from "../../shared/const/colors";
+import {StyleSheet} from 'react-native'
+import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import Colors from '../../shared/const/colors'
 
 export const styles = StyleSheet.create({
-  dashboardStyle: {
-    paddingHorizontal: 10
-    // mawath add karapn kammaliy
-  },
-
-
-  // END
   betweenStyle: {
     marginLeft: 6
   },
@@ -17,14 +10,14 @@ export const styles = StyleSheet.create({
     marginBottom: hp('0.5%'),
     marginHorizontal: wp('2%')
   },
-
-
   countStyle: {
     marginHorizontal: 6,
     color: Colors.secondaryColor,
     textAlignVertical: 'center'
   },
-
+  dashboardStyle: {
+    paddingHorizontal: 10
+  },
   emptyListStyle: {
     alignItems: 'center',
     justifyContent: 'center'
@@ -105,7 +98,6 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10
   },
-
   sectionTitleStyle: {
     fontSize: 22,
     marginLeft: wp('4%'),

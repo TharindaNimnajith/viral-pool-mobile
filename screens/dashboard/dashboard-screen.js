@@ -19,9 +19,9 @@ import Menu from '../../components/header/menu-button/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
 import DashboardLogo from '../../components/header/dashboard-logo/dashboard-logo'
 import ProjectListItem from '../../components/lists/project-list-item/project-list-item'
-import {DashboardUserProfile} from './components/dashboard-user-profile'
-import {DashboardStats} from './components/dashboard-stats'
-import {DashboardEarnings} from './components/dashboard-earnings'
+import {DashboardUserProfile} from '../../components/dashboard/dashboard-user-profile'
+import {DashboardStats} from '../../components/dashboard/dashboard-stats'
+import {DashboardEarnings} from '../../components/dashboard/dashboard-earnings'
 import {styles} from './dashboard-screen-style'
 
 const DashboardScreen = props => {
@@ -170,8 +170,6 @@ const DashboardScreen = props => {
                         onRefresh={onRefresh}/>
       }>
         <View style={styles.mainViewStyle}>
-
-
           <DashboardUserProfile facebookCount={facebookCount}
                                 youtubeCount={youtubeCount}
                                 tiktokCount={tiktokCount}
@@ -181,15 +179,11 @@ const DashboardScreen = props => {
                                 firstName={appContext?.userData?.firstName}
                                 lastName={appContext?.userData?.lastName}
                                 profileImagePath={appContext?.userData?.profileImagePath}/>
-
           <DashboardStats pendingProjectCount={pendingProjectCount}
                           ongoingProjectCount={ongoingProjectCount}
                           completedProjectCount={completedProjectCount}/>
-
-
-          <DashboardEarnings totalEarnings={totalEarnings} pendingEarnings={pendingEarnings}/>
-
-
+          <DashboardEarnings totalEarnings={totalEarnings}
+                             pendingEarnings={pendingEarnings}/>
           <View style={styles.bodyStyle}>
             <View style={styles.listStyle}>
               <Text style={styles.sectionTitleStyle}>
@@ -231,7 +225,6 @@ const DashboardScreen = props => {
     </SafeAreaView>
   )
 }
-
 
 const wait = timeout => {
   return new Promise(resolve => {
