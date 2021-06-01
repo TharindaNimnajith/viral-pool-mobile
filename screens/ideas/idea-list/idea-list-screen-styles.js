@@ -12,8 +12,8 @@ export const styles = StyleSheet.create({
     width: 60,
     height: 60,
     position: 'absolute',
-    bottom: hp('10%'),
-    right: wp('9%'),
+    bottom:90,
+    right: 25,
     backgroundColor: Colors.primaryColor,
     borderRadius: 30
   },
@@ -24,7 +24,8 @@ export const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingVertical: 40
   },
   errorMessageStyle: {
     color: Colors.tertiaryColor,

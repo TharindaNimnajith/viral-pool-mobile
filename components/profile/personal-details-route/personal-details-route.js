@@ -18,7 +18,7 @@ import Colors from '../../../shared/const/colors'
 import Constants from '../../../shared/const/constants'
 import {styles} from './personal-details-route-styles'
 
-const PersonalDetailsRoute = () => {
+const PersonalDetailsRoute = props => {
   const appContext = useContext(AppContext)
 
   const [firstName, setFirstName] = useState(appContext.userData.firstName)
@@ -184,7 +184,7 @@ const PersonalDetailsRoute = () => {
                           },
                           dateInput: {
                             marginLeft: 36,
-                            borderColor: Colors.primaryColor,
+                            borderColor: Colors.defaultColor,
                             borderRadius: 5
                           },
                           dateText: {

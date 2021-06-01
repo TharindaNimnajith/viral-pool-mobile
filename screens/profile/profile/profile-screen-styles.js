@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     borderColor: Colors.secondaryColor,
     alignSelf: 'center',
     position: 'absolute',
-    marginTop: hp('16%')
+    marginTop: hp('10%')
   },
   bodyContentStyle: {
     alignItems: 'center'
@@ -45,12 +45,13 @@ export const styles = StyleSheet.create({
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,
-    height: hp('28%'),
+    height: hp('22%'),
     borderBottomRightRadius: wp('10%'),
     borderBottomLeftRadius: wp('10%')
   },
   infoStyle: {
-    marginTop: hp('4%')
+    marginTop: hp('4%'),
+    paddingHorizontal: 20
   },
   loadingStyle: {
     position: 'absolute',
@@ -78,7 +79,7 @@ export const styles = StyleSheet.create({
   textStyle: {
     fontSize: 18,
     color: Colors.defaultColor,
-    textAlign: 'center',
+    textAlign: 'left',
     marginLeft: 15
   },
   titleStyle: {

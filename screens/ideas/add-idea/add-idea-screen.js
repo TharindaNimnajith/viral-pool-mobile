@@ -79,6 +79,7 @@ const AddIdeaScreen = props => {
       setLoading(false)
       if (response.status === 200) {
         await reset()
+        props.navigation.navigate('IdeaList')
         await showAlert(Constants.SUCCESS, Constants.SUBMITTED)
       } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)

@@ -86,7 +86,7 @@ export const styles = StyleSheet.create({
   },
   multilineTextInputStyle: {
     textAlignVertical: 'top',
-    borderColor: Colors.primaryColor,
+    borderColor: Colors.defaultColor,
     width: wp('80%'),
     height: hp('47%'),
     borderWidth: 1,
@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     color: Colors.tertiaryColor
   },
   textInputStyle: {
-    borderColor: Colors.primaryColor,
+    borderColor: Colors.defaultColor,
     width: wp('80%'),
     borderWidth: 1,
     borderRadius: 5,

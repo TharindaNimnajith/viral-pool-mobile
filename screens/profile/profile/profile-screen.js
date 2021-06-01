@@ -30,6 +30,8 @@ const ProfileScreen = props => {
   const [image, setImage] = useState(appContext.userData.profileImagePath)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
+   const [visibleLogout, setVisibleLogout] = useState(false)
+    const [visibleResetPassword, setVisibleResetPassword] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {
@@ -74,12 +76,36 @@ const ProfileScreen = props => {
     setVisible(false)
   }
 
+  const showDialogLogout = async () => {
+    setVisibleLogout(true)
+  }
+
+  const hideDialogLogout = async () => {
+    setVisibleLogout(false)
+  }
+
+  const showDialogResetPassword = async () => {
+    setVisibleResetPassword(true)
+  }
+
+  const hideDialogResetPassword = async () => {
+    setVisibleResetPassword(false)
+  }
+
+  const handleLogout = async () => {
+    props.navigation.navigate('Login')
+  }
+
   const onEditButtonPress = async () => {
     props.navigation.navigate('EditProfile')
   }
 
   const onResetPassword = async () => {
     props.navigation.navigate('ForgotPassword')
+  }
+
+  const onLogout = async () => {
+    props.navigation.navigate('Login')
   }
 
   const pickImage = async () => {
@@ -204,6 +230,36 @@ const ProfileScreen = props => {
                        color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
+      <Dialog.Container visible={visibleResetPassword}
+                        onBackdropPress={hideDialogResetPassword}>
+        <Dialog.Title>
+          RESET PASSWORD
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
+                       onPress={onResetPassword}/>
+        <Dialog.Button label='No'
+                       color={Colors.primaryColor}
+                       onPress={hideDialogResetPassword}/>
+      </Dialog.Container>
+      <Dialog.Container visible={visibleLogout}
+                        onBackdropPress={hideDialogLogout}>
+        <Dialog.Title>
+          SIGN OUT
+        </Dialog.Title>
+        <Dialog.Description>
+          {Constants.CONFIRMATION}
+        </Dialog.Description>
+        <Dialog.Button label='Yes'
+                       color={Colors.primaryColor}
+                       onPress={onLogout}/>
+        <Dialog.Button label='No'
+                       color={Colors.primaryColor}
+                       onPress={hideDialogLogout}/>
+      </Dialog.Container>
       <ScrollView refreshControl={
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
@@ -307,9 +363,15 @@ const ProfileScreen = props => {
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.resetButtonStyle}
-                                onPress={onResetPassword}>
+                                onPress={showDialogResetPassword}>
                 <Text style={styles.buttonTextStyle}>
                   Reset Password
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.resetButtonStyle}
+                                onPress={showDialogLogout}>
+                <Text style={styles.buttonTextStyle}>
+                  Sign Out
                 </Text>
               </TouchableOpacity>
             </View>

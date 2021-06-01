@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react'
 import {ActivityIndicator, FlatList, RefreshControl, Text, TouchableOpacity, View} from 'react-native'
-import {Ionicons} from '@expo/vector-icons'
+import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../../shared/const/colors'
 import {showAlert} from '../../../shared/util/helpers'
@@ -76,19 +76,14 @@ const IdeaListScreen = props => {
                       }/>
           </View>
         ) : (
-          <View style={styles.emptyListStyle}>
-            <Ionicons name='warning'
-                      size={80}
-                      color={Colors.tertiaryColor}/>
-            <Text style={styles.errorMessageStyle}>
-              {Constants.EMPTY_LIST}
-            </Text>
+         <View style={styles.emptyListStyle}>
+                    
             <TouchableOpacity onPress={refreshFunction}>
-              <Text style={styles.reloadMessageStyle}>
-                Reload?
-              </Text>
+              <MaterialCommunityIcons name='reload'
+                      size={50}
+                      color={Colors.primaryColor}/>
             </TouchableOpacity>
-          </View>
+                  </View>
         )
       }
       <TouchableOpacity style={styles.buttonStyle}

@@ -115,10 +115,12 @@ const EditIdeaScreen = props => {
     axios.put('cc-ideas', data).then(async response => {
       idea.refresh()
       setLoading(false)
-      if (response.status === 200)
+      if (response.status === 200) {
         await showAlert(Constants.SUCCESS, Constants.UPDATED)
-      else
+        props.navigation.navigate('IdeaList')
+      } else {
         await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+      }
     }).catch(async error => {
       idea.refresh()
       setLoading(false)

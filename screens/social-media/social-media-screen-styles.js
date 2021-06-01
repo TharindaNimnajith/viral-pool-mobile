@@ -18,7 +18,8 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingVertical:40
   },
   errorMessageStyle: {
     color: Colors.tertiaryColor,
@@ -81,8 +82,7 @@ export const styles = StyleSheet.create({
     marginBottom: hp('2%')
   },
   textInputStyle: {
-    borderColor: Colors.primaryColor,
-    width: wp('70%'),
+    borderColor: Colors.defaultColor,
     borderWidth: 1,
     borderRadius: 5,
     height: 40,

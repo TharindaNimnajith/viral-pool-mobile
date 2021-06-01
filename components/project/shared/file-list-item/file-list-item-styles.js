@@ -5,6 +5,10 @@ import Colors from '../../../../shared/const/colors'
 
 export const styles = StyleSheet.create({
   itemStyle: {
+    shadowColor: Colors.tertiaryColor, // IOS
+    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOpacity: 1, // IOS
+    shadowRadius: 4, //IOS
     elevation: 5,
     borderRadius: 10,
     backgroundColor: Colors.secondaryColor,
