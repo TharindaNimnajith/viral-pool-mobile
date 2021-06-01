@@ -73,6 +73,9 @@ export const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: hp('1%')
   },
+  scrollStyle: {
+    flexGrow: 0
+  },
   socialMediaViewStyle: {
     marginTop: hp('1%'),
     marginBottom: hp('2%')

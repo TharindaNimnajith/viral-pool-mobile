@@ -415,7 +415,6 @@ const SocialMediaScreen = () => {
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
       }>
-
         <Dialog.Container visible={visibleYoutube}
                           onBackdropPress={hideDialogYoutube}
                           headerStyle={styles.headerStyle}
@@ -423,9 +422,7 @@ const SocialMediaScreen = () => {
           <Dialog.Title style={styles.titleStyle}>
             NEW CHANNEL
           </Dialog.Title>
-
-          <ScrollView style={{flexGrow: 0}}>
-
+          <ScrollView style={styles.scrollStyle}>
             <Dialog.Input label='Channel ID'
                           style={styles.textInputStyle}
                           wrapperStyle={styles.wrapperStyle}
@@ -433,9 +430,7 @@ const SocialMediaScreen = () => {
                           value={youtubeChannelId}
                           placeholder='Enter Channel ID'
                           placeholderTextColor={Colors.tertiaryColor}/>
-
           </ScrollView>
-
           <Dialog.Button label='Submit'
                          color={isDisabledYoutube() ? Colors.tertiaryColor : Colors.primaryColor}
                          onPress={addYoutube}
@@ -443,10 +438,7 @@ const SocialMediaScreen = () => {
           <Dialog.Button label='Cancel'
                          color={Colors.primaryColor}
                          onPress={hideDialogYoutube}/>
-
-
         </Dialog.Container>
-
         <Dialog.Container visible={visibleFacebook}
                           onBackdropPress={hideDialogFacebook}
                           headerStyle={styles.headerStyle}
@@ -454,34 +446,36 @@ const SocialMediaScreen = () => {
           <Dialog.Title style={styles.titleStyle}>
             NEW PAGE
           </Dialog.Title>
-          <Dialog.Input label='Page ID'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={facebookPageId => onChangeFacebookPageId(facebookPageId)}
-                        value={facebookPageId}
-                        placeholder='Enter Page ID'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Page Name'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={facebookPageName => onChangeFacebookPageName(facebookPageName)}
-                        value={facebookPageName}
-                        placeholder='Enter Page Name'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Page Link'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={facebookPageLink => onChangeFacebookPageLink(facebookPageLink)}
-                        value={facebookPageLink}
-                        placeholder='Enter Page Link'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Likes Count'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={facebookPageLikeCount => onChangeFacebookPageLikeCount(facebookPageLikeCount)}
-                        value={facebookPageLikeCount}
-                        placeholder='Enter Likes Count'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+          <ScrollView style={styles.scrollStyle}>
+            <Dialog.Input label='Page ID'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={facebookPageId => onChangeFacebookPageId(facebookPageId)}
+                          value={facebookPageId}
+                          placeholder='Enter Page ID'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Page Name'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={facebookPageName => onChangeFacebookPageName(facebookPageName)}
+                          value={facebookPageName}
+                          placeholder='Enter Page Name'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Page Link'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={facebookPageLink => onChangeFacebookPageLink(facebookPageLink)}
+                          value={facebookPageLink}
+                          placeholder='Enter Page Link'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Likes Count'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={facebookPageLikeCount => onChangeFacebookPageLikeCount(facebookPageLikeCount)}
+                          value={facebookPageLikeCount}
+                          placeholder='Enter Likes Count'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+          </ScrollView>
           <Dialog.Button label='Submit'
                          color={isDisabledFacebook() ? Colors.tertiaryColor : Colors.primaryColor}
                          onPress={addFacebook}
@@ -497,34 +491,36 @@ const SocialMediaScreen = () => {
           <Dialog.Title style={styles.titleStyle}>
             NEW ACCOUNT
           </Dialog.Title>
-          <Dialog.Input label='Account Username'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={instagramUsername => onChangeInstagramUsername(instagramUsername)}
-                        value={instagramUsername}
-                        placeholder='Enter Account Username'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Account Link'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={instagramLink => onChangeInstagramLink(instagramLink)}
-                        value={instagramLink}
-                        placeholder='Enter Account Link'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Followers Count'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={instagramFollowerCount => onChangeInstagramFollowerCount(instagramFollowerCount)}
-                        value={instagramFollowerCount}
-                        placeholder='Enter Followers Count'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Following Count'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
-                        value={instagramFollowingCount}
-                        placeholder='Enter Following Count'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+          <ScrollView style={styles.scrollStyle}>
+            <Dialog.Input label='Account Username'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={instagramUsername => onChangeInstagramUsername(instagramUsername)}
+                          value={instagramUsername}
+                          placeholder='Enter Account Username'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Account Link'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={instagramLink => onChangeInstagramLink(instagramLink)}
+                          value={instagramLink}
+                          placeholder='Enter Account Link'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Followers Count'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={instagramFollowerCount => onChangeInstagramFollowerCount(instagramFollowerCount)}
+                          value={instagramFollowerCount}
+                          placeholder='Enter Followers Count'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Following Count'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
+                          value={instagramFollowingCount}
+                          placeholder='Enter Following Count'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+          </ScrollView>
           <Dialog.Button label='Submit'
                          color={isDisabledInstagram() ? Colors.tertiaryColor : Colors.primaryColor}
                          onPress={addInstagram}
@@ -540,34 +536,36 @@ const SocialMediaScreen = () => {
           <Dialog.Title style={styles.titleStyle}>
             NEW ACCOUNT
           </Dialog.Title>
-          <Dialog.Input label='Account Username'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={tiktokUsername => onChangeTiktokUsername(tiktokUsername)}
-                        value={tiktokUsername}
-                        placeholder='Enter Account Username'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Followers Count'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={tiktokFollowers => onChangeTiktokFollowers(tiktokFollowers)}
-                        value={tiktokFollowers}
-                        placeholder='Enter Followers Count'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Videos Count'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={tiktokVideos => onChangeTiktokVideos(tiktokVideos)}
-                        value={tiktokVideos}
-                        placeholder='Enter Videos Count'
-                        placeholderTextColor={Colors.tertiaryColor}/>
-          <Dialog.Input label='Likes Count'
-                        style={styles.textInputStyle}
-                        wrapperStyle={styles.wrapperStyle}
-                        onChangeText={tiktokTotalLikes => onChangeTiktokTotalLikes(tiktokTotalLikes)}
-                        value={tiktokTotalLikes}
-                        placeholder='Enter Likes Count'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+          <ScrollView style={styles.scrollStyle}>
+            <Dialog.Input label='Account Username'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={tiktokUsername => onChangeTiktokUsername(tiktokUsername)}
+                          value={tiktokUsername}
+                          placeholder='Enter Account Username'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Followers Count'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={tiktokFollowers => onChangeTiktokFollowers(tiktokFollowers)}
+                          value={tiktokFollowers}
+                          placeholder='Enter Followers Count'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Videos Count'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={tiktokVideos => onChangeTiktokVideos(tiktokVideos)}
+                          value={tiktokVideos}
+                          placeholder='Enter Videos Count'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Likes Count'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={tiktokTotalLikes => onChangeTiktokTotalLikes(tiktokTotalLikes)}
+                          value={tiktokTotalLikes}
+                          placeholder='Enter Likes Count'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+          </ScrollView>
           <Dialog.Button label='Submit'
                          color={isDisabledTiktok() ? Colors.tertiaryColor : Colors.primaryColor}
                          onPress={addTiktok}
