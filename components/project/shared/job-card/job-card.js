@@ -222,7 +222,7 @@ const JobCard = props => {
                        onPress={hideDialogResultDelete}/>
       </Dialog.Container>
       <View style={styles.submissionViewStyle}>
-        <View style={{alignItems: 'flex-end', paddingRight: 15, width: '100%'}}>
+        <View style={styles.paidViewStyle}>
           {
             props.itemData.isPaid ? (
               <Text style={styles.statusPaidStyle}>
@@ -250,15 +250,12 @@ const JobCard = props => {
         </View>
         {
           !props.isContentGivenByStrategyMember &&
-          <View style={styles.centerViewStyle}>
-            <View style={{
-              flex: 1,
-              backgroundColor: Colors.defaultColor
-            }}>
-              <View style={styles.horizontalStyle}>
-                <Text style={styles.labelStyle}>
-                  Content Submission Link
-                </Text>
+          <View style={styles.cardBodyStyle}>
+            <View style={styles.horizontalStyle}>
+              <Text style={styles.labelStyle}>
+                Content Submission Link
+              </Text>
+              <View style={styles.statusStyle}>
                 {
                   props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved ? (
                     <Text style={styles.contentStatusApprovedStyle}>
@@ -276,117 +273,114 @@ const JobCard = props => {
                 }
               </View>
             </View>
-            <TextInput style={styles.textInputStyle}
-                       value={contentSubmissionLink}
-                       onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
-                       placeholder='Paste Link Here'
-                       placeholderTextColor={Colors.tertiaryColor}
-                       editable={props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
-            {
-              props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
-              <View style={styles.horizontalStyle}>
-                <TouchableOpacity disabled={!contentSubmissionLinkValid ||
-                props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected}
-                                  onPress={showDialogContentDelete}
-                                  style={contentSubmissionLinkValid ? styles.deleteButtonStyle :
-                                    styles.buttonDisabledStyle}>
-                  <View style={styles.horizontalStyle}>
-                    <Entypo name='cross'
-                            size={19}
-                            color={Colors.secondaryColor}/>
-                    <Text style={styles.buttonTextStyle}>
-                      Delete
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity disabled={!contentSubmissionLinkValid}
-                                  onPress={showDialogContentSubmit}
-                                  style={contentSubmissionLinkValid ? styles.submitButtonStyle :
-                                    styles.buttonDisabledStyle}>
-                  <View style={styles.horizontalStyle}>
-                    <Ionicons name='checkmark'
+            <View style={styles.centerStyle}>
+              <TextInput style={styles.textInputStyle}
+                         value={contentSubmissionLink}
+                         onChangeText={contentSubmissionLink => onChangeContentSubmissionLink(contentSubmissionLink)}
+                         placeholder='Paste Link Here'
+                         placeholderTextColor={Colors.tertiaryColor}
+                         editable={props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved}/>
+              {
+                props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
+                <View style={styles.horizontalStyle}>
+                  <TouchableOpacity disabled={!contentSubmissionLinkValid ||
+                  props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected}
+                                    onPress={showDialogContentDelete}
+                                    style={contentSubmissionLinkValid ? styles.deleteButtonStyle :
+                                      styles.buttonDisabledStyle}>
+                    <View style={styles.horizontalStyle}>
+                      <Entypo name='cross'
                               size={19}
                               color={Colors.secondaryColor}/>
-                    <Text style={styles.buttonTextStyle}>
-                      Submit
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            }
+                      <Text style={styles.buttonTextStyle}>
+                        Delete
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity disabled={!contentSubmissionLinkValid}
+                                    onPress={showDialogContentSubmit}
+                                    style={contentSubmissionLinkValid ? styles.submitButtonStyle :
+                                      styles.buttonDisabledStyle}>
+                    <View style={styles.horizontalStyle}>
+                      <Ionicons name='checkmark'
+                                size={19}
+                                color={Colors.secondaryColor}/>
+                      <Text style={styles.buttonTextStyle}>
+                        Submit
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              }
+            </View>
           </View>
         }
         {
           (props.isContentGivenByStrategyMember ||
             props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved) &&
-          <View style={styles.centerViewStyle}>
-            <View style={{
-              flex: 1,
-              backgroundColor: Colors.defaultColor
-            }}>
-              <View style={styles.horizontalStyle}>
-                <View>
-                  <Text style={styles.labelStyle}>
-                    Result Submission Link
-                  </Text>
-                </View>
-                <View>
-                  {
-                    props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Approved ? (
-                      <Text style={styles.resultStatusApprovedStyle}>
-                        Approved
-                      </Text>
-                    ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected ? (
-                      <Text style={styles.resultStatusRejectedStyle}>
-                        Rejected
-                      </Text>
-                    ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Pending ? (
-                      <Text style={styles.resultStatusPendingStyle}>
-                        Pending
-                      </Text>
-                    ) : null
-                  }
-                </View>
+          <View style={styles.cardBodyStyle}>
+            <View style={styles.horizontalStyle}>
+              <Text style={styles.labelStyle}>
+                Result Submission Link
+              </Text>
+              <View style={styles.statusStyle}>
+                {
+                  props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Approved ? (
+                    <Text style={styles.resultStatusApprovedStyle}>
+                      Approved
+                    </Text>
+                  ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected ? (
+                    <Text style={styles.resultStatusRejectedStyle}>
+                      Rejected
+                    </Text>
+                  ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Pending ? (
+                    <Text style={styles.resultStatusPendingStyle}>
+                      Pending
+                    </Text>
+                  ) : null
+                }
               </View>
             </View>
-            <TextInput style={styles.textInputStyle}
-                       value={resultSubmissionLink}
-                       onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
-                       placeholder='Paste Link Here'
-                       placeholderTextColor={Colors.tertiaryColor}
-                       editable={props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
-            {
-              props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
-              <View style={styles.horizontalStyle}>
-                <TouchableOpacity disabled={!resultSubmissionLinkValid ||
-                props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected}
-                                  onPress={showDialogResultDelete}
-                                  style={resultSubmissionLinkValid ? styles.deleteButtonStyle :
-                                    styles.buttonDisabledStyle}>
-                  <View style={styles.horizontalStyle}>
-                    <Entypo name='cross'
-                            size={19}
-                            color={Colors.secondaryColor}/>
-                    <Text style={styles.buttonTextStyle}>
-                      Delete
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-                <TouchableOpacity disabled={!resultSubmissionLinkValid}
-                                  onPress={showDialogResultSubmit}
-                                  style={resultSubmissionLinkValid ? styles.submitButtonStyle :
-                                    styles.buttonDisabledStyle}>
-                  <View style={styles.horizontalStyle}>
-                    <Ionicons name='checkmark'
+            <View style={styles.centerStyle}>
+              <TextInput style={styles.textInputStyle}
+                         value={resultSubmissionLink}
+                         onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}
+                         placeholder='Paste Link Here'
+                         placeholderTextColor={Colors.tertiaryColor}
+                         editable={props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved}/>
+              {
+                props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
+                <View style={styles.horizontalStyle}>
+                  <TouchableOpacity disabled={!resultSubmissionLinkValid ||
+                  props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected}
+                                    onPress={showDialogResultDelete}
+                                    style={resultSubmissionLinkValid ? styles.deleteButtonStyle :
+                                      styles.buttonDisabledStyle}>
+                    <View style={styles.horizontalStyle}>
+                      <Entypo name='cross'
                               size={19}
                               color={Colors.secondaryColor}/>
-                    <Text style={styles.buttonTextStyle}>
-                      Submit
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            }
+                      <Text style={styles.buttonTextStyle}>
+                        Delete
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                  <TouchableOpacity disabled={!resultSubmissionLinkValid}
+                                    onPress={showDialogResultSubmit}
+                                    style={resultSubmissionLinkValid ? styles.submitButtonStyle :
+                                      styles.buttonDisabledStyle}>
+                    <View style={styles.horizontalStyle}>
+                      <Ionicons name='checkmark'
+                                size={19}
+                                color={Colors.secondaryColor}/>
+                      <Text style={styles.buttonTextStyle}>
+                        Submit
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              }
+            </View>
           </View>
         }
       </View>

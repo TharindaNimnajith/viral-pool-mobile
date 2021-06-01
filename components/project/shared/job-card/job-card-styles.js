@@ -24,18 +24,23 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 16
   },
-  centerViewStyle: {
-    alignItems: 'center',
-    marginBottom: 30
+  cardBodyStyle: {
+    paddingBottom: hp('4%')
   },
-    contentStatusApprovedStyle: {
- color: Colors.successColor
+  centerStyle: {
+    alignItems: 'center'
   },
- contentStatusPendingStyle: {
- color: Colors.yellowColor
+  contentStatusApprovedStyle: {
+    marginTop: 3,
+    color: Colors.successColor
   },
- contentStatusRejectedStyle: {
- color: Colors.primaryColor
+  contentStatusPendingStyle: {
+    marginTop: 3,
+    color: Colors.yellowColor
+  },
+  contentStatusRejectedStyle: {
+    marginTop: 3,
+    color: Colors.primaryColor
   },
   deleteButtonStyle: {
     marginTop: hp('3%'),
@@ -60,7 +65,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   labelStyle: {
-    marginTop: 5,
+    marginTop: 3,
     color: Colors.primaryColor,
     alignSelf: 'baseline',
     marginLeft: wp('4%')
@@ -72,14 +77,22 @@ export const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 20
   },
+  paidViewStyle: {
+    alignItems: 'flex-end',
+    paddingRight: 15,
+    width: '100%'
+  },
   resultStatusApprovedStyle: {
- color: Colors.successColor
+    marginTop: 3,
+    color: Colors.successColor
   },
   resultStatusPendingStyle: {
- color: Colors.yellowColor
+    marginTop: 3,
+    color: Colors.yellowColor
   },
   resultStatusRejectedStyle: {
- color: Colors.primaryColor
+    marginTop: 3,
+    color: Colors.primaryColor
   },
   statusNotPaidStyle: {
     color: Colors.primaryColor,
@@ -88,6 +101,11 @@ export const styles = StyleSheet.create({
   statusPaidStyle: {
     color: Colors.successColor,
     fontSize: 13
+  },
+  statusStyle: {
+    flex: 1,
+    alignItems: 'flex-end',
+    marginRight: wp('5%')
   },
   submissionViewStyle: {
     backgroundColor: Colors.fadedEffectColor,
