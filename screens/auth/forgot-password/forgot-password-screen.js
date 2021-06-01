@@ -1,9 +1,8 @@
 import React, {useCallback, useState} from 'react'
-import {RefreshControl, SafeAreaView, ScrollView, StyleSheet, View} from 'react-native'
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
+import {RefreshControl, SafeAreaView, ScrollView, View} from 'react-native'
 import WebView from 'react-native-webview'
-import Colors from '../../shared/const/colors'
-import {ApiUrl} from '../../shared/util/helpers'
+import {ApiUrl} from '../../../shared/util/helpers'
+import {styles} from './forgot-password-screen-styles'
 
 const ForgotPasswordScreen = () => {
   const [refreshing, setRefreshing] = useState(false)
@@ -32,20 +31,6 @@ const ForgotPasswordScreen = () => {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  mainViewStyle: {
-    minHeight: hp('102.2%'),
-    backgroundColor: Colors.primaryColor
-  },
-  refreshStyle: {
-    marginTop: 10
-  },
-  webViewStyle: {
-    marginTop: 12,
-    marginHorizontal: 15
-  }
-})
 
 const wait = timeout => {
   return new Promise(resolve => {

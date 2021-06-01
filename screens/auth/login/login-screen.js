@@ -6,19 +6,18 @@ import {
   RefreshControl,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View
 } from 'react-native'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
 import validator from 'validator'
-import Colors from '../../shared/const/colors'
-import Constants from '../../shared/const/constants'
-import {showAlert, showErrors} from '../../shared/util/helpers'
-import {storeStringData} from '../../shared/util/local-storage'
+import Colors from '../../../shared/const/colors'
+import Constants from '../../../shared/const/constants'
+import {showAlert, showErrors} from '../../../shared/util/helpers'
+import {storeStringData} from '../../../shared/util/local-storage'
+import {styles} from './login-screen-styles'
 
 const LoginScreen = props => {
   const [email, setEmail] = useState('tharindarajapakshe@y7mail.com')
@@ -92,17 +91,17 @@ const LoginScreen = props => {
                   }>
         <View style={styles.mainViewStyle}>
           <ImageBackground style={styles.image}
-                           source={require('../../assets/background/background.png')}>
+                           source={require('../../../assets/background/background.png')}>
             <View style={styles.containerStyle}>
               <View style={styles.headerStyle}>
                 <Image style={styles.imageStyle}
-                       source={require('../../assets/logo/login-logo.png')}/>
+                       source={require('../../../assets/logo/login-logo.png')}/>
                 <Text style={styles.textStyle}>
                   {Constants.DESCRIPTION}
                 </Text>
-                {/*<Text style={styles.titleStyle}>*/}
-                {/*  Sign in*/}
-                {/*</Text>*/}
+                <Text style={styles.titleStyle}>
+                  Sign in
+                </Text>
               </View>
               <Text style={styles.labelStyle}>
                 Email
@@ -149,108 +148,6 @@ const LoginScreen = props => {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    marginTop: 30,
-    marginBottom: 20,
-    backgroundColor: Colors.defaultColor,
-    alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
-    borderRadius: 5
-  },
-  buttonDisabledStyle: {
-    marginTop: 30,
-    backgroundColor: Colors.tertiaryColor,
-    alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
-    borderRadius: 5
-  },
-  buttonTextStyle: {
-    color: Colors.secondaryColor,
-    textTransform: 'uppercase'
-  },
-  containerStyle: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'column'
-  },
-  forgotPasswordLabelStyle: {
-    color: Colors.secondaryColor,
-    marginRight: 5
-  },
-  forgotPasswordStyle: {
-    marginRight: 40,
-    marginTop: 20,
-    alignSelf: 'flex-end'
-  },
-  image: {
-    flex: 1,
-    resizeMode: 'cover',
-    justifyContent: 'center'
-  },
-  imageStyle: {
-    width: 140,
-    height: 140,
-    marginBottom: 20,
-    marginTop: 20
-  },
-  headerStyle: {
-    alignItems: 'center',
-    marginBottom: 15
-  },
-  labelStyle: {
-    marginLeft: 40,
-    marginTop: 20,
-    color: Colors.secondaryColor,
-    alignSelf: 'baseline'
-  },
-  loadingStyle: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.blurEffectColor
-  },
-  mainViewStyle: {
-    // minHeight: hp('100%'),
-    // padding: 20,
-    minHeight: hp('103.5%'),
-    backgroundColor: Colors.primaryColor
-  },
-  refreshStyle: {
-    marginTop: 10
-  },
-  textInputStyle: {
-    backgroundColor: Colors.secondaryColor,
-    borderColor: Colors.primaryColor,
-    width: wp('80%'),
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 40,
-    marginTop: 10,
-    padding: 10,
-    color: Colors.tertiaryColor
-  },
-  textStyle: {
-    width: wp('70%'),
-    color: Colors.secondaryColor,
-    textAlign: 'center',
-    lineHeight: 22
-  },
-  titleStyle: {
-    textTransform: 'uppercase',
-    color: Colors.secondaryColor,
-    marginTop: hp('5%'),
-    fontSize: 30
-  }
-})
 
 const wait = timeout => {
   return new Promise(resolve => {
