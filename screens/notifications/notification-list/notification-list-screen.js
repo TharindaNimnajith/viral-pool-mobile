@@ -1,6 +1,5 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {ActivityIndicator, FlatList, RefreshControl, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {ActivityIndicator, FlatList, RefreshControl, Text, TouchableOpacity, View} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../../shared/global/app-context'
@@ -10,6 +9,7 @@ import Constants from '../../../shared/const/constants'
 import Menu from '../../../components/header/menu-button/menu-button'
 import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
 import NotificationListItem from '../../../components/lists/notification-list-item/notification-list-item'
+import {styles} from './notification-list-screen-styles'
 
 const NotificationListScreen = props => {
   const appContext = useContext(AppContext)
@@ -108,47 +108,6 @@ const NotificationListScreen = props => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  emptyListStyle: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  errorMessageStyle: {
-    color: Colors.tertiaryColor,
-    fontSize: 18
-  },
-  listStyle: {
-    width: wp('95%'),
-    marginTop: hp('1%'),
-    marginBottom: hp('7%')
-  },
-  loadingStyle: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.blurEffectColor
-  },
-  mainViewStyle: {
-    backgroundColor: Colors.secondaryColor,
-    alignItems: 'center',
-    minHeight: hp('100%')
-  },
-  reloadMessageStyle: {
-    color: Colors.primaryColor,
-    fontSize: 16,
-    marginTop: hp('1%')
-  }
-})
 
 const wait = timeout => {
   return new Promise(resolve => {
