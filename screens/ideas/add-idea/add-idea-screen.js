@@ -4,13 +4,11 @@ import {
   RefreshControl,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View
 } from 'react-native'
-import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import axios from 'axios'
 import {AppContext} from '../../../shared/global/app-context'
@@ -18,6 +16,7 @@ import {showAlert, showErrors} from '../../../shared/util/helpers'
 import Colors from '../../../shared/const/colors'
 import Constants from '../../../shared/const/constants'
 import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
+import {styles} from './add-idea-screen-styles'
 
 const AddIdeaScreen = props => {
   const appContext = useContext(AppContext)
@@ -153,78 +152,6 @@ const AddIdeaScreen = props => {
     </SafeAreaView>
   )
 }
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    marginTop: hp('4%'),
-    marginBottom: hp('1%'),
-    backgroundColor: Colors.successColor,
-    alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
-    borderRadius: 5
-  },
-  buttonDisabledStyle: {
-    marginTop: hp('4%'),
-    marginBottom: hp('1%'),
-    backgroundColor: Colors.tertiaryColor,
-    alignItems: 'center',
-    padding: 10,
-    width: wp('80%'),
-    borderRadius: 5
-  },
-  buttonTextStyle: {
-    color: Colors.secondaryColor,
-    textTransform: 'uppercase'
-  },
-  containerStyle: {
-    marginTop: hp('1%'),
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    flex: 1
-  },
-  labelStyle: {
-    marginLeft: wp('10%'),
-    marginTop: hp('3%'),
-    color: Colors.primaryColor,
-    alignSelf: 'baseline'
-  },
-  loadingStyle: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: Colors.blurEffectColor
-  },
-  mainViewStyle: {
-    backgroundColor: Colors.secondaryColor,
-    minHeight: hp('93.6%')
-  },
-  multilineTextInputStyle: {
-    textAlignVertical: 'top',
-    borderColor: Colors.primaryColor,
-    width: wp('80%'),
-    height: hp('47%'),
-    borderWidth: 1,
-    borderRadius: 5,
-    marginTop: hp('1.5%'),
-    padding: 10,
-    color: Colors.tertiaryColor
-  },
-  textInputStyle: {
-    borderColor: Colors.primaryColor,
-    width: wp('80%'),
-    borderWidth: 1,
-    borderRadius: 5,
-    height: 40,
-    marginTop: hp('1.5%'),
-    padding: 10,
-    color: Colors.tertiaryColor
-  }
-})
 
 const wait = timeout => {
   return new Promise(resolve => {
