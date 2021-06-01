@@ -34,10 +34,6 @@ export const styles = StyleSheet.create({
   horizontalContentStyle: {
     flexDirection: 'row'
   },
-  horizontalContentStyle2: {
-    flexDirection: 'row',
-    marginBottom: hp('1%')
-  },
   listStyle: {
     borderRadius: 25,
     paddingVertical: 15,
@@ -117,15 +113,15 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     color: Colors.secondaryColor
   },
-  viewStyle: {
-    marginLeft: wp('6%'),
-    marginTop: wp('4%')
-  },
   unitStyle: {
     color: Colors.primaryColor,
     fontSize: 18,
     textAlignVertical: 'bottom',
     marginLeft: 10,
     marginBottom: 5
+  },
+  viewStyle: {
+    marginLeft: wp('6%'),
+    marginTop: wp('4%')
   }
 })
