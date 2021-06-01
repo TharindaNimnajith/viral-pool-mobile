@@ -9,9 +9,9 @@ import {
   requestPermissionsAsync,
   setNotificationHandler
 } from 'expo-notifications'
-import {AppContext} from '../../shared/global/app-context'
-import Constants from '../../shared/const/constants'
-import {showAlert} from '../../shared/util/helpers'
+import {AppContext} from '../../../shared/global/app-context'
+import Constants from '../../../shared/const/constants'
+import {showAlert} from '../../../shared/util/helpers'
 
 setNotificationHandler({
   handleNotification: async () => ({
