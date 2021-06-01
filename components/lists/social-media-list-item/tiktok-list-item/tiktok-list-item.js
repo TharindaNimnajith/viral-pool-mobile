@@ -1,15 +1,16 @@
 import React, {useState} from 'react'
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
-import {Ionicons, MaterialIcons} from '@expo/vector-icons'
+import {MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
-import {formatNumber, showAlert, showErrors} from '../../../shared/util/helpers'
-import {socialMediaPlatformActiveStatusEnum} from '../../../shared/const/enums'
-import Constants from '../../../shared/const/constants'
-import Colors from '../../../shared/const/colors'
+import {formatNumber, showAlert, showErrors} from '../../../../shared/util/helpers'
+import {socialMediaPlatformActiveStatusEnum} from '../../../../shared/const/enums'
+import Constants from '../../../../shared/const/constants'
+import Colors from '../../../../shared/const/colors'
+import {styles} from './tiktok-list-item-styles'
 
-const FacebookListItem = props => {
+const TiktokListItem = props => {
   const [visible, setVisible] = useState(false)
 
   const showDialog = async () => {
@@ -23,11 +24,7 @@ const FacebookListItem = props => {
   const deleteAccount = async () => {
     setVisible(false)
     props.loadingFunctionTrue()
-    const data = {
-      id: props.itemData.item.id,
-      link: props.itemData.item.link
-    }
-    axios.post('cc-social-media/facebook/deactivate', data).then(async response => {
+    axios.post('cc-social-media/ticktok/deactivate', props.itemData.item).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200)
@@ -47,7 +44,7 @@ const FacebookListItem = props => {
       <Dialog.Container visible={visible}
                         onBackdropPress={hideDialog}>
         <Dialog.Title>
-          DELETE PAGE
+          DELETE ACCOUNT
         </Dialog.Title>
         <Dialog.Description>
           {Constants.CONFIRMATION}
@@ -64,20 +61,35 @@ const FacebookListItem = props => {
           <View style={styles.itemStyle}>
             <View style={styles.mainViewStyle}>
               <View style={styles.iconViewStyle}>
-                <Ionicons name='logo-facebook'
-                          size={50}
-                          color={Colors.facebookColor}/>
+                <Image style={styles.avatarStyle}
+                       source={require('../../../../assets/icons/tiktok-logo.png')}/>
               </View>
               <View style={styles.viewStyle}>
                 <Text style={styles.textStyle}>
-                  {props.itemData.item.name}
+                  {props.itemData.item.username}
                 </Text>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Followers
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.followers)}
+                  </Text>
+                </View>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Videos
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.videos)}
+                  </Text>
+                </View>
                 <View style={styles.horizontalStyle}>
                   <Text style={styles.statTitleStyle}>
                     Likes
                   </Text>
                   <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.fanCount)}
+                    {formatNumber(props.itemData.item.totalLikes)}
                   </Text>
                 </View>
               </View>
@@ -96,6 +108,11 @@ const FacebookListItem = props => {
 }
 
 const styles = StyleSheet.create({
+  avatarStyle: {
+    width: wp('16%'),
+    height: wp('16%'),
+    marginLeft: -wp('1.5%')
+  },
   deleteStyle: {
     width: '10%',
     alignSelf: 'center',
@@ -122,7 +139,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    borderLeftColor: Colors.facebookColor,
+    borderLeftColor: Colors.defaultColor,
     justifyContent: 'center',
     paddingVertical: 8
   },
@@ -143,7 +160,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 18,
     color: Colors.defaultColor,
-    marginBottom: 8
+    marginBottom: 7
   },
   viewStyle: {
     width: '64%',
@@ -152,4 +169,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FacebookListItem
+export default TiktokListItem

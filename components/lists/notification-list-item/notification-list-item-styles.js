@@ -157,5 +157,3 @@ export const styles = StyleSheet.create({
     width: wp('62%')
   }
 })
-
-export default NotificationListItem

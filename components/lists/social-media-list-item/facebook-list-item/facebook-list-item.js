@@ -1,15 +1,16 @@
 import React, {useState} from 'react'
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
-import {MaterialIcons} from '@expo/vector-icons'
+import {Ionicons, MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
-import {formatNumber, showAlert, showErrors} from '../../../shared/util/helpers'
-import {socialMediaPlatformActiveStatusEnum} from '../../../shared/const/enums'
-import Constants from '../../../shared/const/constants'
-import Colors from '../../../shared/const/colors'
+import {formatNumber, showAlert, showErrors} from '../../../../shared/util/helpers'
+import {socialMediaPlatformActiveStatusEnum} from '../../../../shared/const/enums'
+import Constants from '../../../../shared/const/constants'
+import Colors from '../../../../shared/const/colors'
+import {styles} from './facebook-list-item-styles'
 
-const YoutubeListItem = props => {
+const FacebookListItem = props => {
   const [visible, setVisible] = useState(false)
 
   const showDialog = async () => {
@@ -25,9 +26,9 @@ const YoutubeListItem = props => {
     props.loadingFunctionTrue()
     const data = {
       id: props.itemData.item.id,
-      channelId: props.itemData.item.channelId
+      link: props.itemData.item.link
     }
-    axios.post('cc-social-media/youtube/deactivate', data).then(async response => {
+    axios.post('cc-social-media/facebook/deactivate', data).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200)
@@ -47,7 +48,7 @@ const YoutubeListItem = props => {
       <Dialog.Container visible={visible}
                         onBackdropPress={hideDialog}>
         <Dialog.Title>
-          DELETE CHANNEL
+          DELETE PAGE
         </Dialog.Title>
         <Dialog.Description>
           {Constants.CONFIRMATION}
@@ -64,37 +65,20 @@ const YoutubeListItem = props => {
           <View style={styles.itemStyle}>
             <View style={styles.mainViewStyle}>
               <View style={styles.iconViewStyle}>
-                <Image style={styles.avatarStyle}
-                       source={{
-                         uri: props.itemData.item.iconPath
-                       }}/>
+                <Ionicons name='logo-facebook'
+                          size={50}
+                          color={Colors.facebookColor}/>
               </View>
               <View style={styles.viewStyle}>
                 <Text style={styles.textStyle}>
-                  {props.itemData.item.channelName}
+                  {props.itemData.item.name}
                 </Text>
                 <View style={styles.horizontalStyle}>
                   <Text style={styles.statTitleStyle}>
-                    Videos
+                    Likes
                   </Text>
                   <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.videoCount)}
-                  </Text>
-                </View>
-                <View style={styles.horizontalStyle}>
-                  <Text style={styles.statTitleStyle}>
-                    Subscribers
-                  </Text>
-                  <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.subscriptionCount)}
-                  </Text>
-                </View>
-                <View style={styles.horizontalStyle}>
-                  <Text style={styles.statTitleStyle}>
-                    Views
-                  </Text>
-                  <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.viewCount)}
+                    {formatNumber(props.itemData.item.fanCount)}
                   </Text>
                 </View>
               </View>
@@ -113,11 +97,6 @@ const YoutubeListItem = props => {
 }
 
 const styles = StyleSheet.create({
-  avatarStyle: {
-    width: 60,
-    height: 60,
-    borderRadius: 30
-  },
   deleteStyle: {
     width: '10%',
     alignSelf: 'center',
@@ -144,7 +123,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    borderLeftColor: Colors.primaryColor,
+    borderLeftColor: Colors.facebookColor,
     justifyContent: 'center',
     paddingVertical: 8
   },
@@ -165,7 +144,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 18,
     color: Colors.defaultColor,
-    marginBottom: 5
+    marginBottom: 8
   },
   viewStyle: {
     width: '64%',
@@ -174,4 +153,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default YoutubeListItem
+export default FacebookListItem

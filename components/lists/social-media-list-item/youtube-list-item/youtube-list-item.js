@@ -4,12 +4,13 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import Dialog from 'react-native-dialog'
 import {MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
-import {formatNumber, showAlert, showErrors} from '../../../shared/util/helpers'
-import {socialMediaPlatformActiveStatusEnum} from '../../../shared/const/enums'
-import Constants from '../../../shared/const/constants'
-import Colors from '../../../shared/const/colors'
+import {formatNumber, showAlert, showErrors} from '../../../../shared/util/helpers'
+import {socialMediaPlatformActiveStatusEnum} from '../../../../shared/const/enums'
+import Constants from '../../../../shared/const/constants'
+import Colors from '../../../../shared/const/colors'
+import {styles} from './youtube-list-item-styles'
 
-const TiktokListItem = props => {
+const YoutubeListItem = props => {
   const [visible, setVisible] = useState(false)
 
   const showDialog = async () => {
@@ -23,7 +24,11 @@ const TiktokListItem = props => {
   const deleteAccount = async () => {
     setVisible(false)
     props.loadingFunctionTrue()
-    axios.post('cc-social-media/ticktok/deactivate', props.itemData.item).then(async response => {
+    const data = {
+      id: props.itemData.item.id,
+      channelId: props.itemData.item.channelId
+    }
+    axios.post('cc-social-media/youtube/deactivate', data).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200)
@@ -43,7 +48,7 @@ const TiktokListItem = props => {
       <Dialog.Container visible={visible}
                         onBackdropPress={hideDialog}>
         <Dialog.Title>
-          DELETE ACCOUNT
+          DELETE CHANNEL
         </Dialog.Title>
         <Dialog.Description>
           {Constants.CONFIRMATION}
@@ -61,34 +66,36 @@ const TiktokListItem = props => {
             <View style={styles.mainViewStyle}>
               <View style={styles.iconViewStyle}>
                 <Image style={styles.avatarStyle}
-                       source={require('../../../assets/icons/tiktok-logo.png')}/>
+                       source={{
+                         uri: props.itemData.item.iconPath
+                       }}/>
               </View>
               <View style={styles.viewStyle}>
                 <Text style={styles.textStyle}>
-                  {props.itemData.item.username}
+                  {props.itemData.item.channelName}
                 </Text>
-                <View style={styles.horizontalStyle}>
-                  <Text style={styles.statTitleStyle}>
-                    Followers
-                  </Text>
-                  <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.followers)}
-                  </Text>
-                </View>
                 <View style={styles.horizontalStyle}>
                   <Text style={styles.statTitleStyle}>
                     Videos
                   </Text>
                   <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.videos)}
+                    {formatNumber(props.itemData.item.videoCount)}
                   </Text>
                 </View>
                 <View style={styles.horizontalStyle}>
                   <Text style={styles.statTitleStyle}>
-                    Likes
+                    Subscribers
                   </Text>
                   <Text style={styles.statStyle}>
-                    {formatNumber(props.itemData.item.totalLikes)}
+                    {formatNumber(props.itemData.item.subscriptionCount)}
+                  </Text>
+                </View>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Views
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.viewCount)}
                   </Text>
                 </View>
               </View>
@@ -108,9 +115,9 @@ const TiktokListItem = props => {
 
 const styles = StyleSheet.create({
   avatarStyle: {
-    width: wp('16%'),
-    height: wp('16%'),
-    marginLeft: -wp('1.5%')
+    width: 60,
+    height: 60,
+    borderRadius: 30
   },
   deleteStyle: {
     width: '10%',
@@ -138,7 +145,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 6,
     borderTopLeftRadius: 5,
     borderBottomLeftRadius: 5,
-    borderLeftColor: Colors.defaultColor,
+    borderLeftColor: Colors.primaryColor,
     justifyContent: 'center',
     paddingVertical: 8
   },
@@ -159,7 +166,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontSize: 18,
     color: Colors.defaultColor,
-    marginBottom: 7
+    marginBottom: 5
   },
   viewStyle: {
     width: '64%',
@@ -168,4 +175,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default TiktokListItem
+export default YoutubeListItem

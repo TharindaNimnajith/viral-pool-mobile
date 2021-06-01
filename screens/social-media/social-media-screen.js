@@ -21,10 +21,10 @@ import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
-import YoutubeListItem from '../../components/lists/social-media/youtube-list-item'
-import FacebookListItem from '../../components/lists/social-media/facebook-list-item'
-import InstagramListItem from '../../components/lists/social-media/instagram-list-item'
-import TiktokListItem from '../../components/lists/social-media/tiktok-list-item'
+import YoutubeListItem from '../../components/lists/social-media-list-item/youtube-list-item/youtube-list-item'
+import FacebookListItem from '../../components/lists/social-media-list-item/facebook-list-item/facebook-list-item'
+import InstagramListItem from '../../components/lists/social-media-list-item/instagram-list-item/instagram-list-item'
+import TiktokListItem from '../../components/lists/social-media-list-item/tiktok-list-item/tiktok-list-item'
 
 const SocialMediaScreen = () => {
   const appContext = useContext(AppContext)
