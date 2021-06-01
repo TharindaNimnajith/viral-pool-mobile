@@ -2,13 +2,13 @@ import React from 'react'
 import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
 import ProjectDetails from '../../../components/project/project-details/project-details'
 
-const CompletedProjectDetailsScreen = props => {
+const NotificationProjectDetailsScreen = props => {
   return (
     <ProjectDetails project={props}/>
   )
 }
 
-CompletedProjectDetailsScreen.navigationOptions = navData => {
+NotificationProjectDetailsScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Job Details',
     headerRight: () => (
@@ -17,4 +17,4 @@ CompletedProjectDetailsScreen.navigationOptions = navData => {
   }
 }
 
-export default CompletedProjectDetailsScreen
+export default NotificationProjectDetailsScreen

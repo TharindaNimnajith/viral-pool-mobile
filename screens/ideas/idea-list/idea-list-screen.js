@@ -5,14 +5,13 @@ import {Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../../shared/const/colors'
 import {showAlert} from '../../../shared/util/helpers'
-import {projectStatusEnum} from '../../../shared/const/enums'
 import Constants from '../../../shared/const/constants'
 import Menu from '../../../components/header/menu-button/menu-button'
 import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
-import ProjectListItem from '../../../components/lists/project-list-item/project-list-item'
+import IdeaListItem from '../../../components/lists/idea-list-item/idea-list-item'
 
-const OngoingProjectListScreen = props => {
-  const [ongoingProjects, setOngoingProjects] = useState([])
+const IdeaListScreen = props => {
+  const [ideas, setIdeas] = useState([])
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [refresh, setRefresh] = useState(false)
@@ -20,12 +19,9 @@ const OngoingProjectListScreen = props => {
   useEffect(() => {
     setLoading(true)
     setRefresh(false)
-    axios.get(`project-cc-strategy?status=${projectStatusEnum.Ongoing}`).then(async response => {
+    axios.get('cc-ideas').then(async response => {
+      setIdeas(response.data.data)
       setLoading(false)
-      if (response.status === 200)
-        setOngoingProjects(response.data.data)
-      else
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
     }).catch(async error => {
       setLoading(false)
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
@@ -35,11 +31,8 @@ const OngoingProjectListScreen = props => {
 
   const onRefresh = useCallback(() => {
     setRefreshing(true)
-    axios.get(`project-cc-strategy?status=${projectStatusEnum.Ongoing}`).then(async response => {
-      if (response.status === 200)
-        setOngoingProjects(response.data.data)
-      else
-        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+    axios.get('cc-ideas').then(async response => {
+      setIdeas(response.data.data)
     }).catch(async error => {
       await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
       console.log(error)
@@ -55,20 +48,26 @@ const OngoingProjectListScreen = props => {
 
   const renderItemsFunction = itemData => {
     return (
-      <ProjectListItem navigation={props.navigation}
-                       itemData={itemData}
-                       screen='OngoingProjectDetails'
-                       refreshFunction={refreshFunction}/>
+      <IdeaListItem navigation={props.navigation}
+                    itemData={itemData}
+                    refreshFunction={refreshFunction}/>
     )
+  }
+
+  const redirectToAddIdeaScreen = async () => {
+    const idea = {
+      refresh: refreshFunction
+    }
+    props.navigation.navigate('AddIdea', {idea})
   }
 
   return (
     <View style={styles.mainViewStyle}>
       {
-        ongoingProjects.length > 0 ? (
+        ideas.length > 0 ? (
           <View style={styles.listStyle}>
             <FlatList keyExtractor={(item, index) => index.toString()}
-                      data={ongoingProjects}
+                      data={ideas}
                       numColumns={1}
                       renderItem={renderItemsFunction}
                       refreshControl={
@@ -92,6 +91,12 @@ const OngoingProjectListScreen = props => {
           </View>
         )
       }
+      <TouchableOpacity style={styles.buttonStyle}
+                        onPress={redirectToAddIdeaScreen}>
+        <Ionicons name='add'
+                  size={35}
+                  color={Colors.secondaryColor}/>
+      </TouchableOpacity>
       {
         loading &&
         <View style={styles.loadingStyle}>
@@ -104,6 +109,19 @@ const OngoingProjectListScreen = props => {
 }
 
 const styles = StyleSheet.create({
+  buttonStyle: {
+    borderWidth: 1,
+    borderColor: Colors.primaryColor,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    height: 60,
+    position: 'absolute',
+    bottom: hp('10%'),
+    right: wp('9%'),
+    backgroundColor: Colors.primaryColor,
+    borderRadius: 30
+  },
   emptyListStyle: {
     position: 'absolute',
     left: 0,
@@ -150,9 +168,9 @@ const wait = timeout => {
   })
 }
 
-OngoingProjectListScreen.navigationOptions = navData => {
+IdeaListScreen.navigationOptions = navData => {
   return {
-    headerTitle: 'Ongoing Jobs',
+    headerTitle: 'My Ideas',
     headerLeft: () => (
       <Menu navigation={navData.navigation}/>
     ),
@@ -162,4 +180,4 @@ OngoingProjectListScreen.navigationOptions = navData => {
   }
 }
 
-export default OngoingProjectListScreen
+export default IdeaListScreen

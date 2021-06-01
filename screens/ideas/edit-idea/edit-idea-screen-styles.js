@@ -14,11 +14,11 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Dialog from 'react-native-dialog'
 import {Entypo, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
-import {AppContext} from '../../shared/global/app-context'
-import {showAlert, showErrors} from '../../shared/util/helpers'
-import Colors from '../../shared/const/colors'
-import Constants from '../../shared/const/constants'
-import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
+import {AppContext} from '../../../shared/global/app-context'
+import {showAlert, showErrors} from '../../../shared/util/helpers'
+import Colors from '../../../shared/const/colors'
+import Constants from '../../../shared/const/constants'
+import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
 
 const EditIdeaScreen = props => {
   const appContext = useContext(AppContext)

@@ -13,12 +13,12 @@ import {
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import {FontAwesome, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
-import Colors from '../../../shared/const/colors'
-import {formatNumber, showAlert} from '../../../shared/util/helpers'
-import Constants from '../../../shared/const/constants'
-import Menu from '../../../components/header/menu-button/menu-button'
-import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
-import ProjectListItem from '../../../components/lists/project-list-item/project-list-item'
+import Colors from '../../../../shared/const/colors'
+import {formatNumber, showAlert} from '../../../../shared/util/helpers'
+import Constants from '../../../../shared/const/constants'
+import Menu from '../../../../components/header/menu-button/menu-button'
+import CombinedButtons from '../../../../components/header/combined-buttons/combined-buttons'
+import ProjectListItem from '../../../../components/lists/project-list-item/project-list-item'
 
 const CompletedProjectListScreen = props => {
   const [completedProjects, setCompletedProjects] = useState([])

@@ -7,20 +7,20 @@ import Colors from '../../../shared/const/colors'
 import LoginScreen from '../../../screens/auth/login/login-screen'
 import ForgotPasswordScreen from '../../../screens/auth/forgot-password/forgot-password-screen'
 import DashboardScreen from '../../../screens/dashboard/dashboard-screen'
-import NotificationsScreen from '../../../screens/notifications/notifications-screen'
-import NotificationProjectDetailsScreen from '../../../screens/notifications/notification-project-details-screen'
-import ProfileScreen from '../../../screens/profile/profile-screen'
-import EditProfileScreen from '../../../screens/profile/edit-profile-screen'
-import IdeaListScreen from '../../../screens/ideas/idea-list-screen'
-import AddIdeaScreen from '../../../screens/ideas/add-idea-screen'
-import EditIdeaScreen from '../../../screens/ideas/edit-idea-screen'
+import NotificationListScreen from '../../../screens/notifications/notification-list/notification-list-screen'
+import NotificationProjectDetailsScreen from '../../../screens/notifications/notification-project-details/notification-project-details-screen'
+import ProfileScreen from '../../../screens/profile/profile/profile-screen'
+import EditProfileScreen from '../../../screens/profile/edit-profile/edit-profile-screen'
+import IdeaListScreen from '../../../screens/ideas/idea-list/idea-list-screen'
+import AddIdeaScreen from '../../../screens/ideas/add-idea/add-idea-screen'
+import EditIdeaScreen from '../../../screens/ideas/edit-idea/edit-idea-screen'
 import SocialMediaScreen from '../../../screens/social-media/social-media-screen'
-import NewProjectListScreen from '../../../screens/projects/new/new-project-list-screen'
-import NewProjectDetailsScreen from '../../../screens/projects/new/new-project-details-screen'
-import OngoingProjectListScreen from '../../../screens/projects/ongoing/ongoing-project-list-screen'
-import OngoingProjectDetailsScreen from '../../../screens/projects/ongoing/ongoing-project-details-screen'
-import CompletedProjectListScreen from '../../../screens/projects/completed/completed-project-list-screen'
-import CompletedProjectDetailsScreen from '../../../screens/projects/completed/completed-project-details-screen'
+import NewProjectListScreen from '../../../screens/projects/new/new-project-list/new-project-list-screen'
+import NewProjectDetailsScreen from '../../../screens/projects/new/new-project-details/new-project-details-screen'
+import OngoingProjectListScreen from '../../../screens/projects/ongoing/ongoing-project-list/ongoing-project-list-screen'
+import OngoingProjectDetailsScreen from '../../../screens/projects/ongoing/ongoing-project-details/ongoing-project-details-screen'
+import CompletedProjectListScreen from '../../../screens/projects/completed/completed-project-list/completed-project-list-screen'
+import CompletedProjectDetailsScreen from '../../../screens/projects/completed/completed-project-details/completed-project-details-screen'
 
 const LoginNavigator = createStackNavigator({
   Login: LoginScreen,
@@ -45,7 +45,7 @@ const DashboardNavigator = createStackNavigator({
 })
 
 const NotificationsNavigator = createStackNavigator({
-  Notifications: NotificationsScreen,
+  Notifications: NotificationListScreen,
   NotificationProjectDetails: NotificationProjectDetailsScreen
 }, {
   defaultNavigationOptions: {
