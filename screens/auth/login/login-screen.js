@@ -20,10 +20,10 @@ import {storeStringData} from '../../../shared/util/local-storage'
 import {styles} from './login-screen-styles'
 
 const LoginScreen = props => {
-  const [email, setEmail] = useState('tharindarajapakshe@y7mail.com')
-  const [password, setPassword] = useState('tharinda')
-  const [emailValid, setEmailValid] = useState(true)
-  const [passwordValid, setPasswordValid] = useState(true)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [emailValid, setEmailValid] = useState(false)
+  const [passwordValid, setPasswordValid] = useState(false)
   const [loading, setLoading] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 

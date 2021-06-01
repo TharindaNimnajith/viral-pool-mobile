@@ -65,13 +65,11 @@ export const styles = StyleSheet.create({
   },
   statusNotPaidStyle: {
     color: Colors.primaryColor,
-    fontSize: 10,
-    fontWeight: 'bold'
+    fontSize: 13
   },
   statusPaidStyle: {
     color: Colors.successColor,
-    fontWeight: 'bold',
-    fontSize: 10
+    fontSize: 13
   },
   submissionViewStyle: {
     backgroundColor: Colors.fadedEffectColor,

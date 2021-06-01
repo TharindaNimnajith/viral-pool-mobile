@@ -29,13 +29,14 @@ const DashboardUserProfile = props => {
         }
       </TouchableOpacity>
       <View style={{marginLeft: 5}}>
-        <View style={styles.textWrapper}>
+        <TouchableOpacity style={styles.textWrapper}
+                          onPress={onProfilePress}>
           <Text style={styles.userNameStyle}>
             {props?.firstName} {props?.lastName}
           </Text>
-        </View>
-        <View style={styles.socialMediaIcon}
-              onPress={onSocialMediaPress}>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.socialMediaIcon}
+                          onPress={onSocialMediaPress}>
           <Text style={styles.socialMediaIconText}>
             <Image source={require('../../../assets/icons/facebook.png')}/>
             <Text style={styles.socialMediaIconText}> {props.facebookCount} </Text>
@@ -52,7 +53,7 @@ const DashboardUserProfile = props => {
             <Image source={require('../../../assets/icons/tiktok.png')}/>
             <Text style={styles.socialMediaIconText}> {props.tiktokCount} </Text>
           </Text>
-        </View>
+        </TouchableOpacity>
         <View style={styles.socialMediaIcon}>
           <Text style={styles.socialMediaIconText}>
             <Text style={{fontWeight: 'bold'}}>
