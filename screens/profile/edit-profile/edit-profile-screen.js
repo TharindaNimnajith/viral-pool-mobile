@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {StyleSheet, Text, useWindowDimensions} from 'react-native'
+import {Text, useWindowDimensions} from 'react-native'
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view'
 import {Ionicons} from '@expo/vector-icons'
 import {tabs} from '../../../shared/util/helpers'
@@ -7,6 +7,7 @@ import CombinedButtons from '../../../components/header/combined-buttons/combine
 import PersonalDetailsRoute from '../../../components/profile/personal-details-route/personal-details-route'
 import PaymentDetailsRoute from '../../../components/profile/payment-details-route/payment-details-route'
 import Colors from '../../../shared/const/colors'
+import {styles} from './edit-profile-screen-styles'
 
 const renderScene = SceneMap({
   personalDetails: PersonalDetailsRoute,
@@ -56,23 +57,6 @@ const EditProfileScreen = () => {
                )}/>
   )
 }
-
-const styles = StyleSheet.create({
-  focusedTabTextStyle: {
-    color: Colors.primaryColor,
-    marginTop: 3
-  },
-  tabBarIndicatorStyle: {
-    backgroundColor: Colors.primaryColor
-  },
-  tabBarStyle: {
-    backgroundColor: Colors.secondaryColor
-  },
-  unfocusedTabTextStyle: {
-    color: Colors.tertiaryColor,
-    marginTop: 3
-  }
-})
 
 EditProfileScreen.navigationOptions = navData => {
   return {
