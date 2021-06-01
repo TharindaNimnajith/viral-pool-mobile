@@ -1,20 +1,4 @@
 import React from 'react'
-import CombinedButtons from '../../../../components/header/combined-buttons/combined-buttons'
-import ProjectDetails from '../../../../components/project/project-details/project-details'
+import {StyleSheet} from 'react-native'
 
-const NewProjectDetailsScreen = props => {
-  return (
-    <ProjectDetails project={props}/>
-  )
-}
-
-NewProjectDetailsScreen.navigationOptions = navData => {
-  return {
-    headerTitle: 'Job Details',
-    headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
-    )
-  }
-}
-
-export default NewProjectDetailsScreen
+export const styles = StyleSheet.create({})
