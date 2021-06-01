@@ -10,9 +10,6 @@ const CombinedButtons = props => {
       <View style={styles.iconStyle}>
         <NotificationButton navigation={props.navigation}/>
       </View>
-      <View>
-        <Logout navigation={props.navigation}/>
-      </View>
     </View>
   )
 }

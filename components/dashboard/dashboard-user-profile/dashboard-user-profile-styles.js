@@ -24,12 +24,22 @@ export const styles = StyleSheet.create({
     borderBottomRightRadius: hp('6%'),
     borderBottomLeftRadius: hp('6%')
   },
-  socialMediaIcon: {
+  points: {
     marginBottom: 10,
     display: 'flex',
     alignItems: 'center',
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginLeft: 6
   },
+  socialMediaIcon: {
+    marginTop: 8,
+    marginBottom: 10,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginLeft: 3
+
+      },
   socialMediaIconText: {
     color: Colors.secondaryColor,
     marginRight: 10

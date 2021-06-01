@@ -54,7 +54,7 @@ const DashboardUserProfile = props => {
             <Text style={styles.socialMediaIconText}> {props.tiktokCount} </Text>
           </Text>
         </TouchableOpacity>
-        <View style={styles.socialMediaIcon}>
+        <View style={styles.points}>
           <Text style={styles.socialMediaIconText}>
             <Text style={{fontWeight: 'bold'}}>
               {formatNumber(props.points)}

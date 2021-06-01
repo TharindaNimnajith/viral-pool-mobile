@@ -3,9 +3,7 @@ import {StyleSheet} from 'react-native'
 
 export const styles = StyleSheet.create({
   iconStyle: {
-    left: 20
-  },
-  viewStyle: {
-    flexDirection: 'row'
+    left: 10,
+    bottom: 1
   }
 })

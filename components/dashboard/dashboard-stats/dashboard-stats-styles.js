@@ -5,6 +5,7 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 
 export const styles = StyleSheet.create({
   circleStyle: {
+    justifyContent: 'center',
     borderColor: Colors.primaryColor,
     borderWidth: 3,
     width: wp('18%'),
@@ -12,7 +13,7 @@ export const styles = StyleSheet.create({
     borderRadius: wp('9%')
   },
   circleTextStyle: {
-    flex: 1,
+    //flex: 1,
     textAlignVertical: 'center',
     alignSelf: 'center',
     color: Colors.primaryColor,
@@ -20,7 +21,8 @@ export const styles = StyleSheet.create({
   },
   circleTitleStyle: {
     textAlign: 'center',
-    color: Colors.defaultColor
+    color: Colors.defaultColor,
+    marginTop : 4
   },
   rowViewStyle: {
     paddingRight: 50,

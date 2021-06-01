@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import {Ionicons} from '@expo/vector-icons'
+import {Ionicons,MaterialCommunityIcons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
@@ -199,17 +199,12 @@ const DashboardScreen = props => {
                             renderItem={renderItemsFunction}/>
                 ) : (
                   <View style={styles.emptyListStyle}>
-                    <Ionicons name='warning'
-                              size={80}
-                              color={Colors.tertiaryColor}/>
-                    <Text style={styles.errorMessageStyle}>
-                      {Constants.EMPTY_LIST}
-                    </Text>
-                    <TouchableOpacity onPress={refreshFunction}>
-                      <Text style={styles.reloadMessageStyle}>
-                        Reload?
-                      </Text>
-                    </TouchableOpacity>
+                    
+            <TouchableOpacity onPress={refreshFunction}>
+              <MaterialCommunityIcons name='reload'
+                      size={50}
+                      color={Colors.primaryColor}/>
+            </TouchableOpacity>
                   </View>
                 )
               }
