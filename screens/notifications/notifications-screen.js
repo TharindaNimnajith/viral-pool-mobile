@@ -9,7 +9,7 @@ import {showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
-import NotificationListItem from '../../components/lists/notification/notification-list-item'
+import NotificationListItem from '../../components/lists/notification-list-item/notification-list-item'
 
 const NotificationsScreen = props => {
   const appContext = useContext(AppContext)

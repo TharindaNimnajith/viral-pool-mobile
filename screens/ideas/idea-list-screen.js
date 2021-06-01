@@ -8,7 +8,7 @@ import {showAlert} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
-import IdeaListItem from '../../components/lists/idea/idea-list-item'
+import IdeaListItem from '../../components/lists/idea-list-item/idea-list-item'
 
 const IdeaListScreen = props => {
   const [ideas, setIdeas] = useState([])
