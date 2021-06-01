@@ -4,10 +4,10 @@ import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-nativ
 import Dialog from 'react-native-dialog'
 import {Entypo, Ionicons} from '@expo/vector-icons'
 import axios from 'axios'
-import {contentSubmissionStatusEnum, resultSubmissionStatusEnum} from '../../../shared/const/enums'
-import Colors from '../../../shared/const/colors'
-import Constants from '../../../shared/const/constants'
-import {showAlert, showErrors} from '../../../shared/util/helpers'
+import {contentSubmissionStatusEnum, resultSubmissionStatusEnum} from '../../../../shared/const/enums'
+import Colors from '../../../../shared/const/colors'
+import Constants from '../../../../shared/const/constants'
+import {showAlert, showErrors} from '../../../../shared/util/helpers'
 
 const JobCard = props => {
   const [contentSubmissionLink, setContentSubmissionLink] = useState(props.itemData.contentSubmissionLink)

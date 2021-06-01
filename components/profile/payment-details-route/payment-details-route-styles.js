@@ -12,10 +12,10 @@ import {
 } from 'react-native'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
 import axios from 'axios'
-import {AppContext} from '../../shared/global/app-context'
-import {isNullAsync, showAlert, showErrors} from '../../shared/util/helpers'
-import Colors from '../../shared/const/colors'
-import Constants from '../../shared/const/constants'
+import {AppContext} from '../../../shared/global/app-context'
+import {isNullAsync, showAlert, showErrors} from '../../../shared/util/helpers'
+import Colors from '../../../shared/const/colors'
+import Constants from '../../../shared/const/constants'
 
 const PaymentDetailsRoute = () => {
   const appContext = useContext(AppContext)

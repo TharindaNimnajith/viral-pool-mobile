@@ -1,8 +1,8 @@
 import React from 'react'
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import Colors from '../../shared/const/colors'
+import Colors from '../../../shared/const/colors'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {formatNumber} from '../../shared/util/helpers'
+import {formatNumber} from '../../../shared/util/helpers'
 
 export const DashboardStats = props => {
   const onNewProjectsPress = async () => {

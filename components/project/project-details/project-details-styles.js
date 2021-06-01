@@ -20,8 +20,8 @@ import {jobAcceptationStatusEnum, socialMediaPlatformNameEnum} from '../../../sh
 import Colors from '../../../shared/const/colors'
 import Constants from '../../../shared/const/constants'
 import {formatNumber, showAlert, showErrors} from '../../../shared/util/helpers'
-import FileListItem from '../shared/file-list-item'
-import JobCard from '../shared/job-card'
+import FileListItem from '../shared/file-list-item/file-list-item'
+import JobCard from '../shared/job-card/job-card'
 
 const ProjectDetails = props => {
   const contentWidth = useWindowDimensions().width

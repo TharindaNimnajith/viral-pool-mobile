@@ -19,9 +19,9 @@ import Menu from '../../components/header/menu-button/menu-button'
 import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
 import DashboardLogo from '../../components/header/dashboard-logo/dashboard-logo'
 import ProjectListItem from '../../components/lists/project-list-item/project-list-item'
-import {DashboardUserProfile} from '../../components/dashboard/dashboard-user-profile'
-import {DashboardStats} from '../../components/dashboard/dashboard-stats'
-import {DashboardEarnings} from '../../components/dashboard/dashboard-earnings'
+import {DashboardUserProfile} from '../../components/dashboard/dashboard-user-profile/dashboard-user-profile'
+import {DashboardStats} from '../../components/dashboard/dashboard-stats/dashboard-stats'
+import {DashboardEarnings} from '../../components/dashboard/dashboard-earnings/dashboard-earnings'
 import {styles} from './dashboard-screen-style'
 
 const DashboardScreen = props => {

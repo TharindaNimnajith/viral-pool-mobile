@@ -1,8 +1,8 @@
 import React from 'react'
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import Colors from '../../shared/const/colors'
+import Colors from '../../../shared/const/colors'
 import {heightPercentageToDP as hp} from 'react-native-responsive-screen'
-import {formatNumber} from '../../shared/util/helpers'
+import {formatNumber} from '../../../shared/util/helpers'
 
 export const DashboardEarnings = props => {
   const onCompletedProjectsPress = async () => {
@@ -15,7 +15,7 @@ export const DashboardEarnings = props => {
                         onPress={onCompletedProjectsPress}>
         <View style={styles.col}>
           <Text style={styles.iconText}>
-            <Image source={require('../../assets/icons/earning.png')}/>
+            <Image source={require('../../../assets/icons/earning.png')}/>
             <Text style={styles.iconText}> Total Earnings </Text>
           </Text>
           <Text style={[styles.amountTextStyle, {color: Colors.primaryColor}]}>
@@ -24,7 +24,7 @@ export const DashboardEarnings = props => {
         </View>
         <View style={[styles.col, styles.verticalLine]}>
           <Text style={styles.iconText}>
-            <Image source={require('../../assets/icons/earning.png')}/>
+            <Image source={require('../../../assets/icons/earning.png')}/>
             <Text style={styles.iconText}> Pending Earnings </Text>
           </Text>
           <Text style={[styles.amountTextStyle, {color: Colors.tertiaryColor}]}>

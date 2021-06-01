@@ -1,8 +1,8 @@
 import React from 'react'
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import Colors from '../../shared/const/colors'
+import Colors from '../../../shared/const/colors'
 import {heightPercentageToDP as hp, widthPercentageToDP as wp} from 'react-native-responsive-screen'
-import {formatNumber} from '../../shared/util/helpers'
+import {formatNumber} from '../../../shared/util/helpers'
 
 export const DashboardUserProfile = props => {
   const onProfilePress = async () => {
@@ -24,7 +24,7 @@ export const DashboardUserProfile = props => {
                    }}/>
           ) : (
             <Image style={styles.avatarStyle}
-                   source={require('../../assets/user/user.jpg')}/>
+                   source={require('../../../assets/user/user.jpg')}/>
           )
         }
       </TouchableOpacity>
@@ -36,19 +36,19 @@ export const DashboardUserProfile = props => {
         </View>
         <View style={styles.socialMediaIcon} onPress={onSocialMediaPress}>
           <Text style={styles.socialMediaIconText}>
-            <Image source={require('../../assets/icons/facebook.png')}/>
+            <Image source={require('../../../assets/icons/facebook.png')}/>
             <Text style={styles.socialMediaIconText}> {props.facebookCount} </Text>
           </Text>
           <Text style={styles.socialMediaIconText}>
-            <Image source={require('../../assets/icons/youtube.png')}/>
+            <Image source={require('../../../assets/icons/youtube.png')}/>
             <Text style={styles.socialMediaIconText}> {props.youtubeCount} </Text>
           </Text>
           <Text style={styles.socialMediaIconText}>
-            <Image source={require('../../assets/icons/instagram.png')}/>
+            <Image source={require('../../../assets/icons/instagram.png')}/>
             <Text style={styles.socialMediaIconText}> {props.instagramCount} </Text>
           </Text>
           <Text style={styles.socialMediaIconText}>
-            <Image source={require('../../assets/icons/tiktok.png')}/>
+            <Image source={require('../../../assets/icons/tiktok.png')}/>
             <Text style={styles.socialMediaIconText}> {props.tiktokCount} </Text>
           </Text>
         </View>
