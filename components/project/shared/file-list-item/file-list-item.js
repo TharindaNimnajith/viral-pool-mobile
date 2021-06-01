@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
+import {Text, TouchableOpacity, View} from 'react-native'
 import {FontAwesome5} from '@expo/vector-icons'
 import {createAlbumAsync, createAssetAsync, requestPermissionsAsync} from 'expo-media-library'
 import {documentDirectory, downloadAsync, FileSystemSessionType} from 'expo-file-system'
@@ -10,6 +9,7 @@ import {ApiUrl, showAlert} from '../../../../shared/util/helpers'
 import Constants from '../../../../shared/const/constants'
 import Colors from '../../../../shared/const/colors'
 import {getStringData, storeStringData} from '../../../../shared/util/local-storage'
+import {styles} from './file-list-item-styles'
 
 const FileListItem = props => {
   const [visible, setVisible] = useState(false)
@@ -132,23 +132,5 @@ const FileListItem = props => {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  itemStyle: {
-    elevation: 5,
-    borderRadius: 10,
-    backgroundColor: Colors.secondaryColor,
-    marginRight: wp('2.5%'),
-    marginVertical: 10,
-    height: wp('23%'),
-    width: wp('23%'),
-    alignItems: 'center',
-    alignContent: 'center',
-    justifyContent: 'center'
-  },
-  textStyle: {
-    marginTop: 8
-  }
-})
 
 export default FileListItem
