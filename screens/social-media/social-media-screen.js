@@ -37,10 +37,13 @@ const SocialMediaScreen = () => {
   const [facebookPageName, setFacebookPageName] = useState('')
   const [facebookPageLink, setFacebookPageLink] = useState('')
   const [facebookPageLikeCount, setFacebookPageLikeCount] = useState('')
+  const [facebookPageEngagement, setFacebookPageEngagement] = useState('')
+  const [facebookPageFollowersCount, setFacebookPageFollowersCount] = useState('')
   const [instagramUsername, setInstagramUsername] = useState('')
   const [instagramLink, setInstagramLink] = useState('')
   const [instagramFollowingCount, setInstagramFollowingCount] = useState('')
   const [instagramFollowerCount, setInstagramFollowerCount] = useState('')
+  const [instagramMediaCount, setInstagramMediaCount] = useState('')
   const [tiktokUsername, setTiktokUsername] = useState('')
   const [tiktokTotalLikes, setTiktokTotalLikes] = useState('')
   const [tiktokVideos, setTiktokVideos] = useState('')
@@ -49,11 +52,14 @@ const SocialMediaScreen = () => {
   const [facebookPageIdValid, setFacebookPageIdValid] = useState(false)
   const [facebookPageNameValid, setFacebookPageNameValid] = useState(false)
   const [facebookPageLinkValid, setFacebookPageLinkValid] = useState(false)
+  const [facebookPageEngagementValid, setFacebookPageEngagementValid] = useState(false)
+  const [facebookPageFollowersCountValid, setFacebookPageFollowersCountValid] = useState(false)
   const [facebookPageLikeCountValid, setFacebookPageLikeCountValid] = useState(false)
   const [instagramUsernameValid, setInstagramUsernameValid] = useState(false)
   const [instagramLinkValid, setInstagramLinkValid] = useState(false)
   const [instagramFollowingCountValid, setInstagramFollowingCountValid] = useState(false)
   const [instagramFollowerCountValid, setInstagramFollowerCountValid] = useState(false)
+  const [instagramMediaCountValid, setInstagramMediaCountValid] = useState(false)
   const [tiktokUsernameValid, setTiktokUsernameValid] = useState(false)
   const [tiktokTotalLikesValid, setTiktokTotalLikesValid] = useState(false)
   const [tiktokVideosValid, setTiktokVideosValid] = useState(false)
@@ -214,6 +220,22 @@ const SocialMediaScreen = () => {
     setFacebookPageLikeCount(facebookPageLikeCount)
   }
 
+  const onChangeFacebookPageEngagement = async facebookPageEngagement => {
+    if (facebookPageEngagement.trim().length > 0)
+      setFacebookPageEngagementValid(!isNaN(facebookPageEngagement.trim()))
+    else
+      setFacebookPageEngagementValid(false)
+    setFacebookPageEngagement(facebookPageEngagement)
+  }
+
+  const onChangeFacebookPageFollowersCount = async facebookPageFollowersCount => {
+    if (facebookPageFollowersCount.trim().length > 0)
+      setFacebookPageFollowersCountValid(!isNaN(facebookPageFollowersCount.trim()))
+    else
+      setFacebookPageFollowersCountValid(false)
+    setFacebookPageFollowersCount(facebookPageFollowersCount)
+  }
+
   const onChangeInstagramUsername = async instagramUsername => {
     setInstagramUsernameValid(instagramUsername.trim().length > 0)
     setInstagramUsername(instagramUsername)
@@ -238,6 +260,14 @@ const SocialMediaScreen = () => {
     else
       setInstagramFollowerCountValid(false)
     setInstagramFollowerCount(instagramFollowerCount)
+  }
+
+  const onChangeInstagramMediaCount = async instagramMediaCount => {
+    if (instagramMediaCount.trim().length > 0)
+      setInstagramMediaCountValid(!isNaN(instagramMediaCount.trim()))
+    else
+      setInstagramMediaCountValid(false)
+    setInstagramMediaCount(instagramMediaCount)
   }
 
   const onChangeTiktokUsername = async tiktokUsername => {
@@ -274,12 +304,13 @@ const SocialMediaScreen = () => {
   }
 
   function isDisabledFacebook() {
-    return !facebookPageIdValid || !facebookPageNameValid || !facebookPageLinkValid || !facebookPageLikeCountValid
+    return !facebookPageIdValid || !facebookPageNameValid || !facebookPageLinkValid || !facebookPageLikeCountValid ||
+      !facebookPageEngagementValid || !facebookPageFollowersCountValid
   }
 
   function isDisabledInstagram() {
     return !instagramUsernameValid || !instagramLinkValid || !instagramFollowerCountValid ||
-      !instagramFollowingCountValid
+      !instagramFollowingCountValid || !instagramMediaCountValid
   }
 
   function isDisabledTiktok() {
@@ -295,6 +326,8 @@ const SocialMediaScreen = () => {
     await onChangeFacebookPageName('')
     await onChangeFacebookPageLink('')
     await onChangeFacebookPageLikeCount('')
+    await onChangeFacebookPageEngagement('')
+    await onChangeFacebookPageFollowersCount('')
   }
 
   const resetInstagram = async () => {
@@ -302,6 +335,7 @@ const SocialMediaScreen = () => {
     await onChangeInstagramLink('')
     await onChangeInstagramFollowingCount('')
     await onChangeInstagramFollowerCount('')
+    await onChangeInstagramMediaCount('')
   }
 
   const resetTiktok = async () => {
@@ -341,7 +375,9 @@ const SocialMediaScreen = () => {
       pageId: facebookPageId.trim(),
       name: facebookPageName.trim(),
       link: facebookPageLink.trim(),
-      fanCount: facebookPageLikeCount.trim()
+      fanCount: facebookPageLikeCount.trim(),
+      engagement: facebookPageEngagement.trim(),
+      followersCount: facebookPageFollowersCount.trim()
     }
     axios.post('cc-social-media/facebook/add-profile', data).then(async response => {
       setLoading(false)
@@ -366,7 +402,8 @@ const SocialMediaScreen = () => {
       username: instagramUsername.trim(),
       link: instagramLink.trim(),
       followsCount: instagramFollowingCount.trim(),
-      followersCount: instagramFollowerCount.trim()
+      followersCount: instagramFollowerCount.trim(),
+      mediaCount: instagramMediaCount.trim()
     }
     axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
       setLoading(false)
@@ -475,6 +512,22 @@ const SocialMediaScreen = () => {
                           value={facebookPageLikeCount}
                           placeholder='Enter Likes Count'
                           placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Engagement'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={facebookPageEngagement =>
+                            onChangeFacebookPageEngagement(facebookPageEngagement)}
+                          value={facebookPageEngagement}
+                          placeholder='Enter Engagement'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Followers Count'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={facebookPageFollowersCount =>
+                            onChangeFacebookPageFollowersCount(facebookPageFollowersCount)}
+                          value={facebookPageFollowersCount}
+                          placeholder='Enter Followers Count'
+                          placeholderTextColor={Colors.tertiaryColor}/>
           </ScrollView>
           <Dialog.Button label='Submit'
                          color={isDisabledFacebook() ? Colors.tertiaryColor : Colors.primaryColor}
@@ -519,6 +572,13 @@ const SocialMediaScreen = () => {
                           onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
                           value={instagramFollowingCount}
                           placeholder='Enter Following Count'
+                          placeholderTextColor={Colors.tertiaryColor}/>
+            <Dialog.Input label='Media Count'
+                          style={styles.textInputStyle}
+                          wrapperStyle={styles.wrapperStyle}
+                          onChangeText={instagramMediaCount => onChangeInstagramMediaCount(instagramMediaCount)}
+                          value={instagramMediaCount}
+                          placeholder='Enter Media Count'
                           placeholderTextColor={Colors.tertiaryColor}/>
           </ScrollView>
           <Dialog.Button label='Submit'

@@ -88,10 +88,6 @@ const ProfileScreen = props => {
     setVisibleResetPassword(false)
   }
 
-  const handleLogout = async () => {
-    props.navigation.navigate('Login')
-  }
-
   const onEditButtonPress = async () => {
     props.navigation.navigate('EditProfile')
   }
@@ -109,8 +105,8 @@ const ProfileScreen = props => {
     const accessToken = await getStringData(Constants.ACCESS_TOKEN)
     const refreshToken = await getStringData(Constants.REFRESH_TOKEN)
     const data = {
-      accessToken,
-      refreshToken
+      accessToken: accessToken,
+      refreshToken: refreshToken
     }
     axios.post('oauth/refresh-token', data).then(async response => {
       await storeStringData(Constants.ACCESS_TOKEN, response.data.access_token)

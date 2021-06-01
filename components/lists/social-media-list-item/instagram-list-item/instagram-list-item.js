@@ -88,6 +88,14 @@ const InstagramListItem = props => {
                     {formatNumber(props.itemData.item.followersCount)}
                   </Text>
                 </View>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Media
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.mediaCount)}
+                  </Text>
+                </View>
               </View>
               <TouchableOpacity style={styles.deleteStyle}
                                 onPress={showDialog}>

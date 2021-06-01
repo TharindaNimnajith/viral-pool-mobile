@@ -222,9 +222,7 @@ const JobCard = props => {
                        onPress={hideDialogResultDelete}/>
       </Dialog.Container>
       <View style={styles.submissionViewStyle}>
-
         <View style={{alignItems: 'flex-end', paddingRight: 15, width: '100%'}}>
-
           {
             props.itemData.isPaid ? (
               <Text style={styles.statusPaidStyle}>
@@ -237,10 +235,7 @@ const JobCard = props => {
             )
           }
         </View>
-
         <View style={styles.headerStyle}>
-
-
           <View style={styles.horizontalStyle}>
             <View style={styles.iconViewStyle}>
               <Image style={styles.avatarStyle}
@@ -252,31 +247,34 @@ const JobCard = props => {
               {props.itemData.socialMediaAccountResponse.profileName}
             </Text>
           </View>
-
-
         </View>
         {
           !props.isContentGivenByStrategyMember &&
           <View style={styles.centerViewStyle}>
-            <View style={styles.horizontalStyle}>
-              <Text style={styles.labelStyle}>
-                Content Submission Link
-              </Text>
-              {
-                props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved ? (
-                  <Text style={styles.contentStatusApprovedStyle}>
-                    Approved
-                  </Text>
-                ) : props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected ? (
-                  <Text style={styles.contentStatusRejectedStyle}>
-                    Rejected
-                  </Text>
-                ) : props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Pending ? (
-                  <Text style={styles.contentStatusPendingStyle}>
-                    Pending
-                  </Text>
-                ) : null
-              }
+            <View style={{
+              flex: 1,
+              backgroundColor: Colors.defaultColor
+            }}>
+              <View style={styles.horizontalStyle}>
+                <Text style={styles.labelStyle}>
+                  Content Submission Link
+                </Text>
+                {
+                  props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved ? (
+                    <Text style={styles.contentStatusApprovedStyle}>
+                      Approved
+                    </Text>
+                  ) : props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected ? (
+                    <Text style={styles.contentStatusRejectedStyle}>
+                      Rejected
+                    </Text>
+                  ) : props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Pending ? (
+                    <Text style={styles.contentStatusPendingStyle}>
+                      Pending
+                    </Text>
+                  ) : null
+                }
+              </View>
             </View>
             <TextInput style={styles.textInputStyle}
                        value={contentSubmissionLink}
@@ -288,7 +286,7 @@ const JobCard = props => {
               props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
               <View style={styles.horizontalStyle}>
                 <TouchableOpacity disabled={!contentSubmissionLinkValid ||
-                 props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected}
+                props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected}
                                   onPress={showDialogContentDelete}
                                   style={contentSubmissionLinkValid ? styles.deleteButtonStyle :
                                     styles.buttonDisabledStyle}>
@@ -322,28 +320,33 @@ const JobCard = props => {
           (props.isContentGivenByStrategyMember ||
             props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved) &&
           <View style={styles.centerViewStyle}>
-            <View style={styles.horizontalStyle}>
-            <View>
-                   <Text style={styles.labelStyle}>
-                Result Submission Link
-              </Text>
-            </View>
-             <View>
-              {
-                props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Approved ? (
-                  <Text style={styles.resultStatusApprovedStyle}>
-                    Approved
+            <View style={{
+              flex: 1,
+              backgroundColor: Colors.defaultColor
+            }}>
+              <View style={styles.horizontalStyle}>
+                <View>
+                  <Text style={styles.labelStyle}>
+                    Result Submission Link
                   </Text>
-                ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected ? (
-                  <Text style={styles.resultStatusRejectedStyle}>
-                    Rejected
-                  </Text>
-                ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Pending ? (
-                  <Text style={styles.resultStatusPendingStyle}>
-                    Pending
-                  </Text>
-                ) : null
-              }
+                </View>
+                <View>
+                  {
+                    props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Approved ? (
+                      <Text style={styles.resultStatusApprovedStyle}>
+                        Approved
+                      </Text>
+                    ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected ? (
+                      <Text style={styles.resultStatusRejectedStyle}>
+                        Rejected
+                      </Text>
+                    ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Pending ? (
+                      <Text style={styles.resultStatusPendingStyle}>
+                        Pending
+                      </Text>
+                    ) : null
+                  }
+                </View>
               </View>
             </View>
             <TextInput style={styles.textInputStyle}
@@ -356,7 +359,7 @@ const JobCard = props => {
               props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
               <View style={styles.horizontalStyle}>
                 <TouchableOpacity disabled={!resultSubmissionLinkValid ||
-                 props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected}
+                props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected}
                                   onPress={showDialogResultDelete}
                                   style={resultSubmissionLinkValid ? styles.deleteButtonStyle :
                                     styles.buttonDisabledStyle}>

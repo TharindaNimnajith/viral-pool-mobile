@@ -28,8 +28,8 @@ axios.interceptors.response.use(async response => {
   const accessToken = await getStringData(Constants.ACCESS_TOKEN)
   const refreshToken = await getStringData(Constants.REFRESH_TOKEN)
   const data = {
-    accessToken,
-    refreshToken
+    refreshToken: accessToken,
+    refreshToken: refreshToken
   }
   return await axios.post('oauth/refresh-token', data).then(async response => {
     await storeStringData(Constants.ACCESS_TOKEN, response.data.access_token)

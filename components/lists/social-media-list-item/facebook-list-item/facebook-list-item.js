@@ -80,6 +80,22 @@ const FacebookListItem = props => {
                     {formatNumber(props.itemData.item.fanCount)}
                   </Text>
                 </View>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Followers
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.followersCount)}
+                  </Text>
+                </View>
+                <View style={styles.horizontalStyle}>
+                  <Text style={styles.statTitleStyle}>
+                    Engagement
+                  </Text>
+                  <Text style={styles.statStyle}>
+                    {formatNumber(props.itemData.item.engagement)}
+                  </Text>
+                </View>
               </View>
               <TouchableOpacity style={styles.deleteStyle}
                                 onPress={showDialog}>

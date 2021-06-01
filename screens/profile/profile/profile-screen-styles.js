@@ -51,7 +51,7 @@ export const styles = StyleSheet.create({
   },
   infoStyle: {
     marginTop: hp('4%'),
-    paddingHorizontal: 20
+    paddingHorizontal: wp('13%')
   },
   loadingStyle: {
     position: 'absolute',
