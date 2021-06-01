@@ -18,7 +18,7 @@ import Colors from '../../shared/const/colors'
 import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button/menu-button'
-import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
+import NotificationButton from '../../components/header/notification-button/notification-button'
 import YoutubeListItem from '../../components/lists/social-media-list-item/youtube-list-item/youtube-list-item'
 import FacebookListItem from '../../components/lists/social-media-list-item/facebook-list-item/facebook-list-item'
 import InstagramListItem from '../../components/lists/social-media-list-item/instagram-list-item/instagram-list-item'
@@ -816,7 +816,7 @@ SocialMediaScreen.navigationOptions = navData => {
       <Menu navigation={navData.navigation}/>
     ),
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+      <NotificationButton navigation={navData.navigation}/>
     )
   }
 }

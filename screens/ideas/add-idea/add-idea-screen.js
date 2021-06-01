@@ -15,7 +15,7 @@ import {AppContext} from '../../../shared/global/app-context'
 import {showAlert, showErrors} from '../../../shared/util/helpers'
 import Colors from '../../../shared/const/colors'
 import Constants from '../../../shared/const/constants'
-import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
+import NotificationButton from '../../../components/header/notification-button/notification-button'
 import {styles} from './add-idea-screen-styles'
 
 const AddIdeaScreen = props => {
@@ -164,7 +164,7 @@ AddIdeaScreen.navigationOptions = navData => {
   return {
     headerTitle: 'New Idea',
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+      <NotificationButton navigation={navData.navigation}/>
     )
   }
 }

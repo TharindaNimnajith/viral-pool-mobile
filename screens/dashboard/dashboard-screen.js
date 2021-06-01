@@ -16,7 +16,7 @@ import Colors from '../../shared/const/colors'
 import {showAlert, showErrors} from '../../shared/util/helpers'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button/menu-button'
-import CombinedButtons from '../../components/header/combined-buttons/combined-buttons'
+import NotificationButton from '../../components/header/notification-button/notification-button'
 import DashboardLogo from '../../components/header/dashboard-logo/dashboard-logo'
 import ProjectListItem from '../../components/lists/project-list-item/project-list-item'
 import DashboardUserProfile from '../../components/dashboard/dashboard-user-profile/dashboard-user-profile'
@@ -239,7 +239,7 @@ DashboardScreen.navigationOptions = navData => {
       </View>
     ),
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+      <NotificationButton navigation={navData.navigation}/>
     )
   }
 }

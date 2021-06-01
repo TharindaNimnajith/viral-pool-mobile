@@ -7,7 +7,7 @@ import {showAlert} from '../../../../shared/util/helpers'
 import {projectStatusEnum} from '../../../../shared/const/enums'
 import Constants from '../../../../shared/const/constants'
 import Menu from '../../../../components/header/menu-button/menu-button'
-import CombinedButtons from '../../../../components/header/combined-buttons/combined-buttons'
+import NotificationButton from '../../../../components/header/notification-button/notification-button'
 import ProjectListItem from '../../../../components/lists/project-list-item/project-list-item'
 import {styles} from './ongoing-project-list-screen-styles'
 
@@ -110,7 +110,7 @@ OngoingProjectListScreen.navigationOptions = navData => {
       <Menu navigation={navData.navigation}/>
     ),
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+      <NotificationButton navigation={navData.navigation}/>
     )
   }
 }

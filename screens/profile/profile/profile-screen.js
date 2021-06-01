@@ -20,7 +20,7 @@ import {ApiUrl, isNullAsync, showAlert} from '../../../shared/util/helpers'
 import Colors from '../../../shared/const/colors'
 import Constants from '../../../shared/const/constants'
 import Menu from '../../../components/header/menu-button/menu-button'
-import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
+import NotificationButton from '../../../components/header/notification-button/notification-button'
 import {getStringData, storeStringData} from '../../../shared/util/local-storage'
 import {styles} from './profile-screen-styles'
 
@@ -394,7 +394,7 @@ ProfileScreen.navigationOptions = navData => {
       <Menu navigation={navData.navigation}/>
     ),
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+      <NotificationButton navigation={navData.navigation}/>
     )
   }
 }

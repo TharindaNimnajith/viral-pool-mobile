@@ -1,5 +1,5 @@
 import React from 'react'
-import CombinedButtons from '../../../../components/header/combined-buttons/combined-buttons'
+import NotificationButton from '../../../../components/header/notification-button/notification-button'
 import ProjectDetails from '../../../../components/project/project-details/project-details'
 
 const CompletedProjectDetailsScreen = props => {
@@ -12,7 +12,7 @@ CompletedProjectDetailsScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Job Details',
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+      <NotificationButton navigation={navData.navigation}/>
     )
   }
 }

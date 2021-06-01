@@ -7,7 +7,7 @@ import Colors from '../../../shared/const/colors'
 import {showAlert} from '../../../shared/util/helpers'
 import Constants from '../../../shared/const/constants'
 import Menu from '../../../components/header/menu-button/menu-button'
-import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
+import NotificationButton from '../../../components/header/notification-button/notification-button'
 import NotificationListItem from '../../../components/lists/notification-list-item/notification-list-item'
 import {styles} from './notification-list-screen-styles'
 
@@ -118,7 +118,7 @@ NotificationListScreen.navigationOptions = navData => {
       <Menu navigation={navData.navigation}/>
     ),
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+      <NotificationButton navigation={navData.navigation}/>
     )
   }
 }

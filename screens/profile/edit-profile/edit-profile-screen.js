@@ -3,7 +3,7 @@ import {Text, useWindowDimensions} from 'react-native'
 import {SceneMap, TabBar, TabView} from 'react-native-tab-view'
 import {Ionicons} from '@expo/vector-icons'
 import {tabs} from '../../../shared/util/helpers'
-import CombinedButtons from '../../../components/header/combined-buttons/combined-buttons'
+import NotificationButton from '../../../components/header/notification-button/notification-button'
 import PersonalDetailsRoute from '../../../components/profile/personal-details-route/personal-details-route'
 import PaymentDetailsRoute from '../../../components/profile/payment-details-route/payment-details-route'
 import Colors from '../../../shared/const/colors'
@@ -62,7 +62,7 @@ EditProfileScreen.navigationOptions = navData => {
   return {
     headerTitle: 'Update Profile',
     headerRight: () => (
-      <CombinedButtons navigation={navData.navigation}/>
+      <NotificationButton navigation={navData.navigation}/>
     )
   }
 }
