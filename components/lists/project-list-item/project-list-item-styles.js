@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
   },
   itemStyleDefault: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     elevation: 5,
@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
   },
   itemStyleFacebook: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     elevation: 5,
@@ -95,7 +95,7 @@ export const styles = StyleSheet.create({
   },
   itemStyleInstagram: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     elevation: 5,
@@ -116,7 +116,7 @@ export const styles = StyleSheet.create({
   },
   itemStyleTiktok: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     elevation: 5,
@@ -137,7 +137,7 @@ export const styles = StyleSheet.create({
   },
   itemStyleYoutube: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     elevation: 5,

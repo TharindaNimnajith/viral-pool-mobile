@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   },
   itemContentAcceptedStyle: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     flex: 1,
@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
   },
   itemContentRejectedStyle: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     flex: 1,
@@ -66,7 +66,7 @@ export const styles = StyleSheet.create({
   },
   itemDefaultStyle: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     flex: 1,
@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
   },
   itemNewJobStyle: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     flex: 1,
@@ -110,7 +110,7 @@ export const styles = StyleSheet.create({
   },
   itemPaymentAddedStyle: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     flex: 1,
@@ -132,7 +132,7 @@ export const styles = StyleSheet.create({
   },
   itemResultAcceptedStyle: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     flex: 1,
@@ -154,7 +154,7 @@ export const styles = StyleSheet.create({
   },
   itemResultRejectedStyle: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     flex: 1,

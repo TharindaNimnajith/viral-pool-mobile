@@ -181,36 +181,36 @@ const ProjectDetails = props => {
         <RefreshControl refreshing={refreshing}
                         onRefresh={onRefresh}/>
       }>
-       <Dialog.Container visible={visibleAccept}
-                        onBackdropPress={hideDialogAccept}>
-        <Dialog.Title>
-          ACCEPT JOB
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       color={Colors.primaryColor}
-                       onPress={acceptJob}/>
-        <Dialog.Button label='No'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogAccept}/>
-      </Dialog.Container>
-      <Dialog.Container visible={visibleReject}
-                        onBackdropPress={hideDialogReject}>
-        <Dialog.Title>
-          REJECT JOB
-        </Dialog.Title>
-        <Dialog.Description>
-          {Constants.CONFIRMATION}
-        </Dialog.Description>
-        <Dialog.Button label='Yes'
-                       color={Colors.primaryColor}
-                       onPress={rejectJob}/>
-        <Dialog.Button label='No'
-                       color={Colors.primaryColor}
-                       onPress={hideDialogReject}/>
-      </Dialog.Container>
+        <Dialog.Container visible={visibleAccept}
+                          onBackdropPress={hideDialogAccept}>
+          <Dialog.Title>
+            ACCEPT JOB
+          </Dialog.Title>
+          <Dialog.Description>
+            {Constants.CONFIRMATION}
+          </Dialog.Description>
+          <Dialog.Button label='Yes'
+                         color={Colors.primaryColor}
+                         onPress={acceptJob}/>
+          <Dialog.Button label='No'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogAccept}/>
+        </Dialog.Container>
+        <Dialog.Container visible={visibleReject}
+                          onBackdropPress={hideDialogReject}>
+          <Dialog.Title>
+            REJECT JOB
+          </Dialog.Title>
+          <Dialog.Description>
+            {Constants.CONFIRMATION}
+          </Dialog.Description>
+          <Dialog.Button label='Yes'
+                         color={Colors.primaryColor}
+                         onPress={rejectJob}/>
+          <Dialog.Button label='No'
+                         color={Colors.primaryColor}
+                         onPress={hideDialogReject}/>
+        </Dialog.Container>
         <View style={styles.mainViewStyle}>
           <View style={styles.viewStyle}>
             <Text style={styles.projectNameStyle}>

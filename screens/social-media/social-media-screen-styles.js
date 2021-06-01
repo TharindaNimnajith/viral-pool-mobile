@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     right: 0,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical:40
+    paddingVertical: 40
   },
   errorMessageStyle: {
     color: Colors.tertiaryColor,

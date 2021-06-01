@@ -30,8 +30,8 @@ const ProfileScreen = props => {
   const [image, setImage] = useState(appContext.userData.profileImagePath)
   const [loading, setLoading] = useState(false)
   const [visible, setVisible] = useState(false)
-   const [visibleLogout, setVisibleLogout] = useState(false)
-    const [visibleResetPassword, setVisibleResetPassword] = useState(false)
+  const [visibleLogout, setVisibleLogout] = useState(false)
+  const [visibleResetPassword, setVisibleResetPassword] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
 
   useEffect(() => {

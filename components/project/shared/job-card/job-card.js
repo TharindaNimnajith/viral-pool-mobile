@@ -258,28 +258,25 @@ const JobCard = props => {
         {
           !props.isContentGivenByStrategyMember &&
           <View style={styles.centerViewStyle}>
-             <View style={{alignItems: 'flex-end', paddingRight: 15, width: '100%'}}>
-        
-          {
-            props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved ? (
-              <Text style={styles.contentStatusApprovedStyle}>
-                Approved
+            <View style={styles.horizontalStyle}>
+              <Text style={styles.labelStyle}>
+                Content Submission Link
               </Text>
-            ) : props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected ? (
-              <Text style={styles.contentStatusRejectedStyle}>
-                Rejected
-              </Text>
-            ) : props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Pending ? (
-              <Text style={styles.contentStatusPendingStyle}>
-                Pending
-              </Text>
-            ) : null
-          }
-        </View>
-        <View style={styles.horizontalStyle}>
-            <Text style={styles.labelStyle}>
-              Content Submission Link
-            </Text>
+              {
+                props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved ? (
+                  <Text style={styles.contentStatusApprovedStyle}>
+                    Approved
+                  </Text>
+                ) : props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected ? (
+                  <Text style={styles.contentStatusRejectedStyle}>
+                    Rejected
+                  </Text>
+                ) : props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Pending ? (
+                  <Text style={styles.contentStatusPendingStyle}>
+                    Pending
+                  </Text>
+                ) : null
+              }
             </View>
             <TextInput style={styles.textInputStyle}
                        value={contentSubmissionLink}
@@ -324,27 +321,26 @@ const JobCard = props => {
           (props.isContentGivenByStrategyMember ||
             props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved) &&
           <View style={styles.centerViewStyle}>
-          <View style={styles.horizontalStyle}>
-            <Text style={styles.labelStyle}>
-              Result Submission Link
-            </Text>
-            {
-            props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Approved ? (
-              <Text style={styles.resultStatusApprovedStyle}>
-                Approved
+            <View style={styles.horizontalStyle}>
+              <Text style={styles.labelStyle}>
+                Result Submission Link
               </Text>
-            ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected ? (
-              <Text style={styles.resultStatusRejectedStyle}>
-                Rejected
-              </Text>
-            ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Pending ? (
-              <Text style={styles.resultStatusPendingStyle}>
-                Pending
-              </Text>
-            ) : null
-          </View>
-            
-          }
+              {
+                props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Approved ? (
+                  <Text style={styles.resultStatusApprovedStyle}>
+                    Approved
+                  </Text>
+                ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected ? (
+                  <Text style={styles.resultStatusRejectedStyle}>
+                    Rejected
+                  </Text>
+                ) : props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Pending ? (
+                  <Text style={styles.resultStatusPendingStyle}>
+                    Pending
+                  </Text>
+                ) : null
+              }
+            </View>
             <TextInput style={styles.textInputStyle}
                        value={resultSubmissionLink}
                        onChangeText={resultSubmissionLink => onChangeResultSubmissionLink(resultSubmissionLink)}

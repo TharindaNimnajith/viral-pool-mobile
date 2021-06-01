@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
   emptyListStyle: {
     alignItems: 'center',
     justifyContent: 'center',
-   paddingVertical: 40
+    paddingVertical: 40
   },
   errorMessageStyle: {
     color: Colors.tertiaryColor,

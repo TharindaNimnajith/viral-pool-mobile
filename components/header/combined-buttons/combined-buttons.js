@@ -1,7 +1,6 @@
 import React from 'react'
 import {View} from 'react-native'
 import NotificationButton from '../notification-button/notification-button'
-import Logout from '../logout-button/logout-button'
 import {styles} from './combined-buttons-styles'
 
 const CombinedButtons = props => {

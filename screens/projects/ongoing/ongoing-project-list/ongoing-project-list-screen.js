@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {ActivityIndicator, FlatList, RefreshControl, Text, TouchableOpacity, View} from 'react-native'
-import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
+import {ActivityIndicator, FlatList, RefreshControl, TouchableOpacity, View} from 'react-native'
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../../../shared/const/colors'
 import {showAlert} from '../../../../shared/util/helpers'
@@ -80,10 +80,10 @@ const OngoingProjectListScreen = props => {
           <View style={styles.emptyListStyle}>
             <TouchableOpacity onPress={refreshFunction}>
               <MaterialCommunityIcons name='reload'
-                      size={50}
-                      color={Colors.primaryColor}/>
+                                      size={50}
+                                      color={Colors.primaryColor}/>
             </TouchableOpacity>
-                  </View>
+          </View>
         )
       }
       {

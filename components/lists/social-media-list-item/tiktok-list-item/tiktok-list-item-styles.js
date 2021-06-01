@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   },
   itemStyle: {
     shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: { height: 1, width: 2 }, // IOS
+    shadowOffset: {height: 1, width: 2}, // IOS
     shadowOpacity: 1, // IOS
     shadowRadius: 4, //IOS
     flex: 1,

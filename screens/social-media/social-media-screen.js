@@ -603,12 +603,12 @@ const SocialMediaScreen = () => {
               ) : (
                 <View style={styles.socialMediaViewStyle}>
                   <View style={styles.emptyListStyle}>
-                    
-            <TouchableOpacity onPress={refreshFunction}>
-              <MaterialCommunityIcons name='reload'
-                      size={50}
-                      color={Colors.primaryColor}/>
-            </TouchableOpacity>
+
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <MaterialCommunityIcons name='reload'
+                                              size={50}
+                                              color={Colors.primaryColor}/>
+                    </TouchableOpacity>
                   </View>
                 </View>
               )
@@ -642,12 +642,12 @@ const SocialMediaScreen = () => {
               ) : (
                 <View style={styles.socialMediaViewStyle}>
                   <View style={styles.emptyListStyle}>
-                    
-            <TouchableOpacity onPress={refreshFunction}>
-              <MaterialCommunityIcons name='reload'
-                      size={50}
-                      color={Colors.primaryColor}/>
-            </TouchableOpacity>
+
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <MaterialCommunityIcons name='reload'
+                                              size={50}
+                                              color={Colors.primaryColor}/>
+                    </TouchableOpacity>
                   </View>
                 </View>
               )
@@ -681,12 +681,12 @@ const SocialMediaScreen = () => {
               ) : (
                 <View style={styles.socialMediaViewStyle}>
                   <View style={styles.emptyListStyle}>
-                    
-            <TouchableOpacity onPress={refreshFunction}>
-              <MaterialCommunityIcons name='reload'
-                      size={50}
-                      color={Colors.primaryColor}/>
-            </TouchableOpacity>
+
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <MaterialCommunityIcons name='reload'
+                                              size={50}
+                                              color={Colors.primaryColor}/>
+                    </TouchableOpacity>
                   </View>
                 </View>
               )
@@ -718,13 +718,13 @@ const SocialMediaScreen = () => {
                 </View>
               ) : (
                 <View style={styles.socialMediaViewStyle}>
-                 <View style={styles.emptyListStyle}>
-                    
-            <TouchableOpacity onPress={refreshFunction}>
-              <MaterialCommunityIcons name='reload'
-                      size={50}
-                      color={Colors.primaryColor}/>
-            </TouchableOpacity>
+                  <View style={styles.emptyListStyle}>
+
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <MaterialCommunityIcons name='reload'
+                                              size={50}
+                                              color={Colors.primaryColor}/>
+                    </TouchableOpacity>
                   </View>
                 </View>
               )

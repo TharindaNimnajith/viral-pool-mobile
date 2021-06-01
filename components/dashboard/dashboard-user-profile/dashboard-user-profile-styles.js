@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 3
 
-      },
+  },
   socialMediaIconText: {
     color: Colors.secondaryColor,
     marginRight: 10

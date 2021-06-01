@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import {FontAwesome, Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
+import {FontAwesome, MaterialCommunityIcons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../../../shared/const/colors'
 import {formatNumber, showAlert} from '../../../../shared/util/helpers'
@@ -135,12 +135,12 @@ const CompletedProjectListScreen = props => {
                             renderItem={renderItemsFunction}/>
                 ) : (
                   <View style={styles.emptyListStyle}>
-                    
-            <TouchableOpacity onPress={refreshFunction}>
-              <MaterialCommunityIcons name='reload'
-                      size={50}
-                      color={Colors.primaryColor}/>
-            </TouchableOpacity>
+
+                    <TouchableOpacity onPress={refreshFunction}>
+                      <MaterialCommunityIcons name='reload'
+                                              size={50}
+                                              color={Colors.primaryColor}/>
+                    </TouchableOpacity>
                   </View>
                 )
               }

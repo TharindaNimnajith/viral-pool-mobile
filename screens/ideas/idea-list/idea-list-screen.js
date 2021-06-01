@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react'
-import {ActivityIndicator, FlatList, RefreshControl, Text, TouchableOpacity, View} from 'react-native'
+import {ActivityIndicator, FlatList, RefreshControl, TouchableOpacity, View} from 'react-native'
 import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
 import axios from 'axios'
 import Colors from '../../../shared/const/colors'
@@ -76,14 +76,14 @@ const IdeaListScreen = props => {
                       }/>
           </View>
         ) : (
-         <View style={styles.emptyListStyle}>
-                    
+          <View style={styles.emptyListStyle}>
+
             <TouchableOpacity onPress={refreshFunction}>
               <MaterialCommunityIcons name='reload'
-                      size={50}
-                      color={Colors.primaryColor}/>
+                                      size={50}
+                                      color={Colors.primaryColor}/>
             </TouchableOpacity>
-                  </View>
+          </View>
         )
       }
       <TouchableOpacity style={styles.buttonStyle}

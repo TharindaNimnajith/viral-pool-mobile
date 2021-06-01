@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
   circleTitleStyle: {
     textAlign: 'center',
     color: Colors.defaultColor,
-    marginTop : 4
+    marginTop: 4
   },
   rowViewStyle: {
     paddingRight: 50,

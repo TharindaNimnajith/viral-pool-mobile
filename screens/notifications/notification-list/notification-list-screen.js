@@ -1,6 +1,6 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
-import {ActivityIndicator, FlatList, RefreshControl, Text, TouchableOpacity, View} from 'react-native'
-import {Ionicons, MaterialCommunityIcons} from '@expo/vector-icons'
+import {ActivityIndicator, FlatList, RefreshControl, TouchableOpacity, View} from 'react-native'
+import {MaterialCommunityIcons} from '@expo/vector-icons'
 import axios from 'axios'
 import {AppContext} from '../../../shared/global/app-context'
 import Colors from '../../../shared/const/colors'
@@ -83,17 +83,17 @@ const NotificationListScreen = props => {
                       }/>
           </View>
         ) : (
-           <View style={styles.emptyListStyle}>
-                    
+          <View style={styles.emptyListStyle}>
+
             <TouchableOpacity onPress={refreshFunction}>
               <MaterialCommunityIcons name='reload'
-                      size={50}
-                      color={Colors.primaryColor}/>
+                                      size={50}
+                                      color={Colors.primaryColor}/>
             </TouchableOpacity>
-                  </View>
-                )
-              }
-        
+          </View>
+        )
+      }
+
       {
         loading &&
         <View style={styles.loadingStyle}>

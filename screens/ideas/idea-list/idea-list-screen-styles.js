@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     width: 60,
     height: 60,
     position: 'absolute',
-    bottom:90,
+    bottom: 90,
     right: 25,
     backgroundColor: Colors.primaryColor,
     borderRadius: 30
