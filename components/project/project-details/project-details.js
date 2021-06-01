@@ -177,7 +177,11 @@ const ProjectDetails = props => {
 
   return (
     <SafeAreaView>
-      <Dialog.Container visible={visibleAccept}
+      <ScrollView refreshControl={
+        <RefreshControl refreshing={refreshing}
+                        onRefresh={onRefresh}/>
+      }>
+       <Dialog.Container visible={visibleAccept}
                         onBackdropPress={hideDialogAccept}>
         <Dialog.Title>
           ACCEPT JOB
@@ -207,10 +211,6 @@ const ProjectDetails = props => {
                        color={Colors.primaryColor}
                        onPress={hideDialogReject}/>
       </Dialog.Container>
-      <ScrollView refreshControl={
-        <RefreshControl refreshing={refreshing}
-                        onRefresh={onRefresh}/>
-      }>
         <View style={styles.mainViewStyle}>
           <View style={styles.viewStyle}>
             <Text style={styles.projectNameStyle}>

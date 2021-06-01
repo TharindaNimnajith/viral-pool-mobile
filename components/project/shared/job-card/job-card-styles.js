@@ -89,7 +89,7 @@ export const styles = StyleSheet.create({
     borderRadius: 5
   },
   textInputStyle: {
-    borderColor: Colors.primaryColor,
+    borderColor: Colors.defaultColor,
     width: wp('80%'),
     borderWidth: 1,
     borderRadius: 5,

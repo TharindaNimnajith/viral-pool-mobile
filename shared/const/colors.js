@@ -9,7 +9,6 @@ export default {
   facebookColor: '#3b5998',
   instagramColor: '#bc11ab',
   darkPrimaryColor: '#9a181d',
-  
   fadedEffectColor: '#f5f5f5',
   blurEffectColor: 'rgba(0,0,0,0.8)'
 }

@@ -40,8 +40,8 @@ export const styles = StyleSheet.create({
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    top: hp('21%'),
-    left: hp('32%')
+    top: hp('18%'),
+    left: hp('33.2%')
   },
   headerStyle: {
     backgroundColor: Colors.primaryColor,

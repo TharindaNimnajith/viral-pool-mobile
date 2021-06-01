@@ -78,7 +78,6 @@ const OngoingProjectListScreen = props => {
           </View>
         ) : (
           <View style={styles.emptyListStyle}>
-                    
             <TouchableOpacity onPress={refreshFunction}>
               <MaterialCommunityIcons name='reload'
                       size={50}

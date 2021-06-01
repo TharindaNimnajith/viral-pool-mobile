@@ -77,7 +77,8 @@ export const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    minHeight: hp('93.6%')
+    minHeight: hp('93.6%'),
+    paddingBottom: 115
   },
   pointsIconStyle: {
     justifyContent: 'center'
