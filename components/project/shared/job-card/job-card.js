@@ -287,7 +287,8 @@ const JobCard = props => {
             {
               props.itemData.contentSubmissionStatus !== contentSubmissionStatusEnum.Approved &&
               <View style={styles.horizontalStyle}>
-                <TouchableOpacity disabled={!contentSubmissionLinkValid}
+                <TouchableOpacity disabled={!contentSubmissionLinkValid ||
+                 props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Rejected}
                                   onPress={showDialogContentDelete}
                                   style={contentSubmissionLinkValid ? styles.deleteButtonStyle :
                                     styles.buttonDisabledStyle}>
@@ -322,9 +323,12 @@ const JobCard = props => {
             props.itemData.contentSubmissionStatus === contentSubmissionStatusEnum.Approved) &&
           <View style={styles.centerViewStyle}>
             <View style={styles.horizontalStyle}>
-              <Text style={styles.labelStyle}>
+            <View>
+                   <Text style={styles.labelStyle}>
                 Result Submission Link
               </Text>
+            </View>
+             <View>
               {
                 props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Approved ? (
                   <Text style={styles.resultStatusApprovedStyle}>
@@ -340,6 +344,7 @@ const JobCard = props => {
                   </Text>
                 ) : null
               }
+              </View>
             </View>
             <TextInput style={styles.textInputStyle}
                        value={resultSubmissionLink}
@@ -350,7 +355,8 @@ const JobCard = props => {
             {
               props.itemData.resultSubmissionStatus !== resultSubmissionStatusEnum.Approved &&
               <View style={styles.horizontalStyle}>
-                <TouchableOpacity disabled={!resultSubmissionLinkValid}
+                <TouchableOpacity disabled={!resultSubmissionLinkValid ||
+                 props.itemData.resultSubmissionStatus === resultSubmissionStatusEnum.Rejected}
                                   onPress={showDialogResultDelete}
                                   style={resultSubmissionLinkValid ? styles.deleteButtonStyle :
                                     styles.buttonDisabledStyle}>

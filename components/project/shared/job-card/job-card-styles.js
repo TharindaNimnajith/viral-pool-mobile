@@ -28,6 +28,15 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 30
   },
+    contentStatusApprovedStyle: {
+ color: Colors.successColor
+  },
+ contentStatusPendingStyle: {
+ color: Colors.yellowColor
+  },
+ contentStatusRejectedStyle: {
+ color: Colors.primaryColor
+  },
   deleteButtonStyle: {
     marginTop: hp('3%'),
     marginHorizontal: 7,
@@ -62,6 +71,15 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginLeft: 5,
     fontSize: 20
+  },
+  resultStatusApprovedStyle: {
+ color: Colors.successColor
+  },
+  resultStatusPendingStyle: {
+ color: Colors.yellowColor
+  },
+  resultStatusRejectedStyle: {
+ color: Colors.primaryColor
   },
   statusNotPaidStyle: {
     color: Colors.primaryColor,
