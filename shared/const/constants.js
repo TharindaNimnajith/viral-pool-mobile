@@ -12,6 +12,7 @@ export default {
   USER_ROLE: 'Influencer',
   ACCESS_TOKEN: 'access_token',
   REFRESH_TOKEN: 'refresh_token',
+  EXPO_TOKEN: 'expo_token',
   AUTHORIZATION: 'Authorization',
   BEARER: 'Bearer',
   CLIENT_ID: 'client_id',

@@ -14,6 +14,7 @@ import axios from 'axios'
 import {AppContext} from '../../shared/global/app-context'
 import Colors from '../../shared/const/colors'
 import {showAlert, showErrors} from '../../shared/util/helpers'
+import {getStringData} from '../../shared/util/local-storage'
 import Constants from '../../shared/const/constants'
 import Menu from '../../components/header/menu-button/menu-button'
 import NotificationButton from '../../components/header/notification-button/notification-button'
@@ -51,7 +52,7 @@ const DashboardScreen = props => {
         await appContext.SetUserData(response.data.data)
         const data = {
           contentCreatorId: response.data.data.id,
-          expoToken: appContext.expoPushToken
+          expoToken: await getStringData(Constants.EXPO_TOKEN)
         }
         axios.post('content-creator-notification/token', data).then(async response => {
           if (response.status === 200) {
@@ -105,7 +106,7 @@ const DashboardScreen = props => {
         await appContext.SetUserData(response.data.data)
         const data = {
           contentCreatorId: response.data.data.id,
-          expoToken: appContext.expoPushToken
+          expoToken: await getStringData(Constants.EXPO_TOKEN)
         }
         axios.post('content-creator-notification/token', data).then(async response => {
           if (response.status === 200) {

@@ -1,11 +1,17 @@
-export const jobAcceptationStatusEnum = Object.freeze({
+const projectStatusEnum = Object.freeze({
+  New: 0,
+  Ongoing: 1,
+  Completed: 2
+})
+
+const jobAcceptationStatusEnum = Object.freeze({
   Pending: 0,
   Accepted: 1,
   Completed: 2,
   Rejected: 3
 })
 
-export const contentSubmissionStatusEnum = Object.freeze({
+const contentSubmissionStatusEnum = Object.freeze({
   Default: 0,
   Created: 1,
   Pending: 2,
@@ -13,7 +19,7 @@ export const contentSubmissionStatusEnum = Object.freeze({
   Approved: 4
 })
 
-export const resultSubmissionStatusEnum = Object.freeze({
+const resultSubmissionStatusEnum = Object.freeze({
   Default: 0,
   Created: 1,
   Pending: 2,
@@ -21,7 +27,7 @@ export const resultSubmissionStatusEnum = Object.freeze({
   Approved: 4
 })
 
-export const notificationTypeEnum = Object.freeze({
+const notificationTypeEnum = Object.freeze({
   Default: 0,
   NewJob: 1,
   ContentRejected: 2,
@@ -31,20 +37,24 @@ export const notificationTypeEnum = Object.freeze({
   PaymentAdded: 6
 })
 
-export const socialMediaPlatformNameEnum = Object.freeze({
+const socialMediaPlatformNameEnum = Object.freeze({
   Youtube: 'YouTube',
   Facebook: 'FaceBook',
   Instagram: 'Instagram',
   Tiktok: 'TikTok'
 })
 
-export const socialMediaPlatformActiveStatusEnum = Object.freeze({
+const socialMediaPlatformActiveStatusEnum = Object.freeze({
   Deactivated: 0,
   Activated: 1
 })
 
-export const projectStatusEnum = Object.freeze({
-  New: 0,
-  Ongoing: 1,
-  Completed: 2
-})
+export {
+  projectStatusEnum,
+  jobAcceptationStatusEnum,
+  contentSubmissionStatusEnum,
+  resultSubmissionStatusEnum,
+  notificationTypeEnum,
+  socialMediaPlatformNameEnum,
+  socialMediaPlatformActiveStatusEnum
+}

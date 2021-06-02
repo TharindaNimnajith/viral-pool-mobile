@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "561970439698",
+    "project_id": "viralpool-98b7e",
+    "storage_bucket": "viralpool-98b7e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561970439698:android:aaff8b3c56a11be6ffdacb",
+        "android_client_info": {
+          "package_name": "com.tharindarajapakshe.viralpoolapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561970439698-4in80rfj27loe3c35u8a657ensv0e2ab.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpAWCzECOr8p-l0Ip0oxmgt7XTwp8jyOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561970439698-4in80rfj27loe3c35u8a657ensv0e2ab.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
