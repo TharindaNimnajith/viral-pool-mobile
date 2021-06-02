@@ -562,14 +562,16 @@ const SocialMediaScreen = () => {
             <Dialog.Input label='Followers Count'
                           style={styles.textInputStyle}
                           wrapperStyle={styles.wrapperStyle}
-                          onChangeText={instagramFollowerCount => onChangeInstagramFollowerCount(instagramFollowerCount)}
+                          onChangeText={instagramFollowerCount =>
+                            onChangeInstagramFollowerCount(instagramFollowerCount)}
                           value={instagramFollowerCount}
                           placeholder='Enter Followers Count'
                           placeholderTextColor={Colors.tertiaryColor}/>
             <Dialog.Input label='Following Count'
                           style={styles.textInputStyle}
                           wrapperStyle={styles.wrapperStyle}
-                          onChangeText={instagramFollowingCount => onChangeInstagramFollowingCount(instagramFollowingCount)}
+                          onChangeText={instagramFollowingCount =>
+                            onChangeInstagramFollowingCount(instagramFollowingCount)}
                           value={instagramFollowingCount}
                           placeholder='Enter Following Count'
                           placeholderTextColor={Colors.tertiaryColor}/>

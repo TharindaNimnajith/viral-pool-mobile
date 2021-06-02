@@ -100,7 +100,7 @@ const LoginScreen = props => {
                   {Constants.DESCRIPTION}
                 </Text>
                 <Text style={styles.titleStyle}>
-                  Sign in
+                  Sign In
                 </Text>
               </View>
               <Text style={styles.labelStyle}>
@@ -131,7 +131,7 @@ const LoginScreen = props => {
                                 disabled={isDisabled()}
                                 onPress={login}>
                 <Text style={styles.buttonTextStyle}>
-                  Sign in
+                  Sign In
                 </Text>
               </TouchableOpacity>
             </View>

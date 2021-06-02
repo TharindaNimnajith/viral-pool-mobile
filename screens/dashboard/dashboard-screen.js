@@ -175,9 +175,9 @@ const DashboardScreen = props => {
                                 instagramCount={instagramCount}
                                 rank={rank}
                                 points={points}
-                                firstName={appContext?.userData?.firstName}
-                                lastName={appContext?.userData?.lastName}
-                                profileImagePath={appContext?.userData?.profileImagePath}
+                                firstName={appContext.userData?.firstName}
+                                lastName={appContext.userData?.lastName}
+                                profileImagePath={appContext.userData?.profileImagePath}
                                 navigation={props.navigation}/>
           <DashboardStats pendingProjectCount={pendingProjectCount}
                           ongoingProjectCount={ongoingProjectCount}
@@ -199,7 +199,6 @@ const DashboardScreen = props => {
                             renderItem={renderItemsFunction}/>
                 ) : (
                   <View style={styles.emptyListStyle}>
-
                     <TouchableOpacity onPress={refreshFunction}>
                       <MaterialCommunityIcons name='reload'
                                               size={50}

@@ -39,10 +39,9 @@ const ProfileScreen = props => {
       if (Platform.OS !== 'web') {
         const {
           status
-        } = await requestMediaLibraryPermissionsAsync().catch(async error => {
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
-        })
+        } = await requestMediaLibraryPermissionsAsync()
+        if (status !== 'granted')
+          await showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
     })()
   }, [])
@@ -52,10 +51,9 @@ const ProfileScreen = props => {
       if (Platform.OS !== 'web') {
         const {
           status
-        } = await requestMediaLibraryPermissionsAsync().catch(async error => {
-          await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
-          console.log(error)
-        })
+        } = await requestMediaLibraryPermissionsAsync()
+        if (status !== 'granted')
+          await showAlert(Constants.WARNING, Constants.CAMERA_PERMISSION)
       }
     })()
     setRefreshing(true)

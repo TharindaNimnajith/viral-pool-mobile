@@ -5,7 +5,7 @@ import Colors from '../../../shared/const/colors'
 
 export const styles = StyleSheet.create({
   mainViewStyle: {
-    minHeight: hp('102.2%'),
+    minHeight: hp('104%'),
     backgroundColor: Colors.primaryColor
   },
   refreshStyle: {

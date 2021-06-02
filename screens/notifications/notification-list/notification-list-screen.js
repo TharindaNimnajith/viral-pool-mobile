@@ -84,7 +84,6 @@ const NotificationListScreen = props => {
           </View>
         ) : (
           <View style={styles.emptyListStyle}>
-
             <TouchableOpacity onPress={refreshFunction}>
               <MaterialCommunityIcons name='reload'
                                       size={50}
@@ -93,7 +92,6 @@ const NotificationListScreen = props => {
           </View>
         )
       }
-
       {
         loading &&
         <View style={styles.loadingStyle}>
