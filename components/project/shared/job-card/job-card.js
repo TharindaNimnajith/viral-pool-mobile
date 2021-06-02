@@ -96,6 +96,7 @@ const JobCard = props => {
       contentLink: null
     }
     axios.put('project-cc-strategy/content-link', data).then(async response => {
+      setContentSubmissionLink('')
       props.refresh()
       props.setLoadingFalse()
       props.refreshFunction()
@@ -144,6 +145,7 @@ const JobCard = props => {
       resultLink: null
     }
     axios.put('project-cc-strategy/result-link', data).then(async response => {
+      setResultSubmissionLink('')
       props.refresh()
       props.setLoadingFalse()
       props.refreshFunction()

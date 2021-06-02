@@ -32,15 +32,18 @@ export const styles = StyleSheet.create({
   },
   contentStatusApprovedStyle: {
     marginTop: 3,
-    color: Colors.successColor
+    color: Colors.successColor,
+    fontSize: 13
   },
   contentStatusPendingStyle: {
     marginTop: 3,
-    color: Colors.yellowColor
+    color: Colors.yellowColor,
+    fontSize: 13
   },
   contentStatusRejectedStyle: {
     marginTop: 3,
-    color: Colors.primaryColor
+    color: Colors.primaryColor,
+    fontSize: 13
   },
   deleteButtonStyle: {
     marginTop: hp('3%'),
@@ -84,15 +87,18 @@ export const styles = StyleSheet.create({
   },
   resultStatusApprovedStyle: {
     marginTop: 3,
-    color: Colors.successColor
+    color: Colors.successColor,
+    fontSize: 13
   },
   resultStatusPendingStyle: {
     marginTop: 3,
-    color: Colors.yellowColor
+    color: Colors.yellowColor,
+    fontSize: 13
   },
   resultStatusRejectedStyle: {
     marginTop: 3,
-    color: Colors.primaryColor
+    color: Colors.primaryColor,
+    fontSize: 13
   },
   statusNotPaidStyle: {
     color: Colors.primaryColor,
