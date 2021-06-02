@@ -41,7 +41,7 @@ const DashboardEarnings = props => {
           </View>
           <Text style={[
             styles.amountTextStyle,
-            styles.totalEarningsTextStyle
+            styles.pendingEarningsTextStyle
           ]}>
             {formatNumber(props.pendingEarnings)}
             <Text style={styles.unitStyle}>

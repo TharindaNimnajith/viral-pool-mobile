@@ -2,6 +2,7 @@ export default {
   primaryColor: '#e82128',
   secondaryColor: '#ffffff',
   tertiaryColor: '#7b7b7b',
+  grayColor: '#acacac',
   defaultColor: '#100f0d',
   successColor: '#41bca1',
   blueColor: '#204ecf',

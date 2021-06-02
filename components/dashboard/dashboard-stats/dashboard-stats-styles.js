@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
   circleTextStyle: {
     textAlignVertical: 'center',
     alignSelf: 'center',
-    color: Colors.primaryColor,
+    color: Colors.tertiaryColor,
     fontSize: 30
   },
   circleTitleStyle: {
