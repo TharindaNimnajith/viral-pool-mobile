@@ -173,10 +173,28 @@ const PersonalDetailsRoute = () => {
                         placeholder='Enter Birthday'
                         format='YYYY-MM-DD'
                         maxDate={new Date()}
+                        onDateChange={birthDate => onChangeBirthDate(birthDate)}
                         confirmBtnText='Confirm'
                         cancelBtnText='Cancel'
-                        customStyles={styles.customStyle}
-                        onDateChange={birthDate => onChangeBirthDate(birthDate)}/>
+                        customStyles={{
+                          dateIcon: {
+                            position: 'absolute',
+                            left: 0,
+                            top: 4,
+                            marginLeft: 0
+                          },
+                          dateInput: {
+                            marginLeft: 36,
+                            borderColor: Colors.defaultColor,
+                            borderRadius: 5
+                          },
+                          dateText: {
+                            color: Colors.tertiaryColor
+                          },
+                          placeholderText: {
+                            color: Colors.tertiaryColor
+                          }
+                        }}/>
             <Text style={styles.labelStyle}>
               Address
             </Text>

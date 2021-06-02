@@ -118,13 +118,13 @@ const FileListItem = props => {
                       size={35}
                       color={Colors.primaryColor}/>
         {
-          props.itemData.fileName.length < 12 ? (
+          props.itemData.fileName.length < 11 ? (
             <Text style={styles.textStyle}>
               {props.itemData.fileName}
             </Text>
           ) : (
             <Text style={styles.textStyle}>
-              {props.itemData.fileName.substring(0, 8)}...
+              {props.itemData.fileName.substring(0, 7)}...
             </Text>
           )
         }
