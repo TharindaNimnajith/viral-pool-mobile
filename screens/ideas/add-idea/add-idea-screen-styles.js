@@ -50,7 +50,8 @@ export const styles = StyleSheet.create({
   },
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
-    minHeight: hp('93.6%')
+    minHeight: hp('93.6%'),
+    paddingBottom: 15
   },
   multilineTextInputStyle: {
     textAlignVertical: 'top',

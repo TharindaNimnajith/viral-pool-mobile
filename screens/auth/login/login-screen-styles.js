@@ -76,7 +76,7 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.primaryColor
   },
   refreshStyle: {
-    marginTop: 10
+    marginTop: 20
   },
   textInputStyle: {
     backgroundColor: Colors.secondaryColor,

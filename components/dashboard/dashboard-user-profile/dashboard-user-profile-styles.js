@@ -23,7 +23,7 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: hp('6%')
   },
   lineStyle: {
-    color: Colors.tertiaryColor,
+    color: Colors.fadedEffectColor,
     marginHorizontal: 10
   },
   pointsStyle: {
@@ -53,7 +53,7 @@ export const styles = StyleSheet.create({
     maxWidth: 250
   },
   titleStyle: {
-    color: Colors.tertiaryColor
+    color: Colors.fadedEffectColor
   },
   usernameStyle: {
     fontSize: 23,

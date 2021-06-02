@@ -35,7 +35,8 @@ export const styles = StyleSheet.create({
   mainViewStyle: {
     backgroundColor: Colors.secondaryColor,
     alignItems: 'center',
-    minHeight: hp('100%')
+    minHeight: hp('100%'),
+    paddingBottom: 15
   },
   reloadMessageStyle: {
     color: Colors.primaryColor,
