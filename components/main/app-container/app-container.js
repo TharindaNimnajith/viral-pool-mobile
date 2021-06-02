@@ -5,7 +5,7 @@ import {
   removeNotificationSubscription,
   setNotificationHandler
 } from 'expo-notifications'
-import {registerForPushNotificationsAsync} from '../../../shared/util/expo-push-notifications'
+import {registerForPushNotificationsAsync} from '../../../shared/util/expo-token'
 import {AppContext} from '../../../shared/global/app-context'
 import {isNull} from '../../../shared/util/helpers'
 import {storeStringData} from '../../../shared/util/local-storage'

@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import {View} from 'react-native'
 import {HeaderButtons, Item} from 'react-navigation-header-buttons'
 import {MaterialCommunityIcons} from '@expo/vector-icons'
 import {AppContext} from '../../../shared/global/app-context'
@@ -16,25 +15,27 @@ const NotificationButton = props => {
   }
 
   return (
-    <View style={styles.iconStyle}>
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        {
-          appContext.newNotifications ? (
-            <Item title='New Notifications'
-                  iconName='bell-alert'
-                  IconComponent={MaterialCommunityIcons}
-                  color={Colors.secondaryColor}
-                  onPress={displayNotifications}/>
-          ) : (
-            <Item title='Notifications'
-                  iconName='bell'
-                  IconComponent={MaterialCommunityIcons}
-                  color={Colors.secondaryColor}
-                  onPress={displayNotifications}/>
-          )
-        }
-      </HeaderButtons>
-    </View>
+    <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+      {
+        appContext.newNotifications ? (
+          <Item title='New Notifications'
+                iconName='bell-alert'
+                iconSize={26}
+                IconComponent={MaterialCommunityIcons}
+                color={Colors.secondaryColor}
+                buttonStyle={styles.iconStyle}
+                onPress={displayNotifications}/>
+        ) : (
+          <Item title='Notifications'
+                iconName='bell'
+                iconSize={26}
+                IconComponent={MaterialCommunityIcons}
+                color={Colors.secondaryColor}
+                buttonStyle={styles.iconStyle}
+                onPress={displayNotifications}/>
+        )
+      }
+    </HeaderButtons>
   )
 }
 

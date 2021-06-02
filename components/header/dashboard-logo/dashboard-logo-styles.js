@@ -5,8 +5,6 @@ import {widthPercentageToDP as wp} from 'react-native-responsive-screen'
 export const styles = StyleSheet.create({
   logoStyle: {
     position: 'absolute',
-    marginTop: 3,
-    justifyContent: 'center',
     marginLeft: wp('30%'),
     width: wp('40%'),
     height: wp('8.5%')
