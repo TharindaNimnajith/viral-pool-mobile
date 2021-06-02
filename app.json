@@ -17,8 +17,6 @@
     "primaryColor": "#e82128",
     "icon": "./assets/app/icon.png",
     "notification": {
-      "icon": "./assets/app/icon.png",
-      "color": "#ffffff",
       "iosDisplayInForeground": true,
       "androidMode": "collapse",
       "androidCollapsedTitle": "Viral Pool"

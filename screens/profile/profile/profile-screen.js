@@ -177,7 +177,7 @@ const ProfileScreen = props => {
           httpMethod: 'PUT',
           sessionType: FileSystemSessionType.BACKGROUND,
           uploadType: FileSystemUploadType.MULTIPART,
-          fieldName: 'formFile',
+          fieldName: 'FormFile',
           mimeType: type,
           parameters: parameters
         }
