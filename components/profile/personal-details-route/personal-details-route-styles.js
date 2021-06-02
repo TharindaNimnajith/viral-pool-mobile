@@ -31,6 +31,25 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
+  customStyle: {
+    dateIcon: {
+      position: 'absolute',
+      left: 0,
+      top: 4,
+      marginLeft: 0
+    },
+    dateInput: {
+      marginLeft: 36,
+      borderColor: Colors.defaultColor,
+      borderRadius: 5
+    },
+    dateText: {
+      color: Colors.tertiaryColor
+    },
+    placeholderText: {
+      color: Colors.tertiaryColor
+    }
+  },
   datePickerStyle: {
     borderColor: Colors.secondaryColor,
     width: wp('80%'),

@@ -21,10 +21,13 @@ export const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   itemContentAcceptedStyle: {
-    shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: {height: 1, width: 2}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 4, //IOS
+    shadowColor: Colors.tertiaryColor,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -43,10 +46,13 @@ export const styles = StyleSheet.create({
     borderLeftColor: Colors.successColor
   },
   itemContentRejectedStyle: {
-    shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: {height: 1, width: 2}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 4, //IOS
+    shadowColor: Colors.tertiaryColor,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -65,10 +71,13 @@ export const styles = StyleSheet.create({
     borderLeftColor: Colors.primaryColor
   },
   itemDefaultStyle: {
-    shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: {height: 1, width: 2}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 4, //IOS
+    shadowColor: Colors.tertiaryColor,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -87,10 +96,13 @@ export const styles = StyleSheet.create({
     borderLeftColor: Colors.defaultColor
   },
   itemNewJobStyle: {
-    shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: {height: 1, width: 2}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 4, //IOS
+    shadowColor: Colors.tertiaryColor,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -109,10 +121,13 @@ export const styles = StyleSheet.create({
     borderLeftColor: Colors.blueColor
   },
   itemPaymentAddedStyle: {
-    shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: {height: 1, width: 2}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 4, //IOS
+    shadowColor: Colors.tertiaryColor,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -131,10 +146,13 @@ export const styles = StyleSheet.create({
     borderLeftColor: Colors.yellowColor
   },
   itemResultAcceptedStyle: {
-    shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: {height: 1, width: 2}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 4, //IOS
+    shadowColor: Colors.tertiaryColor,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -153,10 +171,13 @@ export const styles = StyleSheet.create({
     borderLeftColor: Colors.successColor
   },
   itemResultRejectedStyle: {
-    shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: {height: 1, width: 2}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 4, //IOS
+    shadowColor: Colors.tertiaryColor,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',

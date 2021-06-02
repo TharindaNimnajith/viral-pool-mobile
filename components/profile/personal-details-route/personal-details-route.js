@@ -18,7 +18,7 @@ import Colors from '../../../shared/const/colors'
 import Constants from '../../../shared/const/constants'
 import {styles} from './personal-details-route-styles'
 
-const PersonalDetailsRoute = props => {
+const PersonalDetailsRoute = () => {
   const appContext = useContext(AppContext)
 
   const [firstName, setFirstName] = useState(appContext.userData.firstName)
@@ -175,25 +175,7 @@ const PersonalDetailsRoute = props => {
                         maxDate={new Date()}
                         confirmBtnText='Confirm'
                         cancelBtnText='Cancel'
-                        customStyles={{
-                          dateIcon: {
-                            position: 'absolute',
-                            left: 0,
-                            top: 4,
-                            marginLeft: 0
-                          },
-                          dateInput: {
-                            marginLeft: 36,
-                            borderColor: Colors.defaultColor,
-                            borderRadius: 5
-                          },
-                          dateText: {
-                            color: Colors.tertiaryColor
-                          },
-                          placeholderText: {
-                            color: Colors.tertiaryColor
-                          }
-                        }}
+                        customStyles={styles.customStyle}
                         onDateChange={birthDate => onChangeBirthDate(birthDate)}/>
             <Text style={styles.labelStyle}>
               Address

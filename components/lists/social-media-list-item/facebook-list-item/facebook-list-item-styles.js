@@ -18,10 +18,13 @@ export const styles = StyleSheet.create({
     alignItems: 'center'
   },
   itemStyle: {
-    shadowColor: Colors.tertiaryColor, // IOS
-    shadowOffset: {height: 1, width: 2}, // IOS
-    shadowOpacity: 1, // IOS
-    shadowRadius: 4, //IOS
+    shadowColor: Colors.tertiaryColor,
+    shadowOffset: {
+      height: 1,
+      width: 2
+    },
+    shadowOpacity: 1,
+    shadowRadius: 4,
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',

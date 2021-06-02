@@ -33,12 +33,10 @@ const ExpoPushNotifications = () => {
     }).catch(async error => {
       console.log(error)
     })
-    notificationListener.current = addNotificationReceivedListener(async notification => {
-      console.log(notification.request.content.data)
+    notificationListener.current = addNotificationReceivedListener(async () => {
       await appContext.SetNewNotifications(true)
     })
-    responseListener.current = addNotificationResponseReceivedListener(async response => {
-      console.log(response.notification.request.content.data)
+    responseListener.current = addNotificationResponseReceivedListener(async () => {
       await appContext.SetNewNotifications(true)
     })
     return () => {
