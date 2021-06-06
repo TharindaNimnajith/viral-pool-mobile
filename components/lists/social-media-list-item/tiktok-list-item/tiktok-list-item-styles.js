@@ -49,6 +49,9 @@ export const styles = StyleSheet.create({
   mainViewStyle: {
     flexDirection: 'row'
   },
+  scrollStyle: {
+    flexGrow: 0
+  },
   statStyle: {
     color: Colors.tertiaryColor,
     fontSize: 13,

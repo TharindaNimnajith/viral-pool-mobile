@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Image, Text, TouchableOpacity, View} from 'react-native'
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native'
 import Dialog from 'react-native-dialog'
 import {MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
@@ -10,6 +10,15 @@ import Colors from '../../../../shared/const/colors'
 import {styles} from './tiktok-list-item-styles'
 
 const TiktokListItem = props => {
+  const [tiktokUsername, setTiktokUsername] = useState(props.itemData.item.username)
+  const [tiktokTotalLikes, setTiktokTotalLikes] = useState(props.itemData.item.totalLikes)
+  const [tiktokVideos, setTiktokVideos] = useState(props.itemData.item.videos)
+  const [tiktokFollowers, setTiktokFollowers] = useState(props.itemData.item.followers)
+  const [tiktokUsernameValid, setTiktokUsernameValid] = useState(true)
+  const [tiktokTotalLikesValid, setTiktokTotalLikesValid] = useState(true)
+  const [tiktokVideosValid, setTiktokVideosValid] = useState(true)
+  const [tiktokFollowersValid, setTiktokFollowersValid] = useState(true)
+  const [visibleTiktok, setVisibleTiktok] = useState(false)
   const [visible, setVisible] = useState(false)
 
   const showDialog = async () => {
@@ -18,6 +27,82 @@ const TiktokListItem = props => {
 
   const hideDialog = async () => {
     setVisible(false)
+  }
+
+  const showDialogTiktok = async () => {
+    setVisibleTiktok(true)
+  }
+
+  const hideDialogTiktok = async () => {
+    setVisibleTiktok(false)
+    await resetTiktok()
+  }
+
+  const onChangeTiktokUsername = async tiktokUsername => {
+    setTiktokUsernameValid(tiktokUsername.trim().length > 0)
+    setTiktokUsername(tiktokUsername)
+  }
+
+  const onChangeTiktokVideos = async tiktokVideos => {
+    if (tiktokVideos.trim().length > 0)
+      setTiktokVideosValid(!isNaN(tiktokVideos.trim()))
+    else
+      setTiktokVideosValid(false)
+    setTiktokVideos(tiktokVideos)
+  }
+
+  const onChangeTiktokFollowers = async tiktokFollowers => {
+    if (tiktokFollowers.trim().length > 0)
+      setTiktokFollowersValid(!isNaN(tiktokFollowers.trim()))
+    else
+      setTiktokFollowersValid(false)
+    setTiktokFollowers(tiktokFollowers)
+  }
+
+  const onChangeTiktokTotalLikes = async tiktokTotalLikes => {
+    if (tiktokTotalLikes.trim().length > 0)
+      setTiktokTotalLikesValid(!isNaN(tiktokTotalLikes.trim()))
+    else
+      setTiktokTotalLikesValid(false)
+    setTiktokTotalLikes(tiktokTotalLikes)
+  }
+
+  function isDisabledTiktok() {
+    return !tiktokUsernameValid || !tiktokFollowersValid || !tiktokVideosValid || !tiktokTotalLikesValid
+  }
+
+  const resetTiktok = async () => {
+    await onChangeTiktokUsername(props.itemData.item.username)
+    await onChangeTiktokFollowers(props.itemData.item.videos)
+    await onChangeTiktokVideos(props.itemData.item.followers)
+    await onChangeTiktokTotalLikes(props.itemData.item.totalLikes)
+  }
+
+  const editTiktok = async () => {
+    setVisibleTiktok(false)
+    props.loadingFunctionTrue()
+    const data = {
+      username: tiktokUsername.trim(),
+      totalLikes: tiktokTotalLikes.trim(),
+      videos: tiktokVideos.trim(),
+      followers: tiktokFollowers.trim()
+    }
+    axios.put('cc-social-media/tiktok/edit-profile', data).then(async response => {
+      props.loadingFunctionFalse()
+      props.refreshFunction()
+      if (response.status === 200) {
+        await showAlert(Constants.SUCCESS, Constants.UPDATED)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+        await resetTiktok()
+      }
+    }).catch(async error => {
+      props.loadingFunctionFalse()
+      await showErrors(error.response.data)
+      await resetTiktok()
+      props.refreshFunction()
+      console.log(error.response.data)
+    })
   }
 
   const deleteAccount = async () => {
@@ -55,9 +140,55 @@ const TiktokListItem = props => {
                        color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
+      <Dialog.Container visible={visibleTiktok}
+                        onBackdropPress={hideDialogTiktok}
+                        headerStyle={styles.headerStyle}
+                        footerStyle={styles.footerStyle}>
+        <Dialog.Title style={styles.titleStyle}>
+          UPDATE ACCOUNT
+        </Dialog.Title>
+        <ScrollView style={styles.scrollStyle}>
+          <Dialog.Input label='Account Username'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokUsername => onChangeTiktokUsername(tiktokUsername)}
+                        value={tiktokUsername}
+                        placeholder='Enter Account Username'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Followers Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokFollowers => onChangeTiktokFollowers(tiktokFollowers)}
+                        value={tiktokFollowers}
+                        placeholder='Enter Followers Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Videos Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokVideos => onChangeTiktokVideos(tiktokVideos)}
+                        value={tiktokVideos}
+                        placeholder='Enter Videos Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+          <Dialog.Input label='Likes Count'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={tiktokTotalLikes => onChangeTiktokTotalLikes(tiktokTotalLikes)}
+                        value={tiktokTotalLikes}
+                        placeholder='Enter Likes Count'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+        </ScrollView>
+        <Dialog.Button label='Update'
+                       color={isDisabledTiktok() ? Colors.tertiaryColor : Colors.primaryColor}
+                       onPress={editTiktok}
+                       disabled={isDisabledTiktok()}/>
+        <Dialog.Button label='Cancel'
+                       color={Colors.primaryColor}
+                       onPress={hideDialogTiktok}/>
+      </Dialog.Container>
       {
         props.itemData.item.status === socialMediaPlatformActiveStatusEnum.Activated && (
-          <View style={styles.itemStyle}>
+          <TouchableOpacity style={styles.itemStyle}
+                            onPress={showDialogTiktok}>
             <View style={styles.mainViewStyle}>
               <View style={styles.iconViewStyle}>
                 <Image style={styles.avatarStyle}
@@ -99,7 +230,7 @@ const TiktokListItem = props => {
                                color={Colors.primaryColor}/>
               </TouchableOpacity>
             </View>
-          </View>
+          </TouchableOpacity>
         )
       }
     </View>

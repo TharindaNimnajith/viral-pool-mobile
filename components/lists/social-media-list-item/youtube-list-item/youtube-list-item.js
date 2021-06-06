@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
-import {Image, Text, TouchableOpacity, View} from 'react-native'
+import React, {useContext, useState} from 'react'
+import {Image, ScrollView, Text, TouchableOpacity, View} from 'react-native'
 import Dialog from 'react-native-dialog'
 import {MaterialIcons} from '@expo/vector-icons'
 import axios from 'axios'
+import {AppContext} from '../../../../shared/global/app-context'
 import {formatNumber, showAlert, showErrors} from '../../../../shared/util/helpers'
 import {socialMediaPlatformActiveStatusEnum} from '../../../../shared/const/enums'
 import Constants from '../../../../shared/const/constants'
@@ -10,6 +11,11 @@ import Colors from '../../../../shared/const/colors'
 import {styles} from './youtube-list-item-styles'
 
 const YoutubeListItem = props => {
+  const appContext = useContext(AppContext)
+
+  const [youtubeChannelId, setYoutubeChannelId] = useState(props.itemData.item.channelId)
+  const [youtubeChannelIdValid, setYoutubeChannelIdValid] = useState(true)
+  const [visibleYoutube, setVisibleYoutube] = useState(false)
   const [visible, setVisible] = useState(false)
 
   const showDialog = async () => {
@@ -18,6 +24,53 @@ const YoutubeListItem = props => {
 
   const hideDialog = async () => {
     setVisible(false)
+  }
+
+  const showDialogYoutube = async () => {
+    setVisibleYoutube(true)
+  }
+
+  const hideDialogYoutube = async () => {
+    setVisibleYoutube(false)
+    await resetYoutube()
+  }
+
+  const onChangeYoutubeChannelId = async youtubeChannelId => {
+    setYoutubeChannelIdValid(youtubeChannelId.trim().length > 0)
+    setYoutubeChannelId(youtubeChannelId)
+  }
+
+  function isDisabledYoutube() {
+    return !youtubeChannelIdValid
+  }
+
+  const resetYoutube = async () => {
+    await onChangeYoutubeChannelId(props.itemData.item.channelId)
+  }
+
+  const editYoutube = async () => {
+    setVisibleYoutube(false)
+    props.loadingFunctionTrue()
+    const data = {
+      channelId: youtubeChannelId.trim(),
+      contentCreatorDetailId: appContext.userData?.id
+    }
+    axios.put('cc-social-media/youtube/edit-profile', data).then(async response => {
+      props.loadingFunctionFalse()
+      props.refreshFunction()
+      if (response.status === 200) {
+        await showAlert(Constants.SUCCESS, Constants.UPDATED)
+      } else {
+        await showAlert(Constants.ERROR, Constants.COMMON_ERROR)
+        await resetYoutube()
+      }
+    }).catch(async error => {
+      props.loadingFunctionFalse()
+      await showErrors(error.response.data)
+      await resetYoutube()
+      props.refreshFunction()
+      console.log(error.response.data)
+    })
   }
 
   const deleteAccount = async () => {
@@ -59,9 +112,34 @@ const YoutubeListItem = props => {
                        color={Colors.primaryColor}
                        onPress={hideDialog}/>
       </Dialog.Container>
+      <Dialog.Container visible={visibleYoutube}
+                        onBackdropPress={hideDialogYoutube}
+                        headerStyle={styles.headerStyle}
+                        footerStyle={styles.footerStyle}>
+        <Dialog.Title style={styles.titleStyle}>
+          UPDATE CHANNEL
+        </Dialog.Title>
+        <ScrollView style={styles.scrollStyle}>
+          <Dialog.Input label='Channel ID'
+                        style={styles.textInputStyle}
+                        wrapperStyle={styles.wrapperStyle}
+                        onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
+                        value={youtubeChannelId}
+                        placeholder='Enter Channel ID'
+                        placeholderTextColor={Colors.tertiaryColor}/>
+        </ScrollView>
+        <Dialog.Button label='Update'
+                       color={isDisabledYoutube() ? Colors.tertiaryColor : Colors.primaryColor}
+                       onPress={editYoutube}
+                       disabled={isDisabledYoutube()}/>
+        <Dialog.Button label='Cancel'
+                       color={Colors.primaryColor}
+                       onPress={hideDialogYoutube}/>
+      </Dialog.Container>
       {
         props.itemData.item.status === socialMediaPlatformActiveStatusEnum.Activated && (
-          <View style={styles.itemStyle}>
+          <TouchableOpacity style={styles.itemStyle}
+                            onPress={showDialogYoutube}>
             <View style={styles.mainViewStyle}>
               <View style={styles.iconViewStyle}>
                 <Image style={styles.avatarStyle}
@@ -105,7 +183,7 @@ const YoutubeListItem = props => {
                                color={Colors.primaryColor}/>
               </TouchableOpacity>
             </View>
-          </View>
+          </TouchableOpacity>
         )
       }
     </View>
