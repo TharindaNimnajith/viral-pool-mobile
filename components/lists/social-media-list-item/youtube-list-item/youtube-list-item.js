@@ -41,7 +41,7 @@ const YoutubeListItem = props => {
   }
 
   function isDisabledYoutube() {
-    return !youtubeChannelIdValid
+    return !youtubeChannelIdValid || true
   }
 
   const resetYoutube = async () => {
@@ -121,12 +121,13 @@ const YoutubeListItem = props => {
         </Dialog.Title>
         <ScrollView style={styles.scrollStyle}>
           <Dialog.Input label='Channel ID'
-                        style={styles.textInputStyle}
+                        style={styles.textInputDisabledStyle}
                         wrapperStyle={styles.wrapperStyle}
                         onChangeText={youtubeChannelId => onChangeYoutubeChannelId(youtubeChannelId)}
                         value={youtubeChannelId}
                         placeholder='Enter Channel ID'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+                        placeholderTextColor={Colors.tertiaryColor}
+                        editable={false}/>
         </ScrollView>
         <Dialog.Button label='Update'
                        color={isDisabledYoutube() ? Colors.tertiaryColor : Colors.primaryColor}

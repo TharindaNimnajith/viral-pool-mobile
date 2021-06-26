@@ -164,19 +164,21 @@ const InstagramListItem = props => {
         </Dialog.Title>
         <ScrollView style={styles.scrollStyle}>
           <Dialog.Input label='Account Username'
-                        style={styles.textInputStyle}
+                        style={styles.textInputDisabledStyle}
                         wrapperStyle={styles.wrapperStyle}
                         onChangeText={instagramUsername => onChangeInstagramUsername(instagramUsername)}
                         value={instagramUsername}
                         placeholder='Enter Account Username'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+                        placeholderTextColor={Colors.tertiaryColor}
+                        editable={false}/>
           <Dialog.Input label='Account Link'
-                        style={styles.textInputStyle}
+                        style={styles.textInputDisabledStyle}
                         wrapperStyle={styles.wrapperStyle}
                         onChangeText={instagramLink => onChangeInstagramLink(instagramLink)}
                         value={instagramLink}
                         placeholder='Enter Account Link'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+                        placeholderTextColor={Colors.tertiaryColor}
+                        editable={false}/>
           <Dialog.Input label='Followers Count'
                         style={styles.textInputStyle}
                         wrapperStyle={styles.wrapperStyle}

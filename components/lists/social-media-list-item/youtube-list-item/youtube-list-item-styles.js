@@ -69,8 +69,8 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     width: '40%'
   },
-  textInputStyle: {
-    borderColor: Colors.defaultColor,
+  textInputDisabledStyle: {
+    borderColor: Colors.tertiaryColor,
     borderWidth: 1,
     borderRadius: 5,
     height: 40,

@@ -174,26 +174,29 @@ const FacebookListItem = props => {
         </Dialog.Title>
         <ScrollView style={styles.scrollStyle}>
           <Dialog.Input label='Page ID'
-                        style={styles.textInputStyle}
+                        style={styles.textInputDisabledStyle}
                         wrapperStyle={styles.wrapperStyle}
                         onChangeText={facebookPageId => onChangeFacebookPageId(facebookPageId)}
                         value={facebookPageId}
                         placeholder='Enter Page ID'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+                        placeholderTextColor={Colors.tertiaryColor}
+                        editable={false}/>
           <Dialog.Input label='Page Name'
-                        style={styles.textInputStyle}
+                        style={styles.textInputDisabledStyle}
                         wrapperStyle={styles.wrapperStyle}
                         onChangeText={facebookPageName => onChangeFacebookPageName(facebookPageName)}
                         value={facebookPageName}
                         placeholder='Enter Page Name'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+                        placeholderTextColor={Colors.tertiaryColor}
+                        editable={false}/>
           <Dialog.Input label='Page Link'
-                        style={styles.textInputStyle}
+                        style={styles.textInputDisabledStyle}
                         wrapperStyle={styles.wrapperStyle}
                         onChangeText={facebookPageLink => onChangeFacebookPageLink(facebookPageLink)}
                         value={facebookPageLink}
                         placeholder='Enter Page Link'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+                        placeholderTextColor={Colors.tertiaryColor}
+                        editable={false}/>
           <Dialog.Input label='Likes Count'
                         style={styles.textInputStyle}
                         wrapperStyle={styles.wrapperStyle}
