@@ -90,7 +90,7 @@ const TiktokListItem = props => {
       videos: tiktokVideos.toString().trim(),
       followers: tiktokFollowers.toString().trim()
     }
-    axios.post('cc-social-media/tiktok/add-profile', data).then(async response => {
+    axios.post('cc-social-media/ticktok/add-profile', data).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200) {
@@ -111,7 +111,10 @@ const TiktokListItem = props => {
   const deleteAccount = async () => {
     setVisible(false)
     props.loadingFunctionTrue()
-    axios.post('cc-social-media/ticktok/deactivate', props.itemData.item).then(async response => {
+    const data = {
+      id: props.itemData.item.id
+    }
+    axios.post('cc-social-media/ticktok/deactivate', data).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200)
@@ -152,12 +155,13 @@ const TiktokListItem = props => {
         </Dialog.Title>
         <ScrollView style={styles.scrollStyle}>
           <Dialog.Input label='Account Username'
-                        style={styles.textInputStyle}
+                        style={styles.textInputDisabledStyle}
                         wrapperStyle={styles.wrapperStyle}
                         onChangeText={tiktokUsername => onChangeTiktokUsername(tiktokUsername)}
                         value={tiktokUsername}
                         placeholder='Enter Account Username'
-                        placeholderTextColor={Colors.tertiaryColor}/>
+                        placeholderTextColor={Colors.tertiaryColor}
+                        editable={false}/>
           <Dialog.Input label='Followers Count'
                         style={styles.textInputStyle}
                         wrapperStyle={styles.wrapperStyle}
