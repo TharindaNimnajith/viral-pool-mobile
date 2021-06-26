@@ -52,7 +52,7 @@ const InstagramListItem = props => {
 
   const onChangeInstagramFollowingCount = async instagramFollowingCount => {
     if (instagramFollowingCount.toString().trim().length > 0)
-      setInstagramFollowingCountValid(!isNaN(instagramFollowingCount.trim()))
+      setInstagramFollowingCountValid(!isNaN(instagramFollowingCount))
     else
       setInstagramFollowingCountValid(false)
     setInstagramFollowingCount(instagramFollowingCount)
@@ -60,7 +60,7 @@ const InstagramListItem = props => {
 
   const onChangeInstagramFollowerCount = async instagramFollowerCount => {
     if (instagramFollowerCount.toString().trim().length > 0)
-      setInstagramFollowerCountValid(!isNaN(instagramFollowerCount.trim()))
+      setInstagramFollowerCountValid(!isNaN(instagramFollowerCount))
     else
       setInstagramFollowerCountValid(false)
     setInstagramFollowerCount(instagramFollowerCount)
@@ -68,7 +68,7 @@ const InstagramListItem = props => {
 
   const onChangeInstagramMediaCount = async instagramMediaCount => {
     if (instagramMediaCount.toString().trim().length > 0)
-      setInstagramMediaCountValid(!isNaN(instagramMediaCount.trim()))
+      setInstagramMediaCountValid(!isNaN(instagramMediaCount))
     else
       setInstagramMediaCountValid(false)
     setInstagramMediaCount(instagramMediaCount)

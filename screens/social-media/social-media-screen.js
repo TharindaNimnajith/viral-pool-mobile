@@ -214,7 +214,7 @@ const SocialMediaScreen = () => {
 
   const onChangeFacebookPageLikeCount = async facebookPageLikeCount => {
     if (facebookPageLikeCount.toString().trim().length > 0)
-      setFacebookPageLikeCountValid(!isNaN(facebookPageLikeCount.trim()))
+      setFacebookPageLikeCountValid(!isNaN(facebookPageLikeCount))
     else
       setFacebookPageLikeCountValid(false)
     setFacebookPageLikeCount(facebookPageLikeCount)
@@ -222,7 +222,7 @@ const SocialMediaScreen = () => {
 
   const onChangeFacebookPageEngagement = async facebookPageEngagement => {
     if (facebookPageEngagement.trim().toString().length > 0)
-      setFacebookPageEngagementValid(!isNaN(facebookPageEngagement.trim()))
+      setFacebookPageEngagementValid(!isNaN(facebookPageEngagement))
     else
       setFacebookPageEngagementValid(false)
     setFacebookPageEngagement(facebookPageEngagement)
@@ -230,7 +230,7 @@ const SocialMediaScreen = () => {
 
   const onChangeFacebookPageFollowersCount = async facebookPageFollowersCount => {
     if (facebookPageFollowersCount.trim().toString().length > 0)
-      setFacebookPageFollowersCountValid(!isNaN(facebookPageFollowersCount.trim()))
+      setFacebookPageFollowersCountValid(!isNaN(facebookPageFollowersCount))
     else
       setFacebookPageFollowersCountValid(false)
     setFacebookPageFollowersCount(facebookPageFollowersCount)
@@ -248,7 +248,7 @@ const SocialMediaScreen = () => {
 
   const onChangeInstagramFollowingCount = async instagramFollowingCount => {
     if (instagramFollowingCount.toString().trim().length > 0)
-      setInstagramFollowingCountValid(!isNaN(instagramFollowingCount.trim()))
+      setInstagramFollowingCountValid(!isNaN(instagramFollowingCount))
     else
       setInstagramFollowingCountValid(false)
     setInstagramFollowingCount(instagramFollowingCount)
@@ -256,7 +256,7 @@ const SocialMediaScreen = () => {
 
   const onChangeInstagramFollowerCount = async instagramFollowerCount => {
     if (instagramFollowerCount.toString().trim().length > 0)
-      setInstagramFollowerCountValid(!isNaN(instagramFollowerCount.trim()))
+      setInstagramFollowerCountValid(!isNaN(instagramFollowerCount))
     else
       setInstagramFollowerCountValid(false)
     setInstagramFollowerCount(instagramFollowerCount)
@@ -264,7 +264,7 @@ const SocialMediaScreen = () => {
 
   const onChangeInstagramMediaCount = async instagramMediaCount => {
     if (instagramMediaCount.toString().trim().length > 0)
-      setInstagramMediaCountValid(!isNaN(instagramMediaCount.trim()))
+      setInstagramMediaCountValid(!isNaN(instagramMediaCount))
     else
       setInstagramMediaCountValid(false)
     setInstagramMediaCount(instagramMediaCount)
@@ -277,7 +277,7 @@ const SocialMediaScreen = () => {
 
   const onChangeTiktokVideos = async tiktokVideos => {
     if (tiktokVideos.toString().trim().length > 0)
-      setTiktokVideosValid(!isNaN(tiktokVideos.trim()))
+      setTiktokVideosValid(!isNaN(tiktokVideos))
     else
       setTiktokVideosValid(false)
     setTiktokVideos(tiktokVideos)
@@ -285,7 +285,7 @@ const SocialMediaScreen = () => {
 
   const onChangeTiktokFollowers = async tiktokFollowers => {
     if (tiktokFollowers.toString().trim().length > 0)
-      setTiktokFollowersValid(!isNaN(tiktokFollowers.trim()))
+      setTiktokFollowersValid(!isNaN(tiktokFollowers))
     else
       setTiktokFollowersValid(false)
     setTiktokFollowers(tiktokFollowers)
@@ -293,7 +293,7 @@ const SocialMediaScreen = () => {
 
   const onChangeTiktokTotalLikes = async tiktokTotalLikes => {
     if (tiktokTotalLikes.toString().trim().length > 0)
-      setTiktokTotalLikesValid(!isNaN(tiktokTotalLikes.trim()))
+      setTiktokTotalLikesValid(!isNaN(tiktokTotalLikes))
     else
       setTiktokTotalLikesValid(false)
     setTiktokTotalLikes(tiktokTotalLikes)

@@ -60,7 +60,7 @@ const FacebookListItem = props => {
 
   const onChangeFacebookPageLikeCount = async facebookPageLikeCount => {
     if (facebookPageLikeCount.toString().trim().length > 0)
-      setFacebookPageLikeCountValid(!isNaN(facebookPageLikeCount.trim()))
+      setFacebookPageLikeCountValid(!isNaN(facebookPageLikeCount))
     else
       setFacebookPageLikeCountValid(false)
     setFacebookPageLikeCount(facebookPageLikeCount)
@@ -68,7 +68,7 @@ const FacebookListItem = props => {
 
   const onChangeFacebookPageEngagement = async facebookPageEngagement => {
     if (facebookPageEngagement.toString().trim().length > 0)
-      setFacebookPageEngagementValid(!isNaN(facebookPageEngagement.trim()))
+      setFacebookPageEngagementValid(!isNaN(facebookPageEngagement))
     else
       setFacebookPageEngagementValid(false)
     setFacebookPageEngagement(facebookPageEngagement)
@@ -76,7 +76,7 @@ const FacebookListItem = props => {
 
   const onChangeFacebookPageFollowersCount = async facebookPageFollowersCount => {
     if (facebookPageFollowersCount.toString().trim().length > 0)
-      setFacebookPageFollowersCountValid(!isNaN(facebookPageFollowersCount.trim()))
+      setFacebookPageFollowersCountValid(!isNaN(facebookPageFollowersCount))
     else
       setFacebookPageFollowersCountValid(false)
     setFacebookPageFollowersCount(facebookPageFollowersCount)

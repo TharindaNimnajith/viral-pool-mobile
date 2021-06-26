@@ -45,7 +45,7 @@ const TiktokListItem = props => {
 
   const onChangeTiktokVideos = async tiktokVideos => {
     if (tiktokVideos.toString().trim().length > 0)
-      setTiktokVideosValid(!isNaN(tiktokVideos.trim()))
+      setTiktokVideosValid(!isNaN(tiktokVideos))
     else
       setTiktokVideosValid(false)
     setTiktokVideos(tiktokVideos)
@@ -53,7 +53,7 @@ const TiktokListItem = props => {
 
   const onChangeTiktokFollowers = async tiktokFollowers => {
     if (tiktokFollowers.toString().trim().length > 0)
-      setTiktokFollowersValid(!isNaN(tiktokFollowers.trim()))
+      setTiktokFollowersValid(!isNaN(tiktokFollowers))
     else
       setTiktokFollowersValid(false)
     setTiktokFollowers(tiktokFollowers)
@@ -61,7 +61,7 @@ const TiktokListItem = props => {
 
   const onChangeTiktokTotalLikes = async tiktokTotalLikes => {
     if (tiktokTotalLikes.toString().trim().length > 0)
-      setTiktokTotalLikesValid(!isNaN(tiktokTotalLikes.trim()))
+      setTiktokTotalLikesValid(!isNaN(tiktokTotalLikes))
     else
       setTiktokTotalLikesValid(false)
     setTiktokTotalLikes(tiktokTotalLikes)

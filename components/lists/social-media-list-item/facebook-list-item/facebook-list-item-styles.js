@@ -9,6 +9,12 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     alignItems: 'center'
   },
+  footerStyle: {
+    marginTop: 10
+  },
+  headerStyle: {
+    marginBottom: 25
+  },
   horizontalStyle: {
     flexDirection: 'row'
   },
@@ -58,14 +64,31 @@ export const styles = StyleSheet.create({
     fontSize: 13,
     width: '40%'
   },
+  textInputStyle: {
+    borderColor: Colors.defaultColor,
+    borderWidth: 1,
+    borderRadius: 5,
+    height: 40,
+    marginTop: 10,
+    marginLeft: 0.5,
+    paddingVertical: 10,
+    paddingLeft: 5,
+    color: Colors.tertiaryColor
+  },
   textStyle: {
     fontSize: 18,
     color: Colors.defaultColor,
     marginBottom: 8
   },
+  titleStyle: {
+    color: Colors.primaryColor
+  },
   viewStyle: {
     width: '64%',
     marginLeft: '4%',
     justifyContent: 'center'
+  },
+  wrapperStyle: {
+    marginTop: 2
   }
 })
