@@ -73,9 +73,9 @@ const TiktokListItem = props => {
 
   const resetTiktok = async () => {
     await onChangeTiktokUsername(props.itemData.item.username)
-    await onChangeTiktokFollowers(props.itemData.item.videos)
-    await onChangeTiktokVideos(props.itemData.item.followers)
-    await onChangeTiktokTotalLikes(props.itemData.item.totalLikes)
+    await onChangeTiktokFollowers(props.itemData.item.videos.toString())
+    await onChangeTiktokVideos(props.itemData.item.followers.toString())
+    await onChangeTiktokTotalLikes(props.itemData.item.totalLikes.toString())
   }
 
   const editTiktok = async () => {

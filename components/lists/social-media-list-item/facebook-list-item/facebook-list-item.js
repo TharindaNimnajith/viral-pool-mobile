@@ -91,9 +91,9 @@ const FacebookListItem = props => {
     await onChangeFacebookPageId(props.itemData.item.pageId)
     await onChangeFacebookPageName(props.itemData.item.name)
     await onChangeFacebookPageLink(props.itemData.item.link)
-    await onChangeFacebookPageLikeCount(props.itemData.item.fanCount)
-    await onChangeFacebookPageEngagement(props.itemData.item.engagement)
-    await onChangeFacebookPageFollowersCount(props.itemData.item.followersCount)
+    await onChangeFacebookPageLikeCount(props.itemData.item.fanCount.toString())
+    await onChangeFacebookPageEngagement(props.itemData.item.engagement.toString())
+    await onChangeFacebookPageFollowersCount(props.itemData.item.followersCount.toString())
   }
 
   const editFacebook = async () => {

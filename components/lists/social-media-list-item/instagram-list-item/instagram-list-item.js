@@ -82,9 +82,9 @@ const InstagramListItem = props => {
   const resetInstagram = async () => {
     await onChangeInstagramUsername(props.itemData.item.username)
     await onChangeInstagramLink(props.itemData.item.link)
-    await onChangeInstagramFollowingCount(props.itemData.item.followsCount)
-    await onChangeInstagramFollowerCount(props.itemData.item.followersCount)
-    await onChangeInstagramMediaCount(props.itemData.item.mediaCount)
+    await onChangeInstagramFollowingCount(props.itemData.item.followsCount.toString())
+    await onChangeInstagramFollowerCount(props.itemData.item.followersCount.toString())
+    await onChangeInstagramMediaCount(props.itemData.item.mediaCount.toString())
   }
 
   const editInstagram = async () => {
