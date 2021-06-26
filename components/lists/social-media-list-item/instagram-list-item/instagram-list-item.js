@@ -91,13 +91,14 @@ const InstagramListItem = props => {
     setVisibleInstagram(false)
     props.loadingFunctionTrue()
     const data = {
+      id: props.itemData.item.id,
       username: instagramUsername.trim(),
       link: instagramLink.trim(),
       followsCount: instagramFollowingCount.trim(),
       followersCount: instagramFollowerCount.trim(),
       mediaCount: instagramMediaCount.trim()
     }
-    axios.put('cc-social-media/instagram/edit-profile', data).then(async response => {
+    axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200) {

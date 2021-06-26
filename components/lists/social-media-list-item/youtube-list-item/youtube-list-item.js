@@ -55,7 +55,7 @@ const YoutubeListItem = props => {
       channelId: youtubeChannelId.trim(),
       contentCreatorDetailId: appContext.userData?.id
     }
-    axios.put('cc-social-media/youtube/edit-profile', data).then(async response => {
+    axios.post('cc-social-media/youtube/add-profile', data).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200) {

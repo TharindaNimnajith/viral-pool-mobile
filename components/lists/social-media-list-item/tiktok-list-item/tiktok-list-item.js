@@ -82,12 +82,14 @@ const TiktokListItem = props => {
     setVisibleTiktok(false)
     props.loadingFunctionTrue()
     const data = {
+      id: props.itemData.item.id,
+      status: props.itemData.item.status,
       username: tiktokUsername.trim(),
       totalLikes: tiktokTotalLikes.trim(),
       videos: tiktokVideos.trim(),
       followers: tiktokFollowers.trim()
     }
-    axios.put('cc-social-media/tiktok/edit-profile', data).then(async response => {
+    axios.post('cc-social-media/tiktok/add-profile', data).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200) {

@@ -99,6 +99,7 @@ const FacebookListItem = props => {
     setVisibleFacebook(false)
     props.loadingFunctionTrue()
     const data = {
+      id: props.itemData.item.id,
       pageId: facebookPageId.trim(),
       name: facebookPageName.trim(),
       link: facebookPageLink.trim(),
@@ -106,7 +107,7 @@ const FacebookListItem = props => {
       engagement: facebookPageEngagement.trim(),
       followersCount: facebookPageFollowersCount.trim()
     }
-    axios.put('cc-social-media/facebook/edit-profile', data).then(async response => {
+    axios.post('cc-social-media/facebook/add-profile', data).then(async response => {
       props.loadingFunctionFalse()
       props.refreshFunction()
       if (response.status === 200) {
