@@ -213,7 +213,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeFacebookPageLikeCount = async facebookPageLikeCount => {
-    if (facebookPageLikeCount.trim().length > 0)
+    if (facebookPageLikeCount.toString().trim().length > 0)
       setFacebookPageLikeCountValid(!isNaN(facebookPageLikeCount.trim()))
     else
       setFacebookPageLikeCountValid(false)
@@ -221,7 +221,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeFacebookPageEngagement = async facebookPageEngagement => {
-    if (facebookPageEngagement.trim().length > 0)
+    if (facebookPageEngagement.trim().toString().length > 0)
       setFacebookPageEngagementValid(!isNaN(facebookPageEngagement.trim()))
     else
       setFacebookPageEngagementValid(false)
@@ -229,7 +229,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeFacebookPageFollowersCount = async facebookPageFollowersCount => {
-    if (facebookPageFollowersCount.trim().length > 0)
+    if (facebookPageFollowersCount.trim().toString().length > 0)
       setFacebookPageFollowersCountValid(!isNaN(facebookPageFollowersCount.trim()))
     else
       setFacebookPageFollowersCountValid(false)
@@ -247,7 +247,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeInstagramFollowingCount = async instagramFollowingCount => {
-    if (instagramFollowingCount.trim().length > 0)
+    if (instagramFollowingCount.toString().trim().length > 0)
       setInstagramFollowingCountValid(!isNaN(instagramFollowingCount.trim()))
     else
       setInstagramFollowingCountValid(false)
@@ -255,7 +255,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeInstagramFollowerCount = async instagramFollowerCount => {
-    if (instagramFollowerCount.trim().length > 0)
+    if (instagramFollowerCount.toString().trim().length > 0)
       setInstagramFollowerCountValid(!isNaN(instagramFollowerCount.trim()))
     else
       setInstagramFollowerCountValid(false)
@@ -263,7 +263,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeInstagramMediaCount = async instagramMediaCount => {
-    if (instagramMediaCount.trim().length > 0)
+    if (instagramMediaCount.toString().trim().length > 0)
       setInstagramMediaCountValid(!isNaN(instagramMediaCount.trim()))
     else
       setInstagramMediaCountValid(false)
@@ -276,7 +276,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeTiktokVideos = async tiktokVideos => {
-    if (tiktokVideos.trim().length > 0)
+    if (tiktokVideos.toString().trim().length > 0)
       setTiktokVideosValid(!isNaN(tiktokVideos.trim()))
     else
       setTiktokVideosValid(false)
@@ -284,7 +284,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeTiktokFollowers = async tiktokFollowers => {
-    if (tiktokFollowers.trim().length > 0)
+    if (tiktokFollowers.toString().trim().length > 0)
       setTiktokFollowersValid(!isNaN(tiktokFollowers.trim()))
     else
       setTiktokFollowersValid(false)
@@ -292,7 +292,7 @@ const SocialMediaScreen = () => {
   }
 
   const onChangeTiktokTotalLikes = async tiktokTotalLikes => {
-    if (tiktokTotalLikes.trim().length > 0)
+    if (tiktokTotalLikes.toString().trim().length > 0)
       setTiktokTotalLikesValid(!isNaN(tiktokTotalLikes.trim()))
     else
       setTiktokTotalLikesValid(false)
@@ -375,9 +375,9 @@ const SocialMediaScreen = () => {
       pageId: facebookPageId.trim(),
       name: facebookPageName.trim(),
       link: facebookPageLink.trim(),
-      fanCount: facebookPageLikeCount.trim(),
-      engagement: facebookPageEngagement.trim(),
-      followersCount: facebookPageFollowersCount.trim()
+      fanCount: facebookPageLikeCount.toString().trim(),
+      engagement: facebookPageEngagement.toString().trim(),
+      followersCount: facebookPageFollowersCount.toString().trim()
     }
     axios.post('cc-social-media/facebook/add-profile', data).then(async response => {
       setLoading(false)
@@ -401,9 +401,9 @@ const SocialMediaScreen = () => {
     const data = {
       username: instagramUsername.trim(),
       link: instagramLink.trim(),
-      followsCount: instagramFollowingCount.trim(),
-      followersCount: instagramFollowerCount.trim(),
-      mediaCount: instagramMediaCount.trim()
+      followsCount: instagramFollowingCount.toString().trim(),
+      followersCount: instagramFollowerCount.toString().trim(),
+      mediaCount: instagramMediaCount.toString().trim()
     }
     axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
       setLoading(false)
@@ -426,9 +426,9 @@ const SocialMediaScreen = () => {
     setLoading(true)
     const data = {
       username: tiktokUsername.trim(),
-      totalLikes: tiktokTotalLikes.trim(),
-      videos: tiktokVideos.trim(),
-      followers: tiktokFollowers.trim()
+      totalLikes: tiktokTotalLikes.toString().trim(),
+      videos: tiktokVideos.toString().trim(),
+      followers: tiktokFollowers.toString().trim()
     }
     axios.post('cc-social-media/ticktok/add-profile', data).then(async response => {
       setLoading(false)

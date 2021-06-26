@@ -44,7 +44,7 @@ const TiktokListItem = props => {
   }
 
   const onChangeTiktokVideos = async tiktokVideos => {
-    if (tiktokVideos.trim().length > 0)
+    if (tiktokVideos.toString().trim().length > 0)
       setTiktokVideosValid(!isNaN(tiktokVideos.trim()))
     else
       setTiktokVideosValid(false)
@@ -52,7 +52,7 @@ const TiktokListItem = props => {
   }
 
   const onChangeTiktokFollowers = async tiktokFollowers => {
-    if (tiktokFollowers.trim().length > 0)
+    if (tiktokFollowers.toString().trim().length > 0)
       setTiktokFollowersValid(!isNaN(tiktokFollowers.trim()))
     else
       setTiktokFollowersValid(false)
@@ -60,7 +60,7 @@ const TiktokListItem = props => {
   }
 
   const onChangeTiktokTotalLikes = async tiktokTotalLikes => {
-    if (tiktokTotalLikes.trim().length > 0)
+    if (tiktokTotalLikes.toString().trim().length > 0)
       setTiktokTotalLikesValid(!isNaN(tiktokTotalLikes.trim()))
     else
       setTiktokTotalLikesValid(false)
@@ -86,9 +86,9 @@ const TiktokListItem = props => {
       status: props.itemData.item.status,
       contentCreatorDetailId: props.itemData.item.contentCreatorDetailId,
       username: tiktokUsername.trim(),
-      totalLikes: tiktokTotalLikes.trim(),
-      videos: tiktokVideos.trim(),
-      followers: tiktokFollowers.trim()
+      totalLikes: tiktokTotalLikes.toString().trim(),
+      videos: tiktokVideos.toString().trim(),
+      followers: tiktokFollowers.toString().trim()
     }
     axios.post('cc-social-media/tiktok/add-profile', data).then(async response => {
       props.loadingFunctionFalse()

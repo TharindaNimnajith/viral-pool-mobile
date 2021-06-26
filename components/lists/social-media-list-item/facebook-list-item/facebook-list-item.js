@@ -59,7 +59,7 @@ const FacebookListItem = props => {
   }
 
   const onChangeFacebookPageLikeCount = async facebookPageLikeCount => {
-    if (facebookPageLikeCount.trim().length > 0)
+    if (facebookPageLikeCount.toString().trim().length > 0)
       setFacebookPageLikeCountValid(!isNaN(facebookPageLikeCount.trim()))
     else
       setFacebookPageLikeCountValid(false)
@@ -67,7 +67,7 @@ const FacebookListItem = props => {
   }
 
   const onChangeFacebookPageEngagement = async facebookPageEngagement => {
-    if (facebookPageEngagement.trim().length > 0)
+    if (facebookPageEngagement.toString().trim().length > 0)
       setFacebookPageEngagementValid(!isNaN(facebookPageEngagement.trim()))
     else
       setFacebookPageEngagementValid(false)
@@ -75,7 +75,7 @@ const FacebookListItem = props => {
   }
 
   const onChangeFacebookPageFollowersCount = async facebookPageFollowersCount => {
-    if (facebookPageFollowersCount.trim().length > 0)
+    if (facebookPageFollowersCount.toString().trim().length > 0)
       setFacebookPageFollowersCountValid(!isNaN(facebookPageFollowersCount.trim()))
     else
       setFacebookPageFollowersCountValid(false)
@@ -104,9 +104,9 @@ const FacebookListItem = props => {
       pageId: facebookPageId.trim(),
       name: facebookPageName.trim(),
       link: facebookPageLink.trim(),
-      fanCount: facebookPageLikeCount.trim(),
-      engagement: facebookPageEngagement.trim(),
-      followersCount: facebookPageFollowersCount.trim()
+      fanCount: facebookPageLikeCount.toString().trim(),
+      engagement: facebookPageEngagement.toString().trim(),
+      followersCount: facebookPageFollowersCount.toString().trim()
     }
     axios.post('cc-social-media/facebook/add-profile', data).then(async response => {
       props.loadingFunctionFalse()

@@ -51,7 +51,7 @@ const InstagramListItem = props => {
   }
 
   const onChangeInstagramFollowingCount = async instagramFollowingCount => {
-    if (instagramFollowingCount.trim().length > 0)
+    if (instagramFollowingCount.toString().trim().length > 0)
       setInstagramFollowingCountValid(!isNaN(instagramFollowingCount.trim()))
     else
       setInstagramFollowingCountValid(false)
@@ -59,7 +59,7 @@ const InstagramListItem = props => {
   }
 
   const onChangeInstagramFollowerCount = async instagramFollowerCount => {
-    if (instagramFollowerCount.trim().length > 0)
+    if (instagramFollowerCount.toString().trim().length > 0)
       setInstagramFollowerCountValid(!isNaN(instagramFollowerCount.trim()))
     else
       setInstagramFollowerCountValid(false)
@@ -67,7 +67,7 @@ const InstagramListItem = props => {
   }
 
   const onChangeInstagramMediaCount = async instagramMediaCount => {
-    if (instagramMediaCount.trim().length > 0)
+    if (instagramMediaCount.toString().trim().length > 0)
       setInstagramMediaCountValid(!isNaN(instagramMediaCount.trim()))
     else
       setInstagramMediaCountValid(false)
@@ -94,9 +94,9 @@ const InstagramListItem = props => {
       id: props.itemData.item.id,
       username: instagramUsername.trim(),
       link: instagramLink.trim(),
-      followsCount: instagramFollowingCount.trim(),
-      followersCount: instagramFollowerCount.trim(),
-      mediaCount: instagramMediaCount.trim()
+      followsCount: instagramFollowingCount.toString().trim(),
+      followersCount: instagramFollowerCount.toString().trim(),
+      mediaCount: instagramMediaCount.toString().trim()
     }
     axios.post('cc-social-media/instagram/add-profile', data).then(async response => {
       props.loadingFunctionFalse()
