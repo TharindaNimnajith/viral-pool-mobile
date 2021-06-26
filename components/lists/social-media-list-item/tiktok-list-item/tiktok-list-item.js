@@ -11,9 +11,9 @@ import {styles} from './tiktok-list-item-styles'
 
 const TiktokListItem = props => {
   const [tiktokUsername, setTiktokUsername] = useState(props.itemData.item.username)
-  const [tiktokTotalLikes, setTiktokTotalLikes] = useState(props.itemData.item.totalLikes)
-  const [tiktokVideos, setTiktokVideos] = useState(props.itemData.item.videos)
-  const [tiktokFollowers, setTiktokFollowers] = useState(props.itemData.item.followers)
+  const [tiktokTotalLikes, setTiktokTotalLikes] = useState(props.itemData.item.totalLikes.toString())
+  const [tiktokVideos, setTiktokVideos] = useState(props.itemData.item.videos.toString())
+  const [tiktokFollowers, setTiktokFollowers] = useState(props.itemData.item.followers.toString())
   const [tiktokUsernameValid, setTiktokUsernameValid] = useState(true)
   const [tiktokTotalLikesValid, setTiktokTotalLikesValid] = useState(true)
   const [tiktokVideosValid, setTiktokVideosValid] = useState(true)
@@ -84,6 +84,7 @@ const TiktokListItem = props => {
     const data = {
       id: props.itemData.item.id,
       status: props.itemData.item.status,
+      contentCreatorDetailId: props.itemData.item.contentCreatorDetailId,
       username: tiktokUsername.trim(),
       totalLikes: tiktokTotalLikes.trim(),
       videos: tiktokVideos.trim(),

@@ -12,9 +12,9 @@ import {styles} from './instagram-list-item-styles'
 const InstagramListItem = props => {
   const [instagramUsername, setInstagramUsername] = useState(props.itemData.item.username)
   const [instagramLink, setInstagramLink] = useState(props.itemData.item.link)
-  const [instagramFollowingCount, setInstagramFollowingCount] = useState(props.itemData.item.followsCount)
-  const [instagramFollowerCount, setInstagramFollowerCount] = useState(props.itemData.item.followersCount)
-  const [instagramMediaCount, setInstagramMediaCount] = useState(props.itemData.item.mediaCount)
+  const [instagramFollowingCount, setInstagramFollowingCount] = useState(props.itemData.item.followsCount.toString())
+  const [instagramFollowerCount, setInstagramFollowerCount] = useState(props.itemData.item.followersCount.toString())
+  const [instagramMediaCount, setInstagramMediaCount] = useState(props.itemData.item.mediaCount.toString())
   const [instagramUsernameValid, setInstagramUsernameValid] = useState(true)
   const [instagramLinkValid, setInstagramLinkValid] = useState(true)
   const [instagramFollowingCountValid, setInstagramFollowingCountValid] = useState(true)

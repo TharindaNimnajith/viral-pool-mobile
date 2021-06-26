@@ -13,9 +13,10 @@ const FacebookListItem = props => {
   const [facebookPageId, setFacebookPageId] = useState(props.itemData.item.pageId)
   const [facebookPageName, setFacebookPageName] = useState(props.itemData.item.name)
   const [facebookPageLink, setFacebookPageLink] = useState(props.itemData.item.link)
-  const [facebookPageLikeCount, setFacebookPageLikeCount] = useState(props.itemData.item.fanCount)
-  const [facebookPageEngagement, setFacebookPageEngagement] = useState(props.itemData.item.engagement)
-  const [facebookPageFollowersCount, setFacebookPageFollowersCount] = useState(props.itemData.item.followersCount)
+  const [facebookPageLikeCount, setFacebookPageLikeCount] = useState(props.itemData.item.fanCount.toString())
+  const [facebookPageEngagement, setFacebookPageEngagement] = useState(props.itemData.item.engagement.toString())
+  const [facebookPageFollowersCount, setFacebookPageFollowersCount] =
+    useState(props.itemData.item.followersCount.toString())
   const [facebookPageIdValid, setFacebookPageIdValid] = useState(true)
   const [facebookPageNameValid, setFacebookPageNameValid] = useState(true)
   const [facebookPageLinkValid, setFacebookPageLinkValid] = useState(true)
